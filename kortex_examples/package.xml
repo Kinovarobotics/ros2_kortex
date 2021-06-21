@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>kortex_examples</name>
+  <version>2.2.2</version>
+  <description>Examples to show usage of core kortex_arm_driver services and topics.</description>
+
+  <author email="hlamontagne@kinova.ca">Hugo Lamontagne</author>
+  <author email="avannobel@kinova.ca">Alexandre Vannobel</author>
+  <maintainer email="avannobel@kinova.ca" />
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>kortex_driver</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>moveit_commander</exec_depend>
+  <exec_depend>moveit_commander</exec_depend>
+  <exec_depend>actionlib_msgs</exec_depend>
+  <exec_depend>message_generation</exec_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>

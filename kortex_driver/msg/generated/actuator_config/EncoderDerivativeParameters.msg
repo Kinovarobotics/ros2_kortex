@@ -1,0 +1,3 @@
+
+uint32 max_window_width
+float32 min_angle

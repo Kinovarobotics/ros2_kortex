@@ -1,0 +1,10 @@
+controller_list:
+  - name: $(arg prefix)fake_arm_controller
+    joints:
+      - $(arg prefix)joint_1
+      - $(arg prefix)joint_2
+      - $(arg prefix)joint_3
+      - $(arg prefix)joint_4
+      - $(arg prefix)joint_5
+      - $(arg prefix)joint_6
+      - $(arg prefix)joint_7

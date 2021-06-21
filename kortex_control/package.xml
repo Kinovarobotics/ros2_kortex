@@ -1,0 +1,25 @@
+<package>
+  <name>kortex_control</name>
+  <version>2.2.2</version>
+  <description>
+    <p>Gazebo ROS Control package for simulated Kortex robots</p>
+    <p>This package contains configuration files for the gazebo_ros_control controllers for simulation of Kortex arms</p>
+  </description>
+  <author email="avannobel@kinova.ca">Alexandre Vannobel</author>
+  <maintainer email="avannobel@kinova.ca" />
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>gazebo</run_depend>
+  <run_depend>xacro</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
+  <run_depend>ros_control</run_depend>
+  <run_depend>ros_controllers</run_depend>
+  <export>
+    <architecture_independent />
+  </export>
+</package>
