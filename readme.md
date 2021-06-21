@@ -1,5 +1,11 @@
-# ros_kortex
-ROS Kortex is the official ROS package to interact with Kortex and its related products. It is built upon the Kortex API, documentation for which can be found in the [GitHub Kortex repository](https://github.com/Kinovarobotics/kortex).
+# ros2_kortex
+ROS2 Kortex is the official ROS2 package to interact with Kortex and its related products. It is built upon the Kortex API, documentation for which can be found in the [GitHub Kortex repository](https://github.com/Kinovarobotics/kortex).
+
+**Warning** Currently the only package ported to ROS2 is 'kortex_description`
+
+To launch and view the robots URDF run:
+
+        ros2 launch kortex_description view_robot.launch.py
 
 ## Download links
 
