@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <xacro:macro name="load_robot" params="arm gripper dof vision sim prefix">
+    <xacro:macro name="load_robot" params="parent arm gripper dof vision sim prefix">
             
         <!-- Files to include -->
         <xacro:include filename="$(find kortex_description)/arms/${arm}/${dof}dof/urdf/${arm}_macro.xacro" />
@@ -20,19 +20,9 @@
         </xacro:if>
 
         <!-- Run the macros -->
-
-        <!-- For gazebo-->
-        <xacro:if value="${sim}">
-            <link name="world" />
-            <joint name="world_to_root" type="fixed">
-                <child link="${prefix}base_link" />
-                <parent link="world" />
-                <origin xyz="0 0 0" rpy="0 0 0" />    
-            </joint> 
-        </xacro:if>
         
         <!-- Load the arm -->
-        <xacro:load_arm parent="" dof="${dof}" vision="${vision}" prefix="${prefix}">
+        <xacro:load_arm parent="${parent}" dof="${dof}" vision="${vision}" prefix="${prefix}">
             <origin xyz="0 0 0" rpy="0 0 0"/> 
         </xacro:load_arm>
 

@@ -5,7 +5,12 @@
   <!-- Propagate last link name information because it is the gripper's parent link -->
   <xacro:property name="last_arm_link" value="end_effector_link"/>
 
-  <xacro:macro name="load_arm" params="parent:='' dof vision prefix *origin">
+  <xacro:macro name="load_arm" params="parent dof vision prefix *origin">
+      <joint name="${prefix}base_joint" type="fixed">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${prefix}base_link" />
+      </joint>
       <link name="${prefix}base_link">
         <inertial>
           <origin xyz="-0.000648 -0.000166 0.084487" rpy="0 0 0" />
