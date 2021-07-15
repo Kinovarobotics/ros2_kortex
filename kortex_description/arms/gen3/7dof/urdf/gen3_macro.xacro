@@ -6,6 +6,18 @@
   <xacro:property name="last_arm_link" value="end_effector_link"/>
 
   <xacro:macro name="load_arm" params="parent dof vision prefix *origin">
+  
+      <xacro:arg name="use_fake_hardware" default="true"/>
+      <xacro:arg name="fake_sensor_commands" default="true"/>
+      <!-- ros2 control include -->
+      <xacro:include filename="$(find kortex_description)/arms/gen3/${dof}dof/urdf/kortex.ros2_control.xacro" />
+      <xacro:kortex_ros2_control
+        name="KortexMultiInterfaceHardware" prefix="$(arg prefix)"
+        use_fake_hardware="$(arg use_fake_hardware)"
+        fake_sensor_commands="$(arg fake_sensor_commands)"
+        tf_prefix=""
+        robot_ip="$(arg robot_ip)" />
+
       <joint name="${prefix}base_joint" type="fixed">
         <xacro:insert_block name="origin" />
         <parent link="${parent}"/>
