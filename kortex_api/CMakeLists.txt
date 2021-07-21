@@ -3,9 +3,6 @@ project(kortex_api)
 
 find_package(ament_cmake REQUIRED)
 
-# TODO(marqrazz) This is needed by TransportClientTcp.h line14 but it doesn't see it??
-add_definitions(-D_OS_UNIX)
-
 ament_export_libraries(${CMAKE_CURRENT_SOURCE_DIR}/lib/release/libKortexApiCpp.a)
 link_libraries(pthread)
 

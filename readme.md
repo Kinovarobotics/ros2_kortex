@@ -1,11 +1,23 @@
 # ros2_kortex
 ROS2 Kortex is the official ROS2 package to interact with Kortex and its related products. It is built upon the Kortex API, documentation for which can be found in the [GitHub Kortex repository](https://github.com/Kinovarobotics/kortex).
 
-**Warning** Currently the only package ported to ROS2 is 'kortex_description`
+**Warning** Currently the only packages ported to ROS2 are 'kortex_description`, 'kortex2_driver`, 'kortex2_bringup` and 'gen3_move_it_config`
 
 To launch and view the robots URDF run:
 
         ros2 launch kortex_description view_robot.launch.py
+
+To simulate the robot and generate paths with MoveIt run the following:
+
+        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true launch_rviz:=false
+
+        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true
+
+To work with a physical robot and generate/execute paths with MoveIt run the following:
+
+        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=192.168.0.10 use_fake_hardware:=false launch_rviz:=false
+
+        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.0.10 use_fake_hardware:=false
 
 ## Download links
 

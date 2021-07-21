@@ -13,18 +13,22 @@
 #include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
 #include "hardware_interface/types/hardware_interface_status_values.hpp"
+
 #include "kortex2_driver/visibility_control.h"
+#include "kortex2_driver/kortex_math_util.hpp"
 
 #include <BaseClientRpc.h>
 #include <BaseCyclicClientRpc.h>
 #include <SessionManager.h>
 #include <RouterClient.h>
 #include <TransportClientTcp.h>
+#include <TransportClientUdp.h>
 
 using hardware_interface::return_type;
 
 namespace k_api = Kinova::Api;
 #define PORT 10000
+#define PORT_REAL_TIME 10001
 
 namespace kortex2_driver
 {
@@ -32,6 +36,8 @@ class KortexMultiInterfaceHardware
 : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
 {
 public:
+  KortexMultiInterfaceHardware();
+
   RCLCPP_SHARED_PTR_DEFINITIONS(KortexMultiInterfaceHardware);
 
   KORTEX2_DRIVER_PUBLIC
@@ -61,12 +67,19 @@ public:
   return_type write() final;
 
 private:
-  // Parameters for the Robot simulation
-  double hw_start_sec_;
-  double hw_stop_sec_;
-  double hw_slowdown_;
+  k_api::TransportClientTcp transport_tcp_;
+  k_api::RouterClient router_tcp_;
+  k_api::SessionManager session_manager_;
+  k_api::TransportClientUdp transport_udp_realtime_;
+  k_api::RouterClient router_udp_realtime_;
+  k_api::SessionManager session_manager_real_time_;
+  k_api::Base::BaseClient base_;
+  k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
 
-  // Store the commands for the simulated robot
+  k_api::BaseCyclic::Command  base_command_;
+  std::size_t  actuator_count_;
+
+  // Store the commands for the robot
   std::vector<double> hw_commands_positions_;
   std::vector<double> hw_commands_velocities_;
   std::vector<double> hw_commands_efforts_;

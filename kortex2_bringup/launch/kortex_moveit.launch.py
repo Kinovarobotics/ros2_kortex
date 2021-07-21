@@ -238,7 +238,7 @@ def generate_launch_description():
 
     # rviz with moveit configuration
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(moveit_config_package), "rviz", "view_robot.rviz"]
+        [FindPackageShare(moveit_config_package), "rviz", "moveit.rviz"]
     )
     rviz_node = Node(
         package="rviz2",

@@ -11,8 +11,7 @@
 // ---- win ----
 #include <stdio.h>
 #include <winsock2.h>
-// #elif defined(_OS_UNIX) TODO(marqrazz) get this passed in from the CmakeLists.txt file
-#else
+#elif defined(_OS_UNIX)
 // --- linux ---
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -31,8 +30,8 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-// #else
-// #warning Unknown OS type!
+#else
+#warning Unknown OS type!
 #endif
 
 #include <atomic>

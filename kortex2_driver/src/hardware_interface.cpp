@@ -10,18 +10,33 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
+namespace
+{
+  const rclcpp::Logger LOGGER = rclcpp::get_logger("KortexMultiInterfaceHardware");
+}
+
 namespace kortex2_driver
 {
+  
+KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
+: router_tcp_{&transport_tcp_, [](k_api::KError err){ cout << "_________ callback error _________" << err.toString();}},
+session_manager_{&router_tcp_},
+router_udp_realtime_{&transport_udp_realtime_, [](k_api::KError err){ cout << "_________ callback error _________" << err.toString();}},
+session_manager_real_time_{&router_udp_realtime_},
+base_{&router_tcp_},
+base_cyclic_{&router_udp_realtime_}
+{
+  rclcpp::on_shutdown(std::bind(&KortexMultiInterfaceHardware::stop, this));
+}
+
 return_type KortexMultiInterfaceHardware::configure(const hardware_interface::HardwareInfo & info)
 {
+  RCLCPP_INFO(LOGGER, "Configuring Hardware Interface");
   if (configure_default(info) != return_type::OK)
   {
     return return_type::ERROR;
   }
 
-  hw_start_sec_ = stod(info_.hardware_parameters["example_param_hw_start_duration_sec"]);
-  hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
-  hw_slowdown_ = stod(info_.hardware_parameters["example_param_hw_slowdown"]);
   hw_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   hw_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   hw_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
@@ -34,11 +49,11 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
   {
     // KortexMultiInterface has exactly 3 state interfaces
     // and 3 command interfaces on each joint
-    if (joint.command_interfaces.size() != 3)
+    // TODO (marqrazz) enable the effort interface and re-enable all 3 interfaces
+    if (joint.command_interfaces.size() != 2)
     {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("KortexMultiInterfaceHardware"),
-        "Joint '%s' has %d command interfaces. 3 expected.", joint.name.c_str());
+      RCLCPP_FATAL(LOGGER, "Joint '%s' has %d command interfaces. 2 expected.",
+        joint.name.c_str(), joint.command_interfaces.size());
       return return_type::ERROR;
     }
 
@@ -46,19 +61,17 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
           joint.command_interfaces[0].name == hardware_interface::HW_IF_VELOCITY ||
           joint.command_interfaces[0].name == hardware_interface::HW_IF_EFFORT))
     {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("KortexMultiInterfaceHardware"),
-        "Joint '%s' has %s command interface. Expected %s, %s, or %s.", joint.name.c_str(),
-        joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION,
-        hardware_interface::HW_IF_VELOCITY, hardware_interface::HW_IF_EFFORT);
+      RCLCPP_FATAL(LOGGER, "Joint '%s' has %s command interface. Expected %s, %s, or %s.",
+        joint.name.c_str(), joint.command_interfaces[0].name.c_str(),
+        hardware_interface::HW_IF_POSITION, hardware_interface::HW_IF_VELOCITY,
+        hardware_interface::HW_IF_EFFORT);
       return return_type::ERROR;
     }
 
     if (joint.state_interfaces.size() != 3)
     {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("KortexMultiInterfaceHardware"),
-        "Joint '%s'has %d state interfaces. 3 expected.", joint.name.c_str());
+      RCLCPP_FATAL(LOGGER, "Joint '%s'has %d state interfaces. 3 expected.",
+        joint.name.c_str(), joint.state_interfaces.size());
       return return_type::ERROR;
     }
 
@@ -66,15 +79,15 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
           joint.state_interfaces[0].name == hardware_interface::HW_IF_VELOCITY ||
           joint.state_interfaces[0].name == hardware_interface::HW_IF_EFFORT))
     {
-      RCLCPP_FATAL(
-        rclcpp::get_logger("KortexMultiInterfaceHardware"),
-        "Joint '%s' has %s state interface. Expected %s, %s, or %s.", joint.name.c_str(),
-        joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION,
-        hardware_interface::HW_IF_VELOCITY, hardware_interface::HW_IF_EFFORT);
+      RCLCPP_FATAL(LOGGER, "Joint '%s' has %s state interface. Expected %s, %s, or %s.",
+        joint.name.c_str(), joint.state_interfaces[0].name.c_str(),
+        hardware_interface::HW_IF_POSITION, hardware_interface::HW_IF_VELOCITY,
+        hardware_interface::HW_IF_EFFORT);
       return return_type::ERROR;
     }
   }
 
+  RCLCPP_INFO(LOGGER, "Hardware Interface successfully configured");
   status_ = hardware_interface::status::CONFIGURED;
   return return_type::OK;
 }
@@ -179,16 +192,8 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
 
 return_type KortexMultiInterfaceHardware::start()
 {
-  RCLCPP_INFO(
-    rclcpp::get_logger("KortexMultiInterfaceHardware"), "Starting... please wait...");
-
-  for (int i = 0; i <= hw_start_sec_; i++)
-  {
-    rclcpp::sleep_for(std::chrono::seconds(1));
-    RCLCPP_INFO(
-      rclcpp::get_logger("KortexMultiInterfaceHardware"), "%.1f seconds left...",
-      hw_start_sec_ - i);
-  }
+  RCLCPP_INFO(LOGGER, "Connecting to robot at %s ...",
+    info_.hardware_parameters["robot_ip"].c_str());
 
   // The robot's IP address.
   std::string robot_ip = info_.hardware_parameters["robot_ip"];
@@ -197,10 +202,8 @@ return_type KortexMultiInterfaceHardware::start()
   // Password to log into the robot controller
   std::string password = "admin"; //TODO: read in info_.hardware_parameters["password"];
 
-  auto error_callback = [](k_api::KError err){ cout << "_________ callback error _________" << err.toString(); };
-  auto transport = new k_api::TransportClientTcp();
-  auto router = new k_api::RouterClient(transport, error_callback);
-  transport->connect(robot_ip, PORT);
+  transport_tcp_.connect(robot_ip, PORT);
+  transport_udp_realtime_.connect(robot_ip, PORT_REAL_TIME);
 
   // Set session data connection information
   auto create_session_info = k_api::Session::CreateSessionInfo();
@@ -210,21 +213,33 @@ return_type KortexMultiInterfaceHardware::start()
   create_session_info.set_connection_inactivity_timeout(2000); // (milliseconds)
 
   // Session manager service wrapper
-  RCLCPP_INFO(rclcpp::get_logger("KortexMultiInterfaceHardware"), "Creating session for communication");
-  auto session_manager = new k_api::SessionManager(router);
-  session_manager->CreateSession(create_session_info);
-  RCLCPP_INFO(rclcpp::get_logger("KortexMultiInterfaceHardware"), "Session created");
+  RCLCPP_INFO(LOGGER, "Creating session for communication");
+  session_manager_.CreateSession(create_session_info);
+  session_manager_real_time_.CreateSession(create_session_info);
+  RCLCPP_INFO(LOGGER, "Session created");
 
-  // Create services
-  auto base = new k_api::Base::BaseClient(router);
-  auto base_cyclic = new k_api::BaseCyclic::BaseCyclicClient(router);
+  auto servoing_mode = k_api::Base::ServoingModeInformation();
+  // Set the base in low-level servoing mode
+  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+  base_.SetServoingMode(servoing_mode);
+  auto base_feedback = base_cyclic_.RefreshFeedback();
+  actuator_count_ = base_.GetActuatorCount().count();
+
+  // Add each actuator to the base_comnmand_ and set the command to it's current position
+  for (std::size_t  i = 0; i < actuator_count_; i++)
+  {
+      base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
+  }
+  // Send a first frame
+  base_feedback = base_cyclic_.Refresh(base_command_);
 
   // Set some default values
-  for (std::size_t i = 0; i < hw_positions_.size(); i++)
+  for (std::size_t i = 0; i < actuator_count_; i++)
   {
     if (std::isnan(hw_positions_[i]))
     {
-      hw_positions_[i] = 0;
+      hw_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+        KortexMathUtil::toRad(base_feedback.actuators(i).position())); // rad
     }
     if (std::isnan(hw_velocities_[i]))
     {
@@ -236,7 +251,8 @@ return_type KortexMultiInterfaceHardware::start()
     }
     if (std::isnan(hw_commands_positions_[i]))
     {
-      hw_commands_positions_[i] = 0;
+      hw_commands_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+        KortexMathUtil::toRad(base_feedback.actuators(i).position())); // rad
     }
     if (std::isnan(hw_commands_velocities_[i]))
     {
@@ -250,83 +266,99 @@ return_type KortexMultiInterfaceHardware::start()
   }
   status_ = hardware_interface::status::STARTED;
 
-  RCLCPP_INFO(
-    rclcpp::get_logger("KortexMultiInterfaceHardware"), "System successfully started! %u",
-    control_lvl_[0]);
+  RCLCPP_INFO(LOGGER, "System successfully started! %u", control_lvl_[0]);
   return return_type::OK;
 }
 
 return_type KortexMultiInterfaceHardware::stop()
 {
-  RCLCPP_INFO(
-    rclcpp::get_logger("KortexMultiInterfaceHardware"), "Stopping... please wait...");
+  RCLCPP_INFO(LOGGER, "Stopping... please wait...");
 
-  for (int i = 0; i <= hw_stop_sec_; i++)
-  {
-    rclcpp::sleep_for(std::chrono::seconds(1));
-    RCLCPP_INFO(
-      rclcpp::get_logger("KortexMultiInterfaceHardware"), "%.1f seconds left...",
-      hw_stop_sec_ - i);
-  }
+  auto servoing_mode = k_api::Base::ServoingModeInformation();
+  // Set back the servoing mode to Single Level Servoing
+  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+  base_.SetServoingMode(servoing_mode);
+
+  // Close API session
+  session_manager_.CloseSession();
+  session_manager_real_time_.CloseSession();
+
+  // Deactivate the router and cleanly disconnect from the transport object
+  router_tcp_.SetActivationStatus(false);
+  transport_tcp_.disconnect();
+  router_udp_realtime_.SetActivationStatus(false);
+  transport_udp_realtime_.disconnect();
 
   status_ = hardware_interface::status::STOPPED;
 
-  RCLCPP_INFO(
-    rclcpp::get_logger("KortexMultiInterfaceHardware"), "System successfully stopped!");
+  RCLCPP_INFO(LOGGER, "System successfully stopped!");
 
   return return_type::OK;
 }
 
 return_type KortexMultiInterfaceHardware::read()
 {
-  for (std::size_t i = 0; i < hw_positions_.size(); i++)
+  auto feedback = base_cyclic_.RefreshFeedback();
+  for (std::size_t i = 0; i < actuator_count_; i++)
   {
     switch (control_lvl_[i])
     {
       case integration_lvl_t::UNDEFINED:
-        RCLCPP_INFO(
-          rclcpp::get_logger("KortexMultiInterfaceHardware"),
-          "Nothing is using the hardware interface!");
+        RCLCPP_INFO(LOGGER, "Nothing is using the hardware interface!");
         return return_type::OK;
         break;
       case integration_lvl_t::POSITION:
-        hw_efforts_[i] = 0;
-        hw_velocities_[i] = 0;
-        hw_positions_[i] = hw_commands_positions_[i];
+        hw_efforts_[i] = feedback.actuators(i).torque(); // N*m
+        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity()); // rad/sec
+        hw_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+          KortexMathUtil::toRad(feedback.actuators(i).position())); // rad
         break;
       case integration_lvl_t::VELOCITY:
-        hw_efforts_[i] = 0;
-        hw_velocities_[i] = hw_commands_velocities_[i];
+        hw_efforts_[i] = feedback.actuators(i).torque(); // N*m
+        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity()); // rad/sec
         break;
       case integration_lvl_t::EFFORT:
-        hw_efforts_[i] = hw_commands_efforts_[i];
+        hw_efforts_[i] = feedback.actuators(i).torque(); // N*m
         break;
     }
-    // Using the hw_slowdown_ parameter as a timestep
-    hw_velocities_[i] += hw_slowdown_ * hw_efforts_[i];
-    hw_positions_[i] += hw_slowdown_ * hw_velocities_[i];
-    RCLCPP_INFO(
-      rclcpp::get_logger("KortexMultiInterfaceHardware"),
-      "Got pos: %.5f, vel: %.5f, eff: %.5f for joint %d!", hw_positions_[i], hw_velocities_[i],
-      hw_efforts_[i], i);
   }
   return return_type::OK;
 }
 
 return_type KortexMultiInterfaceHardware::write()
 {
-  /*RCLCPP_INFO(
-    rclcpp::get_logger("KortexMultiInterfaceHardware"),
-    "Writing...");*/
-  for (std::size_t i = 0; i < hw_commands_positions_.size(); i++)
+  Kinova::Api::BaseCyclic::Feedback feedback;
+
+  // Incrementing identifier ensures actuators can reject out of time frames
+  base_command_.set_frame_id(base_command_.frame_id() + 1);
+  if (base_command_.frame_id() > 65535)
+    base_command_.set_frame_id(0);
+
+  // update the command for each joint
+  for (std::size_t i = 0; i < actuator_count_; i++)
   {
-    // Simulate sending commands to the hardware
-    RCLCPP_INFO(
-      rclcpp::get_logger("KortexMultiInterfaceHardware"),
-      "Got the commands pos: %.5f, vel: %.5f, eff: %.5f for joint %d, control_lvl: %d",
-      hw_commands_positions_[i], hw_commands_velocities_[i], hw_commands_efforts_[i], i,
-      control_lvl_[i]);
+    float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(
+      KortexMathUtil::toDeg(hw_commands_positions_[i]));    
+    float cmd_vel = KortexMathUtil::toDeg(hw_commands_velocities_[i]);
+
+    base_command_.mutable_actuators(i)->set_position(cmd_degrees);
+    base_command_.mutable_actuators(i)->set_velocity(cmd_vel);
+    base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
   }
+
+  // send the command to the robot
+  try
+  {
+    feedback = base_cyclic_.Refresh(base_command_, 0);
+  }
+  catch (k_api::KDetailedException& ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+    RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << 
+      k_api::SubErrorCodes_Name(k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+  }
+  
   return return_type::OK;
 }
 

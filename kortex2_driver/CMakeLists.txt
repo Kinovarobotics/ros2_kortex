@@ -10,6 +10,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra)
 endif()
 
+# this is needed by the kortex_api to tell it we are compiling for linux
+add_definitions(-D_OS_UNIX=1)
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(hardware_interface REQUIRED)
@@ -22,6 +25,7 @@ add_library(
   ${PROJECT_NAME}
   SHARED
   src/hardware_interface.cpp
+  src/kortex_math_util.cpp
 )
 target_include_directories(
   ${PROJECT_NAME}
