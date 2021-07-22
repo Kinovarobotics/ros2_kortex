@@ -6,6 +6,7 @@
     <xacro:arg name="arm" default="gen3" />
     <xacro:arg name="dof" default="7" />
     <xacro:arg name="vision" default="true" />
+    <xacro:arg name="robot_ip" default="yyy.yyy.yyy.yyy" />
 
     <xacro:arg name="gripper" default="" />
 
@@ -14,6 +15,6 @@
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
     <link name="world" />
-    <xacro:load_robot parent="world" arm="$(arg arm)" gripper="$(arg gripper)" dof="$(arg dof)" vision="$(arg vision)" sim="$(arg sim)" prefix="$(arg prefix)" />
+    <xacro:load_robot parent="world" arm="$(arg arm)" gripper="$(arg gripper)" dof="$(arg dof)" vision="$(arg vision)" robot_ip="$(arg robot_ip)" sim="$(arg sim)" prefix="$(arg prefix)" />
 
 </robot>

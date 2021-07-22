@@ -300,17 +300,17 @@ return_type KortexMultiInterfaceHardware::read()
         return return_type::OK;
         break;
       case integration_lvl_t::POSITION:
-        hw_efforts_[i] = feedback.actuators(i).torque();                              // N*m
-        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity());  // rad/sec
-        hw_positions_[i] =
-            KortexMathUtil::wrapRadiansFromMinusPiToPi(KortexMathUtil::toRad(feedback.actuators(i).position()));  // rad
+        hw_efforts_[i] = feedback.actuators(i).torque(); // N*m
+        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity()); // rad/sec
+        hw_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+          KortexMathUtil::toRad(feedback.actuators(i).position())); // rad
         break;
       case integration_lvl_t::VELOCITY:
-        hw_efforts_[i] = feedback.actuators(i).torque();                              // N*m
-        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity());  // rad/sec
+        hw_efforts_[i] = feedback.actuators(i).torque(); // N*m
+        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity()); // rad/sec
         break;
       case integration_lvl_t::EFFORT:
-        hw_efforts_[i] = feedback.actuators(i).torque();  // N*m
+        hw_efforts_[i] = feedback.actuators(i).torque(); // N*m
         break;
     }
   }

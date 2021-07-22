@@ -11,6 +11,7 @@
     vision
     prefix
     *origin
+    robot_ip
     use_fake_hardware:=false
     fake_sensor_commands:=false">
 
