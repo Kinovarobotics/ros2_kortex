@@ -23,28 +23,28 @@
         <child link="$(arg left_prefix)base_link" />
         <parent link="world" />
         <!-- Here you can change the origin of the left arm-->
-        <origin xyz="-1 0 0" rpy="0 0 0" />    
-    </joint> 
+        <origin xyz="-1 0 0" rpy="0 0 0" />
+    </joint>
     <joint name="world_to_$(arg right_prefix)root" type="fixed">
         <child link="$(arg right_prefix)base_link" />
         <parent link="world" />
         <!-- Here you can change the origin of the right arm -->
-        <origin xyz="1 0 0" rpy="0 0 0" />    
-    </joint> 
+        <origin xyz="1 0 0" rpy="0 0 0" />
+    </joint>
 
-    <xacro:load_robot 
+    <xacro:load_robot
         arm="$(arg left_arm)"
-        gripper="$(arg left_gripper)" 
+        gripper="$(arg left_gripper)"
         dof="$(arg left_dof)"
-        vision="$(arg left_vision)" 
+        vision="$(arg left_vision)"
         sim="$(arg left_sim)"
         prefix="$(arg left_prefix)"
     />
-    <xacro:load_robot 
+    <xacro:load_robot
         arm="$(arg right_arm)"
-        gripper="$(arg right_gripper)" 
+        gripper="$(arg right_gripper)"
         dof="$(arg right_dof)"
-        vision="$(arg right_vision)" 
+        vision="$(arg right_vision)"
         sim="$(arg right_sim)"
         prefix="$(arg right_prefix)"
     />

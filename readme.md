@@ -23,7 +23,7 @@ To work with a physical robot and generate/execute paths with MoveIt run the fol
 
 You can refer to the [Kortex repository "Download links" section](https://github.com/Kinovarobotics/kortex#download-links) to download the firmware package and the release notes.
 
-### Accessing the color and depth streams 
+### Accessing the color and depth streams
 
 To access the color and depth streams, you will need to clone and follow the instructions to install the [ros_kortex_vision repository ](https://github.com/Kinovarobotics/ros_kortex_vision).
 ## Installation
@@ -59,7 +59,7 @@ Then, to build and source the workspace:
 
 You can also build against one of the ARMv8 builds of the Kortex API with Conan if you specify the `CONAN_TARGET_PLATFORM` CMake argument when using `catkin_make`. The following platforms are supported:
 
-- Artik 710: 
+- Artik 710:
 
         catkin_make --cmake-args -DCONAN_TARGET_PLATFORM=artik710
         source devel/setup.bash
@@ -69,12 +69,26 @@ You can also build against one of the ARMv8 builds of the Kortex API with Conan 
         catkin_make --cmake-args -DCONAN_TARGET_PLATFORM=imx6
         source devel/setup.bash
 
-- NVidia Jetson: 
+- NVidia Jetson:
 
         catkin_make --cmake-args -DCONAN_TARGET_PLATFORM=jetson
         source devel/setup.bash
 
-As you see, there are instructions to install the Conan package manager. You can learn more about why we use Conan or how to simply download the API and link against it [in this specific section of the kortex_driver readme](kortex_driver/readme.md#conan). You can also decide 
+As you see, there are instructions to install the Conan package manager. You can learn more about why we use Conan or how to simply download the API and link against it [in this specific section of the kortex_driver readme](kortex_driver/readme.md#conan). You can also decide
+
+### pre-commit Formatting Checks
+
+In this repository we have a pre-commit check that runs in CI. You can use this locally and set it up to run automatically before you commit something. To install, use pip:
+
+    pip3 install pre-commit
+
+To run over all the files in the repo manually:
+
+    pre-commit run -a
+
+To run pre-commit automatically before committing in a local repo, install git hooks:
+
+    pre-commit install
 
 ## Contents
 

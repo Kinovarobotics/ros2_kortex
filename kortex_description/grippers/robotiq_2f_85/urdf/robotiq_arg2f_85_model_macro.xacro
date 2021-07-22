@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-  <!-- This line was removed by Kinova because we replaced the transmission file with our own 
+  <!-- This line was removed by Kinova because we replaced the transmission file with our own
     <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_transmission.xacro" /> -->
 
   <xacro:macro name="outer_knuckle" params="prefix fingerprefix stroke">
@@ -84,7 +84,7 @@
         <origin xyz="0.000299999999999317 0.0160078233491243 -0.0136945669206257" rpy="0 0 0" />
         <mass value="0.0104003125914103" />
         <inertia ixx="2.71909453810972E-06" ixy="1.35402465472579E-21" ixz="-7.1817349065269E-22" iyy="7.69100314106116E-07" iyz="6.74715432769696E-07" izz="2.30315190420171E-06" />
-      </inertial> 
+      </inertial>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>

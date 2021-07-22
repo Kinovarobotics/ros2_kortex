@@ -5,7 +5,7 @@
         <arg name="debug" default="false" />
         <arg name="gui" default="true" />
         <arg name="paused" default="true" />
-    
+
         <!-- Launch Gazebo with an empty world -->
         <include file="$(find gazebo_ros)/launch/empty_world.launch">
             <arg name="gui" value="$(arg gui)" />

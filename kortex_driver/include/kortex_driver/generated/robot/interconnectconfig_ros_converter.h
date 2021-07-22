@@ -1,19 +1,19 @@
 /*
-* KINOVA (R) KORTEX (TM)
-*
-* Copyright (c) 2019 Kinova inc. All rights reserved.
-*
-* This software may be modified and distributed under the
-* terms of the BSD 3-Clause license.
-*
-* Refer to the LICENSE file for details.
-*
-*/
+ * KINOVA (R) KORTEX (TM)
+ *
+ * Copyright (c) 2019 Kinova inc. All rights reserved.
+ *
+ * This software may be modified and distributed under the
+ * terms of the BSD 3-Clause license.
+ *
+ * Refer to the LICENSE file for details.
+ *
+ */
 
 /*
  * This file has been auto-generated and should not be modified.
  */
- 
+
 #ifndef _KORTEX_INTERCONNECTCONFIG_ROS_CONVERTER_H_
 #define _KORTEX_INTERCONNECTCONFIG_ROS_CONVERTER_H_
 
@@ -40,7 +40,6 @@
 #include "kortex_driver/generated/robot/devicemanager_ros_converter.h"
 #include "kortex_driver/generated/robot/visionconfig_ros_converter.h"
 
-
 #include "kortex_driver/EthernetDeviceIdentification.h"
 #include "kortex_driver/EthernetConfiguration.h"
 #include "kortex_driver/GPIOIdentification.h"
@@ -54,18 +53,23 @@
 #include "kortex_driver/I2CWriteRegisterParameter.h"
 #include "kortex_driver/I2CData.h"
 
-
-int ToRosData(Kinova::Api::InterconnectConfig::EthernetDeviceIdentification input, kortex_driver::EthernetDeviceIdentification &output);
-int ToRosData(Kinova::Api::InterconnectConfig::EthernetConfiguration input, kortex_driver::EthernetConfiguration &output);
-int ToRosData(Kinova::Api::InterconnectConfig::GPIOIdentification input, kortex_driver::GPIOIdentification &output);
-int ToRosData(Kinova::Api::InterconnectConfig::GPIOConfiguration input, kortex_driver::InterconnectConfig_GPIOConfiguration &output);
-int ToRosData(Kinova::Api::InterconnectConfig::GPIOState input, kortex_driver::GPIOState &output);
-int ToRosData(Kinova::Api::InterconnectConfig::I2CDeviceIdentification input, kortex_driver::I2CDeviceIdentification &output);
-int ToRosData(Kinova::Api::InterconnectConfig::I2CConfiguration input, kortex_driver::I2CConfiguration &output);
-int ToRosData(Kinova::Api::InterconnectConfig::I2CReadParameter input, kortex_driver::I2CReadParameter &output);
-int ToRosData(Kinova::Api::InterconnectConfig::I2CReadRegisterParameter input, kortex_driver::I2CReadRegisterParameter &output);
-int ToRosData(Kinova::Api::InterconnectConfig::I2CWriteParameter input, kortex_driver::I2CWriteParameter &output);
-int ToRosData(Kinova::Api::InterconnectConfig::I2CWriteRegisterParameter input, kortex_driver::I2CWriteRegisterParameter &output);
-int ToRosData(Kinova::Api::InterconnectConfig::I2CData input, kortex_driver::I2CData &output);
+int ToRosData(Kinova::Api::InterconnectConfig::EthernetDeviceIdentification input,
+              kortex_driver::EthernetDeviceIdentification& output);
+int ToRosData(Kinova::Api::InterconnectConfig::EthernetConfiguration input,
+              kortex_driver::EthernetConfiguration& output);
+int ToRosData(Kinova::Api::InterconnectConfig::GPIOIdentification input, kortex_driver::GPIOIdentification& output);
+int ToRosData(Kinova::Api::InterconnectConfig::GPIOConfiguration input,
+              kortex_driver::InterconnectConfig_GPIOConfiguration& output);
+int ToRosData(Kinova::Api::InterconnectConfig::GPIOState input, kortex_driver::GPIOState& output);
+int ToRosData(Kinova::Api::InterconnectConfig::I2CDeviceIdentification input,
+              kortex_driver::I2CDeviceIdentification& output);
+int ToRosData(Kinova::Api::InterconnectConfig::I2CConfiguration input, kortex_driver::I2CConfiguration& output);
+int ToRosData(Kinova::Api::InterconnectConfig::I2CReadParameter input, kortex_driver::I2CReadParameter& output);
+int ToRosData(Kinova::Api::InterconnectConfig::I2CReadRegisterParameter input,
+              kortex_driver::I2CReadRegisterParameter& output);
+int ToRosData(Kinova::Api::InterconnectConfig::I2CWriteParameter input, kortex_driver::I2CWriteParameter& output);
+int ToRosData(Kinova::Api::InterconnectConfig::I2CWriteRegisterParameter input,
+              kortex_driver::I2CWriteRegisterParameter& output);
+int ToRosData(Kinova::Api::InterconnectConfig::I2CData input, kortex_driver::I2CData& output);
 
 #endif

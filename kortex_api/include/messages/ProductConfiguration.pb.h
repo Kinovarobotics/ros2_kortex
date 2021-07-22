@@ -27,15 +27,17 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "Common.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_ProductConfiguration_2eproto {
+namespace protobuf_ProductConfiguration_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[2];
@@ -48,14 +50,18 @@ void InitDefaultsCompleteProductConfigurationImpl();
 void InitDefaultsCompleteProductConfiguration();
 void InitDefaultsProductConfigurationEndEffectorTypeImpl();
 void InitDefaultsProductConfigurationEndEffectorType();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsCompleteProductConfiguration();
   InitDefaultsProductConfigurationEndEffectorType();
 }
 }  // namespace protobuf_ProductConfiguration_2eproto
-namespace Kinova {
-namespace Api {
-namespace ProductConfiguration {
+namespace Kinova
+{
+namespace Api
+{
+namespace ProductConfiguration
+{
 class CompleteProductConfiguration;
 class CompleteProductConfigurationDefaultTypeInternal;
 extern CompleteProductConfigurationDefaultTypeInternal _CompleteProductConfiguration_default_instance_;
@@ -65,11 +71,14 @@ extern ProductConfigurationEndEffectorTypeDefaultTypeInternal _ProductConfigurat
 }  // namespace ProductConfiguration
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace ProductConfiguration {
-
-enum ModelId {
+namespace Kinova
+{
+namespace Api
+{
+namespace ProductConfiguration
+{
+enum ModelId
+{
   MODEL_ID_UNSPECIFIED = 0,
   MODEL_ID_L53 = 1,
   MODEL_ID_L31 = 2,
@@ -83,16 +92,16 @@ const ModelId ModelId_MAX = MODEL_ID_HDK;
 const int ModelId_ARRAYSIZE = ModelId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ModelId_descriptor();
-inline const ::std::string& ModelId_Name(ModelId value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ModelId_descriptor(), value);
+inline const ::std::string& ModelId_Name(ModelId value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ModelId_descriptor(), value);
 }
-inline bool ModelId_Parse(
-    const ::std::string& name, ModelId* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ModelId>(
-    ModelId_descriptor(), name, value);
+inline bool ModelId_Parse(const ::std::string& name, ModelId* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ModelId>(ModelId_descriptor(), name, value);
 }
-enum BaseType {
+enum BaseType
+{
   BASE_TYPE_UNSPECIFIED = 0,
   BASE_TYPE_L53_QUICK_CONNECT = 1,
   BASE_TYPE_L53_FIXED = 2,
@@ -107,16 +116,16 @@ const BaseType BaseType_MAX = BASE_TYPE_HDK_FIXED;
 const int BaseType_ARRAYSIZE = BaseType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* BaseType_descriptor();
-inline const ::std::string& BaseType_Name(BaseType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    BaseType_descriptor(), value);
+inline const ::std::string& BaseType_Name(BaseType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(BaseType_descriptor(), value);
 }
-inline bool BaseType_Parse(
-    const ::std::string& name, BaseType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<BaseType>(
-    BaseType_descriptor(), name, value);
+inline bool BaseType_Parse(const ::std::string& name, BaseType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<BaseType>(BaseType_descriptor(), name, value);
 }
-enum EndEffectorType {
+enum EndEffectorType
+{
   END_EFFECTOR_TYPE_UNSPECIFIED = 0,
   END_EFFECTOR_TYPE_NOT_INSTALLED = 1,
   END_EFFECTOR_TYPE_L31_GRIPPER_2F = 2,
@@ -131,16 +140,16 @@ const EndEffectorType EndEffectorType_MAX = END_EFFECTOR_TYPE_ROBOTIQ_2F_140;
 const int EndEffectorType_ARRAYSIZE = EndEffectorType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EndEffectorType_descriptor();
-inline const ::std::string& EndEffectorType_Name(EndEffectorType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    EndEffectorType_descriptor(), value);
+inline const ::std::string& EndEffectorType_Name(EndEffectorType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(EndEffectorType_descriptor(), value);
 }
-inline bool EndEffectorType_Parse(
-    const ::std::string& name, EndEffectorType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EndEffectorType>(
-    EndEffectorType_descriptor(), name, value);
+inline bool EndEffectorType_Parse(const ::std::string& name, EndEffectorType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<EndEffectorType>(EndEffectorType_descriptor(), name, value);
 }
-enum VisionModuleType {
+enum VisionModuleType
+{
   VISION_MODULE_TYPE_UNSPECIFIED = 0,
   VISION_MODULE_TYPE_NOT_INSTALLED = 1,
   VISION_MODULE_TYPE_L53_2D3D = 2,
@@ -155,16 +164,16 @@ const VisionModuleType VisionModuleType_MAX = VISION_MODULE_TYPE_EOD;
 const int VisionModuleType_ARRAYSIZE = VisionModuleType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* VisionModuleType_descriptor();
-inline const ::std::string& VisionModuleType_Name(VisionModuleType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    VisionModuleType_descriptor(), value);
+inline const ::std::string& VisionModuleType_Name(VisionModuleType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(VisionModuleType_descriptor(), value);
 }
-inline bool VisionModuleType_Parse(
-    const ::std::string& name, VisionModuleType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<VisionModuleType>(
-    VisionModuleType_descriptor(), name, value);
+inline bool VisionModuleType_Parse(const ::std::string& name, VisionModuleType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<VisionModuleType>(VisionModuleType_descriptor(), name, value);
 }
-enum InterfaceModuleType {
+enum InterfaceModuleType
+{
   INTERFACE_MODULE_TYPE_UNSPECIFIED = 0,
   INTERFACE_MODULE_TYPE_NOT_INSTALLED = 1,
   INTERFACE_MODULE_TYPE_L53 = 2,
@@ -178,16 +187,17 @@ const InterfaceModuleType InterfaceModuleType_MAX = INTERFACE_MODULE_TYPE_L31;
 const int InterfaceModuleType_ARRAYSIZE = InterfaceModuleType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* InterfaceModuleType_descriptor();
-inline const ::std::string& InterfaceModuleType_Name(InterfaceModuleType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    InterfaceModuleType_descriptor(), value);
+inline const ::std::string& InterfaceModuleType_Name(InterfaceModuleType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(InterfaceModuleType_descriptor(), value);
 }
-inline bool InterfaceModuleType_Parse(
-    const ::std::string& name, InterfaceModuleType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<InterfaceModuleType>(
-    InterfaceModuleType_descriptor(), name, value);
+inline bool InterfaceModuleType_Parse(const ::std::string& name, InterfaceModuleType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<InterfaceModuleType>(InterfaceModuleType_descriptor(), name,
+                                                                           value);
 }
-enum ArmLaterality {
+enum ArmLaterality
+{
   ARM_LATERALITY_UNSPECIFIED = 0,
   ARM_LATERALITY_NOT_APPLICABLE = 1,
   ARM_LATERALITY_LEFT = 2,
@@ -201,16 +211,16 @@ const ArmLaterality ArmLaterality_MAX = ARM_LATERALITY_RIGHT;
 const int ArmLaterality_ARRAYSIZE = ArmLaterality_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ArmLaterality_descriptor();
-inline const ::std::string& ArmLaterality_Name(ArmLaterality value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ArmLaterality_descriptor(), value);
+inline const ::std::string& ArmLaterality_Name(ArmLaterality value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ArmLaterality_descriptor(), value);
 }
-inline bool ArmLaterality_Parse(
-    const ::std::string& name, ArmLaterality* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ArmLaterality>(
-    ArmLaterality_descriptor(), name, value);
+inline bool ArmLaterality_Parse(const ::std::string& name, ArmLaterality* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ArmLaterality>(ArmLaterality_descriptor(), name, value);
 }
-enum WristType {
+enum WristType
+{
   WRIST_TYPE_UNSPECIFIED = 0,
   WRIST_TYPE_NOT_APPLICABLE = 1,
   WRIST_TYPE_SPHERICAL = 2,
@@ -224,62 +234,74 @@ const WristType WristType_MAX = WRIST_TYPE_CURVED;
 const int WristType_ARRAYSIZE = WristType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* WristType_descriptor();
-inline const ::std::string& WristType_Name(WristType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    WristType_descriptor(), value);
+inline const ::std::string& WristType_Name(WristType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(WristType_descriptor(), value);
 }
-inline bool WristType_Parse(
-    const ::std::string& name, WristType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<WristType>(
-    WristType_descriptor(), name, value);
+inline bool WristType_Parse(const ::std::string& name, WristType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<WristType>(WristType_descriptor(), name, value);
 }
 // ===================================================================
 
-class CompleteProductConfiguration : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ProductConfiguration.CompleteProductConfiguration) */ {
- public:
+class CompleteProductConfiguration
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ProductConfiguration.CompleteProductConfiguration)
+                 */
+{
+public:
   CompleteProductConfiguration();
   virtual ~CompleteProductConfiguration();
 
   CompleteProductConfiguration(const CompleteProductConfiguration& from);
 
-  inline CompleteProductConfiguration& operator=(const CompleteProductConfiguration& from) {
+  inline CompleteProductConfiguration& operator=(const CompleteProductConfiguration& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CompleteProductConfiguration(CompleteProductConfiguration&& from) noexcept
-    : CompleteProductConfiguration() {
+#if LANG_CXX11
+  CompleteProductConfiguration(CompleteProductConfiguration&& from) noexcept : CompleteProductConfiguration()
+  {
     *this = ::std::move(from);
   }
 
-  inline CompleteProductConfiguration& operator=(CompleteProductConfiguration&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CompleteProductConfiguration& operator=(CompleteProductConfiguration&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CompleteProductConfiguration& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CompleteProductConfiguration* internal_default_instance() {
-    return reinterpret_cast<const CompleteProductConfiguration*>(
-               &_CompleteProductConfiguration_default_instance_);
+  static inline const CompleteProductConfiguration* internal_default_instance()
+  {
+    return reinterpret_cast<const CompleteProductConfiguration*>(&_CompleteProductConfiguration_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(CompleteProductConfiguration* other);
-  friend void swap(CompleteProductConfiguration& a, CompleteProductConfiguration& b) {
+  friend void swap(CompleteProductConfiguration& a, CompleteProductConfiguration& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CompleteProductConfiguration* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CompleteProductConfiguration* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CompleteProductConfiguration* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -290,27 +312,32 @@ class CompleteProductConfiguration : public ::google::protobuf::Message /* @@pro
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CompleteProductConfiguration* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -322,9 +349,9 @@ class CompleteProductConfiguration : public ::google::protobuf::Message /* @@pro
   static const int kKinFieldNumber = 1;
   const ::std::string& kin() const;
   void set_kin(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_kin(::std::string&& value);
-  #endif
+#endif
   void set_kin(const char* value);
   void set_kin(const char* value, size_t size);
   ::std::string* mutable_kin();
@@ -336,9 +363,9 @@ class CompleteProductConfiguration : public ::google::protobuf::Message /* @@pro
   static const int kAssemblyPlantFieldNumber = 4;
   const ::std::string& assembly_plant() const;
   void set_assembly_plant(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_assembly_plant(::std::string&& value);
-  #endif
+#endif
   void set_assembly_plant(const char* value);
   void set_assembly_plant(const char* value, size_t size);
   ::std::string* mutable_assembly_plant();
@@ -350,9 +377,9 @@ class CompleteProductConfiguration : public ::google::protobuf::Message /* @@pro
   static const int kModelYearFieldNumber = 5;
   const ::std::string& model_year() const;
   void set_model_year(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_model_year(::std::string&& value);
-  #endif
+#endif
   void set_model_year(const char* value);
   void set_model_year(const char* value, size_t size);
   ::std::string* mutable_model_year();
@@ -417,8 +444,7 @@ class CompleteProductConfiguration : public ::google::protobuf::Message /* @@pro
   void set_wrist_type(::Kinova::Api::ProductConfiguration::WristType value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ProductConfiguration.CompleteProductConfiguration)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr kin_;
   ::google::protobuf::internal::ArenaStringPtr assembly_plant_;
@@ -438,51 +464,66 @@ class CompleteProductConfiguration : public ::google::protobuf::Message /* @@pro
 };
 // -------------------------------------------------------------------
 
-class ProductConfigurationEndEffectorType : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ProductConfiguration.ProductConfigurationEndEffectorType) */ {
- public:
+class ProductConfigurationEndEffectorType
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ProductConfiguration.ProductConfigurationEndEffectorType)
+                 */
+{
+public:
   ProductConfigurationEndEffectorType();
   virtual ~ProductConfigurationEndEffectorType();
 
   ProductConfigurationEndEffectorType(const ProductConfigurationEndEffectorType& from);
 
-  inline ProductConfigurationEndEffectorType& operator=(const ProductConfigurationEndEffectorType& from) {
+  inline ProductConfigurationEndEffectorType& operator=(const ProductConfigurationEndEffectorType& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
+#if LANG_CXX11
   ProductConfigurationEndEffectorType(ProductConfigurationEndEffectorType&& from) noexcept
-    : ProductConfigurationEndEffectorType() {
+    : ProductConfigurationEndEffectorType()
+  {
     *this = ::std::move(from);
   }
 
-  inline ProductConfigurationEndEffectorType& operator=(ProductConfigurationEndEffectorType&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ProductConfigurationEndEffectorType& operator=(ProductConfigurationEndEffectorType&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ProductConfigurationEndEffectorType& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ProductConfigurationEndEffectorType* internal_default_instance() {
+  static inline const ProductConfigurationEndEffectorType* internal_default_instance()
+  {
     return reinterpret_cast<const ProductConfigurationEndEffectorType*>(
-               &_ProductConfigurationEndEffectorType_default_instance_);
+        &_ProductConfigurationEndEffectorType_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void Swap(ProductConfigurationEndEffectorType* other);
-  friend void swap(ProductConfigurationEndEffectorType& a, ProductConfigurationEndEffectorType& b) {
+  friend void swap(ProductConfigurationEndEffectorType& a, ProductConfigurationEndEffectorType& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ProductConfigurationEndEffectorType* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ProductConfigurationEndEffectorType* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ProductConfigurationEndEffectorType* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -493,27 +534,32 @@ class ProductConfigurationEndEffectorType : public ::google::protobuf::Message /
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ProductConfigurationEndEffectorType* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -527,8 +573,7 @@ class ProductConfigurationEndEffectorType : public ::google::protobuf::Message /
   void set_end_effector_type(::Kinova::Api::ProductConfiguration::EndEffectorType value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ProductConfiguration.ProductConfigurationEndEffectorType)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int end_effector_type_;
   mutable int _cached_size_;
@@ -537,326 +582,362 @@ class ProductConfigurationEndEffectorType : public ::google::protobuf::Message /
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // CompleteProductConfiguration
 
 // string kin = 1;
-inline void CompleteProductConfiguration::clear_kin() {
+inline void CompleteProductConfiguration::clear_kin()
+{
   kin_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& CompleteProductConfiguration::kin() const {
+inline const ::std::string& CompleteProductConfiguration::kin() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
   return kin_.GetNoArena();
 }
-inline void CompleteProductConfiguration::set_kin(const ::std::string& value) {
-  
+inline void CompleteProductConfiguration::set_kin(const ::std::string& value)
+{
   kin_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
 }
 #if LANG_CXX11
-inline void CompleteProductConfiguration::set_kin(::std::string&& value) {
-  
-  kin_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void CompleteProductConfiguration::set_kin(::std::string&& value)
+{
+  kin_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
 }
 #endif
-inline void CompleteProductConfiguration::set_kin(const char* value) {
+inline void CompleteProductConfiguration::set_kin(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   kin_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
 }
-inline void CompleteProductConfiguration::set_kin(const char* value, size_t size) {
-  
+inline void CompleteProductConfiguration::set_kin(const char* value, size_t size)
+{
   kin_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                  ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
 }
-inline ::std::string* CompleteProductConfiguration::mutable_kin() {
-  
+inline ::std::string* CompleteProductConfiguration::mutable_kin()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
   return kin_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* CompleteProductConfiguration::release_kin() {
+inline ::std::string* CompleteProductConfiguration::release_kin()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
-  
+
   return kin_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void CompleteProductConfiguration::set_allocated_kin(::std::string* kin) {
-  if (kin != NULL) {
-    
-  } else {
-    
+inline void CompleteProductConfiguration::set_allocated_kin(::std::string* kin)
+{
+  if (kin != NULL) {}
+  else
+  {
   }
   kin_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), kin);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.kin)
 }
 
 // .Kinova.Api.ProductConfiguration.ModelId model = 2;
-inline void CompleteProductConfiguration::clear_model() {
+inline void CompleteProductConfiguration::clear_model()
+{
   model_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::ModelId CompleteProductConfiguration::model() const {
+inline ::Kinova::Api::ProductConfiguration::ModelId CompleteProductConfiguration::model() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model)
-  return static_cast< ::Kinova::Api::ProductConfiguration::ModelId >(model_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::ModelId>(model_);
 }
-inline void CompleteProductConfiguration::set_model(::Kinova::Api::ProductConfiguration::ModelId value) {
-  
+inline void CompleteProductConfiguration::set_model(::Kinova::Api::ProductConfiguration::ModelId value)
+{
   model_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model)
 }
 
 // .Kinova.Api.Common.CountryCode country_code = 3;
-inline bool CompleteProductConfiguration::has_country_code() const {
+inline bool CompleteProductConfiguration::has_country_code() const
+{
   return this != internal_default_instance() && country_code_ != NULL;
 }
-inline const ::Kinova::Api::Common::CountryCode& CompleteProductConfiguration::country_code() const {
+inline const ::Kinova::Api::Common::CountryCode& CompleteProductConfiguration::country_code() const
+{
   const ::Kinova::Api::Common::CountryCode* p = country_code_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.country_code)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::CountryCode*>(
-      &::Kinova::Api::Common::_CountryCode_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::CountryCode*>(
+                         &::Kinova::Api::Common::_CountryCode_default_instance_);
 }
-inline ::Kinova::Api::Common::CountryCode* CompleteProductConfiguration::release_country_code() {
+inline ::Kinova::Api::Common::CountryCode* CompleteProductConfiguration::release_country_code()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.country_code)
-  
+
   ::Kinova::Api::Common::CountryCode* temp = country_code_;
   country_code_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::CountryCode* CompleteProductConfiguration::mutable_country_code() {
-  
-  if (country_code_ == NULL) {
+inline ::Kinova::Api::Common::CountryCode* CompleteProductConfiguration::mutable_country_code()
+{
+  if (country_code_ == NULL)
+  {
     country_code_ = new ::Kinova::Api::Common::CountryCode;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.country_code)
   return country_code_;
 }
-inline void CompleteProductConfiguration::set_allocated_country_code(::Kinova::Api::Common::CountryCode* country_code) {
+inline void CompleteProductConfiguration::set_allocated_country_code(::Kinova::Api::Common::CountryCode* country_code)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(country_code_);
   }
-  if (country_code) {
+  if (country_code)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      country_code = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, country_code, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      country_code = ::google::protobuf::internal::GetOwnedMessage(message_arena, country_code, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   country_code_ = country_code;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.country_code)
 }
 
 // string assembly_plant = 4;
-inline void CompleteProductConfiguration::clear_assembly_plant() {
+inline void CompleteProductConfiguration::clear_assembly_plant()
+{
   assembly_plant_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& CompleteProductConfiguration::assembly_plant() const {
+inline const ::std::string& CompleteProductConfiguration::assembly_plant() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
   return assembly_plant_.GetNoArena();
 }
-inline void CompleteProductConfiguration::set_assembly_plant(const ::std::string& value) {
-  
+inline void CompleteProductConfiguration::set_assembly_plant(const ::std::string& value)
+{
   assembly_plant_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
 }
 #if LANG_CXX11
-inline void CompleteProductConfiguration::set_assembly_plant(::std::string&& value) {
-  
-  assembly_plant_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void CompleteProductConfiguration::set_assembly_plant(::std::string&& value)
+{
+  assembly_plant_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
 }
 #endif
-inline void CompleteProductConfiguration::set_assembly_plant(const char* value) {
+inline void CompleteProductConfiguration::set_assembly_plant(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   assembly_plant_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
 }
-inline void CompleteProductConfiguration::set_assembly_plant(const char* value, size_t size) {
-  
+inline void CompleteProductConfiguration::set_assembly_plant(const char* value, size_t size)
+{
   assembly_plant_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                             ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
 }
-inline ::std::string* CompleteProductConfiguration::mutable_assembly_plant() {
-  
+inline ::std::string* CompleteProductConfiguration::mutable_assembly_plant()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
   return assembly_plant_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* CompleteProductConfiguration::release_assembly_plant() {
+inline ::std::string* CompleteProductConfiguration::release_assembly_plant()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
-  
+
   return assembly_plant_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void CompleteProductConfiguration::set_allocated_assembly_plant(::std::string* assembly_plant) {
-  if (assembly_plant != NULL) {
-    
-  } else {
-    
+inline void CompleteProductConfiguration::set_allocated_assembly_plant(::std::string* assembly_plant)
+{
+  if (assembly_plant != NULL) {}
+  else
+  {
   }
   assembly_plant_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), assembly_plant);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.assembly_plant)
 }
 
 // string model_year = 5;
-inline void CompleteProductConfiguration::clear_model_year() {
+inline void CompleteProductConfiguration::clear_model_year()
+{
   model_year_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& CompleteProductConfiguration::model_year() const {
+inline const ::std::string& CompleteProductConfiguration::model_year() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
   return model_year_.GetNoArena();
 }
-inline void CompleteProductConfiguration::set_model_year(const ::std::string& value) {
-  
+inline void CompleteProductConfiguration::set_model_year(const ::std::string& value)
+{
   model_year_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
 }
 #if LANG_CXX11
-inline void CompleteProductConfiguration::set_model_year(::std::string&& value) {
-  
-  model_year_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void CompleteProductConfiguration::set_model_year(::std::string&& value)
+{
+  model_year_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
 }
 #endif
-inline void CompleteProductConfiguration::set_model_year(const char* value) {
+inline void CompleteProductConfiguration::set_model_year(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   model_year_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
 }
-inline void CompleteProductConfiguration::set_model_year(const char* value, size_t size) {
-  
+inline void CompleteProductConfiguration::set_model_year(const char* value, size_t size)
+{
   model_year_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                         ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
 }
-inline ::std::string* CompleteProductConfiguration::mutable_model_year() {
-  
+inline ::std::string* CompleteProductConfiguration::mutable_model_year()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
   return model_year_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* CompleteProductConfiguration::release_model_year() {
+inline ::std::string* CompleteProductConfiguration::release_model_year()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
-  
+
   return model_year_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void CompleteProductConfiguration::set_allocated_model_year(::std::string* model_year) {
-  if (model_year != NULL) {
-    
-  } else {
-    
+inline void CompleteProductConfiguration::set_allocated_model_year(::std::string* model_year)
+{
+  if (model_year != NULL) {}
+  else
+  {
   }
   model_year_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), model_year);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.model_year)
 }
 
 // uint32 degree_of_freedom = 6;
-inline void CompleteProductConfiguration::clear_degree_of_freedom() {
+inline void CompleteProductConfiguration::clear_degree_of_freedom()
+{
   degree_of_freedom_ = 0u;
 }
-inline ::google::protobuf::uint32 CompleteProductConfiguration::degree_of_freedom() const {
+inline ::google::protobuf::uint32 CompleteProductConfiguration::degree_of_freedom() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.degree_of_freedom)
   return degree_of_freedom_;
 }
-inline void CompleteProductConfiguration::set_degree_of_freedom(::google::protobuf::uint32 value) {
-  
+inline void CompleteProductConfiguration::set_degree_of_freedom(::google::protobuf::uint32 value)
+{
   degree_of_freedom_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.degree_of_freedom)
 }
 
 // .Kinova.Api.ProductConfiguration.BaseType base_type = 7;
-inline void CompleteProductConfiguration::clear_base_type() {
+inline void CompleteProductConfiguration::clear_base_type()
+{
   base_type_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::BaseType CompleteProductConfiguration::base_type() const {
+inline ::Kinova::Api::ProductConfiguration::BaseType CompleteProductConfiguration::base_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.base_type)
-  return static_cast< ::Kinova::Api::ProductConfiguration::BaseType >(base_type_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::BaseType>(base_type_);
 }
-inline void CompleteProductConfiguration::set_base_type(::Kinova::Api::ProductConfiguration::BaseType value) {
-  
+inline void CompleteProductConfiguration::set_base_type(::Kinova::Api::ProductConfiguration::BaseType value)
+{
   base_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.base_type)
 }
 
 // .Kinova.Api.ProductConfiguration.EndEffectorType end_effector_type = 8;
-inline void CompleteProductConfiguration::clear_end_effector_type() {
+inline void CompleteProductConfiguration::clear_end_effector_type()
+{
   end_effector_type_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::EndEffectorType CompleteProductConfiguration::end_effector_type() const {
+inline ::Kinova::Api::ProductConfiguration::EndEffectorType CompleteProductConfiguration::end_effector_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.end_effector_type)
-  return static_cast< ::Kinova::Api::ProductConfiguration::EndEffectorType >(end_effector_type_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::EndEffectorType>(end_effector_type_);
 }
-inline void CompleteProductConfiguration::set_end_effector_type(::Kinova::Api::ProductConfiguration::EndEffectorType value) {
-  
+inline void
+CompleteProductConfiguration::set_end_effector_type(::Kinova::Api::ProductConfiguration::EndEffectorType value)
+{
   end_effector_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.end_effector_type)
 }
 
 // .Kinova.Api.ProductConfiguration.VisionModuleType vision_module_type = 9;
-inline void CompleteProductConfiguration::clear_vision_module_type() {
+inline void CompleteProductConfiguration::clear_vision_module_type()
+{
   vision_module_type_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::VisionModuleType CompleteProductConfiguration::vision_module_type() const {
+inline ::Kinova::Api::ProductConfiguration::VisionModuleType CompleteProductConfiguration::vision_module_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.vision_module_type)
-  return static_cast< ::Kinova::Api::ProductConfiguration::VisionModuleType >(vision_module_type_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::VisionModuleType>(vision_module_type_);
 }
-inline void CompleteProductConfiguration::set_vision_module_type(::Kinova::Api::ProductConfiguration::VisionModuleType value) {
-  
+inline void
+CompleteProductConfiguration::set_vision_module_type(::Kinova::Api::ProductConfiguration::VisionModuleType value)
+{
   vision_module_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.vision_module_type)
 }
 
 // .Kinova.Api.ProductConfiguration.InterfaceModuleType interface_module_type = 10;
-inline void CompleteProductConfiguration::clear_interface_module_type() {
+inline void CompleteProductConfiguration::clear_interface_module_type()
+{
   interface_module_type_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::InterfaceModuleType CompleteProductConfiguration::interface_module_type() const {
+inline ::Kinova::Api::ProductConfiguration::InterfaceModuleType
+CompleteProductConfiguration::interface_module_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.interface_module_type)
-  return static_cast< ::Kinova::Api::ProductConfiguration::InterfaceModuleType >(interface_module_type_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::InterfaceModuleType>(interface_module_type_);
 }
-inline void CompleteProductConfiguration::set_interface_module_type(::Kinova::Api::ProductConfiguration::InterfaceModuleType value) {
-  
+inline void
+CompleteProductConfiguration::set_interface_module_type(::Kinova::Api::ProductConfiguration::InterfaceModuleType value)
+{
   interface_module_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.interface_module_type)
 }
 
 // .Kinova.Api.ProductConfiguration.ArmLaterality arm_laterality = 11;
-inline void CompleteProductConfiguration::clear_arm_laterality() {
+inline void CompleteProductConfiguration::clear_arm_laterality()
+{
   arm_laterality_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::ArmLaterality CompleteProductConfiguration::arm_laterality() const {
+inline ::Kinova::Api::ProductConfiguration::ArmLaterality CompleteProductConfiguration::arm_laterality() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.arm_laterality)
-  return static_cast< ::Kinova::Api::ProductConfiguration::ArmLaterality >(arm_laterality_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::ArmLaterality>(arm_laterality_);
 }
-inline void CompleteProductConfiguration::set_arm_laterality(::Kinova::Api::ProductConfiguration::ArmLaterality value) {
-  
+inline void CompleteProductConfiguration::set_arm_laterality(::Kinova::Api::ProductConfiguration::ArmLaterality value)
+{
   arm_laterality_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.arm_laterality)
 }
 
 // .Kinova.Api.ProductConfiguration.WristType wrist_type = 12;
-inline void CompleteProductConfiguration::clear_wrist_type() {
+inline void CompleteProductConfiguration::clear_wrist_type()
+{
   wrist_type_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::WristType CompleteProductConfiguration::wrist_type() const {
+inline ::Kinova::Api::ProductConfiguration::WristType CompleteProductConfiguration::wrist_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.wrist_type)
-  return static_cast< ::Kinova::Api::ProductConfiguration::WristType >(wrist_type_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::WristType>(wrist_type_);
 }
-inline void CompleteProductConfiguration::set_wrist_type(::Kinova::Api::ProductConfiguration::WristType value) {
-  
+inline void CompleteProductConfiguration::set_wrist_type(::Kinova::Api::ProductConfiguration::WristType value)
+{
   wrist_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.CompleteProductConfiguration.wrist_type)
 }
@@ -866,24 +947,27 @@ inline void CompleteProductConfiguration::set_wrist_type(::Kinova::Api::ProductC
 // ProductConfigurationEndEffectorType
 
 // .Kinova.Api.ProductConfiguration.EndEffectorType end_effector_type = 1;
-inline void ProductConfigurationEndEffectorType::clear_end_effector_type() {
+inline void ProductConfigurationEndEffectorType::clear_end_effector_type()
+{
   end_effector_type_ = 0;
 }
-inline ::Kinova::Api::ProductConfiguration::EndEffectorType ProductConfigurationEndEffectorType::end_effector_type() const {
+inline ::Kinova::Api::ProductConfiguration::EndEffectorType
+ProductConfigurationEndEffectorType::end_effector_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ProductConfiguration.ProductConfigurationEndEffectorType.end_effector_type)
-  return static_cast< ::Kinova::Api::ProductConfiguration::EndEffectorType >(end_effector_type_);
+  return static_cast< ::Kinova::Api::ProductConfiguration::EndEffectorType>(end_effector_type_);
 }
-inline void ProductConfigurationEndEffectorType::set_end_effector_type(::Kinova::Api::ProductConfiguration::EndEffectorType value) {
-  
+inline void
+ProductConfigurationEndEffectorType::set_end_effector_type(::Kinova::Api::ProductConfiguration::EndEffectorType value)
+{
   end_effector_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ProductConfiguration.ProductConfigurationEndEffectorType.end_effector_type)
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -891,42 +975,72 @@ inline void ProductConfigurationEndEffectorType::set_end_effector_type(::Kinova:
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::ProductConfiguration::ModelId> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::ModelId>() {
+struct is_proto_enum< ::Kinova::Api::ProductConfiguration::ModelId> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::ModelId>()
+{
   return ::Kinova::Api::ProductConfiguration::ModelId_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ProductConfiguration::BaseType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::BaseType>() {
+struct is_proto_enum< ::Kinova::Api::ProductConfiguration::BaseType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::BaseType>()
+{
   return ::Kinova::Api::ProductConfiguration::BaseType_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ProductConfiguration::EndEffectorType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::EndEffectorType>() {
+struct is_proto_enum< ::Kinova::Api::ProductConfiguration::EndEffectorType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::EndEffectorType>()
+{
   return ::Kinova::Api::ProductConfiguration::EndEffectorType_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ProductConfiguration::VisionModuleType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::VisionModuleType>() {
+struct is_proto_enum< ::Kinova::Api::ProductConfiguration::VisionModuleType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::VisionModuleType>()
+{
   return ::Kinova::Api::ProductConfiguration::VisionModuleType_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ProductConfiguration::InterfaceModuleType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::InterfaceModuleType>() {
+struct is_proto_enum< ::Kinova::Api::ProductConfiguration::InterfaceModuleType>
+  : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::InterfaceModuleType>()
+{
   return ::Kinova::Api::ProductConfiguration::InterfaceModuleType_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ProductConfiguration::ArmLaterality> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::ArmLaterality>() {
+struct is_proto_enum< ::Kinova::Api::ProductConfiguration::ArmLaterality> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::ArmLaterality>()
+{
   return ::Kinova::Api::ProductConfiguration::ArmLaterality_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ProductConfiguration::WristType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::WristType>() {
+struct is_proto_enum< ::Kinova::Api::ProductConfiguration::WristType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ProductConfiguration::WristType>()
+{
   return ::Kinova::Api::ProductConfiguration::WristType_descriptor();
 }
 

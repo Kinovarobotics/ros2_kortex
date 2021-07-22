@@ -27,15 +27,17 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "Common.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_DeviceConfig_2eproto {
+namespace protobuf_DeviceConfig_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[25];
@@ -94,7 +96,8 @@ void InitDefaultsCapSenseConfigImpl();
 void InitDefaultsCapSenseConfig();
 void InitDefaultsCapSenseRegisterImpl();
 void InitDefaultsCapSenseRegister();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsDeviceType();
   InitDefaultsRunMode();
   InitDefaultsFirmwareVersion();
@@ -122,9 +125,12 @@ inline void InitDefaults() {
   InitDefaultsCapSenseRegister();
 }
 }  // namespace protobuf_DeviceConfig_2eproto
-namespace Kinova {
-namespace Api {
-namespace DeviceConfig {
+namespace Kinova
+{
+namespace Api
+{
+namespace DeviceConfig
+{
 class BootloaderVersion;
 class BootloaderVersionDefaultTypeInternal;
 extern BootloaderVersionDefaultTypeInternal _BootloaderVersion_default_instance_;
@@ -203,11 +209,14 @@ extern SerialNumberDefaultTypeInternal _SerialNumber_default_instance_;
 }  // namespace DeviceConfig
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace DeviceConfig {
-
-enum ServiceVersion {
+namespace Kinova
+{
+namespace Api
+{
+namespace DeviceConfig
+{
+enum ServiceVersion
+{
   RESERVED_0 = 0,
   CURRENT_VERSION = 1,
   ServiceVersion_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
@@ -219,16 +228,16 @@ const ServiceVersion ServiceVersion_MAX = CURRENT_VERSION;
 const int ServiceVersion_ARRAYSIZE = ServiceVersion_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServiceVersion_descriptor();
-inline const ::std::string& ServiceVersion_Name(ServiceVersion value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ServiceVersion_descriptor(), value);
+inline const ::std::string& ServiceVersion_Name(ServiceVersion value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ServiceVersion_descriptor(), value);
 }
-inline bool ServiceVersion_Parse(
-    const ::std::string& name, ServiceVersion* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(
-    ServiceVersion_descriptor(), name, value);
+inline bool ServiceVersion_Parse(const ::std::string& name, ServiceVersion* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(ServiceVersion_descriptor(), name, value);
 }
-enum RunModes {
+enum RunModes
+{
   RUN_MODE = 0,
   CALIBRATION_MODE = 1,
   CONFIGURATION_MODE = 2,
@@ -243,16 +252,16 @@ const RunModes RunModes_MAX = TUNING_MODE;
 const int RunModes_ARRAYSIZE = RunModes_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* RunModes_descriptor();
-inline const ::std::string& RunModes_Name(RunModes value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    RunModes_descriptor(), value);
+inline const ::std::string& RunModes_Name(RunModes value)
+{
+  return ::google::protobuf::internal::NameOfEnum(RunModes_descriptor(), value);
 }
-inline bool RunModes_Parse(
-    const ::std::string& name, RunModes* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<RunModes>(
-    RunModes_descriptor(), name, value);
+inline bool RunModes_Parse(const ::std::string& name, RunModes* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<RunModes>(RunModes_descriptor(), name, value);
 }
-enum CalibrationItem {
+enum CalibrationItem
+{
   UNSPECIFIED_CALIBRATION_ITEM = 0,
   COGGING = 1,
   MAGNETIC = 2,
@@ -267,16 +276,16 @@ const CalibrationItem CalibrationItem_MAX = POSITION_RANGE;
 const int CalibrationItem_ARRAYSIZE = CalibrationItem_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CalibrationItem_descriptor();
-inline const ::std::string& CalibrationItem_Name(CalibrationItem value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    CalibrationItem_descriptor(), value);
+inline const ::std::string& CalibrationItem_Name(CalibrationItem value)
+{
+  return ::google::protobuf::internal::NameOfEnum(CalibrationItem_descriptor(), value);
 }
-inline bool CalibrationItem_Parse(
-    const ::std::string& name, CalibrationItem* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CalibrationItem>(
-    CalibrationItem_descriptor(), name, value);
+inline bool CalibrationItem_Parse(const ::std::string& name, CalibrationItem* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<CalibrationItem>(CalibrationItem_descriptor(), name, value);
 }
-enum CalibrationStatus {
+enum CalibrationStatus
+{
   UNSPECIFIED_CALIBRATION_STATUS = 0,
   NOT_CALIBRATED = 1,
   IN_PROGRESS = 2,
@@ -291,16 +300,16 @@ const CalibrationStatus CalibrationStatus_MAX = IN_FAULT;
 const int CalibrationStatus_ARRAYSIZE = CalibrationStatus_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CalibrationStatus_descriptor();
-inline const ::std::string& CalibrationStatus_Name(CalibrationStatus value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    CalibrationStatus_descriptor(), value);
+inline const ::std::string& CalibrationStatus_Name(CalibrationStatus value)
+{
+  return ::google::protobuf::internal::NameOfEnum(CalibrationStatus_descriptor(), value);
 }
-inline bool CalibrationStatus_Parse(
-    const ::std::string& name, CalibrationStatus* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CalibrationStatus>(
-    CalibrationStatus_descriptor(), name, value);
+inline bool CalibrationStatus_Parse(const ::std::string& name, CalibrationStatus* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<CalibrationStatus>(CalibrationStatus_descriptor(), name, value);
 }
-enum SafetyLimitType {
+enum SafetyLimitType
+{
   UNSPECIFIED_SAFETY_LIMIT_TYPE = 0,
   MINIMAL_LIMIT = 1,
   MAXIMAL_LIMIT = 2,
@@ -314,16 +323,16 @@ const SafetyLimitType SafetyLimitType_MAX = EVENT_LIMIT;
 const int SafetyLimitType_ARRAYSIZE = SafetyLimitType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* SafetyLimitType_descriptor();
-inline const ::std::string& SafetyLimitType_Name(SafetyLimitType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    SafetyLimitType_descriptor(), value);
+inline const ::std::string& SafetyLimitType_Name(SafetyLimitType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(SafetyLimitType_descriptor(), value);
 }
-inline bool SafetyLimitType_Parse(
-    const ::std::string& name, SafetyLimitType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<SafetyLimitType>(
-    SafetyLimitType_descriptor(), name, value);
+inline bool SafetyLimitType_Parse(const ::std::string& name, SafetyLimitType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<SafetyLimitType>(SafetyLimitType_descriptor(), name, value);
 }
-enum CapSenseMode {
+enum CapSenseMode
+{
   RESERVED = 0,
   INACTIVE = 1,
   ACTIVE_AUTO_THRESHOLD = 2,
@@ -339,62 +348,72 @@ const CapSenseMode CapSenseMode_MAX = CONFIGURATION;
 const int CapSenseMode_ARRAYSIZE = CapSenseMode_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CapSenseMode_descriptor();
-inline const ::std::string& CapSenseMode_Name(CapSenseMode value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    CapSenseMode_descriptor(), value);
+inline const ::std::string& CapSenseMode_Name(CapSenseMode value)
+{
+  return ::google::protobuf::internal::NameOfEnum(CapSenseMode_descriptor(), value);
 }
-inline bool CapSenseMode_Parse(
-    const ::std::string& name, CapSenseMode* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CapSenseMode>(
-    CapSenseMode_descriptor(), name, value);
+inline bool CapSenseMode_Parse(const ::std::string& name, CapSenseMode* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<CapSenseMode>(CapSenseMode_descriptor(), name, value);
 }
 // ===================================================================
 
-class DeviceType : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.DeviceType) */ {
- public:
+class DeviceType
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.DeviceType) */
+{
+public:
   DeviceType();
   virtual ~DeviceType();
 
   DeviceType(const DeviceType& from);
 
-  inline DeviceType& operator=(const DeviceType& from) {
+  inline DeviceType& operator=(const DeviceType& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DeviceType(DeviceType&& from) noexcept
-    : DeviceType() {
+#if LANG_CXX11
+  DeviceType(DeviceType&& from) noexcept : DeviceType()
+  {
     *this = ::std::move(from);
   }
 
-  inline DeviceType& operator=(DeviceType&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DeviceType& operator=(DeviceType&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const DeviceType& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DeviceType* internal_default_instance() {
-    return reinterpret_cast<const DeviceType*>(
-               &_DeviceType_default_instance_);
+  static inline const DeviceType* internal_default_instance()
+  {
+    return reinterpret_cast<const DeviceType*>(&_DeviceType_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(DeviceType* other);
-  friend void swap(DeviceType& a, DeviceType& b) {
+  friend void swap(DeviceType& a, DeviceType& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DeviceType* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DeviceType* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DeviceType* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -405,27 +424,32 @@ class DeviceType : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DeviceType* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -439,8 +463,7 @@ class DeviceType : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void set_device_type(::Kinova::Api::Common::DeviceTypes value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.DeviceType)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int device_type_;
   mutable int _cached_size_;
@@ -449,51 +472,62 @@ class DeviceType : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
-class RunMode : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.RunMode) */ {
- public:
+class RunMode
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.RunMode) */
+{
+public:
   RunMode();
   virtual ~RunMode();
 
   RunMode(const RunMode& from);
 
-  inline RunMode& operator=(const RunMode& from) {
+  inline RunMode& operator=(const RunMode& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  RunMode(RunMode&& from) noexcept
-    : RunMode() {
+#if LANG_CXX11
+  RunMode(RunMode&& from) noexcept : RunMode()
+  {
     *this = ::std::move(from);
   }
 
-  inline RunMode& operator=(RunMode&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline RunMode& operator=(RunMode&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const RunMode& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const RunMode* internal_default_instance() {
-    return reinterpret_cast<const RunMode*>(
-               &_RunMode_default_instance_);
+  static inline const RunMode* internal_default_instance()
+  {
+    return reinterpret_cast<const RunMode*>(&_RunMode_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void Swap(RunMode* other);
-  friend void swap(RunMode& a, RunMode& b) {
+  friend void swap(RunMode& a, RunMode& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline RunMode* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline RunMode* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   RunMode* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -504,27 +538,32 @@ class RunMode : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(RunMode* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -538,8 +577,7 @@ class RunMode : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   void set_run_mode(::Kinova::Api::DeviceConfig::RunModes value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.RunMode)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int run_mode_;
   mutable int _cached_size_;
@@ -548,51 +586,63 @@ class RunMode : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 };
 // -------------------------------------------------------------------
 
-class FirmwareVersion : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.FirmwareVersion) */ {
- public:
+class FirmwareVersion
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.FirmwareVersion) */
+{
+public:
   FirmwareVersion();
   virtual ~FirmwareVersion();
 
   FirmwareVersion(const FirmwareVersion& from);
 
-  inline FirmwareVersion& operator=(const FirmwareVersion& from) {
+  inline FirmwareVersion& operator=(const FirmwareVersion& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  FirmwareVersion(FirmwareVersion&& from) noexcept
-    : FirmwareVersion() {
+#if LANG_CXX11
+  FirmwareVersion(FirmwareVersion&& from) noexcept : FirmwareVersion()
+  {
     *this = ::std::move(from);
   }
 
-  inline FirmwareVersion& operator=(FirmwareVersion&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline FirmwareVersion& operator=(FirmwareVersion&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const FirmwareVersion& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FirmwareVersion* internal_default_instance() {
-    return reinterpret_cast<const FirmwareVersion*>(
-               &_FirmwareVersion_default_instance_);
+  static inline const FirmwareVersion* internal_default_instance()
+  {
+    return reinterpret_cast<const FirmwareVersion*>(&_FirmwareVersion_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 2;
 
   void Swap(FirmwareVersion* other);
-  friend void swap(FirmwareVersion& a, FirmwareVersion& b) {
+  friend void swap(FirmwareVersion& a, FirmwareVersion& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FirmwareVersion* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline FirmwareVersion* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   FirmwareVersion* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -603,27 +653,32 @@ class FirmwareVersion : public ::google::protobuf::Message /* @@protoc_insertion
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(FirmwareVersion* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -637,8 +692,7 @@ class FirmwareVersion : public ::google::protobuf::Message /* @@protoc_insertion
   void set_firmware_version(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.FirmwareVersion)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 firmware_version_;
   mutable int _cached_size_;
@@ -647,51 +701,63 @@ class FirmwareVersion : public ::google::protobuf::Message /* @@protoc_insertion
 };
 // -------------------------------------------------------------------
 
-class BootloaderVersion : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.BootloaderVersion) */ {
- public:
+class BootloaderVersion
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.BootloaderVersion) */
+{
+public:
   BootloaderVersion();
   virtual ~BootloaderVersion();
 
   BootloaderVersion(const BootloaderVersion& from);
 
-  inline BootloaderVersion& operator=(const BootloaderVersion& from) {
+  inline BootloaderVersion& operator=(const BootloaderVersion& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  BootloaderVersion(BootloaderVersion&& from) noexcept
-    : BootloaderVersion() {
+#if LANG_CXX11
+  BootloaderVersion(BootloaderVersion&& from) noexcept : BootloaderVersion()
+  {
     *this = ::std::move(from);
   }
 
-  inline BootloaderVersion& operator=(BootloaderVersion&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline BootloaderVersion& operator=(BootloaderVersion&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const BootloaderVersion& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const BootloaderVersion* internal_default_instance() {
-    return reinterpret_cast<const BootloaderVersion*>(
-               &_BootloaderVersion_default_instance_);
+  static inline const BootloaderVersion* internal_default_instance()
+  {
+    return reinterpret_cast<const BootloaderVersion*>(&_BootloaderVersion_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 3;
 
   void Swap(BootloaderVersion* other);
-  friend void swap(BootloaderVersion& a, BootloaderVersion& b) {
+  friend void swap(BootloaderVersion& a, BootloaderVersion& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline BootloaderVersion* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline BootloaderVersion* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   BootloaderVersion* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -702,27 +768,32 @@ class BootloaderVersion : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(BootloaderVersion* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -736,8 +807,7 @@ class BootloaderVersion : public ::google::protobuf::Message /* @@protoc_inserti
   void set_bootloader_version(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.BootloaderVersion)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 bootloader_version_;
   mutable int _cached_size_;
@@ -746,51 +816,62 @@ class BootloaderVersion : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class ModelNumber : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.ModelNumber) */ {
- public:
+class ModelNumber
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.ModelNumber) */
+{
+public:
   ModelNumber();
   virtual ~ModelNumber();
 
   ModelNumber(const ModelNumber& from);
 
-  inline ModelNumber& operator=(const ModelNumber& from) {
+  inline ModelNumber& operator=(const ModelNumber& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ModelNumber(ModelNumber&& from) noexcept
-    : ModelNumber() {
+#if LANG_CXX11
+  ModelNumber(ModelNumber&& from) noexcept : ModelNumber()
+  {
     *this = ::std::move(from);
   }
 
-  inline ModelNumber& operator=(ModelNumber&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ModelNumber& operator=(ModelNumber&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ModelNumber& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ModelNumber* internal_default_instance() {
-    return reinterpret_cast<const ModelNumber*>(
-               &_ModelNumber_default_instance_);
+  static inline const ModelNumber* internal_default_instance()
+  {
+    return reinterpret_cast<const ModelNumber*>(&_ModelNumber_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 4;
 
   void Swap(ModelNumber* other);
-  friend void swap(ModelNumber& a, ModelNumber& b) {
+  friend void swap(ModelNumber& a, ModelNumber& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ModelNumber* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ModelNumber* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ModelNumber* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -801,27 +882,32 @@ class ModelNumber : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ModelNumber* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -833,9 +919,9 @@ class ModelNumber : public ::google::protobuf::Message /* @@protoc_insertion_poi
   static const int kModelNumberFieldNumber = 1;
   const ::std::string& model_number() const;
   void set_model_number(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_model_number(::std::string&& value);
-  #endif
+#endif
   void set_model_number(const char* value);
   void set_model_number(const char* value, size_t size);
   ::std::string* mutable_model_number();
@@ -843,8 +929,7 @@ class ModelNumber : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void set_allocated_model_number(::std::string* model_number);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.ModelNumber)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr model_number_;
   mutable int _cached_size_;
@@ -853,51 +938,62 @@ class ModelNumber : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class PartNumber : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.PartNumber) */ {
- public:
+class PartNumber
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.PartNumber) */
+{
+public:
   PartNumber();
   virtual ~PartNumber();
 
   PartNumber(const PartNumber& from);
 
-  inline PartNumber& operator=(const PartNumber& from) {
+  inline PartNumber& operator=(const PartNumber& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  PartNumber(PartNumber&& from) noexcept
-    : PartNumber() {
+#if LANG_CXX11
+  PartNumber(PartNumber&& from) noexcept : PartNumber()
+  {
     *this = ::std::move(from);
   }
 
-  inline PartNumber& operator=(PartNumber&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline PartNumber& operator=(PartNumber&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const PartNumber& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PartNumber* internal_default_instance() {
-    return reinterpret_cast<const PartNumber*>(
-               &_PartNumber_default_instance_);
+  static inline const PartNumber* internal_default_instance()
+  {
+    return reinterpret_cast<const PartNumber*>(&_PartNumber_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 5;
 
   void Swap(PartNumber* other);
-  friend void swap(PartNumber& a, PartNumber& b) {
+  friend void swap(PartNumber& a, PartNumber& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline PartNumber* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline PartNumber* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   PartNumber* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -908,27 +1004,32 @@ class PartNumber : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(PartNumber* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -940,9 +1041,9 @@ class PartNumber : public ::google::protobuf::Message /* @@protoc_insertion_poin
   static const int kPartNumberFieldNumber = 1;
   const ::std::string& part_number() const;
   void set_part_number(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_part_number(::std::string&& value);
-  #endif
+#endif
   void set_part_number(const char* value);
   void set_part_number(const char* value, size_t size);
   ::std::string* mutable_part_number();
@@ -950,8 +1051,7 @@ class PartNumber : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void set_allocated_part_number(::std::string* part_number);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.PartNumber)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr part_number_;
   mutable int _cached_size_;
@@ -960,51 +1060,62 @@ class PartNumber : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
-class SerialNumber : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SerialNumber) */ {
- public:
+class SerialNumber : public ::google::protobuf::
+                         Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SerialNumber) */
+{
+public:
   SerialNumber();
   virtual ~SerialNumber();
 
   SerialNumber(const SerialNumber& from);
 
-  inline SerialNumber& operator=(const SerialNumber& from) {
+  inline SerialNumber& operator=(const SerialNumber& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SerialNumber(SerialNumber&& from) noexcept
-    : SerialNumber() {
+#if LANG_CXX11
+  SerialNumber(SerialNumber&& from) noexcept : SerialNumber()
+  {
     *this = ::std::move(from);
   }
 
-  inline SerialNumber& operator=(SerialNumber&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SerialNumber& operator=(SerialNumber&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SerialNumber& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SerialNumber* internal_default_instance() {
-    return reinterpret_cast<const SerialNumber*>(
-               &_SerialNumber_default_instance_);
+  static inline const SerialNumber* internal_default_instance()
+  {
+    return reinterpret_cast<const SerialNumber*>(&_SerialNumber_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 6;
 
   void Swap(SerialNumber* other);
-  friend void swap(SerialNumber& a, SerialNumber& b) {
+  friend void swap(SerialNumber& a, SerialNumber& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SerialNumber* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SerialNumber* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SerialNumber* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1015,27 +1126,32 @@ class SerialNumber : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SerialNumber* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1047,9 +1163,9 @@ class SerialNumber : public ::google::protobuf::Message /* @@protoc_insertion_po
   static const int kSerialNumberFieldNumber = 1;
   const ::std::string& serial_number() const;
   void set_serial_number(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_serial_number(::std::string&& value);
-  #endif
+#endif
   void set_serial_number(const char* value);
   void set_serial_number(const char* value, size_t size);
   ::std::string* mutable_serial_number();
@@ -1057,8 +1173,7 @@ class SerialNumber : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_allocated_serial_number(::std::string* serial_number);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SerialNumber)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr serial_number_;
   mutable int _cached_size_;
@@ -1067,51 +1182,62 @@ class SerialNumber : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class MACAddress : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.MACAddress) */ {
- public:
+class MACAddress
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.MACAddress) */
+{
+public:
   MACAddress();
   virtual ~MACAddress();
 
   MACAddress(const MACAddress& from);
 
-  inline MACAddress& operator=(const MACAddress& from) {
+  inline MACAddress& operator=(const MACAddress& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  MACAddress(MACAddress&& from) noexcept
-    : MACAddress() {
+#if LANG_CXX11
+  MACAddress(MACAddress&& from) noexcept : MACAddress()
+  {
     *this = ::std::move(from);
   }
 
-  inline MACAddress& operator=(MACAddress&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline MACAddress& operator=(MACAddress&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const MACAddress& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const MACAddress* internal_default_instance() {
-    return reinterpret_cast<const MACAddress*>(
-               &_MACAddress_default_instance_);
+  static inline const MACAddress* internal_default_instance()
+  {
+    return reinterpret_cast<const MACAddress*>(&_MACAddress_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 7;
 
   void Swap(MACAddress* other);
-  friend void swap(MACAddress& a, MACAddress& b) {
+  friend void swap(MACAddress& a, MACAddress& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline MACAddress* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline MACAddress* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   MACAddress* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1122,27 +1248,32 @@ class MACAddress : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(MACAddress* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1154,9 +1285,9 @@ class MACAddress : public ::google::protobuf::Message /* @@protoc_insertion_poin
   static const int kMacAddressFieldNumber = 1;
   const ::std::string& mac_address() const;
   void set_mac_address(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_mac_address(::std::string&& value);
-  #endif
+#endif
   void set_mac_address(const char* value);
   void set_mac_address(const void* value, size_t size);
   ::std::string* mutable_mac_address();
@@ -1164,8 +1295,7 @@ class MACAddress : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void set_allocated_mac_address(::std::string* mac_address);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.MACAddress)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr mac_address_;
   mutable int _cached_size_;
@@ -1174,51 +1304,62 @@ class MACAddress : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
-class IPv4Settings : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.IPv4Settings) */ {
- public:
+class IPv4Settings : public ::google::protobuf::
+                         Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.IPv4Settings) */
+{
+public:
   IPv4Settings();
   virtual ~IPv4Settings();
 
   IPv4Settings(const IPv4Settings& from);
 
-  inline IPv4Settings& operator=(const IPv4Settings& from) {
+  inline IPv4Settings& operator=(const IPv4Settings& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  IPv4Settings(IPv4Settings&& from) noexcept
-    : IPv4Settings() {
+#if LANG_CXX11
+  IPv4Settings(IPv4Settings&& from) noexcept : IPv4Settings()
+  {
     *this = ::std::move(from);
   }
 
-  inline IPv4Settings& operator=(IPv4Settings&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline IPv4Settings& operator=(IPv4Settings&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const IPv4Settings& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const IPv4Settings* internal_default_instance() {
-    return reinterpret_cast<const IPv4Settings*>(
-               &_IPv4Settings_default_instance_);
+  static inline const IPv4Settings* internal_default_instance()
+  {
+    return reinterpret_cast<const IPv4Settings*>(&_IPv4Settings_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 8;
 
   void Swap(IPv4Settings* other);
-  friend void swap(IPv4Settings& a, IPv4Settings& b) {
+  friend void swap(IPv4Settings& a, IPv4Settings& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline IPv4Settings* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline IPv4Settings* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   IPv4Settings* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1229,27 +1370,32 @@ class IPv4Settings : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(IPv4Settings* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1275,8 +1421,7 @@ class IPv4Settings : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_ipv4_default_gateway(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.IPv4Settings)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 ipv4_address_;
   ::google::protobuf::uint32 ipv4_subnet_mask_;
@@ -1287,51 +1432,63 @@ class IPv4Settings : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class PartNumberRevision : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.PartNumberRevision) */ {
- public:
+class PartNumberRevision
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.PartNumberRevision) */
+{
+public:
   PartNumberRevision();
   virtual ~PartNumberRevision();
 
   PartNumberRevision(const PartNumberRevision& from);
 
-  inline PartNumberRevision& operator=(const PartNumberRevision& from) {
+  inline PartNumberRevision& operator=(const PartNumberRevision& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  PartNumberRevision(PartNumberRevision&& from) noexcept
-    : PartNumberRevision() {
+#if LANG_CXX11
+  PartNumberRevision(PartNumberRevision&& from) noexcept : PartNumberRevision()
+  {
     *this = ::std::move(from);
   }
 
-  inline PartNumberRevision& operator=(PartNumberRevision&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline PartNumberRevision& operator=(PartNumberRevision&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const PartNumberRevision& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PartNumberRevision* internal_default_instance() {
-    return reinterpret_cast<const PartNumberRevision*>(
-               &_PartNumberRevision_default_instance_);
+  static inline const PartNumberRevision* internal_default_instance()
+  {
+    return reinterpret_cast<const PartNumberRevision*>(&_PartNumberRevision_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 9;
 
   void Swap(PartNumberRevision* other);
-  friend void swap(PartNumberRevision& a, PartNumberRevision& b) {
+  friend void swap(PartNumberRevision& a, PartNumberRevision& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline PartNumberRevision* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline PartNumberRevision* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   PartNumberRevision* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1342,27 +1499,32 @@ class PartNumberRevision : public ::google::protobuf::Message /* @@protoc_insert
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(PartNumberRevision* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1374,9 +1536,9 @@ class PartNumberRevision : public ::google::protobuf::Message /* @@protoc_insert
   static const int kPartNumberRevisionFieldNumber = 1;
   const ::std::string& part_number_revision() const;
   void set_part_number_revision(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_part_number_revision(::std::string&& value);
-  #endif
+#endif
   void set_part_number_revision(const char* value);
   void set_part_number_revision(const char* value, size_t size);
   ::std::string* mutable_part_number_revision();
@@ -1384,8 +1546,7 @@ class PartNumberRevision : public ::google::protobuf::Message /* @@protoc_insert
   void set_allocated_part_number_revision(::std::string* part_number_revision);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.PartNumberRevision)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr part_number_revision_;
   mutable int _cached_size_;
@@ -1394,51 +1555,63 @@ class PartNumberRevision : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class PowerOnSelfTestResult : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.PowerOnSelfTestResult) */ {
- public:
+class PowerOnSelfTestResult
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.PowerOnSelfTestResult) */
+{
+public:
   PowerOnSelfTestResult();
   virtual ~PowerOnSelfTestResult();
 
   PowerOnSelfTestResult(const PowerOnSelfTestResult& from);
 
-  inline PowerOnSelfTestResult& operator=(const PowerOnSelfTestResult& from) {
+  inline PowerOnSelfTestResult& operator=(const PowerOnSelfTestResult& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  PowerOnSelfTestResult(PowerOnSelfTestResult&& from) noexcept
-    : PowerOnSelfTestResult() {
+#if LANG_CXX11
+  PowerOnSelfTestResult(PowerOnSelfTestResult&& from) noexcept : PowerOnSelfTestResult()
+  {
     *this = ::std::move(from);
   }
 
-  inline PowerOnSelfTestResult& operator=(PowerOnSelfTestResult&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline PowerOnSelfTestResult& operator=(PowerOnSelfTestResult&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const PowerOnSelfTestResult& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PowerOnSelfTestResult* internal_default_instance() {
-    return reinterpret_cast<const PowerOnSelfTestResult*>(
-               &_PowerOnSelfTestResult_default_instance_);
+  static inline const PowerOnSelfTestResult* internal_default_instance()
+  {
+    return reinterpret_cast<const PowerOnSelfTestResult*>(&_PowerOnSelfTestResult_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 10;
 
   void Swap(PowerOnSelfTestResult* other);
-  friend void swap(PowerOnSelfTestResult& a, PowerOnSelfTestResult& b) {
+  friend void swap(PowerOnSelfTestResult& a, PowerOnSelfTestResult& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline PowerOnSelfTestResult* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline PowerOnSelfTestResult* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   PowerOnSelfTestResult* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1449,27 +1622,32 @@ class PowerOnSelfTestResult : public ::google::protobuf::Message /* @@protoc_ins
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(PowerOnSelfTestResult* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1483,8 +1661,7 @@ class PowerOnSelfTestResult : public ::google::protobuf::Message /* @@protoc_ins
   void set_power_on_self_test_result(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.PowerOnSelfTestResult)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 power_on_self_test_result_;
   mutable int _cached_size_;
@@ -1493,51 +1670,62 @@ class PowerOnSelfTestResult : public ::google::protobuf::Message /* @@protoc_ins
 };
 // -------------------------------------------------------------------
 
-class RebootRqst : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.RebootRqst) */ {
- public:
+class RebootRqst
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.RebootRqst) */
+{
+public:
   RebootRqst();
   virtual ~RebootRqst();
 
   RebootRqst(const RebootRqst& from);
 
-  inline RebootRqst& operator=(const RebootRqst& from) {
+  inline RebootRqst& operator=(const RebootRqst& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  RebootRqst(RebootRqst&& from) noexcept
-    : RebootRqst() {
+#if LANG_CXX11
+  RebootRqst(RebootRqst&& from) noexcept : RebootRqst()
+  {
     *this = ::std::move(from);
   }
 
-  inline RebootRqst& operator=(RebootRqst&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline RebootRqst& operator=(RebootRqst&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const RebootRqst& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const RebootRqst* internal_default_instance() {
-    return reinterpret_cast<const RebootRqst*>(
-               &_RebootRqst_default_instance_);
+  static inline const RebootRqst* internal_default_instance()
+  {
+    return reinterpret_cast<const RebootRqst*>(&_RebootRqst_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 11;
 
   void Swap(RebootRqst* other);
-  friend void swap(RebootRqst& a, RebootRqst& b) {
+  friend void swap(RebootRqst& a, RebootRqst& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline RebootRqst* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline RebootRqst* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   RebootRqst* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1548,27 +1736,32 @@ class RebootRqst : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(RebootRqst* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1582,8 +1775,7 @@ class RebootRqst : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void set_delay(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.RebootRqst)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 delay_;
   mutable int _cached_size_;
@@ -1592,51 +1784,63 @@ class RebootRqst : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
-class SafetyInformation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyInformation) */ {
- public:
+class SafetyInformation
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyInformation) */
+{
+public:
   SafetyInformation();
   virtual ~SafetyInformation();
 
   SafetyInformation(const SafetyInformation& from);
 
-  inline SafetyInformation& operator=(const SafetyInformation& from) {
+  inline SafetyInformation& operator=(const SafetyInformation& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyInformation(SafetyInformation&& from) noexcept
-    : SafetyInformation() {
+#if LANG_CXX11
+  SafetyInformation(SafetyInformation&& from) noexcept : SafetyInformation()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyInformation& operator=(SafetyInformation&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyInformation& operator=(SafetyInformation&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyInformation& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyInformation* internal_default_instance() {
-    return reinterpret_cast<const SafetyInformation*>(
-               &_SafetyInformation_default_instance_);
+  static inline const SafetyInformation* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyInformation*>(&_SafetyInformation_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    12;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 12;
 
   void Swap(SafetyInformation* other);
-  friend void swap(SafetyInformation& a, SafetyInformation& b) {
+  friend void swap(SafetyInformation& a, SafetyInformation& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyInformation* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyInformation* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyInformation* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1647,27 +1851,32 @@ class SafetyInformation : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyInformation* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1744,8 +1953,7 @@ class SafetyInformation : public ::google::protobuf::Message /* @@protoc_inserti
   void set_unit(::Kinova::Api::Common::Unit value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SafetyInformation)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::Common::SafetyHandle* handle_;
   bool can_change_safety_state_;
@@ -1764,51 +1972,63 @@ class SafetyInformation : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class SafetyInformationList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyInformationList) */ {
- public:
+class SafetyInformationList
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyInformationList) */
+{
+public:
   SafetyInformationList();
   virtual ~SafetyInformationList();
 
   SafetyInformationList(const SafetyInformationList& from);
 
-  inline SafetyInformationList& operator=(const SafetyInformationList& from) {
+  inline SafetyInformationList& operator=(const SafetyInformationList& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyInformationList(SafetyInformationList&& from) noexcept
-    : SafetyInformationList() {
+#if LANG_CXX11
+  SafetyInformationList(SafetyInformationList&& from) noexcept : SafetyInformationList()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyInformationList& operator=(SafetyInformationList&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyInformationList& operator=(SafetyInformationList&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyInformationList& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyInformationList* internal_default_instance() {
-    return reinterpret_cast<const SafetyInformationList*>(
-               &_SafetyInformationList_default_instance_);
+  static inline const SafetyInformationList* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyInformationList*>(&_SafetyInformationList_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    13;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 13;
 
   void Swap(SafetyInformationList* other);
-  friend void swap(SafetyInformationList& a, SafetyInformationList& b) {
+  friend void swap(SafetyInformationList& a, SafetyInformationList& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyInformationList* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyInformationList* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyInformationList* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1819,27 +2039,32 @@ class SafetyInformationList : public ::google::protobuf::Message /* @@protoc_ins
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyInformationList* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1853,67 +2078,75 @@ class SafetyInformationList : public ::google::protobuf::Message /* @@protoc_ins
   const ::Kinova::Api::DeviceConfig::SafetyInformation& information(int index) const;
   ::Kinova::Api::DeviceConfig::SafetyInformation* mutable_information(int index);
   ::Kinova::Api::DeviceConfig::SafetyInformation* add_information();
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation >*
-      mutable_information();
-  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation >&
-      information() const;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation>* mutable_information();
+  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation>& information() const;
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SafetyInformationList)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation > information_;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation> information_;
   mutable int _cached_size_;
   friend struct ::protobuf_DeviceConfig_2eproto::TableStruct;
   friend void ::protobuf_DeviceConfig_2eproto::InitDefaultsSafetyInformationListImpl();
 };
 // -------------------------------------------------------------------
 
-class SafetyEnable : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyEnable) */ {
- public:
+class SafetyEnable : public ::google::protobuf::
+                         Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyEnable) */
+{
+public:
   SafetyEnable();
   virtual ~SafetyEnable();
 
   SafetyEnable(const SafetyEnable& from);
 
-  inline SafetyEnable& operator=(const SafetyEnable& from) {
+  inline SafetyEnable& operator=(const SafetyEnable& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyEnable(SafetyEnable&& from) noexcept
-    : SafetyEnable() {
+#if LANG_CXX11
+  SafetyEnable(SafetyEnable&& from) noexcept : SafetyEnable()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyEnable& operator=(SafetyEnable&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyEnable& operator=(SafetyEnable&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyEnable& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyEnable* internal_default_instance() {
-    return reinterpret_cast<const SafetyEnable*>(
-               &_SafetyEnable_default_instance_);
+  static inline const SafetyEnable* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyEnable*>(&_SafetyEnable_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    14;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 14;
 
   void Swap(SafetyEnable* other);
-  friend void swap(SafetyEnable& a, SafetyEnable& b) {
+  friend void swap(SafetyEnable& a, SafetyEnable& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyEnable* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyEnable* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyEnable* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1924,27 +2157,32 @@ class SafetyEnable : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyEnable* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1967,8 +2205,7 @@ class SafetyEnable : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_enable(bool value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SafetyEnable)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::Common::SafetyHandle* handle_;
   bool enable_;
@@ -1978,51 +2215,63 @@ class SafetyEnable : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class SafetyThreshold : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyThreshold) */ {
- public:
+class SafetyThreshold
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyThreshold) */
+{
+public:
   SafetyThreshold();
   virtual ~SafetyThreshold();
 
   SafetyThreshold(const SafetyThreshold& from);
 
-  inline SafetyThreshold& operator=(const SafetyThreshold& from) {
+  inline SafetyThreshold& operator=(const SafetyThreshold& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyThreshold(SafetyThreshold&& from) noexcept
-    : SafetyThreshold() {
+#if LANG_CXX11
+  SafetyThreshold(SafetyThreshold&& from) noexcept : SafetyThreshold()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyThreshold& operator=(SafetyThreshold&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyThreshold& operator=(SafetyThreshold&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyThreshold& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyThreshold* internal_default_instance() {
-    return reinterpret_cast<const SafetyThreshold*>(
-               &_SafetyThreshold_default_instance_);
+  static inline const SafetyThreshold* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyThreshold*>(&_SafetyThreshold_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    15;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 15;
 
   void Swap(SafetyThreshold* other);
-  friend void swap(SafetyThreshold& a, SafetyThreshold& b) {
+  friend void swap(SafetyThreshold& a, SafetyThreshold& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyThreshold* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyThreshold* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyThreshold* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2033,27 +2282,32 @@ class SafetyThreshold : public ::google::protobuf::Message /* @@protoc_insertion
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyThreshold* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2076,8 +2330,7 @@ class SafetyThreshold : public ::google::protobuf::Message /* @@protoc_insertion
   void set_value(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SafetyThreshold)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::Common::SafetyHandle* handle_;
   float value_;
@@ -2087,51 +2340,63 @@ class SafetyThreshold : public ::google::protobuf::Message /* @@protoc_insertion
 };
 // -------------------------------------------------------------------
 
-class SafetyConfiguration : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyConfiguration) */ {
- public:
+class SafetyConfiguration
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyConfiguration) */
+{
+public:
   SafetyConfiguration();
   virtual ~SafetyConfiguration();
 
   SafetyConfiguration(const SafetyConfiguration& from);
 
-  inline SafetyConfiguration& operator=(const SafetyConfiguration& from) {
+  inline SafetyConfiguration& operator=(const SafetyConfiguration& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyConfiguration(SafetyConfiguration&& from) noexcept
-    : SafetyConfiguration() {
+#if LANG_CXX11
+  SafetyConfiguration(SafetyConfiguration&& from) noexcept : SafetyConfiguration()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyConfiguration& operator=(SafetyConfiguration&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyConfiguration& operator=(SafetyConfiguration&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyConfiguration& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyConfiguration* internal_default_instance() {
-    return reinterpret_cast<const SafetyConfiguration*>(
-               &_SafetyConfiguration_default_instance_);
+  static inline const SafetyConfiguration* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyConfiguration*>(&_SafetyConfiguration_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    16;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 16;
 
   void Swap(SafetyConfiguration* other);
-  friend void swap(SafetyConfiguration& a, SafetyConfiguration& b) {
+  friend void swap(SafetyConfiguration& a, SafetyConfiguration& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyConfiguration* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyConfiguration* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyConfiguration* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2142,27 +2407,32 @@ class SafetyConfiguration : public ::google::protobuf::Message /* @@protoc_inser
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyConfiguration* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2200,8 +2470,7 @@ class SafetyConfiguration : public ::google::protobuf::Message /* @@protoc_inser
   void set_warning_threshold(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SafetyConfiguration)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::Common::SafetyHandle* handle_;
   ::Kinova::Api::DeviceConfig::SafetyEnable* enable_;
@@ -2213,51 +2482,63 @@ class SafetyConfiguration : public ::google::protobuf::Message /* @@protoc_inser
 };
 // -------------------------------------------------------------------
 
-class SafetyConfigurationList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyConfigurationList) */ {
- public:
+class SafetyConfigurationList
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyConfigurationList) */
+{
+public:
   SafetyConfigurationList();
   virtual ~SafetyConfigurationList();
 
   SafetyConfigurationList(const SafetyConfigurationList& from);
 
-  inline SafetyConfigurationList& operator=(const SafetyConfigurationList& from) {
+  inline SafetyConfigurationList& operator=(const SafetyConfigurationList& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyConfigurationList(SafetyConfigurationList&& from) noexcept
-    : SafetyConfigurationList() {
+#if LANG_CXX11
+  SafetyConfigurationList(SafetyConfigurationList&& from) noexcept : SafetyConfigurationList()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyConfigurationList& operator=(SafetyConfigurationList&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyConfigurationList& operator=(SafetyConfigurationList&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyConfigurationList& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyConfigurationList* internal_default_instance() {
-    return reinterpret_cast<const SafetyConfigurationList*>(
-               &_SafetyConfigurationList_default_instance_);
+  static inline const SafetyConfigurationList* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyConfigurationList*>(&_SafetyConfigurationList_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    17;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 17;
 
   void Swap(SafetyConfigurationList* other);
-  friend void swap(SafetyConfigurationList& a, SafetyConfigurationList& b) {
+  friend void swap(SafetyConfigurationList& a, SafetyConfigurationList& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyConfigurationList* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyConfigurationList* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyConfigurationList* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2268,27 +2549,32 @@ class SafetyConfigurationList : public ::google::protobuf::Message /* @@protoc_i
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyConfigurationList* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2302,67 +2588,75 @@ class SafetyConfigurationList : public ::google::protobuf::Message /* @@protoc_i
   const ::Kinova::Api::DeviceConfig::SafetyConfiguration& configuration(int index) const;
   ::Kinova::Api::DeviceConfig::SafetyConfiguration* mutable_configuration(int index);
   ::Kinova::Api::DeviceConfig::SafetyConfiguration* add_configuration();
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration >*
-      mutable_configuration();
-  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration >&
-      configuration() const;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration>* mutable_configuration();
+  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration>& configuration() const;
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SafetyConfigurationList)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration > configuration_;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration> configuration_;
   mutable int _cached_size_;
   friend struct ::protobuf_DeviceConfig_2eproto::TableStruct;
   friend void ::protobuf_DeviceConfig_2eproto::InitDefaultsSafetyConfigurationListImpl();
 };
 // -------------------------------------------------------------------
 
-class SafetyStatus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyStatus) */ {
- public:
+class SafetyStatus : public ::google::protobuf::
+                         Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.SafetyStatus) */
+{
+public:
   SafetyStatus();
   virtual ~SafetyStatus();
 
   SafetyStatus(const SafetyStatus& from);
 
-  inline SafetyStatus& operator=(const SafetyStatus& from) {
+  inline SafetyStatus& operator=(const SafetyStatus& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyStatus(SafetyStatus&& from) noexcept
-    : SafetyStatus() {
+#if LANG_CXX11
+  SafetyStatus(SafetyStatus&& from) noexcept : SafetyStatus()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyStatus& operator=(SafetyStatus&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyStatus& operator=(SafetyStatus&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyStatus& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyStatus* internal_default_instance() {
-    return reinterpret_cast<const SafetyStatus*>(
-               &_SafetyStatus_default_instance_);
+  static inline const SafetyStatus* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyStatus*>(&_SafetyStatus_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    18;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 18;
 
   void Swap(SafetyStatus* other);
-  friend void swap(SafetyStatus& a, SafetyStatus& b) {
+  friend void swap(SafetyStatus& a, SafetyStatus& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyStatus* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyStatus* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyStatus* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2373,27 +2667,32 @@ class SafetyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyStatus* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2407,8 +2706,7 @@ class SafetyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_value(::Kinova::Api::Common::SafetyStatusValue value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.SafetyStatus)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int value_;
   mutable int _cached_size_;
@@ -2417,36 +2715,46 @@ class SafetyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class CalibrationParameter : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CalibrationParameter) */ {
- public:
+class CalibrationParameter
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CalibrationParameter) */
+{
+public:
   CalibrationParameter();
   virtual ~CalibrationParameter();
 
   CalibrationParameter(const CalibrationParameter& from);
 
-  inline CalibrationParameter& operator=(const CalibrationParameter& from) {
+  inline CalibrationParameter& operator=(const CalibrationParameter& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CalibrationParameter(CalibrationParameter&& from) noexcept
-    : CalibrationParameter() {
+#if LANG_CXX11
+  CalibrationParameter(CalibrationParameter&& from) noexcept : CalibrationParameter()
+  {
     *this = ::std::move(from);
   }
 
-  inline CalibrationParameter& operator=(CalibrationParameter&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CalibrationParameter& operator=(CalibrationParameter&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CalibrationParameter& default_instance();
 
-  enum ValueCase {
+  enum ValueCase
+  {
     kSignedIntValue = 2,
     kUnsignedIntValue = 3,
     kFloatValue = 4,
@@ -2454,21 +2762,24 @@ class CalibrationParameter : public ::google::protobuf::Message /* @@protoc_inse
   };
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CalibrationParameter* internal_default_instance() {
-    return reinterpret_cast<const CalibrationParameter*>(
-               &_CalibrationParameter_default_instance_);
+  static inline const CalibrationParameter* internal_default_instance()
+  {
+    return reinterpret_cast<const CalibrationParameter*>(&_CalibrationParameter_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    19;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 19;
 
   void Swap(CalibrationParameter* other);
-  friend void swap(CalibrationParameter& a, CalibrationParameter& b) {
+  friend void swap(CalibrationParameter& a, CalibrationParameter& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CalibrationParameter* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CalibrationParameter* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CalibrationParameter* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2479,27 +2790,32 @@ class CalibrationParameter : public ::google::protobuf::Message /* @@protoc_inse
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CalibrationParameter* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2513,27 +2829,30 @@ class CalibrationParameter : public ::google::protobuf::Message /* @@protoc_inse
   void set_calibration_parameter_identifier(::google::protobuf::uint32 value);
 
   // int32 signedIntValue = 2;
-  private:
+private:
   bool has_signedintvalue() const;
-  public:
+
+public:
   void clear_signedintvalue();
   static const int kSignedIntValueFieldNumber = 2;
   ::google::protobuf::int32 signedintvalue() const;
   void set_signedintvalue(::google::protobuf::int32 value);
 
   // uint32 unsignedIntValue = 3;
-  private:
+private:
   bool has_unsignedintvalue() const;
-  public:
+
+public:
   void clear_unsignedintvalue();
   static const int kUnsignedIntValueFieldNumber = 3;
   ::google::protobuf::uint32 unsignedintvalue() const;
   void set_unsignedintvalue(::google::protobuf::uint32 value);
 
   // float floatValue = 4;
-  private:
+private:
   bool has_floatvalue() const;
-  public:
+
+public:
   void clear_floatvalue();
   static const int kFloatValueFieldNumber = 4;
   float floatvalue() const;
@@ -2541,7 +2860,7 @@ class CalibrationParameter : public ::google::protobuf::Message /* @@protoc_inse
 
   ValueCase value_case() const;
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.CalibrationParameter)
- private:
+private:
   void set_has_signedintvalue();
   void set_has_unsignedintvalue();
   void set_has_floatvalue();
@@ -2552,8 +2871,11 @@ class CalibrationParameter : public ::google::protobuf::Message /* @@protoc_inse
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 calibration_parameter_identifier_;
-  union ValueUnion {
-    ValueUnion() {}
+  union ValueUnion
+  {
+    ValueUnion()
+    {
+    }
     ::google::protobuf::int32 signedintvalue_;
     ::google::protobuf::uint32 unsignedintvalue_;
     float floatvalue_;
@@ -2566,51 +2888,62 @@ class CalibrationParameter : public ::google::protobuf::Message /* @@protoc_inse
 };
 // -------------------------------------------------------------------
 
-class Calibration : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.Calibration) */ {
- public:
+class Calibration
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.Calibration) */
+{
+public:
   Calibration();
   virtual ~Calibration();
 
   Calibration(const Calibration& from);
 
-  inline Calibration& operator=(const Calibration& from) {
+  inline Calibration& operator=(const Calibration& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  Calibration(Calibration&& from) noexcept
-    : Calibration() {
+#if LANG_CXX11
+  Calibration(Calibration&& from) noexcept : Calibration()
+  {
     *this = ::std::move(from);
   }
 
-  inline Calibration& operator=(Calibration&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline Calibration& operator=(Calibration&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const Calibration& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Calibration* internal_default_instance() {
-    return reinterpret_cast<const Calibration*>(
-               &_Calibration_default_instance_);
+  static inline const Calibration* internal_default_instance()
+  {
+    return reinterpret_cast<const Calibration*>(&_Calibration_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    20;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 20;
 
   void Swap(Calibration* other);
-  friend void swap(Calibration& a, Calibration& b) {
+  friend void swap(Calibration& a, Calibration& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Calibration* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Calibration* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   Calibration* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2621,27 +2954,32 @@ class Calibration : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Calibration* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2655,10 +2993,10 @@ class Calibration : public ::google::protobuf::Message /* @@protoc_insertion_poi
   const ::Kinova::Api::DeviceConfig::CalibrationParameter& calibration_parameter(int index) const;
   ::Kinova::Api::DeviceConfig::CalibrationParameter* mutable_calibration_parameter(int index);
   ::Kinova::Api::DeviceConfig::CalibrationParameter* add_calibration_parameter();
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter >*
-      mutable_calibration_parameter();
-  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter >&
-      calibration_parameter() const;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter>*
+  mutable_calibration_parameter();
+  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter>&
+  calibration_parameter() const;
 
   // .Kinova.Api.DeviceConfig.CalibrationItem calibration_item = 1;
   void clear_calibration_item();
@@ -2667,10 +3005,9 @@ class Calibration : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void set_calibration_item(::Kinova::Api::DeviceConfig::CalibrationItem value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.Calibration)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter > calibration_parameter_;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter> calibration_parameter_;
   int calibration_item_;
   mutable int _cached_size_;
   friend struct ::protobuf_DeviceConfig_2eproto::TableStruct;
@@ -2678,51 +3015,63 @@ class Calibration : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class CalibrationElement : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CalibrationElement) */ {
- public:
+class CalibrationElement
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CalibrationElement) */
+{
+public:
   CalibrationElement();
   virtual ~CalibrationElement();
 
   CalibrationElement(const CalibrationElement& from);
 
-  inline CalibrationElement& operator=(const CalibrationElement& from) {
+  inline CalibrationElement& operator=(const CalibrationElement& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CalibrationElement(CalibrationElement&& from) noexcept
-    : CalibrationElement() {
+#if LANG_CXX11
+  CalibrationElement(CalibrationElement&& from) noexcept : CalibrationElement()
+  {
     *this = ::std::move(from);
   }
 
-  inline CalibrationElement& operator=(CalibrationElement&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CalibrationElement& operator=(CalibrationElement&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CalibrationElement& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CalibrationElement* internal_default_instance() {
-    return reinterpret_cast<const CalibrationElement*>(
-               &_CalibrationElement_default_instance_);
+  static inline const CalibrationElement* internal_default_instance()
+  {
+    return reinterpret_cast<const CalibrationElement*>(&_CalibrationElement_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    21;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 21;
 
   void Swap(CalibrationElement* other);
-  friend void swap(CalibrationElement& a, CalibrationElement& b) {
+  friend void swap(CalibrationElement& a, CalibrationElement& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CalibrationElement* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CalibrationElement* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CalibrationElement* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2733,27 +3082,32 @@ class CalibrationElement : public ::google::protobuf::Message /* @@protoc_insert
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CalibrationElement* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2767,8 +3121,7 @@ class CalibrationElement : public ::google::protobuf::Message /* @@protoc_insert
   void set_calibration_item(::Kinova::Api::DeviceConfig::CalibrationItem value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.CalibrationElement)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int calibration_item_;
   mutable int _cached_size_;
@@ -2777,51 +3130,63 @@ class CalibrationElement : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class CalibrationResult : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CalibrationResult) */ {
- public:
+class CalibrationResult
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CalibrationResult) */
+{
+public:
   CalibrationResult();
   virtual ~CalibrationResult();
 
   CalibrationResult(const CalibrationResult& from);
 
-  inline CalibrationResult& operator=(const CalibrationResult& from) {
+  inline CalibrationResult& operator=(const CalibrationResult& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CalibrationResult(CalibrationResult&& from) noexcept
-    : CalibrationResult() {
+#if LANG_CXX11
+  CalibrationResult(CalibrationResult&& from) noexcept : CalibrationResult()
+  {
     *this = ::std::move(from);
   }
 
-  inline CalibrationResult& operator=(CalibrationResult&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CalibrationResult& operator=(CalibrationResult&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CalibrationResult& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CalibrationResult* internal_default_instance() {
-    return reinterpret_cast<const CalibrationResult*>(
-               &_CalibrationResult_default_instance_);
+  static inline const CalibrationResult* internal_default_instance()
+  {
+    return reinterpret_cast<const CalibrationResult*>(&_CalibrationResult_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    22;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 22;
 
   void Swap(CalibrationResult* other);
-  friend void swap(CalibrationResult& a, CalibrationResult& b) {
+  friend void swap(CalibrationResult& a, CalibrationResult& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CalibrationResult* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CalibrationResult* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CalibrationResult* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2832,27 +3197,32 @@ class CalibrationResult : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CalibrationResult* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2872,8 +3242,7 @@ class CalibrationResult : public ::google::protobuf::Message /* @@protoc_inserti
   void set_calibration_details(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.CalibrationResult)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int calibration_status_;
   ::google::protobuf::uint32 calibration_details_;
@@ -2883,51 +3252,63 @@ class CalibrationResult : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class CapSenseConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CapSenseConfig) */ {
- public:
+class CapSenseConfig
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CapSenseConfig) */
+{
+public:
   CapSenseConfig();
   virtual ~CapSenseConfig();
 
   CapSenseConfig(const CapSenseConfig& from);
 
-  inline CapSenseConfig& operator=(const CapSenseConfig& from) {
+  inline CapSenseConfig& operator=(const CapSenseConfig& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CapSenseConfig(CapSenseConfig&& from) noexcept
-    : CapSenseConfig() {
+#if LANG_CXX11
+  CapSenseConfig(CapSenseConfig&& from) noexcept : CapSenseConfig()
+  {
     *this = ::std::move(from);
   }
 
-  inline CapSenseConfig& operator=(CapSenseConfig&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CapSenseConfig& operator=(CapSenseConfig&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CapSenseConfig& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CapSenseConfig* internal_default_instance() {
-    return reinterpret_cast<const CapSenseConfig*>(
-               &_CapSenseConfig_default_instance_);
+  static inline const CapSenseConfig* internal_default_instance()
+  {
+    return reinterpret_cast<const CapSenseConfig*>(&_CapSenseConfig_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    23;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 23;
 
   void Swap(CapSenseConfig* other);
-  friend void swap(CapSenseConfig& a, CapSenseConfig& b) {
+  friend void swap(CapSenseConfig& a, CapSenseConfig& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CapSenseConfig* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CapSenseConfig* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CapSenseConfig* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2938,27 +3319,32 @@ class CapSenseConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CapSenseConfig* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2984,8 +3370,7 @@ class CapSenseConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   void set_threshold_b(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.CapSenseConfig)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int mode_;
   float threshold_a_;
@@ -2996,51 +3381,63 @@ class CapSenseConfig : public ::google::protobuf::Message /* @@protoc_insertion_
 };
 // -------------------------------------------------------------------
 
-class CapSenseRegister : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CapSenseRegister) */ {
- public:
+class CapSenseRegister
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceConfig.CapSenseRegister) */
+{
+public:
   CapSenseRegister();
   virtual ~CapSenseRegister();
 
   CapSenseRegister(const CapSenseRegister& from);
 
-  inline CapSenseRegister& operator=(const CapSenseRegister& from) {
+  inline CapSenseRegister& operator=(const CapSenseRegister& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CapSenseRegister(CapSenseRegister&& from) noexcept
-    : CapSenseRegister() {
+#if LANG_CXX11
+  CapSenseRegister(CapSenseRegister&& from) noexcept : CapSenseRegister()
+  {
     *this = ::std::move(from);
   }
 
-  inline CapSenseRegister& operator=(CapSenseRegister&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CapSenseRegister& operator=(CapSenseRegister&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CapSenseRegister& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CapSenseRegister* internal_default_instance() {
-    return reinterpret_cast<const CapSenseRegister*>(
-               &_CapSenseRegister_default_instance_);
+  static inline const CapSenseRegister* internal_default_instance()
+  {
+    return reinterpret_cast<const CapSenseRegister*>(&_CapSenseRegister_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    24;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 24;
 
   void Swap(CapSenseRegister* other);
-  friend void swap(CapSenseRegister& a, CapSenseRegister& b) {
+  friend void swap(CapSenseRegister& a, CapSenseRegister& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CapSenseRegister* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CapSenseRegister* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CapSenseRegister* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -3051,27 +3448,32 @@ class CapSenseRegister : public ::google::protobuf::Message /* @@protoc_insertio
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CapSenseRegister* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -3091,8 +3493,7 @@ class CapSenseRegister : public ::google::protobuf::Message /* @@protoc_insertio
   void set_value(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceConfig.CapSenseRegister)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 address_;
   ::google::protobuf::uint32 value_;
@@ -3102,25 +3503,26 @@ class CapSenseRegister : public ::google::protobuf::Message /* @@protoc_insertio
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // DeviceType
 
 // .Kinova.Api.Common.DeviceTypes device_type = 1;
-inline void DeviceType::clear_device_type() {
+inline void DeviceType::clear_device_type()
+{
   device_type_ = 0;
 }
-inline ::Kinova::Api::Common::DeviceTypes DeviceType::device_type() const {
+inline ::Kinova::Api::Common::DeviceTypes DeviceType::device_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.DeviceType.device_type)
-  return static_cast< ::Kinova::Api::Common::DeviceTypes >(device_type_);
+  return static_cast< ::Kinova::Api::Common::DeviceTypes>(device_type_);
 }
-inline void DeviceType::set_device_type(::Kinova::Api::Common::DeviceTypes value) {
-  
+inline void DeviceType::set_device_type(::Kinova::Api::Common::DeviceTypes value)
+{
   device_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.DeviceType.device_type)
 }
@@ -3130,15 +3532,17 @@ inline void DeviceType::set_device_type(::Kinova::Api::Common::DeviceTypes value
 // RunMode
 
 // .Kinova.Api.DeviceConfig.RunModes run_mode = 1;
-inline void RunMode::clear_run_mode() {
+inline void RunMode::clear_run_mode()
+{
   run_mode_ = 0;
 }
-inline ::Kinova::Api::DeviceConfig::RunModes RunMode::run_mode() const {
+inline ::Kinova::Api::DeviceConfig::RunModes RunMode::run_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.RunMode.run_mode)
-  return static_cast< ::Kinova::Api::DeviceConfig::RunModes >(run_mode_);
+  return static_cast< ::Kinova::Api::DeviceConfig::RunModes>(run_mode_);
 }
-inline void RunMode::set_run_mode(::Kinova::Api::DeviceConfig::RunModes value) {
-  
+inline void RunMode::set_run_mode(::Kinova::Api::DeviceConfig::RunModes value)
+{
   run_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.RunMode.run_mode)
 }
@@ -3148,15 +3552,17 @@ inline void RunMode::set_run_mode(::Kinova::Api::DeviceConfig::RunModes value) {
 // FirmwareVersion
 
 // uint32 firmware_version = 1;
-inline void FirmwareVersion::clear_firmware_version() {
+inline void FirmwareVersion::clear_firmware_version()
+{
   firmware_version_ = 0u;
 }
-inline ::google::protobuf::uint32 FirmwareVersion::firmware_version() const {
+inline ::google::protobuf::uint32 FirmwareVersion::firmware_version() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.FirmwareVersion.firmware_version)
   return firmware_version_;
 }
-inline void FirmwareVersion::set_firmware_version(::google::protobuf::uint32 value) {
-  
+inline void FirmwareVersion::set_firmware_version(::google::protobuf::uint32 value)
+{
   firmware_version_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.FirmwareVersion.firmware_version)
 }
@@ -3166,15 +3572,17 @@ inline void FirmwareVersion::set_firmware_version(::google::protobuf::uint32 val
 // BootloaderVersion
 
 // uint32 bootloader_version = 1;
-inline void BootloaderVersion::clear_bootloader_version() {
+inline void BootloaderVersion::clear_bootloader_version()
+{
   bootloader_version_ = 0u;
 }
-inline ::google::protobuf::uint32 BootloaderVersion::bootloader_version() const {
+inline ::google::protobuf::uint32 BootloaderVersion::bootloader_version() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.BootloaderVersion.bootloader_version)
   return bootloader_version_;
 }
-inline void BootloaderVersion::set_bootloader_version(::google::protobuf::uint32 value) {
-  
+inline void BootloaderVersion::set_bootloader_version(::google::protobuf::uint32 value)
+{
   bootloader_version_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.BootloaderVersion.bootloader_version)
 }
@@ -3184,53 +3592,56 @@ inline void BootloaderVersion::set_bootloader_version(::google::protobuf::uint32
 // ModelNumber
 
 // string model_number = 1;
-inline void ModelNumber::clear_model_number() {
+inline void ModelNumber::clear_model_number()
+{
   model_number_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& ModelNumber::model_number() const {
+inline const ::std::string& ModelNumber::model_number() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.ModelNumber.model_number)
   return model_number_.GetNoArena();
 }
-inline void ModelNumber::set_model_number(const ::std::string& value) {
-  
+inline void ModelNumber::set_model_number(const ::std::string& value)
+{
   model_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.ModelNumber.model_number)
 }
 #if LANG_CXX11
-inline void ModelNumber::set_model_number(::std::string&& value) {
-  
-  model_number_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void ModelNumber::set_model_number(::std::string&& value)
+{
+  model_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.DeviceConfig.ModelNumber.model_number)
 }
 #endif
-inline void ModelNumber::set_model_number(const char* value) {
+inline void ModelNumber::set_model_number(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   model_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.DeviceConfig.ModelNumber.model_number)
 }
-inline void ModelNumber::set_model_number(const char* value, size_t size) {
-  
+inline void ModelNumber::set_model_number(const char* value, size_t size)
+{
   model_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                           ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.DeviceConfig.ModelNumber.model_number)
 }
-inline ::std::string* ModelNumber::mutable_model_number() {
-  
+inline ::std::string* ModelNumber::mutable_model_number()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.ModelNumber.model_number)
   return model_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* ModelNumber::release_model_number() {
+inline ::std::string* ModelNumber::release_model_number()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.ModelNumber.model_number)
-  
+
   return model_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void ModelNumber::set_allocated_model_number(::std::string* model_number) {
-  if (model_number != NULL) {
-    
-  } else {
-    
+inline void ModelNumber::set_allocated_model_number(::std::string* model_number)
+{
+  if (model_number != NULL) {}
+  else
+  {
   }
   model_number_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), model_number);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.ModelNumber.model_number)
@@ -3241,53 +3652,56 @@ inline void ModelNumber::set_allocated_model_number(::std::string* model_number)
 // PartNumber
 
 // string part_number = 1;
-inline void PartNumber::clear_part_number() {
+inline void PartNumber::clear_part_number()
+{
   part_number_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& PartNumber::part_number() const {
+inline const ::std::string& PartNumber::part_number() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.PartNumber.part_number)
   return part_number_.GetNoArena();
 }
-inline void PartNumber::set_part_number(const ::std::string& value) {
-  
+inline void PartNumber::set_part_number(const ::std::string& value)
+{
   part_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.PartNumber.part_number)
 }
 #if LANG_CXX11
-inline void PartNumber::set_part_number(::std::string&& value) {
-  
-  part_number_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void PartNumber::set_part_number(::std::string&& value)
+{
+  part_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.DeviceConfig.PartNumber.part_number)
 }
 #endif
-inline void PartNumber::set_part_number(const char* value) {
+inline void PartNumber::set_part_number(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   part_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.DeviceConfig.PartNumber.part_number)
 }
-inline void PartNumber::set_part_number(const char* value, size_t size) {
-  
+inline void PartNumber::set_part_number(const char* value, size_t size)
+{
   part_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                          ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.DeviceConfig.PartNumber.part_number)
 }
-inline ::std::string* PartNumber::mutable_part_number() {
-  
+inline ::std::string* PartNumber::mutable_part_number()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.PartNumber.part_number)
   return part_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* PartNumber::release_part_number() {
+inline ::std::string* PartNumber::release_part_number()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.PartNumber.part_number)
-  
+
   return part_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void PartNumber::set_allocated_part_number(::std::string* part_number) {
-  if (part_number != NULL) {
-    
-  } else {
-    
+inline void PartNumber::set_allocated_part_number(::std::string* part_number)
+{
+  if (part_number != NULL) {}
+  else
+  {
   }
   part_number_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), part_number);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.PartNumber.part_number)
@@ -3298,53 +3712,56 @@ inline void PartNumber::set_allocated_part_number(::std::string* part_number) {
 // SerialNumber
 
 // string serial_number = 1;
-inline void SerialNumber::clear_serial_number() {
+inline void SerialNumber::clear_serial_number()
+{
   serial_number_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& SerialNumber::serial_number() const {
+inline const ::std::string& SerialNumber::serial_number() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
   return serial_number_.GetNoArena();
 }
-inline void SerialNumber::set_serial_number(const ::std::string& value) {
-  
+inline void SerialNumber::set_serial_number(const ::std::string& value)
+{
   serial_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
 }
 #if LANG_CXX11
-inline void SerialNumber::set_serial_number(::std::string&& value) {
-  
-  serial_number_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void SerialNumber::set_serial_number(::std::string&& value)
+{
+  serial_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
 }
 #endif
-inline void SerialNumber::set_serial_number(const char* value) {
+inline void SerialNumber::set_serial_number(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   serial_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
 }
-inline void SerialNumber::set_serial_number(const char* value, size_t size) {
-  
+inline void SerialNumber::set_serial_number(const char* value, size_t size)
+{
   serial_number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                            ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
 }
-inline ::std::string* SerialNumber::mutable_serial_number() {
-  
+inline ::std::string* SerialNumber::mutable_serial_number()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
   return serial_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* SerialNumber::release_serial_number() {
+inline ::std::string* SerialNumber::release_serial_number()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
-  
+
   return serial_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void SerialNumber::set_allocated_serial_number(::std::string* serial_number) {
-  if (serial_number != NULL) {
-    
-  } else {
-    
+inline void SerialNumber::set_allocated_serial_number(::std::string* serial_number)
+{
+  if (serial_number != NULL) {}
+  else
+  {
   }
   serial_number_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), serial_number);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.SerialNumber.serial_number)
@@ -3355,53 +3772,56 @@ inline void SerialNumber::set_allocated_serial_number(::std::string* serial_numb
 // MACAddress
 
 // bytes mac_address = 1;
-inline void MACAddress::clear_mac_address() {
+inline void MACAddress::clear_mac_address()
+{
   mac_address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& MACAddress::mac_address() const {
+inline const ::std::string& MACAddress::mac_address() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.MACAddress.mac_address)
   return mac_address_.GetNoArena();
 }
-inline void MACAddress::set_mac_address(const ::std::string& value) {
-  
+inline void MACAddress::set_mac_address(const ::std::string& value)
+{
   mac_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.MACAddress.mac_address)
 }
 #if LANG_CXX11
-inline void MACAddress::set_mac_address(::std::string&& value) {
-  
-  mac_address_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void MACAddress::set_mac_address(::std::string&& value)
+{
+  mac_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.DeviceConfig.MACAddress.mac_address)
 }
 #endif
-inline void MACAddress::set_mac_address(const char* value) {
+inline void MACAddress::set_mac_address(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   mac_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.DeviceConfig.MACAddress.mac_address)
 }
-inline void MACAddress::set_mac_address(const void* value, size_t size) {
-  
+inline void MACAddress::set_mac_address(const void* value, size_t size)
+{
   mac_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                          ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.DeviceConfig.MACAddress.mac_address)
 }
-inline ::std::string* MACAddress::mutable_mac_address() {
-  
+inline ::std::string* MACAddress::mutable_mac_address()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.MACAddress.mac_address)
   return mac_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* MACAddress::release_mac_address() {
+inline ::std::string* MACAddress::release_mac_address()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.MACAddress.mac_address)
-  
+
   return mac_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void MACAddress::set_allocated_mac_address(::std::string* mac_address) {
-  if (mac_address != NULL) {
-    
-  } else {
-    
+inline void MACAddress::set_allocated_mac_address(::std::string* mac_address)
+{
+  if (mac_address != NULL) {}
+  else
+  {
   }
   mac_address_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), mac_address);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.MACAddress.mac_address)
@@ -3412,43 +3832,49 @@ inline void MACAddress::set_allocated_mac_address(::std::string* mac_address) {
 // IPv4Settings
 
 // uint32 ipv4_address = 1;
-inline void IPv4Settings::clear_ipv4_address() {
+inline void IPv4Settings::clear_ipv4_address()
+{
   ipv4_address_ = 0u;
 }
-inline ::google::protobuf::uint32 IPv4Settings::ipv4_address() const {
+inline ::google::protobuf::uint32 IPv4Settings::ipv4_address() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.IPv4Settings.ipv4_address)
   return ipv4_address_;
 }
-inline void IPv4Settings::set_ipv4_address(::google::protobuf::uint32 value) {
-  
+inline void IPv4Settings::set_ipv4_address(::google::protobuf::uint32 value)
+{
   ipv4_address_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.IPv4Settings.ipv4_address)
 }
 
 // uint32 ipv4_subnet_mask = 2;
-inline void IPv4Settings::clear_ipv4_subnet_mask() {
+inline void IPv4Settings::clear_ipv4_subnet_mask()
+{
   ipv4_subnet_mask_ = 0u;
 }
-inline ::google::protobuf::uint32 IPv4Settings::ipv4_subnet_mask() const {
+inline ::google::protobuf::uint32 IPv4Settings::ipv4_subnet_mask() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.IPv4Settings.ipv4_subnet_mask)
   return ipv4_subnet_mask_;
 }
-inline void IPv4Settings::set_ipv4_subnet_mask(::google::protobuf::uint32 value) {
-  
+inline void IPv4Settings::set_ipv4_subnet_mask(::google::protobuf::uint32 value)
+{
   ipv4_subnet_mask_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.IPv4Settings.ipv4_subnet_mask)
 }
 
 // uint32 ipv4_default_gateway = 3;
-inline void IPv4Settings::clear_ipv4_default_gateway() {
+inline void IPv4Settings::clear_ipv4_default_gateway()
+{
   ipv4_default_gateway_ = 0u;
 }
-inline ::google::protobuf::uint32 IPv4Settings::ipv4_default_gateway() const {
+inline ::google::protobuf::uint32 IPv4Settings::ipv4_default_gateway() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.IPv4Settings.ipv4_default_gateway)
   return ipv4_default_gateway_;
 }
-inline void IPv4Settings::set_ipv4_default_gateway(::google::protobuf::uint32 value) {
-  
+inline void IPv4Settings::set_ipv4_default_gateway(::google::protobuf::uint32 value)
+{
   ipv4_default_gateway_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.IPv4Settings.ipv4_default_gateway)
 }
@@ -3458,55 +3884,59 @@ inline void IPv4Settings::set_ipv4_default_gateway(::google::protobuf::uint32 va
 // PartNumberRevision
 
 // string part_number_revision = 1;
-inline void PartNumberRevision::clear_part_number_revision() {
+inline void PartNumberRevision::clear_part_number_revision()
+{
   part_number_revision_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& PartNumberRevision::part_number_revision() const {
+inline const ::std::string& PartNumberRevision::part_number_revision() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
   return part_number_revision_.GetNoArena();
 }
-inline void PartNumberRevision::set_part_number_revision(const ::std::string& value) {
-  
+inline void PartNumberRevision::set_part_number_revision(const ::std::string& value)
+{
   part_number_revision_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
 }
 #if LANG_CXX11
-inline void PartNumberRevision::set_part_number_revision(::std::string&& value) {
-  
-  part_number_revision_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void PartNumberRevision::set_part_number_revision(::std::string&& value)
+{
+  part_number_revision_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
 }
 #endif
-inline void PartNumberRevision::set_part_number_revision(const char* value) {
+inline void PartNumberRevision::set_part_number_revision(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   part_number_revision_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
 }
-inline void PartNumberRevision::set_part_number_revision(const char* value, size_t size) {
-  
+inline void PartNumberRevision::set_part_number_revision(const char* value, size_t size)
+{
   part_number_revision_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                                   ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
 }
-inline ::std::string* PartNumberRevision::mutable_part_number_revision() {
-  
+inline ::std::string* PartNumberRevision::mutable_part_number_revision()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
   return part_number_revision_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* PartNumberRevision::release_part_number_revision() {
+inline ::std::string* PartNumberRevision::release_part_number_revision()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
-  
+
   return part_number_revision_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void PartNumberRevision::set_allocated_part_number_revision(::std::string* part_number_revision) {
-  if (part_number_revision != NULL) {
-    
-  } else {
-    
+inline void PartNumberRevision::set_allocated_part_number_revision(::std::string* part_number_revision)
+{
+  if (part_number_revision != NULL) {}
+  else
+  {
   }
-  part_number_revision_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), part_number_revision);
+  part_number_revision_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                                            part_number_revision);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.PartNumberRevision.part_number_revision)
 }
 
@@ -3515,15 +3945,17 @@ inline void PartNumberRevision::set_allocated_part_number_revision(::std::string
 // PowerOnSelfTestResult
 
 // uint32 power_on_self_test_result = 1;
-inline void PowerOnSelfTestResult::clear_power_on_self_test_result() {
+inline void PowerOnSelfTestResult::clear_power_on_self_test_result()
+{
   power_on_self_test_result_ = 0u;
 }
-inline ::google::protobuf::uint32 PowerOnSelfTestResult::power_on_self_test_result() const {
+inline ::google::protobuf::uint32 PowerOnSelfTestResult::power_on_self_test_result() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.PowerOnSelfTestResult.power_on_self_test_result)
   return power_on_self_test_result_;
 }
-inline void PowerOnSelfTestResult::set_power_on_self_test_result(::google::protobuf::uint32 value) {
-  
+inline void PowerOnSelfTestResult::set_power_on_self_test_result(::google::protobuf::uint32 value)
+{
   power_on_self_test_result_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.PowerOnSelfTestResult.power_on_self_test_result)
 }
@@ -3533,15 +3965,17 @@ inline void PowerOnSelfTestResult::set_power_on_self_test_result(::google::proto
 // RebootRqst
 
 // uint32 delay = 1;
-inline void RebootRqst::clear_delay() {
+inline void RebootRqst::clear_delay()
+{
   delay_ = 0u;
 }
-inline ::google::protobuf::uint32 RebootRqst::delay() const {
+inline ::google::protobuf::uint32 RebootRqst::delay() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.RebootRqst.delay)
   return delay_;
 }
-inline void RebootRqst::set_delay(::google::protobuf::uint32 value) {
-  
+inline void RebootRqst::set_delay(::google::protobuf::uint32 value)
+{
   delay_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.RebootRqst.delay)
 }
@@ -3551,185 +3985,213 @@ inline void RebootRqst::set_delay(::google::protobuf::uint32 value) {
 // SafetyInformation
 
 // .Kinova.Api.Common.SafetyHandle handle = 1;
-inline bool SafetyInformation::has_handle() const {
+inline bool SafetyInformation::has_handle() const
+{
   return this != internal_default_instance() && handle_ != NULL;
 }
-inline const ::Kinova::Api::Common::SafetyHandle& SafetyInformation::handle() const {
+inline const ::Kinova::Api::Common::SafetyHandle& SafetyInformation::handle() const
+{
   const ::Kinova::Api::Common::SafetyHandle* p = handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
-      &::Kinova::Api::Common::_SafetyHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
+                         &::Kinova::Api::Common::_SafetyHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyInformation::release_handle() {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyInformation::release_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.SafetyInformation.handle)
-  
+
   ::Kinova::Api::Common::SafetyHandle* temp = handle_;
   handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyInformation::mutable_handle() {
-  
-  if (handle_ == NULL) {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyInformation::mutable_handle()
+{
+  if (handle_ == NULL)
+  {
     handle_ = new ::Kinova::Api::Common::SafetyHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SafetyInformation.handle)
   return handle_;
 }
-inline void SafetyInformation::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle) {
+inline void SafetyInformation::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(handle_);
   }
-  if (handle) {
+  if (handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   handle_ = handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.SafetyInformation.handle)
 }
 
 // bool can_change_safety_state = 2;
-inline void SafetyInformation::clear_can_change_safety_state() {
+inline void SafetyInformation::clear_can_change_safety_state()
+{
   can_change_safety_state_ = false;
 }
-inline bool SafetyInformation::can_change_safety_state() const {
+inline bool SafetyInformation::can_change_safety_state() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.can_change_safety_state)
   return can_change_safety_state_;
 }
-inline void SafetyInformation::set_can_change_safety_state(bool value) {
-  
+inline void SafetyInformation::set_can_change_safety_state(bool value)
+{
   can_change_safety_state_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.can_change_safety_state)
 }
 
 // bool has_warning_threshold = 3;
-inline void SafetyInformation::clear_has_warning_threshold() {
+inline void SafetyInformation::clear_has_warning_threshold()
+{
   has_warning_threshold_ = false;
 }
-inline bool SafetyInformation::has_warning_threshold() const {
+inline bool SafetyInformation::has_warning_threshold() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.has_warning_threshold)
   return has_warning_threshold_;
 }
-inline void SafetyInformation::set_has_warning_threshold(bool value) {
-  
+inline void SafetyInformation::set_has_warning_threshold(bool value)
+{
   has_warning_threshold_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.has_warning_threshold)
 }
 
 // bool has_error_threshold = 4;
-inline void SafetyInformation::clear_has_error_threshold() {
+inline void SafetyInformation::clear_has_error_threshold()
+{
   has_error_threshold_ = false;
 }
-inline bool SafetyInformation::has_error_threshold() const {
+inline bool SafetyInformation::has_error_threshold() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.has_error_threshold)
   return has_error_threshold_;
 }
-inline void SafetyInformation::set_has_error_threshold(bool value) {
-  
+inline void SafetyInformation::set_has_error_threshold(bool value)
+{
   has_error_threshold_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.has_error_threshold)
 }
 
 // .Kinova.Api.DeviceConfig.SafetyLimitType limit_type = 5;
-inline void SafetyInformation::clear_limit_type() {
+inline void SafetyInformation::clear_limit_type()
+{
   limit_type_ = 0;
 }
-inline ::Kinova::Api::DeviceConfig::SafetyLimitType SafetyInformation::limit_type() const {
+inline ::Kinova::Api::DeviceConfig::SafetyLimitType SafetyInformation::limit_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.limit_type)
-  return static_cast< ::Kinova::Api::DeviceConfig::SafetyLimitType >(limit_type_);
+  return static_cast< ::Kinova::Api::DeviceConfig::SafetyLimitType>(limit_type_);
 }
-inline void SafetyInformation::set_limit_type(::Kinova::Api::DeviceConfig::SafetyLimitType value) {
-  
+inline void SafetyInformation::set_limit_type(::Kinova::Api::DeviceConfig::SafetyLimitType value)
+{
   limit_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.limit_type)
 }
 
 // float default_warning_threshold = 6;
-inline void SafetyInformation::clear_default_warning_threshold() {
+inline void SafetyInformation::clear_default_warning_threshold()
+{
   default_warning_threshold_ = 0;
 }
-inline float SafetyInformation::default_warning_threshold() const {
+inline float SafetyInformation::default_warning_threshold() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.default_warning_threshold)
   return default_warning_threshold_;
 }
-inline void SafetyInformation::set_default_warning_threshold(float value) {
-  
+inline void SafetyInformation::set_default_warning_threshold(float value)
+{
   default_warning_threshold_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.default_warning_threshold)
 }
 
 // float default_error_threshold = 7;
-inline void SafetyInformation::clear_default_error_threshold() {
+inline void SafetyInformation::clear_default_error_threshold()
+{
   default_error_threshold_ = 0;
 }
-inline float SafetyInformation::default_error_threshold() const {
+inline float SafetyInformation::default_error_threshold() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.default_error_threshold)
   return default_error_threshold_;
 }
-inline void SafetyInformation::set_default_error_threshold(float value) {
-  
+inline void SafetyInformation::set_default_error_threshold(float value)
+{
   default_error_threshold_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.default_error_threshold)
 }
 
 // float upper_hard_limit = 8;
-inline void SafetyInformation::clear_upper_hard_limit() {
+inline void SafetyInformation::clear_upper_hard_limit()
+{
   upper_hard_limit_ = 0;
 }
-inline float SafetyInformation::upper_hard_limit() const {
+inline float SafetyInformation::upper_hard_limit() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.upper_hard_limit)
   return upper_hard_limit_;
 }
-inline void SafetyInformation::set_upper_hard_limit(float value) {
-  
+inline void SafetyInformation::set_upper_hard_limit(float value)
+{
   upper_hard_limit_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.upper_hard_limit)
 }
 
 // float lower_hard_limit = 9;
-inline void SafetyInformation::clear_lower_hard_limit() {
+inline void SafetyInformation::clear_lower_hard_limit()
+{
   lower_hard_limit_ = 0;
 }
-inline float SafetyInformation::lower_hard_limit() const {
+inline float SafetyInformation::lower_hard_limit() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.lower_hard_limit)
   return lower_hard_limit_;
 }
-inline void SafetyInformation::set_lower_hard_limit(float value) {
-  
+inline void SafetyInformation::set_lower_hard_limit(float value)
+{
   lower_hard_limit_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.lower_hard_limit)
 }
 
 // .Kinova.Api.Common.SafetyStatusValue status = 11;
-inline void SafetyInformation::clear_status() {
+inline void SafetyInformation::clear_status()
+{
   status_ = 0;
 }
-inline ::Kinova::Api::Common::SafetyStatusValue SafetyInformation::status() const {
+inline ::Kinova::Api::Common::SafetyStatusValue SafetyInformation::status() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.status)
-  return static_cast< ::Kinova::Api::Common::SafetyStatusValue >(status_);
+  return static_cast< ::Kinova::Api::Common::SafetyStatusValue>(status_);
 }
-inline void SafetyInformation::set_status(::Kinova::Api::Common::SafetyStatusValue value) {
-  
+inline void SafetyInformation::set_status(::Kinova::Api::Common::SafetyStatusValue value)
+{
   status_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.status)
 }
 
 // .Kinova.Api.Common.Unit unit = 12;
-inline void SafetyInformation::clear_unit() {
+inline void SafetyInformation::clear_unit()
+{
   unit_ = 0;
 }
-inline ::Kinova::Api::Common::Unit SafetyInformation::unit() const {
+inline ::Kinova::Api::Common::Unit SafetyInformation::unit() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformation.unit)
-  return static_cast< ::Kinova::Api::Common::Unit >(unit_);
+  return static_cast< ::Kinova::Api::Common::Unit>(unit_);
 }
-inline void SafetyInformation::set_unit(::Kinova::Api::Common::Unit value) {
-  
+inline void SafetyInformation::set_unit(::Kinova::Api::Common::Unit value)
+{
   unit_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyInformation.unit)
 }
@@ -3739,31 +4201,38 @@ inline void SafetyInformation::set_unit(::Kinova::Api::Common::Unit value) {
 // SafetyInformationList
 
 // repeated .Kinova.Api.DeviceConfig.SafetyInformation information = 1;
-inline int SafetyInformationList::information_size() const {
+inline int SafetyInformationList::information_size() const
+{
   return information_.size();
 }
-inline void SafetyInformationList::clear_information() {
+inline void SafetyInformationList::clear_information()
+{
   information_.Clear();
 }
-inline const ::Kinova::Api::DeviceConfig::SafetyInformation& SafetyInformationList::information(int index) const {
+inline const ::Kinova::Api::DeviceConfig::SafetyInformation& SafetyInformationList::information(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyInformationList.information)
   return information_.Get(index);
 }
-inline ::Kinova::Api::DeviceConfig::SafetyInformation* SafetyInformationList::mutable_information(int index) {
+inline ::Kinova::Api::DeviceConfig::SafetyInformation* SafetyInformationList::mutable_information(int index)
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SafetyInformationList.information)
   return information_.Mutable(index);
 }
-inline ::Kinova::Api::DeviceConfig::SafetyInformation* SafetyInformationList::add_information() {
+inline ::Kinova::Api::DeviceConfig::SafetyInformation* SafetyInformationList::add_information()
+{
   // @@protoc_insertion_point(field_add:Kinova.Api.DeviceConfig.SafetyInformationList.information)
   return information_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation >*
-SafetyInformationList::mutable_information() {
+inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation>*
+SafetyInformationList::mutable_information()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.DeviceConfig.SafetyInformationList.information)
   return &information_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation >&
-SafetyInformationList::information() const {
+inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyInformation>&
+SafetyInformationList::information() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.DeviceConfig.SafetyInformationList.information)
   return information_;
 }
@@ -3773,59 +4242,69 @@ SafetyInformationList::information() const {
 // SafetyEnable
 
 // .Kinova.Api.Common.SafetyHandle handle = 1;
-inline bool SafetyEnable::has_handle() const {
+inline bool SafetyEnable::has_handle() const
+{
   return this != internal_default_instance() && handle_ != NULL;
 }
-inline const ::Kinova::Api::Common::SafetyHandle& SafetyEnable::handle() const {
+inline const ::Kinova::Api::Common::SafetyHandle& SafetyEnable::handle() const
+{
   const ::Kinova::Api::Common::SafetyHandle* p = handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyEnable.handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
-      &::Kinova::Api::Common::_SafetyHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
+                         &::Kinova::Api::Common::_SafetyHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyEnable::release_handle() {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyEnable::release_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.SafetyEnable.handle)
-  
+
   ::Kinova::Api::Common::SafetyHandle* temp = handle_;
   handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyEnable::mutable_handle() {
-  
-  if (handle_ == NULL) {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyEnable::mutable_handle()
+{
+  if (handle_ == NULL)
+  {
     handle_ = new ::Kinova::Api::Common::SafetyHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SafetyEnable.handle)
   return handle_;
 }
-inline void SafetyEnable::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle) {
+inline void SafetyEnable::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(handle_);
   }
-  if (handle) {
+  if (handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   handle_ = handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.SafetyEnable.handle)
 }
 
 // bool enable = 2;
-inline void SafetyEnable::clear_enable() {
+inline void SafetyEnable::clear_enable()
+{
   enable_ = false;
 }
-inline bool SafetyEnable::enable() const {
+inline bool SafetyEnable::enable() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyEnable.enable)
   return enable_;
 }
-inline void SafetyEnable::set_enable(bool value) {
-  
+inline void SafetyEnable::set_enable(bool value)
+{
   enable_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyEnable.enable)
 }
@@ -3835,59 +4314,69 @@ inline void SafetyEnable::set_enable(bool value) {
 // SafetyThreshold
 
 // .Kinova.Api.Common.SafetyHandle handle = 1;
-inline bool SafetyThreshold::has_handle() const {
+inline bool SafetyThreshold::has_handle() const
+{
   return this != internal_default_instance() && handle_ != NULL;
 }
-inline const ::Kinova::Api::Common::SafetyHandle& SafetyThreshold::handle() const {
+inline const ::Kinova::Api::Common::SafetyHandle& SafetyThreshold::handle() const
+{
   const ::Kinova::Api::Common::SafetyHandle* p = handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyThreshold.handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
-      &::Kinova::Api::Common::_SafetyHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
+                         &::Kinova::Api::Common::_SafetyHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyThreshold::release_handle() {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyThreshold::release_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.SafetyThreshold.handle)
-  
+
   ::Kinova::Api::Common::SafetyHandle* temp = handle_;
   handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyThreshold::mutable_handle() {
-  
-  if (handle_ == NULL) {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyThreshold::mutable_handle()
+{
+  if (handle_ == NULL)
+  {
     handle_ = new ::Kinova::Api::Common::SafetyHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SafetyThreshold.handle)
   return handle_;
 }
-inline void SafetyThreshold::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle) {
+inline void SafetyThreshold::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(handle_);
   }
-  if (handle) {
+  if (handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   handle_ = handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.SafetyThreshold.handle)
 }
 
 // float value = 2;
-inline void SafetyThreshold::clear_value() {
+inline void SafetyThreshold::clear_value()
+{
   value_ = 0;
 }
-inline float SafetyThreshold::value() const {
+inline float SafetyThreshold::value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyThreshold.value)
   return value_;
 }
-inline void SafetyThreshold::set_value(float value) {
-  
+inline void SafetyThreshold::set_value(float value)
+{
   value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyThreshold.value)
 }
@@ -3897,122 +4386,144 @@ inline void SafetyThreshold::set_value(float value) {
 // SafetyConfiguration
 
 // .Kinova.Api.Common.SafetyHandle handle = 1;
-inline bool SafetyConfiguration::has_handle() const {
+inline bool SafetyConfiguration::has_handle() const
+{
   return this != internal_default_instance() && handle_ != NULL;
 }
-inline const ::Kinova::Api::Common::SafetyHandle& SafetyConfiguration::handle() const {
+inline const ::Kinova::Api::Common::SafetyHandle& SafetyConfiguration::handle() const
+{
   const ::Kinova::Api::Common::SafetyHandle* p = handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyConfiguration.handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
-      &::Kinova::Api::Common::_SafetyHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
+                         &::Kinova::Api::Common::_SafetyHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyConfiguration::release_handle() {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyConfiguration::release_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.SafetyConfiguration.handle)
-  
+
   ::Kinova::Api::Common::SafetyHandle* temp = handle_;
   handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyConfiguration::mutable_handle() {
-  
-  if (handle_ == NULL) {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyConfiguration::mutable_handle()
+{
+  if (handle_ == NULL)
+  {
     handle_ = new ::Kinova::Api::Common::SafetyHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SafetyConfiguration.handle)
   return handle_;
 }
-inline void SafetyConfiguration::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle) {
+inline void SafetyConfiguration::set_allocated_handle(::Kinova::Api::Common::SafetyHandle* handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(handle_);
   }
-  if (handle) {
+  if (handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   handle_ = handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.SafetyConfiguration.handle)
 }
 
 // float error_threshold = 2;
-inline void SafetyConfiguration::clear_error_threshold() {
+inline void SafetyConfiguration::clear_error_threshold()
+{
   error_threshold_ = 0;
 }
-inline float SafetyConfiguration::error_threshold() const {
+inline float SafetyConfiguration::error_threshold() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyConfiguration.error_threshold)
   return error_threshold_;
 }
-inline void SafetyConfiguration::set_error_threshold(float value) {
-  
+inline void SafetyConfiguration::set_error_threshold(float value)
+{
   error_threshold_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyConfiguration.error_threshold)
 }
 
 // float warning_threshold = 3;
-inline void SafetyConfiguration::clear_warning_threshold() {
+inline void SafetyConfiguration::clear_warning_threshold()
+{
   warning_threshold_ = 0;
 }
-inline float SafetyConfiguration::warning_threshold() const {
+inline float SafetyConfiguration::warning_threshold() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyConfiguration.warning_threshold)
   return warning_threshold_;
 }
-inline void SafetyConfiguration::set_warning_threshold(float value) {
-  
+inline void SafetyConfiguration::set_warning_threshold(float value)
+{
   warning_threshold_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyConfiguration.warning_threshold)
 }
 
 // .Kinova.Api.DeviceConfig.SafetyEnable enable = 4;
-inline bool SafetyConfiguration::has_enable() const {
+inline bool SafetyConfiguration::has_enable() const
+{
   return this != internal_default_instance() && enable_ != NULL;
 }
-inline void SafetyConfiguration::clear_enable() {
-  if (GetArenaNoVirtual() == NULL && enable_ != NULL) {
+inline void SafetyConfiguration::clear_enable()
+{
+  if (GetArenaNoVirtual() == NULL && enable_ != NULL)
+  {
     delete enable_;
   }
   enable_ = NULL;
 }
-inline const ::Kinova::Api::DeviceConfig::SafetyEnable& SafetyConfiguration::enable() const {
+inline const ::Kinova::Api::DeviceConfig::SafetyEnable& SafetyConfiguration::enable() const
+{
   const ::Kinova::Api::DeviceConfig::SafetyEnable* p = enable_;
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyConfiguration.enable)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::DeviceConfig::SafetyEnable*>(
-      &::Kinova::Api::DeviceConfig::_SafetyEnable_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::DeviceConfig::SafetyEnable*>(
+                         &::Kinova::Api::DeviceConfig::_SafetyEnable_default_instance_);
 }
-inline ::Kinova::Api::DeviceConfig::SafetyEnable* SafetyConfiguration::release_enable() {
+inline ::Kinova::Api::DeviceConfig::SafetyEnable* SafetyConfiguration::release_enable()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.DeviceConfig.SafetyConfiguration.enable)
-  
+
   ::Kinova::Api::DeviceConfig::SafetyEnable* temp = enable_;
   enable_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::DeviceConfig::SafetyEnable* SafetyConfiguration::mutable_enable() {
-  
-  if (enable_ == NULL) {
+inline ::Kinova::Api::DeviceConfig::SafetyEnable* SafetyConfiguration::mutable_enable()
+{
+  if (enable_ == NULL)
+  {
     enable_ = new ::Kinova::Api::DeviceConfig::SafetyEnable;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SafetyConfiguration.enable)
   return enable_;
 }
-inline void SafetyConfiguration::set_allocated_enable(::Kinova::Api::DeviceConfig::SafetyEnable* enable) {
+inline void SafetyConfiguration::set_allocated_enable(::Kinova::Api::DeviceConfig::SafetyEnable* enable)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete enable_;
   }
-  if (enable) {
+  if (enable)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      enable = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, enable, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      enable = ::google::protobuf::internal::GetOwnedMessage(message_arena, enable, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   enable_ = enable;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.DeviceConfig.SafetyConfiguration.enable)
@@ -4023,31 +4534,38 @@ inline void SafetyConfiguration::set_allocated_enable(::Kinova::Api::DeviceConfi
 // SafetyConfigurationList
 
 // repeated .Kinova.Api.DeviceConfig.SafetyConfiguration configuration = 1;
-inline int SafetyConfigurationList::configuration_size() const {
+inline int SafetyConfigurationList::configuration_size() const
+{
   return configuration_.size();
 }
-inline void SafetyConfigurationList::clear_configuration() {
+inline void SafetyConfigurationList::clear_configuration()
+{
   configuration_.Clear();
 }
-inline const ::Kinova::Api::DeviceConfig::SafetyConfiguration& SafetyConfigurationList::configuration(int index) const {
+inline const ::Kinova::Api::DeviceConfig::SafetyConfiguration& SafetyConfigurationList::configuration(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyConfigurationList.configuration)
   return configuration_.Get(index);
 }
-inline ::Kinova::Api::DeviceConfig::SafetyConfiguration* SafetyConfigurationList::mutable_configuration(int index) {
+inline ::Kinova::Api::DeviceConfig::SafetyConfiguration* SafetyConfigurationList::mutable_configuration(int index)
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.SafetyConfigurationList.configuration)
   return configuration_.Mutable(index);
 }
-inline ::Kinova::Api::DeviceConfig::SafetyConfiguration* SafetyConfigurationList::add_configuration() {
+inline ::Kinova::Api::DeviceConfig::SafetyConfiguration* SafetyConfigurationList::add_configuration()
+{
   // @@protoc_insertion_point(field_add:Kinova.Api.DeviceConfig.SafetyConfigurationList.configuration)
   return configuration_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration >*
-SafetyConfigurationList::mutable_configuration() {
+inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration>*
+SafetyConfigurationList::mutable_configuration()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.DeviceConfig.SafetyConfigurationList.configuration)
   return &configuration_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration >&
-SafetyConfigurationList::configuration() const {
+inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::SafetyConfiguration>&
+SafetyConfigurationList::configuration() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.DeviceConfig.SafetyConfigurationList.configuration)
   return configuration_;
 }
@@ -4057,15 +4575,17 @@ SafetyConfigurationList::configuration() const {
 // SafetyStatus
 
 // .Kinova.Api.Common.SafetyStatusValue value = 1;
-inline void SafetyStatus::clear_value() {
+inline void SafetyStatus::clear_value()
+{
   value_ = 0;
 }
-inline ::Kinova::Api::Common::SafetyStatusValue SafetyStatus::value() const {
+inline ::Kinova::Api::Common::SafetyStatusValue SafetyStatus::value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.SafetyStatus.value)
-  return static_cast< ::Kinova::Api::Common::SafetyStatusValue >(value_);
+  return static_cast< ::Kinova::Api::Common::SafetyStatusValue>(value_);
 }
-inline void SafetyStatus::set_value(::Kinova::Api::Common::SafetyStatusValue value) {
-  
+inline void SafetyStatus::set_value(::Kinova::Api::Common::SafetyStatusValue value)
+{
   value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.SafetyStatus.value)
 }
@@ -4075,41 +4595,51 @@ inline void SafetyStatus::set_value(::Kinova::Api::Common::SafetyStatusValue val
 // CalibrationParameter
 
 // uint32 calibration_parameter_identifier = 1;
-inline void CalibrationParameter::clear_calibration_parameter_identifier() {
+inline void CalibrationParameter::clear_calibration_parameter_identifier()
+{
   calibration_parameter_identifier_ = 0u;
 }
-inline ::google::protobuf::uint32 CalibrationParameter::calibration_parameter_identifier() const {
+inline ::google::protobuf::uint32 CalibrationParameter::calibration_parameter_identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CalibrationParameter.calibration_parameter_identifier)
   return calibration_parameter_identifier_;
 }
-inline void CalibrationParameter::set_calibration_parameter_identifier(::google::protobuf::uint32 value) {
-  
+inline void CalibrationParameter::set_calibration_parameter_identifier(::google::protobuf::uint32 value)
+{
   calibration_parameter_identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CalibrationParameter.calibration_parameter_identifier)
 }
 
 // int32 signedIntValue = 2;
-inline bool CalibrationParameter::has_signedintvalue() const {
+inline bool CalibrationParameter::has_signedintvalue() const
+{
   return value_case() == kSignedIntValue;
 }
-inline void CalibrationParameter::set_has_signedintvalue() {
+inline void CalibrationParameter::set_has_signedintvalue()
+{
   _oneof_case_[0] = kSignedIntValue;
 }
-inline void CalibrationParameter::clear_signedintvalue() {
-  if (has_signedintvalue()) {
+inline void CalibrationParameter::clear_signedintvalue()
+{
+  if (has_signedintvalue())
+  {
     value_.signedintvalue_ = 0;
     clear_has_value();
   }
 }
-inline ::google::protobuf::int32 CalibrationParameter::signedintvalue() const {
+inline ::google::protobuf::int32 CalibrationParameter::signedintvalue() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CalibrationParameter.signedIntValue)
-  if (has_signedintvalue()) {
+  if (has_signedintvalue())
+  {
     return value_.signedintvalue_;
   }
   return 0;
 }
-inline void CalibrationParameter::set_signedintvalue(::google::protobuf::int32 value) {
-  if (!has_signedintvalue()) {
+inline void CalibrationParameter::set_signedintvalue(::google::protobuf::int32 value)
+{
+  if (!has_signedintvalue())
+  {
     clear_value();
     set_has_signedintvalue();
   }
@@ -4118,27 +4648,35 @@ inline void CalibrationParameter::set_signedintvalue(::google::protobuf::int32 v
 }
 
 // uint32 unsignedIntValue = 3;
-inline bool CalibrationParameter::has_unsignedintvalue() const {
+inline bool CalibrationParameter::has_unsignedintvalue() const
+{
   return value_case() == kUnsignedIntValue;
 }
-inline void CalibrationParameter::set_has_unsignedintvalue() {
+inline void CalibrationParameter::set_has_unsignedintvalue()
+{
   _oneof_case_[0] = kUnsignedIntValue;
 }
-inline void CalibrationParameter::clear_unsignedintvalue() {
-  if (has_unsignedintvalue()) {
+inline void CalibrationParameter::clear_unsignedintvalue()
+{
+  if (has_unsignedintvalue())
+  {
     value_.unsignedintvalue_ = 0u;
     clear_has_value();
   }
 }
-inline ::google::protobuf::uint32 CalibrationParameter::unsignedintvalue() const {
+inline ::google::protobuf::uint32 CalibrationParameter::unsignedintvalue() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CalibrationParameter.unsignedIntValue)
-  if (has_unsignedintvalue()) {
+  if (has_unsignedintvalue())
+  {
     return value_.unsignedintvalue_;
   }
   return 0u;
 }
-inline void CalibrationParameter::set_unsignedintvalue(::google::protobuf::uint32 value) {
-  if (!has_unsignedintvalue()) {
+inline void CalibrationParameter::set_unsignedintvalue(::google::protobuf::uint32 value)
+{
+  if (!has_unsignedintvalue())
+  {
     clear_value();
     set_has_unsignedintvalue();
   }
@@ -4147,27 +4685,35 @@ inline void CalibrationParameter::set_unsignedintvalue(::google::protobuf::uint3
 }
 
 // float floatValue = 4;
-inline bool CalibrationParameter::has_floatvalue() const {
+inline bool CalibrationParameter::has_floatvalue() const
+{
   return value_case() == kFloatValue;
 }
-inline void CalibrationParameter::set_has_floatvalue() {
+inline void CalibrationParameter::set_has_floatvalue()
+{
   _oneof_case_[0] = kFloatValue;
 }
-inline void CalibrationParameter::clear_floatvalue() {
-  if (has_floatvalue()) {
+inline void CalibrationParameter::clear_floatvalue()
+{
+  if (has_floatvalue())
+  {
     value_.floatvalue_ = 0;
     clear_has_value();
   }
 }
-inline float CalibrationParameter::floatvalue() const {
+inline float CalibrationParameter::floatvalue() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CalibrationParameter.floatValue)
-  if (has_floatvalue()) {
+  if (has_floatvalue())
+  {
     return value_.floatvalue_;
   }
   return 0;
 }
-inline void CalibrationParameter::set_floatvalue(float value) {
-  if (!has_floatvalue()) {
+inline void CalibrationParameter::set_floatvalue(float value)
+{
+  if (!has_floatvalue())
+  {
     clear_value();
     set_has_floatvalue();
   }
@@ -4175,13 +4721,16 @@ inline void CalibrationParameter::set_floatvalue(float value) {
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CalibrationParameter.floatValue)
 }
 
-inline bool CalibrationParameter::has_value() const {
+inline bool CalibrationParameter::has_value() const
+{
   return value_case() != VALUE_NOT_SET;
 }
-inline void CalibrationParameter::clear_has_value() {
+inline void CalibrationParameter::clear_has_value()
+{
   _oneof_case_[0] = VALUE_NOT_SET;
 }
-inline CalibrationParameter::ValueCase CalibrationParameter::value_case() const {
+inline CalibrationParameter::ValueCase CalibrationParameter::value_case() const
+{
   return CalibrationParameter::ValueCase(_oneof_case_[0]);
 }
 // -------------------------------------------------------------------
@@ -4189,45 +4738,54 @@ inline CalibrationParameter::ValueCase CalibrationParameter::value_case() const 
 // Calibration
 
 // .Kinova.Api.DeviceConfig.CalibrationItem calibration_item = 1;
-inline void Calibration::clear_calibration_item() {
+inline void Calibration::clear_calibration_item()
+{
   calibration_item_ = 0;
 }
-inline ::Kinova::Api::DeviceConfig::CalibrationItem Calibration::calibration_item() const {
+inline ::Kinova::Api::DeviceConfig::CalibrationItem Calibration::calibration_item() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.Calibration.calibration_item)
-  return static_cast< ::Kinova::Api::DeviceConfig::CalibrationItem >(calibration_item_);
+  return static_cast< ::Kinova::Api::DeviceConfig::CalibrationItem>(calibration_item_);
 }
-inline void Calibration::set_calibration_item(::Kinova::Api::DeviceConfig::CalibrationItem value) {
-  
+inline void Calibration::set_calibration_item(::Kinova::Api::DeviceConfig::CalibrationItem value)
+{
   calibration_item_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.Calibration.calibration_item)
 }
 
 // repeated .Kinova.Api.DeviceConfig.CalibrationParameter calibration_parameter = 2;
-inline int Calibration::calibration_parameter_size() const {
+inline int Calibration::calibration_parameter_size() const
+{
   return calibration_parameter_.size();
 }
-inline void Calibration::clear_calibration_parameter() {
+inline void Calibration::clear_calibration_parameter()
+{
   calibration_parameter_.Clear();
 }
-inline const ::Kinova::Api::DeviceConfig::CalibrationParameter& Calibration::calibration_parameter(int index) const {
+inline const ::Kinova::Api::DeviceConfig::CalibrationParameter& Calibration::calibration_parameter(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.Calibration.calibration_parameter)
   return calibration_parameter_.Get(index);
 }
-inline ::Kinova::Api::DeviceConfig::CalibrationParameter* Calibration::mutable_calibration_parameter(int index) {
+inline ::Kinova::Api::DeviceConfig::CalibrationParameter* Calibration::mutable_calibration_parameter(int index)
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceConfig.Calibration.calibration_parameter)
   return calibration_parameter_.Mutable(index);
 }
-inline ::Kinova::Api::DeviceConfig::CalibrationParameter* Calibration::add_calibration_parameter() {
+inline ::Kinova::Api::DeviceConfig::CalibrationParameter* Calibration::add_calibration_parameter()
+{
   // @@protoc_insertion_point(field_add:Kinova.Api.DeviceConfig.Calibration.calibration_parameter)
   return calibration_parameter_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter >*
-Calibration::mutable_calibration_parameter() {
+inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter>*
+Calibration::mutable_calibration_parameter()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.DeviceConfig.Calibration.calibration_parameter)
   return &calibration_parameter_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter >&
-Calibration::calibration_parameter() const {
+inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::DeviceConfig::CalibrationParameter>&
+Calibration::calibration_parameter() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.DeviceConfig.Calibration.calibration_parameter)
   return calibration_parameter_;
 }
@@ -4237,15 +4795,17 @@ Calibration::calibration_parameter() const {
 // CalibrationElement
 
 // .Kinova.Api.DeviceConfig.CalibrationItem calibration_item = 1;
-inline void CalibrationElement::clear_calibration_item() {
+inline void CalibrationElement::clear_calibration_item()
+{
   calibration_item_ = 0;
 }
-inline ::Kinova::Api::DeviceConfig::CalibrationItem CalibrationElement::calibration_item() const {
+inline ::Kinova::Api::DeviceConfig::CalibrationItem CalibrationElement::calibration_item() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CalibrationElement.calibration_item)
-  return static_cast< ::Kinova::Api::DeviceConfig::CalibrationItem >(calibration_item_);
+  return static_cast< ::Kinova::Api::DeviceConfig::CalibrationItem>(calibration_item_);
 }
-inline void CalibrationElement::set_calibration_item(::Kinova::Api::DeviceConfig::CalibrationItem value) {
-  
+inline void CalibrationElement::set_calibration_item(::Kinova::Api::DeviceConfig::CalibrationItem value)
+{
   calibration_item_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CalibrationElement.calibration_item)
 }
@@ -4255,29 +4815,33 @@ inline void CalibrationElement::set_calibration_item(::Kinova::Api::DeviceConfig
 // CalibrationResult
 
 // .Kinova.Api.DeviceConfig.CalibrationStatus calibration_status = 1;
-inline void CalibrationResult::clear_calibration_status() {
+inline void CalibrationResult::clear_calibration_status()
+{
   calibration_status_ = 0;
 }
-inline ::Kinova::Api::DeviceConfig::CalibrationStatus CalibrationResult::calibration_status() const {
+inline ::Kinova::Api::DeviceConfig::CalibrationStatus CalibrationResult::calibration_status() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CalibrationResult.calibration_status)
-  return static_cast< ::Kinova::Api::DeviceConfig::CalibrationStatus >(calibration_status_);
+  return static_cast< ::Kinova::Api::DeviceConfig::CalibrationStatus>(calibration_status_);
 }
-inline void CalibrationResult::set_calibration_status(::Kinova::Api::DeviceConfig::CalibrationStatus value) {
-  
+inline void CalibrationResult::set_calibration_status(::Kinova::Api::DeviceConfig::CalibrationStatus value)
+{
   calibration_status_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CalibrationResult.calibration_status)
 }
 
 // uint32 calibration_details = 2;
-inline void CalibrationResult::clear_calibration_details() {
+inline void CalibrationResult::clear_calibration_details()
+{
   calibration_details_ = 0u;
 }
-inline ::google::protobuf::uint32 CalibrationResult::calibration_details() const {
+inline ::google::protobuf::uint32 CalibrationResult::calibration_details() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CalibrationResult.calibration_details)
   return calibration_details_;
 }
-inline void CalibrationResult::set_calibration_details(::google::protobuf::uint32 value) {
-  
+inline void CalibrationResult::set_calibration_details(::google::protobuf::uint32 value)
+{
   calibration_details_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CalibrationResult.calibration_details)
 }
@@ -4287,43 +4851,49 @@ inline void CalibrationResult::set_calibration_details(::google::protobuf::uint3
 // CapSenseConfig
 
 // .Kinova.Api.DeviceConfig.CapSenseMode mode = 1;
-inline void CapSenseConfig::clear_mode() {
+inline void CapSenseConfig::clear_mode()
+{
   mode_ = 0;
 }
-inline ::Kinova::Api::DeviceConfig::CapSenseMode CapSenseConfig::mode() const {
+inline ::Kinova::Api::DeviceConfig::CapSenseMode CapSenseConfig::mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CapSenseConfig.mode)
-  return static_cast< ::Kinova::Api::DeviceConfig::CapSenseMode >(mode_);
+  return static_cast< ::Kinova::Api::DeviceConfig::CapSenseMode>(mode_);
 }
-inline void CapSenseConfig::set_mode(::Kinova::Api::DeviceConfig::CapSenseMode value) {
-  
+inline void CapSenseConfig::set_mode(::Kinova::Api::DeviceConfig::CapSenseMode value)
+{
   mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CapSenseConfig.mode)
 }
 
 // float threshold_a = 2;
-inline void CapSenseConfig::clear_threshold_a() {
+inline void CapSenseConfig::clear_threshold_a()
+{
   threshold_a_ = 0;
 }
-inline float CapSenseConfig::threshold_a() const {
+inline float CapSenseConfig::threshold_a() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CapSenseConfig.threshold_a)
   return threshold_a_;
 }
-inline void CapSenseConfig::set_threshold_a(float value) {
-  
+inline void CapSenseConfig::set_threshold_a(float value)
+{
   threshold_a_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CapSenseConfig.threshold_a)
 }
 
 // float threshold_b = 3;
-inline void CapSenseConfig::clear_threshold_b() {
+inline void CapSenseConfig::clear_threshold_b()
+{
   threshold_b_ = 0;
 }
-inline float CapSenseConfig::threshold_b() const {
+inline float CapSenseConfig::threshold_b() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CapSenseConfig.threshold_b)
   return threshold_b_;
 }
-inline void CapSenseConfig::set_threshold_b(float value) {
-  
+inline void CapSenseConfig::set_threshold_b(float value)
+{
   threshold_b_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CapSenseConfig.threshold_b)
 }
@@ -4333,35 +4903,39 @@ inline void CapSenseConfig::set_threshold_b(float value) {
 // CapSenseRegister
 
 // uint32 address = 1;
-inline void CapSenseRegister::clear_address() {
+inline void CapSenseRegister::clear_address()
+{
   address_ = 0u;
 }
-inline ::google::protobuf::uint32 CapSenseRegister::address() const {
+inline ::google::protobuf::uint32 CapSenseRegister::address() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CapSenseRegister.address)
   return address_;
 }
-inline void CapSenseRegister::set_address(::google::protobuf::uint32 value) {
-  
+inline void CapSenseRegister::set_address(::google::protobuf::uint32 value)
+{
   address_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CapSenseRegister.address)
 }
 
 // uint32 value = 2;
-inline void CapSenseRegister::clear_value() {
+inline void CapSenseRegister::clear_value()
+{
   value_ = 0u;
 }
-inline ::google::protobuf::uint32 CapSenseRegister::value() const {
+inline ::google::protobuf::uint32 CapSenseRegister::value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceConfig.CapSenseRegister.value)
   return value_;
 }
-inline void CapSenseRegister::set_value(::google::protobuf::uint32 value) {
-  
+inline void CapSenseRegister::set_value(::google::protobuf::uint32 value)
+{
   value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.DeviceConfig.CapSenseRegister.value)
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
@@ -4411,44 +4985,68 @@ inline void CapSenseRegister::set_value(::google::protobuf::uint32 value) {
 
 // -------------------------------------------------------------------
 
-
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace DeviceConfig
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::DeviceConfig::ServiceVersion> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::ServiceVersion>() {
+struct is_proto_enum< ::Kinova::Api::DeviceConfig::ServiceVersion> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::ServiceVersion>()
+{
   return ::Kinova::Api::DeviceConfig::ServiceVersion_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::DeviceConfig::RunModes> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::RunModes>() {
+struct is_proto_enum< ::Kinova::Api::DeviceConfig::RunModes> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::RunModes>()
+{
   return ::Kinova::Api::DeviceConfig::RunModes_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::DeviceConfig::CalibrationItem> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::CalibrationItem>() {
+struct is_proto_enum< ::Kinova::Api::DeviceConfig::CalibrationItem> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::CalibrationItem>()
+{
   return ::Kinova::Api::DeviceConfig::CalibrationItem_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::DeviceConfig::CalibrationStatus> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::CalibrationStatus>() {
+struct is_proto_enum< ::Kinova::Api::DeviceConfig::CalibrationStatus> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::CalibrationStatus>()
+{
   return ::Kinova::Api::DeviceConfig::CalibrationStatus_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::DeviceConfig::SafetyLimitType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::SafetyLimitType>() {
+struct is_proto_enum< ::Kinova::Api::DeviceConfig::SafetyLimitType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::SafetyLimitType>()
+{
   return ::Kinova::Api::DeviceConfig::SafetyLimitType_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::DeviceConfig::CapSenseMode> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::CapSenseMode>() {
+struct is_proto_enum< ::Kinova::Api::DeviceConfig::CapSenseMode> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceConfig::CapSenseMode>()
+{
   return ::Kinova::Api::DeviceConfig::CapSenseMode_descriptor();
 }
 

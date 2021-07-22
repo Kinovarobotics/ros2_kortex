@@ -15,25 +15,28 @@ namespace Kinova
 {
 namespace Api
 {
-    class KDetailedException : public KBasicException
-    {
-    public:
-        KDetailedException(const KError& error);
-        KDetailedException(const KDetailedException &other);
+class KDetailedException : public KBasicException
+{
+public:
+  KDetailedException(const KError& error);
+  KDetailedException(const KDetailedException& other);
 
-        virtual const char* what() const throw() override;
-        virtual std::string toString() override;
+  virtual const char* what() const throw() override;
+  virtual std::string toString() override;
 
-        KError&      getErrorInfo() { return m_error; }
+  KError& getErrorInfo()
+  {
+    return m_error;
+  }
 
-    private:
-        void init(const HeaderInfo& header, const Error& error);
-    
-        KError       m_error;
-        std::string  m_errorStr;
-    };
+private:
+  void init(const HeaderInfo& header, const Error& error);
 
-} // namespace Api
-} // namespace Kinova
+  KError m_error;
+  std::string m_errorStr;
+};
+
+}  // namespace Api
+}  // namespace Kinova
 
 #endif

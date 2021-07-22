@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <robot name="gen3_robotiq_2f_140" xmlns:xacro="http://ros.org/wiki/xacro">
-    
+
     <!-- Arguments -->
     <xacro:arg name="arm" default="gen3" />
     <xacro:arg name="dof" default="7" />

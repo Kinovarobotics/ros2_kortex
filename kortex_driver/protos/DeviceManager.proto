@@ -17,19 +17,22 @@ import public "Common.proto";
 package Kinova.Api.DeviceManager;
 
 // This service provides information about which devices are present in the robot
-service DeviceManager {//@PROXY_ID=23 @ERROR=Kinova.Api.Error
+service DeviceManager
+{  //@PROXY_ID=23 @ERROR=Kinova.Api.Error
 
-    // Retrieves the list of every device that the system contains, along with its type and order within the system
-    rpc ReadAllDevices (Kinova.Api.Common.Empty) returns (DeviceHandles);//@RPC_ID=1
+  // Retrieves the list of every device that the system contains, along with its type and order within the system
+  rpc ReadAllDevices(Kinova.Api.Common.Empty) returns (DeviceHandles);  //@RPC_ID=1
 }
 
 // Identifies DeviceManager service current version
-enum ServiceVersion {
-    RESERVED_0 = 0;         // Reserved
-    CURRENT_VERSION = 1;    // Current version
+enum ServiceVersion
+{
+  RESERVED_0 = 0;       // Reserved
+  CURRENT_VERSION = 1;  // Current version
 }
 
 // Array of Device handles
-message DeviceHandles {
-    repeated Kinova.Api.Common.DeviceHandle device_handle = 1;  // Device handle    
+message DeviceHandles
+{
+  repeated Kinova.Api.Common.DeviceHandle device_handle = 1;  // Device handle
 }

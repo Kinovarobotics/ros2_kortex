@@ -127,12 +127,13 @@ std::string bitrate_enum_to_string(uint32_t enum_value)
 
 bool example_get_intrinsic_parameters(ros::NodeHandle n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_get_intrinsic_parameters = n.serviceClient<kortex_driver::GetIntrinsicParameters>("/" + robot_name + "/vision_config/get_intrinsic_parameters");
+  ros::ServiceClient service_client_get_intrinsic_parameters = n.serviceClient<kortex_driver::GetIntrinsicParameters>(
+      "/" + robot_name + "/vision_config/get_intrinsic_parameters");
   kortex_driver::GetIntrinsicParameters service_get_intrinsic_parameters;
 
   // Get the parameters from the color sensor
   kortex_driver::GetIntrinsicParametersRequest req;
-  req.input.sensor = kortex_driver::Sensor::SENSOR_COLOR; // Change to SENSOR_DEPTH for the depth sensor
+  req.input.sensor = kortex_driver::Sensor::SENSOR_COLOR;  // Change to SENSOR_DEPTH for the depth sensor
   service_get_intrinsic_parameters.request = req;
 
   if (!service_client_get_intrinsic_parameters.call(service_get_intrinsic_parameters))
@@ -144,25 +145,26 @@ bool example_get_intrinsic_parameters(ros::NodeHandle n, const std::string& robo
   auto output = service_get_intrinsic_parameters.response.output;
   // The message description can be seen at msg/generated/vision_config/IntrinsicParameters.msg
   std::ostringstream oss;
-  oss << std::endl << "---------------------------------" << std::endl
-  << "Intrinsic parameters are : " << std::endl
-  << "Focal length in x is : " << output.focal_length_x << std::endl
-  << "Focal length in y is : " << output.focal_length_y << std::endl
-  << "Principal point in x is : " << output.principal_point_x << std::endl
-  << "Principal point in y is : " << output.principal_point_y << std::endl
-  << "Distortion coefficients are : [" << 
-  "k1 = " << output.distortion_coeffs.k1 << "; " <<
-  "k2 = " << output.distortion_coeffs.k2 << "; " <<
-  "k3 = " << output.distortion_coeffs.k3 << "; " <<
-  "p1 = " << output.distortion_coeffs.p1 << "; " <<
-  "p2 = " << output.distortion_coeffs.p2 << "]" << std::endl;
-  
+  oss << std::endl
+      << "---------------------------------" << std::endl
+      << "Intrinsic parameters are : " << std::endl
+      << "Focal length in x is : " << output.focal_length_x << std::endl
+      << "Focal length in y is : " << output.focal_length_y << std::endl
+      << "Principal point in x is : " << output.principal_point_x << std::endl
+      << "Principal point in y is : " << output.principal_point_y << std::endl
+      << "Distortion coefficients are : ["
+      << "k1 = " << output.distortion_coeffs.k1 << "; "
+      << "k2 = " << output.distortion_coeffs.k2 << "; "
+      << "k3 = " << output.distortion_coeffs.k3 << "; "
+      << "p1 = " << output.distortion_coeffs.p1 << "; "
+      << "p2 = " << output.distortion_coeffs.p2 << "]" << std::endl;
+
   // The Sensor enum can be seen at msg/generated/vision_config/Sensor.msg
   oss << "Sensor type is : " << sensor_type_enum_to_string(output.sensor) << std::endl;
 
   // The Resolution enum can be seen at msg/generated/vision_config/Resolution.msg
-  oss << "Resolution is : " << resolution_enum_to_string(output.resolution) << std::endl 
-  << "---------------------------------";
+  oss << "Resolution is : " << resolution_enum_to_string(output.resolution) << std::endl
+      << "---------------------------------";
 
   ROS_INFO("%s", oss.str().c_str());
 
@@ -171,7 +173,8 @@ bool example_get_intrinsic_parameters(ros::NodeHandle n, const std::string& robo
 
 bool example_get_extrinsic_parameters(ros::NodeHandle n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_get_extrinsic_parameters = n.serviceClient<kortex_driver::GetExtrinsicParameters>("/" + robot_name + "/vision_config/get_extrinsic_parameters");
+  ros::ServiceClient service_client_get_extrinsic_parameters = n.serviceClient<kortex_driver::GetExtrinsicParameters>(
+      "/" + robot_name + "/vision_config/get_extrinsic_parameters");
   kortex_driver::GetExtrinsicParameters service_get_extrinsic_parameters;
 
   kortex_driver::GetExtrinsicParametersRequest req;
@@ -185,18 +188,21 @@ bool example_get_extrinsic_parameters(ros::NodeHandle n, const std::string& robo
   auto output = service_get_extrinsic_parameters.response.output;
   // The message description can be seen at msg/generated/vision_config/ExtrinsicParameters.msg
   std::ostringstream oss;
-  oss << std::endl << "---------------------------------" << std::endl
-  << "Extrinsic parameters are : " << std::endl
-  << "Rotation parameters matrix is : " << std::endl
-  << "|  " << output.rotation.row1.column1 << "  ;  " << output.rotation.row1.column2 << "  ;  " << output.rotation.row1.column3 << "  |" << std::endl
-  << "|  " << output.rotation.row2.column1 << "  ;  " << output.rotation.row2.column2 << "  ;  " << output.rotation.row2.column3 << "  |" << std::endl
-  << "|  " << output.rotation.row3.column1 << "  ;  " << output.rotation.row3.column2 << "  ;  " << output.rotation.row3.column3 << "  |" << std::endl;
+  oss << std::endl
+      << "---------------------------------" << std::endl
+      << "Extrinsic parameters are : " << std::endl
+      << "Rotation parameters matrix is : " << std::endl
+      << "|  " << output.rotation.row1.column1 << "  ;  " << output.rotation.row1.column2 << "  ;  "
+      << output.rotation.row1.column3 << "  |" << std::endl
+      << "|  " << output.rotation.row2.column1 << "  ;  " << output.rotation.row2.column2 << "  ;  "
+      << output.rotation.row2.column3 << "  |" << std::endl
+      << "|  " << output.rotation.row3.column1 << "  ;  " << output.rotation.row3.column2 << "  ;  "
+      << output.rotation.row3.column3 << "  |" << std::endl;
 
-  oss << "Translation parameters are : " <<
-  "[ x = " << output.translation.t_x <<
-  " ; y = " << output.translation.t_y << 
-  " ; z = " << output.translation.t_z << " ]"
-  << std::endl << "---------------------------------" << std::endl;
+  oss << "Translation parameters are : "
+      << "[ x = " << output.translation.t_x << " ; y = " << output.translation.t_y
+      << " ; z = " << output.translation.t_z << " ]" << std::endl
+      << "---------------------------------" << std::endl;
 
   ROS_INFO("%s", oss.str().c_str());
 
@@ -205,7 +211,8 @@ bool example_get_extrinsic_parameters(ros::NodeHandle n, const std::string& robo
 
 bool example_get_sensor_settings(ros::NodeHandle n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_get_sensor_settings = n.serviceClient<kortex_driver::GetSensorSettings>("/" + robot_name + "/vision_config/get_sensor_settings");
+  ros::ServiceClient service_client_get_sensor_settings =
+      n.serviceClient<kortex_driver::GetSensorSettings>("/" + robot_name + "/vision_config/get_sensor_settings");
   kortex_driver::GetSensorSettings service_get_sensor_settings;
 
   kortex_driver::GetSensorSettingsRequest req;
@@ -224,13 +231,13 @@ bool example_get_sensor_settings(ros::NodeHandle n, const std::string& robot_nam
   auto output = service_get_sensor_settings.response.output;
 
   std::ostringstream oss;
-  oss << std::endl << 
-  "---------------------------------" << std::endl <<
-  "Get sensor settings : " << std::endl <<
-  "Bit rate : " << bitrate_enum_to_string(output.bit_rate) << std::endl <<
-  "Frame rate : " << framerate_enum_to_string(output.frame_rate) << std::endl << 
-  "Resolution : " << resolution_enum_to_string(output.resolution) << std::endl << 
-  "---------------------------------";
+  oss << std::endl
+      << "---------------------------------" << std::endl
+      << "Get sensor settings : " << std::endl
+      << "Bit rate : " << bitrate_enum_to_string(output.bit_rate) << std::endl
+      << "Frame rate : " << framerate_enum_to_string(output.frame_rate) << std::endl
+      << "Resolution : " << resolution_enum_to_string(output.resolution) << std::endl
+      << "---------------------------------";
 
   ROS_INFO("%s", oss.str().c_str());
 
@@ -239,7 +246,8 @@ bool example_get_sensor_settings(ros::NodeHandle n, const std::string& robot_nam
 
 bool example_change_the_resolution(ros::NodeHandle n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_set_sensor_settings = n.serviceClient<kortex_driver::SetSensorSettings>("/" + robot_name + "/vision_config/set_sensor_settings");
+  ros::ServiceClient service_client_set_sensor_settings =
+      n.serviceClient<kortex_driver::SetSensorSettings>("/" + robot_name + "/vision_config/set_sensor_settings");
   kortex_driver::SetSensorSettings service_set_sensor_settings;
 
   kortex_driver::SetSensorSettingsRequest req;
@@ -269,21 +277,22 @@ bool example_change_the_resolution(ros::NodeHandle n, const std::string& robot_n
 
 bool example_get_sensor_option_value(ros::NodeHandle n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_get_sensor_option_value = n.serviceClient<kortex_driver::GetOptionValue>("/" + robot_name + "/vision_config/get_option_value");
+  ros::ServiceClient service_client_get_sensor_option_value =
+      n.serviceClient<kortex_driver::GetOptionValue>("/" + robot_name + "/vision_config/get_option_value");
   kortex_driver::GetOptionValue service_get_sensor_option_value;
 
   kortex_driver::GetOptionValueRequest req;
 
   // The only supported options for now are:
-  // For Color sensor : 
+  // For Color sensor :
   // OPTION_BRIGHTNESS, OPTION_CONTRAST, OPTION_SATURATION
-  // For Depth sensor : 
-  // OPTION_EXPOSURE, OPTION_GAIN, OPTION_ENABLE_AUTO_EXPOSURE, OPTION_VISUAL_PRESET, OPTION_FRAMES_QUEUE_SIZE, 
-  // OPTION_ERROR_POLLING_ENABLE, OPTION_OUTPUT_TRIGGER_ENABLED, OPTION_DEPTH_UNITS, 
-  // OPTION_STEREO_BASELINE (read-only) 
+  // For Depth sensor :
+  // OPTION_EXPOSURE, OPTION_GAIN, OPTION_ENABLE_AUTO_EXPOSURE, OPTION_VISUAL_PRESET, OPTION_FRAMES_QUEUE_SIZE,
+  // OPTION_ERROR_POLLING_ENABLE, OPTION_OUTPUT_TRIGGER_ENABLED, OPTION_DEPTH_UNITS,
+  // OPTION_STEREO_BASELINE (read-only)
 
-  // Trying to call an unsupported option in this service (or in the SetOptionValue service) will generate an error 
-  // Get the actual value the color sensor's contrast 
+  // Trying to call an unsupported option in this service (or in the SetOptionValue service) will generate an error
+  // Get the actual value the color sensor's contrast
   req.input.sensor = kortex_driver::Sensor::SENSOR_COLOR;
   req.input.option = kortex_driver::Option::OPTION_CONTRAST;
 
@@ -298,20 +307,21 @@ bool example_get_sensor_option_value(ros::NodeHandle n, const std::string& robot
 
   auto output = service_get_sensor_option_value.response.output;
   std::ostringstream oss;
-  oss << std::endl << "---------------------------------" << std::endl
-  << "Get Option value : " << std::endl
-  << "Option value is : " << std::endl
-  << "For sensor : " << output.sensor << std::endl
-  << "For option : " << output.option << std::endl
-  << "The value is : " << output.value << std::endl
-  << "---------------------------------" << std::endl;
+  oss << std::endl
+      << "---------------------------------" << std::endl
+      << "Get Option value : " << std::endl
+      << "Option value is : " << std::endl
+      << "For sensor : " << output.sensor << std::endl
+      << "For option : " << output.option << std::endl
+      << "The value is : " << output.value << std::endl
+      << "---------------------------------" << std::endl;
 
   ROS_INFO("%s", oss.str().c_str());
 
   return true;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Init the node and get the namespace parameter
   ros::init(argc, argv, "vision_configuration_example_cpp");
@@ -330,7 +340,7 @@ int main(int argc, char **argv)
     std::string error_string = "Parameter robot_name was not specified, defaulting to " + robot_name + " as namespace";
     ROS_WARN("%s", error_string.c_str());
   }
-  else 
+  else
   {
     std::string error_string = "Using robot_name " + robot_name + " as namespace";
     ROS_INFO("%s", error_string.c_str());
@@ -358,6 +368,6 @@ int main(int argc, char **argv)
 
   // Report success for testing purposes
   ros::param::set("/kortex_examples_test_results/vision_configuration_cpp", success);
-  
+
   return success ? 0 : 1;
 }

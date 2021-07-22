@@ -6,7 +6,7 @@
         Gazebo Model plugin(s) which handle/help grasping in Gazebo.
   </description>
 
-  <!-- One maintainer tag required, multiple allowed, one person per tag --> 
+  <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <maintainer email="jennifer.e.buehler@gmail.com">Jennifer Buehler</maintainer>
 
 

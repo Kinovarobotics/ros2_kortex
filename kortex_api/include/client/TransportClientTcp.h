@@ -56,87 +56,92 @@ namespace Kinova
 {
 namespace Api
 {
-    class TransportClientTcp : public ITransportClient
-    {
-    private:
-        const uint32_t kApiPort					= 10000;
-        // Configuration        m_config;
-        bool                    m_isInitialized;
-        struct sockaddr_in      m_socketAddr{};
-        socklen_t               m_socketAddrSize{};
-        int32_t                 m_socketFd{};
-        #if defined(_OS_WINDOWS)
-        WSADATA                 m_wsa{};
-        #endif
+class TransportClientTcp : public ITransportClient
+{
+private:
+  const uint32_t kApiPort = 10000;
+  // Configuration        m_config;
+  bool m_isInitialized;
+  struct sockaddr_in m_socketAddr
+  {
+  };
+  socklen_t m_socketAddrSize{};
+  int32_t m_socketFd{};
+#if defined(_OS_WINDOWS)
+  WSADATA m_wsa{};
+#endif
 
-        bool                    m_isUsingRcvThread;
-        std::atomic<bool>       m_isRunning { true };
-        std::mutex              m_sendMutex;
+  bool m_isUsingRcvThread;
+  std::atomic<bool> m_isRunning{ true };
+  std::mutex m_sendMutex;
 
-        // ---- non-blocking ----
-        fd_set          m_original_rx{};
-        fd_set          m_readfds{};
+  // ---- non-blocking ----
+  fd_set m_original_rx{};
+  fd_set m_readfds{};
 
-        int             numfd{};
-        struct hostent  *m_host{};
-        struct timeval  m_tv{};
-        // ----------------------
+  int numfd{};
+  struct hostent* m_host{};
+  struct timeval m_tv
+  {
+  };
+  // ----------------------
 
-        // 65535 - 20 (ip header) - 20 (tcp header) = 65495 bytes
-        static constexpr uint32_t kMaxTxBufferSize = 65495;
-        static constexpr uint32_t kMaxRxBufferSize = 65495;
-        static constexpr uint32_t kMaxBufferSize = 16777216;
+  // 65535 - 20 (ip header) - 20 (tcp header) = 65495 bytes
+  static constexpr uint32_t kMaxTxBufferSize = 65495;
+  static constexpr uint32_t kMaxRxBufferSize = 65495;
+  static constexpr uint32_t kMaxBufferSize = 16777216;
 
-        bool                 m_bIsReceiving { false };
-        uint32_t             m_nTotalBytesRead {0};
-        uint32_t             m_nTotalBytesToRead {0};
-        uint8_t*             m_tx_buffer;
-        uint8_t*             m_rx_buffer;
+  bool m_bIsReceiving{ false };
+  uint32_t m_nTotalBytesRead{ 0 };
+  uint32_t m_nTotalBytesToRead{ 0 };
+  uint8_t* m_tx_buffer;
+  uint8_t* m_rx_buffer;
 
-        uint32_t             m_current_buffer_size_rx = { kMaxRxBufferSize };
-        uint32_t             m_current_buffer_size_tx = { kMaxTxBufferSize };
+  uint32_t m_current_buffer_size_rx = { kMaxRxBufferSize };
+  uint32_t m_current_buffer_size_tx = { kMaxTxBufferSize };
 
+  KinovaTcpUtilities m_utilities_object;
 
-        KinovaTcpUtilities m_utilities_object;
+  std::function<void(const char*, uint32_t)> m_onMessageCallback;
 
-        std::function<void (const char*, uint32_t) > m_onMessageCallback;
+public:
+  TransportReadyStateEnum readyState;
+  std::thread m_receiveThread;
 
+  explicit TransportClientTcp(bool isUsingRcvThread = true);
+  ~TransportClientTcp() override;
 
-    public:
-        TransportReadyStateEnum readyState;
-        std::thread             m_receiveThread;
+  bool connect(std::string host = "127.0.0.1", uint32_t port = 10000) override;
+  void disconnect() override;
 
-        explicit TransportClientTcp(bool isUsingRcvThread = true);
-        ~TransportClientTcp() override;
+  void send(const char* txBuffer, uint32_t txSize) override;
+  void onMessage(std::function<void(const char*, uint32_t)> callback) override;
 
-        bool connect(std::string host = "127.0.0.1", uint32_t port = 10000) override;
-        void disconnect() override;
+  char* getTxBuffer(uint32_t const& allocation_size) override;
+  size_t getMaxTxBufferSize() override
+  {
+    return kMaxBufferSize;
+  }
 
-        void send(const char* txBuffer, uint32_t txSize) override;
-        void onMessage(std::function<void (const char*, uint32_t)> callback) override;
+  int processReceive(long rcvTimeout_usec);
+  int processReceive(struct timeval rcvTimeout_tv);
 
-        char* getTxBuffer(uint32_t const& allocation_size) override;
-        size_t getMaxTxBufferSize() override { return kMaxBufferSize; }
+  virtual void getHostAddress(std::string& host, uint32_t& port) override
+  {
+    host = mHostAddress;
+    port = mHostPort;
+  };
 
-        int processReceive(long rcvTimeout_usec);
-        int processReceive(struct timeval rcvTimeout_tv);
+private:
+  std::string mHostAddress;
+  uint32_t mHostPort;
 
-        virtual void getHostAddress(std::string &host, uint32_t &port) override {
-            host = mHostAddress;
-            port = mHostPort;
-        };
+  void receiveThread(std::atomic<bool>& program_is_running);
 
-    private:
+  int callReceiveFrom();
+};
 
-        std::string mHostAddress;
-        uint32_t mHostPort;
+}  // namespace Api
+}  // namespace Kinova
 
-        void receiveThread(std::atomic<bool> &program_is_running);
-        
-        int callReceiveFrom();
-    };
-
-} // namespace Api
-} // namespace Kinova
-
-#endif // __TRANSPORT_CLIENT_H__
+#endif  // __TRANSPORT_CLIENT_H__

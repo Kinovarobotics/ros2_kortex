@@ -1,4 +1,4 @@
-<!-- 
+<!--
 * KINOVA (R) KORTEX (TM)
 *
 * Copyright (c) 2018 Kinova inc. All rights reserved.
@@ -45,12 +45,12 @@ This package has been tested under ROS Kinetic (Ubuntu 16.04) and ROS Melodic (U
 <a id="usage"></a>
 ## Usage
 
-The `kortex_driver` node is the node responsible for the communication between the ROS network and the Kortex-compatible Kinova robots. It publishes topics that users can subscribe to. It also advertises services that users can call from the command line or from their own code to configure or control the robot arm or its sub-devices (actuators, vision module, interface module).  
+The `kortex_driver` node is the node responsible for the communication between the ROS network and the Kortex-compatible Kinova robots. It publishes topics that users can subscribe to. It also advertises services that users can call from the command line or from their own code to configure or control the robot arm or its sub-devices (actuators, vision module, interface module).
 
 **Arguments**:
 - **arm** : Name of your robot arm model. See the `kortex_description/arms` folder to see the available robot models. The default value is **gen3**.
 - **dof** : Number of DOFs of your robot. The default value is for Gen3 is **7** and the default value for Gen3 lite is **6**. You will have to specify this value only if you have a Gen3 6DOF.
-- **vision** : Boolean value to indicate if your arm has a Vision Module. The default value is for Gen3 is **true** and the default value for Gen3 lite is **false**. You will have to specify this value only if you have a Gen3 6DOF without a Vision Module. This argument only affects the visual representation of the arm in RViz. 
+- **vision** : Boolean value to indicate if your arm has a Vision Module. The default value is for Gen3 is **true** and the default value for Gen3 lite is **false**. You will have to specify this value only if you have a Gen3 6DOF without a Vision Module. This argument only affects the visual representation of the arm in RViz.
 - **gripper** : Name of your robot arm's tool / gripper. See the `kortex_description/grippers` folder to see the available end effector models (or to add your own). The default value is **""**. For Gen3, you can also put **robotiq_2f_85** or **robotiq_2f_140**. For Gen3 lite, the default (and only) gripper is **gen3_lite_2f**.
 - **robot_name** : This is the namespace in which the driver will run. It defaults to **my_$(arg arm)** (so "my_gen3" for arm="gen3").
 - **prefix** : This is an optional prefix for all joint and link names in the kortex_description. It is used to allow differentiating between different arms in the same URDF. It defaults to **an empty string**. **Note** : Changing the prefix invalidates the MoveIt! configuration, and requires modifying said configuration, plus the .yaml files with harcoded joint names.
@@ -68,11 +68,11 @@ The `kortex_driver` node is the node responsible for the communication between t
 - **default_goal_time_tolerance** : The default goal time tolerance for the `FollowJointTrajectory` action server, in seconds. This value is used if no default goal time tolerance is specified in the trajectory. The default value is **0.5** seconds.
 - **default_goal_tolerance** : The default goal tolerance for the `FollowJointTrajectory` action server, in radians. This value is used if no default goal tolerance is specified in the trajectory for the joint positions reached at the end of the trajectory. The default value is **0.005** radians.
 
-To launch it with default arguments, run the following command in a terminal : 
+To launch it with default arguments, run the following command in a terminal :
 
 `roslaunch kortex_driver kortex_driver.launch`
 
-To launch it with optional arguments, specify the argument name, then ":=", then the value you want. For example, : 
+To launch it with optional arguments, specify the argument name, then ":=", then the value you want. For example, :
 
 `roslaunch kortex_driver kortex_driver.launch ip_address:=10.0.100.239 start_rviz:=false robot_name:=terminator`
 
@@ -80,7 +80,7 @@ You can also have a look at the [roslaunch documentation](http://wiki.ros.org/ro
 
 If everything goes well, you will see a "**The Kortex driver has been initialized correctly!**" message. If you also start MoveIt!, the `kortex_driver` output may be flooded in the `move_group` output, so pay attention to the warning and error messages! If the node fails to start for any reason, you will get an error message followed by a "**process has died**" message.
 
-You will read below about the topics and services the driver offers. To read more about how to use those tools, [go to the kortex_examples documentation](../kortex_examples/readme.md). 
+You will read below about the topics and services the driver offers. To read more about how to use those tools, [go to the kortex_examples documentation](../kortex_examples/readme.md).
 
 <a id="topics"></a>
 ## Topics
@@ -100,7 +100,7 @@ You can publish on those topics for joint or Cartesian velocity control of the r
     rostopic pub /my_gen3/in/joint_velocity kortex_driver/JointSpeeds "joint_speeds:
     - joint_identifier: 0
     value: 0.57
-    duration: 0" 
+    duration: 0"
     ```
 
 * **`/your_robot_name/in/cartesian_velocity`**
@@ -144,7 +144,7 @@ You can publish on those topics for joint or Cartesian velocity control of the r
 
 ### Robot feedback topics (out)
 
-The robot feedback topics are always published by the `kortex_driver`. You don't have to activate them. 
+The robot feedback topics are always published by the `kortex_driver`. You don't have to activate them.
 
 * **`/your_robot_name/kortex_error`**
 
@@ -159,12 +159,12 @@ The robot feedback topics are always published by the `kortex_driver`. You don't
     The feedback from the robot is converted to a [sensor_msgs/JointState](http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/JointState.html) and published on this topic at a rate of **cyclic_data_publish_rate**.
 
 ### Notification topics (out)
-    
-The notification topics are only published by the `kortex_driver` if you activate them by first calling an activation service. Once activated, a notification topic will be activated until the node is shutdown. 
 
-Subscribing to all the notifications causes a heavy load on the robot CPU. That is why the notification topics were designed in such a way. The users also typically only use one or two notifications, if at all. 
+The notification topics are only published by the `kortex_driver` if you activate them by first calling an activation service. Once activated, a notification topic will be activated until the node is shutdown.
 
-For example, if a user wants to subscribe to the **/my_robot_name/network_topic** (the message type is [NetworkNotification](msg/generated/base/NetworkNotification.msg)), he will have to: 
+Subscribing to all the notifications causes a heavy load on the robot CPU. That is why the notification topics were designed in such a way. The users also typically only use one or two notifications, if at all.
+
+For example, if a user wants to subscribe to the **/my_robot_name/network_topic** (the message type is [NetworkNotification](msg/generated/base/NetworkNotification.msg)), he will have to:
 1. Call the **/my_robot_name/base/activate_publishing_of_network_notification** service to enable the publishing of the topic
 2. Subscribe to the **/my_robot_name/network_topic** topic
 3. Process the notifications when he receives them in his code
@@ -175,9 +175,9 @@ Most of the services supported by this node are generated from the [C++ Kortex A
 
 ### Understanding packages
 
-The *.srv* files are generated in different sub-folders depending on the sub-module they affect. For example, all the RPC calls used to configure the vision module are generated in `srv/generated/vision_config` and all the RPC calls common to all devices are generated in `srv/generated/device_config`. Here is a list of the packages with a short explanation of the services they have to offer: 
+The *.srv* files are generated in different sub-folders depending on the sub-module they affect. For example, all the RPC calls used to configure the vision module are generated in `srv/generated/vision_config` and all the RPC calls common to all devices are generated in `srv/generated/device_config`. Here is a list of the packages with a short explanation of the services they have to offer:
 
-* **actuator_config** : This package contains the functions used to configure a single actuator. 
+* **actuator_config** : This package contains the functions used to configure a single actuator.
 **Note:** To choose the actuator you want to configure, you have to call the **/my_robot_name/actuator_config/set_device_id** service and specify the device identifier of the actuator you want to configure. You get the device identifiers of actuators when you launch the node, when you parse the output of the [ReadAllDevices](srv/generated/device_manager/ReadAllDevices.srv) service or in the Kinova Kortex *Web App*.
 
 * **base** : This package contains :
@@ -188,18 +188,18 @@ The *.srv* files are generated in different sub-folders depending on the sub-mod
     * Services to read and update the user-related information
 **Note:** The base high level commands are treated every 25 ms inside the robot. High level control cannot be achieved at a rate faster than 40 Hz for now.
 
-* **control_config** : This package contains the functions used to configure the control-related features on the robot. This includes : 
+* **control_config** : This package contains the functions used to configure the control-related features on the robot. This includes :
     * Reading and setting the cartesian reference frame
     * Reading and setting the gravity vector
     * Reading and setting the payload information
     * Reading and setting the tool configuration
 
-* **device_config** : This package contains the functions used to configure a generic Kortex device. This includes : 
+* **device_config** : This package contains the functions used to configure a generic Kortex device. This includes :
     * Reading and setting safety configurations
     * Reading general information on the specified device (software versions, serial numbers, MAC address, IPv4 settings, etc.)
 **Note:** To choose the device you want to configure, you have to call the **/my_robot_name/device_config/set_device_id** service and specify the device identifier of the device you want to configure. You get the device identifiers when you launch the node, when you parse the output of the [ReadAllDevices](srv/generated/device_manager/ReadAllDevices.srv) service or in the WebApp.
 
-* **device_manager** : This package contains [ReadAllDevices](srv/generated/device_manager/ReadAllDevices.srv) service, which is used to get the list of connected device and various informations on each device. 
+* **device_manager** : This package contains [ReadAllDevices](srv/generated/device_manager/ReadAllDevices.srv) service, which is used to get the list of connected device and various informations on each device.
 
 * **interconnect_config** : This package contains the functions used to configure the interface module on the robot.
 **Note:** You don't have to call the `SetDeviceID` service before calling the **interconnect_config** services, because the `kortex_driver` node goes through the list of connected devices and automatically sets the correct device ID for the **interconnect_config** services.
@@ -213,7 +213,7 @@ The *.srv* files are generated in different sub-folders depending on the sub-mod
 Many things have been changed in the ros_kortex repository between versions 1.1.7 and 2.0.0 and you will have to modify your code if you don't want it to break.
 
 * The `kortex_actuator_driver`, `kortex_vision_config_driver` and `kortex_device_manager` packages were removed and only the `kortex_driver` package remains (one driver to rule them all).
-* Since we only have one driver and the ROS message generation does not deal with namespaces, the messages and services that are duplicated are now named differently. For example, the **Feedback** message exists within the `BaseCyclic`, `ActuatorCyclic`, `InterconnectCyclic` and `GripperCyclic` Protocol Buffers .proto files. In ROS, this is now translated as a "PackageName_" prefix before the message name. So, for the **Feedback** message, the **BaseCyclic_Feedback**, **ActuatorCyclic_Feedback**, **InterconnectCyclic_Feedback** and **GripperCyclic_Feedback** ROS messages have been automatically generated. You may encounter build errors (in C++) or runtime errors (in Python) because of this change. You can just go in the `msg/generated` folder and look for the problematic message to find its new name to change the occurrences in your code. 
+* Since we only have one driver and the ROS message generation does not deal with namespaces, the messages and services that are duplicated are now named differently. For example, the **Feedback** message exists within the `BaseCyclic`, `ActuatorCyclic`, `InterconnectCyclic` and `GripperCyclic` Protocol Buffers .proto files. In ROS, this is now translated as a "PackageName_" prefix before the message name. So, for the **Feedback** message, the **BaseCyclic_Feedback**, **ActuatorCyclic_Feedback**, **InterconnectCyclic_Feedback** and **GripperCyclic_Feedback** ROS messages have been automatically generated. You may encounter build errors (in C++) or runtime errors (in Python) because of this change. You can just go in the `msg/generated` folder and look for the problematic message to find its new name to change the occurrences in your code.
 * The services are now all **lowercase_with_underscores** instead of **UpperCase**.
 * The services are now advertised in **/my_robot_name/my_package_name/desired_service** (see the [Services section](#services) to learn about the packages). You can also visualize it if you start the node and type `rosservice list` in a terminal.
 * The topics are now all **lowercase_with_underscores** instead of **UpperCase**.
@@ -231,10 +231,10 @@ If you still want to download the ZIP files for the API, you can find the link i
 
 You will have to extract the API in the `kortex_api` folder as such:
 ```sh
-kortex_api/  
-┬  
+kortex_api/
+┬
 ├ include/
-└ lib/  
+└ lib/
 ```
 
 You will then have to build the catkin workspace and pass it the option to disable Conan so it links with your local API:
@@ -245,12 +245,12 @@ catkin_make -DUSE_CONAN=OFF
 <a id="multiple"></a>
 ## Support for multiple arms
 
-The [kortex_driver launch file](launch/kortex_driver.launch) is primarily used to define one-armed robots. 
-Having more than one arm requires prefixing the joints and links to protect against ambiguity when refering those. 
-To this end, a [kortex_dual_driver launch file](launch/kortex_dual_driver.launch) has been made to demonstrate running a two-armed robot. 
+The [kortex_driver launch file](launch/kortex_driver.launch) is primarily used to define one-armed robots.
+Having more than one arm requires prefixing the joints and links to protect against ambiguity when refering those.
+To this end, a [kortex_dual_driver launch file](launch/kortex_dual_driver.launch) has been made to demonstrate running a two-armed robot.
 The same pattern could be repeated to describe a robot with any number of arms.
 
-**Note**: This launch file is intended as a starting point showing how to launch a robot with two arms. When using this launch file for a specific robot, it should be modified to fit the robot's description. 
+**Note**: This launch file is intended as a starting point showing how to launch a robot with two arms. When using this launch file for a specific robot, it should be modified to fit the robot's description.
 
 The launch file uses the same parameters as the one-armed version, except that most parameters are to be defined individually for each arm (with the **left_** and **right_** prefixes).
 

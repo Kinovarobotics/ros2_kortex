@@ -13,7 +13,7 @@
 /*
  * This file has been auto-generated and should not be modified.
  */
- 
+
 #include "{{current_header_filename}}"
 
 {% for detailed_message in package.messages -%}
@@ -35,17 +35,17 @@ int ToRosData({{detailed_message.cpp_namespace}}::{{detailed_message.name}} inpu
 	for(int i = 0; i < input.{{field.name|lower}}_size(); i++)
 	{
 		output.{{field.name}}.push_back(input.{{field.name|lower}}(i));
-	}	
+	}
 	{%- endif %}
 	{%- else %}
 	{%- if field.type == 11 %}
 	ToRosData(input.{{field.name}}(), output.{{field.name}});
 	{%- elif field.type == 14 %}
-	output.{{field.name}} = input.{{field.name}}(); 
+	output.{{field.name}} = input.{{field.name}}();
 	{%- elif field.type == 12 %}
 	output.{{field.name}} = std::vector<uint8_t>(input.{{field.name}}().begin(), input.{{field.name}}().end());
 	{%- else %}
-	output.{{field.name}} = input.{{field.name}}(); 
+	output.{{field.name}} = input.{{field.name}}();
 	{%- endif %}
 	{%- endif %}
 	{%- endif %}
@@ -58,7 +58,7 @@ int ToRosData({{detailed_message.cpp_namespace}}::{{detailed_message.name}} inpu
 	{%- for field in detailed_one_of.fields %}
 	{%- if "_" in field.name -%} {%- set EnumName = field.name.replace("_", " ").title().replace(" ", "") -%} {# In case the field is in the form of "gripper_command" #}
 	{%- else -%} {%- set EnumName = field.name[0]|upper + field.name[1:] -%} {%- endif %} {# In case the field is in the form of "gripperCommand" #}
-	
+
 		case {{detailed_message.cpp_namespace}}::{{detailed_message.message.name}}::k{{EnumName}}:
 		{
 	{%- if field.type == 11 %}
@@ -73,7 +73,7 @@ int ToRosData({{detailed_message.cpp_namespace}}::{{detailed_message.name}} inpu
 	{%- endfor -%}
 	}
 	{%- endfor %}
-	
+
 	return 0;
 }
 {% endfor %}

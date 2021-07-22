@@ -27,15 +27,17 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "Common.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_ControlConfig_2eproto {
+namespace protobuf_ControlConfig_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[19];
@@ -82,7 +84,8 @@ void InitDefaultsControlModeInformationImpl();
 void InitDefaultsControlModeInformation();
 void InitDefaultsControlModeNotificationImpl();
 void InitDefaultsControlModeNotification();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsGravityVector();
   InitDefaultsPosition();
   InitDefaultsPayloadInformation();
@@ -104,9 +107,12 @@ inline void InitDefaults() {
   InitDefaultsControlModeNotification();
 }
 }  // namespace protobuf_ControlConfig_2eproto
-namespace Kinova {
-namespace Api {
-namespace ControlConfig {
+namespace Kinova
+{
+namespace Api
+{
+namespace ControlConfig
+{
 class AngularTwist;
 class AngularTwistDefaultTypeInternal;
 extern AngularTwistDefaultTypeInternal _AngularTwist_default_instance_;
@@ -167,11 +173,14 @@ extern TwistLinearSoftLimitDefaultTypeInternal _TwistLinearSoftLimit_default_ins
 }  // namespace ControlConfig
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace ControlConfig {
-
-enum ServiceVersion {
+namespace Kinova
+{
+namespace Api
+{
+namespace ControlConfig
+{
+enum ServiceVersion
+{
   RESERVED_0 = 0,
   CURRENT_VERSION = 1,
   ServiceVersion_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
@@ -183,16 +192,16 @@ const ServiceVersion ServiceVersion_MAX = CURRENT_VERSION;
 const int ServiceVersion_ARRAYSIZE = ServiceVersion_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServiceVersion_descriptor();
-inline const ::std::string& ServiceVersion_Name(ServiceVersion value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ServiceVersion_descriptor(), value);
+inline const ::std::string& ServiceVersion_Name(ServiceVersion value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ServiceVersion_descriptor(), value);
 }
-inline bool ServiceVersion_Parse(
-    const ::std::string& name, ServiceVersion* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(
-    ServiceVersion_descriptor(), name, value);
+inline bool ServiceVersion_Parse(const ::std::string& name, ServiceVersion* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(ServiceVersion_descriptor(), name, value);
 }
-enum ControlConfigurationEvent {
+enum ControlConfigurationEvent
+{
   UNSPECIFIED_CONTROL_CONFIGURATION_EVENT = 0,
   ANGLE_UNIT_CHANGED = 1,
   GRAVITY_VECTOR_CHANGED = 2,
@@ -223,16 +232,17 @@ const ControlConfigurationEvent ControlConfigurationEvent_MAX = DESIRED_JOINT_SP
 const int ControlConfigurationEvent_ARRAYSIZE = ControlConfigurationEvent_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ControlConfigurationEvent_descriptor();
-inline const ::std::string& ControlConfigurationEvent_Name(ControlConfigurationEvent value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ControlConfigurationEvent_descriptor(), value);
+inline const ::std::string& ControlConfigurationEvent_Name(ControlConfigurationEvent value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ControlConfigurationEvent_descriptor(), value);
 }
-inline bool ControlConfigurationEvent_Parse(
-    const ::std::string& name, ControlConfigurationEvent* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ControlConfigurationEvent>(
-    ControlConfigurationEvent_descriptor(), name, value);
+inline bool ControlConfigurationEvent_Parse(const ::std::string& name, ControlConfigurationEvent* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ControlConfigurationEvent>(ControlConfigurationEvent_descriptor(),
+                                                                                 name, value);
 }
-enum ControlMode {
+enum ControlMode
+{
   UNSPECIFIED_CONTROL_MODE = 0,
   ANGULAR_JOYSTICK = 1,
   CARTESIAN_JOYSTICK = 2,
@@ -254,62 +264,73 @@ const ControlMode ControlMode_MAX = IDLE;
 const int ControlMode_ARRAYSIZE = ControlMode_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ControlMode_descriptor();
-inline const ::std::string& ControlMode_Name(ControlMode value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ControlMode_descriptor(), value);
+inline const ::std::string& ControlMode_Name(ControlMode value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ControlMode_descriptor(), value);
 }
-inline bool ControlMode_Parse(
-    const ::std::string& name, ControlMode* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ControlMode>(
-    ControlMode_descriptor(), name, value);
+inline bool ControlMode_Parse(const ::std::string& name, ControlMode* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ControlMode>(ControlMode_descriptor(), name, value);
 }
 // ===================================================================
 
-class GravityVector : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.GravityVector) */ {
- public:
+class GravityVector
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.GravityVector) */
+{
+public:
   GravityVector();
   virtual ~GravityVector();
 
   GravityVector(const GravityVector& from);
 
-  inline GravityVector& operator=(const GravityVector& from) {
+  inline GravityVector& operator=(const GravityVector& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  GravityVector(GravityVector&& from) noexcept
-    : GravityVector() {
+#if LANG_CXX11
+  GravityVector(GravityVector&& from) noexcept : GravityVector()
+  {
     *this = ::std::move(from);
   }
 
-  inline GravityVector& operator=(GravityVector&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline GravityVector& operator=(GravityVector&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const GravityVector& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const GravityVector* internal_default_instance() {
-    return reinterpret_cast<const GravityVector*>(
-               &_GravityVector_default_instance_);
+  static inline const GravityVector* internal_default_instance()
+  {
+    return reinterpret_cast<const GravityVector*>(&_GravityVector_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(GravityVector* other);
-  friend void swap(GravityVector& a, GravityVector& b) {
+  friend void swap(GravityVector& a, GravityVector& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline GravityVector* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline GravityVector* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   GravityVector* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -320,27 +341,32 @@ class GravityVector : public ::google::protobuf::Message /* @@protoc_insertion_p
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(GravityVector* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -366,8 +392,7 @@ class GravityVector : public ::google::protobuf::Message /* @@protoc_insertion_p
   void set_z(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.GravityVector)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float x_;
   float y_;
@@ -378,51 +403,62 @@ class GravityVector : public ::google::protobuf::Message /* @@protoc_insertion_p
 };
 // -------------------------------------------------------------------
 
-class Position : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.Position) */ {
- public:
+class Position
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.Position) */
+{
+public:
   Position();
   virtual ~Position();
 
   Position(const Position& from);
 
-  inline Position& operator=(const Position& from) {
+  inline Position& operator=(const Position& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  Position(Position&& from) noexcept
-    : Position() {
+#if LANG_CXX11
+  Position(Position&& from) noexcept : Position()
+  {
     *this = ::std::move(from);
   }
 
-  inline Position& operator=(Position&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline Position& operator=(Position&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const Position& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Position* internal_default_instance() {
-    return reinterpret_cast<const Position*>(
-               &_Position_default_instance_);
+  static inline const Position* internal_default_instance()
+  {
+    return reinterpret_cast<const Position*>(&_Position_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void Swap(Position* other);
-  friend void swap(Position& a, Position& b) {
+  friend void swap(Position& a, Position& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Position* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Position* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   Position* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -433,27 +469,32 @@ class Position : public ::google::protobuf::Message /* @@protoc_insertion_point(
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Position* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -479,8 +520,7 @@ class Position : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void set_z(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.Position)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float x_;
   float y_;
@@ -491,51 +531,63 @@ class Position : public ::google::protobuf::Message /* @@protoc_insertion_point(
 };
 // -------------------------------------------------------------------
 
-class PayloadInformation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.PayloadInformation) */ {
- public:
+class PayloadInformation
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.PayloadInformation) */
+{
+public:
   PayloadInformation();
   virtual ~PayloadInformation();
 
   PayloadInformation(const PayloadInformation& from);
 
-  inline PayloadInformation& operator=(const PayloadInformation& from) {
+  inline PayloadInformation& operator=(const PayloadInformation& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  PayloadInformation(PayloadInformation&& from) noexcept
-    : PayloadInformation() {
+#if LANG_CXX11
+  PayloadInformation(PayloadInformation&& from) noexcept : PayloadInformation()
+  {
     *this = ::std::move(from);
   }
 
-  inline PayloadInformation& operator=(PayloadInformation&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline PayloadInformation& operator=(PayloadInformation&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const PayloadInformation& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PayloadInformation* internal_default_instance() {
-    return reinterpret_cast<const PayloadInformation*>(
-               &_PayloadInformation_default_instance_);
+  static inline const PayloadInformation* internal_default_instance()
+  {
+    return reinterpret_cast<const PayloadInformation*>(&_PayloadInformation_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 2;
 
   void Swap(PayloadInformation* other);
-  friend void swap(PayloadInformation& a, PayloadInformation& b) {
+  friend void swap(PayloadInformation& a, PayloadInformation& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline PayloadInformation* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline PayloadInformation* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   PayloadInformation* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -546,27 +598,32 @@ class PayloadInformation : public ::google::protobuf::Message /* @@protoc_insert
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(PayloadInformation* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -589,8 +646,7 @@ class PayloadInformation : public ::google::protobuf::Message /* @@protoc_insert
   void set_payload_mass(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.PayloadInformation)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::ControlConfig::Position* payload_mass_center_;
   float payload_mass_;
@@ -600,51 +656,63 @@ class PayloadInformation : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class CartesianTransform : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.CartesianTransform) */ {
- public:
+class CartesianTransform
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.CartesianTransform) */
+{
+public:
   CartesianTransform();
   virtual ~CartesianTransform();
 
   CartesianTransform(const CartesianTransform& from);
 
-  inline CartesianTransform& operator=(const CartesianTransform& from) {
+  inline CartesianTransform& operator=(const CartesianTransform& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CartesianTransform(CartesianTransform&& from) noexcept
-    : CartesianTransform() {
+#if LANG_CXX11
+  CartesianTransform(CartesianTransform&& from) noexcept : CartesianTransform()
+  {
     *this = ::std::move(from);
   }
 
-  inline CartesianTransform& operator=(CartesianTransform&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CartesianTransform& operator=(CartesianTransform&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CartesianTransform& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CartesianTransform* internal_default_instance() {
-    return reinterpret_cast<const CartesianTransform*>(
-               &_CartesianTransform_default_instance_);
+  static inline const CartesianTransform* internal_default_instance()
+  {
+    return reinterpret_cast<const CartesianTransform*>(&_CartesianTransform_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 3;
 
   void Swap(CartesianTransform* other);
-  friend void swap(CartesianTransform& a, CartesianTransform& b) {
+  friend void swap(CartesianTransform& a, CartesianTransform& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CartesianTransform* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CartesianTransform* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CartesianTransform* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -655,27 +723,32 @@ class CartesianTransform : public ::google::protobuf::Message /* @@protoc_insert
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CartesianTransform* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -719,8 +792,7 @@ class CartesianTransform : public ::google::protobuf::Message /* @@protoc_insert
   void set_theta_z(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.CartesianTransform)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float x_;
   float y_;
@@ -734,51 +806,63 @@ class CartesianTransform : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class ToolConfiguration : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ToolConfiguration) */ {
- public:
+class ToolConfiguration
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ToolConfiguration) */
+{
+public:
   ToolConfiguration();
   virtual ~ToolConfiguration();
 
   ToolConfiguration(const ToolConfiguration& from);
 
-  inline ToolConfiguration& operator=(const ToolConfiguration& from) {
+  inline ToolConfiguration& operator=(const ToolConfiguration& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ToolConfiguration(ToolConfiguration&& from) noexcept
-    : ToolConfiguration() {
+#if LANG_CXX11
+  ToolConfiguration(ToolConfiguration&& from) noexcept : ToolConfiguration()
+  {
     *this = ::std::move(from);
   }
 
-  inline ToolConfiguration& operator=(ToolConfiguration&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ToolConfiguration& operator=(ToolConfiguration&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ToolConfiguration& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ToolConfiguration* internal_default_instance() {
-    return reinterpret_cast<const ToolConfiguration*>(
-               &_ToolConfiguration_default_instance_);
+  static inline const ToolConfiguration* internal_default_instance()
+  {
+    return reinterpret_cast<const ToolConfiguration*>(&_ToolConfiguration_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 4;
 
   void Swap(ToolConfiguration* other);
-  friend void swap(ToolConfiguration& a, ToolConfiguration& b) {
+  friend void swap(ToolConfiguration& a, ToolConfiguration& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ToolConfiguration* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ToolConfiguration* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ToolConfiguration* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -789,27 +873,32 @@ class ToolConfiguration : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ToolConfiguration* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -841,8 +930,7 @@ class ToolConfiguration : public ::google::protobuf::Message /* @@protoc_inserti
   void set_tool_mass(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.ToolConfiguration)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::ControlConfig::CartesianTransform* tool_transform_;
   ::Kinova::Api::ControlConfig::Position* tool_mass_center_;
@@ -853,51 +941,65 @@ class ToolConfiguration : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class ControlConfigurationNotification : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ControlConfigurationNotification) */ {
- public:
+class ControlConfigurationNotification
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ControlConfigurationNotification) */
+{
+public:
   ControlConfigurationNotification();
   virtual ~ControlConfigurationNotification();
 
   ControlConfigurationNotification(const ControlConfigurationNotification& from);
 
-  inline ControlConfigurationNotification& operator=(const ControlConfigurationNotification& from) {
+  inline ControlConfigurationNotification& operator=(const ControlConfigurationNotification& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
+#if LANG_CXX11
   ControlConfigurationNotification(ControlConfigurationNotification&& from) noexcept
-    : ControlConfigurationNotification() {
+    : ControlConfigurationNotification()
+  {
     *this = ::std::move(from);
   }
 
-  inline ControlConfigurationNotification& operator=(ControlConfigurationNotification&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ControlConfigurationNotification& operator=(ControlConfigurationNotification&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ControlConfigurationNotification& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ControlConfigurationNotification* internal_default_instance() {
+  static inline const ControlConfigurationNotification* internal_default_instance()
+  {
     return reinterpret_cast<const ControlConfigurationNotification*>(
-               &_ControlConfigurationNotification_default_instance_);
+        &_ControlConfigurationNotification_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 5;
 
   void Swap(ControlConfigurationNotification* other);
-  friend void swap(ControlConfigurationNotification& a, ControlConfigurationNotification& b) {
+  friend void swap(ControlConfigurationNotification& a, ControlConfigurationNotification& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ControlConfigurationNotification* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ControlConfigurationNotification* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ControlConfigurationNotification* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -908,27 +1010,32 @@ class ControlConfigurationNotification : public ::google::protobuf::Message /* @
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ControlConfigurationNotification* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -969,8 +1076,7 @@ class ControlConfigurationNotification : public ::google::protobuf::Message /* @
   void set_event(::Kinova::Api::ControlConfig::ControlConfigurationEvent value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.ControlConfigurationNotification)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::Common::Timestamp* timestamp_;
   ::Kinova::Api::Common::UserProfileHandle* user_handle_;
@@ -982,51 +1088,63 @@ class ControlConfigurationNotification : public ::google::protobuf::Message /* @
 };
 // -------------------------------------------------------------------
 
-class CartesianReferenceFrameInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.CartesianReferenceFrameInfo) */ {
- public:
+class CartesianReferenceFrameInfo
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.CartesianReferenceFrameInfo) */
+{
+public:
   CartesianReferenceFrameInfo();
   virtual ~CartesianReferenceFrameInfo();
 
   CartesianReferenceFrameInfo(const CartesianReferenceFrameInfo& from);
 
-  inline CartesianReferenceFrameInfo& operator=(const CartesianReferenceFrameInfo& from) {
+  inline CartesianReferenceFrameInfo& operator=(const CartesianReferenceFrameInfo& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CartesianReferenceFrameInfo(CartesianReferenceFrameInfo&& from) noexcept
-    : CartesianReferenceFrameInfo() {
+#if LANG_CXX11
+  CartesianReferenceFrameInfo(CartesianReferenceFrameInfo&& from) noexcept : CartesianReferenceFrameInfo()
+  {
     *this = ::std::move(from);
   }
 
-  inline CartesianReferenceFrameInfo& operator=(CartesianReferenceFrameInfo&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CartesianReferenceFrameInfo& operator=(CartesianReferenceFrameInfo&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CartesianReferenceFrameInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CartesianReferenceFrameInfo* internal_default_instance() {
-    return reinterpret_cast<const CartesianReferenceFrameInfo*>(
-               &_CartesianReferenceFrameInfo_default_instance_);
+  static inline const CartesianReferenceFrameInfo* internal_default_instance()
+  {
+    return reinterpret_cast<const CartesianReferenceFrameInfo*>(&_CartesianReferenceFrameInfo_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 6;
 
   void Swap(CartesianReferenceFrameInfo* other);
-  friend void swap(CartesianReferenceFrameInfo& a, CartesianReferenceFrameInfo& b) {
+  friend void swap(CartesianReferenceFrameInfo& a, CartesianReferenceFrameInfo& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CartesianReferenceFrameInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CartesianReferenceFrameInfo* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CartesianReferenceFrameInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1037,27 +1155,32 @@ class CartesianReferenceFrameInfo : public ::google::protobuf::Message /* @@prot
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CartesianReferenceFrameInfo* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1071,8 +1194,7 @@ class CartesianReferenceFrameInfo : public ::google::protobuf::Message /* @@prot
   void set_reference_frame(::Kinova::Api::Common::CartesianReferenceFrame value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.CartesianReferenceFrameInfo)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int reference_frame_;
   mutable int _cached_size_;
@@ -1081,51 +1203,63 @@ class CartesianReferenceFrameInfo : public ::google::protobuf::Message /* @@prot
 };
 // -------------------------------------------------------------------
 
-class TwistLinearSoftLimit : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.TwistLinearSoftLimit) */ {
- public:
+class TwistLinearSoftLimit
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.TwistLinearSoftLimit) */
+{
+public:
   TwistLinearSoftLimit();
   virtual ~TwistLinearSoftLimit();
 
   TwistLinearSoftLimit(const TwistLinearSoftLimit& from);
 
-  inline TwistLinearSoftLimit& operator=(const TwistLinearSoftLimit& from) {
+  inline TwistLinearSoftLimit& operator=(const TwistLinearSoftLimit& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  TwistLinearSoftLimit(TwistLinearSoftLimit&& from) noexcept
-    : TwistLinearSoftLimit() {
+#if LANG_CXX11
+  TwistLinearSoftLimit(TwistLinearSoftLimit&& from) noexcept : TwistLinearSoftLimit()
+  {
     *this = ::std::move(from);
   }
 
-  inline TwistLinearSoftLimit& operator=(TwistLinearSoftLimit&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline TwistLinearSoftLimit& operator=(TwistLinearSoftLimit&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const TwistLinearSoftLimit& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TwistLinearSoftLimit* internal_default_instance() {
-    return reinterpret_cast<const TwistLinearSoftLimit*>(
-               &_TwistLinearSoftLimit_default_instance_);
+  static inline const TwistLinearSoftLimit* internal_default_instance()
+  {
+    return reinterpret_cast<const TwistLinearSoftLimit*>(&_TwistLinearSoftLimit_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 7;
 
   void Swap(TwistLinearSoftLimit* other);
-  friend void swap(TwistLinearSoftLimit& a, TwistLinearSoftLimit& b) {
+  friend void swap(TwistLinearSoftLimit& a, TwistLinearSoftLimit& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline TwistLinearSoftLimit* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline TwistLinearSoftLimit* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   TwistLinearSoftLimit* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1136,27 +1270,32 @@ class TwistLinearSoftLimit : public ::google::protobuf::Message /* @@protoc_inse
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(TwistLinearSoftLimit* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1176,8 +1315,7 @@ class TwistLinearSoftLimit : public ::google::protobuf::Message /* @@protoc_inse
   void set_twist_linear_soft_limit(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.TwistLinearSoftLimit)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int control_mode_;
   float twist_linear_soft_limit_;
@@ -1187,51 +1325,63 @@ class TwistLinearSoftLimit : public ::google::protobuf::Message /* @@protoc_inse
 };
 // -------------------------------------------------------------------
 
-class TwistAngularSoftLimit : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.TwistAngularSoftLimit) */ {
- public:
+class TwistAngularSoftLimit
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.TwistAngularSoftLimit) */
+{
+public:
   TwistAngularSoftLimit();
   virtual ~TwistAngularSoftLimit();
 
   TwistAngularSoftLimit(const TwistAngularSoftLimit& from);
 
-  inline TwistAngularSoftLimit& operator=(const TwistAngularSoftLimit& from) {
+  inline TwistAngularSoftLimit& operator=(const TwistAngularSoftLimit& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  TwistAngularSoftLimit(TwistAngularSoftLimit&& from) noexcept
-    : TwistAngularSoftLimit() {
+#if LANG_CXX11
+  TwistAngularSoftLimit(TwistAngularSoftLimit&& from) noexcept : TwistAngularSoftLimit()
+  {
     *this = ::std::move(from);
   }
 
-  inline TwistAngularSoftLimit& operator=(TwistAngularSoftLimit&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline TwistAngularSoftLimit& operator=(TwistAngularSoftLimit&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const TwistAngularSoftLimit& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TwistAngularSoftLimit* internal_default_instance() {
-    return reinterpret_cast<const TwistAngularSoftLimit*>(
-               &_TwistAngularSoftLimit_default_instance_);
+  static inline const TwistAngularSoftLimit* internal_default_instance()
+  {
+    return reinterpret_cast<const TwistAngularSoftLimit*>(&_TwistAngularSoftLimit_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 8;
 
   void Swap(TwistAngularSoftLimit* other);
-  friend void swap(TwistAngularSoftLimit& a, TwistAngularSoftLimit& b) {
+  friend void swap(TwistAngularSoftLimit& a, TwistAngularSoftLimit& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline TwistAngularSoftLimit* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline TwistAngularSoftLimit* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   TwistAngularSoftLimit* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1242,27 +1392,32 @@ class TwistAngularSoftLimit : public ::google::protobuf::Message /* @@protoc_ins
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(TwistAngularSoftLimit* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1282,8 +1437,7 @@ class TwistAngularSoftLimit : public ::google::protobuf::Message /* @@protoc_ins
   void set_twist_angular_soft_limit(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.TwistAngularSoftLimit)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int control_mode_;
   float twist_angular_soft_limit_;
@@ -1293,51 +1447,63 @@ class TwistAngularSoftLimit : public ::google::protobuf::Message /* @@protoc_ins
 };
 // -------------------------------------------------------------------
 
-class JointSpeedSoftLimits : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.JointSpeedSoftLimits) */ {
- public:
+class JointSpeedSoftLimits
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.JointSpeedSoftLimits) */
+{
+public:
   JointSpeedSoftLimits();
   virtual ~JointSpeedSoftLimits();
 
   JointSpeedSoftLimits(const JointSpeedSoftLimits& from);
 
-  inline JointSpeedSoftLimits& operator=(const JointSpeedSoftLimits& from) {
+  inline JointSpeedSoftLimits& operator=(const JointSpeedSoftLimits& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  JointSpeedSoftLimits(JointSpeedSoftLimits&& from) noexcept
-    : JointSpeedSoftLimits() {
+#if LANG_CXX11
+  JointSpeedSoftLimits(JointSpeedSoftLimits&& from) noexcept : JointSpeedSoftLimits()
+  {
     *this = ::std::move(from);
   }
 
-  inline JointSpeedSoftLimits& operator=(JointSpeedSoftLimits&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline JointSpeedSoftLimits& operator=(JointSpeedSoftLimits&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const JointSpeedSoftLimits& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const JointSpeedSoftLimits* internal_default_instance() {
-    return reinterpret_cast<const JointSpeedSoftLimits*>(
-               &_JointSpeedSoftLimits_default_instance_);
+  static inline const JointSpeedSoftLimits* internal_default_instance()
+  {
+    return reinterpret_cast<const JointSpeedSoftLimits*>(&_JointSpeedSoftLimits_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 9;
 
   void Swap(JointSpeedSoftLimits* other);
-  friend void swap(JointSpeedSoftLimits& a, JointSpeedSoftLimits& b) {
+  friend void swap(JointSpeedSoftLimits& a, JointSpeedSoftLimits& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline JointSpeedSoftLimits* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline JointSpeedSoftLimits* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   JointSpeedSoftLimits* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1348,27 +1514,32 @@ class JointSpeedSoftLimits : public ::google::protobuf::Message /* @@protoc_inse
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(JointSpeedSoftLimits* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1382,10 +1553,8 @@ class JointSpeedSoftLimits : public ::google::protobuf::Message /* @@protoc_inse
   float joint_speed_soft_limits(int index) const;
   void set_joint_speed_soft_limits(int index, float value);
   void add_joint_speed_soft_limits(float value);
-  const ::google::protobuf::RepeatedField< float >&
-      joint_speed_soft_limits() const;
-  ::google::protobuf::RepeatedField< float >*
-      mutable_joint_speed_soft_limits();
+  const ::google::protobuf::RepeatedField<float>& joint_speed_soft_limits() const;
+  ::google::protobuf::RepeatedField<float>* mutable_joint_speed_soft_limits();
 
   // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
   void clear_control_mode();
@@ -1394,10 +1563,9 @@ class JointSpeedSoftLimits : public ::google::protobuf::Message /* @@protoc_inse
   void set_control_mode(::Kinova::Api::ControlConfig::ControlMode value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.JointSpeedSoftLimits)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedField< float > joint_speed_soft_limits_;
+  ::google::protobuf::RepeatedField<float> joint_speed_soft_limits_;
   mutable int _joint_speed_soft_limits_cached_byte_size_;
   int control_mode_;
   mutable int _cached_size_;
@@ -1406,51 +1574,63 @@ class JointSpeedSoftLimits : public ::google::protobuf::Message /* @@protoc_inse
 };
 // -------------------------------------------------------------------
 
-class JointAccelerationSoftLimits : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.JointAccelerationSoftLimits) */ {
- public:
+class JointAccelerationSoftLimits
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.JointAccelerationSoftLimits) */
+{
+public:
   JointAccelerationSoftLimits();
   virtual ~JointAccelerationSoftLimits();
 
   JointAccelerationSoftLimits(const JointAccelerationSoftLimits& from);
 
-  inline JointAccelerationSoftLimits& operator=(const JointAccelerationSoftLimits& from) {
+  inline JointAccelerationSoftLimits& operator=(const JointAccelerationSoftLimits& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  JointAccelerationSoftLimits(JointAccelerationSoftLimits&& from) noexcept
-    : JointAccelerationSoftLimits() {
+#if LANG_CXX11
+  JointAccelerationSoftLimits(JointAccelerationSoftLimits&& from) noexcept : JointAccelerationSoftLimits()
+  {
     *this = ::std::move(from);
   }
 
-  inline JointAccelerationSoftLimits& operator=(JointAccelerationSoftLimits&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline JointAccelerationSoftLimits& operator=(JointAccelerationSoftLimits&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const JointAccelerationSoftLimits& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const JointAccelerationSoftLimits* internal_default_instance() {
-    return reinterpret_cast<const JointAccelerationSoftLimits*>(
-               &_JointAccelerationSoftLimits_default_instance_);
+  static inline const JointAccelerationSoftLimits* internal_default_instance()
+  {
+    return reinterpret_cast<const JointAccelerationSoftLimits*>(&_JointAccelerationSoftLimits_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 10;
 
   void Swap(JointAccelerationSoftLimits* other);
-  friend void swap(JointAccelerationSoftLimits& a, JointAccelerationSoftLimits& b) {
+  friend void swap(JointAccelerationSoftLimits& a, JointAccelerationSoftLimits& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline JointAccelerationSoftLimits* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline JointAccelerationSoftLimits* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   JointAccelerationSoftLimits* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1461,27 +1641,32 @@ class JointAccelerationSoftLimits : public ::google::protobuf::Message /* @@prot
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(JointAccelerationSoftLimits* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1495,10 +1680,8 @@ class JointAccelerationSoftLimits : public ::google::protobuf::Message /* @@prot
   float joint_acceleration_soft_limits(int index) const;
   void set_joint_acceleration_soft_limits(int index, float value);
   void add_joint_acceleration_soft_limits(float value);
-  const ::google::protobuf::RepeatedField< float >&
-      joint_acceleration_soft_limits() const;
-  ::google::protobuf::RepeatedField< float >*
-      mutable_joint_acceleration_soft_limits();
+  const ::google::protobuf::RepeatedField<float>& joint_acceleration_soft_limits() const;
+  ::google::protobuf::RepeatedField<float>* mutable_joint_acceleration_soft_limits();
 
   // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
   void clear_control_mode();
@@ -1507,10 +1690,9 @@ class JointAccelerationSoftLimits : public ::google::protobuf::Message /* @@prot
   void set_control_mode(::Kinova::Api::ControlConfig::ControlMode value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.JointAccelerationSoftLimits)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedField< float > joint_acceleration_soft_limits_;
+  ::google::protobuf::RepeatedField<float> joint_acceleration_soft_limits_;
   mutable int _joint_acceleration_soft_limits_cached_byte_size_;
   int control_mode_;
   mutable int _cached_size_;
@@ -1519,51 +1701,63 @@ class JointAccelerationSoftLimits : public ::google::protobuf::Message /* @@prot
 };
 // -------------------------------------------------------------------
 
-class KinematicLimits : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.KinematicLimits) */ {
- public:
+class KinematicLimits
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.KinematicLimits) */
+{
+public:
   KinematicLimits();
   virtual ~KinematicLimits();
 
   KinematicLimits(const KinematicLimits& from);
 
-  inline KinematicLimits& operator=(const KinematicLimits& from) {
+  inline KinematicLimits& operator=(const KinematicLimits& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  KinematicLimits(KinematicLimits&& from) noexcept
-    : KinematicLimits() {
+#if LANG_CXX11
+  KinematicLimits(KinematicLimits&& from) noexcept : KinematicLimits()
+  {
     *this = ::std::move(from);
   }
 
-  inline KinematicLimits& operator=(KinematicLimits&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline KinematicLimits& operator=(KinematicLimits&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const KinematicLimits& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const KinematicLimits* internal_default_instance() {
-    return reinterpret_cast<const KinematicLimits*>(
-               &_KinematicLimits_default_instance_);
+  static inline const KinematicLimits* internal_default_instance()
+  {
+    return reinterpret_cast<const KinematicLimits*>(&_KinematicLimits_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 11;
 
   void Swap(KinematicLimits* other);
-  friend void swap(KinematicLimits& a, KinematicLimits& b) {
+  friend void swap(KinematicLimits& a, KinematicLimits& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline KinematicLimits* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline KinematicLimits* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   KinematicLimits* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1574,27 +1768,32 @@ class KinematicLimits : public ::google::protobuf::Message /* @@protoc_insertion
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(KinematicLimits* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1608,10 +1807,8 @@ class KinematicLimits : public ::google::protobuf::Message /* @@protoc_insertion
   float joint_speed_limits(int index) const;
   void set_joint_speed_limits(int index, float value);
   void add_joint_speed_limits(float value);
-  const ::google::protobuf::RepeatedField< float >&
-      joint_speed_limits() const;
-  ::google::protobuf::RepeatedField< float >*
-      mutable_joint_speed_limits();
+  const ::google::protobuf::RepeatedField<float>& joint_speed_limits() const;
+  ::google::protobuf::RepeatedField<float>* mutable_joint_speed_limits();
 
   // repeated float joint_acceleration_limits = 5;
   int joint_acceleration_limits_size() const;
@@ -1620,10 +1817,8 @@ class KinematicLimits : public ::google::protobuf::Message /* @@protoc_insertion
   float joint_acceleration_limits(int index) const;
   void set_joint_acceleration_limits(int index, float value);
   void add_joint_acceleration_limits(float value);
-  const ::google::protobuf::RepeatedField< float >&
-      joint_acceleration_limits() const;
-  ::google::protobuf::RepeatedField< float >*
-      mutable_joint_acceleration_limits();
+  const ::google::protobuf::RepeatedField<float>& joint_acceleration_limits() const;
+  ::google::protobuf::RepeatedField<float>* mutable_joint_acceleration_limits();
 
   // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
   void clear_control_mode();
@@ -1644,12 +1839,11 @@ class KinematicLimits : public ::google::protobuf::Message /* @@protoc_insertion
   void set_twist_angular(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.KinematicLimits)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedField< float > joint_speed_limits_;
+  ::google::protobuf::RepeatedField<float> joint_speed_limits_;
   mutable int _joint_speed_limits_cached_byte_size_;
-  ::google::protobuf::RepeatedField< float > joint_acceleration_limits_;
+  ::google::protobuf::RepeatedField<float> joint_acceleration_limits_;
   mutable int _joint_acceleration_limits_cached_byte_size_;
   int control_mode_;
   float twist_linear_;
@@ -1660,51 +1854,63 @@ class KinematicLimits : public ::google::protobuf::Message /* @@protoc_insertion
 };
 // -------------------------------------------------------------------
 
-class KinematicLimitsList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.KinematicLimitsList) */ {
- public:
+class KinematicLimitsList
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.KinematicLimitsList) */
+{
+public:
   KinematicLimitsList();
   virtual ~KinematicLimitsList();
 
   KinematicLimitsList(const KinematicLimitsList& from);
 
-  inline KinematicLimitsList& operator=(const KinematicLimitsList& from) {
+  inline KinematicLimitsList& operator=(const KinematicLimitsList& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  KinematicLimitsList(KinematicLimitsList&& from) noexcept
-    : KinematicLimitsList() {
+#if LANG_CXX11
+  KinematicLimitsList(KinematicLimitsList&& from) noexcept : KinematicLimitsList()
+  {
     *this = ::std::move(from);
   }
 
-  inline KinematicLimitsList& operator=(KinematicLimitsList&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline KinematicLimitsList& operator=(KinematicLimitsList&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const KinematicLimitsList& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const KinematicLimitsList* internal_default_instance() {
-    return reinterpret_cast<const KinematicLimitsList*>(
-               &_KinematicLimitsList_default_instance_);
+  static inline const KinematicLimitsList* internal_default_instance()
+  {
+    return reinterpret_cast<const KinematicLimitsList*>(&_KinematicLimitsList_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    12;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 12;
 
   void Swap(KinematicLimitsList* other);
-  friend void swap(KinematicLimitsList& a, KinematicLimitsList& b) {
+  friend void swap(KinematicLimitsList& a, KinematicLimitsList& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline KinematicLimitsList* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline KinematicLimitsList* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   KinematicLimitsList* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1715,27 +1921,32 @@ class KinematicLimitsList : public ::google::protobuf::Message /* @@protoc_inser
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(KinematicLimitsList* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1749,67 +1960,77 @@ class KinematicLimitsList : public ::google::protobuf::Message /* @@protoc_inser
   const ::Kinova::Api::ControlConfig::KinematicLimits& kinematic_limits_list(int index) const;
   ::Kinova::Api::ControlConfig::KinematicLimits* mutable_kinematic_limits_list(int index);
   ::Kinova::Api::ControlConfig::KinematicLimits* add_kinematic_limits_list();
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits >*
-      mutable_kinematic_limits_list();
-  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits >&
-      kinematic_limits_list() const;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits>* mutable_kinematic_limits_list();
+  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits>&
+  kinematic_limits_list() const;
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.KinematicLimitsList)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits > kinematic_limits_list_;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits> kinematic_limits_list_;
   mutable int _cached_size_;
   friend struct ::protobuf_ControlConfig_2eproto::TableStruct;
   friend void ::protobuf_ControlConfig_2eproto::InitDefaultsKinematicLimitsListImpl();
 };
 // -------------------------------------------------------------------
 
-class DesiredSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.DesiredSpeeds) */ {
- public:
+class DesiredSpeeds
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.DesiredSpeeds) */
+{
+public:
   DesiredSpeeds();
   virtual ~DesiredSpeeds();
 
   DesiredSpeeds(const DesiredSpeeds& from);
 
-  inline DesiredSpeeds& operator=(const DesiredSpeeds& from) {
+  inline DesiredSpeeds& operator=(const DesiredSpeeds& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DesiredSpeeds(DesiredSpeeds&& from) noexcept
-    : DesiredSpeeds() {
+#if LANG_CXX11
+  DesiredSpeeds(DesiredSpeeds&& from) noexcept : DesiredSpeeds()
+  {
     *this = ::std::move(from);
   }
 
-  inline DesiredSpeeds& operator=(DesiredSpeeds&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DesiredSpeeds& operator=(DesiredSpeeds&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const DesiredSpeeds& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DesiredSpeeds* internal_default_instance() {
-    return reinterpret_cast<const DesiredSpeeds*>(
-               &_DesiredSpeeds_default_instance_);
+  static inline const DesiredSpeeds* internal_default_instance()
+  {
+    return reinterpret_cast<const DesiredSpeeds*>(&_DesiredSpeeds_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    13;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 13;
 
   void Swap(DesiredSpeeds* other);
-  friend void swap(DesiredSpeeds& a, DesiredSpeeds& b) {
+  friend void swap(DesiredSpeeds& a, DesiredSpeeds& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DesiredSpeeds* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DesiredSpeeds* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DesiredSpeeds* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1820,27 +2041,32 @@ class DesiredSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_p
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DesiredSpeeds* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1854,10 +2080,8 @@ class DesiredSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_p
   float joint_speed(int index) const;
   void set_joint_speed(int index, float value);
   void add_joint_speed(float value);
-  const ::google::protobuf::RepeatedField< float >&
-      joint_speed() const;
-  ::google::protobuf::RepeatedField< float >*
-      mutable_joint_speed();
+  const ::google::protobuf::RepeatedField<float>& joint_speed() const;
+  ::google::protobuf::RepeatedField<float>* mutable_joint_speed();
 
   // float linear = 1;
   void clear_linear();
@@ -1872,10 +2096,9 @@ class DesiredSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_p
   void set_angular(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.DesiredSpeeds)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedField< float > joint_speed_;
+  ::google::protobuf::RepeatedField<float> joint_speed_;
   mutable int _joint_speed_cached_byte_size_;
   float linear_;
   float angular_;
@@ -1885,51 +2108,62 @@ class DesiredSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_p
 };
 // -------------------------------------------------------------------
 
-class LinearTwist : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.LinearTwist) */ {
- public:
+class LinearTwist : public ::google::protobuf::
+                        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.LinearTwist) */
+{
+public:
   LinearTwist();
   virtual ~LinearTwist();
 
   LinearTwist(const LinearTwist& from);
 
-  inline LinearTwist& operator=(const LinearTwist& from) {
+  inline LinearTwist& operator=(const LinearTwist& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  LinearTwist(LinearTwist&& from) noexcept
-    : LinearTwist() {
+#if LANG_CXX11
+  LinearTwist(LinearTwist&& from) noexcept : LinearTwist()
+  {
     *this = ::std::move(from);
   }
 
-  inline LinearTwist& operator=(LinearTwist&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline LinearTwist& operator=(LinearTwist&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const LinearTwist& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const LinearTwist* internal_default_instance() {
-    return reinterpret_cast<const LinearTwist*>(
-               &_LinearTwist_default_instance_);
+  static inline const LinearTwist* internal_default_instance()
+  {
+    return reinterpret_cast<const LinearTwist*>(&_LinearTwist_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    14;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 14;
 
   void Swap(LinearTwist* other);
-  friend void swap(LinearTwist& a, LinearTwist& b) {
+  friend void swap(LinearTwist& a, LinearTwist& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline LinearTwist* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline LinearTwist* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   LinearTwist* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1940,27 +2174,32 @@ class LinearTwist : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(LinearTwist* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1974,8 +2213,7 @@ class LinearTwist : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void set_linear(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.LinearTwist)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float linear_;
   mutable int _cached_size_;
@@ -1984,51 +2222,62 @@ class LinearTwist : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class AngularTwist : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.AngularTwist) */ {
- public:
+class AngularTwist : public ::google::protobuf::
+                         Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.AngularTwist) */
+{
+public:
   AngularTwist();
   virtual ~AngularTwist();
 
   AngularTwist(const AngularTwist& from);
 
-  inline AngularTwist& operator=(const AngularTwist& from) {
+  inline AngularTwist& operator=(const AngularTwist& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  AngularTwist(AngularTwist&& from) noexcept
-    : AngularTwist() {
+#if LANG_CXX11
+  AngularTwist(AngularTwist&& from) noexcept : AngularTwist()
+  {
     *this = ::std::move(from);
   }
 
-  inline AngularTwist& operator=(AngularTwist&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline AngularTwist& operator=(AngularTwist&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const AngularTwist& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const AngularTwist* internal_default_instance() {
-    return reinterpret_cast<const AngularTwist*>(
-               &_AngularTwist_default_instance_);
+  static inline const AngularTwist* internal_default_instance()
+  {
+    return reinterpret_cast<const AngularTwist*>(&_AngularTwist_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    15;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 15;
 
   void Swap(AngularTwist* other);
-  friend void swap(AngularTwist& a, AngularTwist& b) {
+  friend void swap(AngularTwist& a, AngularTwist& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline AngularTwist* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline AngularTwist* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   AngularTwist* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2039,27 +2288,32 @@ class AngularTwist : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(AngularTwist* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2073,8 +2327,7 @@ class AngularTwist : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_angular(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.AngularTwist)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float angular_;
   mutable int _cached_size_;
@@ -2083,51 +2336,62 @@ class AngularTwist : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class JointSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.JointSpeeds) */ {
- public:
+class JointSpeeds : public ::google::protobuf::
+                        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.JointSpeeds) */
+{
+public:
   JointSpeeds();
   virtual ~JointSpeeds();
 
   JointSpeeds(const JointSpeeds& from);
 
-  inline JointSpeeds& operator=(const JointSpeeds& from) {
+  inline JointSpeeds& operator=(const JointSpeeds& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  JointSpeeds(JointSpeeds&& from) noexcept
-    : JointSpeeds() {
+#if LANG_CXX11
+  JointSpeeds(JointSpeeds&& from) noexcept : JointSpeeds()
+  {
     *this = ::std::move(from);
   }
 
-  inline JointSpeeds& operator=(JointSpeeds&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline JointSpeeds& operator=(JointSpeeds&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const JointSpeeds& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const JointSpeeds* internal_default_instance() {
-    return reinterpret_cast<const JointSpeeds*>(
-               &_JointSpeeds_default_instance_);
+  static inline const JointSpeeds* internal_default_instance()
+  {
+    return reinterpret_cast<const JointSpeeds*>(&_JointSpeeds_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    16;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 16;
 
   void Swap(JointSpeeds* other);
-  friend void swap(JointSpeeds& a, JointSpeeds& b) {
+  friend void swap(JointSpeeds& a, JointSpeeds& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline JointSpeeds* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline JointSpeeds* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   JointSpeeds* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2138,27 +2402,32 @@ class JointSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(JointSpeeds* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2172,16 +2441,13 @@ class JointSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_poi
   float joint_speed(int index) const;
   void set_joint_speed(int index, float value);
   void add_joint_speed(float value);
-  const ::google::protobuf::RepeatedField< float >&
-      joint_speed() const;
-  ::google::protobuf::RepeatedField< float >*
-      mutable_joint_speed();
+  const ::google::protobuf::RepeatedField<float>& joint_speed() const;
+  ::google::protobuf::RepeatedField<float>* mutable_joint_speed();
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.JointSpeeds)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedField< float > joint_speed_;
+  ::google::protobuf::RepeatedField<float> joint_speed_;
   mutable int _joint_speed_cached_byte_size_;
   mutable int _cached_size_;
   friend struct ::protobuf_ControlConfig_2eproto::TableStruct;
@@ -2189,51 +2455,63 @@ class JointSpeeds : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class ControlModeInformation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ControlModeInformation) */ {
- public:
+class ControlModeInformation
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ControlModeInformation) */
+{
+public:
   ControlModeInformation();
   virtual ~ControlModeInformation();
 
   ControlModeInformation(const ControlModeInformation& from);
 
-  inline ControlModeInformation& operator=(const ControlModeInformation& from) {
+  inline ControlModeInformation& operator=(const ControlModeInformation& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ControlModeInformation(ControlModeInformation&& from) noexcept
-    : ControlModeInformation() {
+#if LANG_CXX11
+  ControlModeInformation(ControlModeInformation&& from) noexcept : ControlModeInformation()
+  {
     *this = ::std::move(from);
   }
 
-  inline ControlModeInformation& operator=(ControlModeInformation&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ControlModeInformation& operator=(ControlModeInformation&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ControlModeInformation& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ControlModeInformation* internal_default_instance() {
-    return reinterpret_cast<const ControlModeInformation*>(
-               &_ControlModeInformation_default_instance_);
+  static inline const ControlModeInformation* internal_default_instance()
+  {
+    return reinterpret_cast<const ControlModeInformation*>(&_ControlModeInformation_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    17;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 17;
 
   void Swap(ControlModeInformation* other);
-  friend void swap(ControlModeInformation& a, ControlModeInformation& b) {
+  friend void swap(ControlModeInformation& a, ControlModeInformation& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ControlModeInformation* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ControlModeInformation* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ControlModeInformation* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2244,27 +2522,32 @@ class ControlModeInformation : public ::google::protobuf::Message /* @@protoc_in
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ControlModeInformation* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2278,8 +2561,7 @@ class ControlModeInformation : public ::google::protobuf::Message /* @@protoc_in
   void set_control_mode(::Kinova::Api::ControlConfig::ControlMode value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.ControlModeInformation)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int control_mode_;
   mutable int _cached_size_;
@@ -2288,51 +2570,63 @@ class ControlModeInformation : public ::google::protobuf::Message /* @@protoc_in
 };
 // -------------------------------------------------------------------
 
-class ControlModeNotification : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ControlModeNotification) */ {
- public:
+class ControlModeNotification
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.ControlConfig.ControlModeNotification) */
+{
+public:
   ControlModeNotification();
   virtual ~ControlModeNotification();
 
   ControlModeNotification(const ControlModeNotification& from);
 
-  inline ControlModeNotification& operator=(const ControlModeNotification& from) {
+  inline ControlModeNotification& operator=(const ControlModeNotification& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ControlModeNotification(ControlModeNotification&& from) noexcept
-    : ControlModeNotification() {
+#if LANG_CXX11
+  ControlModeNotification(ControlModeNotification&& from) noexcept : ControlModeNotification()
+  {
     *this = ::std::move(from);
   }
 
-  inline ControlModeNotification& operator=(ControlModeNotification&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ControlModeNotification& operator=(ControlModeNotification&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ControlModeNotification& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ControlModeNotification* internal_default_instance() {
-    return reinterpret_cast<const ControlModeNotification*>(
-               &_ControlModeNotification_default_instance_);
+  static inline const ControlModeNotification* internal_default_instance()
+  {
+    return reinterpret_cast<const ControlModeNotification*>(&_ControlModeNotification_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    18;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 18;
 
   void Swap(ControlModeNotification* other);
-  friend void swap(ControlModeNotification& a, ControlModeNotification& b) {
+  friend void swap(ControlModeNotification& a, ControlModeNotification& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ControlModeNotification* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ControlModeNotification* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ControlModeNotification* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2343,27 +2637,32 @@ class ControlModeNotification : public ::google::protobuf::Message /* @@protoc_i
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ControlModeNotification* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2404,8 +2703,7 @@ class ControlModeNotification : public ::google::protobuf::Message /* @@protoc_i
   void set_control_mode(::Kinova::Api::ControlConfig::ControlMode value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.ControlConfig.ControlModeNotification)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::Common::Timestamp* timestamp_;
   ::Kinova::Api::Common::UserProfileHandle* user_handle_;
@@ -2417,53 +2715,58 @@ class ControlModeNotification : public ::google::protobuf::Message /* @@protoc_i
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // GravityVector
 
 // float x = 1;
-inline void GravityVector::clear_x() {
+inline void GravityVector::clear_x()
+{
   x_ = 0;
 }
-inline float GravityVector::x() const {
+inline float GravityVector::x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.GravityVector.x)
   return x_;
 }
-inline void GravityVector::set_x(float value) {
-  
+inline void GravityVector::set_x(float value)
+{
   x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.GravityVector.x)
 }
 
 // float y = 2;
-inline void GravityVector::clear_y() {
+inline void GravityVector::clear_y()
+{
   y_ = 0;
 }
-inline float GravityVector::y() const {
+inline float GravityVector::y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.GravityVector.y)
   return y_;
 }
-inline void GravityVector::set_y(float value) {
-  
+inline void GravityVector::set_y(float value)
+{
   y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.GravityVector.y)
 }
 
 // float z = 3;
-inline void GravityVector::clear_z() {
+inline void GravityVector::clear_z()
+{
   z_ = 0;
 }
-inline float GravityVector::z() const {
+inline float GravityVector::z() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.GravityVector.z)
   return z_;
 }
-inline void GravityVector::set_z(float value) {
-  
+inline void GravityVector::set_z(float value)
+{
   z_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.GravityVector.z)
 }
@@ -2473,43 +2776,49 @@ inline void GravityVector::set_z(float value) {
 // Position
 
 // float x = 1;
-inline void Position::clear_x() {
+inline void Position::clear_x()
+{
   x_ = 0;
 }
-inline float Position::x() const {
+inline float Position::x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.Position.x)
   return x_;
 }
-inline void Position::set_x(float value) {
-  
+inline void Position::set_x(float value)
+{
   x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.Position.x)
 }
 
 // float y = 2;
-inline void Position::clear_y() {
+inline void Position::clear_y()
+{
   y_ = 0;
 }
-inline float Position::y() const {
+inline float Position::y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.Position.y)
   return y_;
 }
-inline void Position::set_y(float value) {
-  
+inline void Position::set_y(float value)
+{
   y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.Position.y)
 }
 
 // float z = 3;
-inline void Position::clear_z() {
+inline void Position::clear_z()
+{
   z_ = 0;
 }
-inline float Position::z() const {
+inline float Position::z() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.Position.z)
   return z_;
 }
-inline void Position::set_z(float value) {
-  
+inline void Position::set_z(float value)
+{
   z_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.Position.z)
 }
@@ -2519,64 +2828,78 @@ inline void Position::set_z(float value) {
 // PayloadInformation
 
 // float payload_mass = 1;
-inline void PayloadInformation::clear_payload_mass() {
+inline void PayloadInformation::clear_payload_mass()
+{
   payload_mass_ = 0;
 }
-inline float PayloadInformation::payload_mass() const {
+inline float PayloadInformation::payload_mass() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.PayloadInformation.payload_mass)
   return payload_mass_;
 }
-inline void PayloadInformation::set_payload_mass(float value) {
-  
+inline void PayloadInformation::set_payload_mass(float value)
+{
   payload_mass_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.PayloadInformation.payload_mass)
 }
 
 // .Kinova.Api.ControlConfig.Position payload_mass_center = 2;
-inline bool PayloadInformation::has_payload_mass_center() const {
+inline bool PayloadInformation::has_payload_mass_center() const
+{
   return this != internal_default_instance() && payload_mass_center_ != NULL;
 }
-inline void PayloadInformation::clear_payload_mass_center() {
-  if (GetArenaNoVirtual() == NULL && payload_mass_center_ != NULL) {
+inline void PayloadInformation::clear_payload_mass_center()
+{
+  if (GetArenaNoVirtual() == NULL && payload_mass_center_ != NULL)
+  {
     delete payload_mass_center_;
   }
   payload_mass_center_ = NULL;
 }
-inline const ::Kinova::Api::ControlConfig::Position& PayloadInformation::payload_mass_center() const {
+inline const ::Kinova::Api::ControlConfig::Position& PayloadInformation::payload_mass_center() const
+{
   const ::Kinova::Api::ControlConfig::Position* p = payload_mass_center_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.PayloadInformation.payload_mass_center)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::ControlConfig::Position*>(
-      &::Kinova::Api::ControlConfig::_Position_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::ControlConfig::Position*>(
+                         &::Kinova::Api::ControlConfig::_Position_default_instance_);
 }
-inline ::Kinova::Api::ControlConfig::Position* PayloadInformation::release_payload_mass_center() {
+inline ::Kinova::Api::ControlConfig::Position* PayloadInformation::release_payload_mass_center()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.PayloadInformation.payload_mass_center)
-  
+
   ::Kinova::Api::ControlConfig::Position* temp = payload_mass_center_;
   payload_mass_center_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::ControlConfig::Position* PayloadInformation::mutable_payload_mass_center() {
-  
-  if (payload_mass_center_ == NULL) {
+inline ::Kinova::Api::ControlConfig::Position* PayloadInformation::mutable_payload_mass_center()
+{
+  if (payload_mass_center_ == NULL)
+  {
     payload_mass_center_ = new ::Kinova::Api::ControlConfig::Position;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.PayloadInformation.payload_mass_center)
   return payload_mass_center_;
 }
-inline void PayloadInformation::set_allocated_payload_mass_center(::Kinova::Api::ControlConfig::Position* payload_mass_center) {
+inline void
+PayloadInformation::set_allocated_payload_mass_center(::Kinova::Api::ControlConfig::Position* payload_mass_center)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete payload_mass_center_;
   }
-  if (payload_mass_center) {
+  if (payload_mass_center)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      payload_mass_center = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, payload_mass_center, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      payload_mass_center =
+          ::google::protobuf::internal::GetOwnedMessage(message_arena, payload_mass_center, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   payload_mass_center_ = payload_mass_center;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.PayloadInformation.payload_mass_center)
@@ -2587,85 +2910,97 @@ inline void PayloadInformation::set_allocated_payload_mass_center(::Kinova::Api:
 // CartesianTransform
 
 // float x = 1;
-inline void CartesianTransform::clear_x() {
+inline void CartesianTransform::clear_x()
+{
   x_ = 0;
 }
-inline float CartesianTransform::x() const {
+inline float CartesianTransform::x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.CartesianTransform.x)
   return x_;
 }
-inline void CartesianTransform::set_x(float value) {
-  
+inline void CartesianTransform::set_x(float value)
+{
   x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.CartesianTransform.x)
 }
 
 // float y = 2;
-inline void CartesianTransform::clear_y() {
+inline void CartesianTransform::clear_y()
+{
   y_ = 0;
 }
-inline float CartesianTransform::y() const {
+inline float CartesianTransform::y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.CartesianTransform.y)
   return y_;
 }
-inline void CartesianTransform::set_y(float value) {
-  
+inline void CartesianTransform::set_y(float value)
+{
   y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.CartesianTransform.y)
 }
 
 // float z = 3;
-inline void CartesianTransform::clear_z() {
+inline void CartesianTransform::clear_z()
+{
   z_ = 0;
 }
-inline float CartesianTransform::z() const {
+inline float CartesianTransform::z() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.CartesianTransform.z)
   return z_;
 }
-inline void CartesianTransform::set_z(float value) {
-  
+inline void CartesianTransform::set_z(float value)
+{
   z_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.CartesianTransform.z)
 }
 
 // float theta_x = 4;
-inline void CartesianTransform::clear_theta_x() {
+inline void CartesianTransform::clear_theta_x()
+{
   theta_x_ = 0;
 }
-inline float CartesianTransform::theta_x() const {
+inline float CartesianTransform::theta_x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.CartesianTransform.theta_x)
   return theta_x_;
 }
-inline void CartesianTransform::set_theta_x(float value) {
-  
+inline void CartesianTransform::set_theta_x(float value)
+{
   theta_x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.CartesianTransform.theta_x)
 }
 
 // float theta_y = 5;
-inline void CartesianTransform::clear_theta_y() {
+inline void CartesianTransform::clear_theta_y()
+{
   theta_y_ = 0;
 }
-inline float CartesianTransform::theta_y() const {
+inline float CartesianTransform::theta_y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.CartesianTransform.theta_y)
   return theta_y_;
 }
-inline void CartesianTransform::set_theta_y(float value) {
-  
+inline void CartesianTransform::set_theta_y(float value)
+{
   theta_y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.CartesianTransform.theta_y)
 }
 
 // float theta_z = 6;
-inline void CartesianTransform::clear_theta_z() {
+inline void CartesianTransform::clear_theta_z()
+{
   theta_z_ = 0;
 }
-inline float CartesianTransform::theta_z() const {
+inline float CartesianTransform::theta_z() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.CartesianTransform.theta_z)
   return theta_z_;
 }
-inline void CartesianTransform::set_theta_z(float value) {
-  
+inline void CartesianTransform::set_theta_z(float value)
+{
   theta_z_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.CartesianTransform.theta_z)
 }
@@ -2675,114 +3010,138 @@ inline void CartesianTransform::set_theta_z(float value) {
 // ToolConfiguration
 
 // .Kinova.Api.ControlConfig.CartesianTransform tool_transform = 1;
-inline bool ToolConfiguration::has_tool_transform() const {
+inline bool ToolConfiguration::has_tool_transform() const
+{
   return this != internal_default_instance() && tool_transform_ != NULL;
 }
-inline void ToolConfiguration::clear_tool_transform() {
-  if (GetArenaNoVirtual() == NULL && tool_transform_ != NULL) {
+inline void ToolConfiguration::clear_tool_transform()
+{
+  if (GetArenaNoVirtual() == NULL && tool_transform_ != NULL)
+  {
     delete tool_transform_;
   }
   tool_transform_ = NULL;
 }
-inline const ::Kinova::Api::ControlConfig::CartesianTransform& ToolConfiguration::tool_transform() const {
+inline const ::Kinova::Api::ControlConfig::CartesianTransform& ToolConfiguration::tool_transform() const
+{
   const ::Kinova::Api::ControlConfig::CartesianTransform* p = tool_transform_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ToolConfiguration.tool_transform)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::ControlConfig::CartesianTransform*>(
-      &::Kinova::Api::ControlConfig::_CartesianTransform_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::ControlConfig::CartesianTransform*>(
+                         &::Kinova::Api::ControlConfig::_CartesianTransform_default_instance_);
 }
-inline ::Kinova::Api::ControlConfig::CartesianTransform* ToolConfiguration::release_tool_transform() {
+inline ::Kinova::Api::ControlConfig::CartesianTransform* ToolConfiguration::release_tool_transform()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ToolConfiguration.tool_transform)
-  
+
   ::Kinova::Api::ControlConfig::CartesianTransform* temp = tool_transform_;
   tool_transform_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::ControlConfig::CartesianTransform* ToolConfiguration::mutable_tool_transform() {
-  
-  if (tool_transform_ == NULL) {
+inline ::Kinova::Api::ControlConfig::CartesianTransform* ToolConfiguration::mutable_tool_transform()
+{
+  if (tool_transform_ == NULL)
+  {
     tool_transform_ = new ::Kinova::Api::ControlConfig::CartesianTransform;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ToolConfiguration.tool_transform)
   return tool_transform_;
 }
-inline void ToolConfiguration::set_allocated_tool_transform(::Kinova::Api::ControlConfig::CartesianTransform* tool_transform) {
+inline void
+ToolConfiguration::set_allocated_tool_transform(::Kinova::Api::ControlConfig::CartesianTransform* tool_transform)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete tool_transform_;
   }
-  if (tool_transform) {
+  if (tool_transform)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      tool_transform = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, tool_transform, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      tool_transform = ::google::protobuf::internal::GetOwnedMessage(message_arena, tool_transform, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   tool_transform_ = tool_transform;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ToolConfiguration.tool_transform)
 }
 
 // float tool_mass = 2;
-inline void ToolConfiguration::clear_tool_mass() {
+inline void ToolConfiguration::clear_tool_mass()
+{
   tool_mass_ = 0;
 }
-inline float ToolConfiguration::tool_mass() const {
+inline float ToolConfiguration::tool_mass() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ToolConfiguration.tool_mass)
   return tool_mass_;
 }
-inline void ToolConfiguration::set_tool_mass(float value) {
-  
+inline void ToolConfiguration::set_tool_mass(float value)
+{
   tool_mass_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.ToolConfiguration.tool_mass)
 }
 
 // .Kinova.Api.ControlConfig.Position tool_mass_center = 3;
-inline bool ToolConfiguration::has_tool_mass_center() const {
+inline bool ToolConfiguration::has_tool_mass_center() const
+{
   return this != internal_default_instance() && tool_mass_center_ != NULL;
 }
-inline void ToolConfiguration::clear_tool_mass_center() {
-  if (GetArenaNoVirtual() == NULL && tool_mass_center_ != NULL) {
+inline void ToolConfiguration::clear_tool_mass_center()
+{
+  if (GetArenaNoVirtual() == NULL && tool_mass_center_ != NULL)
+  {
     delete tool_mass_center_;
   }
   tool_mass_center_ = NULL;
 }
-inline const ::Kinova::Api::ControlConfig::Position& ToolConfiguration::tool_mass_center() const {
+inline const ::Kinova::Api::ControlConfig::Position& ToolConfiguration::tool_mass_center() const
+{
   const ::Kinova::Api::ControlConfig::Position* p = tool_mass_center_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ToolConfiguration.tool_mass_center)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::ControlConfig::Position*>(
-      &::Kinova::Api::ControlConfig::_Position_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::ControlConfig::Position*>(
+                         &::Kinova::Api::ControlConfig::_Position_default_instance_);
 }
-inline ::Kinova::Api::ControlConfig::Position* ToolConfiguration::release_tool_mass_center() {
+inline ::Kinova::Api::ControlConfig::Position* ToolConfiguration::release_tool_mass_center()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ToolConfiguration.tool_mass_center)
-  
+
   ::Kinova::Api::ControlConfig::Position* temp = tool_mass_center_;
   tool_mass_center_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::ControlConfig::Position* ToolConfiguration::mutable_tool_mass_center() {
-  
-  if (tool_mass_center_ == NULL) {
+inline ::Kinova::Api::ControlConfig::Position* ToolConfiguration::mutable_tool_mass_center()
+{
+  if (tool_mass_center_ == NULL)
+  {
     tool_mass_center_ = new ::Kinova::Api::ControlConfig::Position;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ToolConfiguration.tool_mass_center)
   return tool_mass_center_;
 }
-inline void ToolConfiguration::set_allocated_tool_mass_center(::Kinova::Api::ControlConfig::Position* tool_mass_center) {
+inline void ToolConfiguration::set_allocated_tool_mass_center(::Kinova::Api::ControlConfig::Position* tool_mass_center)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete tool_mass_center_;
   }
-  if (tool_mass_center) {
+  if (tool_mass_center)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      tool_mass_center = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, tool_mass_center, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      tool_mass_center =
+          ::google::protobuf::internal::GetOwnedMessage(message_arena, tool_mass_center, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   tool_mass_center_ = tool_mass_center;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ToolConfiguration.tool_mass_center)
@@ -2793,146 +3152,173 @@ inline void ToolConfiguration::set_allocated_tool_mass_center(::Kinova::Api::Con
 // ControlConfigurationNotification
 
 // .Kinova.Api.ControlConfig.ControlConfigurationEvent event = 1;
-inline void ControlConfigurationNotification::clear_event() {
+inline void ControlConfigurationNotification::clear_event()
+{
   event_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlConfigurationEvent ControlConfigurationNotification::event() const {
+inline ::Kinova::Api::ControlConfig::ControlConfigurationEvent ControlConfigurationNotification::event() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlConfigurationNotification.event)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlConfigurationEvent >(event_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlConfigurationEvent>(event_);
 }
-inline void ControlConfigurationNotification::set_event(::Kinova::Api::ControlConfig::ControlConfigurationEvent value) {
-  
+inline void ControlConfigurationNotification::set_event(::Kinova::Api::ControlConfig::ControlConfigurationEvent value)
+{
   event_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.ControlConfigurationNotification.event)
 }
 
 // .Kinova.Api.Common.Timestamp timestamp = 2;
-inline bool ControlConfigurationNotification::has_timestamp() const {
+inline bool ControlConfigurationNotification::has_timestamp() const
+{
   return this != internal_default_instance() && timestamp_ != NULL;
 }
-inline const ::Kinova::Api::Common::Timestamp& ControlConfigurationNotification::timestamp() const {
+inline const ::Kinova::Api::Common::Timestamp& ControlConfigurationNotification::timestamp() const
+{
   const ::Kinova::Api::Common::Timestamp* p = timestamp_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlConfigurationNotification.timestamp)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::Timestamp*>(
-      &::Kinova::Api::Common::_Timestamp_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::Timestamp*>(
+                         &::Kinova::Api::Common::_Timestamp_default_instance_);
 }
-inline ::Kinova::Api::Common::Timestamp* ControlConfigurationNotification::release_timestamp() {
+inline ::Kinova::Api::Common::Timestamp* ControlConfigurationNotification::release_timestamp()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ControlConfigurationNotification.timestamp)
-  
+
   ::Kinova::Api::Common::Timestamp* temp = timestamp_;
   timestamp_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::Timestamp* ControlConfigurationNotification::mutable_timestamp() {
-  
-  if (timestamp_ == NULL) {
+inline ::Kinova::Api::Common::Timestamp* ControlConfigurationNotification::mutable_timestamp()
+{
+  if (timestamp_ == NULL)
+  {
     timestamp_ = new ::Kinova::Api::Common::Timestamp;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ControlConfigurationNotification.timestamp)
   return timestamp_;
 }
-inline void ControlConfigurationNotification::set_allocated_timestamp(::Kinova::Api::Common::Timestamp* timestamp) {
+inline void ControlConfigurationNotification::set_allocated_timestamp(::Kinova::Api::Common::Timestamp* timestamp)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(timestamp_);
   }
-  if (timestamp) {
+  if (timestamp)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      timestamp = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, timestamp, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      timestamp = ::google::protobuf::internal::GetOwnedMessage(message_arena, timestamp, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   timestamp_ = timestamp;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ControlConfigurationNotification.timestamp)
 }
 
 // .Kinova.Api.Common.UserProfileHandle user_handle = 3;
-inline bool ControlConfigurationNotification::has_user_handle() const {
+inline bool ControlConfigurationNotification::has_user_handle() const
+{
   return this != internal_default_instance() && user_handle_ != NULL;
 }
-inline const ::Kinova::Api::Common::UserProfileHandle& ControlConfigurationNotification::user_handle() const {
+inline const ::Kinova::Api::Common::UserProfileHandle& ControlConfigurationNotification::user_handle() const
+{
   const ::Kinova::Api::Common::UserProfileHandle* p = user_handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlConfigurationNotification.user_handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
-      &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
+                         &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::UserProfileHandle* ControlConfigurationNotification::release_user_handle() {
+inline ::Kinova::Api::Common::UserProfileHandle* ControlConfigurationNotification::release_user_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ControlConfigurationNotification.user_handle)
-  
+
   ::Kinova::Api::Common::UserProfileHandle* temp = user_handle_;
   user_handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::UserProfileHandle* ControlConfigurationNotification::mutable_user_handle() {
-  
-  if (user_handle_ == NULL) {
+inline ::Kinova::Api::Common::UserProfileHandle* ControlConfigurationNotification::mutable_user_handle()
+{
+  if (user_handle_ == NULL)
+  {
     user_handle_ = new ::Kinova::Api::Common::UserProfileHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ControlConfigurationNotification.user_handle)
   return user_handle_;
 }
-inline void ControlConfigurationNotification::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle) {
+inline void
+ControlConfigurationNotification::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(user_handle_);
   }
-  if (user_handle) {
+  if (user_handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      user_handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, user_handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      user_handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, user_handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   user_handle_ = user_handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ControlConfigurationNotification.user_handle)
 }
 
 // .Kinova.Api.Common.Connection connection = 4;
-inline bool ControlConfigurationNotification::has_connection() const {
+inline bool ControlConfigurationNotification::has_connection() const
+{
   return this != internal_default_instance() && connection_ != NULL;
 }
-inline const ::Kinova::Api::Common::Connection& ControlConfigurationNotification::connection() const {
+inline const ::Kinova::Api::Common::Connection& ControlConfigurationNotification::connection() const
+{
   const ::Kinova::Api::Common::Connection* p = connection_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlConfigurationNotification.connection)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::Connection*>(
-      &::Kinova::Api::Common::_Connection_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::Connection*>(
+                         &::Kinova::Api::Common::_Connection_default_instance_);
 }
-inline ::Kinova::Api::Common::Connection* ControlConfigurationNotification::release_connection() {
+inline ::Kinova::Api::Common::Connection* ControlConfigurationNotification::release_connection()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ControlConfigurationNotification.connection)
-  
+
   ::Kinova::Api::Common::Connection* temp = connection_;
   connection_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::Connection* ControlConfigurationNotification::mutable_connection() {
-  
-  if (connection_ == NULL) {
+inline ::Kinova::Api::Common::Connection* ControlConfigurationNotification::mutable_connection()
+{
+  if (connection_ == NULL)
+  {
     connection_ = new ::Kinova::Api::Common::Connection;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ControlConfigurationNotification.connection)
   return connection_;
 }
-inline void ControlConfigurationNotification::set_allocated_connection(::Kinova::Api::Common::Connection* connection) {
+inline void ControlConfigurationNotification::set_allocated_connection(::Kinova::Api::Common::Connection* connection)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(connection_);
   }
-  if (connection) {
+  if (connection)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      connection = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, connection, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      connection = ::google::protobuf::internal::GetOwnedMessage(message_arena, connection, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   connection_ = connection;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ControlConfigurationNotification.connection)
@@ -2943,15 +3329,17 @@ inline void ControlConfigurationNotification::set_allocated_connection(::Kinova:
 // CartesianReferenceFrameInfo
 
 // .Kinova.Api.Common.CartesianReferenceFrame reference_frame = 1;
-inline void CartesianReferenceFrameInfo::clear_reference_frame() {
+inline void CartesianReferenceFrameInfo::clear_reference_frame()
+{
   reference_frame_ = 0;
 }
-inline ::Kinova::Api::Common::CartesianReferenceFrame CartesianReferenceFrameInfo::reference_frame() const {
+inline ::Kinova::Api::Common::CartesianReferenceFrame CartesianReferenceFrameInfo::reference_frame() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.CartesianReferenceFrameInfo.reference_frame)
-  return static_cast< ::Kinova::Api::Common::CartesianReferenceFrame >(reference_frame_);
+  return static_cast< ::Kinova::Api::Common::CartesianReferenceFrame>(reference_frame_);
 }
-inline void CartesianReferenceFrameInfo::set_reference_frame(::Kinova::Api::Common::CartesianReferenceFrame value) {
-  
+inline void CartesianReferenceFrameInfo::set_reference_frame(::Kinova::Api::Common::CartesianReferenceFrame value)
+{
   reference_frame_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.CartesianReferenceFrameInfo.reference_frame)
 }
@@ -2961,29 +3349,33 @@ inline void CartesianReferenceFrameInfo::set_reference_frame(::Kinova::Api::Comm
 // TwistLinearSoftLimit
 
 // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
-inline void TwistLinearSoftLimit::clear_control_mode() {
+inline void TwistLinearSoftLimit::clear_control_mode()
+{
   control_mode_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlMode TwistLinearSoftLimit::control_mode() const {
+inline ::Kinova::Api::ControlConfig::ControlMode TwistLinearSoftLimit::control_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.TwistLinearSoftLimit.control_mode)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlMode >(control_mode_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlMode>(control_mode_);
 }
-inline void TwistLinearSoftLimit::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value) {
-  
+inline void TwistLinearSoftLimit::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value)
+{
   control_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.TwistLinearSoftLimit.control_mode)
 }
 
 // float twist_linear_soft_limit = 2;
-inline void TwistLinearSoftLimit::clear_twist_linear_soft_limit() {
+inline void TwistLinearSoftLimit::clear_twist_linear_soft_limit()
+{
   twist_linear_soft_limit_ = 0;
 }
-inline float TwistLinearSoftLimit::twist_linear_soft_limit() const {
+inline float TwistLinearSoftLimit::twist_linear_soft_limit() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.TwistLinearSoftLimit.twist_linear_soft_limit)
   return twist_linear_soft_limit_;
 }
-inline void TwistLinearSoftLimit::set_twist_linear_soft_limit(float value) {
-  
+inline void TwistLinearSoftLimit::set_twist_linear_soft_limit(float value)
+{
   twist_linear_soft_limit_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.TwistLinearSoftLimit.twist_linear_soft_limit)
 }
@@ -2993,29 +3385,33 @@ inline void TwistLinearSoftLimit::set_twist_linear_soft_limit(float value) {
 // TwistAngularSoftLimit
 
 // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
-inline void TwistAngularSoftLimit::clear_control_mode() {
+inline void TwistAngularSoftLimit::clear_control_mode()
+{
   control_mode_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlMode TwistAngularSoftLimit::control_mode() const {
+inline ::Kinova::Api::ControlConfig::ControlMode TwistAngularSoftLimit::control_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.TwistAngularSoftLimit.control_mode)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlMode >(control_mode_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlMode>(control_mode_);
 }
-inline void TwistAngularSoftLimit::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value) {
-  
+inline void TwistAngularSoftLimit::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value)
+{
   control_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.TwistAngularSoftLimit.control_mode)
 }
 
 // float twist_angular_soft_limit = 2;
-inline void TwistAngularSoftLimit::clear_twist_angular_soft_limit() {
+inline void TwistAngularSoftLimit::clear_twist_angular_soft_limit()
+{
   twist_angular_soft_limit_ = 0;
 }
-inline float TwistAngularSoftLimit::twist_angular_soft_limit() const {
+inline float TwistAngularSoftLimit::twist_angular_soft_limit() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.TwistAngularSoftLimit.twist_angular_soft_limit)
   return twist_angular_soft_limit_;
 }
-inline void TwistAngularSoftLimit::set_twist_angular_soft_limit(float value) {
-  
+inline void TwistAngularSoftLimit::set_twist_angular_soft_limit(float value)
+{
   twist_angular_soft_limit_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.TwistAngularSoftLimit.twist_angular_soft_limit)
 }
@@ -3025,45 +3421,52 @@ inline void TwistAngularSoftLimit::set_twist_angular_soft_limit(float value) {
 // JointSpeedSoftLimits
 
 // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
-inline void JointSpeedSoftLimits::clear_control_mode() {
+inline void JointSpeedSoftLimits::clear_control_mode()
+{
   control_mode_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlMode JointSpeedSoftLimits::control_mode() const {
+inline ::Kinova::Api::ControlConfig::ControlMode JointSpeedSoftLimits::control_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.JointSpeedSoftLimits.control_mode)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlMode >(control_mode_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlMode>(control_mode_);
 }
-inline void JointSpeedSoftLimits::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value) {
-  
+inline void JointSpeedSoftLimits::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value)
+{
   control_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.JointSpeedSoftLimits.control_mode)
 }
 
 // repeated float joint_speed_soft_limits = 2;
-inline int JointSpeedSoftLimits::joint_speed_soft_limits_size() const {
+inline int JointSpeedSoftLimits::joint_speed_soft_limits_size() const
+{
   return joint_speed_soft_limits_.size();
 }
-inline void JointSpeedSoftLimits::clear_joint_speed_soft_limits() {
+inline void JointSpeedSoftLimits::clear_joint_speed_soft_limits()
+{
   joint_speed_soft_limits_.Clear();
 }
-inline float JointSpeedSoftLimits::joint_speed_soft_limits(int index) const {
+inline float JointSpeedSoftLimits::joint_speed_soft_limits(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.JointSpeedSoftLimits.joint_speed_soft_limits)
   return joint_speed_soft_limits_.Get(index);
 }
-inline void JointSpeedSoftLimits::set_joint_speed_soft_limits(int index, float value) {
+inline void JointSpeedSoftLimits::set_joint_speed_soft_limits(int index, float value)
+{
   joint_speed_soft_limits_.Set(index, value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.JointSpeedSoftLimits.joint_speed_soft_limits)
 }
-inline void JointSpeedSoftLimits::add_joint_speed_soft_limits(float value) {
+inline void JointSpeedSoftLimits::add_joint_speed_soft_limits(float value)
+{
   joint_speed_soft_limits_.Add(value);
   // @@protoc_insertion_point(field_add:Kinova.Api.ControlConfig.JointSpeedSoftLimits.joint_speed_soft_limits)
 }
-inline const ::google::protobuf::RepeatedField< float >&
-JointSpeedSoftLimits::joint_speed_soft_limits() const {
+inline const ::google::protobuf::RepeatedField<float>& JointSpeedSoftLimits::joint_speed_soft_limits() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.ControlConfig.JointSpeedSoftLimits.joint_speed_soft_limits)
   return joint_speed_soft_limits_;
 }
-inline ::google::protobuf::RepeatedField< float >*
-JointSpeedSoftLimits::mutable_joint_speed_soft_limits() {
+inline ::google::protobuf::RepeatedField<float>* JointSpeedSoftLimits::mutable_joint_speed_soft_limits()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.ControlConfig.JointSpeedSoftLimits.joint_speed_soft_limits)
   return &joint_speed_soft_limits_;
 }
@@ -3073,45 +3476,53 @@ JointSpeedSoftLimits::mutable_joint_speed_soft_limits() {
 // JointAccelerationSoftLimits
 
 // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
-inline void JointAccelerationSoftLimits::clear_control_mode() {
+inline void JointAccelerationSoftLimits::clear_control_mode()
+{
   control_mode_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlMode JointAccelerationSoftLimits::control_mode() const {
+inline ::Kinova::Api::ControlConfig::ControlMode JointAccelerationSoftLimits::control_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.JointAccelerationSoftLimits.control_mode)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlMode >(control_mode_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlMode>(control_mode_);
 }
-inline void JointAccelerationSoftLimits::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value) {
-  
+inline void JointAccelerationSoftLimits::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value)
+{
   control_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.JointAccelerationSoftLimits.control_mode)
 }
 
 // repeated float joint_acceleration_soft_limits = 2;
-inline int JointAccelerationSoftLimits::joint_acceleration_soft_limits_size() const {
+inline int JointAccelerationSoftLimits::joint_acceleration_soft_limits_size() const
+{
   return joint_acceleration_soft_limits_.size();
 }
-inline void JointAccelerationSoftLimits::clear_joint_acceleration_soft_limits() {
+inline void JointAccelerationSoftLimits::clear_joint_acceleration_soft_limits()
+{
   joint_acceleration_soft_limits_.Clear();
 }
-inline float JointAccelerationSoftLimits::joint_acceleration_soft_limits(int index) const {
+inline float JointAccelerationSoftLimits::joint_acceleration_soft_limits(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.JointAccelerationSoftLimits.joint_acceleration_soft_limits)
   return joint_acceleration_soft_limits_.Get(index);
 }
-inline void JointAccelerationSoftLimits::set_joint_acceleration_soft_limits(int index, float value) {
+inline void JointAccelerationSoftLimits::set_joint_acceleration_soft_limits(int index, float value)
+{
   joint_acceleration_soft_limits_.Set(index, value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.JointAccelerationSoftLimits.joint_acceleration_soft_limits)
 }
-inline void JointAccelerationSoftLimits::add_joint_acceleration_soft_limits(float value) {
+inline void JointAccelerationSoftLimits::add_joint_acceleration_soft_limits(float value)
+{
   joint_acceleration_soft_limits_.Add(value);
   // @@protoc_insertion_point(field_add:Kinova.Api.ControlConfig.JointAccelerationSoftLimits.joint_acceleration_soft_limits)
 }
-inline const ::google::protobuf::RepeatedField< float >&
-JointAccelerationSoftLimits::joint_acceleration_soft_limits() const {
+inline const ::google::protobuf::RepeatedField<float>&
+JointAccelerationSoftLimits::joint_acceleration_soft_limits() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.ControlConfig.JointAccelerationSoftLimits.joint_acceleration_soft_limits)
   return joint_acceleration_soft_limits_;
 }
-inline ::google::protobuf::RepeatedField< float >*
-JointAccelerationSoftLimits::mutable_joint_acceleration_soft_limits() {
+inline ::google::protobuf::RepeatedField<float>* JointAccelerationSoftLimits::mutable_joint_acceleration_soft_limits()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.ControlConfig.JointAccelerationSoftLimits.joint_acceleration_soft_limits)
   return &joint_acceleration_soft_limits_;
 }
@@ -3121,103 +3532,119 @@ JointAccelerationSoftLimits::mutable_joint_acceleration_soft_limits() {
 // KinematicLimits
 
 // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
-inline void KinematicLimits::clear_control_mode() {
+inline void KinematicLimits::clear_control_mode()
+{
   control_mode_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlMode KinematicLimits::control_mode() const {
+inline ::Kinova::Api::ControlConfig::ControlMode KinematicLimits::control_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.KinematicLimits.control_mode)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlMode >(control_mode_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlMode>(control_mode_);
 }
-inline void KinematicLimits::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value) {
-  
+inline void KinematicLimits::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value)
+{
   control_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.KinematicLimits.control_mode)
 }
 
 // float twist_linear = 2;
-inline void KinematicLimits::clear_twist_linear() {
+inline void KinematicLimits::clear_twist_linear()
+{
   twist_linear_ = 0;
 }
-inline float KinematicLimits::twist_linear() const {
+inline float KinematicLimits::twist_linear() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.KinematicLimits.twist_linear)
   return twist_linear_;
 }
-inline void KinematicLimits::set_twist_linear(float value) {
-  
+inline void KinematicLimits::set_twist_linear(float value)
+{
   twist_linear_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.KinematicLimits.twist_linear)
 }
 
 // float twist_angular = 3;
-inline void KinematicLimits::clear_twist_angular() {
+inline void KinematicLimits::clear_twist_angular()
+{
   twist_angular_ = 0;
 }
-inline float KinematicLimits::twist_angular() const {
+inline float KinematicLimits::twist_angular() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.KinematicLimits.twist_angular)
   return twist_angular_;
 }
-inline void KinematicLimits::set_twist_angular(float value) {
-  
+inline void KinematicLimits::set_twist_angular(float value)
+{
   twist_angular_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.KinematicLimits.twist_angular)
 }
 
 // repeated float joint_speed_limits = 4;
-inline int KinematicLimits::joint_speed_limits_size() const {
+inline int KinematicLimits::joint_speed_limits_size() const
+{
   return joint_speed_limits_.size();
 }
-inline void KinematicLimits::clear_joint_speed_limits() {
+inline void KinematicLimits::clear_joint_speed_limits()
+{
   joint_speed_limits_.Clear();
 }
-inline float KinematicLimits::joint_speed_limits(int index) const {
+inline float KinematicLimits::joint_speed_limits(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.KinematicLimits.joint_speed_limits)
   return joint_speed_limits_.Get(index);
 }
-inline void KinematicLimits::set_joint_speed_limits(int index, float value) {
+inline void KinematicLimits::set_joint_speed_limits(int index, float value)
+{
   joint_speed_limits_.Set(index, value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.KinematicLimits.joint_speed_limits)
 }
-inline void KinematicLimits::add_joint_speed_limits(float value) {
+inline void KinematicLimits::add_joint_speed_limits(float value)
+{
   joint_speed_limits_.Add(value);
   // @@protoc_insertion_point(field_add:Kinova.Api.ControlConfig.KinematicLimits.joint_speed_limits)
 }
-inline const ::google::protobuf::RepeatedField< float >&
-KinematicLimits::joint_speed_limits() const {
+inline const ::google::protobuf::RepeatedField<float>& KinematicLimits::joint_speed_limits() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.ControlConfig.KinematicLimits.joint_speed_limits)
   return joint_speed_limits_;
 }
-inline ::google::protobuf::RepeatedField< float >*
-KinematicLimits::mutable_joint_speed_limits() {
+inline ::google::protobuf::RepeatedField<float>* KinematicLimits::mutable_joint_speed_limits()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.ControlConfig.KinematicLimits.joint_speed_limits)
   return &joint_speed_limits_;
 }
 
 // repeated float joint_acceleration_limits = 5;
-inline int KinematicLimits::joint_acceleration_limits_size() const {
+inline int KinematicLimits::joint_acceleration_limits_size() const
+{
   return joint_acceleration_limits_.size();
 }
-inline void KinematicLimits::clear_joint_acceleration_limits() {
+inline void KinematicLimits::clear_joint_acceleration_limits()
+{
   joint_acceleration_limits_.Clear();
 }
-inline float KinematicLimits::joint_acceleration_limits(int index) const {
+inline float KinematicLimits::joint_acceleration_limits(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.KinematicLimits.joint_acceleration_limits)
   return joint_acceleration_limits_.Get(index);
 }
-inline void KinematicLimits::set_joint_acceleration_limits(int index, float value) {
+inline void KinematicLimits::set_joint_acceleration_limits(int index, float value)
+{
   joint_acceleration_limits_.Set(index, value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.KinematicLimits.joint_acceleration_limits)
 }
-inline void KinematicLimits::add_joint_acceleration_limits(float value) {
+inline void KinematicLimits::add_joint_acceleration_limits(float value)
+{
   joint_acceleration_limits_.Add(value);
   // @@protoc_insertion_point(field_add:Kinova.Api.ControlConfig.KinematicLimits.joint_acceleration_limits)
 }
-inline const ::google::protobuf::RepeatedField< float >&
-KinematicLimits::joint_acceleration_limits() const {
+inline const ::google::protobuf::RepeatedField<float>& KinematicLimits::joint_acceleration_limits() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.ControlConfig.KinematicLimits.joint_acceleration_limits)
   return joint_acceleration_limits_;
 }
-inline ::google::protobuf::RepeatedField< float >*
-KinematicLimits::mutable_joint_acceleration_limits() {
+inline ::google::protobuf::RepeatedField<float>* KinematicLimits::mutable_joint_acceleration_limits()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.ControlConfig.KinematicLimits.joint_acceleration_limits)
   return &joint_acceleration_limits_;
 }
@@ -3227,31 +3654,38 @@ KinematicLimits::mutable_joint_acceleration_limits() {
 // KinematicLimitsList
 
 // repeated .Kinova.Api.ControlConfig.KinematicLimits kinematic_limits_list = 1;
-inline int KinematicLimitsList::kinematic_limits_list_size() const {
+inline int KinematicLimitsList::kinematic_limits_list_size() const
+{
   return kinematic_limits_list_.size();
 }
-inline void KinematicLimitsList::clear_kinematic_limits_list() {
+inline void KinematicLimitsList::clear_kinematic_limits_list()
+{
   kinematic_limits_list_.Clear();
 }
-inline const ::Kinova::Api::ControlConfig::KinematicLimits& KinematicLimitsList::kinematic_limits_list(int index) const {
+inline const ::Kinova::Api::ControlConfig::KinematicLimits& KinematicLimitsList::kinematic_limits_list(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.KinematicLimitsList.kinematic_limits_list)
   return kinematic_limits_list_.Get(index);
 }
-inline ::Kinova::Api::ControlConfig::KinematicLimits* KinematicLimitsList::mutable_kinematic_limits_list(int index) {
+inline ::Kinova::Api::ControlConfig::KinematicLimits* KinematicLimitsList::mutable_kinematic_limits_list(int index)
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.KinematicLimitsList.kinematic_limits_list)
   return kinematic_limits_list_.Mutable(index);
 }
-inline ::Kinova::Api::ControlConfig::KinematicLimits* KinematicLimitsList::add_kinematic_limits_list() {
+inline ::Kinova::Api::ControlConfig::KinematicLimits* KinematicLimitsList::add_kinematic_limits_list()
+{
   // @@protoc_insertion_point(field_add:Kinova.Api.ControlConfig.KinematicLimitsList.kinematic_limits_list)
   return kinematic_limits_list_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits >*
-KinematicLimitsList::mutable_kinematic_limits_list() {
+inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits>*
+KinematicLimitsList::mutable_kinematic_limits_list()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.ControlConfig.KinematicLimitsList.kinematic_limits_list)
   return &kinematic_limits_list_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits >&
-KinematicLimitsList::kinematic_limits_list() const {
+inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::ControlConfig::KinematicLimits>&
+KinematicLimitsList::kinematic_limits_list() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.ControlConfig.KinematicLimitsList.kinematic_limits_list)
   return kinematic_limits_list_;
 }
@@ -3261,59 +3695,68 @@ KinematicLimitsList::kinematic_limits_list() const {
 // DesiredSpeeds
 
 // float linear = 1;
-inline void DesiredSpeeds::clear_linear() {
+inline void DesiredSpeeds::clear_linear()
+{
   linear_ = 0;
 }
-inline float DesiredSpeeds::linear() const {
+inline float DesiredSpeeds::linear() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.DesiredSpeeds.linear)
   return linear_;
 }
-inline void DesiredSpeeds::set_linear(float value) {
-  
+inline void DesiredSpeeds::set_linear(float value)
+{
   linear_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.DesiredSpeeds.linear)
 }
 
 // float angular = 2;
-inline void DesiredSpeeds::clear_angular() {
+inline void DesiredSpeeds::clear_angular()
+{
   angular_ = 0;
 }
-inline float DesiredSpeeds::angular() const {
+inline float DesiredSpeeds::angular() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.DesiredSpeeds.angular)
   return angular_;
 }
-inline void DesiredSpeeds::set_angular(float value) {
-  
+inline void DesiredSpeeds::set_angular(float value)
+{
   angular_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.DesiredSpeeds.angular)
 }
 
 // repeated float joint_speed = 3;
-inline int DesiredSpeeds::joint_speed_size() const {
+inline int DesiredSpeeds::joint_speed_size() const
+{
   return joint_speed_.size();
 }
-inline void DesiredSpeeds::clear_joint_speed() {
+inline void DesiredSpeeds::clear_joint_speed()
+{
   joint_speed_.Clear();
 }
-inline float DesiredSpeeds::joint_speed(int index) const {
+inline float DesiredSpeeds::joint_speed(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.DesiredSpeeds.joint_speed)
   return joint_speed_.Get(index);
 }
-inline void DesiredSpeeds::set_joint_speed(int index, float value) {
+inline void DesiredSpeeds::set_joint_speed(int index, float value)
+{
   joint_speed_.Set(index, value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.DesiredSpeeds.joint_speed)
 }
-inline void DesiredSpeeds::add_joint_speed(float value) {
+inline void DesiredSpeeds::add_joint_speed(float value)
+{
   joint_speed_.Add(value);
   // @@protoc_insertion_point(field_add:Kinova.Api.ControlConfig.DesiredSpeeds.joint_speed)
 }
-inline const ::google::protobuf::RepeatedField< float >&
-DesiredSpeeds::joint_speed() const {
+inline const ::google::protobuf::RepeatedField<float>& DesiredSpeeds::joint_speed() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.ControlConfig.DesiredSpeeds.joint_speed)
   return joint_speed_;
 }
-inline ::google::protobuf::RepeatedField< float >*
-DesiredSpeeds::mutable_joint_speed() {
+inline ::google::protobuf::RepeatedField<float>* DesiredSpeeds::mutable_joint_speed()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.ControlConfig.DesiredSpeeds.joint_speed)
   return &joint_speed_;
 }
@@ -3323,15 +3766,17 @@ DesiredSpeeds::mutable_joint_speed() {
 // LinearTwist
 
 // float linear = 1;
-inline void LinearTwist::clear_linear() {
+inline void LinearTwist::clear_linear()
+{
   linear_ = 0;
 }
-inline float LinearTwist::linear() const {
+inline float LinearTwist::linear() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.LinearTwist.linear)
   return linear_;
 }
-inline void LinearTwist::set_linear(float value) {
-  
+inline void LinearTwist::set_linear(float value)
+{
   linear_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.LinearTwist.linear)
 }
@@ -3341,15 +3786,17 @@ inline void LinearTwist::set_linear(float value) {
 // AngularTwist
 
 // float angular = 1;
-inline void AngularTwist::clear_angular() {
+inline void AngularTwist::clear_angular()
+{
   angular_ = 0;
 }
-inline float AngularTwist::angular() const {
+inline float AngularTwist::angular() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.AngularTwist.angular)
   return angular_;
 }
-inline void AngularTwist::set_angular(float value) {
-  
+inline void AngularTwist::set_angular(float value)
+{
   angular_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.AngularTwist.angular)
 }
@@ -3359,31 +3806,36 @@ inline void AngularTwist::set_angular(float value) {
 // JointSpeeds
 
 // repeated float joint_speed = 1;
-inline int JointSpeeds::joint_speed_size() const {
+inline int JointSpeeds::joint_speed_size() const
+{
   return joint_speed_.size();
 }
-inline void JointSpeeds::clear_joint_speed() {
+inline void JointSpeeds::clear_joint_speed()
+{
   joint_speed_.Clear();
 }
-inline float JointSpeeds::joint_speed(int index) const {
+inline float JointSpeeds::joint_speed(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.JointSpeeds.joint_speed)
   return joint_speed_.Get(index);
 }
-inline void JointSpeeds::set_joint_speed(int index, float value) {
+inline void JointSpeeds::set_joint_speed(int index, float value)
+{
   joint_speed_.Set(index, value);
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.JointSpeeds.joint_speed)
 }
-inline void JointSpeeds::add_joint_speed(float value) {
+inline void JointSpeeds::add_joint_speed(float value)
+{
   joint_speed_.Add(value);
   // @@protoc_insertion_point(field_add:Kinova.Api.ControlConfig.JointSpeeds.joint_speed)
 }
-inline const ::google::protobuf::RepeatedField< float >&
-JointSpeeds::joint_speed() const {
+inline const ::google::protobuf::RepeatedField<float>& JointSpeeds::joint_speed() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.ControlConfig.JointSpeeds.joint_speed)
   return joint_speed_;
 }
-inline ::google::protobuf::RepeatedField< float >*
-JointSpeeds::mutable_joint_speed() {
+inline ::google::protobuf::RepeatedField<float>* JointSpeeds::mutable_joint_speed()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.ControlConfig.JointSpeeds.joint_speed)
   return &joint_speed_;
 }
@@ -3393,15 +3845,17 @@ JointSpeeds::mutable_joint_speed() {
 // ControlModeInformation
 
 // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
-inline void ControlModeInformation::clear_control_mode() {
+inline void ControlModeInformation::clear_control_mode()
+{
   control_mode_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlMode ControlModeInformation::control_mode() const {
+inline ::Kinova::Api::ControlConfig::ControlMode ControlModeInformation::control_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlModeInformation.control_mode)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlMode >(control_mode_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlMode>(control_mode_);
 }
-inline void ControlModeInformation::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value) {
-  
+inline void ControlModeInformation::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value)
+{
   control_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.ControlModeInformation.control_mode)
 }
@@ -3411,153 +3865,179 @@ inline void ControlModeInformation::set_control_mode(::Kinova::Api::ControlConfi
 // ControlModeNotification
 
 // .Kinova.Api.ControlConfig.ControlMode control_mode = 1;
-inline void ControlModeNotification::clear_control_mode() {
+inline void ControlModeNotification::clear_control_mode()
+{
   control_mode_ = 0;
 }
-inline ::Kinova::Api::ControlConfig::ControlMode ControlModeNotification::control_mode() const {
+inline ::Kinova::Api::ControlConfig::ControlMode ControlModeNotification::control_mode() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlModeNotification.control_mode)
-  return static_cast< ::Kinova::Api::ControlConfig::ControlMode >(control_mode_);
+  return static_cast< ::Kinova::Api::ControlConfig::ControlMode>(control_mode_);
 }
-inline void ControlModeNotification::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value) {
-  
+inline void ControlModeNotification::set_control_mode(::Kinova::Api::ControlConfig::ControlMode value)
+{
   control_mode_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.ControlConfig.ControlModeNotification.control_mode)
 }
 
 // .Kinova.Api.Common.Timestamp timestamp = 2;
-inline bool ControlModeNotification::has_timestamp() const {
+inline bool ControlModeNotification::has_timestamp() const
+{
   return this != internal_default_instance() && timestamp_ != NULL;
 }
-inline const ::Kinova::Api::Common::Timestamp& ControlModeNotification::timestamp() const {
+inline const ::Kinova::Api::Common::Timestamp& ControlModeNotification::timestamp() const
+{
   const ::Kinova::Api::Common::Timestamp* p = timestamp_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlModeNotification.timestamp)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::Timestamp*>(
-      &::Kinova::Api::Common::_Timestamp_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::Timestamp*>(
+                         &::Kinova::Api::Common::_Timestamp_default_instance_);
 }
-inline ::Kinova::Api::Common::Timestamp* ControlModeNotification::release_timestamp() {
+inline ::Kinova::Api::Common::Timestamp* ControlModeNotification::release_timestamp()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ControlModeNotification.timestamp)
-  
+
   ::Kinova::Api::Common::Timestamp* temp = timestamp_;
   timestamp_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::Timestamp* ControlModeNotification::mutable_timestamp() {
-  
-  if (timestamp_ == NULL) {
+inline ::Kinova::Api::Common::Timestamp* ControlModeNotification::mutable_timestamp()
+{
+  if (timestamp_ == NULL)
+  {
     timestamp_ = new ::Kinova::Api::Common::Timestamp;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ControlModeNotification.timestamp)
   return timestamp_;
 }
-inline void ControlModeNotification::set_allocated_timestamp(::Kinova::Api::Common::Timestamp* timestamp) {
+inline void ControlModeNotification::set_allocated_timestamp(::Kinova::Api::Common::Timestamp* timestamp)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(timestamp_);
   }
-  if (timestamp) {
+  if (timestamp)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      timestamp = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, timestamp, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      timestamp = ::google::protobuf::internal::GetOwnedMessage(message_arena, timestamp, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   timestamp_ = timestamp;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ControlModeNotification.timestamp)
 }
 
 // .Kinova.Api.Common.UserProfileHandle user_handle = 3;
-inline bool ControlModeNotification::has_user_handle() const {
+inline bool ControlModeNotification::has_user_handle() const
+{
   return this != internal_default_instance() && user_handle_ != NULL;
 }
-inline const ::Kinova::Api::Common::UserProfileHandle& ControlModeNotification::user_handle() const {
+inline const ::Kinova::Api::Common::UserProfileHandle& ControlModeNotification::user_handle() const
+{
   const ::Kinova::Api::Common::UserProfileHandle* p = user_handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlModeNotification.user_handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
-      &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
+                         &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::UserProfileHandle* ControlModeNotification::release_user_handle() {
+inline ::Kinova::Api::Common::UserProfileHandle* ControlModeNotification::release_user_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ControlModeNotification.user_handle)
-  
+
   ::Kinova::Api::Common::UserProfileHandle* temp = user_handle_;
   user_handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::UserProfileHandle* ControlModeNotification::mutable_user_handle() {
-  
-  if (user_handle_ == NULL) {
+inline ::Kinova::Api::Common::UserProfileHandle* ControlModeNotification::mutable_user_handle()
+{
+  if (user_handle_ == NULL)
+  {
     user_handle_ = new ::Kinova::Api::Common::UserProfileHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ControlModeNotification.user_handle)
   return user_handle_;
 }
-inline void ControlModeNotification::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle) {
+inline void ControlModeNotification::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(user_handle_);
   }
-  if (user_handle) {
+  if (user_handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      user_handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, user_handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      user_handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, user_handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   user_handle_ = user_handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ControlModeNotification.user_handle)
 }
 
 // .Kinova.Api.Common.Connection connection = 4;
-inline bool ControlModeNotification::has_connection() const {
+inline bool ControlModeNotification::has_connection() const
+{
   return this != internal_default_instance() && connection_ != NULL;
 }
-inline const ::Kinova::Api::Common::Connection& ControlModeNotification::connection() const {
+inline const ::Kinova::Api::Common::Connection& ControlModeNotification::connection() const
+{
   const ::Kinova::Api::Common::Connection* p = connection_;
   // @@protoc_insertion_point(field_get:Kinova.Api.ControlConfig.ControlModeNotification.connection)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::Connection*>(
-      &::Kinova::Api::Common::_Connection_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::Connection*>(
+                         &::Kinova::Api::Common::_Connection_default_instance_);
 }
-inline ::Kinova::Api::Common::Connection* ControlModeNotification::release_connection() {
+inline ::Kinova::Api::Common::Connection* ControlModeNotification::release_connection()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.ControlConfig.ControlModeNotification.connection)
-  
+
   ::Kinova::Api::Common::Connection* temp = connection_;
   connection_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::Connection* ControlModeNotification::mutable_connection() {
-  
-  if (connection_ == NULL) {
+inline ::Kinova::Api::Common::Connection* ControlModeNotification::mutable_connection()
+{
+  if (connection_ == NULL)
+  {
     connection_ = new ::Kinova::Api::Common::Connection;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.ControlConfig.ControlModeNotification.connection)
   return connection_;
 }
-inline void ControlModeNotification::set_allocated_connection(::Kinova::Api::Common::Connection* connection) {
+inline void ControlModeNotification::set_allocated_connection(::Kinova::Api::Common::Connection* connection)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(connection_);
   }
-  if (connection) {
+  if (connection)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      connection = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, connection, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      connection = ::google::protobuf::internal::GetOwnedMessage(message_arena, connection, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   connection_ = connection;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.ControlConfig.ControlModeNotification.connection)
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
@@ -3595,29 +4075,41 @@ inline void ControlModeNotification::set_allocated_connection(::Kinova::Api::Com
 
 // -------------------------------------------------------------------
 
-
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace ControlConfig
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::ControlConfig::ServiceVersion> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ControlConfig::ServiceVersion>() {
+struct is_proto_enum< ::Kinova::Api::ControlConfig::ServiceVersion> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ControlConfig::ServiceVersion>()
+{
   return ::Kinova::Api::ControlConfig::ServiceVersion_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ControlConfig::ControlConfigurationEvent> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ControlConfig::ControlConfigurationEvent>() {
+struct is_proto_enum< ::Kinova::Api::ControlConfig::ControlConfigurationEvent> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ControlConfig::ControlConfigurationEvent>()
+{
   return ::Kinova::Api::ControlConfig::ControlConfigurationEvent_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::ControlConfig::ControlMode> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ControlConfig::ControlMode>() {
+struct is_proto_enum< ::Kinova::Api::ControlConfig::ControlMode> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ControlConfig::ControlMode>()
+{
   return ::Kinova::Api::ControlConfig::ControlMode_descriptor();
 }
 

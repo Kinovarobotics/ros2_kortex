@@ -27,14 +27,16 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_Common_2eproto {
+namespace protobuf_Common_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[12];
@@ -67,7 +69,8 @@ void InitDefaultsUARTDeviceIdentificationImpl();
 void InitDefaultsUARTDeviceIdentification();
 void InitDefaultsCountryCodeImpl();
 void InitDefaultsCountryCode();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsDeviceHandle();
   InitDefaultsEmpty();
   InitDefaultsNotificationOptions();
@@ -82,9 +85,12 @@ inline void InitDefaults() {
   InitDefaultsCountryCode();
 }
 }  // namespace protobuf_Common_2eproto
-namespace Kinova {
-namespace Api {
-namespace Common {
+namespace Kinova
+{
+namespace Api
+{
+namespace Common
+{
 class Connection;
 class ConnectionDefaultTypeInternal;
 extern ConnectionDefaultTypeInternal _Connection_default_instance_;
@@ -124,11 +130,14 @@ extern UserProfileHandleDefaultTypeInternal _UserProfileHandle_default_instance_
 }  // namespace Common
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace Common {
-
-enum DeviceTypes {
+namespace Kinova
+{
+namespace Api
+{
+namespace Common
+{
+enum DeviceTypes
+{
   UNSPECIFIED_DEVICE_TYPE = 0,
   BASE = 1,
   VISION = 2,
@@ -147,16 +156,16 @@ const DeviceTypes DeviceTypes_MAX = XBIG_ACTUATOR;
 const int DeviceTypes_ARRAYSIZE = DeviceTypes_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* DeviceTypes_descriptor();
-inline const ::std::string& DeviceTypes_Name(DeviceTypes value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    DeviceTypes_descriptor(), value);
+inline const ::std::string& DeviceTypes_Name(DeviceTypes value)
+{
+  return ::google::protobuf::internal::NameOfEnum(DeviceTypes_descriptor(), value);
 }
-inline bool DeviceTypes_Parse(
-    const ::std::string& name, DeviceTypes* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<DeviceTypes>(
-    DeviceTypes_descriptor(), name, value);
+inline bool DeviceTypes_Parse(const ::std::string& name, DeviceTypes* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<DeviceTypes>(DeviceTypes_descriptor(), name, value);
 }
-enum SafetyStatusValue {
+enum SafetyStatusValue
+{
   SAFETY_STATUS_UNSPECIFIED = 0,
   SAFETY_STATUS_WARNING = 1,
   SAFETY_STATUS_ERROR = 2,
@@ -170,16 +179,16 @@ const SafetyStatusValue SafetyStatusValue_MAX = SAFETY_STATUS_NORMAL;
 const int SafetyStatusValue_ARRAYSIZE = SafetyStatusValue_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* SafetyStatusValue_descriptor();
-inline const ::std::string& SafetyStatusValue_Name(SafetyStatusValue value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    SafetyStatusValue_descriptor(), value);
+inline const ::std::string& SafetyStatusValue_Name(SafetyStatusValue value)
+{
+  return ::google::protobuf::internal::NameOfEnum(SafetyStatusValue_descriptor(), value);
 }
-inline bool SafetyStatusValue_Parse(
-    const ::std::string& name, SafetyStatusValue* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<SafetyStatusValue>(
-    SafetyStatusValue_descriptor(), name, value);
+inline bool SafetyStatusValue_Parse(const ::std::string& name, SafetyStatusValue* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<SafetyStatusValue>(SafetyStatusValue_descriptor(), name, value);
 }
-enum Permission {
+enum Permission
+{
   NO_PERMISSION = 0,
   READ_PERMISSION = 1,
   UPDATE_PERMISSION = 2,
@@ -193,16 +202,16 @@ const Permission Permission_MAX = DELETE_PERMISSION;
 const int Permission_ARRAYSIZE = Permission_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Permission_descriptor();
-inline const ::std::string& Permission_Name(Permission value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Permission_descriptor(), value);
+inline const ::std::string& Permission_Name(Permission value)
+{
+  return ::google::protobuf::internal::NameOfEnum(Permission_descriptor(), value);
 }
-inline bool Permission_Parse(
-    const ::std::string& name, Permission* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Permission>(
-    Permission_descriptor(), name, value);
+inline bool Permission_Parse(const ::std::string& name, Permission* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<Permission>(Permission_descriptor(), name, value);
 }
-enum NotificationType {
+enum NotificationType
+{
   NOTIFICATION_TYPE_UNSPECIFIED = 0,
   NOTIFICATION_TYPE_THRESHOLD = 1,
   NOTIFICATION_TYPE_FIX_RATE = 2,
@@ -216,16 +225,16 @@ const NotificationType NotificationType_MAX = NOTIFICATION_TYPE_EVENT;
 const int NotificationType_ARRAYSIZE = NotificationType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* NotificationType_descriptor();
-inline const ::std::string& NotificationType_Name(NotificationType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    NotificationType_descriptor(), value);
+inline const ::std::string& NotificationType_Name(NotificationType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(NotificationType_descriptor(), value);
 }
-inline bool NotificationType_Parse(
-    const ::std::string& name, NotificationType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<NotificationType>(
-    NotificationType_descriptor(), name, value);
+inline bool NotificationType_Parse(const ::std::string& name, NotificationType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<NotificationType>(NotificationType_descriptor(), name, value);
 }
-enum Unit {
+enum Unit
+{
   UNSPECIFIED_UNIT = 0,
   CELSIUS = 1,
   AMPERE = 2,
@@ -249,16 +258,16 @@ const Unit Unit_MAX = DEGREE_PER_MILLISECOND;
 const int Unit_ARRAYSIZE = Unit_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Unit_descriptor();
-inline const ::std::string& Unit_Name(Unit value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Unit_descriptor(), value);
+inline const ::std::string& Unit_Name(Unit value)
+{
+  return ::google::protobuf::internal::NameOfEnum(Unit_descriptor(), value);
 }
-inline bool Unit_Parse(
-    const ::std::string& name, Unit* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Unit>(
-    Unit_descriptor(), name, value);
+inline bool Unit_Parse(const ::std::string& name, Unit* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<Unit>(Unit_descriptor(), name, value);
 }
-enum ArmState {
+enum ArmState
+{
   ARMSTATE_UNSPECIFIED = 0,
   ARMSTATE_BASE_INITIALIZATION = 1,
   ARMSTATE_IDLE = 2,
@@ -279,16 +288,16 @@ const ArmState ArmState_MAX = ARMSTATE_RESERVED;
 const int ArmState_ARRAYSIZE = ArmState_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ArmState_descriptor();
-inline const ::std::string& ArmState_Name(ArmState value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ArmState_descriptor(), value);
+inline const ::std::string& ArmState_Name(ArmState value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ArmState_descriptor(), value);
 }
-inline bool ArmState_Parse(
-    const ::std::string& name, ArmState* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ArmState>(
-    ArmState_descriptor(), name, value);
+inline bool ArmState_Parse(const ::std::string& name, ArmState* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ArmState>(ArmState_descriptor(), name, value);
 }
-enum UARTSpeed {
+enum UARTSpeed
+{
   UART_SPEED_UNSPECIFIED = 0,
   UART_SPEED_4800 = 1,
   UART_SPEED_9600 = 2,
@@ -314,16 +323,16 @@ const UARTSpeed UARTSpeed_MAX = UART_SPEED_2246400;
 const int UARTSpeed_ARRAYSIZE = UARTSpeed_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* UARTSpeed_descriptor();
-inline const ::std::string& UARTSpeed_Name(UARTSpeed value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    UARTSpeed_descriptor(), value);
+inline const ::std::string& UARTSpeed_Name(UARTSpeed value)
+{
+  return ::google::protobuf::internal::NameOfEnum(UARTSpeed_descriptor(), value);
 }
-inline bool UARTSpeed_Parse(
-    const ::std::string& name, UARTSpeed* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<UARTSpeed>(
-    UARTSpeed_descriptor(), name, value);
+inline bool UARTSpeed_Parse(const ::std::string& name, UARTSpeed* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<UARTSpeed>(UARTSpeed_descriptor(), name, value);
 }
-enum UARTWordLength {
+enum UARTWordLength
+{
   UART_WORD_LENGTH_UNSPECIFIED = 0,
   UART_WORD_LENGTH_7 = 1,
   UART_WORD_LENGTH_8 = 2,
@@ -337,16 +346,16 @@ const UARTWordLength UARTWordLength_MAX = UART_WORD_LENGTH_9;
 const int UARTWordLength_ARRAYSIZE = UARTWordLength_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* UARTWordLength_descriptor();
-inline const ::std::string& UARTWordLength_Name(UARTWordLength value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    UARTWordLength_descriptor(), value);
+inline const ::std::string& UARTWordLength_Name(UARTWordLength value)
+{
+  return ::google::protobuf::internal::NameOfEnum(UARTWordLength_descriptor(), value);
 }
-inline bool UARTWordLength_Parse(
-    const ::std::string& name, UARTWordLength* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<UARTWordLength>(
-    UARTWordLength_descriptor(), name, value);
+inline bool UARTWordLength_Parse(const ::std::string& name, UARTWordLength* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<UARTWordLength>(UARTWordLength_descriptor(), name, value);
 }
-enum UARTStopBits {
+enum UARTStopBits
+{
   UART_STOP_BITS_UNSPECIFIED = 0,
   UART_STOP_BITS_0_5 = 1,
   UART_STOP_BITS_1 = 2,
@@ -361,16 +370,16 @@ const UARTStopBits UARTStopBits_MAX = UART_STOP_BITS_2;
 const int UARTStopBits_ARRAYSIZE = UARTStopBits_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* UARTStopBits_descriptor();
-inline const ::std::string& UARTStopBits_Name(UARTStopBits value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    UARTStopBits_descriptor(), value);
+inline const ::std::string& UARTStopBits_Name(UARTStopBits value)
+{
+  return ::google::protobuf::internal::NameOfEnum(UARTStopBits_descriptor(), value);
 }
-inline bool UARTStopBits_Parse(
-    const ::std::string& name, UARTStopBits* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<UARTStopBits>(
-    UARTStopBits_descriptor(), name, value);
+inline bool UARTStopBits_Parse(const ::std::string& name, UARTStopBits* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<UARTStopBits>(UARTStopBits_descriptor(), name, value);
 }
-enum UARTParity {
+enum UARTParity
+{
   UART_PARITY_UNSPECIFIED = 0,
   UART_PARITY_NONE = 1,
   UART_PARITY_ODD = 2,
@@ -384,16 +393,16 @@ const UARTParity UARTParity_MAX = UART_PARITY_EVEN;
 const int UARTParity_ARRAYSIZE = UARTParity_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* UARTParity_descriptor();
-inline const ::std::string& UARTParity_Name(UARTParity value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    UARTParity_descriptor(), value);
+inline const ::std::string& UARTParity_Name(UARTParity value)
+{
+  return ::google::protobuf::internal::NameOfEnum(UARTParity_descriptor(), value);
 }
-inline bool UARTParity_Parse(
-    const ::std::string& name, UARTParity* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<UARTParity>(
-    UARTParity_descriptor(), name, value);
+inline bool UARTParity_Parse(const ::std::string& name, UARTParity* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<UARTParity>(UARTParity_descriptor(), name, value);
 }
-enum CartesianReferenceFrame {
+enum CartesianReferenceFrame
+{
   CARTESIAN_REFERENCE_FRAME_UNSPECIFIED = 0,
   CARTESIAN_REFERENCE_FRAME_MIXED = 1,
   CARTESIAN_REFERENCE_FRAME_TOOL = 2,
@@ -407,16 +416,17 @@ const CartesianReferenceFrame CartesianReferenceFrame_MAX = CARTESIAN_REFERENCE_
 const int CartesianReferenceFrame_ARRAYSIZE = CartesianReferenceFrame_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CartesianReferenceFrame_descriptor();
-inline const ::std::string& CartesianReferenceFrame_Name(CartesianReferenceFrame value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    CartesianReferenceFrame_descriptor(), value);
+inline const ::std::string& CartesianReferenceFrame_Name(CartesianReferenceFrame value)
+{
+  return ::google::protobuf::internal::NameOfEnum(CartesianReferenceFrame_descriptor(), value);
 }
-inline bool CartesianReferenceFrame_Parse(
-    const ::std::string& name, CartesianReferenceFrame* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CartesianReferenceFrame>(
-    CartesianReferenceFrame_descriptor(), name, value);
+inline bool CartesianReferenceFrame_Parse(const ::std::string& name, CartesianReferenceFrame* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<CartesianReferenceFrame>(CartesianReferenceFrame_descriptor(),
+                                                                               name, value);
 }
-enum CountryCodeIdentifier {
+enum CountryCodeIdentifier
+{
   UNSPECIFIED_COUNTRY_CODE = 0,
   UNITED_ARAB_EMIRATES_AE = 1,
   ANTIGUA_AND_BARBUDA_AG = 2,
@@ -539,62 +549,73 @@ const CountryCodeIdentifier CountryCodeIdentifier_MAX = SOUTH_AFRICA_ZA;
 const int CountryCodeIdentifier_ARRAYSIZE = CountryCodeIdentifier_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CountryCodeIdentifier_descriptor();
-inline const ::std::string& CountryCodeIdentifier_Name(CountryCodeIdentifier value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    CountryCodeIdentifier_descriptor(), value);
+inline const ::std::string& CountryCodeIdentifier_Name(CountryCodeIdentifier value)
+{
+  return ::google::protobuf::internal::NameOfEnum(CountryCodeIdentifier_descriptor(), value);
 }
-inline bool CountryCodeIdentifier_Parse(
-    const ::std::string& name, CountryCodeIdentifier* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CountryCodeIdentifier>(
-    CountryCodeIdentifier_descriptor(), name, value);
+inline bool CountryCodeIdentifier_Parse(const ::std::string& name, CountryCodeIdentifier* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<CountryCodeIdentifier>(CountryCodeIdentifier_descriptor(), name,
+                                                                             value);
 }
 // ===================================================================
 
-class DeviceHandle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.DeviceHandle) */ {
- public:
+class DeviceHandle
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.DeviceHandle) */
+{
+public:
   DeviceHandle();
   virtual ~DeviceHandle();
 
   DeviceHandle(const DeviceHandle& from);
 
-  inline DeviceHandle& operator=(const DeviceHandle& from) {
+  inline DeviceHandle& operator=(const DeviceHandle& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DeviceHandle(DeviceHandle&& from) noexcept
-    : DeviceHandle() {
+#if LANG_CXX11
+  DeviceHandle(DeviceHandle&& from) noexcept : DeviceHandle()
+  {
     *this = ::std::move(from);
   }
 
-  inline DeviceHandle& operator=(DeviceHandle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DeviceHandle& operator=(DeviceHandle&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const DeviceHandle& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DeviceHandle* internal_default_instance() {
-    return reinterpret_cast<const DeviceHandle*>(
-               &_DeviceHandle_default_instance_);
+  static inline const DeviceHandle* internal_default_instance()
+  {
+    return reinterpret_cast<const DeviceHandle*>(&_DeviceHandle_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(DeviceHandle* other);
-  friend void swap(DeviceHandle& a, DeviceHandle& b) {
+  friend void swap(DeviceHandle& a, DeviceHandle& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DeviceHandle* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DeviceHandle* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DeviceHandle* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -605,27 +626,32 @@ class DeviceHandle : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DeviceHandle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -651,8 +677,7 @@ class DeviceHandle : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_order(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.DeviceHandle)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int device_type_;
   ::google::protobuf::uint32 device_identifier_;
@@ -663,51 +688,62 @@ class DeviceHandle : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.Empty) */ {
- public:
+class Empty
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.Empty) */
+{
+public:
   Empty();
   virtual ~Empty();
 
   Empty(const Empty& from);
 
-  inline Empty& operator=(const Empty& from) {
+  inline Empty& operator=(const Empty& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  Empty(Empty&& from) noexcept
-    : Empty() {
+#if LANG_CXX11
+  Empty(Empty&& from) noexcept : Empty()
+  {
     *this = ::std::move(from);
   }
 
-  inline Empty& operator=(Empty&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline Empty& operator=(Empty&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const Empty& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Empty* internal_default_instance() {
-    return reinterpret_cast<const Empty*>(
-               &_Empty_default_instance_);
+  static inline const Empty* internal_default_instance()
+  {
+    return reinterpret_cast<const Empty*>(&_Empty_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void Swap(Empty* other);
-  friend void swap(Empty& a, Empty& b) {
+  friend void swap(Empty& a, Empty& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Empty* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Empty* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   Empty* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -718,27 +754,32 @@ class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Empty* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -746,8 +787,7 @@ class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   // accessors -------------------------------------------------------
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.Empty)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   mutable int _cached_size_;
   friend struct ::protobuf_Common_2eproto::TableStruct;
@@ -755,51 +795,63 @@ class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 };
 // -------------------------------------------------------------------
 
-class NotificationOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.NotificationOptions) */ {
- public:
+class NotificationOptions
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.NotificationOptions) */
+{
+public:
   NotificationOptions();
   virtual ~NotificationOptions();
 
   NotificationOptions(const NotificationOptions& from);
 
-  inline NotificationOptions& operator=(const NotificationOptions& from) {
+  inline NotificationOptions& operator=(const NotificationOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  NotificationOptions(NotificationOptions&& from) noexcept
-    : NotificationOptions() {
+#if LANG_CXX11
+  NotificationOptions(NotificationOptions&& from) noexcept : NotificationOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline NotificationOptions& operator=(NotificationOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline NotificationOptions& operator=(NotificationOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const NotificationOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const NotificationOptions* internal_default_instance() {
-    return reinterpret_cast<const NotificationOptions*>(
-               &_NotificationOptions_default_instance_);
+  static inline const NotificationOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const NotificationOptions*>(&_NotificationOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 2;
 
   void Swap(NotificationOptions* other);
-  friend void swap(NotificationOptions& a, NotificationOptions& b) {
+  friend void swap(NotificationOptions& a, NotificationOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline NotificationOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline NotificationOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   NotificationOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -810,27 +862,32 @@ class NotificationOptions : public ::google::protobuf::Message /* @@protoc_inser
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(NotificationOptions* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -856,8 +913,7 @@ class NotificationOptions : public ::google::protobuf::Message /* @@protoc_inser
   void set_threshold_value(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.NotificationOptions)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int type_;
   ::google::protobuf::uint32 rate_m_sec_;
@@ -868,51 +924,62 @@ class NotificationOptions : public ::google::protobuf::Message /* @@protoc_inser
 };
 // -------------------------------------------------------------------
 
-class SafetyHandle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.SafetyHandle) */ {
- public:
+class SafetyHandle
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.SafetyHandle) */
+{
+public:
   SafetyHandle();
   virtual ~SafetyHandle();
 
   SafetyHandle(const SafetyHandle& from);
 
-  inline SafetyHandle& operator=(const SafetyHandle& from) {
+  inline SafetyHandle& operator=(const SafetyHandle& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyHandle(SafetyHandle&& from) noexcept
-    : SafetyHandle() {
+#if LANG_CXX11
+  SafetyHandle(SafetyHandle&& from) noexcept : SafetyHandle()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyHandle& operator=(SafetyHandle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyHandle& operator=(SafetyHandle&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyHandle& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyHandle* internal_default_instance() {
-    return reinterpret_cast<const SafetyHandle*>(
-               &_SafetyHandle_default_instance_);
+  static inline const SafetyHandle* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyHandle*>(&_SafetyHandle_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 3;
 
   void Swap(SafetyHandle* other);
-  friend void swap(SafetyHandle& a, SafetyHandle& b) {
+  friend void swap(SafetyHandle& a, SafetyHandle& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyHandle* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyHandle* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyHandle* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -923,27 +990,32 @@ class SafetyHandle : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyHandle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -957,8 +1029,7 @@ class SafetyHandle : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_identifier(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.SafetyHandle)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 identifier_;
   mutable int _cached_size_;
@@ -967,51 +1038,62 @@ class SafetyHandle : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class NotificationHandle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.NotificationHandle) */ {
- public:
+class NotificationHandle
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.NotificationHandle) */
+{
+public:
   NotificationHandle();
   virtual ~NotificationHandle();
 
   NotificationHandle(const NotificationHandle& from);
 
-  inline NotificationHandle& operator=(const NotificationHandle& from) {
+  inline NotificationHandle& operator=(const NotificationHandle& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  NotificationHandle(NotificationHandle&& from) noexcept
-    : NotificationHandle() {
+#if LANG_CXX11
+  NotificationHandle(NotificationHandle&& from) noexcept : NotificationHandle()
+  {
     *this = ::std::move(from);
   }
 
-  inline NotificationHandle& operator=(NotificationHandle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline NotificationHandle& operator=(NotificationHandle&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const NotificationHandle& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const NotificationHandle* internal_default_instance() {
-    return reinterpret_cast<const NotificationHandle*>(
-               &_NotificationHandle_default_instance_);
+  static inline const NotificationHandle* internal_default_instance()
+  {
+    return reinterpret_cast<const NotificationHandle*>(&_NotificationHandle_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 4;
 
   void Swap(NotificationHandle* other);
-  friend void swap(NotificationHandle& a, NotificationHandle& b) {
+  friend void swap(NotificationHandle& a, NotificationHandle& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline NotificationHandle* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline NotificationHandle* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   NotificationHandle* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1022,27 +1104,32 @@ class NotificationHandle : public ::google::protobuf::Message /* @@protoc_insert
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(NotificationHandle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1056,8 +1143,7 @@ class NotificationHandle : public ::google::protobuf::Message /* @@protoc_insert
   void set_identifier(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.NotificationHandle)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 identifier_;
   mutable int _cached_size_;
@@ -1066,51 +1152,62 @@ class NotificationHandle : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class SafetyNotification : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.SafetyNotification) */ {
- public:
+class SafetyNotification
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.SafetyNotification) */
+{
+public:
   SafetyNotification();
   virtual ~SafetyNotification();
 
   SafetyNotification(const SafetyNotification& from);
 
-  inline SafetyNotification& operator=(const SafetyNotification& from) {
+  inline SafetyNotification& operator=(const SafetyNotification& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SafetyNotification(SafetyNotification&& from) noexcept
-    : SafetyNotification() {
+#if LANG_CXX11
+  SafetyNotification(SafetyNotification&& from) noexcept : SafetyNotification()
+  {
     *this = ::std::move(from);
   }
 
-  inline SafetyNotification& operator=(SafetyNotification&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SafetyNotification& operator=(SafetyNotification&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SafetyNotification& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SafetyNotification* internal_default_instance() {
-    return reinterpret_cast<const SafetyNotification*>(
-               &_SafetyNotification_default_instance_);
+  static inline const SafetyNotification* internal_default_instance()
+  {
+    return reinterpret_cast<const SafetyNotification*>(&_SafetyNotification_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 5;
 
   void Swap(SafetyNotification* other);
-  friend void swap(SafetyNotification& a, SafetyNotification& b) {
+  friend void swap(SafetyNotification& a, SafetyNotification& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SafetyNotification* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SafetyNotification* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SafetyNotification* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1121,27 +1218,32 @@ class SafetyNotification : public ::google::protobuf::Message /* @@protoc_insert
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SafetyNotification* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1191,8 +1293,7 @@ class SafetyNotification : public ::google::protobuf::Message /* @@protoc_insert
   void set_value(::Kinova::Api::Common::SafetyStatusValue value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.SafetyNotification)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::Common::SafetyHandle* safety_handle_;
   ::Kinova::Api::Common::Timestamp* timestamp_;
@@ -1205,51 +1306,62 @@ class SafetyNotification : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class Timestamp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.Timestamp) */ {
- public:
+class Timestamp
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.Timestamp) */
+{
+public:
   Timestamp();
   virtual ~Timestamp();
 
   Timestamp(const Timestamp& from);
 
-  inline Timestamp& operator=(const Timestamp& from) {
+  inline Timestamp& operator=(const Timestamp& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  Timestamp(Timestamp&& from) noexcept
-    : Timestamp() {
+#if LANG_CXX11
+  Timestamp(Timestamp&& from) noexcept : Timestamp()
+  {
     *this = ::std::move(from);
   }
 
-  inline Timestamp& operator=(Timestamp&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline Timestamp& operator=(Timestamp&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const Timestamp& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Timestamp* internal_default_instance() {
-    return reinterpret_cast<const Timestamp*>(
-               &_Timestamp_default_instance_);
+  static inline const Timestamp* internal_default_instance()
+  {
+    return reinterpret_cast<const Timestamp*>(&_Timestamp_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 6;
 
   void Swap(Timestamp* other);
-  friend void swap(Timestamp& a, Timestamp& b) {
+  friend void swap(Timestamp& a, Timestamp& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Timestamp* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Timestamp* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   Timestamp* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1260,27 +1372,32 @@ class Timestamp : public ::google::protobuf::Message /* @@protoc_insertion_point
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Timestamp* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1300,8 +1417,7 @@ class Timestamp : public ::google::protobuf::Message /* @@protoc_insertion_point
   void set_usec(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.Timestamp)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 sec_;
   ::google::protobuf::uint32 usec_;
@@ -1311,51 +1427,62 @@ class Timestamp : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
-class UserProfileHandle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.UserProfileHandle) */ {
- public:
+class UserProfileHandle
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.UserProfileHandle) */
+{
+public:
   UserProfileHandle();
   virtual ~UserProfileHandle();
 
   UserProfileHandle(const UserProfileHandle& from);
 
-  inline UserProfileHandle& operator=(const UserProfileHandle& from) {
+  inline UserProfileHandle& operator=(const UserProfileHandle& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  UserProfileHandle(UserProfileHandle&& from) noexcept
-    : UserProfileHandle() {
+#if LANG_CXX11
+  UserProfileHandle(UserProfileHandle&& from) noexcept : UserProfileHandle()
+  {
     *this = ::std::move(from);
   }
 
-  inline UserProfileHandle& operator=(UserProfileHandle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline UserProfileHandle& operator=(UserProfileHandle&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const UserProfileHandle& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const UserProfileHandle* internal_default_instance() {
-    return reinterpret_cast<const UserProfileHandle*>(
-               &_UserProfileHandle_default_instance_);
+  static inline const UserProfileHandle* internal_default_instance()
+  {
+    return reinterpret_cast<const UserProfileHandle*>(&_UserProfileHandle_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 7;
 
   void Swap(UserProfileHandle* other);
-  friend void swap(UserProfileHandle& a, UserProfileHandle& b) {
+  friend void swap(UserProfileHandle& a, UserProfileHandle& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline UserProfileHandle* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline UserProfileHandle* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   UserProfileHandle* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1366,27 +1493,32 @@ class UserProfileHandle : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UserProfileHandle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1406,8 +1538,7 @@ class UserProfileHandle : public ::google::protobuf::Message /* @@protoc_inserti
   void set_permission(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.UserProfileHandle)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 identifier_;
   ::google::protobuf::uint32 permission_;
@@ -1417,51 +1548,62 @@ class UserProfileHandle : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class Connection : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.Connection) */ {
- public:
+class Connection
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.Connection) */
+{
+public:
   Connection();
   virtual ~Connection();
 
   Connection(const Connection& from);
 
-  inline Connection& operator=(const Connection& from) {
+  inline Connection& operator=(const Connection& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  Connection(Connection&& from) noexcept
-    : Connection() {
+#if LANG_CXX11
+  Connection(Connection&& from) noexcept : Connection()
+  {
     *this = ::std::move(from);
   }
 
-  inline Connection& operator=(Connection&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline Connection& operator=(Connection&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const Connection& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Connection* internal_default_instance() {
-    return reinterpret_cast<const Connection*>(
-               &_Connection_default_instance_);
+  static inline const Connection* internal_default_instance()
+  {
+    return reinterpret_cast<const Connection*>(&_Connection_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 8;
 
   void Swap(Connection* other);
-  friend void swap(Connection& a, Connection& b) {
+  friend void swap(Connection& a, Connection& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Connection* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Connection* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   Connection* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1472,27 +1614,32 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Connection* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1504,9 +1651,9 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
   static const int kConnectionInformationFieldNumber = 2;
   const ::std::string& connection_information() const;
   void set_connection_information(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_connection_information(::std::string&& value);
-  #endif
+#endif
   void set_connection_information(const char* value);
   void set_connection_information(const char* value, size_t size);
   ::std::string* mutable_connection_information();
@@ -1529,8 +1676,7 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void set_connection_identifier(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.Connection)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr connection_information_;
   ::Kinova::Api::Common::UserProfileHandle* user_handle_;
@@ -1541,51 +1687,62 @@ class Connection : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
-class UARTConfiguration : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.UARTConfiguration) */ {
- public:
+class UARTConfiguration
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.UARTConfiguration) */
+{
+public:
   UARTConfiguration();
   virtual ~UARTConfiguration();
 
   UARTConfiguration(const UARTConfiguration& from);
 
-  inline UARTConfiguration& operator=(const UARTConfiguration& from) {
+  inline UARTConfiguration& operator=(const UARTConfiguration& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  UARTConfiguration(UARTConfiguration&& from) noexcept
-    : UARTConfiguration() {
+#if LANG_CXX11
+  UARTConfiguration(UARTConfiguration&& from) noexcept : UARTConfiguration()
+  {
     *this = ::std::move(from);
   }
 
-  inline UARTConfiguration& operator=(UARTConfiguration&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline UARTConfiguration& operator=(UARTConfiguration&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const UARTConfiguration& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const UARTConfiguration* internal_default_instance() {
-    return reinterpret_cast<const UARTConfiguration*>(
-               &_UARTConfiguration_default_instance_);
+  static inline const UARTConfiguration* internal_default_instance()
+  {
+    return reinterpret_cast<const UARTConfiguration*>(&_UARTConfiguration_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 9;
 
   void Swap(UARTConfiguration* other);
-  friend void swap(UARTConfiguration& a, UARTConfiguration& b) {
+  friend void swap(UARTConfiguration& a, UARTConfiguration& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline UARTConfiguration* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline UARTConfiguration* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   UARTConfiguration* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1596,27 +1753,32 @@ class UARTConfiguration : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UARTConfiguration* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1660,8 +1822,7 @@ class UARTConfiguration : public ::google::protobuf::Message /* @@protoc_inserti
   void set_parity(::Kinova::Api::Common::UARTParity value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.UARTConfiguration)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 port_id_;
   bool enabled_;
@@ -1675,51 +1836,63 @@ class UARTConfiguration : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class UARTDeviceIdentification : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.UARTDeviceIdentification) */ {
- public:
+class UARTDeviceIdentification
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.UARTDeviceIdentification) */
+{
+public:
   UARTDeviceIdentification();
   virtual ~UARTDeviceIdentification();
 
   UARTDeviceIdentification(const UARTDeviceIdentification& from);
 
-  inline UARTDeviceIdentification& operator=(const UARTDeviceIdentification& from) {
+  inline UARTDeviceIdentification& operator=(const UARTDeviceIdentification& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  UARTDeviceIdentification(UARTDeviceIdentification&& from) noexcept
-    : UARTDeviceIdentification() {
+#if LANG_CXX11
+  UARTDeviceIdentification(UARTDeviceIdentification&& from) noexcept : UARTDeviceIdentification()
+  {
     *this = ::std::move(from);
   }
 
-  inline UARTDeviceIdentification& operator=(UARTDeviceIdentification&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline UARTDeviceIdentification& operator=(UARTDeviceIdentification&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const UARTDeviceIdentification& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const UARTDeviceIdentification* internal_default_instance() {
-    return reinterpret_cast<const UARTDeviceIdentification*>(
-               &_UARTDeviceIdentification_default_instance_);
+  static inline const UARTDeviceIdentification* internal_default_instance()
+  {
+    return reinterpret_cast<const UARTDeviceIdentification*>(&_UARTDeviceIdentification_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 10;
 
   void Swap(UARTDeviceIdentification* other);
-  friend void swap(UARTDeviceIdentification& a, UARTDeviceIdentification& b) {
+  friend void swap(UARTDeviceIdentification& a, UARTDeviceIdentification& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline UARTDeviceIdentification* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline UARTDeviceIdentification* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   UARTDeviceIdentification* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1730,27 +1903,32 @@ class UARTDeviceIdentification : public ::google::protobuf::Message /* @@protoc_
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UARTDeviceIdentification* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1764,8 +1942,7 @@ class UARTDeviceIdentification : public ::google::protobuf::Message /* @@protoc_
   void set_port_id(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.UARTDeviceIdentification)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 port_id_;
   mutable int _cached_size_;
@@ -1774,51 +1951,62 @@ class UARTDeviceIdentification : public ::google::protobuf::Message /* @@protoc_
 };
 // -------------------------------------------------------------------
 
-class CountryCode : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.CountryCode) */ {
- public:
+class CountryCode
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Common.CountryCode) */
+{
+public:
   CountryCode();
   virtual ~CountryCode();
 
   CountryCode(const CountryCode& from);
 
-  inline CountryCode& operator=(const CountryCode& from) {
+  inline CountryCode& operator=(const CountryCode& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CountryCode(CountryCode&& from) noexcept
-    : CountryCode() {
+#if LANG_CXX11
+  CountryCode(CountryCode&& from) noexcept : CountryCode()
+  {
     *this = ::std::move(from);
   }
 
-  inline CountryCode& operator=(CountryCode&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CountryCode& operator=(CountryCode&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CountryCode& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CountryCode* internal_default_instance() {
-    return reinterpret_cast<const CountryCode*>(
-               &_CountryCode_default_instance_);
+  static inline const CountryCode* internal_default_instance()
+  {
+    return reinterpret_cast<const CountryCode*>(&_CountryCode_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 11;
 
   void Swap(CountryCode* other);
-  friend void swap(CountryCode& a, CountryCode& b) {
+  friend void swap(CountryCode& a, CountryCode& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CountryCode* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CountryCode* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CountryCode* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1829,27 +2017,32 @@ class CountryCode : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CountryCode* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1863,8 +2056,7 @@ class CountryCode : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void set_identifier(::Kinova::Api::Common::CountryCodeIdentifier value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Common.CountryCode)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int identifier_;
   mutable int _cached_size_;
@@ -1873,53 +2065,58 @@ class CountryCode : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // DeviceHandle
 
 // .Kinova.Api.Common.DeviceTypes device_type = 1;
-inline void DeviceHandle::clear_device_type() {
+inline void DeviceHandle::clear_device_type()
+{
   device_type_ = 0;
 }
-inline ::Kinova::Api::Common::DeviceTypes DeviceHandle::device_type() const {
+inline ::Kinova::Api::Common::DeviceTypes DeviceHandle::device_type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.DeviceHandle.device_type)
-  return static_cast< ::Kinova::Api::Common::DeviceTypes >(device_type_);
+  return static_cast< ::Kinova::Api::Common::DeviceTypes>(device_type_);
 }
-inline void DeviceHandle::set_device_type(::Kinova::Api::Common::DeviceTypes value) {
-  
+inline void DeviceHandle::set_device_type(::Kinova::Api::Common::DeviceTypes value)
+{
   device_type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.DeviceHandle.device_type)
 }
 
 // uint32 device_identifier = 2;
-inline void DeviceHandle::clear_device_identifier() {
+inline void DeviceHandle::clear_device_identifier()
+{
   device_identifier_ = 0u;
 }
-inline ::google::protobuf::uint32 DeviceHandle::device_identifier() const {
+inline ::google::protobuf::uint32 DeviceHandle::device_identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.DeviceHandle.device_identifier)
   return device_identifier_;
 }
-inline void DeviceHandle::set_device_identifier(::google::protobuf::uint32 value) {
-  
+inline void DeviceHandle::set_device_identifier(::google::protobuf::uint32 value)
+{
   device_identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.DeviceHandle.device_identifier)
 }
 
 // uint32 order = 3;
-inline void DeviceHandle::clear_order() {
+inline void DeviceHandle::clear_order()
+{
   order_ = 0u;
 }
-inline ::google::protobuf::uint32 DeviceHandle::order() const {
+inline ::google::protobuf::uint32 DeviceHandle::order() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.DeviceHandle.order)
   return order_;
 }
-inline void DeviceHandle::set_order(::google::protobuf::uint32 value) {
-  
+inline void DeviceHandle::set_order(::google::protobuf::uint32 value)
+{
   order_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.DeviceHandle.order)
 }
@@ -1933,43 +2130,49 @@ inline void DeviceHandle::set_order(::google::protobuf::uint32 value) {
 // NotificationOptions
 
 // .Kinova.Api.Common.NotificationType type = 1;
-inline void NotificationOptions::clear_type() {
+inline void NotificationOptions::clear_type()
+{
   type_ = 0;
 }
-inline ::Kinova::Api::Common::NotificationType NotificationOptions::type() const {
+inline ::Kinova::Api::Common::NotificationType NotificationOptions::type() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.NotificationOptions.type)
-  return static_cast< ::Kinova::Api::Common::NotificationType >(type_);
+  return static_cast< ::Kinova::Api::Common::NotificationType>(type_);
 }
-inline void NotificationOptions::set_type(::Kinova::Api::Common::NotificationType value) {
-  
+inline void NotificationOptions::set_type(::Kinova::Api::Common::NotificationType value)
+{
   type_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.NotificationOptions.type)
 }
 
 // uint32 rate_m_sec = 2;
-inline void NotificationOptions::clear_rate_m_sec() {
+inline void NotificationOptions::clear_rate_m_sec()
+{
   rate_m_sec_ = 0u;
 }
-inline ::google::protobuf::uint32 NotificationOptions::rate_m_sec() const {
+inline ::google::protobuf::uint32 NotificationOptions::rate_m_sec() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.NotificationOptions.rate_m_sec)
   return rate_m_sec_;
 }
-inline void NotificationOptions::set_rate_m_sec(::google::protobuf::uint32 value) {
-  
+inline void NotificationOptions::set_rate_m_sec(::google::protobuf::uint32 value)
+{
   rate_m_sec_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.NotificationOptions.rate_m_sec)
 }
 
 // float threshold_value = 3;
-inline void NotificationOptions::clear_threshold_value() {
+inline void NotificationOptions::clear_threshold_value()
+{
   threshold_value_ = 0;
 }
-inline float NotificationOptions::threshold_value() const {
+inline float NotificationOptions::threshold_value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.NotificationOptions.threshold_value)
   return threshold_value_;
 }
-inline void NotificationOptions::set_threshold_value(float value) {
-  
+inline void NotificationOptions::set_threshold_value(float value)
+{
   threshold_value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.NotificationOptions.threshold_value)
 }
@@ -1979,15 +2182,17 @@ inline void NotificationOptions::set_threshold_value(float value) {
 // SafetyHandle
 
 // uint32 identifier = 1;
-inline void SafetyHandle::clear_identifier() {
+inline void SafetyHandle::clear_identifier()
+{
   identifier_ = 0u;
 }
-inline ::google::protobuf::uint32 SafetyHandle::identifier() const {
+inline ::google::protobuf::uint32 SafetyHandle::identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.SafetyHandle.identifier)
   return identifier_;
 }
-inline void SafetyHandle::set_identifier(::google::protobuf::uint32 value) {
-  
+inline void SafetyHandle::set_identifier(::google::protobuf::uint32 value)
+{
   identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.SafetyHandle.identifier)
 }
@@ -1997,15 +2202,17 @@ inline void SafetyHandle::set_identifier(::google::protobuf::uint32 value) {
 // NotificationHandle
 
 // uint32 identifier = 1;
-inline void NotificationHandle::clear_identifier() {
+inline void NotificationHandle::clear_identifier()
+{
   identifier_ = 0u;
 }
-inline ::google::protobuf::uint32 NotificationHandle::identifier() const {
+inline ::google::protobuf::uint32 NotificationHandle::identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.NotificationHandle.identifier)
   return identifier_;
 }
-inline void NotificationHandle::set_identifier(::google::protobuf::uint32 value) {
-  
+inline void NotificationHandle::set_identifier(::google::protobuf::uint32 value)
+{
   identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.NotificationHandle.identifier)
 }
@@ -2015,214 +2222,256 @@ inline void NotificationHandle::set_identifier(::google::protobuf::uint32 value)
 // SafetyNotification
 
 // .Kinova.Api.Common.SafetyHandle safety_handle = 1;
-inline bool SafetyNotification::has_safety_handle() const {
+inline bool SafetyNotification::has_safety_handle() const
+{
   return this != internal_default_instance() && safety_handle_ != NULL;
 }
-inline void SafetyNotification::clear_safety_handle() {
-  if (GetArenaNoVirtual() == NULL && safety_handle_ != NULL) {
+inline void SafetyNotification::clear_safety_handle()
+{
+  if (GetArenaNoVirtual() == NULL && safety_handle_ != NULL)
+  {
     delete safety_handle_;
   }
   safety_handle_ = NULL;
 }
-inline const ::Kinova::Api::Common::SafetyHandle& SafetyNotification::safety_handle() const {
+inline const ::Kinova::Api::Common::SafetyHandle& SafetyNotification::safety_handle() const
+{
   const ::Kinova::Api::Common::SafetyHandle* p = safety_handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.SafetyNotification.safety_handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
-      &::Kinova::Api::Common::_SafetyHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::SafetyHandle*>(
+                         &::Kinova::Api::Common::_SafetyHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyNotification::release_safety_handle() {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyNotification::release_safety_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Common.SafetyNotification.safety_handle)
-  
+
   ::Kinova::Api::Common::SafetyHandle* temp = safety_handle_;
   safety_handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::SafetyHandle* SafetyNotification::mutable_safety_handle() {
-  
-  if (safety_handle_ == NULL) {
+inline ::Kinova::Api::Common::SafetyHandle* SafetyNotification::mutable_safety_handle()
+{
+  if (safety_handle_ == NULL)
+  {
     safety_handle_ = new ::Kinova::Api::Common::SafetyHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Common.SafetyNotification.safety_handle)
   return safety_handle_;
 }
-inline void SafetyNotification::set_allocated_safety_handle(::Kinova::Api::Common::SafetyHandle* safety_handle) {
+inline void SafetyNotification::set_allocated_safety_handle(::Kinova::Api::Common::SafetyHandle* safety_handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete safety_handle_;
   }
-  if (safety_handle) {
+  if (safety_handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      safety_handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, safety_handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      safety_handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, safety_handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   safety_handle_ = safety_handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Common.SafetyNotification.safety_handle)
 }
 
 // .Kinova.Api.Common.SafetyStatusValue value = 2;
-inline void SafetyNotification::clear_value() {
+inline void SafetyNotification::clear_value()
+{
   value_ = 0;
 }
-inline ::Kinova::Api::Common::SafetyStatusValue SafetyNotification::value() const {
+inline ::Kinova::Api::Common::SafetyStatusValue SafetyNotification::value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.SafetyNotification.value)
-  return static_cast< ::Kinova::Api::Common::SafetyStatusValue >(value_);
+  return static_cast< ::Kinova::Api::Common::SafetyStatusValue>(value_);
 }
-inline void SafetyNotification::set_value(::Kinova::Api::Common::SafetyStatusValue value) {
-  
+inline void SafetyNotification::set_value(::Kinova::Api::Common::SafetyStatusValue value)
+{
   value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.SafetyNotification.value)
 }
 
 // .Kinova.Api.Common.Timestamp timestamp = 3;
-inline bool SafetyNotification::has_timestamp() const {
+inline bool SafetyNotification::has_timestamp() const
+{
   return this != internal_default_instance() && timestamp_ != NULL;
 }
-inline void SafetyNotification::clear_timestamp() {
-  if (GetArenaNoVirtual() == NULL && timestamp_ != NULL) {
+inline void SafetyNotification::clear_timestamp()
+{
+  if (GetArenaNoVirtual() == NULL && timestamp_ != NULL)
+  {
     delete timestamp_;
   }
   timestamp_ = NULL;
 }
-inline const ::Kinova::Api::Common::Timestamp& SafetyNotification::timestamp() const {
+inline const ::Kinova::Api::Common::Timestamp& SafetyNotification::timestamp() const
+{
   const ::Kinova::Api::Common::Timestamp* p = timestamp_;
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.SafetyNotification.timestamp)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::Timestamp*>(
-      &::Kinova::Api::Common::_Timestamp_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::Timestamp*>(
+                         &::Kinova::Api::Common::_Timestamp_default_instance_);
 }
-inline ::Kinova::Api::Common::Timestamp* SafetyNotification::release_timestamp() {
+inline ::Kinova::Api::Common::Timestamp* SafetyNotification::release_timestamp()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Common.SafetyNotification.timestamp)
-  
+
   ::Kinova::Api::Common::Timestamp* temp = timestamp_;
   timestamp_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::Timestamp* SafetyNotification::mutable_timestamp() {
-  
-  if (timestamp_ == NULL) {
+inline ::Kinova::Api::Common::Timestamp* SafetyNotification::mutable_timestamp()
+{
+  if (timestamp_ == NULL)
+  {
     timestamp_ = new ::Kinova::Api::Common::Timestamp;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Common.SafetyNotification.timestamp)
   return timestamp_;
 }
-inline void SafetyNotification::set_allocated_timestamp(::Kinova::Api::Common::Timestamp* timestamp) {
+inline void SafetyNotification::set_allocated_timestamp(::Kinova::Api::Common::Timestamp* timestamp)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete timestamp_;
   }
-  if (timestamp) {
+  if (timestamp)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      timestamp = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, timestamp, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      timestamp = ::google::protobuf::internal::GetOwnedMessage(message_arena, timestamp, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   timestamp_ = timestamp;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Common.SafetyNotification.timestamp)
 }
 
 // .Kinova.Api.Common.UserProfileHandle user_handle = 4;
-inline bool SafetyNotification::has_user_handle() const {
+inline bool SafetyNotification::has_user_handle() const
+{
   return this != internal_default_instance() && user_handle_ != NULL;
 }
-inline void SafetyNotification::clear_user_handle() {
-  if (GetArenaNoVirtual() == NULL && user_handle_ != NULL) {
+inline void SafetyNotification::clear_user_handle()
+{
+  if (GetArenaNoVirtual() == NULL && user_handle_ != NULL)
+  {
     delete user_handle_;
   }
   user_handle_ = NULL;
 }
-inline const ::Kinova::Api::Common::UserProfileHandle& SafetyNotification::user_handle() const {
+inline const ::Kinova::Api::Common::UserProfileHandle& SafetyNotification::user_handle() const
+{
   const ::Kinova::Api::Common::UserProfileHandle* p = user_handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.SafetyNotification.user_handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
-      &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
+                         &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::UserProfileHandle* SafetyNotification::release_user_handle() {
+inline ::Kinova::Api::Common::UserProfileHandle* SafetyNotification::release_user_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Common.SafetyNotification.user_handle)
-  
+
   ::Kinova::Api::Common::UserProfileHandle* temp = user_handle_;
   user_handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::UserProfileHandle* SafetyNotification::mutable_user_handle() {
-  
-  if (user_handle_ == NULL) {
+inline ::Kinova::Api::Common::UserProfileHandle* SafetyNotification::mutable_user_handle()
+{
+  if (user_handle_ == NULL)
+  {
     user_handle_ = new ::Kinova::Api::Common::UserProfileHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Common.SafetyNotification.user_handle)
   return user_handle_;
 }
-inline void SafetyNotification::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle) {
+inline void SafetyNotification::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete user_handle_;
   }
-  if (user_handle) {
+  if (user_handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      user_handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, user_handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      user_handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, user_handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   user_handle_ = user_handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Common.SafetyNotification.user_handle)
 }
 
 // .Kinova.Api.Common.Connection connection = 5;
-inline bool SafetyNotification::has_connection() const {
+inline bool SafetyNotification::has_connection() const
+{
   return this != internal_default_instance() && connection_ != NULL;
 }
-inline void SafetyNotification::clear_connection() {
-  if (GetArenaNoVirtual() == NULL && connection_ != NULL) {
+inline void SafetyNotification::clear_connection()
+{
+  if (GetArenaNoVirtual() == NULL && connection_ != NULL)
+  {
     delete connection_;
   }
   connection_ = NULL;
 }
-inline const ::Kinova::Api::Common::Connection& SafetyNotification::connection() const {
+inline const ::Kinova::Api::Common::Connection& SafetyNotification::connection() const
+{
   const ::Kinova::Api::Common::Connection* p = connection_;
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.SafetyNotification.connection)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::Connection*>(
-      &::Kinova::Api::Common::_Connection_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::Connection*>(
+                         &::Kinova::Api::Common::_Connection_default_instance_);
 }
-inline ::Kinova::Api::Common::Connection* SafetyNotification::release_connection() {
+inline ::Kinova::Api::Common::Connection* SafetyNotification::release_connection()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Common.SafetyNotification.connection)
-  
+
   ::Kinova::Api::Common::Connection* temp = connection_;
   connection_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::Connection* SafetyNotification::mutable_connection() {
-  
-  if (connection_ == NULL) {
+inline ::Kinova::Api::Common::Connection* SafetyNotification::mutable_connection()
+{
+  if (connection_ == NULL)
+  {
     connection_ = new ::Kinova::Api::Common::Connection;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Common.SafetyNotification.connection)
   return connection_;
 }
-inline void SafetyNotification::set_allocated_connection(::Kinova::Api::Common::Connection* connection) {
+inline void SafetyNotification::set_allocated_connection(::Kinova::Api::Common::Connection* connection)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete connection_;
   }
-  if (connection) {
+  if (connection)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      connection = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, connection, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      connection = ::google::protobuf::internal::GetOwnedMessage(message_arena, connection, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   connection_ = connection;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Common.SafetyNotification.connection)
@@ -2233,29 +2482,33 @@ inline void SafetyNotification::set_allocated_connection(::Kinova::Api::Common::
 // Timestamp
 
 // uint32 sec = 1;
-inline void Timestamp::clear_sec() {
+inline void Timestamp::clear_sec()
+{
   sec_ = 0u;
 }
-inline ::google::protobuf::uint32 Timestamp::sec() const {
+inline ::google::protobuf::uint32 Timestamp::sec() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.Timestamp.sec)
   return sec_;
 }
-inline void Timestamp::set_sec(::google::protobuf::uint32 value) {
-  
+inline void Timestamp::set_sec(::google::protobuf::uint32 value)
+{
   sec_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.Timestamp.sec)
 }
 
 // uint32 usec = 2;
-inline void Timestamp::clear_usec() {
+inline void Timestamp::clear_usec()
+{
   usec_ = 0u;
 }
-inline ::google::protobuf::uint32 Timestamp::usec() const {
+inline ::google::protobuf::uint32 Timestamp::usec() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.Timestamp.usec)
   return usec_;
 }
-inline void Timestamp::set_usec(::google::protobuf::uint32 value) {
-  
+inline void Timestamp::set_usec(::google::protobuf::uint32 value)
+{
   usec_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.Timestamp.usec)
 }
@@ -2265,29 +2518,33 @@ inline void Timestamp::set_usec(::google::protobuf::uint32 value) {
 // UserProfileHandle
 
 // uint32 identifier = 1;
-inline void UserProfileHandle::clear_identifier() {
+inline void UserProfileHandle::clear_identifier()
+{
   identifier_ = 0u;
 }
-inline ::google::protobuf::uint32 UserProfileHandle::identifier() const {
+inline ::google::protobuf::uint32 UserProfileHandle::identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UserProfileHandle.identifier)
   return identifier_;
 }
-inline void UserProfileHandle::set_identifier(::google::protobuf::uint32 value) {
-  
+inline void UserProfileHandle::set_identifier(::google::protobuf::uint32 value)
+{
   identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UserProfileHandle.identifier)
 }
 
 // fixed32 permission = 2;
-inline void UserProfileHandle::clear_permission() {
+inline void UserProfileHandle::clear_permission()
+{
   permission_ = 0u;
 }
-inline ::google::protobuf::uint32 UserProfileHandle::permission() const {
+inline ::google::protobuf::uint32 UserProfileHandle::permission() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UserProfileHandle.permission)
   return permission_;
 }
-inline void UserProfileHandle::set_permission(::google::protobuf::uint32 value) {
-  
+inline void UserProfileHandle::set_permission(::google::protobuf::uint32 value)
+{
   permission_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UserProfileHandle.permission)
 }
@@ -2297,118 +2554,134 @@ inline void UserProfileHandle::set_permission(::google::protobuf::uint32 value) 
 // Connection
 
 // .Kinova.Api.Common.UserProfileHandle user_handle = 1;
-inline bool Connection::has_user_handle() const {
+inline bool Connection::has_user_handle() const
+{
   return this != internal_default_instance() && user_handle_ != NULL;
 }
-inline void Connection::clear_user_handle() {
-  if (GetArenaNoVirtual() == NULL && user_handle_ != NULL) {
+inline void Connection::clear_user_handle()
+{
+  if (GetArenaNoVirtual() == NULL && user_handle_ != NULL)
+  {
     delete user_handle_;
   }
   user_handle_ = NULL;
 }
-inline const ::Kinova::Api::Common::UserProfileHandle& Connection::user_handle() const {
+inline const ::Kinova::Api::Common::UserProfileHandle& Connection::user_handle() const
+{
   const ::Kinova::Api::Common::UserProfileHandle* p = user_handle_;
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.Connection.user_handle)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
-      &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::Common::UserProfileHandle*>(
+                         &::Kinova::Api::Common::_UserProfileHandle_default_instance_);
 }
-inline ::Kinova::Api::Common::UserProfileHandle* Connection::release_user_handle() {
+inline ::Kinova::Api::Common::UserProfileHandle* Connection::release_user_handle()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Common.Connection.user_handle)
-  
+
   ::Kinova::Api::Common::UserProfileHandle* temp = user_handle_;
   user_handle_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::Common::UserProfileHandle* Connection::mutable_user_handle() {
-  
-  if (user_handle_ == NULL) {
+inline ::Kinova::Api::Common::UserProfileHandle* Connection::mutable_user_handle()
+{
+  if (user_handle_ == NULL)
+  {
     user_handle_ = new ::Kinova::Api::Common::UserProfileHandle;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Common.Connection.user_handle)
   return user_handle_;
 }
-inline void Connection::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle) {
+inline void Connection::set_allocated_user_handle(::Kinova::Api::Common::UserProfileHandle* user_handle)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete user_handle_;
   }
-  if (user_handle) {
+  if (user_handle)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      user_handle = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, user_handle, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      user_handle = ::google::protobuf::internal::GetOwnedMessage(message_arena, user_handle, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   user_handle_ = user_handle;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Common.Connection.user_handle)
 }
 
 // string connection_information = 2;
-inline void Connection::clear_connection_information() {
+inline void Connection::clear_connection_information()
+{
   connection_information_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Connection::connection_information() const {
+inline const ::std::string& Connection::connection_information() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.Connection.connection_information)
   return connection_information_.GetNoArena();
 }
-inline void Connection::set_connection_information(const ::std::string& value) {
-  
+inline void Connection::set_connection_information(const ::std::string& value)
+{
   connection_information_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.Connection.connection_information)
 }
 #if LANG_CXX11
-inline void Connection::set_connection_information(::std::string&& value) {
-  
-  connection_information_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void Connection::set_connection_information(::std::string&& value)
+{
+  connection_information_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.Common.Connection.connection_information)
 }
 #endif
-inline void Connection::set_connection_information(const char* value) {
+inline void Connection::set_connection_information(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   connection_information_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.Common.Connection.connection_information)
 }
-inline void Connection::set_connection_information(const char* value, size_t size) {
-  
+inline void Connection::set_connection_information(const char* value, size_t size)
+{
   connection_information_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                                     ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.Common.Connection.connection_information)
 }
-inline ::std::string* Connection::mutable_connection_information() {
-  
+inline ::std::string* Connection::mutable_connection_information()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Common.Connection.connection_information)
   return connection_information_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Connection::release_connection_information() {
+inline ::std::string* Connection::release_connection_information()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Common.Connection.connection_information)
-  
+
   return connection_information_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Connection::set_allocated_connection_information(::std::string* connection_information) {
-  if (connection_information != NULL) {
-    
-  } else {
-    
+inline void Connection::set_allocated_connection_information(::std::string* connection_information)
+{
+  if (connection_information != NULL) {}
+  else
+  {
   }
-  connection_information_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), connection_information);
+  connection_information_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                                              connection_information);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Common.Connection.connection_information)
 }
 
 // uint32 connection_identifier = 3;
-inline void Connection::clear_connection_identifier() {
+inline void Connection::clear_connection_identifier()
+{
   connection_identifier_ = 0u;
 }
-inline ::google::protobuf::uint32 Connection::connection_identifier() const {
+inline ::google::protobuf::uint32 Connection::connection_identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.Connection.connection_identifier)
   return connection_identifier_;
 }
-inline void Connection::set_connection_identifier(::google::protobuf::uint32 value) {
-  
+inline void Connection::set_connection_identifier(::google::protobuf::uint32 value)
+{
   connection_identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.Connection.connection_identifier)
 }
@@ -2418,85 +2691,97 @@ inline void Connection::set_connection_identifier(::google::protobuf::uint32 val
 // UARTConfiguration
 
 // uint32 port_id = 1;
-inline void UARTConfiguration::clear_port_id() {
+inline void UARTConfiguration::clear_port_id()
+{
   port_id_ = 0u;
 }
-inline ::google::protobuf::uint32 UARTConfiguration::port_id() const {
+inline ::google::protobuf::uint32 UARTConfiguration::port_id() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UARTConfiguration.port_id)
   return port_id_;
 }
-inline void UARTConfiguration::set_port_id(::google::protobuf::uint32 value) {
-  
+inline void UARTConfiguration::set_port_id(::google::protobuf::uint32 value)
+{
   port_id_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UARTConfiguration.port_id)
 }
 
 // bool enabled = 2;
-inline void UARTConfiguration::clear_enabled() {
+inline void UARTConfiguration::clear_enabled()
+{
   enabled_ = false;
 }
-inline bool UARTConfiguration::enabled() const {
+inline bool UARTConfiguration::enabled() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UARTConfiguration.enabled)
   return enabled_;
 }
-inline void UARTConfiguration::set_enabled(bool value) {
-  
+inline void UARTConfiguration::set_enabled(bool value)
+{
   enabled_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UARTConfiguration.enabled)
 }
 
 // .Kinova.Api.Common.UARTSpeed speed = 3;
-inline void UARTConfiguration::clear_speed() {
+inline void UARTConfiguration::clear_speed()
+{
   speed_ = 0;
 }
-inline ::Kinova::Api::Common::UARTSpeed UARTConfiguration::speed() const {
+inline ::Kinova::Api::Common::UARTSpeed UARTConfiguration::speed() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UARTConfiguration.speed)
-  return static_cast< ::Kinova::Api::Common::UARTSpeed >(speed_);
+  return static_cast< ::Kinova::Api::Common::UARTSpeed>(speed_);
 }
-inline void UARTConfiguration::set_speed(::Kinova::Api::Common::UARTSpeed value) {
-  
+inline void UARTConfiguration::set_speed(::Kinova::Api::Common::UARTSpeed value)
+{
   speed_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UARTConfiguration.speed)
 }
 
 // .Kinova.Api.Common.UARTWordLength word_length = 4;
-inline void UARTConfiguration::clear_word_length() {
+inline void UARTConfiguration::clear_word_length()
+{
   word_length_ = 0;
 }
-inline ::Kinova::Api::Common::UARTWordLength UARTConfiguration::word_length() const {
+inline ::Kinova::Api::Common::UARTWordLength UARTConfiguration::word_length() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UARTConfiguration.word_length)
-  return static_cast< ::Kinova::Api::Common::UARTWordLength >(word_length_);
+  return static_cast< ::Kinova::Api::Common::UARTWordLength>(word_length_);
 }
-inline void UARTConfiguration::set_word_length(::Kinova::Api::Common::UARTWordLength value) {
-  
+inline void UARTConfiguration::set_word_length(::Kinova::Api::Common::UARTWordLength value)
+{
   word_length_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UARTConfiguration.word_length)
 }
 
 // .Kinova.Api.Common.UARTStopBits stop_bits = 5;
-inline void UARTConfiguration::clear_stop_bits() {
+inline void UARTConfiguration::clear_stop_bits()
+{
   stop_bits_ = 0;
 }
-inline ::Kinova::Api::Common::UARTStopBits UARTConfiguration::stop_bits() const {
+inline ::Kinova::Api::Common::UARTStopBits UARTConfiguration::stop_bits() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UARTConfiguration.stop_bits)
-  return static_cast< ::Kinova::Api::Common::UARTStopBits >(stop_bits_);
+  return static_cast< ::Kinova::Api::Common::UARTStopBits>(stop_bits_);
 }
-inline void UARTConfiguration::set_stop_bits(::Kinova::Api::Common::UARTStopBits value) {
-  
+inline void UARTConfiguration::set_stop_bits(::Kinova::Api::Common::UARTStopBits value)
+{
   stop_bits_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UARTConfiguration.stop_bits)
 }
 
 // .Kinova.Api.Common.UARTParity parity = 6;
-inline void UARTConfiguration::clear_parity() {
+inline void UARTConfiguration::clear_parity()
+{
   parity_ = 0;
 }
-inline ::Kinova::Api::Common::UARTParity UARTConfiguration::parity() const {
+inline ::Kinova::Api::Common::UARTParity UARTConfiguration::parity() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UARTConfiguration.parity)
-  return static_cast< ::Kinova::Api::Common::UARTParity >(parity_);
+  return static_cast< ::Kinova::Api::Common::UARTParity>(parity_);
 }
-inline void UARTConfiguration::set_parity(::Kinova::Api::Common::UARTParity value) {
-  
+inline void UARTConfiguration::set_parity(::Kinova::Api::Common::UARTParity value)
+{
   parity_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UARTConfiguration.parity)
 }
@@ -2506,15 +2791,17 @@ inline void UARTConfiguration::set_parity(::Kinova::Api::Common::UARTParity valu
 // UARTDeviceIdentification
 
 // uint32 port_id = 1;
-inline void UARTDeviceIdentification::clear_port_id() {
+inline void UARTDeviceIdentification::clear_port_id()
+{
   port_id_ = 0u;
 }
-inline ::google::protobuf::uint32 UARTDeviceIdentification::port_id() const {
+inline ::google::protobuf::uint32 UARTDeviceIdentification::port_id() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.UARTDeviceIdentification.port_id)
   return port_id_;
 }
-inline void UARTDeviceIdentification::set_port_id(::google::protobuf::uint32 value) {
-  
+inline void UARTDeviceIdentification::set_port_id(::google::protobuf::uint32 value)
+{
   port_id_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.UARTDeviceIdentification.port_id)
 }
@@ -2524,21 +2811,23 @@ inline void UARTDeviceIdentification::set_port_id(::google::protobuf::uint32 val
 // CountryCode
 
 // .Kinova.Api.Common.CountryCodeIdentifier identifier = 1;
-inline void CountryCode::clear_identifier() {
+inline void CountryCode::clear_identifier()
+{
   identifier_ = 0;
 }
-inline ::Kinova::Api::Common::CountryCodeIdentifier CountryCode::identifier() const {
+inline ::Kinova::Api::Common::CountryCodeIdentifier CountryCode::identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Common.CountryCode.identifier)
-  return static_cast< ::Kinova::Api::Common::CountryCodeIdentifier >(identifier_);
+  return static_cast< ::Kinova::Api::Common::CountryCodeIdentifier>(identifier_);
 }
-inline void CountryCode::set_identifier(::Kinova::Api::Common::CountryCodeIdentifier value) {
-  
+inline void CountryCode::set_identifier(::Kinova::Api::Common::CountryCodeIdentifier value)
+{
   identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Common.CountryCode.identifier)
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
@@ -2562,74 +2851,122 @@ inline void CountryCode::set_identifier(::Kinova::Api::Common::CountryCodeIdenti
 
 // -------------------------------------------------------------------
 
-
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace Common
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::Common::DeviceTypes> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::DeviceTypes>() {
+struct is_proto_enum< ::Kinova::Api::Common::DeviceTypes> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::DeviceTypes>()
+{
   return ::Kinova::Api::Common::DeviceTypes_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::SafetyStatusValue> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::SafetyStatusValue>() {
+struct is_proto_enum< ::Kinova::Api::Common::SafetyStatusValue> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::SafetyStatusValue>()
+{
   return ::Kinova::Api::Common::SafetyStatusValue_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::Permission> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::Permission>() {
+struct is_proto_enum< ::Kinova::Api::Common::Permission> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::Permission>()
+{
   return ::Kinova::Api::Common::Permission_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::NotificationType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::NotificationType>() {
+struct is_proto_enum< ::Kinova::Api::Common::NotificationType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::NotificationType>()
+{
   return ::Kinova::Api::Common::NotificationType_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::Unit> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::Unit>() {
+struct is_proto_enum< ::Kinova::Api::Common::Unit> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::Unit>()
+{
   return ::Kinova::Api::Common::Unit_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::ArmState> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::ArmState>() {
+struct is_proto_enum< ::Kinova::Api::Common::ArmState> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::ArmState>()
+{
   return ::Kinova::Api::Common::ArmState_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::UARTSpeed> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTSpeed>() {
+struct is_proto_enum< ::Kinova::Api::Common::UARTSpeed> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTSpeed>()
+{
   return ::Kinova::Api::Common::UARTSpeed_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::UARTWordLength> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTWordLength>() {
+struct is_proto_enum< ::Kinova::Api::Common::UARTWordLength> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTWordLength>()
+{
   return ::Kinova::Api::Common::UARTWordLength_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::UARTStopBits> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTStopBits>() {
+struct is_proto_enum< ::Kinova::Api::Common::UARTStopBits> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTStopBits>()
+{
   return ::Kinova::Api::Common::UARTStopBits_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::UARTParity> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTParity>() {
+struct is_proto_enum< ::Kinova::Api::Common::UARTParity> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::UARTParity>()
+{
   return ::Kinova::Api::Common::UARTParity_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::CartesianReferenceFrame> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::CartesianReferenceFrame>() {
+struct is_proto_enum< ::Kinova::Api::Common::CartesianReferenceFrame> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::CartesianReferenceFrame>()
+{
   return ::Kinova::Api::Common::CartesianReferenceFrame_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::Common::CountryCodeIdentifier> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::CountryCodeIdentifier>() {
+struct is_proto_enum< ::Kinova::Api::Common::CountryCodeIdentifier> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Common::CountryCodeIdentifier>()
+{
   return ::Kinova::Api::Common::CountryCodeIdentifier_descriptor();
 }
 

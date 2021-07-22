@@ -5,7 +5,7 @@
 rosdep update
 apt-get update
 rosdep -y install --from-paths src --ignore-src
-rm -rf devel/ build/ 
+rm -rf devel/ build/
 catkin_make
 catkin_make tests
 echo 'Finished building the package!'

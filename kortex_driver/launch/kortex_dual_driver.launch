@@ -58,10 +58,10 @@
     <arg name="right_default_goal_tolerance" default="0.005"/> <!--radians-->
 
     <!-- Load arms descriptions -->
-   <param 
-        name="robot_description" 
-        command="$(find xacro)/xacro --inorder $(find kortex_description)/multiple_robots/kortex_dual_robots.xacro 
-            left_arm:=$(arg left_arm) 
+   <param
+        name="robot_description"
+        command="$(find xacro)/xacro --inorder $(find kortex_description)/multiple_robots/kortex_dual_robots.xacro
+            left_arm:=$(arg left_arm)
             left_gripper:=$(arg left_gripper)
             left_dof:=$(arg left_dof)
             left_vision:=$(arg left_vision)
@@ -127,6 +127,6 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
 
     <!-- Start RViz -->
-    <node name="rviz" pkg="rviz" type="rviz" output="log" args="world" if="$(arg start_rviz)"/> 
+    <node name="rviz" pkg="rviz" type="rviz" output="log" args="world" if="$(arg start_rviz)"/>
 
 </launch>

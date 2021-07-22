@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
     <xacro:macro name="load_gazebo_gripper_transmissions" params="prefix">
-        
+
         <transmission name="${prefix}right_finger_bottom_trans">
             <type>transmission_interface/SimpleTransmission</type>
             <joint name="${prefix}right_finger_bottom_joint">
@@ -13,7 +13,7 @@
                 <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             </actuator>
         </transmission>
-        
+
         <gazebo>
             <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="mimic_gen3_lite_2f_1">
                 <joint>${prefix}right_finger_bottom_joint</joint>

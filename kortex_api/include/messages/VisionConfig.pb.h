@@ -27,15 +27,17 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "Common.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_VisionConfig_2eproto {
+namespace protobuf_VisionConfig_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[16];
@@ -76,7 +78,8 @@ void InitDefaultsRotationMatrixRowImpl();
 void InitDefaultsRotationMatrixRow();
 void InitDefaultsTranslationVectorImpl();
 void InitDefaultsTranslationVector();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsSensorSettings();
   InitDefaultsSensorIdentifier();
   InitDefaultsIntrinsicProfileIdentifier();
@@ -95,9 +98,12 @@ inline void InitDefaults() {
   InitDefaultsTranslationVector();
 }
 }  // namespace protobuf_VisionConfig_2eproto
-namespace Kinova {
-namespace Api {
-namespace VisionConfig {
+namespace Kinova
+{
+namespace Api
+{
+namespace VisionConfig
+{
 class DistortionCoefficients;
 class DistortionCoefficientsDefaultTypeInternal;
 extern DistortionCoefficientsDefaultTypeInternal _DistortionCoefficients_default_instance_;
@@ -149,11 +155,14 @@ extern VisionNotificationDefaultTypeInternal _VisionNotification_default_instanc
 }  // namespace VisionConfig
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace VisionConfig {
-
-enum ServiceVersion {
+namespace Kinova
+{
+namespace Api
+{
+namespace VisionConfig
+{
+enum ServiceVersion
+{
   RESERVED_0 = 0,
   CURRENT_VERSION = 1,
   ServiceVersion_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
@@ -165,16 +174,16 @@ const ServiceVersion ServiceVersion_MAX = CURRENT_VERSION;
 const int ServiceVersion_ARRAYSIZE = ServiceVersion_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServiceVersion_descriptor();
-inline const ::std::string& ServiceVersion_Name(ServiceVersion value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ServiceVersion_descriptor(), value);
+inline const ::std::string& ServiceVersion_Name(ServiceVersion value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ServiceVersion_descriptor(), value);
 }
-inline bool ServiceVersion_Parse(
-    const ::std::string& name, ServiceVersion* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(
-    ServiceVersion_descriptor(), name, value);
+inline bool ServiceVersion_Parse(const ::std::string& name, ServiceVersion* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(ServiceVersion_descriptor(), name, value);
 }
-enum Sensor {
+enum Sensor
+{
   SENSOR_UNSPECIFIED = 0,
   SENSOR_COLOR = 1,
   SENSOR_DEPTH = 2,
@@ -187,16 +196,16 @@ const Sensor Sensor_MAX = SENSOR_DEPTH;
 const int Sensor_ARRAYSIZE = Sensor_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Sensor_descriptor();
-inline const ::std::string& Sensor_Name(Sensor value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Sensor_descriptor(), value);
+inline const ::std::string& Sensor_Name(Sensor value)
+{
+  return ::google::protobuf::internal::NameOfEnum(Sensor_descriptor(), value);
 }
-inline bool Sensor_Parse(
-    const ::std::string& name, Sensor* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Sensor>(
-    Sensor_descriptor(), name, value);
+inline bool Sensor_Parse(const ::std::string& name, Sensor* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<Sensor>(Sensor_descriptor(), name, value);
 }
-enum Resolution {
+enum Resolution
+{
   RESOLUTION_UNSPECIFIED = 0,
   RESOLUTION_320x240 = 1,
   RESOLUTION_424x240 = 2,
@@ -213,16 +222,16 @@ const Resolution Resolution_MAX = RESOLUTION_1920x1080;
 const int Resolution_ARRAYSIZE = Resolution_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Resolution_descriptor();
-inline const ::std::string& Resolution_Name(Resolution value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Resolution_descriptor(), value);
+inline const ::std::string& Resolution_Name(Resolution value)
+{
+  return ::google::protobuf::internal::NameOfEnum(Resolution_descriptor(), value);
 }
-inline bool Resolution_Parse(
-    const ::std::string& name, Resolution* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Resolution>(
-    Resolution_descriptor(), name, value);
+inline bool Resolution_Parse(const ::std::string& name, Resolution* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<Resolution>(Resolution_descriptor(), name, value);
 }
-enum FrameRate {
+enum FrameRate
+{
   FRAMERATE_UNSPECIFIED = 0,
   FRAMERATE_6_FPS = 1,
   FRAMERATE_15_FPS = 2,
@@ -236,16 +245,16 @@ const FrameRate FrameRate_MAX = FRAMERATE_30_FPS;
 const int FrameRate_ARRAYSIZE = FrameRate_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* FrameRate_descriptor();
-inline const ::std::string& FrameRate_Name(FrameRate value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    FrameRate_descriptor(), value);
+inline const ::std::string& FrameRate_Name(FrameRate value)
+{
+  return ::google::protobuf::internal::NameOfEnum(FrameRate_descriptor(), value);
 }
-inline bool FrameRate_Parse(
-    const ::std::string& name, FrameRate* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<FrameRate>(
-    FrameRate_descriptor(), name, value);
+inline bool FrameRate_Parse(const ::std::string& name, FrameRate* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<FrameRate>(FrameRate_descriptor(), name, value);
 }
-enum BitRate {
+enum BitRate
+{
   BITRATE_UNSPECIFIED = 0,
   BITRATE_10_MBPS = 1,
   BITRATE_15_MBPS = 2,
@@ -260,16 +269,16 @@ const BitRate BitRate_MAX = BITRATE_25_MBPS;
 const int BitRate_ARRAYSIZE = BitRate_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* BitRate_descriptor();
-inline const ::std::string& BitRate_Name(BitRate value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    BitRate_descriptor(), value);
+inline const ::std::string& BitRate_Name(BitRate value)
+{
+  return ::google::protobuf::internal::NameOfEnum(BitRate_descriptor(), value);
 }
-inline bool BitRate_Parse(
-    const ::std::string& name, BitRate* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<BitRate>(
-    BitRate_descriptor(), name, value);
+inline bool BitRate_Parse(const ::std::string& name, BitRate* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<BitRate>(BitRate_descriptor(), name, value);
 }
-enum Option {
+enum Option
+{
   OPTION_UNSPECIFIED = 0,
   OPTION_BACKLIGHT_COMPENSATION = 1,
   OPTION_BRIGHTNESS = 2,
@@ -322,16 +331,16 @@ const Option Option_MAX = OPTION_AUTO_EXPOSURE_CONVERGE_STEP;
 const int Option_ARRAYSIZE = Option_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Option_descriptor();
-inline const ::std::string& Option_Name(Option value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Option_descriptor(), value);
+inline const ::std::string& Option_Name(Option value)
+{
+  return ::google::protobuf::internal::NameOfEnum(Option_descriptor(), value);
 }
-inline bool Option_Parse(
-    const ::std::string& name, Option* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Option>(
-    Option_descriptor(), name, value);
+inline bool Option_Parse(const ::std::string& name, Option* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<Option>(Option_descriptor(), name, value);
 }
-enum FocusAction {
+enum FocusAction
+{
   FOCUSACTION_UNSPECIFIED = 0,
   FOCUSACTION_START_CONTINUOUS_FOCUS = 1,
   FOCUSACTION_PAUSE_CONTINUOUS_FOCUS = 2,
@@ -348,16 +357,16 @@ const FocusAction FocusAction_MAX = FOCUSACTION_SET_MANUAL_FOCUS;
 const int FocusAction_ARRAYSIZE = FocusAction_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* FocusAction_descriptor();
-inline const ::std::string& FocusAction_Name(FocusAction value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    FocusAction_descriptor(), value);
+inline const ::std::string& FocusAction_Name(FocusAction value)
+{
+  return ::google::protobuf::internal::NameOfEnum(FocusAction_descriptor(), value);
 }
-inline bool FocusAction_Parse(
-    const ::std::string& name, FocusAction* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<FocusAction>(
-    FocusAction_descriptor(), name, value);
+inline bool FocusAction_Parse(const ::std::string& name, FocusAction* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<FocusAction>(FocusAction_descriptor(), name, value);
 }
-enum VisionEvent {
+enum VisionEvent
+{
   UNSPECIFIED_VISION_EVENT = 0,
   SENSOR_SETTINGS_CHANGED = 1,
   OPTION_VALUE_CHANGED = 2,
@@ -370,62 +379,73 @@ const VisionEvent VisionEvent_MAX = OPTION_VALUE_CHANGED;
 const int VisionEvent_ARRAYSIZE = VisionEvent_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* VisionEvent_descriptor();
-inline const ::std::string& VisionEvent_Name(VisionEvent value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    VisionEvent_descriptor(), value);
+inline const ::std::string& VisionEvent_Name(VisionEvent value)
+{
+  return ::google::protobuf::internal::NameOfEnum(VisionEvent_descriptor(), value);
 }
-inline bool VisionEvent_Parse(
-    const ::std::string& name, VisionEvent* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<VisionEvent>(
-    VisionEvent_descriptor(), name, value);
+inline bool VisionEvent_Parse(const ::std::string& name, VisionEvent* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<VisionEvent>(VisionEvent_descriptor(), name, value);
 }
 // ===================================================================
 
-class SensorSettings : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.SensorSettings) */ {
- public:
+class SensorSettings
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.SensorSettings) */
+{
+public:
   SensorSettings();
   virtual ~SensorSettings();
 
   SensorSettings(const SensorSettings& from);
 
-  inline SensorSettings& operator=(const SensorSettings& from) {
+  inline SensorSettings& operator=(const SensorSettings& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SensorSettings(SensorSettings&& from) noexcept
-    : SensorSettings() {
+#if LANG_CXX11
+  SensorSettings(SensorSettings&& from) noexcept : SensorSettings()
+  {
     *this = ::std::move(from);
   }
 
-  inline SensorSettings& operator=(SensorSettings&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SensorSettings& operator=(SensorSettings&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SensorSettings& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SensorSettings* internal_default_instance() {
-    return reinterpret_cast<const SensorSettings*>(
-               &_SensorSettings_default_instance_);
+  static inline const SensorSettings* internal_default_instance()
+  {
+    return reinterpret_cast<const SensorSettings*>(&_SensorSettings_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(SensorSettings* other);
-  friend void swap(SensorSettings& a, SensorSettings& b) {
+  friend void swap(SensorSettings& a, SensorSettings& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SensorSettings* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SensorSettings* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SensorSettings* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -436,27 +456,32 @@ class SensorSettings : public ::google::protobuf::Message /* @@protoc_insertion_
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SensorSettings* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -488,8 +513,7 @@ class SensorSettings : public ::google::protobuf::Message /* @@protoc_insertion_
   void set_bit_rate(::Kinova::Api::VisionConfig::BitRate value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.SensorSettings)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int sensor_;
   int resolution_;
@@ -501,51 +525,63 @@ class SensorSettings : public ::google::protobuf::Message /* @@protoc_insertion_
 };
 // -------------------------------------------------------------------
 
-class SensorIdentifier : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.SensorIdentifier) */ {
- public:
+class SensorIdentifier
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.SensorIdentifier) */
+{
+public:
   SensorIdentifier();
   virtual ~SensorIdentifier();
 
   SensorIdentifier(const SensorIdentifier& from);
 
-  inline SensorIdentifier& operator=(const SensorIdentifier& from) {
+  inline SensorIdentifier& operator=(const SensorIdentifier& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SensorIdentifier(SensorIdentifier&& from) noexcept
-    : SensorIdentifier() {
+#if LANG_CXX11
+  SensorIdentifier(SensorIdentifier&& from) noexcept : SensorIdentifier()
+  {
     *this = ::std::move(from);
   }
 
-  inline SensorIdentifier& operator=(SensorIdentifier&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SensorIdentifier& operator=(SensorIdentifier&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SensorIdentifier& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SensorIdentifier* internal_default_instance() {
-    return reinterpret_cast<const SensorIdentifier*>(
-               &_SensorIdentifier_default_instance_);
+  static inline const SensorIdentifier* internal_default_instance()
+  {
+    return reinterpret_cast<const SensorIdentifier*>(&_SensorIdentifier_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void Swap(SensorIdentifier* other);
-  friend void swap(SensorIdentifier& a, SensorIdentifier& b) {
+  friend void swap(SensorIdentifier& a, SensorIdentifier& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SensorIdentifier* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SensorIdentifier* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SensorIdentifier* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -556,27 +592,32 @@ class SensorIdentifier : public ::google::protobuf::Message /* @@protoc_insertio
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SensorIdentifier* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -590,8 +631,7 @@ class SensorIdentifier : public ::google::protobuf::Message /* @@protoc_insertio
   void set_sensor(::Kinova::Api::VisionConfig::Sensor value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.SensorIdentifier)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int sensor_;
   mutable int _cached_size_;
@@ -600,51 +640,63 @@ class SensorIdentifier : public ::google::protobuf::Message /* @@protoc_insertio
 };
 // -------------------------------------------------------------------
 
-class IntrinsicProfileIdentifier : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.IntrinsicProfileIdentifier) */ {
- public:
+class IntrinsicProfileIdentifier
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.IntrinsicProfileIdentifier) */
+{
+public:
   IntrinsicProfileIdentifier();
   virtual ~IntrinsicProfileIdentifier();
 
   IntrinsicProfileIdentifier(const IntrinsicProfileIdentifier& from);
 
-  inline IntrinsicProfileIdentifier& operator=(const IntrinsicProfileIdentifier& from) {
+  inline IntrinsicProfileIdentifier& operator=(const IntrinsicProfileIdentifier& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  IntrinsicProfileIdentifier(IntrinsicProfileIdentifier&& from) noexcept
-    : IntrinsicProfileIdentifier() {
+#if LANG_CXX11
+  IntrinsicProfileIdentifier(IntrinsicProfileIdentifier&& from) noexcept : IntrinsicProfileIdentifier()
+  {
     *this = ::std::move(from);
   }
 
-  inline IntrinsicProfileIdentifier& operator=(IntrinsicProfileIdentifier&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline IntrinsicProfileIdentifier& operator=(IntrinsicProfileIdentifier&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const IntrinsicProfileIdentifier& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const IntrinsicProfileIdentifier* internal_default_instance() {
-    return reinterpret_cast<const IntrinsicProfileIdentifier*>(
-               &_IntrinsicProfileIdentifier_default_instance_);
+  static inline const IntrinsicProfileIdentifier* internal_default_instance()
+  {
+    return reinterpret_cast<const IntrinsicProfileIdentifier*>(&_IntrinsicProfileIdentifier_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 2;
 
   void Swap(IntrinsicProfileIdentifier* other);
-  friend void swap(IntrinsicProfileIdentifier& a, IntrinsicProfileIdentifier& b) {
+  friend void swap(IntrinsicProfileIdentifier& a, IntrinsicProfileIdentifier& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline IntrinsicProfileIdentifier* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline IntrinsicProfileIdentifier* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   IntrinsicProfileIdentifier* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -655,27 +707,32 @@ class IntrinsicProfileIdentifier : public ::google::protobuf::Message /* @@proto
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(IntrinsicProfileIdentifier* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -695,8 +752,7 @@ class IntrinsicProfileIdentifier : public ::google::protobuf::Message /* @@proto
   void set_resolution(::Kinova::Api::VisionConfig::Resolution value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.IntrinsicProfileIdentifier)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int sensor_;
   int resolution_;
@@ -706,51 +762,63 @@ class IntrinsicProfileIdentifier : public ::google::protobuf::Message /* @@proto
 };
 // -------------------------------------------------------------------
 
-class OptionIdentifier : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.OptionIdentifier) */ {
- public:
+class OptionIdentifier
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.OptionIdentifier) */
+{
+public:
   OptionIdentifier();
   virtual ~OptionIdentifier();
 
   OptionIdentifier(const OptionIdentifier& from);
 
-  inline OptionIdentifier& operator=(const OptionIdentifier& from) {
+  inline OptionIdentifier& operator=(const OptionIdentifier& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  OptionIdentifier(OptionIdentifier&& from) noexcept
-    : OptionIdentifier() {
+#if LANG_CXX11
+  OptionIdentifier(OptionIdentifier&& from) noexcept : OptionIdentifier()
+  {
     *this = ::std::move(from);
   }
 
-  inline OptionIdentifier& operator=(OptionIdentifier&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline OptionIdentifier& operator=(OptionIdentifier&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const OptionIdentifier& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const OptionIdentifier* internal_default_instance() {
-    return reinterpret_cast<const OptionIdentifier*>(
-               &_OptionIdentifier_default_instance_);
+  static inline const OptionIdentifier* internal_default_instance()
+  {
+    return reinterpret_cast<const OptionIdentifier*>(&_OptionIdentifier_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 3;
 
   void Swap(OptionIdentifier* other);
-  friend void swap(OptionIdentifier& a, OptionIdentifier& b) {
+  friend void swap(OptionIdentifier& a, OptionIdentifier& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline OptionIdentifier* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline OptionIdentifier* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   OptionIdentifier* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -761,27 +829,32 @@ class OptionIdentifier : public ::google::protobuf::Message /* @@protoc_insertio
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(OptionIdentifier* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -801,8 +874,7 @@ class OptionIdentifier : public ::google::protobuf::Message /* @@protoc_insertio
   void set_option(::Kinova::Api::VisionConfig::Option value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.OptionIdentifier)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int sensor_;
   int option_;
@@ -812,51 +884,62 @@ class OptionIdentifier : public ::google::protobuf::Message /* @@protoc_insertio
 };
 // -------------------------------------------------------------------
 
-class OptionValue : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.OptionValue) */ {
- public:
+class OptionValue
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.OptionValue) */
+{
+public:
   OptionValue();
   virtual ~OptionValue();
 
   OptionValue(const OptionValue& from);
 
-  inline OptionValue& operator=(const OptionValue& from) {
+  inline OptionValue& operator=(const OptionValue& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  OptionValue(OptionValue&& from) noexcept
-    : OptionValue() {
+#if LANG_CXX11
+  OptionValue(OptionValue&& from) noexcept : OptionValue()
+  {
     *this = ::std::move(from);
   }
 
-  inline OptionValue& operator=(OptionValue&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline OptionValue& operator=(OptionValue&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const OptionValue& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const OptionValue* internal_default_instance() {
-    return reinterpret_cast<const OptionValue*>(
-               &_OptionValue_default_instance_);
+  static inline const OptionValue* internal_default_instance()
+  {
+    return reinterpret_cast<const OptionValue*>(&_OptionValue_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 4;
 
   void Swap(OptionValue* other);
-  friend void swap(OptionValue& a, OptionValue& b) {
+  friend void swap(OptionValue& a, OptionValue& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline OptionValue* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline OptionValue* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   OptionValue* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -867,27 +950,32 @@ class OptionValue : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(OptionValue* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -913,8 +1001,7 @@ class OptionValue : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void set_value(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.OptionValue)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int sensor_;
   int option_;
@@ -925,51 +1012,63 @@ class OptionValue : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class OptionInformation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.OptionInformation) */ {
- public:
+class OptionInformation
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.OptionInformation) */
+{
+public:
   OptionInformation();
   virtual ~OptionInformation();
 
   OptionInformation(const OptionInformation& from);
 
-  inline OptionInformation& operator=(const OptionInformation& from) {
+  inline OptionInformation& operator=(const OptionInformation& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  OptionInformation(OptionInformation&& from) noexcept
-    : OptionInformation() {
+#if LANG_CXX11
+  OptionInformation(OptionInformation&& from) noexcept : OptionInformation()
+  {
     *this = ::std::move(from);
   }
 
-  inline OptionInformation& operator=(OptionInformation&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline OptionInformation& operator=(OptionInformation&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const OptionInformation& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const OptionInformation* internal_default_instance() {
-    return reinterpret_cast<const OptionInformation*>(
-               &_OptionInformation_default_instance_);
+  static inline const OptionInformation* internal_default_instance()
+  {
+    return reinterpret_cast<const OptionInformation*>(&_OptionInformation_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 5;
 
   void Swap(OptionInformation* other);
-  friend void swap(OptionInformation& a, OptionInformation& b) {
+  friend void swap(OptionInformation& a, OptionInformation& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline OptionInformation* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline OptionInformation* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   OptionInformation* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -980,27 +1079,32 @@ class OptionInformation : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(OptionInformation* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1056,8 +1160,7 @@ class OptionInformation : public ::google::protobuf::Message /* @@protoc_inserti
   void set_default_value(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.OptionInformation)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int sensor_;
   int option_;
@@ -1073,57 +1176,70 @@ class OptionInformation : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class SensorFocusAction : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.SensorFocusAction) */ {
- public:
+class SensorFocusAction
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.SensorFocusAction) */
+{
+public:
   SensorFocusAction();
   virtual ~SensorFocusAction();
 
   SensorFocusAction(const SensorFocusAction& from);
 
-  inline SensorFocusAction& operator=(const SensorFocusAction& from) {
+  inline SensorFocusAction& operator=(const SensorFocusAction& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SensorFocusAction(SensorFocusAction&& from) noexcept
-    : SensorFocusAction() {
+#if LANG_CXX11
+  SensorFocusAction(SensorFocusAction&& from) noexcept : SensorFocusAction()
+  {
     *this = ::std::move(from);
   }
 
-  inline SensorFocusAction& operator=(SensorFocusAction&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SensorFocusAction& operator=(SensorFocusAction&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const SensorFocusAction& default_instance();
 
-  enum ActionParametersCase {
+  enum ActionParametersCase
+  {
     kFocusPoint = 3,
     kManualFocus = 4,
     ACTION_PARAMETERS_NOT_SET = 0,
   };
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SensorFocusAction* internal_default_instance() {
-    return reinterpret_cast<const SensorFocusAction*>(
-               &_SensorFocusAction_default_instance_);
+  static inline const SensorFocusAction* internal_default_instance()
+  {
+    return reinterpret_cast<const SensorFocusAction*>(&_SensorFocusAction_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 6;
 
   void Swap(SensorFocusAction* other);
-  friend void swap(SensorFocusAction& a, SensorFocusAction& b) {
+  friend void swap(SensorFocusAction& a, SensorFocusAction& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SensorFocusAction* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SensorFocusAction* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SensorFocusAction* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1134,27 +1250,32 @@ class SensorFocusAction : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SensorFocusAction* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1193,7 +1314,7 @@ class SensorFocusAction : public ::google::protobuf::Message /* @@protoc_inserti
 
   ActionParametersCase action_parameters_case() const;
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.SensorFocusAction)
- private:
+private:
   void set_has_focus_point();
   void set_has_manual_focus();
 
@@ -1204,8 +1325,11 @@ class SensorFocusAction : public ::google::protobuf::Message /* @@protoc_inserti
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int sensor_;
   int focus_action_;
-  union ActionParametersUnion {
-    ActionParametersUnion() {}
+  union ActionParametersUnion
+  {
+    ActionParametersUnion()
+    {
+    }
     ::Kinova::Api::VisionConfig::FocusPoint* focus_point_;
     ::Kinova::Api::VisionConfig::ManualFocus* manual_focus_;
   } action_parameters_;
@@ -1217,51 +1341,62 @@ class SensorFocusAction : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class FocusPoint : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.FocusPoint) */ {
- public:
+class FocusPoint
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.FocusPoint) */
+{
+public:
   FocusPoint();
   virtual ~FocusPoint();
 
   FocusPoint(const FocusPoint& from);
 
-  inline FocusPoint& operator=(const FocusPoint& from) {
+  inline FocusPoint& operator=(const FocusPoint& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  FocusPoint(FocusPoint&& from) noexcept
-    : FocusPoint() {
+#if LANG_CXX11
+  FocusPoint(FocusPoint&& from) noexcept : FocusPoint()
+  {
     *this = ::std::move(from);
   }
 
-  inline FocusPoint& operator=(FocusPoint&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline FocusPoint& operator=(FocusPoint&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const FocusPoint& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FocusPoint* internal_default_instance() {
-    return reinterpret_cast<const FocusPoint*>(
-               &_FocusPoint_default_instance_);
+  static inline const FocusPoint* internal_default_instance()
+  {
+    return reinterpret_cast<const FocusPoint*>(&_FocusPoint_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 7;
 
   void Swap(FocusPoint* other);
-  friend void swap(FocusPoint& a, FocusPoint& b) {
+  friend void swap(FocusPoint& a, FocusPoint& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FocusPoint* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline FocusPoint* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   FocusPoint* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1272,27 +1407,32 @@ class FocusPoint : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(FocusPoint* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1312,8 +1452,7 @@ class FocusPoint : public ::google::protobuf::Message /* @@protoc_insertion_poin
   void set_y(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.FocusPoint)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 x_;
   ::google::protobuf::uint32 y_;
@@ -1323,51 +1462,62 @@ class FocusPoint : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
-class ManualFocus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.ManualFocus) */ {
- public:
+class ManualFocus
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.ManualFocus) */
+{
+public:
   ManualFocus();
   virtual ~ManualFocus();
 
   ManualFocus(const ManualFocus& from);
 
-  inline ManualFocus& operator=(const ManualFocus& from) {
+  inline ManualFocus& operator=(const ManualFocus& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ManualFocus(ManualFocus&& from) noexcept
-    : ManualFocus() {
+#if LANG_CXX11
+  ManualFocus(ManualFocus&& from) noexcept : ManualFocus()
+  {
     *this = ::std::move(from);
   }
 
-  inline ManualFocus& operator=(ManualFocus&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ManualFocus& operator=(ManualFocus&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ManualFocus& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ManualFocus* internal_default_instance() {
-    return reinterpret_cast<const ManualFocus*>(
-               &_ManualFocus_default_instance_);
+  static inline const ManualFocus* internal_default_instance()
+  {
+    return reinterpret_cast<const ManualFocus*>(&_ManualFocus_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 8;
 
   void Swap(ManualFocus* other);
-  friend void swap(ManualFocus& a, ManualFocus& b) {
+  friend void swap(ManualFocus& a, ManualFocus& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ManualFocus* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ManualFocus* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ManualFocus* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1378,27 +1528,32 @@ class ManualFocus : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ManualFocus* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1412,8 +1567,7 @@ class ManualFocus : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void set_value(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.ManualFocus)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 value_;
   mutable int _cached_size_;
@@ -1422,51 +1576,63 @@ class ManualFocus : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class VisionNotification : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.VisionNotification) */ {
- public:
+class VisionNotification
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.VisionNotification) */
+{
+public:
   VisionNotification();
   virtual ~VisionNotification();
 
   VisionNotification(const VisionNotification& from);
 
-  inline VisionNotification& operator=(const VisionNotification& from) {
+  inline VisionNotification& operator=(const VisionNotification& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  VisionNotification(VisionNotification&& from) noexcept
-    : VisionNotification() {
+#if LANG_CXX11
+  VisionNotification(VisionNotification&& from) noexcept : VisionNotification()
+  {
     *this = ::std::move(from);
   }
 
-  inline VisionNotification& operator=(VisionNotification&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline VisionNotification& operator=(VisionNotification&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const VisionNotification& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const VisionNotification* internal_default_instance() {
-    return reinterpret_cast<const VisionNotification*>(
-               &_VisionNotification_default_instance_);
+  static inline const VisionNotification* internal_default_instance()
+  {
+    return reinterpret_cast<const VisionNotification*>(&_VisionNotification_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 9;
 
   void Swap(VisionNotification* other);
-  friend void swap(VisionNotification& a, VisionNotification& b) {
+  friend void swap(VisionNotification& a, VisionNotification& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline VisionNotification* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline VisionNotification* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   VisionNotification* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1477,27 +1643,32 @@ class VisionNotification : public ::google::protobuf::Message /* @@protoc_insert
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(VisionNotification* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1523,8 +1694,7 @@ class VisionNotification : public ::google::protobuf::Message /* @@protoc_insert
   void set_option(::Kinova::Api::VisionConfig::Option value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.VisionNotification)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int event_;
   int sensor_;
@@ -1535,51 +1705,63 @@ class VisionNotification : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class IntrinsicParameters : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.IntrinsicParameters) */ {
- public:
+class IntrinsicParameters
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.IntrinsicParameters) */
+{
+public:
   IntrinsicParameters();
   virtual ~IntrinsicParameters();
 
   IntrinsicParameters(const IntrinsicParameters& from);
 
-  inline IntrinsicParameters& operator=(const IntrinsicParameters& from) {
+  inline IntrinsicParameters& operator=(const IntrinsicParameters& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  IntrinsicParameters(IntrinsicParameters&& from) noexcept
-    : IntrinsicParameters() {
+#if LANG_CXX11
+  IntrinsicParameters(IntrinsicParameters&& from) noexcept : IntrinsicParameters()
+  {
     *this = ::std::move(from);
   }
 
-  inline IntrinsicParameters& operator=(IntrinsicParameters&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline IntrinsicParameters& operator=(IntrinsicParameters&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const IntrinsicParameters& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const IntrinsicParameters* internal_default_instance() {
-    return reinterpret_cast<const IntrinsicParameters*>(
-               &_IntrinsicParameters_default_instance_);
+  static inline const IntrinsicParameters* internal_default_instance()
+  {
+    return reinterpret_cast<const IntrinsicParameters*>(&_IntrinsicParameters_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 10;
 
   void Swap(IntrinsicParameters* other);
-  friend void swap(IntrinsicParameters& a, IntrinsicParameters& b) {
+  friend void swap(IntrinsicParameters& a, IntrinsicParameters& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline IntrinsicParameters* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline IntrinsicParameters* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   IntrinsicParameters* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1590,27 +1772,32 @@ class IntrinsicParameters : public ::google::protobuf::Message /* @@protoc_inser
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(IntrinsicParameters* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1663,8 +1850,7 @@ class IntrinsicParameters : public ::google::protobuf::Message /* @@protoc_inser
   void set_focal_length_y(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.IntrinsicParameters)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::VisionConfig::DistortionCoefficients* distortion_coeffs_;
   int sensor_;
@@ -1679,51 +1865,63 @@ class IntrinsicParameters : public ::google::protobuf::Message /* @@protoc_inser
 };
 // -------------------------------------------------------------------
 
-class DistortionCoefficients : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.DistortionCoefficients) */ {
- public:
+class DistortionCoefficients
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.DistortionCoefficients) */
+{
+public:
   DistortionCoefficients();
   virtual ~DistortionCoefficients();
 
   DistortionCoefficients(const DistortionCoefficients& from);
 
-  inline DistortionCoefficients& operator=(const DistortionCoefficients& from) {
+  inline DistortionCoefficients& operator=(const DistortionCoefficients& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DistortionCoefficients(DistortionCoefficients&& from) noexcept
-    : DistortionCoefficients() {
+#if LANG_CXX11
+  DistortionCoefficients(DistortionCoefficients&& from) noexcept : DistortionCoefficients()
+  {
     *this = ::std::move(from);
   }
 
-  inline DistortionCoefficients& operator=(DistortionCoefficients&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DistortionCoefficients& operator=(DistortionCoefficients&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const DistortionCoefficients& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DistortionCoefficients* internal_default_instance() {
-    return reinterpret_cast<const DistortionCoefficients*>(
-               &_DistortionCoefficients_default_instance_);
+  static inline const DistortionCoefficients* internal_default_instance()
+  {
+    return reinterpret_cast<const DistortionCoefficients*>(&_DistortionCoefficients_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 11;
 
   void Swap(DistortionCoefficients* other);
-  friend void swap(DistortionCoefficients& a, DistortionCoefficients& b) {
+  friend void swap(DistortionCoefficients& a, DistortionCoefficients& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DistortionCoefficients* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DistortionCoefficients* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DistortionCoefficients* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1734,27 +1932,32 @@ class DistortionCoefficients : public ::google::protobuf::Message /* @@protoc_in
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DistortionCoefficients* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1792,8 +1995,7 @@ class DistortionCoefficients : public ::google::protobuf::Message /* @@protoc_in
   void set_p2(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.DistortionCoefficients)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float k1_;
   float k2_;
@@ -1806,51 +2008,63 @@ class DistortionCoefficients : public ::google::protobuf::Message /* @@protoc_in
 };
 // -------------------------------------------------------------------
 
-class ExtrinsicParameters : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.ExtrinsicParameters) */ {
- public:
+class ExtrinsicParameters
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.ExtrinsicParameters) */
+{
+public:
   ExtrinsicParameters();
   virtual ~ExtrinsicParameters();
 
   ExtrinsicParameters(const ExtrinsicParameters& from);
 
-  inline ExtrinsicParameters& operator=(const ExtrinsicParameters& from) {
+  inline ExtrinsicParameters& operator=(const ExtrinsicParameters& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ExtrinsicParameters(ExtrinsicParameters&& from) noexcept
-    : ExtrinsicParameters() {
+#if LANG_CXX11
+  ExtrinsicParameters(ExtrinsicParameters&& from) noexcept : ExtrinsicParameters()
+  {
     *this = ::std::move(from);
   }
 
-  inline ExtrinsicParameters& operator=(ExtrinsicParameters&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ExtrinsicParameters& operator=(ExtrinsicParameters&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ExtrinsicParameters& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ExtrinsicParameters* internal_default_instance() {
-    return reinterpret_cast<const ExtrinsicParameters*>(
-               &_ExtrinsicParameters_default_instance_);
+  static inline const ExtrinsicParameters* internal_default_instance()
+  {
+    return reinterpret_cast<const ExtrinsicParameters*>(&_ExtrinsicParameters_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    12;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 12;
 
   void Swap(ExtrinsicParameters* other);
-  friend void swap(ExtrinsicParameters& a, ExtrinsicParameters& b) {
+  friend void swap(ExtrinsicParameters& a, ExtrinsicParameters& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ExtrinsicParameters* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ExtrinsicParameters* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ExtrinsicParameters* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1861,27 +2075,32 @@ class ExtrinsicParameters : public ::google::protobuf::Message /* @@protoc_inser
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ExtrinsicParameters* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1907,8 +2126,7 @@ class ExtrinsicParameters : public ::google::protobuf::Message /* @@protoc_inser
   void set_allocated_translation(::Kinova::Api::VisionConfig::TranslationVector* translation);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.ExtrinsicParameters)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::VisionConfig::RotationMatrix* rotation_;
   ::Kinova::Api::VisionConfig::TranslationVector* translation_;
@@ -1918,51 +2136,63 @@ class ExtrinsicParameters : public ::google::protobuf::Message /* @@protoc_inser
 };
 // -------------------------------------------------------------------
 
-class RotationMatrix : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.RotationMatrix) */ {
- public:
+class RotationMatrix
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.RotationMatrix) */
+{
+public:
   RotationMatrix();
   virtual ~RotationMatrix();
 
   RotationMatrix(const RotationMatrix& from);
 
-  inline RotationMatrix& operator=(const RotationMatrix& from) {
+  inline RotationMatrix& operator=(const RotationMatrix& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  RotationMatrix(RotationMatrix&& from) noexcept
-    : RotationMatrix() {
+#if LANG_CXX11
+  RotationMatrix(RotationMatrix&& from) noexcept : RotationMatrix()
+  {
     *this = ::std::move(from);
   }
 
-  inline RotationMatrix& operator=(RotationMatrix&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline RotationMatrix& operator=(RotationMatrix&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const RotationMatrix& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const RotationMatrix* internal_default_instance() {
-    return reinterpret_cast<const RotationMatrix*>(
-               &_RotationMatrix_default_instance_);
+  static inline const RotationMatrix* internal_default_instance()
+  {
+    return reinterpret_cast<const RotationMatrix*>(&_RotationMatrix_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    13;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 13;
 
   void Swap(RotationMatrix* other);
-  friend void swap(RotationMatrix& a, RotationMatrix& b) {
+  friend void swap(RotationMatrix& a, RotationMatrix& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline RotationMatrix* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline RotationMatrix* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   RotationMatrix* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1973,27 +2203,32 @@ class RotationMatrix : public ::google::protobuf::Message /* @@protoc_insertion_
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(RotationMatrix* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2028,8 +2263,7 @@ class RotationMatrix : public ::google::protobuf::Message /* @@protoc_insertion_
   void set_allocated_row3(::Kinova::Api::VisionConfig::RotationMatrixRow* row3);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.RotationMatrix)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::VisionConfig::RotationMatrixRow* row1_;
   ::Kinova::Api::VisionConfig::RotationMatrixRow* row2_;
@@ -2040,51 +2274,63 @@ class RotationMatrix : public ::google::protobuf::Message /* @@protoc_insertion_
 };
 // -------------------------------------------------------------------
 
-class RotationMatrixRow : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.RotationMatrixRow) */ {
- public:
+class RotationMatrixRow
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.RotationMatrixRow) */
+{
+public:
   RotationMatrixRow();
   virtual ~RotationMatrixRow();
 
   RotationMatrixRow(const RotationMatrixRow& from);
 
-  inline RotationMatrixRow& operator=(const RotationMatrixRow& from) {
+  inline RotationMatrixRow& operator=(const RotationMatrixRow& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  RotationMatrixRow(RotationMatrixRow&& from) noexcept
-    : RotationMatrixRow() {
+#if LANG_CXX11
+  RotationMatrixRow(RotationMatrixRow&& from) noexcept : RotationMatrixRow()
+  {
     *this = ::std::move(from);
   }
 
-  inline RotationMatrixRow& operator=(RotationMatrixRow&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline RotationMatrixRow& operator=(RotationMatrixRow&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const RotationMatrixRow& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const RotationMatrixRow* internal_default_instance() {
-    return reinterpret_cast<const RotationMatrixRow*>(
-               &_RotationMatrixRow_default_instance_);
+  static inline const RotationMatrixRow* internal_default_instance()
+  {
+    return reinterpret_cast<const RotationMatrixRow*>(&_RotationMatrixRow_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    14;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 14;
 
   void Swap(RotationMatrixRow* other);
-  friend void swap(RotationMatrixRow& a, RotationMatrixRow& b) {
+  friend void swap(RotationMatrixRow& a, RotationMatrixRow& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline RotationMatrixRow* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline RotationMatrixRow* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   RotationMatrixRow* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2095,27 +2341,32 @@ class RotationMatrixRow : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(RotationMatrixRow* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2141,8 +2392,7 @@ class RotationMatrixRow : public ::google::protobuf::Message /* @@protoc_inserti
   void set_column3(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.RotationMatrixRow)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float column1_;
   float column2_;
@@ -2153,51 +2403,63 @@ class RotationMatrixRow : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class TranslationVector : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.TranslationVector) */ {
- public:
+class TranslationVector
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.VisionConfig.TranslationVector) */
+{
+public:
   TranslationVector();
   virtual ~TranslationVector();
 
   TranslationVector(const TranslationVector& from);
 
-  inline TranslationVector& operator=(const TranslationVector& from) {
+  inline TranslationVector& operator=(const TranslationVector& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  TranslationVector(TranslationVector&& from) noexcept
-    : TranslationVector() {
+#if LANG_CXX11
+  TranslationVector(TranslationVector&& from) noexcept : TranslationVector()
+  {
     *this = ::std::move(from);
   }
 
-  inline TranslationVector& operator=(TranslationVector&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline TranslationVector& operator=(TranslationVector&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const TranslationVector& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TranslationVector* internal_default_instance() {
-    return reinterpret_cast<const TranslationVector*>(
-               &_TranslationVector_default_instance_);
+  static inline const TranslationVector* internal_default_instance()
+  {
+    return reinterpret_cast<const TranslationVector*>(&_TranslationVector_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    15;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 15;
 
   void Swap(TranslationVector* other);
-  friend void swap(TranslationVector& a, TranslationVector& b) {
+  friend void swap(TranslationVector& a, TranslationVector& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline TranslationVector* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline TranslationVector* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   TranslationVector* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2208,27 +2470,32 @@ class TranslationVector : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(TranslationVector* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2254,8 +2521,7 @@ class TranslationVector : public ::google::protobuf::Message /* @@protoc_inserti
   void set_t_z(float value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.VisionConfig.TranslationVector)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   float t_x_;
   float t_y_;
@@ -2266,67 +2532,74 @@ class TranslationVector : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // SensorSettings
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void SensorSettings::clear_sensor() {
+inline void SensorSettings::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor SensorSettings::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor SensorSettings::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorSettings.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void SensorSettings::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void SensorSettings::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.SensorSettings.sensor)
 }
 
 // .Kinova.Api.VisionConfig.Resolution resolution = 2;
-inline void SensorSettings::clear_resolution() {
+inline void SensorSettings::clear_resolution()
+{
   resolution_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Resolution SensorSettings::resolution() const {
+inline ::Kinova::Api::VisionConfig::Resolution SensorSettings::resolution() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorSettings.resolution)
-  return static_cast< ::Kinova::Api::VisionConfig::Resolution >(resolution_);
+  return static_cast< ::Kinova::Api::VisionConfig::Resolution>(resolution_);
 }
-inline void SensorSettings::set_resolution(::Kinova::Api::VisionConfig::Resolution value) {
-  
+inline void SensorSettings::set_resolution(::Kinova::Api::VisionConfig::Resolution value)
+{
   resolution_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.SensorSettings.resolution)
 }
 
 // .Kinova.Api.VisionConfig.FrameRate frame_rate = 3;
-inline void SensorSettings::clear_frame_rate() {
+inline void SensorSettings::clear_frame_rate()
+{
   frame_rate_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::FrameRate SensorSettings::frame_rate() const {
+inline ::Kinova::Api::VisionConfig::FrameRate SensorSettings::frame_rate() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorSettings.frame_rate)
-  return static_cast< ::Kinova::Api::VisionConfig::FrameRate >(frame_rate_);
+  return static_cast< ::Kinova::Api::VisionConfig::FrameRate>(frame_rate_);
 }
-inline void SensorSettings::set_frame_rate(::Kinova::Api::VisionConfig::FrameRate value) {
-  
+inline void SensorSettings::set_frame_rate(::Kinova::Api::VisionConfig::FrameRate value)
+{
   frame_rate_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.SensorSettings.frame_rate)
 }
 
 // .Kinova.Api.VisionConfig.BitRate bit_rate = 4;
-inline void SensorSettings::clear_bit_rate() {
+inline void SensorSettings::clear_bit_rate()
+{
   bit_rate_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::BitRate SensorSettings::bit_rate() const {
+inline ::Kinova::Api::VisionConfig::BitRate SensorSettings::bit_rate() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorSettings.bit_rate)
-  return static_cast< ::Kinova::Api::VisionConfig::BitRate >(bit_rate_);
+  return static_cast< ::Kinova::Api::VisionConfig::BitRate>(bit_rate_);
 }
-inline void SensorSettings::set_bit_rate(::Kinova::Api::VisionConfig::BitRate value) {
-  
+inline void SensorSettings::set_bit_rate(::Kinova::Api::VisionConfig::BitRate value)
+{
   bit_rate_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.SensorSettings.bit_rate)
 }
@@ -2336,15 +2609,17 @@ inline void SensorSettings::set_bit_rate(::Kinova::Api::VisionConfig::BitRate va
 // SensorIdentifier
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void SensorIdentifier::clear_sensor() {
+inline void SensorIdentifier::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor SensorIdentifier::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor SensorIdentifier::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorIdentifier.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void SensorIdentifier::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void SensorIdentifier::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.SensorIdentifier.sensor)
 }
@@ -2354,29 +2629,33 @@ inline void SensorIdentifier::set_sensor(::Kinova::Api::VisionConfig::Sensor val
 // IntrinsicProfileIdentifier
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void IntrinsicProfileIdentifier::clear_sensor() {
+inline void IntrinsicProfileIdentifier::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor IntrinsicProfileIdentifier::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor IntrinsicProfileIdentifier::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicProfileIdentifier.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void IntrinsicProfileIdentifier::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void IntrinsicProfileIdentifier::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicProfileIdentifier.sensor)
 }
 
 // .Kinova.Api.VisionConfig.Resolution resolution = 2;
-inline void IntrinsicProfileIdentifier::clear_resolution() {
+inline void IntrinsicProfileIdentifier::clear_resolution()
+{
   resolution_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Resolution IntrinsicProfileIdentifier::resolution() const {
+inline ::Kinova::Api::VisionConfig::Resolution IntrinsicProfileIdentifier::resolution() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicProfileIdentifier.resolution)
-  return static_cast< ::Kinova::Api::VisionConfig::Resolution >(resolution_);
+  return static_cast< ::Kinova::Api::VisionConfig::Resolution>(resolution_);
 }
-inline void IntrinsicProfileIdentifier::set_resolution(::Kinova::Api::VisionConfig::Resolution value) {
-  
+inline void IntrinsicProfileIdentifier::set_resolution(::Kinova::Api::VisionConfig::Resolution value)
+{
   resolution_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicProfileIdentifier.resolution)
 }
@@ -2386,29 +2665,33 @@ inline void IntrinsicProfileIdentifier::set_resolution(::Kinova::Api::VisionConf
 // OptionIdentifier
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void OptionIdentifier::clear_sensor() {
+inline void OptionIdentifier::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor OptionIdentifier::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor OptionIdentifier::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionIdentifier.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void OptionIdentifier::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void OptionIdentifier::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionIdentifier.sensor)
 }
 
 // .Kinova.Api.VisionConfig.Option option = 2;
-inline void OptionIdentifier::clear_option() {
+inline void OptionIdentifier::clear_option()
+{
   option_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Option OptionIdentifier::option() const {
+inline ::Kinova::Api::VisionConfig::Option OptionIdentifier::option() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionIdentifier.option)
-  return static_cast< ::Kinova::Api::VisionConfig::Option >(option_);
+  return static_cast< ::Kinova::Api::VisionConfig::Option>(option_);
 }
-inline void OptionIdentifier::set_option(::Kinova::Api::VisionConfig::Option value) {
-  
+inline void OptionIdentifier::set_option(::Kinova::Api::VisionConfig::Option value)
+{
   option_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionIdentifier.option)
 }
@@ -2418,43 +2701,49 @@ inline void OptionIdentifier::set_option(::Kinova::Api::VisionConfig::Option val
 // OptionValue
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void OptionValue::clear_sensor() {
+inline void OptionValue::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor OptionValue::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor OptionValue::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionValue.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void OptionValue::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void OptionValue::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionValue.sensor)
 }
 
 // .Kinova.Api.VisionConfig.Option option = 2;
-inline void OptionValue::clear_option() {
+inline void OptionValue::clear_option()
+{
   option_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Option OptionValue::option() const {
+inline ::Kinova::Api::VisionConfig::Option OptionValue::option() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionValue.option)
-  return static_cast< ::Kinova::Api::VisionConfig::Option >(option_);
+  return static_cast< ::Kinova::Api::VisionConfig::Option>(option_);
 }
-inline void OptionValue::set_option(::Kinova::Api::VisionConfig::Option value) {
-  
+inline void OptionValue::set_option(::Kinova::Api::VisionConfig::Option value)
+{
   option_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionValue.option)
 }
 
 // float value = 3;
-inline void OptionValue::clear_value() {
+inline void OptionValue::clear_value()
+{
   value_ = 0;
 }
-inline float OptionValue::value() const {
+inline float OptionValue::value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionValue.value)
   return value_;
 }
-inline void OptionValue::set_value(float value) {
-  
+inline void OptionValue::set_value(float value)
+{
   value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionValue.value)
 }
@@ -2464,113 +2753,129 @@ inline void OptionValue::set_value(float value) {
 // OptionInformation
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void OptionInformation::clear_sensor() {
+inline void OptionInformation::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor OptionInformation::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor OptionInformation::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void OptionInformation::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void OptionInformation::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.sensor)
 }
 
 // .Kinova.Api.VisionConfig.Option option = 2;
-inline void OptionInformation::clear_option() {
+inline void OptionInformation::clear_option()
+{
   option_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Option OptionInformation::option() const {
+inline ::Kinova::Api::VisionConfig::Option OptionInformation::option() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.option)
-  return static_cast< ::Kinova::Api::VisionConfig::Option >(option_);
+  return static_cast< ::Kinova::Api::VisionConfig::Option>(option_);
 }
-inline void OptionInformation::set_option(::Kinova::Api::VisionConfig::Option value) {
-  
+inline void OptionInformation::set_option(::Kinova::Api::VisionConfig::Option value)
+{
   option_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.option)
 }
 
 // bool supported = 3;
-inline void OptionInformation::clear_supported() {
+inline void OptionInformation::clear_supported()
+{
   supported_ = false;
 }
-inline bool OptionInformation::supported() const {
+inline bool OptionInformation::supported() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.supported)
   return supported_;
 }
-inline void OptionInformation::set_supported(bool value) {
-  
+inline void OptionInformation::set_supported(bool value)
+{
   supported_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.supported)
 }
 
 // bool read_only = 4;
-inline void OptionInformation::clear_read_only() {
+inline void OptionInformation::clear_read_only()
+{
   read_only_ = false;
 }
-inline bool OptionInformation::read_only() const {
+inline bool OptionInformation::read_only() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.read_only)
   return read_only_;
 }
-inline void OptionInformation::set_read_only(bool value) {
-  
+inline void OptionInformation::set_read_only(bool value)
+{
   read_only_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.read_only)
 }
 
 // float minimum = 5;
-inline void OptionInformation::clear_minimum() {
+inline void OptionInformation::clear_minimum()
+{
   minimum_ = 0;
 }
-inline float OptionInformation::minimum() const {
+inline float OptionInformation::minimum() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.minimum)
   return minimum_;
 }
-inline void OptionInformation::set_minimum(float value) {
-  
+inline void OptionInformation::set_minimum(float value)
+{
   minimum_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.minimum)
 }
 
 // float maximum = 6;
-inline void OptionInformation::clear_maximum() {
+inline void OptionInformation::clear_maximum()
+{
   maximum_ = 0;
 }
-inline float OptionInformation::maximum() const {
+inline float OptionInformation::maximum() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.maximum)
   return maximum_;
 }
-inline void OptionInformation::set_maximum(float value) {
-  
+inline void OptionInformation::set_maximum(float value)
+{
   maximum_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.maximum)
 }
 
 // float step = 7;
-inline void OptionInformation::clear_step() {
+inline void OptionInformation::clear_step()
+{
   step_ = 0;
 }
-inline float OptionInformation::step() const {
+inline float OptionInformation::step() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.step)
   return step_;
 }
-inline void OptionInformation::set_step(float value) {
-  
+inline void OptionInformation::set_step(float value)
+{
   step_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.step)
 }
 
 // float default_value = 8;
-inline void OptionInformation::clear_default_value() {
+inline void OptionInformation::clear_default_value()
+{
   default_value_ = 0;
 }
-inline float OptionInformation::default_value() const {
+inline float OptionInformation::default_value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.OptionInformation.default_value)
   return default_value_;
 }
-inline void OptionInformation::set_default_value(float value) {
-  
+inline void OptionInformation::set_default_value(float value)
+{
   default_value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.OptionInformation.default_value)
 }
@@ -2580,65 +2885,80 @@ inline void OptionInformation::set_default_value(float value) {
 // SensorFocusAction
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void SensorFocusAction::clear_sensor() {
+inline void SensorFocusAction::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor SensorFocusAction::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor SensorFocusAction::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorFocusAction.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void SensorFocusAction::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void SensorFocusAction::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.SensorFocusAction.sensor)
 }
 
 // .Kinova.Api.VisionConfig.FocusAction focus_action = 2;
-inline void SensorFocusAction::clear_focus_action() {
+inline void SensorFocusAction::clear_focus_action()
+{
   focus_action_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::FocusAction SensorFocusAction::focus_action() const {
+inline ::Kinova::Api::VisionConfig::FocusAction SensorFocusAction::focus_action() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorFocusAction.focus_action)
-  return static_cast< ::Kinova::Api::VisionConfig::FocusAction >(focus_action_);
+  return static_cast< ::Kinova::Api::VisionConfig::FocusAction>(focus_action_);
 }
-inline void SensorFocusAction::set_focus_action(::Kinova::Api::VisionConfig::FocusAction value) {
-  
+inline void SensorFocusAction::set_focus_action(::Kinova::Api::VisionConfig::FocusAction value)
+{
   focus_action_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.SensorFocusAction.focus_action)
 }
 
 // .Kinova.Api.VisionConfig.FocusPoint focus_point = 3;
-inline bool SensorFocusAction::has_focus_point() const {
+inline bool SensorFocusAction::has_focus_point() const
+{
   return action_parameters_case() == kFocusPoint;
 }
-inline void SensorFocusAction::set_has_focus_point() {
+inline void SensorFocusAction::set_has_focus_point()
+{
   _oneof_case_[0] = kFocusPoint;
 }
-inline void SensorFocusAction::clear_focus_point() {
-  if (has_focus_point()) {
+inline void SensorFocusAction::clear_focus_point()
+{
+  if (has_focus_point())
+  {
     delete action_parameters_.focus_point_;
     clear_has_action_parameters();
   }
 }
-inline ::Kinova::Api::VisionConfig::FocusPoint* SensorFocusAction::release_focus_point() {
+inline ::Kinova::Api::VisionConfig::FocusPoint* SensorFocusAction::release_focus_point()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.SensorFocusAction.focus_point)
-  if (has_focus_point()) {
+  if (has_focus_point())
+  {
     clear_has_action_parameters();
-      ::Kinova::Api::VisionConfig::FocusPoint* temp = action_parameters_.focus_point_;
+    ::Kinova::Api::VisionConfig::FocusPoint* temp = action_parameters_.focus_point_;
     action_parameters_.focus_point_ = NULL;
     return temp;
-  } else {
+  }
+  else
+  {
     return NULL;
   }
 }
-inline const ::Kinova::Api::VisionConfig::FocusPoint& SensorFocusAction::focus_point() const {
+inline const ::Kinova::Api::VisionConfig::FocusPoint& SensorFocusAction::focus_point() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorFocusAction.focus_point)
-  return has_focus_point()
-      ? *action_parameters_.focus_point_
-      : *reinterpret_cast< ::Kinova::Api::VisionConfig::FocusPoint*>(&::Kinova::Api::VisionConfig::_FocusPoint_default_instance_);
+  return has_focus_point() ? *action_parameters_.focus_point_ :
+                             *reinterpret_cast< ::Kinova::Api::VisionConfig::FocusPoint*>(
+                                 &::Kinova::Api::VisionConfig::_FocusPoint_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::FocusPoint* SensorFocusAction::mutable_focus_point() {
-  if (!has_focus_point()) {
+inline ::Kinova::Api::VisionConfig::FocusPoint* SensorFocusAction::mutable_focus_point()
+{
+  if (!has_focus_point())
+  {
     clear_action_parameters();
     set_has_focus_point();
     action_parameters_.focus_point_ = new ::Kinova::Api::VisionConfig::FocusPoint;
@@ -2648,37 +2968,48 @@ inline ::Kinova::Api::VisionConfig::FocusPoint* SensorFocusAction::mutable_focus
 }
 
 // .Kinova.Api.VisionConfig.ManualFocus manual_focus = 4;
-inline bool SensorFocusAction::has_manual_focus() const {
+inline bool SensorFocusAction::has_manual_focus() const
+{
   return action_parameters_case() == kManualFocus;
 }
-inline void SensorFocusAction::set_has_manual_focus() {
+inline void SensorFocusAction::set_has_manual_focus()
+{
   _oneof_case_[0] = kManualFocus;
 }
-inline void SensorFocusAction::clear_manual_focus() {
-  if (has_manual_focus()) {
+inline void SensorFocusAction::clear_manual_focus()
+{
+  if (has_manual_focus())
+  {
     delete action_parameters_.manual_focus_;
     clear_has_action_parameters();
   }
 }
-inline ::Kinova::Api::VisionConfig::ManualFocus* SensorFocusAction::release_manual_focus() {
+inline ::Kinova::Api::VisionConfig::ManualFocus* SensorFocusAction::release_manual_focus()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.SensorFocusAction.manual_focus)
-  if (has_manual_focus()) {
+  if (has_manual_focus())
+  {
     clear_has_action_parameters();
-      ::Kinova::Api::VisionConfig::ManualFocus* temp = action_parameters_.manual_focus_;
+    ::Kinova::Api::VisionConfig::ManualFocus* temp = action_parameters_.manual_focus_;
     action_parameters_.manual_focus_ = NULL;
     return temp;
-  } else {
+  }
+  else
+  {
     return NULL;
   }
 }
-inline const ::Kinova::Api::VisionConfig::ManualFocus& SensorFocusAction::manual_focus() const {
+inline const ::Kinova::Api::VisionConfig::ManualFocus& SensorFocusAction::manual_focus() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.SensorFocusAction.manual_focus)
-  return has_manual_focus()
-      ? *action_parameters_.manual_focus_
-      : *reinterpret_cast< ::Kinova::Api::VisionConfig::ManualFocus*>(&::Kinova::Api::VisionConfig::_ManualFocus_default_instance_);
+  return has_manual_focus() ? *action_parameters_.manual_focus_ :
+                              *reinterpret_cast< ::Kinova::Api::VisionConfig::ManualFocus*>(
+                                  &::Kinova::Api::VisionConfig::_ManualFocus_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::ManualFocus* SensorFocusAction::mutable_manual_focus() {
-  if (!has_manual_focus()) {
+inline ::Kinova::Api::VisionConfig::ManualFocus* SensorFocusAction::mutable_manual_focus()
+{
+  if (!has_manual_focus())
+  {
     clear_action_parameters();
     set_has_manual_focus();
     action_parameters_.manual_focus_ = new ::Kinova::Api::VisionConfig::ManualFocus;
@@ -2687,13 +3018,16 @@ inline ::Kinova::Api::VisionConfig::ManualFocus* SensorFocusAction::mutable_manu
   return action_parameters_.manual_focus_;
 }
 
-inline bool SensorFocusAction::has_action_parameters() const {
+inline bool SensorFocusAction::has_action_parameters() const
+{
   return action_parameters_case() != ACTION_PARAMETERS_NOT_SET;
 }
-inline void SensorFocusAction::clear_has_action_parameters() {
+inline void SensorFocusAction::clear_has_action_parameters()
+{
   _oneof_case_[0] = ACTION_PARAMETERS_NOT_SET;
 }
-inline SensorFocusAction::ActionParametersCase SensorFocusAction::action_parameters_case() const {
+inline SensorFocusAction::ActionParametersCase SensorFocusAction::action_parameters_case() const
+{
   return SensorFocusAction::ActionParametersCase(_oneof_case_[0]);
 }
 // -------------------------------------------------------------------
@@ -2701,29 +3035,33 @@ inline SensorFocusAction::ActionParametersCase SensorFocusAction::action_paramet
 // FocusPoint
 
 // uint32 x = 1;
-inline void FocusPoint::clear_x() {
+inline void FocusPoint::clear_x()
+{
   x_ = 0u;
 }
-inline ::google::protobuf::uint32 FocusPoint::x() const {
+inline ::google::protobuf::uint32 FocusPoint::x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.FocusPoint.x)
   return x_;
 }
-inline void FocusPoint::set_x(::google::protobuf::uint32 value) {
-  
+inline void FocusPoint::set_x(::google::protobuf::uint32 value)
+{
   x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.FocusPoint.x)
 }
 
 // uint32 y = 2;
-inline void FocusPoint::clear_y() {
+inline void FocusPoint::clear_y()
+{
   y_ = 0u;
 }
-inline ::google::protobuf::uint32 FocusPoint::y() const {
+inline ::google::protobuf::uint32 FocusPoint::y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.FocusPoint.y)
   return y_;
 }
-inline void FocusPoint::set_y(::google::protobuf::uint32 value) {
-  
+inline void FocusPoint::set_y(::google::protobuf::uint32 value)
+{
   y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.FocusPoint.y)
 }
@@ -2733,15 +3071,17 @@ inline void FocusPoint::set_y(::google::protobuf::uint32 value) {
 // ManualFocus
 
 // uint32 value = 1;
-inline void ManualFocus::clear_value() {
+inline void ManualFocus::clear_value()
+{
   value_ = 0u;
 }
-inline ::google::protobuf::uint32 ManualFocus::value() const {
+inline ::google::protobuf::uint32 ManualFocus::value() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.ManualFocus.value)
   return value_;
 }
-inline void ManualFocus::set_value(::google::protobuf::uint32 value) {
-  
+inline void ManualFocus::set_value(::google::protobuf::uint32 value)
+{
   value_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.ManualFocus.value)
 }
@@ -2751,43 +3091,49 @@ inline void ManualFocus::set_value(::google::protobuf::uint32 value) {
 // VisionNotification
 
 // .Kinova.Api.VisionConfig.VisionEvent event = 1;
-inline void VisionNotification::clear_event() {
+inline void VisionNotification::clear_event()
+{
   event_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::VisionEvent VisionNotification::event() const {
+inline ::Kinova::Api::VisionConfig::VisionEvent VisionNotification::event() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.VisionNotification.event)
-  return static_cast< ::Kinova::Api::VisionConfig::VisionEvent >(event_);
+  return static_cast< ::Kinova::Api::VisionConfig::VisionEvent>(event_);
 }
-inline void VisionNotification::set_event(::Kinova::Api::VisionConfig::VisionEvent value) {
-  
+inline void VisionNotification::set_event(::Kinova::Api::VisionConfig::VisionEvent value)
+{
   event_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.VisionNotification.event)
 }
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 2;
-inline void VisionNotification::clear_sensor() {
+inline void VisionNotification::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor VisionNotification::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor VisionNotification::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.VisionNotification.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void VisionNotification::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void VisionNotification::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.VisionNotification.sensor)
 }
 
 // .Kinova.Api.VisionConfig.Option option = 3;
-inline void VisionNotification::clear_option() {
+inline void VisionNotification::clear_option()
+{
   option_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Option VisionNotification::option() const {
+inline ::Kinova::Api::VisionConfig::Option VisionNotification::option() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.VisionNotification.option)
-  return static_cast< ::Kinova::Api::VisionConfig::Option >(option_);
+  return static_cast< ::Kinova::Api::VisionConfig::Option>(option_);
 }
-inline void VisionNotification::set_option(::Kinova::Api::VisionConfig::Option value) {
-  
+inline void VisionNotification::set_option(::Kinova::Api::VisionConfig::Option value)
+{
   option_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.VisionNotification.option)
 }
@@ -2797,134 +3143,158 @@ inline void VisionNotification::set_option(::Kinova::Api::VisionConfig::Option v
 // IntrinsicParameters
 
 // .Kinova.Api.VisionConfig.Sensor sensor = 1;
-inline void IntrinsicParameters::clear_sensor() {
+inline void IntrinsicParameters::clear_sensor()
+{
   sensor_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Sensor IntrinsicParameters::sensor() const {
+inline ::Kinova::Api::VisionConfig::Sensor IntrinsicParameters::sensor() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicParameters.sensor)
-  return static_cast< ::Kinova::Api::VisionConfig::Sensor >(sensor_);
+  return static_cast< ::Kinova::Api::VisionConfig::Sensor>(sensor_);
 }
-inline void IntrinsicParameters::set_sensor(::Kinova::Api::VisionConfig::Sensor value) {
-  
+inline void IntrinsicParameters::set_sensor(::Kinova::Api::VisionConfig::Sensor value)
+{
   sensor_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicParameters.sensor)
 }
 
 // .Kinova.Api.VisionConfig.Resolution resolution = 2;
-inline void IntrinsicParameters::clear_resolution() {
+inline void IntrinsicParameters::clear_resolution()
+{
   resolution_ = 0;
 }
-inline ::Kinova::Api::VisionConfig::Resolution IntrinsicParameters::resolution() const {
+inline ::Kinova::Api::VisionConfig::Resolution IntrinsicParameters::resolution() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicParameters.resolution)
-  return static_cast< ::Kinova::Api::VisionConfig::Resolution >(resolution_);
+  return static_cast< ::Kinova::Api::VisionConfig::Resolution>(resolution_);
 }
-inline void IntrinsicParameters::set_resolution(::Kinova::Api::VisionConfig::Resolution value) {
-  
+inline void IntrinsicParameters::set_resolution(::Kinova::Api::VisionConfig::Resolution value)
+{
   resolution_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicParameters.resolution)
 }
 
 // float principal_point_x = 3;
-inline void IntrinsicParameters::clear_principal_point_x() {
+inline void IntrinsicParameters::clear_principal_point_x()
+{
   principal_point_x_ = 0;
 }
-inline float IntrinsicParameters::principal_point_x() const {
+inline float IntrinsicParameters::principal_point_x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicParameters.principal_point_x)
   return principal_point_x_;
 }
-inline void IntrinsicParameters::set_principal_point_x(float value) {
-  
+inline void IntrinsicParameters::set_principal_point_x(float value)
+{
   principal_point_x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicParameters.principal_point_x)
 }
 
 // float principal_point_y = 4;
-inline void IntrinsicParameters::clear_principal_point_y() {
+inline void IntrinsicParameters::clear_principal_point_y()
+{
   principal_point_y_ = 0;
 }
-inline float IntrinsicParameters::principal_point_y() const {
+inline float IntrinsicParameters::principal_point_y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicParameters.principal_point_y)
   return principal_point_y_;
 }
-inline void IntrinsicParameters::set_principal_point_y(float value) {
-  
+inline void IntrinsicParameters::set_principal_point_y(float value)
+{
   principal_point_y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicParameters.principal_point_y)
 }
 
 // float focal_length_x = 5;
-inline void IntrinsicParameters::clear_focal_length_x() {
+inline void IntrinsicParameters::clear_focal_length_x()
+{
   focal_length_x_ = 0;
 }
-inline float IntrinsicParameters::focal_length_x() const {
+inline float IntrinsicParameters::focal_length_x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicParameters.focal_length_x)
   return focal_length_x_;
 }
-inline void IntrinsicParameters::set_focal_length_x(float value) {
-  
+inline void IntrinsicParameters::set_focal_length_x(float value)
+{
   focal_length_x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicParameters.focal_length_x)
 }
 
 // float focal_length_y = 6;
-inline void IntrinsicParameters::clear_focal_length_y() {
+inline void IntrinsicParameters::clear_focal_length_y()
+{
   focal_length_y_ = 0;
 }
-inline float IntrinsicParameters::focal_length_y() const {
+inline float IntrinsicParameters::focal_length_y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicParameters.focal_length_y)
   return focal_length_y_;
 }
-inline void IntrinsicParameters::set_focal_length_y(float value) {
-  
+inline void IntrinsicParameters::set_focal_length_y(float value)
+{
   focal_length_y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.IntrinsicParameters.focal_length_y)
 }
 
 // .Kinova.Api.VisionConfig.DistortionCoefficients distortion_coeffs = 7;
-inline bool IntrinsicParameters::has_distortion_coeffs() const {
+inline bool IntrinsicParameters::has_distortion_coeffs() const
+{
   return this != internal_default_instance() && distortion_coeffs_ != NULL;
 }
-inline void IntrinsicParameters::clear_distortion_coeffs() {
-  if (GetArenaNoVirtual() == NULL && distortion_coeffs_ != NULL) {
+inline void IntrinsicParameters::clear_distortion_coeffs()
+{
+  if (GetArenaNoVirtual() == NULL && distortion_coeffs_ != NULL)
+  {
     delete distortion_coeffs_;
   }
   distortion_coeffs_ = NULL;
 }
-inline const ::Kinova::Api::VisionConfig::DistortionCoefficients& IntrinsicParameters::distortion_coeffs() const {
+inline const ::Kinova::Api::VisionConfig::DistortionCoefficients& IntrinsicParameters::distortion_coeffs() const
+{
   const ::Kinova::Api::VisionConfig::DistortionCoefficients* p = distortion_coeffs_;
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.IntrinsicParameters.distortion_coeffs)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::VisionConfig::DistortionCoefficients*>(
-      &::Kinova::Api::VisionConfig::_DistortionCoefficients_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::VisionConfig::DistortionCoefficients*>(
+                         &::Kinova::Api::VisionConfig::_DistortionCoefficients_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::DistortionCoefficients* IntrinsicParameters::release_distortion_coeffs() {
+inline ::Kinova::Api::VisionConfig::DistortionCoefficients* IntrinsicParameters::release_distortion_coeffs()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.IntrinsicParameters.distortion_coeffs)
-  
+
   ::Kinova::Api::VisionConfig::DistortionCoefficients* temp = distortion_coeffs_;
   distortion_coeffs_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::VisionConfig::DistortionCoefficients* IntrinsicParameters::mutable_distortion_coeffs() {
-  
-  if (distortion_coeffs_ == NULL) {
+inline ::Kinova::Api::VisionConfig::DistortionCoefficients* IntrinsicParameters::mutable_distortion_coeffs()
+{
+  if (distortion_coeffs_ == NULL)
+  {
     distortion_coeffs_ = new ::Kinova::Api::VisionConfig::DistortionCoefficients;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.VisionConfig.IntrinsicParameters.distortion_coeffs)
   return distortion_coeffs_;
 }
-inline void IntrinsicParameters::set_allocated_distortion_coeffs(::Kinova::Api::VisionConfig::DistortionCoefficients* distortion_coeffs) {
+inline void IntrinsicParameters::set_allocated_distortion_coeffs(
+    ::Kinova::Api::VisionConfig::DistortionCoefficients* distortion_coeffs)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete distortion_coeffs_;
   }
-  if (distortion_coeffs) {
+  if (distortion_coeffs)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      distortion_coeffs = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, distortion_coeffs, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      distortion_coeffs =
+          ::google::protobuf::internal::GetOwnedMessage(message_arena, distortion_coeffs, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   distortion_coeffs_ = distortion_coeffs;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.VisionConfig.IntrinsicParameters.distortion_coeffs)
@@ -2935,71 +3305,81 @@ inline void IntrinsicParameters::set_allocated_distortion_coeffs(::Kinova::Api::
 // DistortionCoefficients
 
 // float k1 = 1;
-inline void DistortionCoefficients::clear_k1() {
+inline void DistortionCoefficients::clear_k1()
+{
   k1_ = 0;
 }
-inline float DistortionCoefficients::k1() const {
+inline float DistortionCoefficients::k1() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.DistortionCoefficients.k1)
   return k1_;
 }
-inline void DistortionCoefficients::set_k1(float value) {
-  
+inline void DistortionCoefficients::set_k1(float value)
+{
   k1_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.DistortionCoefficients.k1)
 }
 
 // float k2 = 2;
-inline void DistortionCoefficients::clear_k2() {
+inline void DistortionCoefficients::clear_k2()
+{
   k2_ = 0;
 }
-inline float DistortionCoefficients::k2() const {
+inline float DistortionCoefficients::k2() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.DistortionCoefficients.k2)
   return k2_;
 }
-inline void DistortionCoefficients::set_k2(float value) {
-  
+inline void DistortionCoefficients::set_k2(float value)
+{
   k2_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.DistortionCoefficients.k2)
 }
 
 // float k3 = 3;
-inline void DistortionCoefficients::clear_k3() {
+inline void DistortionCoefficients::clear_k3()
+{
   k3_ = 0;
 }
-inline float DistortionCoefficients::k3() const {
+inline float DistortionCoefficients::k3() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.DistortionCoefficients.k3)
   return k3_;
 }
-inline void DistortionCoefficients::set_k3(float value) {
-  
+inline void DistortionCoefficients::set_k3(float value)
+{
   k3_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.DistortionCoefficients.k3)
 }
 
 // float p1 = 4;
-inline void DistortionCoefficients::clear_p1() {
+inline void DistortionCoefficients::clear_p1()
+{
   p1_ = 0;
 }
-inline float DistortionCoefficients::p1() const {
+inline float DistortionCoefficients::p1() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.DistortionCoefficients.p1)
   return p1_;
 }
-inline void DistortionCoefficients::set_p1(float value) {
-  
+inline void DistortionCoefficients::set_p1(float value)
+{
   p1_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.DistortionCoefficients.p1)
 }
 
 // float p2 = 5;
-inline void DistortionCoefficients::clear_p2() {
+inline void DistortionCoefficients::clear_p2()
+{
   p2_ = 0;
 }
-inline float DistortionCoefficients::p2() const {
+inline float DistortionCoefficients::p2() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.DistortionCoefficients.p2)
   return p2_;
 }
-inline void DistortionCoefficients::set_p2(float value) {
-  
+inline void DistortionCoefficients::set_p2(float value)
+{
   p2_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.DistortionCoefficients.p2)
 }
@@ -3009,100 +3389,120 @@ inline void DistortionCoefficients::set_p2(float value) {
 // ExtrinsicParameters
 
 // .Kinova.Api.VisionConfig.RotationMatrix rotation = 1;
-inline bool ExtrinsicParameters::has_rotation() const {
+inline bool ExtrinsicParameters::has_rotation() const
+{
   return this != internal_default_instance() && rotation_ != NULL;
 }
-inline void ExtrinsicParameters::clear_rotation() {
-  if (GetArenaNoVirtual() == NULL && rotation_ != NULL) {
+inline void ExtrinsicParameters::clear_rotation()
+{
+  if (GetArenaNoVirtual() == NULL && rotation_ != NULL)
+  {
     delete rotation_;
   }
   rotation_ = NULL;
 }
-inline const ::Kinova::Api::VisionConfig::RotationMatrix& ExtrinsicParameters::rotation() const {
+inline const ::Kinova::Api::VisionConfig::RotationMatrix& ExtrinsicParameters::rotation() const
+{
   const ::Kinova::Api::VisionConfig::RotationMatrix* p = rotation_;
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.ExtrinsicParameters.rotation)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrix*>(
-      &::Kinova::Api::VisionConfig::_RotationMatrix_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrix*>(
+                         &::Kinova::Api::VisionConfig::_RotationMatrix_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrix* ExtrinsicParameters::release_rotation() {
+inline ::Kinova::Api::VisionConfig::RotationMatrix* ExtrinsicParameters::release_rotation()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.ExtrinsicParameters.rotation)
-  
+
   ::Kinova::Api::VisionConfig::RotationMatrix* temp = rotation_;
   rotation_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrix* ExtrinsicParameters::mutable_rotation() {
-  
-  if (rotation_ == NULL) {
+inline ::Kinova::Api::VisionConfig::RotationMatrix* ExtrinsicParameters::mutable_rotation()
+{
+  if (rotation_ == NULL)
+  {
     rotation_ = new ::Kinova::Api::VisionConfig::RotationMatrix;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.VisionConfig.ExtrinsicParameters.rotation)
   return rotation_;
 }
-inline void ExtrinsicParameters::set_allocated_rotation(::Kinova::Api::VisionConfig::RotationMatrix* rotation) {
+inline void ExtrinsicParameters::set_allocated_rotation(::Kinova::Api::VisionConfig::RotationMatrix* rotation)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete rotation_;
   }
-  if (rotation) {
+  if (rotation)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      rotation = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, rotation, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      rotation = ::google::protobuf::internal::GetOwnedMessage(message_arena, rotation, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   rotation_ = rotation;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.VisionConfig.ExtrinsicParameters.rotation)
 }
 
 // .Kinova.Api.VisionConfig.TranslationVector translation = 2;
-inline bool ExtrinsicParameters::has_translation() const {
+inline bool ExtrinsicParameters::has_translation() const
+{
   return this != internal_default_instance() && translation_ != NULL;
 }
-inline void ExtrinsicParameters::clear_translation() {
-  if (GetArenaNoVirtual() == NULL && translation_ != NULL) {
+inline void ExtrinsicParameters::clear_translation()
+{
+  if (GetArenaNoVirtual() == NULL && translation_ != NULL)
+  {
     delete translation_;
   }
   translation_ = NULL;
 }
-inline const ::Kinova::Api::VisionConfig::TranslationVector& ExtrinsicParameters::translation() const {
+inline const ::Kinova::Api::VisionConfig::TranslationVector& ExtrinsicParameters::translation() const
+{
   const ::Kinova::Api::VisionConfig::TranslationVector* p = translation_;
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.ExtrinsicParameters.translation)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::VisionConfig::TranslationVector*>(
-      &::Kinova::Api::VisionConfig::_TranslationVector_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::VisionConfig::TranslationVector*>(
+                         &::Kinova::Api::VisionConfig::_TranslationVector_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::TranslationVector* ExtrinsicParameters::release_translation() {
+inline ::Kinova::Api::VisionConfig::TranslationVector* ExtrinsicParameters::release_translation()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.ExtrinsicParameters.translation)
-  
+
   ::Kinova::Api::VisionConfig::TranslationVector* temp = translation_;
   translation_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::VisionConfig::TranslationVector* ExtrinsicParameters::mutable_translation() {
-  
-  if (translation_ == NULL) {
+inline ::Kinova::Api::VisionConfig::TranslationVector* ExtrinsicParameters::mutable_translation()
+{
+  if (translation_ == NULL)
+  {
     translation_ = new ::Kinova::Api::VisionConfig::TranslationVector;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.VisionConfig.ExtrinsicParameters.translation)
   return translation_;
 }
-inline void ExtrinsicParameters::set_allocated_translation(::Kinova::Api::VisionConfig::TranslationVector* translation) {
+inline void ExtrinsicParameters::set_allocated_translation(::Kinova::Api::VisionConfig::TranslationVector* translation)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete translation_;
   }
-  if (translation) {
+  if (translation)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      translation = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, translation, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      translation = ::google::protobuf::internal::GetOwnedMessage(message_arena, translation, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   translation_ = translation;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.VisionConfig.ExtrinsicParameters.translation)
@@ -3113,150 +3513,180 @@ inline void ExtrinsicParameters::set_allocated_translation(::Kinova::Api::Vision
 // RotationMatrix
 
 // .Kinova.Api.VisionConfig.RotationMatrixRow row1 = 1;
-inline bool RotationMatrix::has_row1() const {
+inline bool RotationMatrix::has_row1() const
+{
   return this != internal_default_instance() && row1_ != NULL;
 }
-inline void RotationMatrix::clear_row1() {
-  if (GetArenaNoVirtual() == NULL && row1_ != NULL) {
+inline void RotationMatrix::clear_row1()
+{
+  if (GetArenaNoVirtual() == NULL && row1_ != NULL)
+  {
     delete row1_;
   }
   row1_ = NULL;
 }
-inline const ::Kinova::Api::VisionConfig::RotationMatrixRow& RotationMatrix::row1() const {
+inline const ::Kinova::Api::VisionConfig::RotationMatrixRow& RotationMatrix::row1() const
+{
   const ::Kinova::Api::VisionConfig::RotationMatrixRow* p = row1_;
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.RotationMatrix.row1)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrixRow*>(
-      &::Kinova::Api::VisionConfig::_RotationMatrixRow_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrixRow*>(
+                         &::Kinova::Api::VisionConfig::_RotationMatrixRow_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::release_row1() {
+inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::release_row1()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.RotationMatrix.row1)
-  
+
   ::Kinova::Api::VisionConfig::RotationMatrixRow* temp = row1_;
   row1_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::mutable_row1() {
-  
-  if (row1_ == NULL) {
+inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::mutable_row1()
+{
+  if (row1_ == NULL)
+  {
     row1_ = new ::Kinova::Api::VisionConfig::RotationMatrixRow;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.VisionConfig.RotationMatrix.row1)
   return row1_;
 }
-inline void RotationMatrix::set_allocated_row1(::Kinova::Api::VisionConfig::RotationMatrixRow* row1) {
+inline void RotationMatrix::set_allocated_row1(::Kinova::Api::VisionConfig::RotationMatrixRow* row1)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete row1_;
   }
-  if (row1) {
+  if (row1)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      row1 = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, row1, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      row1 = ::google::protobuf::internal::GetOwnedMessage(message_arena, row1, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   row1_ = row1;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.VisionConfig.RotationMatrix.row1)
 }
 
 // .Kinova.Api.VisionConfig.RotationMatrixRow row2 = 2;
-inline bool RotationMatrix::has_row2() const {
+inline bool RotationMatrix::has_row2() const
+{
   return this != internal_default_instance() && row2_ != NULL;
 }
-inline void RotationMatrix::clear_row2() {
-  if (GetArenaNoVirtual() == NULL && row2_ != NULL) {
+inline void RotationMatrix::clear_row2()
+{
+  if (GetArenaNoVirtual() == NULL && row2_ != NULL)
+  {
     delete row2_;
   }
   row2_ = NULL;
 }
-inline const ::Kinova::Api::VisionConfig::RotationMatrixRow& RotationMatrix::row2() const {
+inline const ::Kinova::Api::VisionConfig::RotationMatrixRow& RotationMatrix::row2() const
+{
   const ::Kinova::Api::VisionConfig::RotationMatrixRow* p = row2_;
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.RotationMatrix.row2)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrixRow*>(
-      &::Kinova::Api::VisionConfig::_RotationMatrixRow_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrixRow*>(
+                         &::Kinova::Api::VisionConfig::_RotationMatrixRow_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::release_row2() {
+inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::release_row2()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.RotationMatrix.row2)
-  
+
   ::Kinova::Api::VisionConfig::RotationMatrixRow* temp = row2_;
   row2_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::mutable_row2() {
-  
-  if (row2_ == NULL) {
+inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::mutable_row2()
+{
+  if (row2_ == NULL)
+  {
     row2_ = new ::Kinova::Api::VisionConfig::RotationMatrixRow;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.VisionConfig.RotationMatrix.row2)
   return row2_;
 }
-inline void RotationMatrix::set_allocated_row2(::Kinova::Api::VisionConfig::RotationMatrixRow* row2) {
+inline void RotationMatrix::set_allocated_row2(::Kinova::Api::VisionConfig::RotationMatrixRow* row2)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete row2_;
   }
-  if (row2) {
+  if (row2)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      row2 = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, row2, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      row2 = ::google::protobuf::internal::GetOwnedMessage(message_arena, row2, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   row2_ = row2;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.VisionConfig.RotationMatrix.row2)
 }
 
 // .Kinova.Api.VisionConfig.RotationMatrixRow row3 = 3;
-inline bool RotationMatrix::has_row3() const {
+inline bool RotationMatrix::has_row3() const
+{
   return this != internal_default_instance() && row3_ != NULL;
 }
-inline void RotationMatrix::clear_row3() {
-  if (GetArenaNoVirtual() == NULL && row3_ != NULL) {
+inline void RotationMatrix::clear_row3()
+{
+  if (GetArenaNoVirtual() == NULL && row3_ != NULL)
+  {
     delete row3_;
   }
   row3_ = NULL;
 }
-inline const ::Kinova::Api::VisionConfig::RotationMatrixRow& RotationMatrix::row3() const {
+inline const ::Kinova::Api::VisionConfig::RotationMatrixRow& RotationMatrix::row3() const
+{
   const ::Kinova::Api::VisionConfig::RotationMatrixRow* p = row3_;
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.RotationMatrix.row3)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrixRow*>(
-      &::Kinova::Api::VisionConfig::_RotationMatrixRow_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::VisionConfig::RotationMatrixRow*>(
+                         &::Kinova::Api::VisionConfig::_RotationMatrixRow_default_instance_);
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::release_row3() {
+inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::release_row3()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.VisionConfig.RotationMatrix.row3)
-  
+
   ::Kinova::Api::VisionConfig::RotationMatrixRow* temp = row3_;
   row3_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::mutable_row3() {
-  
-  if (row3_ == NULL) {
+inline ::Kinova::Api::VisionConfig::RotationMatrixRow* RotationMatrix::mutable_row3()
+{
+  if (row3_ == NULL)
+  {
     row3_ = new ::Kinova::Api::VisionConfig::RotationMatrixRow;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.VisionConfig.RotationMatrix.row3)
   return row3_;
 }
-inline void RotationMatrix::set_allocated_row3(::Kinova::Api::VisionConfig::RotationMatrixRow* row3) {
+inline void RotationMatrix::set_allocated_row3(::Kinova::Api::VisionConfig::RotationMatrixRow* row3)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete row3_;
   }
-  if (row3) {
+  if (row3)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      row3 = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, row3, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      row3 = ::google::protobuf::internal::GetOwnedMessage(message_arena, row3, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   row3_ = row3;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.VisionConfig.RotationMatrix.row3)
@@ -3267,43 +3697,49 @@ inline void RotationMatrix::set_allocated_row3(::Kinova::Api::VisionConfig::Rota
 // RotationMatrixRow
 
 // float column1 = 1;
-inline void RotationMatrixRow::clear_column1() {
+inline void RotationMatrixRow::clear_column1()
+{
   column1_ = 0;
 }
-inline float RotationMatrixRow::column1() const {
+inline float RotationMatrixRow::column1() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.RotationMatrixRow.column1)
   return column1_;
 }
-inline void RotationMatrixRow::set_column1(float value) {
-  
+inline void RotationMatrixRow::set_column1(float value)
+{
   column1_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.RotationMatrixRow.column1)
 }
 
 // float column2 = 2;
-inline void RotationMatrixRow::clear_column2() {
+inline void RotationMatrixRow::clear_column2()
+{
   column2_ = 0;
 }
-inline float RotationMatrixRow::column2() const {
+inline float RotationMatrixRow::column2() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.RotationMatrixRow.column2)
   return column2_;
 }
-inline void RotationMatrixRow::set_column2(float value) {
-  
+inline void RotationMatrixRow::set_column2(float value)
+{
   column2_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.RotationMatrixRow.column2)
 }
 
 // float column3 = 3;
-inline void RotationMatrixRow::clear_column3() {
+inline void RotationMatrixRow::clear_column3()
+{
   column3_ = 0;
 }
-inline float RotationMatrixRow::column3() const {
+inline float RotationMatrixRow::column3() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.RotationMatrixRow.column3)
   return column3_;
 }
-inline void RotationMatrixRow::set_column3(float value) {
-  
+inline void RotationMatrixRow::set_column3(float value)
+{
   column3_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.RotationMatrixRow.column3)
 }
@@ -3313,49 +3749,55 @@ inline void RotationMatrixRow::set_column3(float value) {
 // TranslationVector
 
 // float t_x = 1;
-inline void TranslationVector::clear_t_x() {
+inline void TranslationVector::clear_t_x()
+{
   t_x_ = 0;
 }
-inline float TranslationVector::t_x() const {
+inline float TranslationVector::t_x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.TranslationVector.t_x)
   return t_x_;
 }
-inline void TranslationVector::set_t_x(float value) {
-  
+inline void TranslationVector::set_t_x(float value)
+{
   t_x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.TranslationVector.t_x)
 }
 
 // float t_y = 2;
-inline void TranslationVector::clear_t_y() {
+inline void TranslationVector::clear_t_y()
+{
   t_y_ = 0;
 }
-inline float TranslationVector::t_y() const {
+inline float TranslationVector::t_y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.TranslationVector.t_y)
   return t_y_;
 }
-inline void TranslationVector::set_t_y(float value) {
-  
+inline void TranslationVector::set_t_y(float value)
+{
   t_y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.TranslationVector.t_y)
 }
 
 // float t_z = 3;
-inline void TranslationVector::clear_t_z() {
+inline void TranslationVector::clear_t_z()
+{
   t_z_ = 0;
 }
-inline float TranslationVector::t_z() const {
+inline float TranslationVector::t_z() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.VisionConfig.TranslationVector.t_z)
   return t_z_;
 }
-inline void TranslationVector::set_t_z(float value) {
-  
+inline void TranslationVector::set_t_z(float value)
+{
   t_z_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.VisionConfig.TranslationVector.t_z)
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
@@ -3387,54 +3829,86 @@ inline void TranslationVector::set_t_z(float value) {
 
 // -------------------------------------------------------------------
 
-
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace VisionConfig
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::ServiceVersion> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::ServiceVersion>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::ServiceVersion> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::ServiceVersion>()
+{
   return ::Kinova::Api::VisionConfig::ServiceVersion_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::Sensor> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::Sensor>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::Sensor> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::Sensor>()
+{
   return ::Kinova::Api::VisionConfig::Sensor_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::Resolution> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::Resolution>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::Resolution> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::Resolution>()
+{
   return ::Kinova::Api::VisionConfig::Resolution_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::FrameRate> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::FrameRate>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::FrameRate> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::FrameRate>()
+{
   return ::Kinova::Api::VisionConfig::FrameRate_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::BitRate> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::BitRate>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::BitRate> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::BitRate>()
+{
   return ::Kinova::Api::VisionConfig::BitRate_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::Option> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::Option>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::Option> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::Option>()
+{
   return ::Kinova::Api::VisionConfig::Option_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::FocusAction> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::FocusAction>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::FocusAction> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::FocusAction>()
+{
   return ::Kinova::Api::VisionConfig::FocusAction_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::VisionConfig::VisionEvent> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::VisionEvent>() {
+struct is_proto_enum< ::Kinova::Api::VisionConfig::VisionEvent> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::VisionConfig::VisionEvent>()
+{
   return ::Kinova::Api::VisionConfig::VisionEvent_descriptor();
 }
 

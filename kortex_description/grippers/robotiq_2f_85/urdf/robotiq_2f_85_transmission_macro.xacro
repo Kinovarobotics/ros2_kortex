@@ -13,7 +13,7 @@
                 <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             </actuator>
         </transmission>
-        
+
         <gazebo>
             <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="mimic_robotiq_85_1">
                 <joint>${prefix}finger_joint</joint>

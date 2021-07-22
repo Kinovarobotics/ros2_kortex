@@ -8,7 +8,7 @@
         <child link="${prefix}robotiq_arg2f_base_link"/>
         <origin rpy="0.0 0.0 1.57" xyz="0.0 0.0 0.0"/>
     </joint>
-    
+
     <link name="${prefix}robotiq_arg2f_base_link">
       <inertial>
         <origin xyz="8.625E-08 -4.6583E-06 0.03145" rpy="0 0 0" />
@@ -35,7 +35,7 @@
     </link>
 
     <gazebo reference="${prefix}robotiq_arg2f_base_link">
-      <material>Gazebo/Black</material>  
+      <material>Gazebo/Black</material>
     </gazebo>
 
   </xacro:macro>

@@ -27,15 +27,17 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
-#include "Common.pb.h"  // IWYU pragma: export
+#include "Common.pb.h"                // IWYU pragma: export
 #include "GripperCyclicMessage.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_InterconnectCyclicMessage_2eproto {
+namespace protobuf_InterconnectCyclicMessage_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[4];
@@ -52,16 +54,20 @@ void InitDefaultsFeedbackImpl();
 void InitDefaultsFeedback();
 void InitDefaultsCustomDataImpl();
 void InitDefaultsCustomData();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsMessageId();
   InitDefaultsCommand();
   InitDefaultsFeedback();
   InitDefaultsCustomData();
 }
 }  // namespace protobuf_InterconnectCyclicMessage_2eproto
-namespace Kinova {
-namespace Api {
-namespace InterconnectCyclic {
+namespace Kinova
+{
+namespace Api
+{
+namespace InterconnectCyclic
+{
 class Command;
 class CommandDefaultTypeInternal;
 extern CommandDefaultTypeInternal _Command_default_instance_;
@@ -77,57 +83,70 @@ extern MessageIdDefaultTypeInternal _MessageId_default_instance_;
 }  // namespace InterconnectCyclic
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace InterconnectCyclic {
-
+namespace Kinova
+{
+namespace Api
+{
+namespace InterconnectCyclic
+{
 // ===================================================================
 
-class MessageId : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.MessageId) */ {
- public:
+class MessageId : public ::google::protobuf::
+                      Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.MessageId) */
+{
+public:
   MessageId();
   virtual ~MessageId();
 
   MessageId(const MessageId& from);
 
-  inline MessageId& operator=(const MessageId& from) {
+  inline MessageId& operator=(const MessageId& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  MessageId(MessageId&& from) noexcept
-    : MessageId() {
+#if LANG_CXX11
+  MessageId(MessageId&& from) noexcept : MessageId()
+  {
     *this = ::std::move(from);
   }
 
-  inline MessageId& operator=(MessageId&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline MessageId& operator=(MessageId&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const MessageId& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const MessageId* internal_default_instance() {
-    return reinterpret_cast<const MessageId*>(
-               &_MessageId_default_instance_);
+  static inline const MessageId* internal_default_instance()
+  {
+    return reinterpret_cast<const MessageId*>(&_MessageId_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(MessageId* other);
-  friend void swap(MessageId& a, MessageId& b) {
+  friend void swap(MessageId& a, MessageId& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline MessageId* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline MessageId* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   MessageId* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -138,27 +157,32 @@ class MessageId : public ::google::protobuf::Message /* @@protoc_insertion_point
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(MessageId* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -172,8 +196,7 @@ class MessageId : public ::google::protobuf::Message /* @@protoc_insertion_point
   void set_identifier(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.InterconnectCyclic.MessageId)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 identifier_;
   mutable int _cached_size_;
@@ -182,56 +205,68 @@ class MessageId : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
-class Command : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.Command) */ {
- public:
+class Command : public ::google::protobuf::
+                    Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.Command) */
+{
+public:
   Command();
   virtual ~Command();
 
   Command(const Command& from);
 
-  inline Command& operator=(const Command& from) {
+  inline Command& operator=(const Command& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  Command(Command&& from) noexcept
-    : Command() {
+#if LANG_CXX11
+  Command(Command&& from) noexcept : Command()
+  {
     *this = ::std::move(from);
   }
 
-  inline Command& operator=(Command&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline Command& operator=(Command&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const Command& default_instance();
 
-  enum ToolCommandCase {
+  enum ToolCommandCase
+  {
     kGripperCommand = 3,
     TOOL_COMMAND_NOT_SET = 0,
   };
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Command* internal_default_instance() {
-    return reinterpret_cast<const Command*>(
-               &_Command_default_instance_);
+  static inline const Command* internal_default_instance()
+  {
+    return reinterpret_cast<const Command*>(&_Command_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void Swap(Command* other);
-  friend void swap(Command& a, Command& b) {
+  friend void swap(Command& a, Command& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Command* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Command* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   Command* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -242,27 +277,32 @@ class Command : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Command* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -295,7 +335,7 @@ class Command : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   ToolCommandCase tool_command_case() const;
   // @@protoc_insertion_point(class_scope:Kinova.Api.InterconnectCyclic.Command)
- private:
+private:
   void set_has_gripper_command();
 
   inline bool has_tool_command() const;
@@ -305,8 +345,11 @@ class Command : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::Kinova::Api::InterconnectCyclic::MessageId* command_id_;
   ::google::protobuf::uint32 flags_;
-  union ToolCommandUnion {
-    ToolCommandUnion() {}
+  union ToolCommandUnion
+  {
+    ToolCommandUnion()
+    {
+    }
     ::Kinova::Api::GripperCyclic::Command* gripper_command_;
   } tool_command_;
   mutable int _cached_size_;
@@ -317,56 +360,68 @@ class Command : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 };
 // -------------------------------------------------------------------
 
-class Feedback : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.Feedback) */ {
- public:
+class Feedback : public ::google::protobuf::
+                     Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.Feedback) */
+{
+public:
   Feedback();
   virtual ~Feedback();
 
   Feedback(const Feedback& from);
 
-  inline Feedback& operator=(const Feedback& from) {
+  inline Feedback& operator=(const Feedback& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  Feedback(Feedback&& from) noexcept
-    : Feedback() {
+#if LANG_CXX11
+  Feedback(Feedback&& from) noexcept : Feedback()
+  {
     *this = ::std::move(from);
   }
 
-  inline Feedback& operator=(Feedback&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline Feedback& operator=(Feedback&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const Feedback& default_instance();
 
-  enum ToolFeedbackCase {
+  enum ToolFeedbackCase
+  {
     kGripperFeedback = 18,
     TOOL_FEEDBACK_NOT_SET = 0,
   };
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Feedback* internal_default_instance() {
-    return reinterpret_cast<const Feedback*>(
-               &_Feedback_default_instance_);
+  static inline const Feedback* internal_default_instance()
+  {
+    return reinterpret_cast<const Feedback*>(&_Feedback_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 2;
 
   void Swap(Feedback* other);
-  friend void swap(Feedback& a, Feedback& b) {
+  friend void swap(Feedback& a, Feedback& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Feedback* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Feedback* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   Feedback* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -377,27 +432,32 @@ class Feedback : public ::google::protobuf::Message /* @@protoc_insertion_point(
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Feedback* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -508,7 +568,7 @@ class Feedback : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   ToolFeedbackCase tool_feedback_case() const;
   // @@protoc_insertion_point(class_scope:Kinova.Api.InterconnectCyclic.Feedback)
- private:
+private:
   void set_has_gripper_feedback();
 
   inline bool has_tool_feedback() const;
@@ -531,8 +591,11 @@ class Feedback : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::uint32 fault_bank_b_;
   ::google::protobuf::uint32 warning_bank_a_;
   ::google::protobuf::uint32 warning_bank_b_;
-  union ToolFeedbackUnion {
-    ToolFeedbackUnion() {}
+  union ToolFeedbackUnion
+  {
+    ToolFeedbackUnion()
+    {
+    }
     ::Kinova::Api::GripperCyclic::Feedback* gripper_feedback_;
   } tool_feedback_;
   mutable int _cached_size_;
@@ -543,56 +606,68 @@ class Feedback : public ::google::protobuf::Message /* @@protoc_insertion_point(
 };
 // -------------------------------------------------------------------
 
-class CustomData : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.CustomData) */ {
- public:
+class CustomData : public ::google::protobuf::
+                       Message /* @@protoc_insertion_point(class_definition:Kinova.Api.InterconnectCyclic.CustomData) */
+{
+public:
   CustomData();
   virtual ~CustomData();
 
   CustomData(const CustomData& from);
 
-  inline CustomData& operator=(const CustomData& from) {
+  inline CustomData& operator=(const CustomData& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CustomData(CustomData&& from) noexcept
-    : CustomData() {
+#if LANG_CXX11
+  CustomData(CustomData&& from) noexcept : CustomData()
+  {
     *this = ::std::move(from);
   }
 
-  inline CustomData& operator=(CustomData&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CustomData& operator=(CustomData&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CustomData& default_instance();
 
-  enum ToolCustomDataCase {
+  enum ToolCustomDataCase
+  {
     kGripperCustomData = 18,
     TOOL_CUSTOMDATA_NOT_SET = 0,
   };
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CustomData* internal_default_instance() {
-    return reinterpret_cast<const CustomData*>(
-               &_CustomData_default_instance_);
+  static inline const CustomData* internal_default_instance()
+  {
+    return reinterpret_cast<const CustomData*>(&_CustomData_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 3;
 
   void Swap(CustomData* other);
-  friend void swap(CustomData& a, CustomData& b) {
+  friend void swap(CustomData& a, CustomData& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CustomData* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CustomData* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CustomData* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -603,27 +678,32 @@ class CustomData : public ::google::protobuf::Message /* @@protoc_insertion_poin
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CustomData* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -746,7 +826,7 @@ class CustomData : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   ToolCustomDataCase tool_customData_case() const;
   // @@protoc_insertion_point(class_scope:Kinova.Api.InterconnectCyclic.CustomData)
- private:
+private:
   void set_has_gripper_custom_data();
 
   inline bool has_tool_customData() const;
@@ -771,8 +851,11 @@ class CustomData : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::uint32 custom_data_13_;
   ::google::protobuf::uint32 custom_data_14_;
   ::google::protobuf::uint32 custom_data_15_;
-  union ToolCustomDataUnion {
-    ToolCustomDataUnion() {}
+  union ToolCustomDataUnion
+  {
+    ToolCustomDataUnion()
+    {
+    }
     ::Kinova::Api::GripperCyclic::CustomData* gripper_custom_data_;
   } tool_customData_;
   mutable int _cached_size_;
@@ -783,25 +866,26 @@ class CustomData : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // MessageId
 
 // fixed32 identifier = 1;
-inline void MessageId::clear_identifier() {
+inline void MessageId::clear_identifier()
+{
   identifier_ = 0u;
 }
-inline ::google::protobuf::uint32 MessageId::identifier() const {
+inline ::google::protobuf::uint32 MessageId::identifier() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.MessageId.identifier)
   return identifier_;
 }
-inline void MessageId::set_identifier(::google::protobuf::uint32 value) {
-  
+inline void MessageId::set_identifier(::google::protobuf::uint32 value)
+{
   identifier_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.MessageId.identifier)
 }
@@ -811,95 +895,116 @@ inline void MessageId::set_identifier(::google::protobuf::uint32 value) {
 // Command
 
 // .Kinova.Api.InterconnectCyclic.MessageId command_id = 1;
-inline bool Command::has_command_id() const {
+inline bool Command::has_command_id() const
+{
   return this != internal_default_instance() && command_id_ != NULL;
 }
-inline void Command::clear_command_id() {
-  if (GetArenaNoVirtual() == NULL && command_id_ != NULL) {
+inline void Command::clear_command_id()
+{
+  if (GetArenaNoVirtual() == NULL && command_id_ != NULL)
+  {
     delete command_id_;
   }
   command_id_ = NULL;
 }
-inline const ::Kinova::Api::InterconnectCyclic::MessageId& Command::command_id() const {
+inline const ::Kinova::Api::InterconnectCyclic::MessageId& Command::command_id() const
+{
   const ::Kinova::Api::InterconnectCyclic::MessageId* p = command_id_;
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Command.command_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::InterconnectCyclic::MessageId*>(
-      &::Kinova::Api::InterconnectCyclic::_MessageId_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::InterconnectCyclic::MessageId*>(
+                         &::Kinova::Api::InterconnectCyclic::_MessageId_default_instance_);
 }
-inline ::Kinova::Api::InterconnectCyclic::MessageId* Command::release_command_id() {
+inline ::Kinova::Api::InterconnectCyclic::MessageId* Command::release_command_id()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.InterconnectCyclic.Command.command_id)
-  
+
   ::Kinova::Api::InterconnectCyclic::MessageId* temp = command_id_;
   command_id_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::InterconnectCyclic::MessageId* Command::mutable_command_id() {
-  
-  if (command_id_ == NULL) {
+inline ::Kinova::Api::InterconnectCyclic::MessageId* Command::mutable_command_id()
+{
+  if (command_id_ == NULL)
+  {
     command_id_ = new ::Kinova::Api::InterconnectCyclic::MessageId;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.InterconnectCyclic.Command.command_id)
   return command_id_;
 }
-inline void Command::set_allocated_command_id(::Kinova::Api::InterconnectCyclic::MessageId* command_id) {
+inline void Command::set_allocated_command_id(::Kinova::Api::InterconnectCyclic::MessageId* command_id)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete command_id_;
   }
-  if (command_id) {
+  if (command_id)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      command_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, command_id, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      command_id = ::google::protobuf::internal::GetOwnedMessage(message_arena, command_id, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   command_id_ = command_id;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.InterconnectCyclic.Command.command_id)
 }
 
 // fixed32 flags = 2;
-inline void Command::clear_flags() {
+inline void Command::clear_flags()
+{
   flags_ = 0u;
 }
-inline ::google::protobuf::uint32 Command::flags() const {
+inline ::google::protobuf::uint32 Command::flags() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Command.flags)
   return flags_;
 }
-inline void Command::set_flags(::google::protobuf::uint32 value) {
-  
+inline void Command::set_flags(::google::protobuf::uint32 value)
+{
   flags_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Command.flags)
 }
 
 // .Kinova.Api.GripperCyclic.Command gripper_command = 3;
-inline bool Command::has_gripper_command() const {
+inline bool Command::has_gripper_command() const
+{
   return tool_command_case() == kGripperCommand;
 }
-inline void Command::set_has_gripper_command() {
+inline void Command::set_has_gripper_command()
+{
   _oneof_case_[0] = kGripperCommand;
 }
-inline ::Kinova::Api::GripperCyclic::Command* Command::release_gripper_command() {
+inline ::Kinova::Api::GripperCyclic::Command* Command::release_gripper_command()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.InterconnectCyclic.Command.gripper_command)
-  if (has_gripper_command()) {
+  if (has_gripper_command())
+  {
     clear_has_tool_command();
-      ::Kinova::Api::GripperCyclic::Command* temp = tool_command_.gripper_command_;
+    ::Kinova::Api::GripperCyclic::Command* temp = tool_command_.gripper_command_;
     tool_command_.gripper_command_ = NULL;
     return temp;
-  } else {
+  }
+  else
+  {
     return NULL;
   }
 }
-inline const ::Kinova::Api::GripperCyclic::Command& Command::gripper_command() const {
+inline const ::Kinova::Api::GripperCyclic::Command& Command::gripper_command() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Command.gripper_command)
-  return has_gripper_command()
-      ? *tool_command_.gripper_command_
-      : *reinterpret_cast< ::Kinova::Api::GripperCyclic::Command*>(&::Kinova::Api::GripperCyclic::_Command_default_instance_);
+  return has_gripper_command() ? *tool_command_.gripper_command_ :
+                                 *reinterpret_cast< ::Kinova::Api::GripperCyclic::Command*>(
+                                     &::Kinova::Api::GripperCyclic::_Command_default_instance_);
 }
-inline ::Kinova::Api::GripperCyclic::Command* Command::mutable_gripper_command() {
-  if (!has_gripper_command()) {
+inline ::Kinova::Api::GripperCyclic::Command* Command::mutable_gripper_command()
+{
+  if (!has_gripper_command())
+  {
     clear_tool_command();
     set_has_gripper_command();
     tool_command_.gripper_command_ = new ::Kinova::Api::GripperCyclic::Command;
@@ -908,13 +1013,16 @@ inline ::Kinova::Api::GripperCyclic::Command* Command::mutable_gripper_command()
   return tool_command_.gripper_command_;
 }
 
-inline bool Command::has_tool_command() const {
+inline bool Command::has_tool_command() const
+{
   return tool_command_case() != TOOL_COMMAND_NOT_SET;
 }
-inline void Command::clear_has_tool_command() {
+inline void Command::clear_has_tool_command()
+{
   _oneof_case_[0] = TOOL_COMMAND_NOT_SET;
 }
-inline Command::ToolCommandCase Command::tool_command_case() const {
+inline Command::ToolCommandCase Command::tool_command_case() const
+{
   return Command::ToolCommandCase(_oneof_case_[0]);
 }
 // -------------------------------------------------------------------
@@ -922,277 +1030,324 @@ inline Command::ToolCommandCase Command::tool_command_case() const {
 // Feedback
 
 // .Kinova.Api.InterconnectCyclic.MessageId feedback_id = 1;
-inline bool Feedback::has_feedback_id() const {
+inline bool Feedback::has_feedback_id() const
+{
   return this != internal_default_instance() && feedback_id_ != NULL;
 }
-inline void Feedback::clear_feedback_id() {
-  if (GetArenaNoVirtual() == NULL && feedback_id_ != NULL) {
+inline void Feedback::clear_feedback_id()
+{
+  if (GetArenaNoVirtual() == NULL && feedback_id_ != NULL)
+  {
     delete feedback_id_;
   }
   feedback_id_ = NULL;
 }
-inline const ::Kinova::Api::InterconnectCyclic::MessageId& Feedback::feedback_id() const {
+inline const ::Kinova::Api::InterconnectCyclic::MessageId& Feedback::feedback_id() const
+{
   const ::Kinova::Api::InterconnectCyclic::MessageId* p = feedback_id_;
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.feedback_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::InterconnectCyclic::MessageId*>(
-      &::Kinova::Api::InterconnectCyclic::_MessageId_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::InterconnectCyclic::MessageId*>(
+                         &::Kinova::Api::InterconnectCyclic::_MessageId_default_instance_);
 }
-inline ::Kinova::Api::InterconnectCyclic::MessageId* Feedback::release_feedback_id() {
+inline ::Kinova::Api::InterconnectCyclic::MessageId* Feedback::release_feedback_id()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.InterconnectCyclic.Feedback.feedback_id)
-  
+
   ::Kinova::Api::InterconnectCyclic::MessageId* temp = feedback_id_;
   feedback_id_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::InterconnectCyclic::MessageId* Feedback::mutable_feedback_id() {
-  
-  if (feedback_id_ == NULL) {
+inline ::Kinova::Api::InterconnectCyclic::MessageId* Feedback::mutable_feedback_id()
+{
+  if (feedback_id_ == NULL)
+  {
     feedback_id_ = new ::Kinova::Api::InterconnectCyclic::MessageId;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.InterconnectCyclic.Feedback.feedback_id)
   return feedback_id_;
 }
-inline void Feedback::set_allocated_feedback_id(::Kinova::Api::InterconnectCyclic::MessageId* feedback_id) {
+inline void Feedback::set_allocated_feedback_id(::Kinova::Api::InterconnectCyclic::MessageId* feedback_id)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete feedback_id_;
   }
-  if (feedback_id) {
+  if (feedback_id)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      feedback_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, feedback_id, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      feedback_id = ::google::protobuf::internal::GetOwnedMessage(message_arena, feedback_id, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   feedback_id_ = feedback_id;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.InterconnectCyclic.Feedback.feedback_id)
 }
 
 // fixed32 status_flags = 2;
-inline void Feedback::clear_status_flags() {
+inline void Feedback::clear_status_flags()
+{
   status_flags_ = 0u;
 }
-inline ::google::protobuf::uint32 Feedback::status_flags() const {
+inline ::google::protobuf::uint32 Feedback::status_flags() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.status_flags)
   return status_flags_;
 }
-inline void Feedback::set_status_flags(::google::protobuf::uint32 value) {
-  
+inline void Feedback::set_status_flags(::google::protobuf::uint32 value)
+{
   status_flags_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.status_flags)
 }
 
 // fixed32 jitter_comm = 3;
-inline void Feedback::clear_jitter_comm() {
+inline void Feedback::clear_jitter_comm()
+{
   jitter_comm_ = 0u;
 }
-inline ::google::protobuf::uint32 Feedback::jitter_comm() const {
+inline ::google::protobuf::uint32 Feedback::jitter_comm() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.jitter_comm)
   return jitter_comm_;
 }
-inline void Feedback::set_jitter_comm(::google::protobuf::uint32 value) {
-  
+inline void Feedback::set_jitter_comm(::google::protobuf::uint32 value)
+{
   jitter_comm_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.jitter_comm)
 }
 
 // float imu_acceleration_x = 4;
-inline void Feedback::clear_imu_acceleration_x() {
+inline void Feedback::clear_imu_acceleration_x()
+{
   imu_acceleration_x_ = 0;
 }
-inline float Feedback::imu_acceleration_x() const {
+inline float Feedback::imu_acceleration_x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.imu_acceleration_x)
   return imu_acceleration_x_;
 }
-inline void Feedback::set_imu_acceleration_x(float value) {
-  
+inline void Feedback::set_imu_acceleration_x(float value)
+{
   imu_acceleration_x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.imu_acceleration_x)
 }
 
 // float imu_acceleration_y = 5;
-inline void Feedback::clear_imu_acceleration_y() {
+inline void Feedback::clear_imu_acceleration_y()
+{
   imu_acceleration_y_ = 0;
 }
-inline float Feedback::imu_acceleration_y() const {
+inline float Feedback::imu_acceleration_y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.imu_acceleration_y)
   return imu_acceleration_y_;
 }
-inline void Feedback::set_imu_acceleration_y(float value) {
-  
+inline void Feedback::set_imu_acceleration_y(float value)
+{
   imu_acceleration_y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.imu_acceleration_y)
 }
 
 // float imu_acceleration_z = 6;
-inline void Feedback::clear_imu_acceleration_z() {
+inline void Feedback::clear_imu_acceleration_z()
+{
   imu_acceleration_z_ = 0;
 }
-inline float Feedback::imu_acceleration_z() const {
+inline float Feedback::imu_acceleration_z() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.imu_acceleration_z)
   return imu_acceleration_z_;
 }
-inline void Feedback::set_imu_acceleration_z(float value) {
-  
+inline void Feedback::set_imu_acceleration_z(float value)
+{
   imu_acceleration_z_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.imu_acceleration_z)
 }
 
 // float imu_angular_velocity_x = 7;
-inline void Feedback::clear_imu_angular_velocity_x() {
+inline void Feedback::clear_imu_angular_velocity_x()
+{
   imu_angular_velocity_x_ = 0;
 }
-inline float Feedback::imu_angular_velocity_x() const {
+inline float Feedback::imu_angular_velocity_x() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.imu_angular_velocity_x)
   return imu_angular_velocity_x_;
 }
-inline void Feedback::set_imu_angular_velocity_x(float value) {
-  
+inline void Feedback::set_imu_angular_velocity_x(float value)
+{
   imu_angular_velocity_x_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.imu_angular_velocity_x)
 }
 
 // float imu_angular_velocity_y = 8;
-inline void Feedback::clear_imu_angular_velocity_y() {
+inline void Feedback::clear_imu_angular_velocity_y()
+{
   imu_angular_velocity_y_ = 0;
 }
-inline float Feedback::imu_angular_velocity_y() const {
+inline float Feedback::imu_angular_velocity_y() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.imu_angular_velocity_y)
   return imu_angular_velocity_y_;
 }
-inline void Feedback::set_imu_angular_velocity_y(float value) {
-  
+inline void Feedback::set_imu_angular_velocity_y(float value)
+{
   imu_angular_velocity_y_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.imu_angular_velocity_y)
 }
 
 // float imu_angular_velocity_z = 9;
-inline void Feedback::clear_imu_angular_velocity_z() {
+inline void Feedback::clear_imu_angular_velocity_z()
+{
   imu_angular_velocity_z_ = 0;
 }
-inline float Feedback::imu_angular_velocity_z() const {
+inline float Feedback::imu_angular_velocity_z() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.imu_angular_velocity_z)
   return imu_angular_velocity_z_;
 }
-inline void Feedback::set_imu_angular_velocity_z(float value) {
-  
+inline void Feedback::set_imu_angular_velocity_z(float value)
+{
   imu_angular_velocity_z_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.imu_angular_velocity_z)
 }
 
 // float voltage = 10;
-inline void Feedback::clear_voltage() {
+inline void Feedback::clear_voltage()
+{
   voltage_ = 0;
 }
-inline float Feedback::voltage() const {
+inline float Feedback::voltage() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.voltage)
   return voltage_;
 }
-inline void Feedback::set_voltage(float value) {
-  
+inline void Feedback::set_voltage(float value)
+{
   voltage_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.voltage)
 }
 
 // float temperature_core = 11;
-inline void Feedback::clear_temperature_core() {
+inline void Feedback::clear_temperature_core()
+{
   temperature_core_ = 0;
 }
-inline float Feedback::temperature_core() const {
+inline float Feedback::temperature_core() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.temperature_core)
   return temperature_core_;
 }
-inline void Feedback::set_temperature_core(float value) {
-  
+inline void Feedback::set_temperature_core(float value)
+{
   temperature_core_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.temperature_core)
 }
 
 // fixed32 fault_bank_a = 12;
-inline void Feedback::clear_fault_bank_a() {
+inline void Feedback::clear_fault_bank_a()
+{
   fault_bank_a_ = 0u;
 }
-inline ::google::protobuf::uint32 Feedback::fault_bank_a() const {
+inline ::google::protobuf::uint32 Feedback::fault_bank_a() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.fault_bank_a)
   return fault_bank_a_;
 }
-inline void Feedback::set_fault_bank_a(::google::protobuf::uint32 value) {
-  
+inline void Feedback::set_fault_bank_a(::google::protobuf::uint32 value)
+{
   fault_bank_a_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.fault_bank_a)
 }
 
 // fixed32 fault_bank_b = 13;
-inline void Feedback::clear_fault_bank_b() {
+inline void Feedback::clear_fault_bank_b()
+{
   fault_bank_b_ = 0u;
 }
-inline ::google::protobuf::uint32 Feedback::fault_bank_b() const {
+inline ::google::protobuf::uint32 Feedback::fault_bank_b() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.fault_bank_b)
   return fault_bank_b_;
 }
-inline void Feedback::set_fault_bank_b(::google::protobuf::uint32 value) {
-  
+inline void Feedback::set_fault_bank_b(::google::protobuf::uint32 value)
+{
   fault_bank_b_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.fault_bank_b)
 }
 
 // fixed32 warning_bank_a = 14;
-inline void Feedback::clear_warning_bank_a() {
+inline void Feedback::clear_warning_bank_a()
+{
   warning_bank_a_ = 0u;
 }
-inline ::google::protobuf::uint32 Feedback::warning_bank_a() const {
+inline ::google::protobuf::uint32 Feedback::warning_bank_a() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.warning_bank_a)
   return warning_bank_a_;
 }
-inline void Feedback::set_warning_bank_a(::google::protobuf::uint32 value) {
-  
+inline void Feedback::set_warning_bank_a(::google::protobuf::uint32 value)
+{
   warning_bank_a_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.warning_bank_a)
 }
 
 // fixed32 warning_bank_b = 15;
-inline void Feedback::clear_warning_bank_b() {
+inline void Feedback::clear_warning_bank_b()
+{
   warning_bank_b_ = 0u;
 }
-inline ::google::protobuf::uint32 Feedback::warning_bank_b() const {
+inline ::google::protobuf::uint32 Feedback::warning_bank_b() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.warning_bank_b)
   return warning_bank_b_;
 }
-inline void Feedback::set_warning_bank_b(::google::protobuf::uint32 value) {
-  
+inline void Feedback::set_warning_bank_b(::google::protobuf::uint32 value)
+{
   warning_bank_b_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.Feedback.warning_bank_b)
 }
 
 // .Kinova.Api.GripperCyclic.Feedback gripper_feedback = 18;
-inline bool Feedback::has_gripper_feedback() const {
+inline bool Feedback::has_gripper_feedback() const
+{
   return tool_feedback_case() == kGripperFeedback;
 }
-inline void Feedback::set_has_gripper_feedback() {
+inline void Feedback::set_has_gripper_feedback()
+{
   _oneof_case_[0] = kGripperFeedback;
 }
-inline ::Kinova::Api::GripperCyclic::Feedback* Feedback::release_gripper_feedback() {
+inline ::Kinova::Api::GripperCyclic::Feedback* Feedback::release_gripper_feedback()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.InterconnectCyclic.Feedback.gripper_feedback)
-  if (has_gripper_feedback()) {
+  if (has_gripper_feedback())
+  {
     clear_has_tool_feedback();
-      ::Kinova::Api::GripperCyclic::Feedback* temp = tool_feedback_.gripper_feedback_;
+    ::Kinova::Api::GripperCyclic::Feedback* temp = tool_feedback_.gripper_feedback_;
     tool_feedback_.gripper_feedback_ = NULL;
     return temp;
-  } else {
+  }
+  else
+  {
     return NULL;
   }
 }
-inline const ::Kinova::Api::GripperCyclic::Feedback& Feedback::gripper_feedback() const {
+inline const ::Kinova::Api::GripperCyclic::Feedback& Feedback::gripper_feedback() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.Feedback.gripper_feedback)
-  return has_gripper_feedback()
-      ? *tool_feedback_.gripper_feedback_
-      : *reinterpret_cast< ::Kinova::Api::GripperCyclic::Feedback*>(&::Kinova::Api::GripperCyclic::_Feedback_default_instance_);
+  return has_gripper_feedback() ? *tool_feedback_.gripper_feedback_ :
+                                  *reinterpret_cast< ::Kinova::Api::GripperCyclic::Feedback*>(
+                                      &::Kinova::Api::GripperCyclic::_Feedback_default_instance_);
 }
-inline ::Kinova::Api::GripperCyclic::Feedback* Feedback::mutable_gripper_feedback() {
-  if (!has_gripper_feedback()) {
+inline ::Kinova::Api::GripperCyclic::Feedback* Feedback::mutable_gripper_feedback()
+{
+  if (!has_gripper_feedback())
+  {
     clear_tool_feedback();
     set_has_gripper_feedback();
     tool_feedback_.gripper_feedback_ = new ::Kinova::Api::GripperCyclic::Feedback;
@@ -1201,13 +1356,16 @@ inline ::Kinova::Api::GripperCyclic::Feedback* Feedback::mutable_gripper_feedbac
   return tool_feedback_.gripper_feedback_;
 }
 
-inline bool Feedback::has_tool_feedback() const {
+inline bool Feedback::has_tool_feedback() const
+{
   return tool_feedback_case() != TOOL_FEEDBACK_NOT_SET;
 }
-inline void Feedback::clear_has_tool_feedback() {
+inline void Feedback::clear_has_tool_feedback()
+{
   _oneof_case_[0] = TOOL_FEEDBACK_NOT_SET;
 }
-inline Feedback::ToolFeedbackCase Feedback::tool_feedback_case() const {
+inline Feedback::ToolFeedbackCase Feedback::tool_feedback_case() const
+{
   return Feedback::ToolFeedbackCase(_oneof_case_[0]);
 }
 // -------------------------------------------------------------------
@@ -1215,305 +1373,356 @@ inline Feedback::ToolFeedbackCase Feedback::tool_feedback_case() const {
 // CustomData
 
 // .Kinova.Api.InterconnectCyclic.MessageId custom_data_id = 1;
-inline bool CustomData::has_custom_data_id() const {
+inline bool CustomData::has_custom_data_id() const
+{
   return this != internal_default_instance() && custom_data_id_ != NULL;
 }
-inline void CustomData::clear_custom_data_id() {
-  if (GetArenaNoVirtual() == NULL && custom_data_id_ != NULL) {
+inline void CustomData::clear_custom_data_id()
+{
+  if (GetArenaNoVirtual() == NULL && custom_data_id_ != NULL)
+  {
     delete custom_data_id_;
   }
   custom_data_id_ = NULL;
 }
-inline const ::Kinova::Api::InterconnectCyclic::MessageId& CustomData::custom_data_id() const {
+inline const ::Kinova::Api::InterconnectCyclic::MessageId& CustomData::custom_data_id() const
+{
   const ::Kinova::Api::InterconnectCyclic::MessageId* p = custom_data_id_;
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::Kinova::Api::InterconnectCyclic::MessageId*>(
-      &::Kinova::Api::InterconnectCyclic::_MessageId_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::Kinova::Api::InterconnectCyclic::MessageId*>(
+                         &::Kinova::Api::InterconnectCyclic::_MessageId_default_instance_);
 }
-inline ::Kinova::Api::InterconnectCyclic::MessageId* CustomData::release_custom_data_id() {
+inline ::Kinova::Api::InterconnectCyclic::MessageId* CustomData::release_custom_data_id()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.InterconnectCyclic.CustomData.custom_data_id)
-  
+
   ::Kinova::Api::InterconnectCyclic::MessageId* temp = custom_data_id_;
   custom_data_id_ = NULL;
   return temp;
 }
-inline ::Kinova::Api::InterconnectCyclic::MessageId* CustomData::mutable_custom_data_id() {
-  
-  if (custom_data_id_ == NULL) {
+inline ::Kinova::Api::InterconnectCyclic::MessageId* CustomData::mutable_custom_data_id()
+{
+  if (custom_data_id_ == NULL)
+  {
     custom_data_id_ = new ::Kinova::Api::InterconnectCyclic::MessageId;
   }
   // @@protoc_insertion_point(field_mutable:Kinova.Api.InterconnectCyclic.CustomData.custom_data_id)
   return custom_data_id_;
 }
-inline void CustomData::set_allocated_custom_data_id(::Kinova::Api::InterconnectCyclic::MessageId* custom_data_id) {
+inline void CustomData::set_allocated_custom_data_id(::Kinova::Api::InterconnectCyclic::MessageId* custom_data_id)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete custom_data_id_;
   }
-  if (custom_data_id) {
+  if (custom_data_id)
+  {
     ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      custom_data_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, custom_data_id, submessage_arena);
+    if (message_arena != submessage_arena)
+    {
+      custom_data_id = ::google::protobuf::internal::GetOwnedMessage(message_arena, custom_data_id, submessage_arena);
     }
-    
-  } else {
-    
+  }
+  else
+  {
   }
   custom_data_id_ = custom_data_id;
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.InterconnectCyclic.CustomData.custom_data_id)
 }
 
 // fixed32 custom_data_0 = 2;
-inline void CustomData::clear_custom_data_0() {
+inline void CustomData::clear_custom_data_0()
+{
   custom_data_0_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_0() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_0() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_0)
   return custom_data_0_;
 }
-inline void CustomData::set_custom_data_0(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_0(::google::protobuf::uint32 value)
+{
   custom_data_0_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_0)
 }
 
 // fixed32 custom_data_1 = 3;
-inline void CustomData::clear_custom_data_1() {
+inline void CustomData::clear_custom_data_1()
+{
   custom_data_1_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_1() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_1() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_1)
   return custom_data_1_;
 }
-inline void CustomData::set_custom_data_1(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_1(::google::protobuf::uint32 value)
+{
   custom_data_1_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_1)
 }
 
 // fixed32 custom_data_2 = 4;
-inline void CustomData::clear_custom_data_2() {
+inline void CustomData::clear_custom_data_2()
+{
   custom_data_2_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_2() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_2() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_2)
   return custom_data_2_;
 }
-inline void CustomData::set_custom_data_2(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_2(::google::protobuf::uint32 value)
+{
   custom_data_2_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_2)
 }
 
 // fixed32 custom_data_3 = 5;
-inline void CustomData::clear_custom_data_3() {
+inline void CustomData::clear_custom_data_3()
+{
   custom_data_3_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_3() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_3() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_3)
   return custom_data_3_;
 }
-inline void CustomData::set_custom_data_3(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_3(::google::protobuf::uint32 value)
+{
   custom_data_3_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_3)
 }
 
 // fixed32 custom_data_4 = 6;
-inline void CustomData::clear_custom_data_4() {
+inline void CustomData::clear_custom_data_4()
+{
   custom_data_4_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_4() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_4() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_4)
   return custom_data_4_;
 }
-inline void CustomData::set_custom_data_4(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_4(::google::protobuf::uint32 value)
+{
   custom_data_4_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_4)
 }
 
 // fixed32 custom_data_5 = 7;
-inline void CustomData::clear_custom_data_5() {
+inline void CustomData::clear_custom_data_5()
+{
   custom_data_5_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_5() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_5() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_5)
   return custom_data_5_;
 }
-inline void CustomData::set_custom_data_5(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_5(::google::protobuf::uint32 value)
+{
   custom_data_5_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_5)
 }
 
 // fixed32 custom_data_6 = 8;
-inline void CustomData::clear_custom_data_6() {
+inline void CustomData::clear_custom_data_6()
+{
   custom_data_6_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_6() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_6() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_6)
   return custom_data_6_;
 }
-inline void CustomData::set_custom_data_6(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_6(::google::protobuf::uint32 value)
+{
   custom_data_6_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_6)
 }
 
 // fixed32 custom_data_7 = 9;
-inline void CustomData::clear_custom_data_7() {
+inline void CustomData::clear_custom_data_7()
+{
   custom_data_7_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_7() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_7() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_7)
   return custom_data_7_;
 }
-inline void CustomData::set_custom_data_7(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_7(::google::protobuf::uint32 value)
+{
   custom_data_7_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_7)
 }
 
 // fixed32 custom_data_8 = 10;
-inline void CustomData::clear_custom_data_8() {
+inline void CustomData::clear_custom_data_8()
+{
   custom_data_8_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_8() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_8() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_8)
   return custom_data_8_;
 }
-inline void CustomData::set_custom_data_8(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_8(::google::protobuf::uint32 value)
+{
   custom_data_8_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_8)
 }
 
 // fixed32 custom_data_9 = 11;
-inline void CustomData::clear_custom_data_9() {
+inline void CustomData::clear_custom_data_9()
+{
   custom_data_9_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_9() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_9() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_9)
   return custom_data_9_;
 }
-inline void CustomData::set_custom_data_9(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_9(::google::protobuf::uint32 value)
+{
   custom_data_9_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_9)
 }
 
 // fixed32 custom_data_10 = 12;
-inline void CustomData::clear_custom_data_10() {
+inline void CustomData::clear_custom_data_10()
+{
   custom_data_10_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_10() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_10() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_10)
   return custom_data_10_;
 }
-inline void CustomData::set_custom_data_10(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_10(::google::protobuf::uint32 value)
+{
   custom_data_10_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_10)
 }
 
 // fixed32 custom_data_11 = 13;
-inline void CustomData::clear_custom_data_11() {
+inline void CustomData::clear_custom_data_11()
+{
   custom_data_11_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_11() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_11() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_11)
   return custom_data_11_;
 }
-inline void CustomData::set_custom_data_11(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_11(::google::protobuf::uint32 value)
+{
   custom_data_11_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_11)
 }
 
 // fixed32 custom_data_12 = 14;
-inline void CustomData::clear_custom_data_12() {
+inline void CustomData::clear_custom_data_12()
+{
   custom_data_12_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_12() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_12() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_12)
   return custom_data_12_;
 }
-inline void CustomData::set_custom_data_12(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_12(::google::protobuf::uint32 value)
+{
   custom_data_12_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_12)
 }
 
 // fixed32 custom_data_13 = 15;
-inline void CustomData::clear_custom_data_13() {
+inline void CustomData::clear_custom_data_13()
+{
   custom_data_13_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_13() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_13() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_13)
   return custom_data_13_;
 }
-inline void CustomData::set_custom_data_13(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_13(::google::protobuf::uint32 value)
+{
   custom_data_13_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_13)
 }
 
 // fixed32 custom_data_14 = 16;
-inline void CustomData::clear_custom_data_14() {
+inline void CustomData::clear_custom_data_14()
+{
   custom_data_14_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_14() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_14() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_14)
   return custom_data_14_;
 }
-inline void CustomData::set_custom_data_14(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_14(::google::protobuf::uint32 value)
+{
   custom_data_14_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_14)
 }
 
 // fixed32 custom_data_15 = 17;
-inline void CustomData::clear_custom_data_15() {
+inline void CustomData::clear_custom_data_15()
+{
   custom_data_15_ = 0u;
 }
-inline ::google::protobuf::uint32 CustomData::custom_data_15() const {
+inline ::google::protobuf::uint32 CustomData::custom_data_15() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.custom_data_15)
   return custom_data_15_;
 }
-inline void CustomData::set_custom_data_15(::google::protobuf::uint32 value) {
-  
+inline void CustomData::set_custom_data_15(::google::protobuf::uint32 value)
+{
   custom_data_15_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.InterconnectCyclic.CustomData.custom_data_15)
 }
 
 // .Kinova.Api.GripperCyclic.CustomData gripper_custom_data = 18;
-inline bool CustomData::has_gripper_custom_data() const {
+inline bool CustomData::has_gripper_custom_data() const
+{
   return tool_customData_case() == kGripperCustomData;
 }
-inline void CustomData::set_has_gripper_custom_data() {
+inline void CustomData::set_has_gripper_custom_data()
+{
   _oneof_case_[0] = kGripperCustomData;
 }
-inline ::Kinova::Api::GripperCyclic::CustomData* CustomData::release_gripper_custom_data() {
+inline ::Kinova::Api::GripperCyclic::CustomData* CustomData::release_gripper_custom_data()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.InterconnectCyclic.CustomData.gripper_custom_data)
-  if (has_gripper_custom_data()) {
+  if (has_gripper_custom_data())
+  {
     clear_has_tool_customData();
-      ::Kinova::Api::GripperCyclic::CustomData* temp = tool_customData_.gripper_custom_data_;
+    ::Kinova::Api::GripperCyclic::CustomData* temp = tool_customData_.gripper_custom_data_;
     tool_customData_.gripper_custom_data_ = NULL;
     return temp;
-  } else {
+  }
+  else
+  {
     return NULL;
   }
 }
-inline const ::Kinova::Api::GripperCyclic::CustomData& CustomData::gripper_custom_data() const {
+inline const ::Kinova::Api::GripperCyclic::CustomData& CustomData::gripper_custom_data() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.InterconnectCyclic.CustomData.gripper_custom_data)
-  return has_gripper_custom_data()
-      ? *tool_customData_.gripper_custom_data_
-      : *reinterpret_cast< ::Kinova::Api::GripperCyclic::CustomData*>(&::Kinova::Api::GripperCyclic::_CustomData_default_instance_);
+  return has_gripper_custom_data() ? *tool_customData_.gripper_custom_data_ :
+                                     *reinterpret_cast< ::Kinova::Api::GripperCyclic::CustomData*>(
+                                         &::Kinova::Api::GripperCyclic::_CustomData_default_instance_);
 }
-inline ::Kinova::Api::GripperCyclic::CustomData* CustomData::mutable_gripper_custom_data() {
-  if (!has_gripper_custom_data()) {
+inline ::Kinova::Api::GripperCyclic::CustomData* CustomData::mutable_gripper_custom_data()
+{
+  if (!has_gripper_custom_data())
+  {
     clear_tool_customData();
     set_has_gripper_custom_data();
     tool_customData_.gripper_custom_data_ = new ::Kinova::Api::GripperCyclic::CustomData;
@@ -1522,24 +1731,26 @@ inline ::Kinova::Api::GripperCyclic::CustomData* CustomData::mutable_gripper_cus
   return tool_customData_.gripper_custom_data_;
 }
 
-inline bool CustomData::has_tool_customData() const {
+inline bool CustomData::has_tool_customData() const
+{
   return tool_customData_case() != TOOL_CUSTOMDATA_NOT_SET;
 }
-inline void CustomData::clear_has_tool_customData() {
+inline void CustomData::clear_has_tool_customData()
+{
   _oneof_case_[0] = TOOL_CUSTOMDATA_NOT_SET;
 }
-inline CustomData::ToolCustomDataCase CustomData::tool_customData_case() const {
+inline CustomData::ToolCustomDataCase CustomData::tool_customData_case() const
+{
   return CustomData::ToolCustomDataCase(_oneof_case_[0]);
 }
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 

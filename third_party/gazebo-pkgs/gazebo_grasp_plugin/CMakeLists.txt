@@ -81,8 +81,8 @@ add_dependencies(gazebo_grasp_fix ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 
-target_link_libraries(gazebo_grasp_fix 
-	${catkin_LIBRARIES}  
+target_link_libraries(gazebo_grasp_fix
+	${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
   libprotobuf.so
 )

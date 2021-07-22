@@ -1,0 +1,63 @@
+image: docker:git
+
+pipelines:
+  pull-requests:
+    '**':
+    - step:
+        name: Formatting (pre-commit) (PR)
+        services:
+          - docker
+        script:
+          - apk add --update py3-pip gcc python3 python3-dev musl-dev
+          - pip3 install pre-commit
+          - pre-commit run -a
+    - step:
+        name: Industrial CI (PR)
+        services:
+          - docker
+        script:
+          - apk add --update bash coreutils tar
+          - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
+          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy
+  branches:
+    "master":
+    - step:
+        name: Formatting (pre-commit) (Master)
+        services:
+          - docker
+        script:
+          - apk add --update py3-pip gcc python3 python3-dev musl-dev
+          - pip3 install pre-commit
+          - pre-commit run -a
+    - step:
+        name: Industrial CI (Master)
+        services:
+          - docker
+        script:
+          - apk add --update bash coreutils tar
+          - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
+          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy
+  custom:
+    "Build and Test":
+    - step:
+        name: Industrial CI (Manual Trigger)
+        services:
+          - docker
+        script:
+          - apk add --update bash coreutils tar
+          - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
+          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy
+    "Formatting (pre-commit) (Manual Trigger)":
+      - step:
+          name: Formatting (pre-commit)
+          services:
+            - docker
+          script:
+            - apk add --update py3-pip gcc python3 python3-dev musl-dev
+            - pip3 install pre-commit
+            - pre-commit run -a
+
+definitions:
+  services:
+    docker:
+      memory: 2048

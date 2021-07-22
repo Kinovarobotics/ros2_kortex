@@ -30,14 +30,14 @@
       </collision>
     </link>
     <gazebo reference="${prefix}${fingerprefix}_outer_knuckle">
-      <visual>  
-        <material>  
-          <ambient>0.792156862745098 0.819607843137255 0.933333333333333 1</ambient>  
-          <diffuse>0.792156862745098 0.819607843137255 0.933333333333333 1</diffuse>  
-        </material>  
-      </visual> 
+      <visual>
+        <material>
+          <ambient>0.792156862745098 0.819607843137255 0.933333333333333 1</ambient>
+          <diffuse>0.792156862745098 0.819607843137255 0.933333333333333 1</diffuse>
+        </material>
+      </visual>
     </gazebo>
-    
+
   </xacro:macro>
 
   <xacro:macro name="outer_finger" params="prefix fingerprefix stroke">

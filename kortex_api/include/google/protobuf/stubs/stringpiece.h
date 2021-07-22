@@ -151,8 +151,10 @@
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/hash.h>
 
-namespace google {
-namespace protobuf {
+namespace google
+{
+namespace protobuf
+{
 // StringPiece has *two* size types.
 // StringPiece::size_type
 //   is unsigned
@@ -175,20 +177,22 @@ typedef string::difference_type stringpiece_ssize_type;
 #define STRINGPIECE_CHECK_SIZE 0
 #endif
 
-class LIBPROTOBUF_EXPORT StringPiece {
- private:
+class LIBPROTOBUF_EXPORT StringPiece
+{
+private:
   const char* ptr_;
   stringpiece_ssize_type length_;
 
   // Prevent overflow in debug mode or fortified mode.
   // sizeof(stringpiece_ssize_type) may be smaller than sizeof(size_t).
-  static stringpiece_ssize_type CheckedSsizeTFromSizeT(size_t size) {
+  static stringpiece_ssize_type CheckedSsizeTFromSizeT(size_t size)
+  {
 #if STRINGPIECE_CHECK_SIZE > 0
 #ifdef max
 #undef max
 #endif
-    if (size > static_cast<size_t>(
-        std::numeric_limits<stringpiece_ssize_type>::max())) {
+    if (size > static_cast<size_t>(std::numeric_limits<stringpiece_ssize_type>::max()))
+    {
       // Some people grep for this message in logs
       // so take care if you ever change it.
       LogFatalSizeTooBig(size, "size_t to int conversion");
@@ -200,18 +204,22 @@ class LIBPROTOBUF_EXPORT StringPiece {
   // Out-of-line error path.
   static void LogFatalSizeTooBig(size_t size, const char* details);
 
- public:
+public:
   // We provide non-explicit singleton constructors so users can pass
   // in a "const char*" or a "string" wherever a "StringPiece" is
   // expected.
   //
   // Style guide exception granted:
   // http://goto/style-guide-exception-20978288
-  StringPiece() : ptr_(NULL), length_(0) {}
+  StringPiece() : ptr_(NULL), length_(0)
+  {
+  }
 
   StringPiece(const char* str)  // NOLINT(runtime/explicit)
-      : ptr_(str), length_(0) {
-    if (str != NULL) {
+    : ptr_(str), length_(0)
+  {
+    if (str != NULL)
+    {
       length_ = CheckedSsizeTFromSizeT(strlen(str));
     }
   }
@@ -219,12 +227,13 @@ class LIBPROTOBUF_EXPORT StringPiece {
   template <class Allocator>
   StringPiece(  // NOLINT(runtime/explicit)
       const std::basic_string<char, std::char_traits<char>, Allocator>& str)
-      : ptr_(str.data()), length_(0) {
+    : ptr_(str.data()), length_(0)
+  {
     length_ = CheckedSsizeTFromSizeT(str.size());
   }
 
-  StringPiece(const char* offset, stringpiece_ssize_type len)
-      : ptr_(offset), length_(len) {
+  StringPiece(const char* offset, stringpiece_ssize_type len) : ptr_(offset), length_(len)
+  {
     assert(len >= 0);
   }
 
@@ -234,31 +243,44 @@ class LIBPROTOBUF_EXPORT StringPiece {
   // Substring of another StringPiece.
   // pos must be non-negative and <= x.length().
   // len must be non-negative and will be pinned to at most x.length() - pos.
-  StringPiece(StringPiece x,
-              stringpiece_ssize_type pos,
-              stringpiece_ssize_type len);
+  StringPiece(StringPiece x, stringpiece_ssize_type pos, stringpiece_ssize_type len);
 
   // data() may return a pointer to a buffer with embedded NULs, and the
   // returned buffer may or may not be null terminated.  Therefore it is
   // typically a mistake to pass data() to a routine that expects a NUL
   // terminated string.
-  const char* data() const { return ptr_; }
-  stringpiece_ssize_type size() const { return length_; }
-  stringpiece_ssize_type length() const { return length_; }
-  bool empty() const { return length_ == 0; }
+  const char* data() const
+  {
+    return ptr_;
+  }
+  stringpiece_ssize_type size() const
+  {
+    return length_;
+  }
+  stringpiece_ssize_type length() const
+  {
+    return length_;
+  }
+  bool empty() const
+  {
+    return length_ == 0;
+  }
 
-  void clear() {
+  void clear()
+  {
     ptr_ = NULL;
     length_ = 0;
   }
 
-  void set(const char* data, stringpiece_ssize_type len) {
+  void set(const char* data, stringpiece_ssize_type len)
+  {
     assert(len >= 0);
     ptr_ = data;
     length_ = len;
   }
 
-  void set(const char* str) {
+  void set(const char* str)
+  {
     ptr_ = str;
     if (str != NULL)
       length_ = CheckedSsizeTFromSizeT(strlen(str));
@@ -266,41 +288,50 @@ class LIBPROTOBUF_EXPORT StringPiece {
       length_ = 0;
   }
 
-  void set(const void* data, stringpiece_ssize_type len) {
+  void set(const void* data, stringpiece_ssize_type len)
+  {
     ptr_ = reinterpret_cast<const char*>(data);
     length_ = len;
   }
 
-  char operator[](stringpiece_ssize_type i) const {
+  char operator[](stringpiece_ssize_type i) const
+  {
     assert(0 <= i);
     assert(i < length_);
     return ptr_[i];
   }
 
-  void remove_prefix(stringpiece_ssize_type n) {
+  void remove_prefix(stringpiece_ssize_type n)
+  {
     assert(length_ >= n);
     ptr_ += n;
     length_ -= n;
   }
 
-  void remove_suffix(stringpiece_ssize_type n) {
+  void remove_suffix(stringpiece_ssize_type n)
+  {
     assert(length_ >= n);
     length_ -= n;
   }
 
   // returns {-1, 0, 1}
-  int compare(StringPiece x) const {
-    const stringpiece_ssize_type min_size =
-        length_ < x.length_ ? length_ : x.length_;
+  int compare(StringPiece x) const
+  {
+    const stringpiece_ssize_type min_size = length_ < x.length_ ? length_ : x.length_;
     int r = memcmp(ptr_, x.ptr_, static_cast<size_t>(min_size));
-    if (r < 0) return -1;
-    if (r > 0) return 1;
-    if (length_ < x.length_) return -1;
-    if (length_ > x.length_) return 1;
+    if (r < 0)
+      return -1;
+    if (r > 0)
+      return 1;
+    if (length_ < x.length_)
+      return -1;
+    if (length_ > x.length_)
+      return 1;
     return 0;
   }
 
-  string as_string() const {
+  string as_string() const
+  {
     return ToString();
   }
   // We also define ToString() here, since many other string-like
@@ -308,27 +339,30 @@ class LIBPROTOBUF_EXPORT StringPiece {
   // "ToString", and it's confusing to have the method that does that
   // for a StringPiece be called "as_string()".  We also leave the
   // "as_string()" method defined here for existing code.
-  string ToString() const {
-    if (ptr_ == NULL) return string();
+  string ToString() const
+  {
+    if (ptr_ == NULL)
+      return string();
     return string(data(), static_cast<size_type>(size()));
   }
 
-  operator string() const {
+  operator string() const
+  {
     return ToString();
   }
 
   void CopyToString(string* target) const;
   void AppendToString(string* target) const;
 
-  bool starts_with(StringPiece x) const {
-    return (length_ >= x.length_) &&
-           (memcmp(ptr_, x.ptr_, static_cast<size_t>(x.length_)) == 0);
+  bool starts_with(StringPiece x) const
+  {
+    return (length_ >= x.length_) && (memcmp(ptr_, x.ptr_, static_cast<size_t>(x.length_)) == 0);
   }
 
-  bool ends_with(StringPiece x) const {
+  bool ends_with(StringPiece x) const
+  {
     return ((length_ >= x.length_) &&
-            (memcmp(ptr_ + (length_-x.length_), x.ptr_,
-                 static_cast<size_t>(x.length_)) == 0));
+            (memcmp(ptr_ + (length_ - x.length_), x.ptr_, static_cast<size_t>(x.length_)) == 0));
   }
 
   // Checks whether StringPiece starts with x and if so advances the beginning
@@ -350,16 +384,30 @@ class LIBPROTOBUF_EXPORT StringPiece {
   typedef const char* iterator;
   typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
   typedef std::reverse_iterator<iterator> reverse_iterator;
-  iterator begin() const { return ptr_; }
-  iterator end() const { return ptr_ + length_; }
-  const_reverse_iterator rbegin() const {
+  iterator begin() const
+  {
+    return ptr_;
+  }
+  iterator end() const
+  {
+    return ptr_ + length_;
+  }
+  const_reverse_iterator rbegin() const
+  {
     return const_reverse_iterator(ptr_ + length_);
   }
-  const_reverse_iterator rend() const {
+  const_reverse_iterator rend() const
+  {
     return const_reverse_iterator(ptr_);
   }
-  stringpiece_ssize_type max_size() const { return length_; }
-  stringpiece_ssize_type capacity() const { return length_; }
+  stringpiece_ssize_type max_size() const
+  {
+    return length_;
+  }
+  stringpiece_ssize_type capacity() const
+  {
+    return length_;
+  }
 
   // cpplint.py emits a false positive [build/include_what_you_use]
   stringpiece_ssize_type copy(char* buf, size_type n, size_type pos = 0) const;  // NOLINT
@@ -372,19 +420,18 @@ class LIBPROTOBUF_EXPORT StringPiece {
   stringpiece_ssize_type rfind(char c, size_type pos = npos) const;
 
   stringpiece_ssize_type find_first_of(StringPiece s, size_type pos = 0) const;
-  stringpiece_ssize_type find_first_of(char c, size_type pos = 0) const {
+  stringpiece_ssize_type find_first_of(char c, size_type pos = 0) const
+  {
     return find(c, pos);
   }
-  stringpiece_ssize_type find_first_not_of(StringPiece s,
-                                           size_type pos = 0) const;
+  stringpiece_ssize_type find_first_not_of(StringPiece s, size_type pos = 0) const;
   stringpiece_ssize_type find_first_not_of(char c, size_type pos = 0) const;
-  stringpiece_ssize_type find_last_of(StringPiece s,
-                                      size_type pos = npos) const;
-  stringpiece_ssize_type find_last_of(char c, size_type pos = npos) const {
+  stringpiece_ssize_type find_last_of(StringPiece s, size_type pos = npos) const;
+  stringpiece_ssize_type find_last_of(char c, size_type pos = npos) const
+  {
     return rfind(c, pos);
   }
-  stringpiece_ssize_type find_last_not_of(StringPiece s,
-                                          size_type pos = npos) const;
+  stringpiece_ssize_type find_last_not_of(StringPiece s, size_type pos = npos) const;
   stringpiece_ssize_type find_last_not_of(char c, size_type pos = npos) const;
 
   StringPiece substr(size_type pos, size_type n = npos) const;
@@ -393,48 +440,56 @@ class LIBPROTOBUF_EXPORT StringPiece {
 // This large function is defined inline so that in a fairly common case where
 // one of the arguments is a literal, the compiler can elide a lot of the
 // following comparisons.
-inline bool operator==(StringPiece x, StringPiece y) {
+inline bool operator==(StringPiece x, StringPiece y)
+{
   stringpiece_ssize_type len = x.size();
-  if (len != y.size()) {
+  if (len != y.size())
+  {
     return false;
   }
 
-  return x.data() == y.data() || len <= 0 ||
-      memcmp(x.data(), y.data(), static_cast<size_t>(len)) == 0;
+  return x.data() == y.data() || len <= 0 || memcmp(x.data(), y.data(), static_cast<size_t>(len)) == 0;
 }
 
-inline bool operator!=(StringPiece x, StringPiece y) {
+inline bool operator!=(StringPiece x, StringPiece y)
+{
   return !(x == y);
 }
 
-inline bool operator<(StringPiece x, StringPiece y) {
-  const stringpiece_ssize_type min_size =
-      x.size() < y.size() ? x.size() : y.size();
+inline bool operator<(StringPiece x, StringPiece y)
+{
+  const stringpiece_ssize_type min_size = x.size() < y.size() ? x.size() : y.size();
   const int r = memcmp(x.data(), y.data(), static_cast<size_t>(min_size));
   return (r < 0) || (r == 0 && x.size() < y.size());
 }
 
-inline bool operator>(StringPiece x, StringPiece y) {
+inline bool operator>(StringPiece x, StringPiece y)
+{
   return y < x;
 }
 
-inline bool operator<=(StringPiece x, StringPiece y) {
+inline bool operator<=(StringPiece x, StringPiece y)
+{
   return !(x > y);
 }
 
-inline bool operator>=(StringPiece x, StringPiece y) {
+inline bool operator>=(StringPiece x, StringPiece y)
+{
   return !(x < y);
 }
 
 // allow StringPiece to be logged
 extern std::ostream& operator<<(std::ostream& o, StringPiece piece);
 
-namespace internal {
+namespace internal
+{
 // StringPiece is not a POD and can not be used in an union (pre C++11). We
 // need a POD version of it.
-struct StringPiecePod {
+struct StringPiecePod
+{
   // Create from a StringPiece.
-  static StringPiecePod CreateFromStringPiece(StringPiece str) {
+  static StringPiecePod CreateFromStringPiece(StringPiece str)
+  {
     StringPiecePod pod;
     pod.data_ = str.data();
     pod.size_ = str.size();
@@ -442,28 +497,39 @@ struct StringPiecePod {
   }
 
   // Cast to StringPiece.
-  operator StringPiece() const { return StringPiece(data_, size_); }
+  operator StringPiece() const
+  {
+    return StringPiece(data_, size_);
+  }
 
-  bool operator==(const char* value) const {
+  bool operator==(const char* value) const
+  {
     return StringPiece(data_, size_) == StringPiece(value);
   }
 
-  char operator[](stringpiece_ssize_type i) const {
+  char operator[](stringpiece_ssize_type i) const
+  {
     assert(0 <= i);
     assert(i < size_);
     return data_[i];
   }
 
-  const char* data() const { return data_; }
+  const char* data() const
+  {
+    return data_;
+  }
 
-  stringpiece_ssize_type size() const {
+  stringpiece_ssize_type size() const
+  {
     return size_;
   }
 
-  std::string ToString() const {
+  std::string ToString() const
+  {
     return std::string(data_, static_cast<size_t>(size_));
   }
- private:
+
+private:
   const char* data_;
   stringpiece_ssize_type size_;
 };
@@ -473,10 +539,14 @@ struct StringPiecePod {
 }  // namespace google
 
 GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_START
-template<> struct hash<StringPiece> {
-  size_t operator()(const StringPiece& s) const {
+template <>
+struct hash<StringPiece>
+{
+  size_t operator()(const StringPiece& s) const
+  {
     size_t result = 0;
-    for (const char *str = s.data(), *end = str + s.size(); str < end; str++) {  
+    for (const char *str = s.data(), *end = str + s.size(); str < end; str++)
+    {
       result = 5 * result + static_cast<size_t>(*str);
     }
     return result;

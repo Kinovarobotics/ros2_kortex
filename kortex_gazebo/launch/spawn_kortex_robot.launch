@@ -5,7 +5,7 @@
     <arg name="start_gazebo" default="true"/>
     <arg name="gazebo_gui"   default ="true"/>
     <arg name="start_rviz" default="true"/>
-    
+
     <!-- Initial position in Gazebo -->
     <arg name="x0" default="0"/>
     <arg name="y0" default="0"/>
@@ -16,11 +16,11 @@
     <arg name="dof" default="7" if="$(eval arg('arm') == 'gen3')"/> <!-- Number of degrees of freedom of the arm -->
     <arg name="dof" default="6" if="$(eval arg('arm') == 'gen3_lite')"/> <!-- Number of degrees of freedom of the arm -->
     <arg name="vision" default="true"/> <!-- True if the arm has a Vision module -->
-    
+
     <!-- Default gripper for Gen3 is none, default gripper for Gen3 lite is gen3_lite_2f -->
     <arg name="gripper" default="" if="$(eval arg('arm') == 'gen3')"/>
     <arg name="gripper" default="gen3_lite_2f" if="$(eval arg('arm') == 'gen3_lite')"/>
-    
+
     <arg name="robot_name" default="my_$(arg arm)"/>
     <arg name="prefix" default=""/>
     <arg name="cyclic_data_publish_rate" default="40"/> <!--Hz-->
@@ -29,7 +29,7 @@
     <arg name="use_sim_time" default="true"/>
     <arg name="debug" default="false" />
     <arg name="paused" default="true"/>
-    
+
     <!-- Start Gazebo -->
     <include file="$(find kortex_gazebo)/launch/start_gazebo.launch" if="$(arg start_gazebo)">
             <arg name="gui" value="$(arg gazebo_gui)"/>
@@ -64,7 +64,7 @@
                 -J $(arg prefix)joint_4 -2.00
                 -J $(arg prefix)joint_5 0
                 -J $(arg prefix)joint_6 -1.00
-                -J $(arg prefix)joint_7 1.57"  
+                -J $(arg prefix)joint_7 1.57"
             if="$(eval not arg('gripper'))"/> <!--TODO-->
         <!-- With gripper -->
         <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
@@ -140,7 +140,7 @@
         <!-- Start MoveIt main executable -->
         <!-- TODO Find cleaner way to do that and that will work with other arms -->
         <!-- Without gripper -->
-        <include file="$(find kortex_description)/../kortex_move_it_config/$(arg arm)_move_it_config/launch/move_group.launch" if="$(eval not arg('gripper'))"> 
+        <include file="$(find kortex_description)/../kortex_move_it_config/$(arg arm)_move_it_config/launch/move_group.launch" if="$(eval not arg('gripper'))">
             <arg name="dof" value="$(arg dof)"/>
             <arg name="prefix" value="$(arg prefix)"/>
         </include>
@@ -160,11 +160,11 @@
             <param name="param_name_target" value="is_initialized" />
             <param name="param_value_expected" value="true" />
             <param name="wait_time" value="60" />
-        </test> 
+        </test>
 
         <!-- Start RViz -->
-        <node name="rviz" pkg="rviz" type="rviz" if="$(arg start_rviz)"/> 
-    
+        <node name="rviz" pkg="rviz" type="rviz" if="$(arg start_rviz)"/>
+
     </group>
 
 </launch>

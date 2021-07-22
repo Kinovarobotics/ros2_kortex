@@ -49,7 +49,8 @@ std::string control_loop_to_string(uint32_t int_control_loop)
 
 bool example_find_actuators_and_set_device_id(ros::NodeHandle& n, const std::string& robot_name, uint32_t device_id)
 {
-  ros::ServiceClient service_client_read_all_devices = n.serviceClient<kortex_driver::ReadAllDevices>("/" + robot_name + "/device_manager/read_all_devices");
+  ros::ServiceClient service_client_read_all_devices =
+      n.serviceClient<kortex_driver::ReadAllDevices>("/" + robot_name + "/device_manager/read_all_devices");
   kortex_driver::ReadAllDevices service_read_all_devices;
   kortex_driver::DeviceTypes device_type;
   std::vector<uint32_t> device_id_vector;
@@ -61,10 +62,9 @@ bool example_find_actuators_and_set_device_id(ros::NodeHandle& n, const std::str
   {
     auto output = service_read_all_devices.response.output;
     // Cycle through all found devices to find actuators
-    for(int i = 0; i < output.device_handle.size(); i++)
+    for (int i = 0; i < output.device_handle.size(); i++)
     {
-
-      if((output.device_handle[i].device_type == device_type.BIG_ACTUATOR) ||
+      if ((output.device_handle[i].device_type == device_type.BIG_ACTUATOR) ||
           (output.device_handle[i].device_type == device_type.MEDIUM_ACTUATOR) ||
           (output.device_handle[i].device_type == device_type.SMALL_ACTUATOR))
       {
@@ -76,7 +76,7 @@ bool example_find_actuators_and_set_device_id(ros::NodeHandle& n, const std::str
   }
   else
   {
-    std::string error_string = "Failed to call ReadAllDevices"; 
+    std::string error_string = "Failed to call ReadAllDevices";
     ROS_ERROR("%s", error_string.c_str());
     return false;
   }
@@ -92,13 +92,15 @@ bool example_find_actuators_and_set_device_id(ros::NodeHandle& n, const std::str
   }
   else
   {
-    std::string error_string = "Device id " + std::to_string(device_id) + " does not correspond to an actuator's device id."; 
+    std::string error_string =
+        "Device id " + std::to_string(device_id) + " does not correspond to an actuator's device id.";
     ROS_ERROR("%s", error_string.c_str());
     return false;
   }
 
   // We need to set the device ID of the actuator we want to configure
-  ros::ServiceClient service_client_set_device_id = n.serviceClient<kortex_driver::SetDeviceID>("/" + robot_name + "/actuator_config/set_device_id");
+  ros::ServiceClient service_client_set_device_id =
+      n.serviceClient<kortex_driver::SetDeviceID>("/" + robot_name + "/actuator_config/set_device_id");
   kortex_driver::SetDeviceID service_set_device_id;
   service_set_device_id.request.device_id = device_id;
   if (service_client_set_device_id.call(service_set_device_id))
@@ -107,18 +109,18 @@ bool example_find_actuators_and_set_device_id(ros::NodeHandle& n, const std::str
   }
   else
   {
-    std::string error_string = "Failed to call SetDeviceID"; 
+    std::string error_string = "Failed to call SetDeviceID";
     ROS_ERROR("%s", error_string.c_str());
     return false;
   }
 
   return true;
-
 }
 
 bool example_clear_actuator_faults(ros::NodeHandle& n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_clear_faults = n.serviceClient<kortex_driver::ActuatorConfig_ClearFaults>("/" + robot_name + "/actuator_config/clear_faults");
+  ros::ServiceClient service_client_clear_faults =
+      n.serviceClient<kortex_driver::ActuatorConfig_ClearFaults>("/" + robot_name + "/actuator_config/clear_faults");
   kortex_driver::ActuatorConfig_ClearFaults service_clear_faults;
   if (service_client_clear_faults.call(service_clear_faults))
   {
@@ -127,22 +129,26 @@ bool example_clear_actuator_faults(ros::NodeHandle& n, const std::string& robot_
   }
   else
   {
-    std::string error_string = "Failed to call ActuatorConfig_ClearFaults"; 
+    std::string error_string = "Failed to call ActuatorConfig_ClearFaults";
     ROS_ERROR("%s", error_string.c_str());
     return false;
   }
 }
 
-bool example_get_control_loop_parameters(ros::NodeHandle& n, const std::string& robot_name, ControlLoopParameters& output)
+bool example_get_control_loop_parameters(ros::NodeHandle& n, const std::string& robot_name,
+                                         ControlLoopParameters& output)
 {
   // Get the actuator control loop parameters
-  ros::ServiceClient service_client_get_control_loop_parameters = n.serviceClient<kortex_driver::GetControlLoopParameters>("/" + robot_name + "/actuator_config/get_control_loop_parameters");
+  ros::ServiceClient service_client_get_control_loop_parameters =
+      n.serviceClient<kortex_driver::GetControlLoopParameters>("/" + robot_name +
+                                                               "/actuator_config/get_control_loop_parameters");
   kortex_driver::GetControlLoopParameters service_get_control_loop_parameters;
   std::ostringstream oss;
   if (service_client_get_control_loop_parameters.call(service_get_control_loop_parameters))
   {
     // The msg file can be found at kortex_driver/msg/generated/actuator_config/ControlLoopParameters.msg
-    kortex_driver::GetControlLoopParametersResponse::_output_type initial_parameters = service_get_control_loop_parameters.response.output;
+    kortex_driver::GetControlLoopParametersResponse::_output_type initial_parameters =
+        service_get_control_loop_parameters.response.output;
     oss << std::endl << "Control Loop Parameters : " << std::endl;
     oss << "Loop selection : " << control_loop_to_string(initial_parameters.loop_selection) << std::endl;
     oss << "Error saturation : " << initial_parameters.error_saturation << std::endl;
@@ -150,11 +156,11 @@ bool example_get_control_loop_parameters(ros::NodeHandle& n, const std::string& 
     oss << "kAz : [";
     for (auto element : initial_parameters.kAz)
       oss << element << "; ";
-    oss << "]" << std::endl;  
+    oss << "]" << std::endl;
     oss << "kBz : [";
     for (auto element : initial_parameters.kBz)
       oss << element << "; ";
-    oss << "]" << std::endl; 
+    oss << "]" << std::endl;
     oss << "Error dead band : " << initial_parameters.error_dead_band << std::endl;
     ROS_INFO("%s", oss.str().c_str());
     output = initial_parameters;
@@ -162,13 +168,13 @@ bool example_get_control_loop_parameters(ros::NodeHandle& n, const std::string& 
   }
   else
   {
-    std::string error_string = "Failed to call GetControlLoopParameters"; 
+    std::string error_string = "Failed to call GetControlLoopParameters";
     ROS_ERROR("%s", error_string.c_str());
     return false;
   }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Init the node and get the namespace parameter
   ros::init(argc, argv, "actuator_configuration_example_cpp");
@@ -188,7 +194,7 @@ int main(int argc, char **argv)
     std::string error_string = "Parameter robot_name was not specified, defaulting to " + robot_name + " as namespace";
     ROS_WARN("%s", error_string.c_str());
   }
-  else 
+  else
   {
     std::string error_string = "Using robot_name " + robot_name + " as namespace";
     ROS_INFO("%s", error_string.c_str());
@@ -200,7 +206,7 @@ int main(int argc, char **argv)
     std::string error_string = "Parameter device_id was not specified, defaulting to " + std::to_string(device_id);
     ROS_WARN("%s", error_string.c_str());
   }
-  else 
+  else
   {
     std::string error_string = "Using device_id " + std::to_string(device_id);
     ROS_INFO("%s", error_string.c_str());
@@ -221,6 +227,6 @@ int main(int argc, char **argv)
 
   // Report success for testing purposes
   ros::param::set("/kortex_examples_test_results/actuator_configuration_cpp", success);
-  
+
   return success ? 0 : 1;
 }

@@ -17,10 +17,11 @@ import time
 from kortex_driver.srv import *
 from kortex_driver.msg import *
 
+
 class ExampleCartesianActionsWithNotifications:
     def __init__(self):
         try:
-            rospy.init_node('example_cartesian_poses_with_notifications_python')
+            rospy.init_node("example_cartesian_poses_with_notifications_python")
 
             self.HOME_ACTION_IDENTIFIER = 2
 
@@ -30,34 +31,51 @@ class ExampleCartesianActionsWithNotifications:
             self.all_notifs_succeeded = True
 
             # Get node params
-            self.robot_name = rospy.get_param('~robot_name', "my_gen3")
+            self.robot_name = rospy.get_param("~robot_name", "my_gen3")
 
             rospy.loginfo("Using robot_name " + self.robot_name)
 
             # Init the action topic subscriber
-            self.action_topic_sub = rospy.Subscriber("/" + self.robot_name + "/action_topic", ActionNotification, self.cb_action_topic)
+            self.action_topic_sub = rospy.Subscriber(
+                "/" + self.robot_name + "/action_topic",
+                ActionNotification,
+                self.cb_action_topic,
+            )
             self.last_action_notif_type = None
 
             # Init the services
-            clear_faults_full_name = '/' + self.robot_name + '/base/clear_faults'
+            clear_faults_full_name = "/" + self.robot_name + "/base/clear_faults"
             rospy.wait_for_service(clear_faults_full_name)
-            self.clear_faults = rospy.ServiceProxy(clear_faults_full_name, Base_ClearFaults)
+            self.clear_faults = rospy.ServiceProxy(
+                clear_faults_full_name, Base_ClearFaults
+            )
 
-            read_action_full_name = '/' + self.robot_name + '/base/read_action'
+            read_action_full_name = "/" + self.robot_name + "/base/read_action"
             rospy.wait_for_service(read_action_full_name)
             self.read_action = rospy.ServiceProxy(read_action_full_name, ReadAction)
 
-            execute_action_full_name = '/' + self.robot_name + '/base/execute_action'
+            execute_action_full_name = "/" + self.robot_name + "/base/execute_action"
             rospy.wait_for_service(execute_action_full_name)
-            self.execute_action = rospy.ServiceProxy(execute_action_full_name, ExecuteAction)
+            self.execute_action = rospy.ServiceProxy(
+                execute_action_full_name, ExecuteAction
+            )
 
-            set_cartesian_reference_frame_full_name = '/' + self.robot_name + '/control_config/set_cartesian_reference_frame'
+            set_cartesian_reference_frame_full_name = (
+                "/" + self.robot_name + "/control_config/set_cartesian_reference_frame"
+            )
             rospy.wait_for_service(set_cartesian_reference_frame_full_name)
-            self.set_cartesian_reference_frame = rospy.ServiceProxy(set_cartesian_reference_frame_full_name, SetCartesianReferenceFrame)
+            self.set_cartesian_reference_frame = rospy.ServiceProxy(
+                set_cartesian_reference_frame_full_name, SetCartesianReferenceFrame
+            )
 
-            activate_publishing_of_action_notification_full_name = '/' + self.robot_name + '/base/activate_publishing_of_action_topic'
+            activate_publishing_of_action_notification_full_name = (
+                "/" + self.robot_name + "/base/activate_publishing_of_action_topic"
+            )
             rospy.wait_for_service(activate_publishing_of_action_notification_full_name)
-            self.activate_publishing_of_action_notification = rospy.ServiceProxy(activate_publishing_of_action_notification_full_name, OnNotificationActionTopic)
+            self.activate_publishing_of_action_notification = rospy.ServiceProxy(
+                activate_publishing_of_action_notification_full_name,
+                OnNotificationActionTopic,
+            )
         except:
             self.is_init_success = False
         else:
@@ -68,10 +86,10 @@ class ExampleCartesianActionsWithNotifications:
 
     def wait_for_action_end_or_abort(self):
         while not rospy.is_shutdown():
-            if (self.last_action_notif_type == ActionEvent.ACTION_END):
+            if self.last_action_notif_type == ActionEvent.ACTION_END:
                 rospy.loginfo("Received ACTION_END notification")
                 return True
-            elif (self.last_action_notif_type == ActionEvent.ACTION_ABORT):
+            elif self.last_action_notif_type == ActionEvent.ACTION_ABORT:
                 rospy.loginfo("Received ACTION_ABORT notification")
                 self.all_notifs_succeeded = False
                 return False
@@ -116,7 +134,9 @@ class ExampleCartesianActionsWithNotifications:
     def example_set_cartesian_reference_frame(self):
         # Prepare the request with the frame we want to set
         req = SetCartesianReferenceFrameRequest()
-        req.input.reference_frame = CartesianReferenceFrame.CARTESIAN_REFERENCE_FRAME_MIXED
+        req.input.reference_frame = (
+            CartesianReferenceFrame.CARTESIAN_REFERENCE_FRAME_MIXED
+        )
 
         # Call the service
         try:
@@ -151,34 +171,36 @@ class ExampleCartesianActionsWithNotifications:
         # For testing purposes
         success = self.is_init_success
         try:
-            rospy.delete_param("/kortex_examples_test_results/cartesian_poses_with_notifications_python")
+            rospy.delete_param(
+                "/kortex_examples_test_results/cartesian_poses_with_notifications_python"
+            )
         except:
             pass
 
         if success:
 
-            #*******************************************************************************
+            # *******************************************************************************
             # Make sure to clear the robot's faults else it won't move if it's already in fault
             success &= self.example_clear_faults()
-            #*******************************************************************************
-            
-            #*******************************************************************************
+            # *******************************************************************************
+
+            # *******************************************************************************
             # Start the example from the Home position
             success &= self.example_home_the_robot()
-            #*******************************************************************************
+            # *******************************************************************************
 
-            #*******************************************************************************
+            # *******************************************************************************
             # Set the reference frame to "Mixed"
             success &= self.example_set_cartesian_reference_frame()
 
-            #*******************************************************************************
+            # *******************************************************************************
             # Subscribe to ActionNotification's from the robot to know when a cartesian pose is finished
             success &= self.example_subscribe_to_a_robot_notification()
 
-            #*******************************************************************************
+            # *******************************************************************************
             # Prepare and send pose 1
             my_cartesian_speed = CartesianSpeed()
-            my_cartesian_speed.translation = 0.1 # m/s
+            my_cartesian_speed.translation = 0.1  # m/s
             my_cartesian_speed.orientation = 15  # deg/s
 
             my_constrained_pose = ConstrainedPose()
@@ -254,10 +276,14 @@ class ExampleCartesianActionsWithNotifications:
             success &= self.all_notifs_succeeded
 
         # For testing purposes
-        rospy.set_param("/kortex_examples_test_results/cartesian_poses_with_notifications_python", success)
+        rospy.set_param(
+            "/kortex_examples_test_results/cartesian_poses_with_notifications_python",
+            success,
+        )
 
         if not success:
             rospy.logerr("The example encountered an error.")
+
 
 if __name__ == "__main__":
     ex = ExampleCartesianActionsWithNotifications()

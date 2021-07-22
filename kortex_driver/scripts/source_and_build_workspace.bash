@@ -5,5 +5,5 @@
 # Can be used by end users, but mainly used because Docker (for CI) needs en executable file and cannot take multiple bash commands
 
 source /opt/ros/kinetic/setup.bash
-rm -rf devel/ build/ 
+rm -rf devel/ build/
 catkin_make -DGENERATE_PROTO_ROS_WRAPPER=OFF

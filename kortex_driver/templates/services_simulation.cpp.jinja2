@@ -13,13 +13,13 @@
 /*
  * This file has been auto-generated and should not be modified.
  */
- 
+
 {% for include_file_name in include_file_names -%}
 #include "{{include_file_name}}"
 {% endfor -%}
 #include "{{current_header_filename}}"
 
-{{package.short_name}}SimulationServices::{{package.short_name}}SimulationServices(ros::NodeHandle& node_handle): 
+{{package.short_name}}SimulationServices::{{package.short_name}}SimulationServices(ros::NodeHandle& node_handle):
 	I{{package.short_name}}Services(node_handle)
 {
 	m_pub_Error = m_node_handle.advertise<kortex_driver::KortexError>("kortex_error", 1000);
@@ -55,11 +55,11 @@ bool {{package.short_name}}SimulationServices::{{method.prepend_rpc_package_name
 	{% if method.is_rpc_deprecated -%}
 	ROS_WARN("The {{package.short_name_lowercase_with_underscores}}/{%- if method.prepend_on_notification -%}activate_publishing_of_{%- endif -%}{{method.name_lowercase_with_underscores}} service is now deprecated and will be removed in a future release.");
 	{% endif -%}
-	
+
 	{%- if method.is_notification_rpc %}
 	m_is_activated_{{method.name}} = true;
 	{%- endif %}
-	
+
 	if ({{method.prepend_rpc_package_name}}{{method.prepend_on_notification}}{{method.name}}Handler)
 	{
 		res = {{method.prepend_rpc_package_name}}{{method.prepend_on_notification}}{{method.name}}Handler(req);

@@ -27,15 +27,17 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "Common.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_Session_2eproto {
+namespace protobuf_Session_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[2];
@@ -48,14 +50,18 @@ void InitDefaultsCreateSessionInfoImpl();
 void InitDefaultsCreateSessionInfo();
 void InitDefaultsConnectionListImpl();
 void InitDefaultsConnectionList();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsCreateSessionInfo();
   InitDefaultsConnectionList();
 }
 }  // namespace protobuf_Session_2eproto
-namespace Kinova {
-namespace Api {
-namespace Session {
+namespace Kinova
+{
+namespace Api
+{
+namespace Session
+{
 class ConnectionList;
 class ConnectionListDefaultTypeInternal;
 extern ConnectionListDefaultTypeInternal _ConnectionList_default_instance_;
@@ -65,11 +71,14 @@ extern CreateSessionInfoDefaultTypeInternal _CreateSessionInfo_default_instance_
 }  // namespace Session
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace Session {
-
-enum ServiceVersion {
+namespace Kinova
+{
+namespace Api
+{
+namespace Session
+{
+enum ServiceVersion
+{
   RESERVED_0 = 0,
   CURRENT_VERSION = 1,
   ServiceVersion_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
@@ -81,62 +90,72 @@ const ServiceVersion ServiceVersion_MAX = CURRENT_VERSION;
 const int ServiceVersion_ARRAYSIZE = ServiceVersion_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServiceVersion_descriptor();
-inline const ::std::string& ServiceVersion_Name(ServiceVersion value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ServiceVersion_descriptor(), value);
+inline const ::std::string& ServiceVersion_Name(ServiceVersion value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ServiceVersion_descriptor(), value);
 }
-inline bool ServiceVersion_Parse(
-    const ::std::string& name, ServiceVersion* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(
-    ServiceVersion_descriptor(), name, value);
+inline bool ServiceVersion_Parse(const ::std::string& name, ServiceVersion* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(ServiceVersion_descriptor(), name, value);
 }
 // ===================================================================
 
-class CreateSessionInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Session.CreateSessionInfo) */ {
- public:
+class CreateSessionInfo
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Session.CreateSessionInfo) */
+{
+public:
   CreateSessionInfo();
   virtual ~CreateSessionInfo();
 
   CreateSessionInfo(const CreateSessionInfo& from);
 
-  inline CreateSessionInfo& operator=(const CreateSessionInfo& from) {
+  inline CreateSessionInfo& operator=(const CreateSessionInfo& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  CreateSessionInfo(CreateSessionInfo&& from) noexcept
-    : CreateSessionInfo() {
+#if LANG_CXX11
+  CreateSessionInfo(CreateSessionInfo&& from) noexcept : CreateSessionInfo()
+  {
     *this = ::std::move(from);
   }
 
-  inline CreateSessionInfo& operator=(CreateSessionInfo&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline CreateSessionInfo& operator=(CreateSessionInfo&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const CreateSessionInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const CreateSessionInfo* internal_default_instance() {
-    return reinterpret_cast<const CreateSessionInfo*>(
-               &_CreateSessionInfo_default_instance_);
+  static inline const CreateSessionInfo* internal_default_instance()
+  {
+    return reinterpret_cast<const CreateSessionInfo*>(&_CreateSessionInfo_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(CreateSessionInfo* other);
-  friend void swap(CreateSessionInfo& a, CreateSessionInfo& b) {
+  friend void swap(CreateSessionInfo& a, CreateSessionInfo& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline CreateSessionInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline CreateSessionInfo* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   CreateSessionInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -147,27 +166,32 @@ class CreateSessionInfo : public ::google::protobuf::Message /* @@protoc_inserti
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(CreateSessionInfo* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -179,9 +203,9 @@ class CreateSessionInfo : public ::google::protobuf::Message /* @@protoc_inserti
   static const int kUsernameFieldNumber = 1;
   const ::std::string& username() const;
   void set_username(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_username(::std::string&& value);
-  #endif
+#endif
   void set_username(const char* value);
   void set_username(const char* value, size_t size);
   ::std::string* mutable_username();
@@ -193,9 +217,9 @@ class CreateSessionInfo : public ::google::protobuf::Message /* @@protoc_inserti
   static const int kPasswordFieldNumber = 3;
   const ::std::string& password() const;
   void set_password(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_password(::std::string&& value);
-  #endif
+#endif
   void set_password(const char* value);
   void set_password(const char* value, size_t size);
   ::std::string* mutable_password();
@@ -215,8 +239,7 @@ class CreateSessionInfo : public ::google::protobuf::Message /* @@protoc_inserti
   void set_connection_inactivity_timeout(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Session.CreateSessionInfo)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr username_;
   ::google::protobuf::internal::ArenaStringPtr password_;
@@ -228,51 +251,62 @@ class CreateSessionInfo : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class ConnectionList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Session.ConnectionList) */ {
- public:
+class ConnectionList
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.Session.ConnectionList) */
+{
+public:
   ConnectionList();
   virtual ~ConnectionList();
 
   ConnectionList(const ConnectionList& from);
 
-  inline ConnectionList& operator=(const ConnectionList& from) {
+  inline ConnectionList& operator=(const ConnectionList& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ConnectionList(ConnectionList&& from) noexcept
-    : ConnectionList() {
+#if LANG_CXX11
+  ConnectionList(ConnectionList&& from) noexcept : ConnectionList()
+  {
     *this = ::std::move(from);
   }
 
-  inline ConnectionList& operator=(ConnectionList&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ConnectionList& operator=(ConnectionList&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const ConnectionList& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ConnectionList* internal_default_instance() {
-    return reinterpret_cast<const ConnectionList*>(
-               &_ConnectionList_default_instance_);
+  static inline const ConnectionList* internal_default_instance()
+  {
+    return reinterpret_cast<const ConnectionList*>(&_ConnectionList_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void Swap(ConnectionList* other);
-  friend void swap(ConnectionList& a, ConnectionList& b) {
+  friend void swap(ConnectionList& a, ConnectionList& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ConnectionList* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ConnectionList* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ConnectionList* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -283,27 +317,32 @@ class ConnectionList : public ::google::protobuf::Message /* @@protoc_insertion_
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ConnectionList* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -317,161 +356,167 @@ class ConnectionList : public ::google::protobuf::Message /* @@protoc_insertion_
   const ::Kinova::Api::Common::Connection& connection(int index) const;
   ::Kinova::Api::Common::Connection* mutable_connection(int index);
   ::Kinova::Api::Common::Connection* add_connection();
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection >*
-      mutable_connection();
-  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection >&
-      connection() const;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection>* mutable_connection();
+  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection>& connection() const;
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.Session.ConnectionList)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection > connection_;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection> connection_;
   mutable int _cached_size_;
   friend struct ::protobuf_Session_2eproto::TableStruct;
   friend void ::protobuf_Session_2eproto::InitDefaultsConnectionListImpl();
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // CreateSessionInfo
 
 // string username = 1;
-inline void CreateSessionInfo::clear_username() {
+inline void CreateSessionInfo::clear_username()
+{
   username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& CreateSessionInfo::username() const {
+inline const ::std::string& CreateSessionInfo::username() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Session.CreateSessionInfo.username)
   return username_.GetNoArena();
 }
-inline void CreateSessionInfo::set_username(const ::std::string& value) {
-  
+inline void CreateSessionInfo::set_username(const ::std::string& value)
+{
   username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.Session.CreateSessionInfo.username)
 }
 #if LANG_CXX11
-inline void CreateSessionInfo::set_username(::std::string&& value) {
-  
-  username_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void CreateSessionInfo::set_username(::std::string&& value)
+{
+  username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.Session.CreateSessionInfo.username)
 }
 #endif
-inline void CreateSessionInfo::set_username(const char* value) {
+inline void CreateSessionInfo::set_username(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.Session.CreateSessionInfo.username)
 }
-inline void CreateSessionInfo::set_username(const char* value, size_t size) {
-  
+inline void CreateSessionInfo::set_username(const char* value, size_t size)
+{
   username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.Session.CreateSessionInfo.username)
 }
-inline ::std::string* CreateSessionInfo::mutable_username() {
-  
+inline ::std::string* CreateSessionInfo::mutable_username()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Session.CreateSessionInfo.username)
   return username_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* CreateSessionInfo::release_username() {
+inline ::std::string* CreateSessionInfo::release_username()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Session.CreateSessionInfo.username)
-  
+
   return username_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void CreateSessionInfo::set_allocated_username(::std::string* username) {
-  if (username != NULL) {
-    
-  } else {
-    
+inline void CreateSessionInfo::set_allocated_username(::std::string* username)
+{
+  if (username != NULL) {}
+  else
+  {
   }
   username_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Session.CreateSessionInfo.username)
 }
 
 // uint32 session_inactivity_timeout = 2;
-inline void CreateSessionInfo::clear_session_inactivity_timeout() {
+inline void CreateSessionInfo::clear_session_inactivity_timeout()
+{
   session_inactivity_timeout_ = 0u;
 }
-inline ::google::protobuf::uint32 CreateSessionInfo::session_inactivity_timeout() const {
+inline ::google::protobuf::uint32 CreateSessionInfo::session_inactivity_timeout() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Session.CreateSessionInfo.session_inactivity_timeout)
   return session_inactivity_timeout_;
 }
-inline void CreateSessionInfo::set_session_inactivity_timeout(::google::protobuf::uint32 value) {
-  
+inline void CreateSessionInfo::set_session_inactivity_timeout(::google::protobuf::uint32 value)
+{
   session_inactivity_timeout_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Session.CreateSessionInfo.session_inactivity_timeout)
 }
 
 // string password = 3;
-inline void CreateSessionInfo::clear_password() {
+inline void CreateSessionInfo::clear_password()
+{
   password_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& CreateSessionInfo::password() const {
+inline const ::std::string& CreateSessionInfo::password() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Session.CreateSessionInfo.password)
   return password_.GetNoArena();
 }
-inline void CreateSessionInfo::set_password(const ::std::string& value) {
-  
+inline void CreateSessionInfo::set_password(const ::std::string& value)
+{
   password_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Kinova.Api.Session.CreateSessionInfo.password)
 }
 #if LANG_CXX11
-inline void CreateSessionInfo::set_password(::std::string&& value) {
-  
-  password_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+inline void CreateSessionInfo::set_password(::std::string&& value)
+{
+  password_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:Kinova.Api.Session.CreateSessionInfo.password)
 }
 #endif
-inline void CreateSessionInfo::set_password(const char* value) {
+inline void CreateSessionInfo::set_password(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
-  
+
   password_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:Kinova.Api.Session.CreateSessionInfo.password)
 }
-inline void CreateSessionInfo::set_password(const char* value, size_t size) {
-  
+inline void CreateSessionInfo::set_password(const char* value, size_t size)
+{
   password_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+                       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:Kinova.Api.Session.CreateSessionInfo.password)
 }
-inline ::std::string* CreateSessionInfo::mutable_password() {
-  
+inline ::std::string* CreateSessionInfo::mutable_password()
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Session.CreateSessionInfo.password)
   return password_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* CreateSessionInfo::release_password() {
+inline ::std::string* CreateSessionInfo::release_password()
+{
   // @@protoc_insertion_point(field_release:Kinova.Api.Session.CreateSessionInfo.password)
-  
+
   return password_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void CreateSessionInfo::set_allocated_password(::std::string* password) {
-  if (password != NULL) {
-    
-  } else {
-    
+inline void CreateSessionInfo::set_allocated_password(::std::string* password)
+{
+  if (password != NULL) {}
+  else
+  {
   }
   password_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), password);
   // @@protoc_insertion_point(field_set_allocated:Kinova.Api.Session.CreateSessionInfo.password)
 }
 
 // uint32 connection_inactivity_timeout = 4;
-inline void CreateSessionInfo::clear_connection_inactivity_timeout() {
+inline void CreateSessionInfo::clear_connection_inactivity_timeout()
+{
   connection_inactivity_timeout_ = 0u;
 }
-inline ::google::protobuf::uint32 CreateSessionInfo::connection_inactivity_timeout() const {
+inline ::google::protobuf::uint32 CreateSessionInfo::connection_inactivity_timeout() const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Session.CreateSessionInfo.connection_inactivity_timeout)
   return connection_inactivity_timeout_;
 }
-inline void CreateSessionInfo::set_connection_inactivity_timeout(::google::protobuf::uint32 value) {
-  
+inline void CreateSessionInfo::set_connection_inactivity_timeout(::google::protobuf::uint32 value)
+{
   connection_inactivity_timeout_ = value;
   // @@protoc_insertion_point(field_set:Kinova.Api.Session.CreateSessionInfo.connection_inactivity_timeout)
 }
@@ -481,37 +526,40 @@ inline void CreateSessionInfo::set_connection_inactivity_timeout(::google::proto
 // ConnectionList
 
 // repeated .Kinova.Api.Common.Connection connection = 1;
-inline int ConnectionList::connection_size() const {
+inline int ConnectionList::connection_size() const
+{
   return connection_.size();
 }
-inline const ::Kinova::Api::Common::Connection& ConnectionList::connection(int index) const {
+inline const ::Kinova::Api::Common::Connection& ConnectionList::connection(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.Session.ConnectionList.connection)
   return connection_.Get(index);
 }
-inline ::Kinova::Api::Common::Connection* ConnectionList::mutable_connection(int index) {
+inline ::Kinova::Api::Common::Connection* ConnectionList::mutable_connection(int index)
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.Session.ConnectionList.connection)
   return connection_.Mutable(index);
 }
-inline ::Kinova::Api::Common::Connection* ConnectionList::add_connection() {
+inline ::Kinova::Api::Common::Connection* ConnectionList::add_connection()
+{
   // @@protoc_insertion_point(field_add:Kinova.Api.Session.ConnectionList.connection)
   return connection_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection >*
-ConnectionList::mutable_connection() {
+inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection>* ConnectionList::mutable_connection()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.Session.ConnectionList.connection)
   return &connection_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection >&
-ConnectionList::connection() const {
+inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::Connection>& ConnectionList::connection() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.Session.ConnectionList.connection)
   return connection_;
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -519,12 +567,17 @@ ConnectionList::connection() const {
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::Session::ServiceVersion> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Session::ServiceVersion>() {
+struct is_proto_enum< ::Kinova::Api::Session::ServiceVersion> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::Session::ServiceVersion>()
+{
   return ::Kinova::Api::Session::ServiceVersion_descriptor();
 }
 

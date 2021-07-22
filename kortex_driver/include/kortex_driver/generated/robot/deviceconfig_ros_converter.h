@@ -1,19 +1,19 @@
 /*
-* KINOVA (R) KORTEX (TM)
-*
-* Copyright (c) 2019 Kinova inc. All rights reserved.
-*
-* This software may be modified and distributed under the
-* terms of the BSD 3-Clause license.
-*
-* Refer to the LICENSE file for details.
-*
-*/
+ * KINOVA (R) KORTEX (TM)
+ *
+ * Copyright (c) 2019 Kinova inc. All rights reserved.
+ *
+ * This software may be modified and distributed under the
+ * terms of the BSD 3-Clause license.
+ *
+ * Refer to the LICENSE file for details.
+ *
+ */
 
 /*
  * This file has been auto-generated and should not be modified.
  */
- 
+
 #ifndef _KORTEX_DEVICECONFIG_ROS_CONVERTER_H_
 #define _KORTEX_DEVICECONFIG_ROS_CONVERTER_H_
 
@@ -39,7 +39,6 @@
 #include "kortex_driver/generated/robot/devicemanager_ros_converter.h"
 #include "kortex_driver/generated/robot/interconnectconfig_ros_converter.h"
 #include "kortex_driver/generated/robot/visionconfig_ros_converter.h"
-
 
 #include "kortex_driver/DeviceType.h"
 #include "kortex_driver/RunMode.h"
@@ -67,31 +66,30 @@
 #include "kortex_driver/DeviceConfig_CapSenseConfig.h"
 #include "kortex_driver/CapSenseRegister.h"
 
-
-int ToRosData(Kinova::Api::DeviceConfig::DeviceType input, kortex_driver::DeviceType &output);
-int ToRosData(Kinova::Api::DeviceConfig::RunMode input, kortex_driver::RunMode &output);
-int ToRosData(Kinova::Api::DeviceConfig::FirmwareVersion input, kortex_driver::FirmwareVersion &output);
-int ToRosData(Kinova::Api::DeviceConfig::BootloaderVersion input, kortex_driver::BootloaderVersion &output);
-int ToRosData(Kinova::Api::DeviceConfig::ModelNumber input, kortex_driver::ModelNumber &output);
-int ToRosData(Kinova::Api::DeviceConfig::PartNumber input, kortex_driver::PartNumber &output);
-int ToRosData(Kinova::Api::DeviceConfig::SerialNumber input, kortex_driver::SerialNumber &output);
-int ToRosData(Kinova::Api::DeviceConfig::MACAddress input, kortex_driver::MACAddress &output);
-int ToRosData(Kinova::Api::DeviceConfig::IPv4Settings input, kortex_driver::IPv4Settings &output);
-int ToRosData(Kinova::Api::DeviceConfig::PartNumberRevision input, kortex_driver::PartNumberRevision &output);
-int ToRosData(Kinova::Api::DeviceConfig::PowerOnSelfTestResult input, kortex_driver::PowerOnSelfTestResult &output);
-int ToRosData(Kinova::Api::DeviceConfig::RebootRqst input, kortex_driver::RebootRqst &output);
-int ToRosData(Kinova::Api::DeviceConfig::SafetyInformation input, kortex_driver::SafetyInformation &output);
-int ToRosData(Kinova::Api::DeviceConfig::SafetyInformationList input, kortex_driver::SafetyInformationList &output);
-int ToRosData(Kinova::Api::DeviceConfig::SafetyEnable input, kortex_driver::SafetyEnable &output);
-int ToRosData(Kinova::Api::DeviceConfig::SafetyThreshold input, kortex_driver::SafetyThreshold &output);
-int ToRosData(Kinova::Api::DeviceConfig::SafetyConfiguration input, kortex_driver::SafetyConfiguration &output);
-int ToRosData(Kinova::Api::DeviceConfig::SafetyConfigurationList input, kortex_driver::SafetyConfigurationList &output);
-int ToRosData(Kinova::Api::DeviceConfig::SafetyStatus input, kortex_driver::SafetyStatus &output);
-int ToRosData(Kinova::Api::DeviceConfig::CalibrationParameter input, kortex_driver::CalibrationParameter &output);
-int ToRosData(Kinova::Api::DeviceConfig::Calibration input, kortex_driver::Calibration &output);
-int ToRosData(Kinova::Api::DeviceConfig::CalibrationElement input, kortex_driver::CalibrationElement &output);
-int ToRosData(Kinova::Api::DeviceConfig::CalibrationResult input, kortex_driver::CalibrationResult &output);
-int ToRosData(Kinova::Api::DeviceConfig::CapSenseConfig input, kortex_driver::DeviceConfig_CapSenseConfig &output);
-int ToRosData(Kinova::Api::DeviceConfig::CapSenseRegister input, kortex_driver::CapSenseRegister &output);
+int ToRosData(Kinova::Api::DeviceConfig::DeviceType input, kortex_driver::DeviceType& output);
+int ToRosData(Kinova::Api::DeviceConfig::RunMode input, kortex_driver::RunMode& output);
+int ToRosData(Kinova::Api::DeviceConfig::FirmwareVersion input, kortex_driver::FirmwareVersion& output);
+int ToRosData(Kinova::Api::DeviceConfig::BootloaderVersion input, kortex_driver::BootloaderVersion& output);
+int ToRosData(Kinova::Api::DeviceConfig::ModelNumber input, kortex_driver::ModelNumber& output);
+int ToRosData(Kinova::Api::DeviceConfig::PartNumber input, kortex_driver::PartNumber& output);
+int ToRosData(Kinova::Api::DeviceConfig::SerialNumber input, kortex_driver::SerialNumber& output);
+int ToRosData(Kinova::Api::DeviceConfig::MACAddress input, kortex_driver::MACAddress& output);
+int ToRosData(Kinova::Api::DeviceConfig::IPv4Settings input, kortex_driver::IPv4Settings& output);
+int ToRosData(Kinova::Api::DeviceConfig::PartNumberRevision input, kortex_driver::PartNumberRevision& output);
+int ToRosData(Kinova::Api::DeviceConfig::PowerOnSelfTestResult input, kortex_driver::PowerOnSelfTestResult& output);
+int ToRosData(Kinova::Api::DeviceConfig::RebootRqst input, kortex_driver::RebootRqst& output);
+int ToRosData(Kinova::Api::DeviceConfig::SafetyInformation input, kortex_driver::SafetyInformation& output);
+int ToRosData(Kinova::Api::DeviceConfig::SafetyInformationList input, kortex_driver::SafetyInformationList& output);
+int ToRosData(Kinova::Api::DeviceConfig::SafetyEnable input, kortex_driver::SafetyEnable& output);
+int ToRosData(Kinova::Api::DeviceConfig::SafetyThreshold input, kortex_driver::SafetyThreshold& output);
+int ToRosData(Kinova::Api::DeviceConfig::SafetyConfiguration input, kortex_driver::SafetyConfiguration& output);
+int ToRosData(Kinova::Api::DeviceConfig::SafetyConfigurationList input, kortex_driver::SafetyConfigurationList& output);
+int ToRosData(Kinova::Api::DeviceConfig::SafetyStatus input, kortex_driver::SafetyStatus& output);
+int ToRosData(Kinova::Api::DeviceConfig::CalibrationParameter input, kortex_driver::CalibrationParameter& output);
+int ToRosData(Kinova::Api::DeviceConfig::Calibration input, kortex_driver::Calibration& output);
+int ToRosData(Kinova::Api::DeviceConfig::CalibrationElement input, kortex_driver::CalibrationElement& output);
+int ToRosData(Kinova::Api::DeviceConfig::CalibrationResult input, kortex_driver::CalibrationResult& output);
+int ToRosData(Kinova::Api::DeviceConfig::CapSenseConfig input, kortex_driver::DeviceConfig_CapSenseConfig& output);
+int ToRosData(Kinova::Api::DeviceConfig::CapSenseRegister input, kortex_driver::CapSenseRegister& output);
 
 #endif

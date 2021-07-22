@@ -13,13 +13,13 @@
 /*
  * This file has been auto-generated and should not be modified.
  */
- 
+
 {% for include_file_name in include_file_names -%}
 #include "{{include_file_name}}"
 {% endfor -%}
 #include "{{current_header_filename}}"
 
-{{package.short_name}}RobotServices::{{package.short_name}}RobotServices(ros::NodeHandle& node_handle, {{package.cpp_namespace}}::{{package.short_name}}Client* {{package.short_name|lower}}, uint32_t device_id, uint32_t timeout_ms): 
+{{package.short_name}}RobotServices::{{package.short_name}}RobotServices(ros::NodeHandle& node_handle, {{package.cpp_namespace}}::{{package.short_name}}Client* {{package.short_name|lower}}, uint32_t device_id, uint32_t timeout_ms):
 	I{{package.short_name}}Services(node_handle),
 	m_{{package.short_name|lower}}({{package.short_name|lower}}),
 	m_current_device_id(device_id)
@@ -76,7 +76,7 @@ bool {{package.short_name}}RobotServices::{{method.prepend_rpc_package_name}}{{m
 	{{method.output_type_cpp_namespace}}::{{method.output_type_short_name}} output;
 	{% endif %}
 	kortex_driver::KortexError result_error;
-	
+
 	try
 	{
 		{%- if not method.output_type_short_name == "Empty" %}

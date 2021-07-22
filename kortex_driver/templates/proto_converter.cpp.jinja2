@@ -13,7 +13,7 @@
 /*
  * This file has been auto-generated and should not be modified.
  */
- 
+
 #include "{{current_header_filename}}"
 
 {% for detailed_message in package.messages -%}
@@ -39,13 +39,13 @@ int ToProtoData(kortex_driver::{{detailed_message.prepend_message_name}}{{detail
 	for(int i = 0; i < input.{{field.name}}.size(); i++)
 	{
 		output->add_{{field.name|lower}}(input.{{field.name}}[i]);
-	}	
-	{%- endif -%} 
+	}
+	{%- endif -%}
 	{%- else -%} {# NOT REPEATED #}
 	{%- if field.type == 11 %} {# MESSAGE #}
 	ToProtoData(input.{{field.name}}, output->mutable_{{field.name}}());
 	{%- elif field.type == 14 %}{# ENUM #}
-	output->set_{{field.name}}(({{field.type_name|replace(".", "", 1)|replace(".", "::")}})input.{{field.name}}); 
+	output->set_{{field.name}}(({{field.type_name|replace(".", "", 1)|replace(".", "::")}})input.{{field.name}});
 	{%- elif field.type == 12 %}
 	output->set_{{field.name}}(std::string(input.{{field.name}}.begin(), input.{{field.name}}.end()));
 	{%- else %}
@@ -69,7 +69,7 @@ int ToProtoData(kortex_driver::{{detailed_message.prepend_message_name}}{{detail
 	}
 	{%- endfor -%}
 	{%- endfor %}
-	
+
 	return 0;
 }
 {% endfor %}

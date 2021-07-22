@@ -34,7 +34,7 @@
 
 #define HOME_ACTION_IDENTIFIER 2
 
-std::atomic<int> last_action_notification_event{0};
+std::atomic<int> last_action_notification_event{ 0 };
 
 void notification_callback(const kortex_driver::ActionNotification& notif)
 {
@@ -60,7 +60,8 @@ bool wait_for_action_end_or_abort()
   return false;
 }
 
-kortex_driver::Waypoint FillCartesianWaypoint(float new_x, float new_y, float new_z, float new_theta_x, float new_theta_y, float new_theta_z, float blending_radius)
+kortex_driver::Waypoint FillCartesianWaypoint(float new_x, float new_y, float new_z, float new_theta_x,
+                                              float new_theta_y, float new_theta_z, float blending_radius)
 {
   kortex_driver::Waypoint waypoint;
   kortex_driver::CartesianWaypoint cartesianWaypoint;
@@ -79,9 +80,10 @@ kortex_driver::Waypoint FillCartesianWaypoint(float new_x, float new_y, float ne
   return waypoint;
 }
 
-bool example_clear_faults(ros::NodeHandle n, const std::string &robot_name)
+bool example_clear_faults(ros::NodeHandle n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_clear_faults = n.serviceClient<kortex_driver::Base_ClearFaults>("/" + robot_name + "/base/clear_faults");
+  ros::ServiceClient service_client_clear_faults =
+      n.serviceClient<kortex_driver::Base_ClearFaults>("/" + robot_name + "/base/clear_faults");
   kortex_driver::Base_ClearFaults service_clear_faults;
 
   // Clear the faults
@@ -97,9 +99,10 @@ bool example_clear_faults(ros::NodeHandle n, const std::string &robot_name)
   return true;
 }
 
-bool example_home_the_robot(ros::NodeHandle n, const std::string &robot_name)
+bool example_home_the_robot(ros::NodeHandle n, const std::string& robot_name)
 {
-  ros::ServiceClient service_client_read_action = n.serviceClient<kortex_driver::ReadAction>("/" + robot_name + "/base/read_action");
+  ros::ServiceClient service_client_read_action =
+      n.serviceClient<kortex_driver::ReadAction>("/" + robot_name + "/base/read_action");
   kortex_driver::ReadAction service_read_action;
   last_action_notification_event = 0;
 
@@ -113,12 +116,13 @@ bool example_home_the_robot(ros::NodeHandle n, const std::string &robot_name)
     return false;
   }
 
-  // We can now execute the Action that we read 
-  ros::ServiceClient service_client_execute_action = n.serviceClient<kortex_driver::ExecuteAction>("/" + robot_name + "/base/execute_action");
+  // We can now execute the Action that we read
+  ros::ServiceClient service_client_execute_action =
+      n.serviceClient<kortex_driver::ExecuteAction>("/" + robot_name + "/base/execute_action");
   kortex_driver::ExecuteAction service_execute_action;
 
   service_execute_action.request.input = service_read_action.response.output;
-  
+
   if (service_client_execute_action.call(service_execute_action))
   {
     ROS_INFO("The Home position action was sent to the robot.");
@@ -133,13 +137,16 @@ bool example_home_the_robot(ros::NodeHandle n, const std::string &robot_name)
   return wait_for_action_end_or_abort();
 }
 
-bool example_set_cartesian_reference_frame(ros::NodeHandle n, const std::string &robot_name)
+bool example_set_cartesian_reference_frame(ros::NodeHandle n, const std::string& robot_name)
 {
   // Initialize the ServiceClient
-  ros::ServiceClient service_client_set_cartesian_reference_frame = n.serviceClient<kortex_driver::SetCartesianReferenceFrame>("/" + robot_name + "/control_config/set_cartesian_reference_frame");
+  ros::ServiceClient service_client_set_cartesian_reference_frame =
+      n.serviceClient<kortex_driver::SetCartesianReferenceFrame>("/" + robot_name +
+                                                                 "/control_config/set_cartesian_reference_frame");
   kortex_driver::SetCartesianReferenceFrame service_set_cartesian_reference_frame;
 
-  service_set_cartesian_reference_frame.request.input.reference_frame = kortex_driver::CartesianReferenceFrame::CARTESIAN_REFERENCE_FRAME_MIXED;
+  service_set_cartesian_reference_frame.request.input.reference_frame =
+      kortex_driver::CartesianReferenceFrame::CARTESIAN_REFERENCE_FRAME_MIXED;
   if (!service_client_set_cartesian_reference_frame.call(service_set_cartesian_reference_frame))
   {
     std::string error_string = "Failed to call SetCartesianReferenceFrame";
@@ -153,7 +160,7 @@ bool example_set_cartesian_reference_frame(ros::NodeHandle n, const std::string 
   return true;
 }
 
-bool example_send_cartesian_pose(ros::NodeHandle n, const std::string &robot_name)
+bool example_send_cartesian_pose(ros::NodeHandle n, const std::string& robot_name)
 {
   last_action_notification_event = 0;
   // Get the actual cartesian pose to increment it
@@ -162,7 +169,8 @@ bool example_send_cartesian_pose(ros::NodeHandle n, const std::string &robot_nam
   auto feedback = ros::topic::waitForMessage<kortex_driver::BaseCyclic_Feedback>("/" + robot_name + "/base_feedback");
 
   // Initialize the ServiceClient for the cartesian pose
-  ros::ServiceClient service_client_play_cartesian_trajectory = n.serviceClient<kortex_driver::PlayCartesianTrajectory>("/" + robot_name + "/base/play_cartesian_trajectory");
+  ros::ServiceClient service_client_play_cartesian_trajectory =
+      n.serviceClient<kortex_driver::PlayCartesianTrajectory>("/" + robot_name + "/base/play_cartesian_trajectory");
   kortex_driver::PlayCartesianTrajectory service_play_cartesian_trajectory;
 
   // Initialize input
@@ -186,7 +194,7 @@ bool example_send_cartesian_pose(ros::NodeHandle n, const std::string &robot_nam
   poseSpeed.orientation = 15;
 
   // The constraint is a one_of in Protobuf. The one_of concept does not exist in ROS
-  // To specify a one_of, create it and put it in the appropriate vector of the oneof_type member of the ROS object : 
+  // To specify a one_of, create it and put it in the appropriate vector of the oneof_type member of the ROS object :
   service_play_cartesian_trajectory.request.input.constraint.oneof_type.speed.push_back(poseSpeed);
 
   if (service_client_play_cartesian_trajectory.call(service_play_cartesian_trajectory))
@@ -203,11 +211,12 @@ bool example_send_cartesian_pose(ros::NodeHandle n, const std::string &robot_nam
   return wait_for_action_end_or_abort();
 }
 
-bool example_send_joint_angles(ros::NodeHandle n, const std::string &robot_name, int degrees_of_freedom)
+bool example_send_joint_angles(ros::NodeHandle n, const std::string& robot_name, int degrees_of_freedom)
 {
   last_action_notification_event = 0;
   // Initialize the ServiceClient
-  ros::ServiceClient service_client_play_joint_trajectory = n.serviceClient<kortex_driver::PlayJointTrajectory>("/" + robot_name + "/base/play_joint_trajectory");
+  ros::ServiceClient service_client_play_joint_trajectory =
+      n.serviceClient<kortex_driver::PlayJointTrajectory>("/" + robot_name + "/base/play_joint_trajectory");
   kortex_driver::PlayJointTrajectory service_play_joint_trajectory;
 
   std::vector<double> angles_to_send;
@@ -238,10 +247,11 @@ bool example_send_joint_angles(ros::NodeHandle n, const std::string &robot_name,
   return wait_for_action_end_or_abort();
 }
 
-bool example_send_gripper_command(ros::NodeHandle n, const std::string &robot_name, double value)
+bool example_send_gripper_command(ros::NodeHandle n, const std::string& robot_name, double value)
 {
   // Initialize the ServiceClient
-  ros::ServiceClient service_client_send_gripper_command = n.serviceClient<kortex_driver::SendGripperCommand>("/" + robot_name + "/base/send_gripper_command");
+  ros::ServiceClient service_client_send_gripper_command =
+      n.serviceClient<kortex_driver::SendGripperCommand>("/" + robot_name + "/base/send_gripper_command");
   kortex_driver::SendGripperCommand service_send_gripper_command;
 
   // Initialize the request
@@ -251,7 +261,7 @@ bool example_send_gripper_command(ros::NodeHandle n, const std::string &robot_na
   service_send_gripper_command.request.input.gripper.finger.push_back(finger);
   service_send_gripper_command.request.input.mode = kortex_driver::GripperMode::GRIPPER_POSITION;
 
-  if (service_client_send_gripper_command.call(service_send_gripper_command))  
+  if (service_client_send_gripper_command.call(service_send_gripper_command))
   {
     ROS_INFO("The gripper command was sent to the robot.");
   }
@@ -265,15 +275,16 @@ bool example_send_gripper_command(ros::NodeHandle n, const std::string &robot_na
   return true;
 }
 
-bool example_cartesian_waypoint(ros::NodeHandle n, const std::string &robot_name)
+bool example_cartesian_waypoint(ros::NodeHandle n, const std::string& robot_name)
 {
-  
-  ros::ServiceClient service_client_execute_waypoints_trajectory = n.serviceClient<kortex_driver::ExecuteWaypointTrajectory>("/" + robot_name + "/base/execute_waypoint_trajectory");
-  ros::ServiceClient service_client_get_config = n.serviceClient<kortex_driver::GetProductConfiguration>("/" + robot_name + "/base/get_product_configuration");
+  ros::ServiceClient service_client_execute_waypoints_trajectory =
+      n.serviceClient<kortex_driver::ExecuteWaypointTrajectory>("/" + robot_name + "/base/execute_waypoint_trajectory");
+  ros::ServiceClient service_client_get_config =
+      n.serviceClient<kortex_driver::GetProductConfiguration>("/" + robot_name + "/base/get_product_configuration");
 
   kortex_driver::ExecuteWaypointTrajectory service_execute_waypoints_trajectory;
   kortex_driver::GetProductConfiguration service_get_config;
-  
+
   last_action_notification_event = 0;
 
   if (!service_client_get_config.call(service_get_config))
@@ -285,27 +296,36 @@ bool example_cartesian_waypoint(ros::NodeHandle n, const std::string &robot_name
 
   auto product_config = service_get_config.response.output;
 
-  if(product_config.model == kortex_driver::ModelId::MODEL_ID_L31) //If the robot is a GEN3-LITE use this trajectory.
+  if (product_config.model == kortex_driver::ModelId::MODEL_ID_L31)  // If the robot is a GEN3-LITE use this trajectory.
   {
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.439,  0.194,  0.448, 90.6, -1.0, 150, 0));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.200,  0.150,  0.400, 90.6, -1.0, 150, 0));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.350,  0.050,  0.300, 90.6, -1.0, 150, 0));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.439, 0.194, 0.448, 90.6, -1.0, 150, 0));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.200, 0.150, 0.400, 90.6, -1.0, 150, 0));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.350, 0.050, 0.300, 90.6, -1.0, 150, 0));
   }
   else
   {
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.7,  0.0,   0.5,  90, 0, 90, 0));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.7,  0.0,   0.33, 90, 0, 90, 0.1));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.7,  0.48,  0.33, 90, 0, 90, 0.1));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.61, 0.22,  0.4,  90, 0, 90, 0.1));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.7,  0.48,  0.33, 90, 0, 90, 0.1));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.63, -0.22, 0.45, 90, 0, 90, 0.1));
-    service_execute_waypoints_trajectory.request.input.waypoints.push_back(FillCartesianWaypoint(0.65, 0.05,  0.45, 90, 0, 90, 0));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.7, 0.0, 0.5, 90, 0, 90, 0));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.7, 0.0, 0.33, 90, 0, 90, 0.1));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.7, 0.48, 0.33, 90, 0, 90, 0.1));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.61, 0.22, 0.4, 90, 0, 90, 0.1));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.7, 0.48, 0.33, 90, 0, 90, 0.1));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.63, -0.22, 0.45, 90, 0, 90, 0.1));
+    service_execute_waypoints_trajectory.request.input.waypoints.push_back(
+        FillCartesianWaypoint(0.65, 0.05, 0.45, 90, 0, 90, 0));
   }
-  
 
   service_execute_waypoints_trajectory.request.input.duration = 0;
   service_execute_waypoints_trajectory.request.input.use_optimal_blending = 0;
-  
+
   if (!service_client_execute_waypoints_trajectory.call(service_execute_waypoints_trajectory))
   {
     std::string error_string = "Failed to call ExecuteWaypointTrajectory";
@@ -316,7 +336,7 @@ bool example_cartesian_waypoint(ros::NodeHandle n, const std::string &robot_name
   return wait_for_action_end_or_abort();
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   ros::init(argc, argv, "full_arm_movement_example_cpp");
 
@@ -341,7 +361,7 @@ int main(int argc, char **argv)
     std::string error_string = "Parameter robot_name was not specified, defaulting to " + robot_name + " as namespace";
     ROS_WARN("%s", error_string.c_str());
   }
-  else 
+  else
   {
     std::string error_string = "Using robot_name " + robot_name + " as namespace";
     ROS_INFO("%s", error_string.c_str());
@@ -350,22 +370,25 @@ int main(int argc, char **argv)
   // Parameter degrees_of_freedom
   if (!ros::param::get("/" + robot_name + "/degrees_of_freedom", degrees_of_freedom))
   {
-    std::string error_string = "Parameter /" + robot_name + "/degrees_of_freedom was not specified, defaulting to " + std::to_string(degrees_of_freedom) + " as degrees of freedom";
+    std::string error_string = "Parameter /" + robot_name + "/degrees_of_freedom was not specified, defaulting to " +
+                               std::to_string(degrees_of_freedom) + " as degrees of freedom";
     ROS_WARN("%s", error_string.c_str());
   }
-  else 
+  else
   {
-    std::string error_string = "Using degrees_of_freedom " + std::to_string(degrees_of_freedom) + " as degrees_of_freedom";
+    std::string error_string =
+        "Using degrees_of_freedom " + std::to_string(degrees_of_freedom) + " as degrees_of_freedom";
     ROS_INFO("%s", error_string.c_str());
   }
 
   // Parameter is_gripper_present
   if (!ros::param::get("/" + robot_name + "/is_gripper_present", is_gripper_present))
   {
-    std::string error_string = "Parameter /" + robot_name + "/is_gripper_present was not specified, defaulting to " + std::to_string(is_gripper_present);
+    std::string error_string = "Parameter /" + robot_name + "/is_gripper_present was not specified, defaulting to " +
+                               std::to_string(is_gripper_present);
     ROS_WARN("%s", error_string.c_str());
   }
-  else 
+  else
   {
     std::string error_string = "Using is_gripper_present " + std::to_string(is_gripper_present);
     ROS_INFO("%s", error_string.c_str());
@@ -373,16 +396,17 @@ int main(int argc, char **argv)
   //*******************************************************************************
 
   // Subscribe to the Action Topic
-  ros::Subscriber sub = n.subscribe("/" + robot_name  + "/action_topic", 1000, notification_callback);
+  ros::Subscriber sub = n.subscribe("/" + robot_name + "/action_topic", 1000, notification_callback);
 
   // We need to call this service to activate the Action Notification on the kortex_driver node.
-  ros::ServiceClient service_client_activate_notif = n.serviceClient<kortex_driver::OnNotificationActionTopic>("/" + robot_name + "/base/activate_publishing_of_action_topic");
+  ros::ServiceClient service_client_activate_notif = n.serviceClient<kortex_driver::OnNotificationActionTopic>(
+      "/" + robot_name + "/base/activate_publishing_of_action_topic");
   kortex_driver::OnNotificationActionTopic service_activate_notif;
   if (service_client_activate_notif.call(service_activate_notif))
   {
     ROS_INFO("Action notification activated!");
   }
-  else 
+  else
   {
     std::string error_string = "Action notification publication failed";
     ROS_ERROR("%s", error_string.c_str());
@@ -449,6 +473,6 @@ int main(int argc, char **argv)
 
   // Report success for testing purposes
   ros::param::set("/kortex_examples_test_results/full_arm_movement_cpp", success);
-  
+
   return success ? 0 : 1;
 }
