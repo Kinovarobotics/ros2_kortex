@@ -23,7 +23,7 @@
 
         <!-- Load the arm -->
         <xacro:load_arm parent="${parent}" dof="${dof}" vision="${vision}" robot_ip="${robot_ip}" prefix="${prefix}">
-            <origin xyz="0 0 0" rpy="0 0 0"/> 
+            <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:load_arm>
 
         <!-- Load the gripper -->
