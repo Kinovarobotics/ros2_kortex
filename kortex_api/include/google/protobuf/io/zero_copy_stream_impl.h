@@ -46,12 +46,12 @@
 #include <google/protobuf/io/zero_copy_stream_impl_lite.h>
 #include <google/protobuf/stubs/common.h>
 
-
-namespace google {
-namespace protobuf {
-namespace io {
-
-
+namespace google
+{
+namespace protobuf
+{
+namespace io
+{
 // ===================================================================
 
 // A ZeroCopyInputStream which reads from a file descriptor.
@@ -60,8 +60,9 @@ namespace io {
 // The latter will introduce an extra layer of buffering, harming performance.
 // Also, it's conceivable that FileInputStream could someday be enhanced
 // to use zero-copy file descriptors on OSs which support them.
-class LIBPROTOBUF_EXPORT FileInputStream : public ZeroCopyInputStream {
- public:
+class LIBPROTOBUF_EXPORT FileInputStream : public ZeroCopyInputStream
+{
+public:
   // Creates a stream that reads from the given Unix file descriptor.
   // If a block_size is given, it specifies the number of bytes that
   // should be read and returned with each call to Next().  Otherwise,
@@ -78,13 +79,19 @@ class LIBPROTOBUF_EXPORT FileInputStream : public ZeroCopyInputStream {
   // This leaves no way for the caller to detect if close() fails.  If
   // detecting close() errors is important to you, you should arrange
   // to close the descriptor yourself.
-  void SetCloseOnDelete(bool value) { copying_input_.SetCloseOnDelete(value); }
+  void SetCloseOnDelete(bool value)
+  {
+    copying_input_.SetCloseOnDelete(value);
+  }
 
   // If an I/O error has occurred on this file descriptor, this is the
   // errno from that error.  Otherwise, this is zero.  Once an error
   // occurs, the stream is broken and all subsequent operations will
   // fail.
-  int GetErrno() { return copying_input_.GetErrno(); }
+  int GetErrno()
+  {
+    return copying_input_.GetErrno();
+  }
 
   // implements ZeroCopyInputStream ----------------------------------
   bool Next(const void** data, int* size);
@@ -92,21 +99,28 @@ class LIBPROTOBUF_EXPORT FileInputStream : public ZeroCopyInputStream {
   bool Skip(int count);
   int64 ByteCount() const;
 
- private:
-  class LIBPROTOBUF_EXPORT CopyingFileInputStream : public CopyingInputStream {
-   public:
+private:
+  class LIBPROTOBUF_EXPORT CopyingFileInputStream : public CopyingInputStream
+  {
+  public:
     CopyingFileInputStream(int file_descriptor);
     ~CopyingFileInputStream();
 
     bool Close();
-    void SetCloseOnDelete(bool value) { close_on_delete_ = value; }
-    int GetErrno() { return errno_; }
+    void SetCloseOnDelete(bool value)
+    {
+      close_on_delete_ = value;
+    }
+    int GetErrno()
+    {
+      return errno_;
+    }
 
     // implements CopyingInputStream ---------------------------------
     int Read(void* buffer, int size);
     int Skip(int count);
 
-   private:
+  private:
     // The file descriptor.
     const int file_;
     bool close_on_delete_;
@@ -137,8 +151,9 @@ class LIBPROTOBUF_EXPORT FileInputStream : public ZeroCopyInputStream {
 // harming performance.  Also, it's conceivable that FileOutputStream could
 // someday be enhanced to use zero-copy file descriptors on OSs which
 // support them.
-class LIBPROTOBUF_EXPORT FileOutputStream : public ZeroCopyOutputStream {
- public:
+class LIBPROTOBUF_EXPORT FileOutputStream : public ZeroCopyOutputStream
+{
+public:
   // Creates a stream that writes to the given Unix file descriptor.
   // If a block_size is given, it specifies the size of the buffers
   // that should be returned by Next().  Otherwise, a reasonable default
@@ -161,33 +176,46 @@ class LIBPROTOBUF_EXPORT FileOutputStream : public ZeroCopyOutputStream {
   // This leaves no way for the caller to detect if close() fails.  If
   // detecting close() errors is important to you, you should arrange
   // to close the descriptor yourself.
-  void SetCloseOnDelete(bool value) { copying_output_.SetCloseOnDelete(value); }
+  void SetCloseOnDelete(bool value)
+  {
+    copying_output_.SetCloseOnDelete(value);
+  }
 
   // If an I/O error has occurred on this file descriptor, this is the
   // errno from that error.  Otherwise, this is zero.  Once an error
   // occurs, the stream is broken and all subsequent operations will
   // fail.
-  int GetErrno() { return copying_output_.GetErrno(); }
+  int GetErrno()
+  {
+    return copying_output_.GetErrno();
+  }
 
   // implements ZeroCopyOutputStream ---------------------------------
   bool Next(void** data, int* size);
   void BackUp(int count);
   int64 ByteCount() const;
 
- private:
-  class LIBPROTOBUF_EXPORT CopyingFileOutputStream : public CopyingOutputStream {
-   public:
+private:
+  class LIBPROTOBUF_EXPORT CopyingFileOutputStream : public CopyingOutputStream
+  {
+  public:
     CopyingFileOutputStream(int file_descriptor);
     ~CopyingFileOutputStream();
 
     bool Close();
-    void SetCloseOnDelete(bool value) { close_on_delete_ = value; }
-    int GetErrno() { return errno_; }
+    void SetCloseOnDelete(bool value)
+    {
+      close_on_delete_ = value;
+    }
+    int GetErrno()
+    {
+      return errno_;
+    }
 
     // implements CopyingOutputStream --------------------------------
     bool Write(const void* buffer, int size);
 
-   private:
+  private:
     // The file descriptor.
     const int file_;
     bool close_on_delete_;
@@ -211,8 +239,9 @@ class LIBPROTOBUF_EXPORT FileOutputStream : public ZeroCopyOutputStream {
 //
 // Note that for reading files (or anything represented by a file descriptor),
 // FileInputStream is more efficient.
-class LIBPROTOBUF_EXPORT IstreamInputStream : public ZeroCopyInputStream {
- public:
+class LIBPROTOBUF_EXPORT IstreamInputStream : public ZeroCopyInputStream
+{
+public:
   // Creates a stream that reads from the given C++ istream.
   // If a block_size is given, it specifies the number of bytes that
   // should be read and returned with each call to Next().  Otherwise,
@@ -225,9 +254,10 @@ class LIBPROTOBUF_EXPORT IstreamInputStream : public ZeroCopyInputStream {
   bool Skip(int count);
   int64 ByteCount() const;
 
- private:
-  class LIBPROTOBUF_EXPORT CopyingIstreamInputStream : public CopyingInputStream {
-   public:
+private:
+  class LIBPROTOBUF_EXPORT CopyingIstreamInputStream : public CopyingInputStream
+  {
+  public:
     CopyingIstreamInputStream(std::istream* input);
     ~CopyingIstreamInputStream();
 
@@ -235,7 +265,7 @@ class LIBPROTOBUF_EXPORT IstreamInputStream : public ZeroCopyInputStream {
     int Read(void* buffer, int size);
     // (We use the default implementation of Skip().)
 
-   private:
+  private:
     // The stream.
     std::istream* input_;
 
@@ -254,8 +284,9 @@ class LIBPROTOBUF_EXPORT IstreamInputStream : public ZeroCopyInputStream {
 //
 // Note that for writing files (or anything represented by a file descriptor),
 // FileOutputStream is more efficient.
-class LIBPROTOBUF_EXPORT OstreamOutputStream : public ZeroCopyOutputStream {
- public:
+class LIBPROTOBUF_EXPORT OstreamOutputStream : public ZeroCopyOutputStream
+{
+public:
   // Creates a stream that writes to the given C++ ostream.
   // If a block_size is given, it specifies the size of the buffers
   // that should be returned by Next().  Otherwise, a reasonable default
@@ -268,16 +299,17 @@ class LIBPROTOBUF_EXPORT OstreamOutputStream : public ZeroCopyOutputStream {
   void BackUp(int count);
   int64 ByteCount() const;
 
- private:
-  class LIBPROTOBUF_EXPORT CopyingOstreamOutputStream : public CopyingOutputStream {
-   public:
+private:
+  class LIBPROTOBUF_EXPORT CopyingOstreamOutputStream : public CopyingOutputStream
+  {
+  public:
     CopyingOstreamOutputStream(std::ostream* output);
     ~CopyingOstreamOutputStream();
 
     // implements CopyingOutputStream --------------------------------
     bool Write(const void* buffer, int size);
 
-   private:
+  private:
     // The stream.
     std::ostream* output_;
 
@@ -299,8 +331,9 @@ class LIBPROTOBUF_EXPORT OstreamOutputStream : public ZeroCopyOutputStream {
 // ConcatenatingInputStream may do odd things.  It is suggested that you do
 // not use ConcatenatingInputStream on streams that might produce read errors
 // other than end-of-stream.
-class LIBPROTOBUF_EXPORT ConcatenatingInputStream : public ZeroCopyInputStream {
- public:
+class LIBPROTOBUF_EXPORT ConcatenatingInputStream : public ZeroCopyInputStream
+{
+public:
   // All streams passed in as well as the array itself must remain valid
   // until the ConcatenatingInputStream is destroyed.
   ConcatenatingInputStream(ZeroCopyInputStream* const streams[], int count);
@@ -311,8 +344,7 @@ class LIBPROTOBUF_EXPORT ConcatenatingInputStream : public ZeroCopyInputStream {
   bool Skip(int count);
   int64 ByteCount() const;
 
-
- private:
+private:
   // As streams are retired, streams_ is incremented and count_ is
   // decremented.
   ZeroCopyInputStream* const* streams_;
@@ -326,8 +358,9 @@ class LIBPROTOBUF_EXPORT ConcatenatingInputStream : public ZeroCopyInputStream {
 
 // A ZeroCopyInputStream which wraps some other stream and limits it to
 // a particular byte count.
-class LIBPROTOBUF_EXPORT LimitingInputStream : public ZeroCopyInputStream {
- public:
+class LIBPROTOBUF_EXPORT LimitingInputStream : public ZeroCopyInputStream
+{
+public:
   LimitingInputStream(ZeroCopyInputStream* input, int64 limit);
   ~LimitingInputStream();
 
@@ -337,10 +370,9 @@ class LIBPROTOBUF_EXPORT LimitingInputStream : public ZeroCopyInputStream {
   bool Skip(int count);
   int64 ByteCount() const;
 
-
- private:
+private:
   ZeroCopyInputStream* input_;
-  int64 limit_;  // Decreases as we go, becomes negative if we overshoot.
+  int64 limit_;             // Decreases as we go, becomes negative if we overshoot.
   int64 prior_bytes_read_;  // Bytes read on underlying stream at construction
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(LimitingInputStream);

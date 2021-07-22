@@ -43,13 +43,18 @@
 #include <vector>
 #include <utility>
 
-namespace google {
-namespace protobuf {
-
-namespace io { class ZeroCopyOutputStream; }
+namespace google
+{
+namespace protobuf
+{
+namespace io
+{
+class ZeroCopyOutputStream;
+}
 class FileDescriptor;
 
-namespace compiler {
+namespace compiler
+{
 class AccessInfoMap;
 
 class Version;
@@ -61,9 +66,12 @@ class GeneratorContext;
 // The abstract interface to a class which generates code implementing a
 // particular proto file in a particular language.  A number of these may
 // be registered with CommandLineInterface to support various languages.
-class LIBPROTOC_EXPORT CodeGenerator {
- public:
-  inline CodeGenerator() {}
+class LIBPROTOC_EXPORT CodeGenerator
+{
+public:
+  inline CodeGenerator()
+  {
+  }
   virtual ~CodeGenerator();
 
   // Generates code for the given proto file, generating one or more files in
@@ -77,9 +85,7 @@ class LIBPROTOC_EXPORT CodeGenerator {
   //
   // Returns true if successful.  Otherwise, sets *error to a description of
   // the problem (e.g. "invalid parameter") and returns false.
-  virtual bool Generate(const FileDescriptor* file,
-                        const string& parameter,
-                        GeneratorContext* generator_context,
+  virtual bool Generate(const FileDescriptor* file, const string& parameter, GeneratorContext* generator_context,
                         string* error) const = 0;
 
   // Generates code for all given proto files.
@@ -93,18 +99,19 @@ class LIBPROTOC_EXPORT CodeGenerator {
   //
   // Returns true if successful.  Otherwise, sets *error to a description of
   // the problem (e.g. "invalid parameter") and returns false.
-  virtual bool GenerateAll(const std::vector<const FileDescriptor*>& files,
-                           const string& parameter,
-                           GeneratorContext* generator_context,
-                           string* error) const;
+  virtual bool GenerateAll(const std::vector<const FileDescriptor*>& files, const string& parameter,
+                           GeneratorContext* generator_context, string* error) const;
 
   // This is no longer used, but this class is part of the opensource protobuf
   // library, so it has to remain to keep vtables the same for the current
   // version of the library. When protobufs does a api breaking change, the
   // method can be removed.
-  virtual bool HasGenerateAll() const { return true; }
+  virtual bool HasGenerateAll() const
+  {
+    return true;
+  }
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CodeGenerator);
 };
 
@@ -112,9 +119,11 @@ class LIBPROTOC_EXPORT CodeGenerator {
 // abstract interface represents the directory to which the CodeGenerator is
 // to write and other information about the context in which the Generator
 // runs.
-class LIBPROTOC_EXPORT GeneratorContext {
- public:
-  inline GeneratorContext() {
+class LIBPROTOC_EXPORT GeneratorContext
+{
+public:
+  inline GeneratorContext()
+  {
   }
   virtual ~GeneratorContext();
 
@@ -139,8 +148,7 @@ class LIBPROTOC_EXPORT GeneratorContext {
   // assert-fails -- it exists only for backwards-compatibility.
   //
   // WARNING:  This feature is currently EXPERIMENTAL and is subject to change.
-  virtual io::ZeroCopyOutputStream* OpenForInsert(
-      const string& filename, const string& insertion_point);
+  virtual io::ZeroCopyOutputStream* OpenForInsert(const string& filename, const string& insertion_point);
 
   // Returns a vector of FileDescriptors for all the files being compiled
   // in this run.  Useful for languages, such as Go, that treat files
@@ -151,8 +159,7 @@ class LIBPROTOC_EXPORT GeneratorContext {
   // this GeneratorContext.
   virtual void GetCompilerVersion(Version* version) const;
 
-
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(GeneratorContext);
 };
 
@@ -166,8 +173,7 @@ typedef GeneratorContext OutputDirectory;
 //   "foo=bar,baz,qux=corge"
 // parses to the pairs:
 //   ("foo", "bar"), ("baz", ""), ("qux", "corge")
-void ParseGeneratorParameter(
-    const string&, std::vector<std::pair<string, string> >*);
+void ParseGeneratorParameter(const string&, std::vector<std::pair<string, string> >*);
 
 }  // namespace compiler
 }  // namespace protobuf

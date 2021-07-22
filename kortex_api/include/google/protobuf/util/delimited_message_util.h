@@ -10,10 +10,12 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-
+namespace google
+{
+namespace protobuf
+{
+namespace util
+{
 // Write a single size-delimited message from the given stream. Delimited
 // format allows a single file or stream to contain multiple messages,
 // whereas normally writing multiple non-delimited messages to the same
@@ -46,9 +48,11 @@ bool LIBPROTOBUF_EXPORT SerializeDelimitedToOstream(const MessageLite& message, 
 // otherwise it will be set false. Note that these methods return false
 // on EOF, but they also return false on other errors, so |clean_eof| is
 // needed to distinguish a clean end from errors.
-bool LIBPROTOBUF_EXPORT ParseDelimitedFromZeroCopyStream(MessageLite* message, io::ZeroCopyInputStream* input, bool* clean_eof);
+bool LIBPROTOBUF_EXPORT ParseDelimitedFromZeroCopyStream(MessageLite* message, io::ZeroCopyInputStream* input,
+                                                         bool* clean_eof);
 
-bool LIBPROTOBUF_EXPORT ParseDelimitedFromCodedStream(MessageLite* message, io::CodedInputStream* input, bool* clean_eof);
+bool LIBPROTOBUF_EXPORT ParseDelimitedFromCodedStream(MessageLite* message, io::CodedInputStream* input,
+                                                      bool* clean_eof);
 
 // Write a single size-delimited message from the given stream. Delimited
 // format allows a single file or stream to contain multiple messages,

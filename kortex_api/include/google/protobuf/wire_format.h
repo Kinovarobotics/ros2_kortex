@@ -45,18 +45,22 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/wire_format_lite.h>
 
-namespace google {
-namespace protobuf {
-  namespace io {
-    class CodedInputStream;      // coded_stream.h
-    class CodedOutputStream;     // coded_stream.h
-  }
-  class UnknownFieldSet;         // unknown_field_set.h
-}
+namespace google
+{
+namespace protobuf
+{
+namespace io
+{
+class CodedInputStream;   // coded_stream.h
+class CodedOutputStream;  // coded_stream.h
+}  // namespace io
+class UnknownFieldSet;  // unknown_field_set.h
+}  // namespace protobuf
 
-namespace protobuf {
-namespace internal {
-
+namespace protobuf
+{
+namespace internal
+{
 // This class is for internal use by the protocol buffer library and by
 // protocol-complier-generated message classes.  It must not be called
 // directly by clients.
@@ -66,16 +70,14 @@ namespace internal {
 // non-reflection based routines.
 //
 // This class is really a namespace that contains only static methods
-class LIBPROTOBUF_EXPORT WireFormat {
- public:
-
+class LIBPROTOBUF_EXPORT WireFormat
+{
+public:
   // Given a field return its WireType
-  static inline WireFormatLite::WireType WireTypeForField(
-      const FieldDescriptor* field);
+  static inline WireFormatLite::WireType WireTypeForField(const FieldDescriptor* field);
 
   // Given a FieldDescriptor::Type return its WireType
-  static inline WireFormatLite::WireType WireTypeForFieldType(
-      FieldDescriptor::Type type);
+  static inline WireFormatLite::WireType WireTypeForFieldType(FieldDescriptor::Type type);
 
   // Compute the byte size of a tag.  For groups, this includes both the start
   // and end tags.
@@ -97,8 +99,7 @@ class LIBPROTOBUF_EXPORT WireFormat {
   //
   // Required fields are NOT checked by this method.  You must call
   // IsInitialized() on the resulting message yourself.
-  static bool ParseAndMergePartial(io::CodedInputStream* input,
-                                   Message* message);
+  static bool ParseAndMergePartial(io::CodedInputStream* input, Message* message);
 
   // Serialize a message in protocol buffer wire format.
   //
@@ -107,9 +108,7 @@ class LIBPROTOBUF_EXPORT WireFormat {
   // a parameter to this procedure.
   //
   // These return false iff the underlying stream returns a write error.
-  static void SerializeWithCachedSizes(
-      const Message& message,
-      int size, io::CodedOutputStream* output);
+  static void SerializeWithCachedSizes(const Message& message, int size, io::CodedOutputStream* output);
 
   // Implements Message::ByteSize() via reflection.  WARNING:  The result
   // of this method is *not* cached anywhere.  However, all embedded messages
@@ -124,56 +123,42 @@ class LIBPROTOBUF_EXPORT WireFormat {
   // Skips a field value of the given WireType.  The input should start
   // positioned immediately after the tag.  If unknown_fields is non-NULL,
   // the contents of the field will be added to it.
-  static bool SkipField(io::CodedInputStream* input, uint32 tag,
-                        UnknownFieldSet* unknown_fields);
+  static bool SkipField(io::CodedInputStream* input, uint32 tag, UnknownFieldSet* unknown_fields);
 
   // Reads and ignores a message from the input.  If unknown_fields is non-NULL,
   // the contents will be added to it.
-  static bool SkipMessage(io::CodedInputStream* input,
-                          UnknownFieldSet* unknown_fields);
+  static bool SkipMessage(io::CodedInputStream* input, UnknownFieldSet* unknown_fields);
 
   // Read a packed enum field. If the is_valid function is not NULL, values for
   // which is_valid(value) returns false are appended to unknown_fields_stream.
-  static bool ReadPackedEnumPreserveUnknowns(io::CodedInputStream* input,
-                                             uint32 field_number,
-                                             bool (*is_valid)(int),
-                                             UnknownFieldSet* unknown_fields,
-                                             RepeatedField<int>* values);
+  static bool ReadPackedEnumPreserveUnknowns(io::CodedInputStream* input, uint32 field_number, bool (*is_valid)(int),
+                                             UnknownFieldSet* unknown_fields, RepeatedField<int>* values);
 
   // Write the contents of an UnknownFieldSet to the output.
-  static void SerializeUnknownFields(const UnknownFieldSet& unknown_fields,
-                                     io::CodedOutputStream* output);
+  static void SerializeUnknownFields(const UnknownFieldSet& unknown_fields, io::CodedOutputStream* output);
   // Same as above, except writing directly to the provided buffer.
   // Requires that the buffer have sufficient capacity for
   // ComputeUnknownFieldsSize(unknown_fields).
   //
   // Returns a pointer past the last written byte.
-  static uint8* SerializeUnknownFieldsToArray(
-      const UnknownFieldSet& unknown_fields,
-      uint8* target);
+  static uint8* SerializeUnknownFieldsToArray(const UnknownFieldSet& unknown_fields, uint8* target);
 
   // Same thing except for messages that have the message_set_wire_format
   // option.
-  static void SerializeUnknownMessageSetItems(
-      const UnknownFieldSet& unknown_fields,
-      io::CodedOutputStream* output);
+  static void SerializeUnknownMessageSetItems(const UnknownFieldSet& unknown_fields, io::CodedOutputStream* output);
   // Same as above, except writing directly to the provided buffer.
   // Requires that the buffer have sufficient capacity for
   // ComputeUnknownMessageSetItemsSize(unknown_fields).
   //
   // Returns a pointer past the last written byte.
-  static uint8* SerializeUnknownMessageSetItemsToArray(
-      const UnknownFieldSet& unknown_fields,
-      uint8* target);
+  static uint8* SerializeUnknownMessageSetItemsToArray(const UnknownFieldSet& unknown_fields, uint8* target);
 
   // Compute the size of the UnknownFieldSet on the wire.
   static size_t ComputeUnknownFieldsSize(const UnknownFieldSet& unknown_fields);
 
   // Same thing except for messages that have the message_set_wire_format
   // option.
-  static size_t ComputeUnknownMessageSetItemsSize(
-      const UnknownFieldSet& unknown_fields);
-
+  static size_t ComputeUnknownMessageSetItemsSize(const UnknownFieldSet& unknown_fields);
 
   // Helper functions for encoding and decoding tags.  (Inlined below and in
   // _inl.h)
@@ -184,47 +169,36 @@ class LIBPROTOBUF_EXPORT WireFormat {
 
   // Parse a single field.  The input should start out positioned immediately
   // after the tag.
-  static bool ParseAndMergeField(
-      uint32 tag,
-      const FieldDescriptor* field,        // May be NULL for unknown
-      Message* message,
-      io::CodedInputStream* input);
+  static bool ParseAndMergeField(uint32 tag,
+                                 const FieldDescriptor* field,  // May be NULL for unknown
+                                 Message* message, io::CodedInputStream* input);
 
   // Serialize a single field.
-  static void SerializeFieldWithCachedSizes(
-      const FieldDescriptor* field,        // Cannot be NULL
-      const Message& message,
-      io::CodedOutputStream* output);
+  static void SerializeFieldWithCachedSizes(const FieldDescriptor* field,  // Cannot be NULL
+                                            const Message& message, io::CodedOutputStream* output);
 
   // Compute size of a single field.  If the field is a message type, this
   // will call ByteSize() for the embedded message, insuring that it caches
   // its size.
-  static size_t FieldByteSize(
-      const FieldDescriptor* field,        // Cannot be NULL
-      const Message& message);
+  static size_t FieldByteSize(const FieldDescriptor* field,  // Cannot be NULL
+                              const Message& message);
 
   // Parse/serialize a MessageSet::Item group.  Used with messages that use
   // opion message_set_wire_format = true.
-  static bool ParseAndMergeMessageSetItem(
-      io::CodedInputStream* input,
-      Message* message);
-  static void SerializeMessageSetItemWithCachedSizes(
-      const FieldDescriptor* field,
-      const Message& message,
-      io::CodedOutputStream* output);
-  static size_t MessageSetItemByteSize(
-      const FieldDescriptor* field,
-      const Message& message);
+  static bool ParseAndMergeMessageSetItem(io::CodedInputStream* input, Message* message);
+  static void SerializeMessageSetItemWithCachedSizes(const FieldDescriptor* field, const Message& message,
+                                                     io::CodedOutputStream* output);
+  static size_t MessageSetItemByteSize(const FieldDescriptor* field, const Message& message);
 
   // Computes the byte size of a field, excluding tags. For packed fields, it
   // only includes the size of the raw data, and not the size of the total
   // length, but for other length-delimited types, the size of the length is
   // included.
-  static size_t FieldDataOnlyByteSize(
-      const FieldDescriptor* field,        // Cannot be NULL
-      const Message& message);
+  static size_t FieldDataOnlyByteSize(const FieldDescriptor* field,  // Cannot be NULL
+                                      const Message& message);
 
-  enum Operation {
+  enum Operation
+  {
     PARSE = 0,
     SERIALIZE = 1,
   };
@@ -235,98 +209,97 @@ class LIBPROTOBUF_EXPORT WireFormat {
   static void VerifyUTF8String(const char* data, int size, Operation op);
   // The NamedField variant takes a field name in order to produce an
   // informative error message if verification fails.
-  static void VerifyUTF8StringNamedField(const char* data,
-                                         int size,
-                                         Operation op,
-                                         const char* field_name);
+  static void VerifyUTF8StringNamedField(const char* data, int size, Operation op, const char* field_name);
 
- private:
+private:
   // Skip a MessageSet field.
-  static bool SkipMessageSetField(io::CodedInputStream* input,
-                                  uint32 field_number,
-                                  UnknownFieldSet* unknown_fields);
+  static bool SkipMessageSetField(io::CodedInputStream* input, uint32 field_number, UnknownFieldSet* unknown_fields);
 
   // Parse a MessageSet field.
-  static bool ParseAndMergeMessageSetField(uint32 field_number,
-                                           const FieldDescriptor* field,
-                                           Message* message,
+  static bool ParseAndMergeMessageSetField(uint32 field_number, const FieldDescriptor* field, Message* message,
                                            io::CodedInputStream* input);
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(WireFormat);
 };
 
 // Subclass of FieldSkipper which saves skipped fields to an UnknownFieldSet.
-class LIBPROTOBUF_EXPORT UnknownFieldSetFieldSkipper : public FieldSkipper {
- public:
-  UnknownFieldSetFieldSkipper(UnknownFieldSet* unknown_fields)
-      : unknown_fields_(unknown_fields) {}
-  virtual ~UnknownFieldSetFieldSkipper() {}
+class LIBPROTOBUF_EXPORT UnknownFieldSetFieldSkipper : public FieldSkipper
+{
+public:
+  UnknownFieldSetFieldSkipper(UnknownFieldSet* unknown_fields) : unknown_fields_(unknown_fields)
+  {
+  }
+  virtual ~UnknownFieldSetFieldSkipper()
+  {
+  }
 
   // implements FieldSkipper -----------------------------------------
   virtual bool SkipField(io::CodedInputStream* input, uint32 tag);
   virtual bool SkipMessage(io::CodedInputStream* input);
   virtual void SkipUnknownEnum(int field_number, int value);
 
- protected:
+protected:
   UnknownFieldSet* unknown_fields_;
 };
 
 // inline methods ====================================================
 
-inline WireFormatLite::WireType WireFormat::WireTypeForField(
-    const FieldDescriptor* field) {
-  if (field->is_packed()) {
+inline WireFormatLite::WireType WireFormat::WireTypeForField(const FieldDescriptor* field)
+{
+  if (field->is_packed())
+  {
     return WireFormatLite::WIRETYPE_LENGTH_DELIMITED;
-  } else {
+  }
+  else
+  {
     return WireTypeForFieldType(field->type());
   }
 }
 
-inline WireFormatLite::WireType WireFormat::WireTypeForFieldType(
-    FieldDescriptor::Type type) {
+inline WireFormatLite::WireType WireFormat::WireTypeForFieldType(FieldDescriptor::Type type)
+{
   // Some compilers don't like enum -> enum casts, so we implicit_cast to
   // int first.
-  return WireFormatLite::WireTypeForFieldType(
-      static_cast<WireFormatLite::FieldType>(
-        implicit_cast<int>(type)));
+  return WireFormatLite::WireTypeForFieldType(static_cast<WireFormatLite::FieldType>(implicit_cast<int>(type)));
 }
 
-inline uint32 WireFormat::MakeTag(const FieldDescriptor* field) {
+inline uint32 WireFormat::MakeTag(const FieldDescriptor* field)
+{
   return WireFormatLite::MakeTag(field->number(), WireTypeForField(field));
 }
 
-inline size_t WireFormat::TagSize(int field_number,
-                                  FieldDescriptor::Type type) {
+inline size_t WireFormat::TagSize(int field_number, FieldDescriptor::Type type)
+{
   // Some compilers don't like enum -> enum casts, so we implicit_cast to
   // int first.
-  return WireFormatLite::TagSize(field_number,
-      static_cast<WireFormatLite::FieldType>(
-        implicit_cast<int>(type)));
+  return WireFormatLite::TagSize(field_number, static_cast<WireFormatLite::FieldType>(implicit_cast<int>(type)));
 }
 
-inline void WireFormat::VerifyUTF8String(const char* data, int size,
-    WireFormat::Operation op) {
+inline void WireFormat::VerifyUTF8String(const char* data, int size, WireFormat::Operation op)
+{
 #ifdef GOOGLE_PROTOBUF_UTF8_VALIDATION_ENABLED
-  WireFormatLite::VerifyUtf8String(
-      data, size, static_cast<WireFormatLite::Operation>(op), NULL);
+  WireFormatLite::VerifyUtf8String(data, size, static_cast<WireFormatLite::Operation>(op), NULL);
 #else
   // Avoid the compiler warning about unused variables.
-  (void)data; (void)size; (void)op;
+  (void)data;
+  (void)size;
+  (void)op;
 #endif
 }
 
-inline void WireFormat::VerifyUTF8StringNamedField(
-    const char* data, int size, WireFormat::Operation op,
-    const char* field_name) {
+inline void WireFormat::VerifyUTF8StringNamedField(const char* data, int size, WireFormat::Operation op,
+                                                   const char* field_name)
+{
 #ifdef GOOGLE_PROTOBUF_UTF8_VALIDATION_ENABLED
-  WireFormatLite::VerifyUtf8String(
-      data, size, static_cast<WireFormatLite::Operation>(op), field_name);
+  WireFormatLite::VerifyUtf8String(data, size, static_cast<WireFormatLite::Operation>(op), field_name);
 #else
   // Avoid the compiler warning about unused variables.
-  (void)data; (void)size; (void)op; (void)field_name;
+  (void)data;
+  (void)size;
+  (void)op;
+  (void)field_name;
 #endif
 }
-
 
 }  // namespace internal
 }  // namespace protobuf

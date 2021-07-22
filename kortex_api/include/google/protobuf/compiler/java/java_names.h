@@ -40,17 +40,19 @@
 
 #include <string>
 
-namespace google {
-namespace protobuf {
-
+namespace google
+{
+namespace protobuf
+{
 class Descriptor;
 class EnumDescriptor;
 class FileDescriptor;
 class ServiceDescriptor;
 
-namespace compiler {
-namespace java {
-
+namespace compiler
+{
+namespace java
+{
 // Requires:
 //   descriptor != NULL
 //

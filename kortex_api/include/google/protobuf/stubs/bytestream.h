@@ -59,10 +59,12 @@
 class CordByteSink;
 class MemBlock;
 
-namespace google {
-namespace protobuf {
-namespace strings {
-
+namespace google
+{
+namespace protobuf
+{
+namespace strings
+{
 // An abstract interface for an object that consumes a sequence of bytes. This
 // interface offers a way to append data as well as a Flush() function.
 //
@@ -74,10 +76,15 @@ namespace strings {
 //   sink->Append(my_data.data(), my_data.size());
 //   sink->Flush();
 //
-class LIBPROTOBUF_EXPORT ByteSink {
- public:
-  ByteSink() {}
-  virtual ~ByteSink() {}
+class LIBPROTOBUF_EXPORT ByteSink
+{
+public:
+  ByteSink()
+  {
+  }
+  virtual ~ByteSink()
+  {
+  }
 
   // Appends the "n" bytes starting at "bytes".
   virtual void Append(const char* bytes, size_t n) = 0;
@@ -87,7 +94,7 @@ class LIBPROTOBUF_EXPORT ByteSink {
   // of the stream.
   virtual void Flush();
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ByteSink);
 };
 
@@ -103,10 +110,15 @@ class LIBPROTOBUF_EXPORT ByteSink {
 //     source->Skip(data.length());
 //   }
 //
-class LIBPROTOBUF_EXPORT ByteSource {
- public:
-  ByteSource() {}
-  virtual ~ByteSource() {}
+class LIBPROTOBUF_EXPORT ByteSource
+{
+public:
+  ByteSource()
+  {
+  }
+  virtual ~ByteSource()
+  {
+  }
 
   // Returns the number of bytes left to read from the source. Available()
   // should decrease by N each time Skip(N) is called. Available() may not
@@ -140,7 +152,7 @@ class LIBPROTOBUF_EXPORT ByteSource {
   // REQUIRES: Available() >= n
   virtual void CopyTo(ByteSink* sink, size_t n);
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ByteSource);
 };
 
@@ -159,18 +171,24 @@ class LIBPROTOBUF_EXPORT ByteSource {
 //   sink.Append("hi", 2);    // OK
 //   sink.Append(data, 100);  // WOOPS! Overflows buf[10].
 //
-class LIBPROTOBUF_EXPORT UncheckedArrayByteSink : public ByteSink {
- public:
-  explicit UncheckedArrayByteSink(char* dest) : dest_(dest) {}
+class LIBPROTOBUF_EXPORT UncheckedArrayByteSink : public ByteSink
+{
+public:
+  explicit UncheckedArrayByteSink(char* dest) : dest_(dest)
+  {
+  }
   virtual void Append(const char* data, size_t n);
 
   // Returns the current output pointer so that a caller can see how many bytes
   // were produced.
   //
   // Note: this method is not part of the ByteSink interface.
-  char* CurrentDestination() const { return dest_; }
+  char* CurrentDestination() const
+  {
+    return dest_;
+  }
 
- private:
+private:
   char* dest_;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(UncheckedArrayByteSink);
 };
@@ -187,19 +205,26 @@ class LIBPROTOBUF_EXPORT UncheckedArrayByteSink : public ByteSink {
 //   sink.Append("hi", 2);    // OK
 //   sink.Append(data, 100);  // Will only write 8 more bytes
 //
-class LIBPROTOBUF_EXPORT CheckedArrayByteSink : public ByteSink {
- public:
+class LIBPROTOBUF_EXPORT CheckedArrayByteSink : public ByteSink
+{
+public:
   CheckedArrayByteSink(char* outbuf, size_t capacity);
   virtual void Append(const char* bytes, size_t n);
 
   // Returns the number of bytes actually written to the sink.
-  size_t NumberOfBytesWritten() const { return size_; }
+  size_t NumberOfBytesWritten() const
+  {
+    return size_;
+  }
 
   // Returns true if any bytes were discarded, i.e., if there was an
   // attempt to write more than 'capacity' bytes.
-  bool Overflowed() const { return overflowed_; }
+  bool Overflowed() const
+  {
+    return overflowed_;
+  }
 
- private:
+private:
   char* outbuf_;
   const size_t capacity_;
   size_t size_;
@@ -223,8 +248,9 @@ class LIBPROTOBUF_EXPORT CheckedArrayByteSink : public ByteSink {
 //   const char* buf = sink.GetBuffer();  // Ownership transferred
 //   delete[] buf;
 //
-class LIBPROTOBUF_EXPORT GrowingArrayByteSink : public strings::ByteSink {
- public:
+class LIBPROTOBUF_EXPORT GrowingArrayByteSink : public strings::ByteSink
+{
+public:
   explicit GrowingArrayByteSink(size_t estimated_size);
   virtual ~GrowingArrayByteSink();
   virtual void Append(const char* bytes, size_t n);
@@ -233,7 +259,7 @@ class LIBPROTOBUF_EXPORT GrowingArrayByteSink : public strings::ByteSink {
   // ownership of the buffer and must delete it with delete[].
   char* GetBuffer(size_t* nbytes);
 
- private:
+private:
   void Expand(size_t amount);
   void ShrinkToFit();
 
@@ -253,12 +279,15 @@ class LIBPROTOBUF_EXPORT GrowingArrayByteSink : public strings::ByteSink {
 //   sink.Append("World", 5);
 //   assert(dest == "Hello World");
 //
-class LIBPROTOBUF_EXPORT StringByteSink : public ByteSink {
- public:
-  explicit StringByteSink(string* dest) : dest_(dest) {}
+class LIBPROTOBUF_EXPORT StringByteSink : public ByteSink
+{
+public:
+  explicit StringByteSink(string* dest) : dest_(dest)
+  {
+  }
   virtual void Append(const char* data, size_t n);
 
- private:
+private:
   string* dest_;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringByteSink);
 };
@@ -270,12 +299,17 @@ class LIBPROTOBUF_EXPORT StringByteSink : public ByteSink {
 //   NullByteSink sink;
 //   sink.Append(data, data.size());  // All data ignored.
 //
-class LIBPROTOBUF_EXPORT NullByteSink : public ByteSink {
- public:
-  NullByteSink() {}
-  virtual void Append(const char *data, size_t n) {}
+class LIBPROTOBUF_EXPORT NullByteSink : public ByteSink
+{
+public:
+  NullByteSink()
+  {
+  }
+  virtual void Append(const char* data, size_t n)
+  {
+  }
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(NullByteSink);
 };
 
@@ -292,16 +326,19 @@ class LIBPROTOBUF_EXPORT NullByteSink : public ByteSink {
 //   assert(source.Available() == 5);
 //   assert(source.Peek() == "Hello");
 //
-class LIBPROTOBUF_EXPORT ArrayByteSource : public ByteSource {
- public:
-  explicit ArrayByteSource(StringPiece s) : input_(s) {}
+class LIBPROTOBUF_EXPORT ArrayByteSource : public ByteSource
+{
+public:
+  explicit ArrayByteSource(StringPiece s) : input_(s)
+  {
+  }
 
   virtual size_t Available() const;
   virtual StringPiece Peek();
   virtual void Skip(size_t n);
 
- private:
-  StringPiece   input_;
+private:
+  StringPiece input_;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ArrayByteSource);
 };
 
@@ -323,8 +360,9 @@ class LIBPROTOBUF_EXPORT ArrayByteSource : public ByteSource {
 //   assert(limit.Available() == 5);
 //   assert(limit.Peek() == "Hello");
 //
-class LIBPROTOBUF_EXPORT LimitByteSource : public ByteSource {
- public:
+class LIBPROTOBUF_EXPORT LimitByteSource : public ByteSource
+{
+public:
   // Returns at most "limit" bytes from "source".
   LimitByteSource(ByteSource* source, size_t limit);
 
@@ -336,7 +374,7 @@ class LIBPROTOBUF_EXPORT LimitByteSource : public ByteSource {
   // case it has an efficient implementation of CopyTo.
   virtual void CopyTo(ByteSink* sink, size_t n);
 
- private:
+private:
   ByteSource* source_;
   size_t limit_;
 };

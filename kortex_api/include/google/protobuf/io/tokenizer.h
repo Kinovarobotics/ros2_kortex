@@ -42,11 +42,13 @@
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/logging.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
-
-class ZeroCopyInputStream;     // zero_copy_stream.h
+namespace google
+{
+namespace protobuf
+{
+namespace io
+{
+class ZeroCopyInputStream;  // zero_copy_stream.h
 
 // Defined in this file.
 class ErrorCollector;
@@ -61,24 +63,27 @@ typedef int ColumnNumber;
 // Abstract interface for an object which collects the errors that occur
 // during parsing.  A typical implementation might simply print the errors
 // to stdout.
-class LIBPROTOBUF_EXPORT ErrorCollector {
- public:
-  inline ErrorCollector() {}
+class LIBPROTOBUF_EXPORT ErrorCollector
+{
+public:
+  inline ErrorCollector()
+  {
+  }
   virtual ~ErrorCollector();
 
   // Indicates that there was an error in the input at the given line and
   // column numbers.  The numbers are zero-based, so you may want to add
   // 1 to each before printing them.
-  virtual void AddError(int line, ColumnNumber column,
-                        const string& message) = 0;
+  virtual void AddError(int line, ColumnNumber column, const string& message) = 0;
 
   // Indicates that there was a warning in the input at the given line and
   // column numbers.  The numbers are zero-based, so you may want to add
   // 1 to each before printing them.
-  virtual void AddWarning(int line, ColumnNumber column,
-                          const string& message) { }
+  virtual void AddWarning(int line, ColumnNumber column, const string& message)
+  {
+  }
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ErrorCollector);
 };
 
@@ -88,17 +93,19 @@ class LIBPROTOBUF_EXPORT ErrorCollector {
 // precise descriptions.  Whitespace and comments are skipped.  By default,
 // C- and C++-style comments are recognized, but other styles can be used by
 // calling set_comment_style().
-class LIBPROTOBUF_EXPORT Tokenizer {
- public:
+class LIBPROTOBUF_EXPORT Tokenizer
+{
+public:
   // Construct a Tokenizer that reads and tokenizes text from the given
   // input stream and writes errors to the given error_collector.
   // The caller keeps ownership of input and error_collector.
   Tokenizer(ZeroCopyInputStream* input, ErrorCollector* error_collector);
   ~Tokenizer();
 
-  enum TokenType {
-    TYPE_START,       // Next() has not yet been called.
-    TYPE_END,         // End of input reached.  "text" is empty.
+  enum TokenType
+  {
+    TYPE_START,  // Next() has not yet been called.
+    TYPE_END,    // End of input reached.  "text" is empty.
 
     TYPE_IDENTIFIER,  // A sequence of letters, digits, and underscores, not
                       // starting with a digit.  It is an error for a number
@@ -122,11 +129,12 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   };
 
   // Structure representing a token read from the token stream.
-  struct Token {
+  struct Token
+  {
     TokenType type;
-    string text;       // The exact text of the token as it appeared in
-                       // the input.  e.g. tokens of TYPE_STRING will still
-                       // be escaped and in quotes.
+    string text;  // The exact text of the token as it appeared in
+                  // the input.  e.g. tokens of TYPE_STRING will still
+                  // be escaped and in quotes.
 
     // "line" and "column" specify the position of the first character of
     // the token within the input stream.  They are zero-based.
@@ -190,8 +198,7 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   //   /* Block comment attached to
   //    * grault. */
   //   optional int32 grault = 6;
-  bool NextWithComments(string* prev_trailing_comments,
-                        std::vector<string>* detached_comments,
+  bool NextWithComments(string* prev_trailing_comments, std::vector<string>* detached_comments,
                         string* next_leading_comments);
 
   // Parse helpers ---------------------------------------------------
@@ -214,8 +221,7 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   // result.  If the text is not from a Token of type TYPE_INTEGER originally
   // parsed by a Tokenizer, the result is undefined (possibly an assert
   // failure).
-  static bool ParseInteger(const string& text, uint64 max_value,
-                           uint64* output);
+  static bool ParseInteger(const string& text, uint64 max_value, uint64* output);
 
   // Options ---------------------------------------------------------
 
@@ -223,10 +229,14 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   // which would otherwise be integers but which have the 'f' suffix will be
   // forced to be interpreted as floats.  For all other purposes, the 'f' is
   // ignored.
-  void set_allow_f_after_float(bool value) { allow_f_after_float_ = value; }
+  void set_allow_f_after_float(bool value)
+  {
+    allow_f_after_float_ = value;
+  }
 
   // Valid values for set_comment_style().
-  enum CommentStyle {
+  enum CommentStyle
+  {
     // Line comments begin with "//", block comments are delimited by "/*" and
     // "*/".
     CPP_COMMENT_STYLE,
@@ -235,17 +245,22 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   };
 
   // Sets the comment style.
-  void set_comment_style(CommentStyle style) { comment_style_ = style; }
+  void set_comment_style(CommentStyle style)
+  {
+    comment_style_ = style;
+  }
 
   // Whether to require whitespace between a number and a field name.
   // Default is true. Do not use this; for Google-internal cleanup only.
-  void set_require_space_after_number(bool require) {
+  void set_require_space_after_number(bool require)
+  {
     require_space_after_number_ = require;
   }
 
   // Whether to allow string literals to span multiple lines. Default is false.
   // Do not use this; for Google-internal cleanup only.
-  void set_allow_multiline_strings(bool allow) {
+  void set_allow_multiline_strings(bool allow)
+  {
     allow_multiline_strings_ = allow;
   }
 
@@ -253,20 +268,20 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   static bool IsIdentifier(const string& text);
 
   // -----------------------------------------------------------------
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Tokenizer);
 
-  Token current_;           // Returned by current().
-  Token previous_;          // Returned by previous().
+  Token current_;   // Returned by current().
+  Token previous_;  // Returned by previous().
 
   ZeroCopyInputStream* input_;
   ErrorCollector* error_collector_;
 
-  char current_char_;       // == buffer_[buffer_pos_], updated by NextChar().
-  const char* buffer_;      // Current buffer returned from input_.
-  int buffer_size_;         // Size of buffer_.
-  int buffer_pos_;          // Current position within the buffer.
-  bool read_error_;         // Did we previously encounter a read error?
+  char current_char_;   // == buffer_[buffer_pos_], updated by NextChar().
+  const char* buffer_;  // Current buffer returned from input_.
+  int buffer_size_;     // Size of buffer_.
+  int buffer_pos_;      // Current position within the buffer.
+  bool read_error_;     // Did we previously encounter a read error?
 
   // Line and column number of current_char_ within the whole input stream.
   int line_;
@@ -311,7 +326,8 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   inline void EndToken();
 
   // Convenience method to add an error at the current line and column.
-  void AddError(const string& message) {
+  void AddError(const string& message)
+  {
     error_collector_->AddError(line_, column_, message);
   }
 
@@ -338,7 +354,8 @@ class LIBPROTOBUF_EXPORT Tokenizer {
   // Consume until "*/".
   void ConsumeBlockComment(string* content);
 
-  enum NextCommentStatus {
+  enum NextCommentStatus
+  {
     // Started a line comment.
     LINE_COMMENT,
 
@@ -367,39 +384,42 @@ class LIBPROTOBUF_EXPORT Tokenizer {
 
   // Returns true if the current character is of the given character
   // class, but does not consume anything.
-  template<typename CharacterClass>
+  template <typename CharacterClass>
   inline bool LookingAt();
 
   // If the current character is in the given class, consume it and return
   // true.  Otherwise return false.
   // e.g. TryConsumeOne<Letter>()
-  template<typename CharacterClass>
+  template <typename CharacterClass>
   inline bool TryConsumeOne();
 
   // Like above, but try to consume the specific character indicated.
   inline bool TryConsume(char c);
 
   // Consume zero or more of the given character class.
-  template<typename CharacterClass>
+  template <typename CharacterClass>
   inline void ConsumeZeroOrMore();
 
   // Consume one or more of the given character class or log the given
   // error message.
   // e.g. ConsumeOneOrMore<Digit>("Expected digits.");
-  template<typename CharacterClass>
+  template <typename CharacterClass>
   inline void ConsumeOneOrMore(const char* error);
 };
 
 // inline methods ====================================================
-inline const Tokenizer::Token& Tokenizer::current() {
+inline const Tokenizer::Token& Tokenizer::current()
+{
   return current_;
 }
 
-inline const Tokenizer::Token& Tokenizer::previous() {
+inline const Tokenizer::Token& Tokenizer::previous()
+{
   return previous_;
 }
 
-inline void Tokenizer::ParseString(const string& text, string* output) {
+inline void Tokenizer::ParseString(const string& text, string* output)
+{
   output->clear();
   ParseStringAppend(text, output);
 }

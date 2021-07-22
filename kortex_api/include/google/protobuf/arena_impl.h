@@ -44,12 +44,14 @@
 
 #include <google/protobuf/stubs/port.h>
 
-namespace google {
-
-namespace protobuf {
-namespace internal {
-
-inline size_t AlignUpTo8(size_t n) {
+namespace google
+{
+namespace protobuf
+{
+namespace internal
+{
+inline size_t AlignUpTo8(size_t n)
+{
   // Align n to next multiple of 8 (from Hacker's Delight, Chapter 3.)
   return (n + 7) & -8;
 }
@@ -60,9 +62,11 @@ inline size_t AlignUpTo8(size_t n) {
 // in turn would be templates, which will/cannot happen. However separating
 // the memory allocation part from the cruft of the API users expect we can
 // use #ifdef the select the best implementation based on hardware / OS.
-class LIBPROTOBUF_EXPORT ArenaImpl {
- public:
-  struct Options {
+class LIBPROTOBUF_EXPORT ArenaImpl
+{
+public:
+  struct Options
+  {
     size_t start_block_size;
     size_t max_block_size;
     char* initial_block;
@@ -72,21 +76,26 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
 
     template <typename O>
     explicit Options(const O& options)
-      : start_block_size(options.start_block_size),
-        max_block_size(options.max_block_size),
-        initial_block(options.initial_block),
-        initial_block_size(options.initial_block_size),
-        block_alloc(options.block_alloc),
-        block_dealloc(options.block_dealloc) {}
+      : start_block_size(options.start_block_size)
+      , max_block_size(options.max_block_size)
+      , initial_block(options.initial_block)
+      , initial_block_size(options.initial_block_size)
+      , block_alloc(options.block_alloc)
+      , block_dealloc(options.block_dealloc)
+    {
+    }
   };
 
   template <typename O>
-  explicit ArenaImpl(const O& options) : options_(options) {
-    if (options_.initial_block != NULL && options_.initial_block_size > 0) {
-      GOOGLE_CHECK_GE(options_.initial_block_size, sizeof(Block))
-          << ": Initial block size too small for header.";
+  explicit ArenaImpl(const O& options) : options_(options)
+  {
+    if (options_.initial_block != NULL && options_.initial_block_size > 0)
+    {
+      GOOGLE_CHECK_GE(options_.initial_block_size, sizeof(Block)) << ": Initial block size too small for header.";
       initial_block_ = reinterpret_cast<Block*>(options_.initial_block);
-    } else {
+    }
+    else
+    {
       initial_block_ = NULL;
     }
 
@@ -111,17 +120,20 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
   // Add object pointer and cleanup function pointer to the list.
   void AddCleanup(void* elem, void (*cleanup)(void*));
 
- private:
+private:
   // Node contains the ptr of the object to be cleaned up and the associated
   // cleanup function ptr.
-  struct CleanupNode {
+  struct CleanupNode
+  {
     void* elem;              // Pointer to the object to be cleaned up.
     void (*cleanup)(void*);  // Function pointer to the destructor or deleter.
   };
 
   // Cleanup uses a chunked linked list, to reduce pointer chasing.
-  struct CleanupChunk {
-    static size_t SizeOf(size_t i) {
+  struct CleanupChunk
+  {
+    static size_t SizeOf(size_t i)
+    {
       return sizeof(CleanupChunk) + (sizeof(CleanupNode) * (i - 1));
     }
     size_t len;            // Number of elements currently present.
@@ -133,16 +145,18 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
   struct Block;
 
   // Tracks per-thread info.  ThreadInfos are kept in a linked list.
-  struct ThreadInfo {
-    void *owner;             // &ThreadCache of this thread;
-    Block* head;             // Head of linked list of blocks.
-    CleanupChunk* cleanup;   // Head of cleanup list.
-    ThreadInfo* next;        // Next ThreadInfo in this linked list.
+  struct ThreadInfo
+  {
+    void* owner;            // &ThreadCache of this thread;
+    Block* head;            // Head of linked list of blocks.
+    CleanupChunk* cleanup;  // Head of cleanup list.
+    ThreadInfo* next;       // Next ThreadInfo in this linked list.
   };
 
   // Blocks are variable length malloc-ed objects.  The following structure
   // describes the common header for all blocks.
-  struct Block {
+  struct Block
+  {
     void* owner;              // &ThreadCache of thread that owns this block.
     ThreadInfo* thread_info;  // ThreadInfo of thread that owns this block.
     Block* next;              // Next block in arena (may have different owner)
@@ -151,16 +165,22 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
     size_t pos;
     size_t size;  // total size of the block.
     GOOGLE_PROTOBUF_ATTRIBUTE_ALWAYS_INLINE
-    size_t avail() const { return size - pos; }
+    size_t avail() const
+    {
+      return size - pos;
+    }
     // data follows
   };
 
-  struct ThreadCache {
+  struct ThreadCache
+  {
 #if defined(GOOGLE_PROTOBUF_NO_THREADLOCAL)
     // If we are using the ThreadLocalStorage class to store the ThreadCache,
     // then the ThreadCache's default constructor has to be responsible for
     // initializing it.
-    ThreadCache() : last_lifecycle_id_seen(-1), last_block_used_(NULL) {}
+    ThreadCache() : last_lifecycle_id_seen(-1), last_block_used_(NULL)
+    {
+    }
 #endif
 
     // The ThreadCache is considered valid as long as this matches the
@@ -180,7 +200,10 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
   static ThreadCache& thread_cache();
 #else
   static GOOGLE_THREAD_LOCAL ThreadCache thread_cache_;
-  static ThreadCache& thread_cache() { return thread_cache_; }
+  static ThreadCache& thread_cache()
+  {
+    return thread_cache_;
+  }
 #endif
 
   void Init();
@@ -194,7 +217,8 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
   // Delete or Destruct all objects owned by the arena.
   void CleanupList();
 
-  inline void CacheBlock(Block* block) {
+  inline void CacheBlock(Block* block)
+  {
     thread_cache().last_block_used_ = block;
     thread_cache().last_lifecycle_id_seen = lifecycle_id_;
     // TODO(haberman): evaluate whether we would gain efficiency by getting rid
@@ -207,14 +231,14 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
   google::protobuf::internal::AtomicWord hint_;             // Fast thread-local block access
   google::protobuf::internal::AtomicWord space_allocated_;  // Sum of sizes of all allocated blocks.
 
-  Block *initial_block_;     // If non-NULL, points to the block that came from
-                             // user data.
+  Block* initial_block_;  // If non-NULL, points to the block that came from
+                          // user data.
 
   // Returns a block owned by this thread.
   Block* GetBlock(size_t n);
   Block* GetBlockSlow(void* me, Block* my_full_block, size_t n);
   Block* NewBlock(void* me, Block* my_last_block, size_t min_bytes);
-  void InitBlock(Block* b, void *me, size_t size);
+  void InitBlock(Block* b, void* me, size_t size);
   static void* AllocFromBlock(Block* b, size_t n);
   ThreadInfo* NewThreadInfo(Block* b);
   ThreadInfo* FindThreadInfo(void* me);
@@ -226,7 +250,7 @@ class LIBPROTOBUF_EXPORT ArenaImpl {
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ArenaImpl);
 
- public:
+public:
   // kHeaderSize is sizeof(Block), aligned up to the nearest multiple of 8 to
   // protect the invariant that pos is always at a multiple of 8.
   static const size_t kHeaderSize = (sizeof(Block) + 7) & -8;

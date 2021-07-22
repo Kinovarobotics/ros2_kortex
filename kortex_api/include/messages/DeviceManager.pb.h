@@ -27,15 +27,17 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "Common.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_DeviceManager_2eproto {
+namespace protobuf_DeviceManager_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[1];
@@ -46,24 +48,31 @@ struct TableStruct {
 void AddDescriptors();
 void InitDefaultsDeviceHandlesImpl();
 void InitDefaultsDeviceHandles();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
   InitDefaultsDeviceHandles();
 }
 }  // namespace protobuf_DeviceManager_2eproto
-namespace Kinova {
-namespace Api {
-namespace DeviceManager {
+namespace Kinova
+{
+namespace Api
+{
+namespace DeviceManager
+{
 class DeviceHandles;
 class DeviceHandlesDefaultTypeInternal;
 extern DeviceHandlesDefaultTypeInternal _DeviceHandles_default_instance_;
 }  // namespace DeviceManager
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace DeviceManager {
-
-enum ServiceVersion {
+namespace Kinova
+{
+namespace Api
+{
+namespace DeviceManager
+{
+enum ServiceVersion
+{
   RESERVED_0 = 0,
   CURRENT_VERSION = 1,
   ServiceVersion_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
@@ -75,62 +84,73 @@ const ServiceVersion ServiceVersion_MAX = CURRENT_VERSION;
 const int ServiceVersion_ARRAYSIZE = ServiceVersion_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServiceVersion_descriptor();
-inline const ::std::string& ServiceVersion_Name(ServiceVersion value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ServiceVersion_descriptor(), value);
+inline const ::std::string& ServiceVersion_Name(ServiceVersion value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ServiceVersion_descriptor(), value);
 }
-inline bool ServiceVersion_Parse(
-    const ::std::string& name, ServiceVersion* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(
-    ServiceVersion_descriptor(), name, value);
+inline bool ServiceVersion_Parse(const ::std::string& name, ServiceVersion* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(ServiceVersion_descriptor(), name, value);
 }
 // ===================================================================
 
-class DeviceHandles : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceManager.DeviceHandles) */ {
- public:
+class DeviceHandles
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:Kinova.Api.DeviceManager.DeviceHandles) */
+{
+public:
   DeviceHandles();
   virtual ~DeviceHandles();
 
   DeviceHandles(const DeviceHandles& from);
 
-  inline DeviceHandles& operator=(const DeviceHandles& from) {
+  inline DeviceHandles& operator=(const DeviceHandles& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DeviceHandles(DeviceHandles&& from) noexcept
-    : DeviceHandles() {
+#if LANG_CXX11
+  DeviceHandles(DeviceHandles&& from) noexcept : DeviceHandles()
+  {
     *this = ::std::move(from);
   }
 
-  inline DeviceHandles& operator=(DeviceHandles&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DeviceHandles& operator=(DeviceHandles&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
+#endif
   static const ::google::protobuf::Descriptor* descriptor();
   static const DeviceHandles& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DeviceHandles* internal_default_instance() {
-    return reinterpret_cast<const DeviceHandles*>(
-               &_DeviceHandles_default_instance_);
+  static inline const DeviceHandles* internal_default_instance()
+  {
+    return reinterpret_cast<const DeviceHandles*>(&_DeviceHandles_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void Swap(DeviceHandles* other);
-  friend void swap(DeviceHandles& a, DeviceHandles& b) {
+  friend void swap(DeviceHandles& a, DeviceHandles& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DeviceHandles* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DeviceHandles* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DeviceHandles* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -141,27 +161,32 @@ class DeviceHandles : public ::google::protobuf::Message /* @@protoc_insertion_p
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DeviceHandles* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
 
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const
+  {
+    return NULL;
+  }
+
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -175,60 +200,61 @@ class DeviceHandles : public ::google::protobuf::Message /* @@protoc_insertion_p
   const ::Kinova::Api::Common::DeviceHandle& device_handle(int index) const;
   ::Kinova::Api::Common::DeviceHandle* mutable_device_handle(int index);
   ::Kinova::Api::Common::DeviceHandle* add_device_handle();
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle >*
-      mutable_device_handle();
-  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle >&
-      device_handle() const;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle>* mutable_device_handle();
+  const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle>& device_handle() const;
 
   // @@protoc_insertion_point(class_scope:Kinova.Api.DeviceManager.DeviceHandles)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle > device_handle_;
+  ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle> device_handle_;
   mutable int _cached_size_;
   friend struct ::protobuf_DeviceManager_2eproto::TableStruct;
   friend void ::protobuf_DeviceManager_2eproto::InitDefaultsDeviceHandlesImpl();
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // DeviceHandles
 
 // repeated .Kinova.Api.Common.DeviceHandle device_handle = 1;
-inline int DeviceHandles::device_handle_size() const {
+inline int DeviceHandles::device_handle_size() const
+{
   return device_handle_.size();
 }
-inline const ::Kinova::Api::Common::DeviceHandle& DeviceHandles::device_handle(int index) const {
+inline const ::Kinova::Api::Common::DeviceHandle& DeviceHandles::device_handle(int index) const
+{
   // @@protoc_insertion_point(field_get:Kinova.Api.DeviceManager.DeviceHandles.device_handle)
   return device_handle_.Get(index);
 }
-inline ::Kinova::Api::Common::DeviceHandle* DeviceHandles::mutable_device_handle(int index) {
+inline ::Kinova::Api::Common::DeviceHandle* DeviceHandles::mutable_device_handle(int index)
+{
   // @@protoc_insertion_point(field_mutable:Kinova.Api.DeviceManager.DeviceHandles.device_handle)
   return device_handle_.Mutable(index);
 }
-inline ::Kinova::Api::Common::DeviceHandle* DeviceHandles::add_device_handle() {
+inline ::Kinova::Api::Common::DeviceHandle* DeviceHandles::add_device_handle()
+{
   // @@protoc_insertion_point(field_add:Kinova.Api.DeviceManager.DeviceHandles.device_handle)
   return device_handle_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle >*
-DeviceHandles::mutable_device_handle() {
+inline ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle>* DeviceHandles::mutable_device_handle()
+{
   // @@protoc_insertion_point(field_mutable_list:Kinova.Api.DeviceManager.DeviceHandles.device_handle)
   return &device_handle_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle >&
-DeviceHandles::device_handle() const {
+inline const ::google::protobuf::RepeatedPtrField< ::Kinova::Api::Common::DeviceHandle>&
+DeviceHandles::device_handle() const
+{
   // @@protoc_insertion_point(field_list:Kinova.Api.DeviceManager.DeviceHandles.device_handle)
   return device_handle_;
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
@@ -237,12 +263,17 @@ DeviceHandles::device_handle() const {
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::DeviceManager::ServiceVersion> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceManager::ServiceVersion>() {
+struct is_proto_enum< ::Kinova::Api::DeviceManager::ServiceVersion> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::DeviceManager::ServiceVersion>()
+{
   return ::Kinova::Api::DeviceManager::ServiceVersion_descriptor();
 }
 

@@ -27,14 +27,16 @@
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_google_2fprotobuf_2fdescriptor_2eproto {
+namespace protobuf_google_2fprotobuf_2fdescriptor_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOBUF_EXPORT TableStruct {
+struct LIBPROTOBUF_EXPORT TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[27];
@@ -97,7 +99,8 @@ void LIBPROTOBUF_EXPORT InitDefaultsGeneratedCodeInfo_AnnotationImpl();
 void LIBPROTOBUF_EXPORT InitDefaultsGeneratedCodeInfo_Annotation();
 void LIBPROTOBUF_EXPORT InitDefaultsGeneratedCodeInfoImpl();
 void LIBPROTOBUF_EXPORT InitDefaultsGeneratedCodeInfo();
-inline void LIBPROTOBUF_EXPORT InitDefaults() {
+inline void LIBPROTOBUF_EXPORT InitDefaults()
+{
   InitDefaultsFileDescriptorSet();
   InitDefaultsFileDescriptorProto();
   InitDefaultsDescriptorProto_ExtensionRange();
@@ -127,23 +130,28 @@ inline void LIBPROTOBUF_EXPORT InitDefaults() {
   InitDefaultsGeneratedCodeInfo();
 }
 }  // namespace protobuf_google_2fprotobuf_2fdescriptor_2eproto
-namespace google {
-namespace protobuf {
+namespace google
+{
+namespace protobuf
+{
 class DescriptorProto;
 class DescriptorProtoDefaultTypeInternal;
 LIBPROTOBUF_EXPORT extern DescriptorProtoDefaultTypeInternal _DescriptorProto_default_instance_;
 class DescriptorProto_ExtensionRange;
 class DescriptorProto_ExtensionRangeDefaultTypeInternal;
-LIBPROTOBUF_EXPORT extern DescriptorProto_ExtensionRangeDefaultTypeInternal _DescriptorProto_ExtensionRange_default_instance_;
+LIBPROTOBUF_EXPORT extern DescriptorProto_ExtensionRangeDefaultTypeInternal
+    _DescriptorProto_ExtensionRange_default_instance_;
 class DescriptorProto_ReservedRange;
 class DescriptorProto_ReservedRangeDefaultTypeInternal;
-LIBPROTOBUF_EXPORT extern DescriptorProto_ReservedRangeDefaultTypeInternal _DescriptorProto_ReservedRange_default_instance_;
+LIBPROTOBUF_EXPORT extern DescriptorProto_ReservedRangeDefaultTypeInternal
+    _DescriptorProto_ReservedRange_default_instance_;
 class EnumDescriptorProto;
 class EnumDescriptorProtoDefaultTypeInternal;
 LIBPROTOBUF_EXPORT extern EnumDescriptorProtoDefaultTypeInternal _EnumDescriptorProto_default_instance_;
 class EnumDescriptorProto_EnumReservedRange;
 class EnumDescriptorProto_EnumReservedRangeDefaultTypeInternal;
-LIBPROTOBUF_EXPORT extern EnumDescriptorProto_EnumReservedRangeDefaultTypeInternal _EnumDescriptorProto_EnumReservedRange_default_instance_;
+LIBPROTOBUF_EXPORT extern EnumDescriptorProto_EnumReservedRangeDefaultTypeInternal
+    _EnumDescriptorProto_EnumReservedRange_default_instance_;
 class EnumOptions;
 class EnumOptionsDefaultTypeInternal;
 LIBPROTOBUF_EXPORT extern EnumOptionsDefaultTypeInternal _EnumOptions_default_instance_;
@@ -212,10 +220,12 @@ class UninterpretedOption_NamePartDefaultTypeInternal;
 LIBPROTOBUF_EXPORT extern UninterpretedOption_NamePartDefaultTypeInternal _UninterpretedOption_NamePart_default_instance_;
 }  // namespace protobuf
 }  // namespace google
-namespace google {
-namespace protobuf {
-
-enum FieldDescriptorProto_Type {
+namespace google
+{
+namespace protobuf
+{
+enum FieldDescriptorProto_Type
+{
   FieldDescriptorProto_Type_TYPE_DOUBLE = 1,
   FieldDescriptorProto_Type_TYPE_FLOAT = 2,
   FieldDescriptorProto_Type_TYPE_INT64 = 3,
@@ -241,16 +251,17 @@ const FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MAX = FieldDescri
 const int FieldDescriptorProto_Type_Type_ARRAYSIZE = FieldDescriptorProto_Type_Type_MAX + 1;
 
 LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* FieldDescriptorProto_Type_descriptor();
-inline const ::std::string& FieldDescriptorProto_Type_Name(FieldDescriptorProto_Type value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    FieldDescriptorProto_Type_descriptor(), value);
+inline const ::std::string& FieldDescriptorProto_Type_Name(FieldDescriptorProto_Type value)
+{
+  return ::google::protobuf::internal::NameOfEnum(FieldDescriptorProto_Type_descriptor(), value);
 }
-inline bool FieldDescriptorProto_Type_Parse(
-    const ::std::string& name, FieldDescriptorProto_Type* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<FieldDescriptorProto_Type>(
-    FieldDescriptorProto_Type_descriptor(), name, value);
+inline bool FieldDescriptorProto_Type_Parse(const ::std::string& name, FieldDescriptorProto_Type* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<FieldDescriptorProto_Type>(FieldDescriptorProto_Type_descriptor(),
+                                                                                 name, value);
 }
-enum FieldDescriptorProto_Label {
+enum FieldDescriptorProto_Label
+{
   FieldDescriptorProto_Label_LABEL_OPTIONAL = 1,
   FieldDescriptorProto_Label_LABEL_REQUIRED = 2,
   FieldDescriptorProto_Label_LABEL_REPEATED = 3
@@ -261,16 +272,17 @@ const FieldDescriptorProto_Label FieldDescriptorProto_Label_Label_MAX = FieldDes
 const int FieldDescriptorProto_Label_Label_ARRAYSIZE = FieldDescriptorProto_Label_Label_MAX + 1;
 
 LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* FieldDescriptorProto_Label_descriptor();
-inline const ::std::string& FieldDescriptorProto_Label_Name(FieldDescriptorProto_Label value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    FieldDescriptorProto_Label_descriptor(), value);
+inline const ::std::string& FieldDescriptorProto_Label_Name(FieldDescriptorProto_Label value)
+{
+  return ::google::protobuf::internal::NameOfEnum(FieldDescriptorProto_Label_descriptor(), value);
 }
-inline bool FieldDescriptorProto_Label_Parse(
-    const ::std::string& name, FieldDescriptorProto_Label* value) {
+inline bool FieldDescriptorProto_Label_Parse(const ::std::string& name, FieldDescriptorProto_Label* value)
+{
   return ::google::protobuf::internal::ParseNamedEnum<FieldDescriptorProto_Label>(
-    FieldDescriptorProto_Label_descriptor(), name, value);
+      FieldDescriptorProto_Label_descriptor(), name, value);
 }
-enum FileOptions_OptimizeMode {
+enum FileOptions_OptimizeMode
+{
   FileOptions_OptimizeMode_SPEED = 1,
   FileOptions_OptimizeMode_CODE_SIZE = 2,
   FileOptions_OptimizeMode_LITE_RUNTIME = 3
@@ -281,16 +293,17 @@ const FileOptions_OptimizeMode FileOptions_OptimizeMode_OptimizeMode_MAX = FileO
 const int FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE = FileOptions_OptimizeMode_OptimizeMode_MAX + 1;
 
 LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* FileOptions_OptimizeMode_descriptor();
-inline const ::std::string& FileOptions_OptimizeMode_Name(FileOptions_OptimizeMode value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    FileOptions_OptimizeMode_descriptor(), value);
+inline const ::std::string& FileOptions_OptimizeMode_Name(FileOptions_OptimizeMode value)
+{
+  return ::google::protobuf::internal::NameOfEnum(FileOptions_OptimizeMode_descriptor(), value);
 }
-inline bool FileOptions_OptimizeMode_Parse(
-    const ::std::string& name, FileOptions_OptimizeMode* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<FileOptions_OptimizeMode>(
-    FileOptions_OptimizeMode_descriptor(), name, value);
+inline bool FileOptions_OptimizeMode_Parse(const ::std::string& name, FileOptions_OptimizeMode* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<FileOptions_OptimizeMode>(FileOptions_OptimizeMode_descriptor(),
+                                                                                name, value);
 }
-enum FieldOptions_CType {
+enum FieldOptions_CType
+{
   FieldOptions_CType_STRING = 0,
   FieldOptions_CType_CORD = 1,
   FieldOptions_CType_STRING_PIECE = 2
@@ -301,16 +314,16 @@ const FieldOptions_CType FieldOptions_CType_CType_MAX = FieldOptions_CType_STRIN
 const int FieldOptions_CType_CType_ARRAYSIZE = FieldOptions_CType_CType_MAX + 1;
 
 LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* FieldOptions_CType_descriptor();
-inline const ::std::string& FieldOptions_CType_Name(FieldOptions_CType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    FieldOptions_CType_descriptor(), value);
+inline const ::std::string& FieldOptions_CType_Name(FieldOptions_CType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(FieldOptions_CType_descriptor(), value);
 }
-inline bool FieldOptions_CType_Parse(
-    const ::std::string& name, FieldOptions_CType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_CType>(
-    FieldOptions_CType_descriptor(), name, value);
+inline bool FieldOptions_CType_Parse(const ::std::string& name, FieldOptions_CType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_CType>(FieldOptions_CType_descriptor(), name, value);
 }
-enum FieldOptions_JSType {
+enum FieldOptions_JSType
+{
   FieldOptions_JSType_JS_NORMAL = 0,
   FieldOptions_JSType_JS_STRING = 1,
   FieldOptions_JSType_JS_NUMBER = 2
@@ -321,96 +334,115 @@ const FieldOptions_JSType FieldOptions_JSType_JSType_MAX = FieldOptions_JSType_J
 const int FieldOptions_JSType_JSType_ARRAYSIZE = FieldOptions_JSType_JSType_MAX + 1;
 
 LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* FieldOptions_JSType_descriptor();
-inline const ::std::string& FieldOptions_JSType_Name(FieldOptions_JSType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    FieldOptions_JSType_descriptor(), value);
+inline const ::std::string& FieldOptions_JSType_Name(FieldOptions_JSType value)
+{
+  return ::google::protobuf::internal::NameOfEnum(FieldOptions_JSType_descriptor(), value);
 }
-inline bool FieldOptions_JSType_Parse(
-    const ::std::string& name, FieldOptions_JSType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_JSType>(
-    FieldOptions_JSType_descriptor(), name, value);
+inline bool FieldOptions_JSType_Parse(const ::std::string& name, FieldOptions_JSType* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<FieldOptions_JSType>(FieldOptions_JSType_descriptor(), name,
+                                                                           value);
 }
-enum MethodOptions_IdempotencyLevel {
+enum MethodOptions_IdempotencyLevel
+{
   MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN = 0,
   MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS = 1,
   MethodOptions_IdempotencyLevel_IDEMPOTENT = 2
 };
 LIBPROTOBUF_EXPORT bool MethodOptions_IdempotencyLevel_IsValid(int value);
-const MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN = MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN;
-const MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX = MethodOptions_IdempotencyLevel_IDEMPOTENT;
-const int MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE = MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX + 1;
+const MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN =
+    MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN;
+const MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX =
+    MethodOptions_IdempotencyLevel_IDEMPOTENT;
+const int MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE =
+    MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX + 1;
 
 LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* MethodOptions_IdempotencyLevel_descriptor();
-inline const ::std::string& MethodOptions_IdempotencyLevel_Name(MethodOptions_IdempotencyLevel value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    MethodOptions_IdempotencyLevel_descriptor(), value);
+inline const ::std::string& MethodOptions_IdempotencyLevel_Name(MethodOptions_IdempotencyLevel value)
+{
+  return ::google::protobuf::internal::NameOfEnum(MethodOptions_IdempotencyLevel_descriptor(), value);
 }
-inline bool MethodOptions_IdempotencyLevel_Parse(
-    const ::std::string& name, MethodOptions_IdempotencyLevel* value) {
+inline bool MethodOptions_IdempotencyLevel_Parse(const ::std::string& name, MethodOptions_IdempotencyLevel* value)
+{
   return ::google::protobuf::internal::ParseNamedEnum<MethodOptions_IdempotencyLevel>(
-    MethodOptions_IdempotencyLevel_descriptor(), name, value);
+      MethodOptions_IdempotencyLevel_descriptor(), name, value);
 }
 // ===================================================================
 
-class LIBPROTOBUF_EXPORT FileDescriptorSet : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileDescriptorSet) */ {
- public:
+class LIBPROTOBUF_EXPORT FileDescriptorSet
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileDescriptorSet) */
+{
+public:
   FileDescriptorSet();
   virtual ~FileDescriptorSet();
 
   FileDescriptorSet(const FileDescriptorSet& from);
 
-  inline FileDescriptorSet& operator=(const FileDescriptorSet& from) {
+  inline FileDescriptorSet& operator=(const FileDescriptorSet& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  FileDescriptorSet(FileDescriptorSet&& from) noexcept
-    : FileDescriptorSet() {
+#if LANG_CXX11
+  FileDescriptorSet(FileDescriptorSet&& from) noexcept : FileDescriptorSet()
+  {
     *this = ::std::move(from);
   }
 
-  inline FileDescriptorSet& operator=(FileDescriptorSet&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline FileDescriptorSet& operator=(FileDescriptorSet&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const FileDescriptorSet& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FileDescriptorSet* internal_default_instance() {
-    return reinterpret_cast<const FileDescriptorSet*>(
-               &_FileDescriptorSet_default_instance_);
+  static inline const FileDescriptorSet* internal_default_instance()
+  {
+    return reinterpret_cast<const FileDescriptorSet*>(&_FileDescriptorSet_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 0;
 
   void UnsafeArenaSwap(FileDescriptorSet* other);
   void Swap(FileDescriptorSet* other);
-  friend void swap(FileDescriptorSet& a, FileDescriptorSet& b) {
+  friend void swap(FileDescriptorSet& a, FileDescriptorSet& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FileDescriptorSet* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline FileDescriptorSet* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   FileDescriptorSet* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -421,32 +453,39 @@ class LIBPROTOBUF_EXPORT FileDescriptorSet : public ::google::protobuf::Message 
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(FileDescriptorSet* other);
-  protected:
+
+protected:
   explicit FileDescriptorSet(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -460,85 +499,98 @@ class LIBPROTOBUF_EXPORT FileDescriptorSet : public ::google::protobuf::Message 
   const ::google::protobuf::FileDescriptorProto& file(int index) const;
   ::google::protobuf::FileDescriptorProto* mutable_file(int index);
   ::google::protobuf::FileDescriptorProto* add_file();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto >*
-      mutable_file();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto >&
-      file() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto>* mutable_file();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto>& file() const;
 
   // @@protoc_insertion_point(class_scope:google.protobuf.FileDescriptorSet)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto > file_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto> file_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
   friend void ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::InitDefaultsFileDescriptorSetImpl();
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileDescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT FileDescriptorProto
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileDescriptorProto) */
+{
+public:
   FileDescriptorProto();
   virtual ~FileDescriptorProto();
 
   FileDescriptorProto(const FileDescriptorProto& from);
 
-  inline FileDescriptorProto& operator=(const FileDescriptorProto& from) {
+  inline FileDescriptorProto& operator=(const FileDescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  FileDescriptorProto(FileDescriptorProto&& from) noexcept
-    : FileDescriptorProto() {
+#if LANG_CXX11
+  FileDescriptorProto(FileDescriptorProto&& from) noexcept : FileDescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline FileDescriptorProto& operator=(FileDescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline FileDescriptorProto& operator=(FileDescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const FileDescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FileDescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const FileDescriptorProto*>(
-               &_FileDescriptorProto_default_instance_);
+  static inline const FileDescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const FileDescriptorProto*>(&_FileDescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 1;
 
   void UnsafeArenaSwap(FileDescriptorProto* other);
   void Swap(FileDescriptorProto* other);
-  friend void swap(FileDescriptorProto& a, FileDescriptorProto& b) {
+  friend void swap(FileDescriptorProto& a, FileDescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FileDescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline FileDescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   FileDescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -549,32 +601,39 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(FileDescriptorProto* other);
-  protected:
+
+protected:
   explicit FileDescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -588,16 +647,16 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   const ::std::string& dependency(int index) const;
   ::std::string* mutable_dependency(int index);
   void set_dependency(int index, const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_dependency(int index, ::std::string&& value);
-  #endif
+#endif
   void set_dependency(int index, const char* value);
   void set_dependency(int index, const char* value, size_t size);
   ::std::string* add_dependency();
   void add_dependency(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void add_dependency(::std::string&& value);
-  #endif
+#endif
   void add_dependency(const char* value);
   void add_dependency(const char* value, size_t size);
   const ::google::protobuf::RepeatedPtrField< ::std::string>& dependency() const;
@@ -610,10 +669,8 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   const ::google::protobuf::DescriptorProto& message_type(int index) const;
   ::google::protobuf::DescriptorProto* mutable_message_type(int index);
   ::google::protobuf::DescriptorProto* add_message_type();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >*
-      mutable_message_type();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >&
-      message_type() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>* mutable_message_type();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>& message_type() const;
 
   // repeated .google.protobuf.EnumDescriptorProto enum_type = 5;
   int enum_type_size() const;
@@ -622,10 +679,8 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   const ::google::protobuf::EnumDescriptorProto& enum_type(int index) const;
   ::google::protobuf::EnumDescriptorProto* mutable_enum_type(int index);
   ::google::protobuf::EnumDescriptorProto* add_enum_type();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >*
-      mutable_enum_type();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >&
-      enum_type() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>* mutable_enum_type();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>& enum_type() const;
 
   // repeated .google.protobuf.ServiceDescriptorProto service = 6;
   int service_size() const;
@@ -634,10 +689,8 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   const ::google::protobuf::ServiceDescriptorProto& service(int index) const;
   ::google::protobuf::ServiceDescriptorProto* mutable_service(int index);
   ::google::protobuf::ServiceDescriptorProto* add_service();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto >*
-      mutable_service();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto >&
-      service() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto>* mutable_service();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto>& service() const;
 
   // repeated .google.protobuf.FieldDescriptorProto extension = 7;
   int extension_size() const;
@@ -646,10 +699,8 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   const ::google::protobuf::FieldDescriptorProto& extension(int index) const;
   ::google::protobuf::FieldDescriptorProto* mutable_extension(int index);
   ::google::protobuf::FieldDescriptorProto* add_extension();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >*
-      mutable_extension();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >&
-      extension() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>* mutable_extension();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>& extension() const;
 
   // repeated int32 public_dependency = 10;
   int public_dependency_size() const;
@@ -658,10 +709,8 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   ::google::protobuf::int32 public_dependency(int index) const;
   void set_public_dependency(int index, ::google::protobuf::int32 value);
   void add_public_dependency(::google::protobuf::int32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      public_dependency() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_public_dependency();
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& public_dependency() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32>* mutable_public_dependency();
 
   // repeated int32 weak_dependency = 11;
   int weak_dependency_size() const;
@@ -670,10 +719,8 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   ::google::protobuf::int32 weak_dependency(int index) const;
   void set_weak_dependency(int index, ::google::protobuf::int32 value);
   void add_weak_dependency(::google::protobuf::int32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      weak_dependency() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_weak_dependency();
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& weak_dependency() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32>* mutable_weak_dependency();
 
   // optional string name = 1;
   bool has_name() const;
@@ -681,23 +728,22 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional string package = 2;
   bool has_package() const;
@@ -705,23 +751,22 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   static const int kPackageFieldNumber = 2;
   const ::std::string& package() const;
   void set_package(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_package(::std::string&& value);
-  #endif
+#endif
   void set_package(const char* value);
   void set_package(const char* value, size_t size);
   ::std::string* mutable_package();
   ::std::string* release_package();
   void set_allocated_package(::std::string* package);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_package();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_package(
-      ::std::string* package);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_package(::std::string* package);
 
   // optional string syntax = 12;
   bool has_syntax() const;
@@ -729,56 +774,57 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   static const int kSyntaxFieldNumber = 12;
   const ::std::string& syntax() const;
   void set_syntax(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_syntax(::std::string&& value);
-  #endif
+#endif
   void set_syntax(const char* value);
   void set_syntax(const char* value, size_t size);
   ::std::string* mutable_syntax();
   ::std::string* release_syntax();
   void set_allocated_syntax(::std::string* syntax);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_syntax();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_syntax(
-      ::std::string* syntax);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_syntax(::std::string* syntax);
 
   // optional .google.protobuf.FileOptions options = 8;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 8;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::FileOptions& options() const;
   ::google::protobuf::FileOptions* release_options();
   ::google::protobuf::FileOptions* mutable_options();
   void set_allocated_options(::google::protobuf::FileOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::FileOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::FileOptions* options);
   ::google::protobuf::FileOptions* unsafe_arena_release_options();
 
   // optional .google.protobuf.SourceCodeInfo source_code_info = 9;
   bool has_source_code_info() const;
   void clear_source_code_info();
   static const int kSourceCodeInfoFieldNumber = 9;
-  private:
+
+private:
   void _slow_mutable_source_code_info();
-  public:
+
+public:
   const ::google::protobuf::SourceCodeInfo& source_code_info() const;
   ::google::protobuf::SourceCodeInfo* release_source_code_info();
   ::google::protobuf::SourceCodeInfo* mutable_source_code_info();
   void set_allocated_source_code_info(::google::protobuf::SourceCodeInfo* source_code_info);
-  void unsafe_arena_set_allocated_source_code_info(
-      ::google::protobuf::SourceCodeInfo* source_code_info);
+  void unsafe_arena_set_allocated_source_code_info(::google::protobuf::SourceCodeInfo* source_code_info);
   ::google::protobuf::SourceCodeInfo* unsafe_arena_release_source_code_info();
 
   // @@protoc_insertion_point(class_scope:google.protobuf.FileDescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_package();
@@ -791,18 +837,19 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
   void clear_has_syntax();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::std::string> dependency_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto > message_type_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto > enum_type_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto > service_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto > extension_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > public_dependency_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > weak_dependency_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto> message_type_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto> enum_type_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto> service_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto> extension_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32> public_dependency_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32> weak_dependency_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr package_;
   ::google::protobuf::internal::ArenaStringPtr syntax_;
@@ -813,65 +860,81 @@ class LIBPROTOBUF_EXPORT FileDescriptorProto : public ::google::protobuf::Messag
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT DescriptorProto_ExtensionRange : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto.ExtensionRange) */ {
- public:
+class LIBPROTOBUF_EXPORT DescriptorProto_ExtensionRange
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto.ExtensionRange) */
+{
+public:
   DescriptorProto_ExtensionRange();
   virtual ~DescriptorProto_ExtensionRange();
 
   DescriptorProto_ExtensionRange(const DescriptorProto_ExtensionRange& from);
 
-  inline DescriptorProto_ExtensionRange& operator=(const DescriptorProto_ExtensionRange& from) {
+  inline DescriptorProto_ExtensionRange& operator=(const DescriptorProto_ExtensionRange& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DescriptorProto_ExtensionRange(DescriptorProto_ExtensionRange&& from) noexcept
-    : DescriptorProto_ExtensionRange() {
+#if LANG_CXX11
+  DescriptorProto_ExtensionRange(DescriptorProto_ExtensionRange&& from) noexcept : DescriptorProto_ExtensionRange()
+  {
     *this = ::std::move(from);
   }
 
-  inline DescriptorProto_ExtensionRange& operator=(DescriptorProto_ExtensionRange&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DescriptorProto_ExtensionRange& operator=(DescriptorProto_ExtensionRange&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const DescriptorProto_ExtensionRange& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DescriptorProto_ExtensionRange* internal_default_instance() {
-    return reinterpret_cast<const DescriptorProto_ExtensionRange*>(
-               &_DescriptorProto_ExtensionRange_default_instance_);
+  static inline const DescriptorProto_ExtensionRange* internal_default_instance()
+  {
+    return reinterpret_cast<const DescriptorProto_ExtensionRange*>(&_DescriptorProto_ExtensionRange_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 2;
 
   void UnsafeArenaSwap(DescriptorProto_ExtensionRange* other);
   void Swap(DescriptorProto_ExtensionRange* other);
-  friend void swap(DescriptorProto_ExtensionRange& a, DescriptorProto_ExtensionRange& b) {
+  friend void swap(DescriptorProto_ExtensionRange& a, DescriptorProto_ExtensionRange& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DescriptorProto_ExtensionRange* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DescriptorProto_ExtensionRange* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DescriptorProto_ExtensionRange* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -882,32 +945,39 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ExtensionRange : public ::google::proto
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DescriptorProto_ExtensionRange* other);
-  protected:
+
+protected:
   explicit DescriptorProto_ExtensionRange(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -918,15 +988,16 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ExtensionRange : public ::google::proto
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 3;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::ExtensionRangeOptions& options() const;
   ::google::protobuf::ExtensionRangeOptions* release_options();
   ::google::protobuf::ExtensionRangeOptions* mutable_options();
   void set_allocated_options(::google::protobuf::ExtensionRangeOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::ExtensionRangeOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::ExtensionRangeOptions* options);
   ::google::protobuf::ExtensionRangeOptions* unsafe_arena_release_options();
 
   // optional int32 start = 1;
@@ -944,7 +1015,7 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ExtensionRange : public ::google::proto
   void set_end(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.DescriptorProto.ExtensionRange)
- private:
+private:
   void set_has_start();
   void clear_has_start();
   void set_has_end();
@@ -953,7 +1024,8 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ExtensionRange : public ::google::proto
   void clear_has_options();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -966,65 +1038,81 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ExtensionRange : public ::google::proto
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT DescriptorProto_ReservedRange : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto.ReservedRange) */ {
- public:
+class LIBPROTOBUF_EXPORT DescriptorProto_ReservedRange
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto.ReservedRange) */
+{
+public:
   DescriptorProto_ReservedRange();
   virtual ~DescriptorProto_ReservedRange();
 
   DescriptorProto_ReservedRange(const DescriptorProto_ReservedRange& from);
 
-  inline DescriptorProto_ReservedRange& operator=(const DescriptorProto_ReservedRange& from) {
+  inline DescriptorProto_ReservedRange& operator=(const DescriptorProto_ReservedRange& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DescriptorProto_ReservedRange(DescriptorProto_ReservedRange&& from) noexcept
-    : DescriptorProto_ReservedRange() {
+#if LANG_CXX11
+  DescriptorProto_ReservedRange(DescriptorProto_ReservedRange&& from) noexcept : DescriptorProto_ReservedRange()
+  {
     *this = ::std::move(from);
   }
 
-  inline DescriptorProto_ReservedRange& operator=(DescriptorProto_ReservedRange&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DescriptorProto_ReservedRange& operator=(DescriptorProto_ReservedRange&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const DescriptorProto_ReservedRange& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DescriptorProto_ReservedRange* internal_default_instance() {
-    return reinterpret_cast<const DescriptorProto_ReservedRange*>(
-               &_DescriptorProto_ReservedRange_default_instance_);
+  static inline const DescriptorProto_ReservedRange* internal_default_instance()
+  {
+    return reinterpret_cast<const DescriptorProto_ReservedRange*>(&_DescriptorProto_ReservedRange_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 3;
 
   void UnsafeArenaSwap(DescriptorProto_ReservedRange* other);
   void Swap(DescriptorProto_ReservedRange* other);
-  friend void swap(DescriptorProto_ReservedRange& a, DescriptorProto_ReservedRange& b) {
+  friend void swap(DescriptorProto_ReservedRange& a, DescriptorProto_ReservedRange& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DescriptorProto_ReservedRange* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DescriptorProto_ReservedRange* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DescriptorProto_ReservedRange* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1035,32 +1123,39 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ReservedRange : public ::google::protob
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DescriptorProto_ReservedRange* other);
-  protected:
+
+protected:
   explicit DescriptorProto_ReservedRange(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1082,14 +1177,15 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ReservedRange : public ::google::protob
   void set_end(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.DescriptorProto.ReservedRange)
- private:
+private:
   void set_has_start();
   void clear_has_start();
   void set_has_end();
   void clear_has_end();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -1101,65 +1197,80 @@ class LIBPROTOBUF_EXPORT DescriptorProto_ReservedRange : public ::google::protob
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT DescriptorProto
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto) */
+{
+public:
   DescriptorProto();
   virtual ~DescriptorProto();
 
   DescriptorProto(const DescriptorProto& from);
 
-  inline DescriptorProto& operator=(const DescriptorProto& from) {
+  inline DescriptorProto& operator=(const DescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  DescriptorProto(DescriptorProto&& from) noexcept
-    : DescriptorProto() {
+#if LANG_CXX11
+  DescriptorProto(DescriptorProto&& from) noexcept : DescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline DescriptorProto& operator=(DescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline DescriptorProto& operator=(DescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const DescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const DescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const DescriptorProto*>(
-               &_DescriptorProto_default_instance_);
+  static inline const DescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const DescriptorProto*>(&_DescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 4;
 
   void UnsafeArenaSwap(DescriptorProto* other);
   void Swap(DescriptorProto* other);
-  friend void swap(DescriptorProto& a, DescriptorProto& b) {
+  friend void swap(DescriptorProto& a, DescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline DescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline DescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   DescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1170,32 +1281,39 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(DescriptorProto* other);
-  protected:
+
+protected:
   explicit DescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1212,10 +1330,8 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::google::protobuf::FieldDescriptorProto& field(int index) const;
   ::google::protobuf::FieldDescriptorProto* mutable_field(int index);
   ::google::protobuf::FieldDescriptorProto* add_field();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >*
-      mutable_field();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >&
-      field() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>* mutable_field();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>& field() const;
 
   // repeated .google.protobuf.DescriptorProto nested_type = 3;
   int nested_type_size() const;
@@ -1224,10 +1340,8 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::google::protobuf::DescriptorProto& nested_type(int index) const;
   ::google::protobuf::DescriptorProto* mutable_nested_type(int index);
   ::google::protobuf::DescriptorProto* add_nested_type();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >*
-      mutable_nested_type();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >&
-      nested_type() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>* mutable_nested_type();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>& nested_type() const;
 
   // repeated .google.protobuf.EnumDescriptorProto enum_type = 4;
   int enum_type_size() const;
@@ -1236,10 +1350,8 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::google::protobuf::EnumDescriptorProto& enum_type(int index) const;
   ::google::protobuf::EnumDescriptorProto* mutable_enum_type(int index);
   ::google::protobuf::EnumDescriptorProto* add_enum_type();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >*
-      mutable_enum_type();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >&
-      enum_type() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>* mutable_enum_type();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>& enum_type() const;
 
   // repeated .google.protobuf.DescriptorProto.ExtensionRange extension_range = 5;
   int extension_range_size() const;
@@ -1248,10 +1360,9 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::google::protobuf::DescriptorProto_ExtensionRange& extension_range(int index) const;
   ::google::protobuf::DescriptorProto_ExtensionRange* mutable_extension_range(int index);
   ::google::protobuf::DescriptorProto_ExtensionRange* add_extension_range();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange >*
-      mutable_extension_range();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange >&
-      extension_range() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange>* mutable_extension_range();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange>&
+  extension_range() const;
 
   // repeated .google.protobuf.FieldDescriptorProto extension = 6;
   int extension_size() const;
@@ -1260,10 +1371,8 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::google::protobuf::FieldDescriptorProto& extension(int index) const;
   ::google::protobuf::FieldDescriptorProto* mutable_extension(int index);
   ::google::protobuf::FieldDescriptorProto* add_extension();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >*
-      mutable_extension();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >&
-      extension() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>* mutable_extension();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>& extension() const;
 
   // repeated .google.protobuf.OneofDescriptorProto oneof_decl = 8;
   int oneof_decl_size() const;
@@ -1272,10 +1381,8 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::google::protobuf::OneofDescriptorProto& oneof_decl(int index) const;
   ::google::protobuf::OneofDescriptorProto* mutable_oneof_decl(int index);
   ::google::protobuf::OneofDescriptorProto* add_oneof_decl();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto >*
-      mutable_oneof_decl();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto >&
-      oneof_decl() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto>* mutable_oneof_decl();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto>& oneof_decl() const;
 
   // repeated .google.protobuf.DescriptorProto.ReservedRange reserved_range = 9;
   int reserved_range_size() const;
@@ -1284,10 +1391,8 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::google::protobuf::DescriptorProto_ReservedRange& reserved_range(int index) const;
   ::google::protobuf::DescriptorProto_ReservedRange* mutable_reserved_range(int index);
   ::google::protobuf::DescriptorProto_ReservedRange* add_reserved_range();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange >*
-      mutable_reserved_range();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange >&
-      reserved_range() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange>* mutable_reserved_range();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange>& reserved_range() const;
 
   // repeated string reserved_name = 10;
   int reserved_name_size() const;
@@ -1296,16 +1401,16 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   const ::std::string& reserved_name(int index) const;
   ::std::string* mutable_reserved_name(int index);
   void set_reserved_name(int index, const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_reserved_name(int index, ::std::string&& value);
-  #endif
+#endif
   void set_reserved_name(int index, const char* value);
   void set_reserved_name(int index, const char* value, size_t size);
   ::std::string* add_reserved_name();
   void add_reserved_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void add_reserved_name(::std::string&& value);
-  #endif
+#endif
   void add_reserved_name(const char* value);
   void add_reserved_name(const char* value, size_t size);
   const ::google::protobuf::RepeatedPtrField< ::std::string>& reserved_name() const;
@@ -1317,59 +1422,60 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional .google.protobuf.MessageOptions options = 7;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 7;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::MessageOptions& options() const;
   ::google::protobuf::MessageOptions* release_options();
   ::google::protobuf::MessageOptions* mutable_options();
   void set_allocated_options(::google::protobuf::MessageOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::MessageOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::MessageOptions* options);
   ::google::protobuf::MessageOptions* unsafe_arena_release_options();
 
   // @@protoc_insertion_point(class_scope:google.protobuf.DescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_options();
   void clear_has_options();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto > field_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto > nested_type_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto > enum_type_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange > extension_range_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto > extension_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto > oneof_decl_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange > reserved_range_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto> field_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto> nested_type_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto> enum_type_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange> extension_range_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto> extension_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto> oneof_decl_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange> reserved_range_;
   ::google::protobuf::RepeatedPtrField< ::std::string> reserved_name_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::MessageOptions* options_;
@@ -1378,65 +1484,81 @@ class LIBPROTOBUF_EXPORT DescriptorProto : public ::google::protobuf::Message /*
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT ExtensionRangeOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ExtensionRangeOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT ExtensionRangeOptions
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.ExtensionRangeOptions) */
+{
+public:
   ExtensionRangeOptions();
   virtual ~ExtensionRangeOptions();
 
   ExtensionRangeOptions(const ExtensionRangeOptions& from);
 
-  inline ExtensionRangeOptions& operator=(const ExtensionRangeOptions& from) {
+  inline ExtensionRangeOptions& operator=(const ExtensionRangeOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ExtensionRangeOptions(ExtensionRangeOptions&& from) noexcept
-    : ExtensionRangeOptions() {
+#if LANG_CXX11
+  ExtensionRangeOptions(ExtensionRangeOptions&& from) noexcept : ExtensionRangeOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline ExtensionRangeOptions& operator=(ExtensionRangeOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ExtensionRangeOptions& operator=(ExtensionRangeOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const ExtensionRangeOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ExtensionRangeOptions* internal_default_instance() {
-    return reinterpret_cast<const ExtensionRangeOptions*>(
-               &_ExtensionRangeOptions_default_instance_);
+  static inline const ExtensionRangeOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const ExtensionRangeOptions*>(&_ExtensionRangeOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 5;
 
   void UnsafeArenaSwap(ExtensionRangeOptions* other);
   void Swap(ExtensionRangeOptions* other);
-  friend void swap(ExtensionRangeOptions& a, ExtensionRangeOptions& b) {
+  friend void swap(ExtensionRangeOptions& a, ExtensionRangeOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ExtensionRangeOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ExtensionRangeOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ExtensionRangeOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1447,32 +1569,39 @@ class LIBPROTOBUF_EXPORT ExtensionRangeOptions : public ::google::protobuf::Mess
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ExtensionRangeOptions* other);
-  protected:
+
+protected:
   explicit ExtensionRangeOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -1486,88 +1615,101 @@ class LIBPROTOBUF_EXPORT ExtensionRangeOptions : public ::google::protobuf::Mess
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(ExtensionRangeOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.ExtensionRangeOptions)
- private:
-
+private:
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
   friend void ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::InitDefaultsExtensionRangeOptionsImpl();
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FieldDescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT FieldDescriptorProto
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FieldDescriptorProto) */
+{
+public:
   FieldDescriptorProto();
   virtual ~FieldDescriptorProto();
 
   FieldDescriptorProto(const FieldDescriptorProto& from);
 
-  inline FieldDescriptorProto& operator=(const FieldDescriptorProto& from) {
+  inline FieldDescriptorProto& operator=(const FieldDescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  FieldDescriptorProto(FieldDescriptorProto&& from) noexcept
-    : FieldDescriptorProto() {
+#if LANG_CXX11
+  FieldDescriptorProto(FieldDescriptorProto&& from) noexcept : FieldDescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline FieldDescriptorProto& operator=(FieldDescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline FieldDescriptorProto& operator=(FieldDescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const FieldDescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FieldDescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const FieldDescriptorProto*>(
-               &_FieldDescriptorProto_default_instance_);
+  static inline const FieldDescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const FieldDescriptorProto*>(&_FieldDescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 6;
 
   void UnsafeArenaSwap(FieldDescriptorProto* other);
   void Swap(FieldDescriptorProto* other);
-  friend void swap(FieldDescriptorProto& a, FieldDescriptorProto& b) {
+  friend void swap(FieldDescriptorProto& a, FieldDescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FieldDescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline FieldDescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   FieldDescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1578,119 +1720,103 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(FieldDescriptorProto* other);
-  protected:
+
+protected:
   explicit FieldDescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   typedef FieldDescriptorProto_Type Type;
-  static const Type TYPE_DOUBLE =
-    FieldDescriptorProto_Type_TYPE_DOUBLE;
-  static const Type TYPE_FLOAT =
-    FieldDescriptorProto_Type_TYPE_FLOAT;
-  static const Type TYPE_INT64 =
-    FieldDescriptorProto_Type_TYPE_INT64;
-  static const Type TYPE_UINT64 =
-    FieldDescriptorProto_Type_TYPE_UINT64;
-  static const Type TYPE_INT32 =
-    FieldDescriptorProto_Type_TYPE_INT32;
-  static const Type TYPE_FIXED64 =
-    FieldDescriptorProto_Type_TYPE_FIXED64;
-  static const Type TYPE_FIXED32 =
-    FieldDescriptorProto_Type_TYPE_FIXED32;
-  static const Type TYPE_BOOL =
-    FieldDescriptorProto_Type_TYPE_BOOL;
-  static const Type TYPE_STRING =
-    FieldDescriptorProto_Type_TYPE_STRING;
-  static const Type TYPE_GROUP =
-    FieldDescriptorProto_Type_TYPE_GROUP;
-  static const Type TYPE_MESSAGE =
-    FieldDescriptorProto_Type_TYPE_MESSAGE;
-  static const Type TYPE_BYTES =
-    FieldDescriptorProto_Type_TYPE_BYTES;
-  static const Type TYPE_UINT32 =
-    FieldDescriptorProto_Type_TYPE_UINT32;
-  static const Type TYPE_ENUM =
-    FieldDescriptorProto_Type_TYPE_ENUM;
-  static const Type TYPE_SFIXED32 =
-    FieldDescriptorProto_Type_TYPE_SFIXED32;
-  static const Type TYPE_SFIXED64 =
-    FieldDescriptorProto_Type_TYPE_SFIXED64;
-  static const Type TYPE_SINT32 =
-    FieldDescriptorProto_Type_TYPE_SINT32;
-  static const Type TYPE_SINT64 =
-    FieldDescriptorProto_Type_TYPE_SINT64;
-  static inline bool Type_IsValid(int value) {
+  static const Type TYPE_DOUBLE = FieldDescriptorProto_Type_TYPE_DOUBLE;
+  static const Type TYPE_FLOAT = FieldDescriptorProto_Type_TYPE_FLOAT;
+  static const Type TYPE_INT64 = FieldDescriptorProto_Type_TYPE_INT64;
+  static const Type TYPE_UINT64 = FieldDescriptorProto_Type_TYPE_UINT64;
+  static const Type TYPE_INT32 = FieldDescriptorProto_Type_TYPE_INT32;
+  static const Type TYPE_FIXED64 = FieldDescriptorProto_Type_TYPE_FIXED64;
+  static const Type TYPE_FIXED32 = FieldDescriptorProto_Type_TYPE_FIXED32;
+  static const Type TYPE_BOOL = FieldDescriptorProto_Type_TYPE_BOOL;
+  static const Type TYPE_STRING = FieldDescriptorProto_Type_TYPE_STRING;
+  static const Type TYPE_GROUP = FieldDescriptorProto_Type_TYPE_GROUP;
+  static const Type TYPE_MESSAGE = FieldDescriptorProto_Type_TYPE_MESSAGE;
+  static const Type TYPE_BYTES = FieldDescriptorProto_Type_TYPE_BYTES;
+  static const Type TYPE_UINT32 = FieldDescriptorProto_Type_TYPE_UINT32;
+  static const Type TYPE_ENUM = FieldDescriptorProto_Type_TYPE_ENUM;
+  static const Type TYPE_SFIXED32 = FieldDescriptorProto_Type_TYPE_SFIXED32;
+  static const Type TYPE_SFIXED64 = FieldDescriptorProto_Type_TYPE_SFIXED64;
+  static const Type TYPE_SINT32 = FieldDescriptorProto_Type_TYPE_SINT32;
+  static const Type TYPE_SINT64 = FieldDescriptorProto_Type_TYPE_SINT64;
+  static inline bool Type_IsValid(int value)
+  {
     return FieldDescriptorProto_Type_IsValid(value);
   }
-  static const Type Type_MIN =
-    FieldDescriptorProto_Type_Type_MIN;
-  static const Type Type_MAX =
-    FieldDescriptorProto_Type_Type_MAX;
-  static const int Type_ARRAYSIZE =
-    FieldDescriptorProto_Type_Type_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  Type_descriptor() {
+  static const Type Type_MIN = FieldDescriptorProto_Type_Type_MIN;
+  static const Type Type_MAX = FieldDescriptorProto_Type_Type_MAX;
+  static const int Type_ARRAYSIZE = FieldDescriptorProto_Type_Type_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* Type_descriptor()
+  {
     return FieldDescriptorProto_Type_descriptor();
   }
-  static inline const ::std::string& Type_Name(Type value) {
+  static inline const ::std::string& Type_Name(Type value)
+  {
     return FieldDescriptorProto_Type_Name(value);
   }
-  static inline bool Type_Parse(const ::std::string& name,
-      Type* value) {
+  static inline bool Type_Parse(const ::std::string& name, Type* value)
+  {
     return FieldDescriptorProto_Type_Parse(name, value);
   }
 
   typedef FieldDescriptorProto_Label Label;
-  static const Label LABEL_OPTIONAL =
-    FieldDescriptorProto_Label_LABEL_OPTIONAL;
-  static const Label LABEL_REQUIRED =
-    FieldDescriptorProto_Label_LABEL_REQUIRED;
-  static const Label LABEL_REPEATED =
-    FieldDescriptorProto_Label_LABEL_REPEATED;
-  static inline bool Label_IsValid(int value) {
+  static const Label LABEL_OPTIONAL = FieldDescriptorProto_Label_LABEL_OPTIONAL;
+  static const Label LABEL_REQUIRED = FieldDescriptorProto_Label_LABEL_REQUIRED;
+  static const Label LABEL_REPEATED = FieldDescriptorProto_Label_LABEL_REPEATED;
+  static inline bool Label_IsValid(int value)
+  {
     return FieldDescriptorProto_Label_IsValid(value);
   }
-  static const Label Label_MIN =
-    FieldDescriptorProto_Label_Label_MIN;
-  static const Label Label_MAX =
-    FieldDescriptorProto_Label_Label_MAX;
-  static const int Label_ARRAYSIZE =
-    FieldDescriptorProto_Label_Label_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  Label_descriptor() {
+  static const Label Label_MIN = FieldDescriptorProto_Label_Label_MIN;
+  static const Label Label_MAX = FieldDescriptorProto_Label_Label_MAX;
+  static const int Label_ARRAYSIZE = FieldDescriptorProto_Label_Label_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* Label_descriptor()
+  {
     return FieldDescriptorProto_Label_descriptor();
   }
-  static inline const ::std::string& Label_Name(Label value) {
+  static inline const ::std::string& Label_Name(Label value)
+  {
     return FieldDescriptorProto_Label_Name(value);
   }
-  static inline bool Label_Parse(const ::std::string& name,
-      Label* value) {
+  static inline bool Label_Parse(const ::std::string& name, Label* value)
+  {
     return FieldDescriptorProto_Label_Parse(name, value);
   }
 
@@ -1702,23 +1828,22 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional string extendee = 2;
   bool has_extendee() const;
@@ -1726,23 +1851,22 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   static const int kExtendeeFieldNumber = 2;
   const ::std::string& extendee() const;
   void set_extendee(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_extendee(::std::string&& value);
-  #endif
+#endif
   void set_extendee(const char* value);
   void set_extendee(const char* value, size_t size);
   ::std::string* mutable_extendee();
   ::std::string* release_extendee();
   void set_allocated_extendee(::std::string* extendee);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_extendee();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_extendee(
-      ::std::string* extendee);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_extendee(::std::string* extendee);
 
   // optional string type_name = 6;
   bool has_type_name() const;
@@ -1750,23 +1874,22 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   static const int kTypeNameFieldNumber = 6;
   const ::std::string& type_name() const;
   void set_type_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_type_name(::std::string&& value);
-  #endif
+#endif
   void set_type_name(const char* value);
   void set_type_name(const char* value, size_t size);
   ::std::string* mutable_type_name();
   ::std::string* release_type_name();
   void set_allocated_type_name(::std::string* type_name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_type_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_type_name(
-      ::std::string* type_name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_type_name(::std::string* type_name);
 
   // optional string default_value = 7;
   bool has_default_value() const;
@@ -1774,23 +1897,22 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   static const int kDefaultValueFieldNumber = 7;
   const ::std::string& default_value() const;
   void set_default_value(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_default_value(::std::string&& value);
-  #endif
+#endif
   void set_default_value(const char* value);
   void set_default_value(const char* value, size_t size);
   ::std::string* mutable_default_value();
   ::std::string* release_default_value();
   void set_allocated_default_value(::std::string* default_value);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_default_value();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_default_value(
-      ::std::string* default_value);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_default_value(::std::string* default_value);
 
   // optional string json_name = 10;
   bool has_json_name() const;
@@ -1798,37 +1920,37 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   static const int kJsonNameFieldNumber = 10;
   const ::std::string& json_name() const;
   void set_json_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_json_name(::std::string&& value);
-  #endif
+#endif
   void set_json_name(const char* value);
   void set_json_name(const char* value, size_t size);
   ::std::string* mutable_json_name();
   ::std::string* release_json_name();
   void set_allocated_json_name(::std::string* json_name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_json_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_json_name(
-      ::std::string* json_name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_json_name(::std::string* json_name);
 
   // optional .google.protobuf.FieldOptions options = 8;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 8;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::FieldOptions& options() const;
   ::google::protobuf::FieldOptions* release_options();
   ::google::protobuf::FieldOptions* mutable_options();
   void set_allocated_options(::google::protobuf::FieldOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::FieldOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::FieldOptions* options);
   ::google::protobuf::FieldOptions* unsafe_arena_release_options();
 
   // optional int32 number = 3;
@@ -1860,7 +1982,7 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   void set_type(::google::protobuf::FieldDescriptorProto_Type value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.FieldDescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_number();
@@ -1883,7 +2005,8 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
   void clear_has_options();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -1903,65 +2026,80 @@ class LIBPROTOBUF_EXPORT FieldDescriptorProto : public ::google::protobuf::Messa
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT OneofDescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.OneofDescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT OneofDescriptorProto
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.OneofDescriptorProto) */
+{
+public:
   OneofDescriptorProto();
   virtual ~OneofDescriptorProto();
 
   OneofDescriptorProto(const OneofDescriptorProto& from);
 
-  inline OneofDescriptorProto& operator=(const OneofDescriptorProto& from) {
+  inline OneofDescriptorProto& operator=(const OneofDescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  OneofDescriptorProto(OneofDescriptorProto&& from) noexcept
-    : OneofDescriptorProto() {
+#if LANG_CXX11
+  OneofDescriptorProto(OneofDescriptorProto&& from) noexcept : OneofDescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline OneofDescriptorProto& operator=(OneofDescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline OneofDescriptorProto& operator=(OneofDescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const OneofDescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const OneofDescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const OneofDescriptorProto*>(
-               &_OneofDescriptorProto_default_instance_);
+  static inline const OneofDescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const OneofDescriptorProto*>(&_OneofDescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 7;
 
   void UnsafeArenaSwap(OneofDescriptorProto* other);
   void Swap(OneofDescriptorProto* other);
-  friend void swap(OneofDescriptorProto& a, OneofDescriptorProto& b) {
+  friend void swap(OneofDescriptorProto& a, OneofDescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline OneofDescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline OneofDescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   OneofDescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -1972,32 +2110,39 @@ class LIBPROTOBUF_EXPORT OneofDescriptorProto : public ::google::protobuf::Messa
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(OneofDescriptorProto* other);
-  protected:
+
+protected:
   explicit OneofDescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2010,48 +2155,49 @@ class LIBPROTOBUF_EXPORT OneofDescriptorProto : public ::google::protobuf::Messa
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional .google.protobuf.OneofOptions options = 2;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 2;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::OneofOptions& options() const;
   ::google::protobuf::OneofOptions* release_options();
   ::google::protobuf::OneofOptions* mutable_options();
   void set_allocated_options(::google::protobuf::OneofOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::OneofOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::OneofOptions* options);
   ::google::protobuf::OneofOptions* unsafe_arena_release_options();
 
   // @@protoc_insertion_point(class_scope:google.protobuf.OneofDescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_options();
   void clear_has_options();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -2063,65 +2209,83 @@ class LIBPROTOBUF_EXPORT OneofDescriptorProto : public ::google::protobuf::Messa
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT EnumDescriptorProto_EnumReservedRange : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumDescriptorProto.EnumReservedRange) */ {
- public:
+class LIBPROTOBUF_EXPORT EnumDescriptorProto_EnumReservedRange
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumDescriptorProto.EnumReservedRange) */
+{
+public:
   EnumDescriptorProto_EnumReservedRange();
   virtual ~EnumDescriptorProto_EnumReservedRange();
 
   EnumDescriptorProto_EnumReservedRange(const EnumDescriptorProto_EnumReservedRange& from);
 
-  inline EnumDescriptorProto_EnumReservedRange& operator=(const EnumDescriptorProto_EnumReservedRange& from) {
+  inline EnumDescriptorProto_EnumReservedRange& operator=(const EnumDescriptorProto_EnumReservedRange& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
+#if LANG_CXX11
   EnumDescriptorProto_EnumReservedRange(EnumDescriptorProto_EnumReservedRange&& from) noexcept
-    : EnumDescriptorProto_EnumReservedRange() {
+    : EnumDescriptorProto_EnumReservedRange()
+  {
     *this = ::std::move(from);
   }
 
-  inline EnumDescriptorProto_EnumReservedRange& operator=(EnumDescriptorProto_EnumReservedRange&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline EnumDescriptorProto_EnumReservedRange& operator=(EnumDescriptorProto_EnumReservedRange&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const EnumDescriptorProto_EnumReservedRange& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EnumDescriptorProto_EnumReservedRange* internal_default_instance() {
+  static inline const EnumDescriptorProto_EnumReservedRange* internal_default_instance()
+  {
     return reinterpret_cast<const EnumDescriptorProto_EnumReservedRange*>(
-               &_EnumDescriptorProto_EnumReservedRange_default_instance_);
+        &_EnumDescriptorProto_EnumReservedRange_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 8;
 
   void UnsafeArenaSwap(EnumDescriptorProto_EnumReservedRange* other);
   void Swap(EnumDescriptorProto_EnumReservedRange* other);
-  friend void swap(EnumDescriptorProto_EnumReservedRange& a, EnumDescriptorProto_EnumReservedRange& b) {
+  friend void swap(EnumDescriptorProto_EnumReservedRange& a, EnumDescriptorProto_EnumReservedRange& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EnumDescriptorProto_EnumReservedRange* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline EnumDescriptorProto_EnumReservedRange* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   EnumDescriptorProto_EnumReservedRange* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2132,32 +2296,39 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto_EnumReservedRange : public ::google
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(EnumDescriptorProto_EnumReservedRange* other);
-  protected:
+
+protected:
   explicit EnumDescriptorProto_EnumReservedRange(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2179,14 +2350,15 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto_EnumReservedRange : public ::google
   void set_end(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.EnumDescriptorProto.EnumReservedRange)
- private:
+private:
   void set_has_start();
   void clear_has_start();
   void set_has_end();
   void clear_has_end();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -2198,65 +2370,80 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto_EnumReservedRange : public ::google
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT EnumDescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumDescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT EnumDescriptorProto
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumDescriptorProto) */
+{
+public:
   EnumDescriptorProto();
   virtual ~EnumDescriptorProto();
 
   EnumDescriptorProto(const EnumDescriptorProto& from);
 
-  inline EnumDescriptorProto& operator=(const EnumDescriptorProto& from) {
+  inline EnumDescriptorProto& operator=(const EnumDescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  EnumDescriptorProto(EnumDescriptorProto&& from) noexcept
-    : EnumDescriptorProto() {
+#if LANG_CXX11
+  EnumDescriptorProto(EnumDescriptorProto&& from) noexcept : EnumDescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline EnumDescriptorProto& operator=(EnumDescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline EnumDescriptorProto& operator=(EnumDescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const EnumDescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EnumDescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const EnumDescriptorProto*>(
-               &_EnumDescriptorProto_default_instance_);
+  static inline const EnumDescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const EnumDescriptorProto*>(&_EnumDescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 9;
 
   void UnsafeArenaSwap(EnumDescriptorProto* other);
   void Swap(EnumDescriptorProto* other);
-  friend void swap(EnumDescriptorProto& a, EnumDescriptorProto& b) {
+  friend void swap(EnumDescriptorProto& a, EnumDescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EnumDescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline EnumDescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   EnumDescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2267,32 +2454,39 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto : public ::google::protobuf::Messag
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(EnumDescriptorProto* other);
-  protected:
+
+protected:
   explicit EnumDescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2308,10 +2502,8 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto : public ::google::protobuf::Messag
   const ::google::protobuf::EnumValueDescriptorProto& value(int index) const;
   ::google::protobuf::EnumValueDescriptorProto* mutable_value(int index);
   ::google::protobuf::EnumValueDescriptorProto* add_value();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto >*
-      mutable_value();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto >&
-      value() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto>* mutable_value();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto>& value() const;
 
   // repeated .google.protobuf.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
   int reserved_range_size() const;
@@ -2320,10 +2512,10 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto : public ::google::protobuf::Messag
   const ::google::protobuf::EnumDescriptorProto_EnumReservedRange& reserved_range(int index) const;
   ::google::protobuf::EnumDescriptorProto_EnumReservedRange* mutable_reserved_range(int index);
   ::google::protobuf::EnumDescriptorProto_EnumReservedRange* add_reserved_range();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange >*
-      mutable_reserved_range();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange >&
-      reserved_range() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange>*
+  mutable_reserved_range();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange>&
+  reserved_range() const;
 
   // repeated string reserved_name = 5;
   int reserved_name_size() const;
@@ -2332,16 +2524,16 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto : public ::google::protobuf::Messag
   const ::std::string& reserved_name(int index) const;
   ::std::string* mutable_reserved_name(int index);
   void set_reserved_name(int index, const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_reserved_name(int index, ::std::string&& value);
-  #endif
+#endif
   void set_reserved_name(int index, const char* value);
   void set_reserved_name(int index, const char* value, size_t size);
   ::std::string* add_reserved_name();
   void add_reserved_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void add_reserved_name(::std::string&& value);
-  #endif
+#endif
   void add_reserved_name(const char* value);
   void add_reserved_name(const char* value, size_t size);
   const ::google::protobuf::RepeatedPtrField< ::std::string>& reserved_name() const;
@@ -2353,54 +2545,55 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto : public ::google::protobuf::Messag
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional .google.protobuf.EnumOptions options = 3;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 3;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::EnumOptions& options() const;
   ::google::protobuf::EnumOptions* release_options();
   ::google::protobuf::EnumOptions* mutable_options();
   void set_allocated_options(::google::protobuf::EnumOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::EnumOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::EnumOptions* options);
   ::google::protobuf::EnumOptions* unsafe_arena_release_options();
 
   // @@protoc_insertion_point(class_scope:google.protobuf.EnumDescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_options();
   void clear_has_options();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto > value_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange > reserved_range_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto> value_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange> reserved_range_;
   ::google::protobuf::RepeatedPtrField< ::std::string> reserved_name_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::EnumOptions* options_;
@@ -2409,65 +2602,81 @@ class LIBPROTOBUF_EXPORT EnumDescriptorProto : public ::google::protobuf::Messag
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT EnumValueDescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumValueDescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT EnumValueDescriptorProto
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumValueDescriptorProto) */
+{
+public:
   EnumValueDescriptorProto();
   virtual ~EnumValueDescriptorProto();
 
   EnumValueDescriptorProto(const EnumValueDescriptorProto& from);
 
-  inline EnumValueDescriptorProto& operator=(const EnumValueDescriptorProto& from) {
+  inline EnumValueDescriptorProto& operator=(const EnumValueDescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  EnumValueDescriptorProto(EnumValueDescriptorProto&& from) noexcept
-    : EnumValueDescriptorProto() {
+#if LANG_CXX11
+  EnumValueDescriptorProto(EnumValueDescriptorProto&& from) noexcept : EnumValueDescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline EnumValueDescriptorProto& operator=(EnumValueDescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline EnumValueDescriptorProto& operator=(EnumValueDescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const EnumValueDescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EnumValueDescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const EnumValueDescriptorProto*>(
-               &_EnumValueDescriptorProto_default_instance_);
+  static inline const EnumValueDescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const EnumValueDescriptorProto*>(&_EnumValueDescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 10;
 
   void UnsafeArenaSwap(EnumValueDescriptorProto* other);
   void Swap(EnumValueDescriptorProto* other);
-  friend void swap(EnumValueDescriptorProto& a, EnumValueDescriptorProto& b) {
+  friend void swap(EnumValueDescriptorProto& a, EnumValueDescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EnumValueDescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline EnumValueDescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   EnumValueDescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2478,32 +2687,39 @@ class LIBPROTOBUF_EXPORT EnumValueDescriptorProto : public ::google::protobuf::M
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(EnumValueDescriptorProto* other);
-  protected:
+
+protected:
   explicit EnumValueDescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2516,37 +2732,37 @@ class LIBPROTOBUF_EXPORT EnumValueDescriptorProto : public ::google::protobuf::M
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional .google.protobuf.EnumValueOptions options = 3;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 3;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::EnumValueOptions& options() const;
   ::google::protobuf::EnumValueOptions* release_options();
   ::google::protobuf::EnumValueOptions* mutable_options();
   void set_allocated_options(::google::protobuf::EnumValueOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::EnumValueOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::EnumValueOptions* options);
   ::google::protobuf::EnumValueOptions* unsafe_arena_release_options();
 
   // optional int32 number = 2;
@@ -2557,7 +2773,7 @@ class LIBPROTOBUF_EXPORT EnumValueDescriptorProto : public ::google::protobuf::M
   void set_number(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.EnumValueDescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_number();
@@ -2566,7 +2782,8 @@ class LIBPROTOBUF_EXPORT EnumValueDescriptorProto : public ::google::protobuf::M
   void clear_has_options();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -2579,65 +2796,81 @@ class LIBPROTOBUF_EXPORT EnumValueDescriptorProto : public ::google::protobuf::M
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT ServiceDescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ServiceDescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT ServiceDescriptorProto
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.ServiceDescriptorProto) */
+{
+public:
   ServiceDescriptorProto();
   virtual ~ServiceDescriptorProto();
 
   ServiceDescriptorProto(const ServiceDescriptorProto& from);
 
-  inline ServiceDescriptorProto& operator=(const ServiceDescriptorProto& from) {
+  inline ServiceDescriptorProto& operator=(const ServiceDescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ServiceDescriptorProto(ServiceDescriptorProto&& from) noexcept
-    : ServiceDescriptorProto() {
+#if LANG_CXX11
+  ServiceDescriptorProto(ServiceDescriptorProto&& from) noexcept : ServiceDescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline ServiceDescriptorProto& operator=(ServiceDescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ServiceDescriptorProto& operator=(ServiceDescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const ServiceDescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ServiceDescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const ServiceDescriptorProto*>(
-               &_ServiceDescriptorProto_default_instance_);
+  static inline const ServiceDescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const ServiceDescriptorProto*>(&_ServiceDescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 11;
 
   void UnsafeArenaSwap(ServiceDescriptorProto* other);
   void Swap(ServiceDescriptorProto* other);
-  friend void swap(ServiceDescriptorProto& a, ServiceDescriptorProto& b) {
+  friend void swap(ServiceDescriptorProto& a, ServiceDescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ServiceDescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ServiceDescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ServiceDescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2648,32 +2881,39 @@ class LIBPROTOBUF_EXPORT ServiceDescriptorProto : public ::google::protobuf::Mes
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ServiceDescriptorProto* other);
-  protected:
+
+protected:
   explicit ServiceDescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2687,10 +2927,8 @@ class LIBPROTOBUF_EXPORT ServiceDescriptorProto : public ::google::protobuf::Mes
   const ::google::protobuf::MethodDescriptorProto& method(int index) const;
   ::google::protobuf::MethodDescriptorProto* mutable_method(int index);
   ::google::protobuf::MethodDescriptorProto* add_method();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto >*
-      mutable_method();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto >&
-      method() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto>* mutable_method();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto>& method() const;
 
   // optional string name = 1;
   bool has_name() const;
@@ -2698,53 +2936,54 @@ class LIBPROTOBUF_EXPORT ServiceDescriptorProto : public ::google::protobuf::Mes
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional .google.protobuf.ServiceOptions options = 3;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 3;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::ServiceOptions& options() const;
   ::google::protobuf::ServiceOptions* release_options();
   ::google::protobuf::ServiceOptions* mutable_options();
   void set_allocated_options(::google::protobuf::ServiceOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::ServiceOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::ServiceOptions* options);
   ::google::protobuf::ServiceOptions* unsafe_arena_release_options();
 
   // @@protoc_insertion_point(class_scope:google.protobuf.ServiceDescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_options();
   void clear_has_options();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto > method_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto> method_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::ServiceOptions* options_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
@@ -2752,65 +2991,81 @@ class LIBPROTOBUF_EXPORT ServiceDescriptorProto : public ::google::protobuf::Mes
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MethodDescriptorProto) */ {
- public:
+class LIBPROTOBUF_EXPORT MethodDescriptorProto
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.MethodDescriptorProto) */
+{
+public:
   MethodDescriptorProto();
   virtual ~MethodDescriptorProto();
 
   MethodDescriptorProto(const MethodDescriptorProto& from);
 
-  inline MethodDescriptorProto& operator=(const MethodDescriptorProto& from) {
+  inline MethodDescriptorProto& operator=(const MethodDescriptorProto& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  MethodDescriptorProto(MethodDescriptorProto&& from) noexcept
-    : MethodDescriptorProto() {
+#if LANG_CXX11
+  MethodDescriptorProto(MethodDescriptorProto&& from) noexcept : MethodDescriptorProto()
+  {
     *this = ::std::move(from);
   }
 
-  inline MethodDescriptorProto& operator=(MethodDescriptorProto&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline MethodDescriptorProto& operator=(MethodDescriptorProto&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const MethodDescriptorProto& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const MethodDescriptorProto* internal_default_instance() {
-    return reinterpret_cast<const MethodDescriptorProto*>(
-               &_MethodDescriptorProto_default_instance_);
+  static inline const MethodDescriptorProto* internal_default_instance()
+  {
+    return reinterpret_cast<const MethodDescriptorProto*>(&_MethodDescriptorProto_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    12;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 12;
 
   void UnsafeArenaSwap(MethodDescriptorProto* other);
   void Swap(MethodDescriptorProto* other);
-  friend void swap(MethodDescriptorProto& a, MethodDescriptorProto& b) {
+  friend void swap(MethodDescriptorProto& a, MethodDescriptorProto& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline MethodDescriptorProto* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline MethodDescriptorProto* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   MethodDescriptorProto* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -2821,32 +3076,39 @@ class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Mess
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(MethodDescriptorProto* other);
-  protected:
+
+protected:
   explicit MethodDescriptorProto(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -2859,23 +3121,22 @@ class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Mess
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
   void set_name(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name(::std::string&& value);
-  #endif
+#endif
   void set_name(const char* value);
   void set_name(const char* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      ::std::string* name);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name(::std::string* name);
 
   // optional string input_type = 2;
   bool has_input_type() const;
@@ -2883,23 +3144,22 @@ class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Mess
   static const int kInputTypeFieldNumber = 2;
   const ::std::string& input_type() const;
   void set_input_type(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_input_type(::std::string&& value);
-  #endif
+#endif
   void set_input_type(const char* value);
   void set_input_type(const char* value, size_t size);
   ::std::string* mutable_input_type();
   ::std::string* release_input_type();
   void set_allocated_input_type(::std::string* input_type);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_input_type();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_input_type(
-      ::std::string* input_type);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_input_type(::std::string* input_type);
 
   // optional string output_type = 3;
   bool has_output_type() const;
@@ -2907,37 +3167,37 @@ class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Mess
   static const int kOutputTypeFieldNumber = 3;
   const ::std::string& output_type() const;
   void set_output_type(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_output_type(::std::string&& value);
-  #endif
+#endif
   void set_output_type(const char* value);
   void set_output_type(const char* value, size_t size);
   ::std::string* mutable_output_type();
   ::std::string* release_output_type();
   void set_allocated_output_type(::std::string* output_type);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_output_type();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_output_type(
-      ::std::string* output_type);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_output_type(::std::string* output_type);
 
   // optional .google.protobuf.MethodOptions options = 4;
   bool has_options() const;
   void clear_options();
   static const int kOptionsFieldNumber = 4;
-  private:
+
+private:
   void _slow_mutable_options();
-  public:
+
+public:
   const ::google::protobuf::MethodOptions& options() const;
   ::google::protobuf::MethodOptions* release_options();
   ::google::protobuf::MethodOptions* mutable_options();
   void set_allocated_options(::google::protobuf::MethodOptions* options);
-  void unsafe_arena_set_allocated_options(
-      ::google::protobuf::MethodOptions* options);
+  void unsafe_arena_set_allocated_options(::google::protobuf::MethodOptions* options);
   ::google::protobuf::MethodOptions* unsafe_arena_release_options();
 
   // optional bool client_streaming = 5 [default = false];
@@ -2955,7 +3215,7 @@ class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Mess
   void set_server_streaming(bool value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.MethodDescriptorProto)
- private:
+private:
   void set_has_name();
   void clear_has_name();
   void set_has_input_type();
@@ -2970,7 +3230,8 @@ class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Mess
   void clear_has_server_streaming();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -2986,65 +3247,80 @@ class LIBPROTOBUF_EXPORT MethodDescriptorProto : public ::google::protobuf::Mess
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT FileOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileOptions) */
+{
+public:
   FileOptions();
   virtual ~FileOptions();
 
   FileOptions(const FileOptions& from);
 
-  inline FileOptions& operator=(const FileOptions& from) {
+  inline FileOptions& operator=(const FileOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  FileOptions(FileOptions&& from) noexcept
-    : FileOptions() {
+#if LANG_CXX11
+  FileOptions(FileOptions&& from) noexcept : FileOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline FileOptions& operator=(FileOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline FileOptions& operator=(FileOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const FileOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FileOptions* internal_default_instance() {
-    return reinterpret_cast<const FileOptions*>(
-               &_FileOptions_default_instance_);
+  static inline const FileOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const FileOptions*>(&_FileOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    13;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 13;
 
   void UnsafeArenaSwap(FileOptions* other);
   void Swap(FileOptions* other);
-  friend void swap(FileOptions& a, FileOptions& b) {
+  friend void swap(FileOptions& a, FileOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FileOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline FileOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   FileOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -3055,61 +3331,64 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(FileOptions* other);
-  protected:
+
+protected:
   explicit FileOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   typedef FileOptions_OptimizeMode OptimizeMode;
-  static const OptimizeMode SPEED =
-    FileOptions_OptimizeMode_SPEED;
-  static const OptimizeMode CODE_SIZE =
-    FileOptions_OptimizeMode_CODE_SIZE;
-  static const OptimizeMode LITE_RUNTIME =
-    FileOptions_OptimizeMode_LITE_RUNTIME;
-  static inline bool OptimizeMode_IsValid(int value) {
+  static const OptimizeMode SPEED = FileOptions_OptimizeMode_SPEED;
+  static const OptimizeMode CODE_SIZE = FileOptions_OptimizeMode_CODE_SIZE;
+  static const OptimizeMode LITE_RUNTIME = FileOptions_OptimizeMode_LITE_RUNTIME;
+  static inline bool OptimizeMode_IsValid(int value)
+  {
     return FileOptions_OptimizeMode_IsValid(value);
   }
-  static const OptimizeMode OptimizeMode_MIN =
-    FileOptions_OptimizeMode_OptimizeMode_MIN;
-  static const OptimizeMode OptimizeMode_MAX =
-    FileOptions_OptimizeMode_OptimizeMode_MAX;
-  static const int OptimizeMode_ARRAYSIZE =
-    FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  OptimizeMode_descriptor() {
+  static const OptimizeMode OptimizeMode_MIN = FileOptions_OptimizeMode_OptimizeMode_MIN;
+  static const OptimizeMode OptimizeMode_MAX = FileOptions_OptimizeMode_OptimizeMode_MAX;
+  static const int OptimizeMode_ARRAYSIZE = FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* OptimizeMode_descriptor()
+  {
     return FileOptions_OptimizeMode_descriptor();
   }
-  static inline const ::std::string& OptimizeMode_Name(OptimizeMode value) {
+  static inline const ::std::string& OptimizeMode_Name(OptimizeMode value)
+  {
     return FileOptions_OptimizeMode_Name(value);
   }
-  static inline bool OptimizeMode_Parse(const ::std::string& name,
-      OptimizeMode* value) {
+  static inline bool OptimizeMode_Parse(const ::std::string& name, OptimizeMode* value)
+  {
     return FileOptions_OptimizeMode_Parse(name, value);
   }
 
@@ -3122,10 +3401,8 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   // optional string java_package = 1;
   bool has_java_package() const;
@@ -3133,23 +3410,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kJavaPackageFieldNumber = 1;
   const ::std::string& java_package() const;
   void set_java_package(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_java_package(::std::string&& value);
-  #endif
+#endif
   void set_java_package(const char* value);
   void set_java_package(const char* value, size_t size);
   ::std::string* mutable_java_package();
   ::std::string* release_java_package();
   void set_allocated_java_package(::std::string* java_package);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_java_package();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_java_package(
-      ::std::string* java_package);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_java_package(::std::string* java_package);
 
   // optional string java_outer_classname = 8;
   bool has_java_outer_classname() const;
@@ -3157,23 +3433,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kJavaOuterClassnameFieldNumber = 8;
   const ::std::string& java_outer_classname() const;
   void set_java_outer_classname(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_java_outer_classname(::std::string&& value);
-  #endif
+#endif
   void set_java_outer_classname(const char* value);
   void set_java_outer_classname(const char* value, size_t size);
   ::std::string* mutable_java_outer_classname();
   ::std::string* release_java_outer_classname();
   void set_allocated_java_outer_classname(::std::string* java_outer_classname);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_java_outer_classname();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_java_outer_classname(
-      ::std::string* java_outer_classname);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_java_outer_classname(::std::string* java_outer_classname);
 
   // optional string go_package = 11;
   bool has_go_package() const;
@@ -3181,23 +3456,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kGoPackageFieldNumber = 11;
   const ::std::string& go_package() const;
   void set_go_package(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_go_package(::std::string&& value);
-  #endif
+#endif
   void set_go_package(const char* value);
   void set_go_package(const char* value, size_t size);
   ::std::string* mutable_go_package();
   ::std::string* release_go_package();
   void set_allocated_go_package(::std::string* go_package);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_go_package();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_go_package(
-      ::std::string* go_package);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_go_package(::std::string* go_package);
 
   // optional string objc_class_prefix = 36;
   bool has_objc_class_prefix() const;
@@ -3205,23 +3479,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kObjcClassPrefixFieldNumber = 36;
   const ::std::string& objc_class_prefix() const;
   void set_objc_class_prefix(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_objc_class_prefix(::std::string&& value);
-  #endif
+#endif
   void set_objc_class_prefix(const char* value);
   void set_objc_class_prefix(const char* value, size_t size);
   ::std::string* mutable_objc_class_prefix();
   ::std::string* release_objc_class_prefix();
   void set_allocated_objc_class_prefix(::std::string* objc_class_prefix);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_objc_class_prefix();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_objc_class_prefix(
-      ::std::string* objc_class_prefix);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_objc_class_prefix(::std::string* objc_class_prefix);
 
   // optional string csharp_namespace = 37;
   bool has_csharp_namespace() const;
@@ -3229,23 +3502,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kCsharpNamespaceFieldNumber = 37;
   const ::std::string& csharp_namespace() const;
   void set_csharp_namespace(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_csharp_namespace(::std::string&& value);
-  #endif
+#endif
   void set_csharp_namespace(const char* value);
   void set_csharp_namespace(const char* value, size_t size);
   ::std::string* mutable_csharp_namespace();
   ::std::string* release_csharp_namespace();
   void set_allocated_csharp_namespace(::std::string* csharp_namespace);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_csharp_namespace();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_csharp_namespace(
-      ::std::string* csharp_namespace);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_csharp_namespace(::std::string* csharp_namespace);
 
   // optional string swift_prefix = 39;
   bool has_swift_prefix() const;
@@ -3253,23 +3525,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kSwiftPrefixFieldNumber = 39;
   const ::std::string& swift_prefix() const;
   void set_swift_prefix(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_swift_prefix(::std::string&& value);
-  #endif
+#endif
   void set_swift_prefix(const char* value);
   void set_swift_prefix(const char* value, size_t size);
   ::std::string* mutable_swift_prefix();
   ::std::string* release_swift_prefix();
   void set_allocated_swift_prefix(::std::string* swift_prefix);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_swift_prefix();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_swift_prefix(
-      ::std::string* swift_prefix);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_swift_prefix(::std::string* swift_prefix);
 
   // optional string php_class_prefix = 40;
   bool has_php_class_prefix() const;
@@ -3277,23 +3548,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kPhpClassPrefixFieldNumber = 40;
   const ::std::string& php_class_prefix() const;
   void set_php_class_prefix(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_php_class_prefix(::std::string&& value);
-  #endif
+#endif
   void set_php_class_prefix(const char* value);
   void set_php_class_prefix(const char* value, size_t size);
   ::std::string* mutable_php_class_prefix();
   ::std::string* release_php_class_prefix();
   void set_allocated_php_class_prefix(::std::string* php_class_prefix);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_php_class_prefix();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_php_class_prefix(
-      ::std::string* php_class_prefix);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_php_class_prefix(::std::string* php_class_prefix);
 
   // optional string php_namespace = 41;
   bool has_php_namespace() const;
@@ -3301,23 +3571,22 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   static const int kPhpNamespaceFieldNumber = 41;
   const ::std::string& php_namespace() const;
   void set_php_namespace(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_php_namespace(::std::string&& value);
-  #endif
+#endif
   void set_php_namespace(const char* value);
   void set_php_namespace(const char* value, size_t size);
   ::std::string* mutable_php_namespace();
   ::std::string* release_php_namespace();
   void set_allocated_php_namespace(::std::string* php_namespace);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_php_namespace();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_php_namespace(
-      ::std::string* php_namespace);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_php_namespace(::std::string* php_namespace);
 
   // optional bool cc_enable_arenas = 31 [default = false];
   bool has_cc_enable_arenas() const;
@@ -3391,7 +3660,7 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(FileOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.FileOptions)
- private:
+private:
   void set_has_java_package();
   void clear_has_java_package();
   void set_has_java_outer_classname();
@@ -3432,12 +3701,13 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   ::google::protobuf::internal::ArenaStringPtr java_package_;
   ::google::protobuf::internal::ArenaStringPtr java_outer_classname_;
   ::google::protobuf::internal::ArenaStringPtr go_package_;
@@ -3461,65 +3731,80 @@ class LIBPROTOBUF_EXPORT FileOptions : public ::google::protobuf::Message /* @@p
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT MessageOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MessageOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT MessageOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MessageOptions) */
+{
+public:
   MessageOptions();
   virtual ~MessageOptions();
 
   MessageOptions(const MessageOptions& from);
 
-  inline MessageOptions& operator=(const MessageOptions& from) {
+  inline MessageOptions& operator=(const MessageOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  MessageOptions(MessageOptions&& from) noexcept
-    : MessageOptions() {
+#if LANG_CXX11
+  MessageOptions(MessageOptions&& from) noexcept : MessageOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline MessageOptions& operator=(MessageOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline MessageOptions& operator=(MessageOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const MessageOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const MessageOptions* internal_default_instance() {
-    return reinterpret_cast<const MessageOptions*>(
-               &_MessageOptions_default_instance_);
+  static inline const MessageOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const MessageOptions*>(&_MessageOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    14;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 14;
 
   void UnsafeArenaSwap(MessageOptions* other);
   void Swap(MessageOptions* other);
-  friend void swap(MessageOptions& a, MessageOptions& b) {
+  friend void swap(MessageOptions& a, MessageOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline MessageOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline MessageOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   MessageOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -3530,32 +3815,39 @@ class LIBPROTOBUF_EXPORT MessageOptions : public ::google::protobuf::Message /* 
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(MessageOptions* other);
-  protected:
+
+protected:
   explicit MessageOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -3569,10 +3861,8 @@ class LIBPROTOBUF_EXPORT MessageOptions : public ::google::protobuf::Message /* 
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   // optional bool message_set_wire_format = 1 [default = false];
   bool has_message_set_wire_format() const;
@@ -3604,7 +3894,7 @@ class LIBPROTOBUF_EXPORT MessageOptions : public ::google::protobuf::Message /* 
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(MessageOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.MessageOptions)
- private:
+private:
   void set_has_message_set_wire_format();
   void clear_has_message_set_wire_format();
   void set_has_no_standard_descriptor_accessor();
@@ -3617,12 +3907,13 @@ class LIBPROTOBUF_EXPORT MessageOptions : public ::google::protobuf::Message /* 
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   bool message_set_wire_format_;
   bool no_standard_descriptor_accessor_;
   bool deprecated_;
@@ -3632,65 +3923,80 @@ class LIBPROTOBUF_EXPORT MessageOptions : public ::google::protobuf::Message /* 
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT FieldOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FieldOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT FieldOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FieldOptions) */
+{
+public:
   FieldOptions();
   virtual ~FieldOptions();
 
   FieldOptions(const FieldOptions& from);
 
-  inline FieldOptions& operator=(const FieldOptions& from) {
+  inline FieldOptions& operator=(const FieldOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  FieldOptions(FieldOptions&& from) noexcept
-    : FieldOptions() {
+#if LANG_CXX11
+  FieldOptions(FieldOptions&& from) noexcept : FieldOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline FieldOptions& operator=(FieldOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline FieldOptions& operator=(FieldOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const FieldOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FieldOptions* internal_default_instance() {
-    return reinterpret_cast<const FieldOptions*>(
-               &_FieldOptions_default_instance_);
+  static inline const FieldOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const FieldOptions*>(&_FieldOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    15;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 15;
 
   void UnsafeArenaSwap(FieldOptions* other);
   void Swap(FieldOptions* other);
-  friend void swap(FieldOptions& a, FieldOptions& b) {
+  friend void swap(FieldOptions& a, FieldOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FieldOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline FieldOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   FieldOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -3701,89 +4007,88 @@ class LIBPROTOBUF_EXPORT FieldOptions : public ::google::protobuf::Message /* @@
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(FieldOptions* other);
-  protected:
+
+protected:
   explicit FieldOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   typedef FieldOptions_CType CType;
-  static const CType STRING =
-    FieldOptions_CType_STRING;
-  static const CType CORD =
-    FieldOptions_CType_CORD;
-  static const CType STRING_PIECE =
-    FieldOptions_CType_STRING_PIECE;
-  static inline bool CType_IsValid(int value) {
+  static const CType STRING = FieldOptions_CType_STRING;
+  static const CType CORD = FieldOptions_CType_CORD;
+  static const CType STRING_PIECE = FieldOptions_CType_STRING_PIECE;
+  static inline bool CType_IsValid(int value)
+  {
     return FieldOptions_CType_IsValid(value);
   }
-  static const CType CType_MIN =
-    FieldOptions_CType_CType_MIN;
-  static const CType CType_MAX =
-    FieldOptions_CType_CType_MAX;
-  static const int CType_ARRAYSIZE =
-    FieldOptions_CType_CType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  CType_descriptor() {
+  static const CType CType_MIN = FieldOptions_CType_CType_MIN;
+  static const CType CType_MAX = FieldOptions_CType_CType_MAX;
+  static const int CType_ARRAYSIZE = FieldOptions_CType_CType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* CType_descriptor()
+  {
     return FieldOptions_CType_descriptor();
   }
-  static inline const ::std::string& CType_Name(CType value) {
+  static inline const ::std::string& CType_Name(CType value)
+  {
     return FieldOptions_CType_Name(value);
   }
-  static inline bool CType_Parse(const ::std::string& name,
-      CType* value) {
+  static inline bool CType_Parse(const ::std::string& name, CType* value)
+  {
     return FieldOptions_CType_Parse(name, value);
   }
 
   typedef FieldOptions_JSType JSType;
-  static const JSType JS_NORMAL =
-    FieldOptions_JSType_JS_NORMAL;
-  static const JSType JS_STRING =
-    FieldOptions_JSType_JS_STRING;
-  static const JSType JS_NUMBER =
-    FieldOptions_JSType_JS_NUMBER;
-  static inline bool JSType_IsValid(int value) {
+  static const JSType JS_NORMAL = FieldOptions_JSType_JS_NORMAL;
+  static const JSType JS_STRING = FieldOptions_JSType_JS_STRING;
+  static const JSType JS_NUMBER = FieldOptions_JSType_JS_NUMBER;
+  static inline bool JSType_IsValid(int value)
+  {
     return FieldOptions_JSType_IsValid(value);
   }
-  static const JSType JSType_MIN =
-    FieldOptions_JSType_JSType_MIN;
-  static const JSType JSType_MAX =
-    FieldOptions_JSType_JSType_MAX;
-  static const int JSType_ARRAYSIZE =
-    FieldOptions_JSType_JSType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  JSType_descriptor() {
+  static const JSType JSType_MIN = FieldOptions_JSType_JSType_MIN;
+  static const JSType JSType_MAX = FieldOptions_JSType_JSType_MAX;
+  static const int JSType_ARRAYSIZE = FieldOptions_JSType_JSType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* JSType_descriptor()
+  {
     return FieldOptions_JSType_descriptor();
   }
-  static inline const ::std::string& JSType_Name(JSType value) {
+  static inline const ::std::string& JSType_Name(JSType value)
+  {
     return FieldOptions_JSType_Name(value);
   }
-  static inline bool JSType_Parse(const ::std::string& name,
-      JSType* value) {
+  static inline bool JSType_Parse(const ::std::string& name, JSType* value)
+  {
     return FieldOptions_JSType_Parse(name, value);
   }
 
@@ -3796,10 +4101,8 @@ class LIBPROTOBUF_EXPORT FieldOptions : public ::google::protobuf::Message /* @@
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   // optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];
   bool has_ctype() const;
@@ -3845,7 +4148,7 @@ class LIBPROTOBUF_EXPORT FieldOptions : public ::google::protobuf::Message /* @@
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(FieldOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.FieldOptions)
- private:
+private:
   void set_has_ctype();
   void clear_has_ctype();
   void set_has_packed();
@@ -3862,12 +4165,13 @@ class LIBPROTOBUF_EXPORT FieldOptions : public ::google::protobuf::Message /* @@
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   int ctype_;
   bool packed_;
   bool lazy_;
@@ -3879,65 +4183,80 @@ class LIBPROTOBUF_EXPORT FieldOptions : public ::google::protobuf::Message /* @@
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT OneofOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.OneofOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT OneofOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.OneofOptions) */
+{
+public:
   OneofOptions();
   virtual ~OneofOptions();
 
   OneofOptions(const OneofOptions& from);
 
-  inline OneofOptions& operator=(const OneofOptions& from) {
+  inline OneofOptions& operator=(const OneofOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  OneofOptions(OneofOptions&& from) noexcept
-    : OneofOptions() {
+#if LANG_CXX11
+  OneofOptions(OneofOptions&& from) noexcept : OneofOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline OneofOptions& operator=(OneofOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline OneofOptions& operator=(OneofOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const OneofOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const OneofOptions* internal_default_instance() {
-    return reinterpret_cast<const OneofOptions*>(
-               &_OneofOptions_default_instance_);
+  static inline const OneofOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const OneofOptions*>(&_OneofOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    16;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 16;
 
   void UnsafeArenaSwap(OneofOptions* other);
   void Swap(OneofOptions* other);
-  friend void swap(OneofOptions& a, OneofOptions& b) {
+  friend void swap(OneofOptions& a, OneofOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline OneofOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline OneofOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   OneofOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -3948,32 +4267,39 @@ class LIBPROTOBUF_EXPORT OneofOptions : public ::google::protobuf::Message /* @@
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(OneofOptions* other);
-  protected:
+
+protected:
   explicit OneofOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -3987,88 +4313,101 @@ class LIBPROTOBUF_EXPORT OneofOptions : public ::google::protobuf::Message /* @@
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(OneofOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.OneofOptions)
- private:
-
+private:
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
   friend void ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::InitDefaultsOneofOptionsImpl();
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT EnumOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT EnumOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumOptions) */
+{
+public:
   EnumOptions();
   virtual ~EnumOptions();
 
   EnumOptions(const EnumOptions& from);
 
-  inline EnumOptions& operator=(const EnumOptions& from) {
+  inline EnumOptions& operator=(const EnumOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  EnumOptions(EnumOptions&& from) noexcept
-    : EnumOptions() {
+#if LANG_CXX11
+  EnumOptions(EnumOptions&& from) noexcept : EnumOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline EnumOptions& operator=(EnumOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline EnumOptions& operator=(EnumOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const EnumOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EnumOptions* internal_default_instance() {
-    return reinterpret_cast<const EnumOptions*>(
-               &_EnumOptions_default_instance_);
+  static inline const EnumOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const EnumOptions*>(&_EnumOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    17;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 17;
 
   void UnsafeArenaSwap(EnumOptions* other);
   void Swap(EnumOptions* other);
-  friend void swap(EnumOptions& a, EnumOptions& b) {
+  friend void swap(EnumOptions& a, EnumOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EnumOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline EnumOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   EnumOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -4079,32 +4418,39 @@ class LIBPROTOBUF_EXPORT EnumOptions : public ::google::protobuf::Message /* @@p
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(EnumOptions* other);
-  protected:
+
+protected:
   explicit EnumOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -4118,10 +4464,8 @@ class LIBPROTOBUF_EXPORT EnumOptions : public ::google::protobuf::Message /* @@p
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   // optional bool allow_alias = 2;
   bool has_allow_alias() const;
@@ -4139,7 +4483,7 @@ class LIBPROTOBUF_EXPORT EnumOptions : public ::google::protobuf::Message /* @@p
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(EnumOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.EnumOptions)
- private:
+private:
   void set_has_allow_alias();
   void clear_has_allow_alias();
   void set_has_deprecated();
@@ -4148,12 +4492,13 @@ class LIBPROTOBUF_EXPORT EnumOptions : public ::google::protobuf::Message /* @@p
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   bool allow_alias_;
   bool deprecated_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
@@ -4161,65 +4506,80 @@ class LIBPROTOBUF_EXPORT EnumOptions : public ::google::protobuf::Message /* @@p
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT EnumValueOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumValueOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT EnumValueOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumValueOptions) */
+{
+public:
   EnumValueOptions();
   virtual ~EnumValueOptions();
 
   EnumValueOptions(const EnumValueOptions& from);
 
-  inline EnumValueOptions& operator=(const EnumValueOptions& from) {
+  inline EnumValueOptions& operator=(const EnumValueOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  EnumValueOptions(EnumValueOptions&& from) noexcept
-    : EnumValueOptions() {
+#if LANG_CXX11
+  EnumValueOptions(EnumValueOptions&& from) noexcept : EnumValueOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline EnumValueOptions& operator=(EnumValueOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline EnumValueOptions& operator=(EnumValueOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const EnumValueOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EnumValueOptions* internal_default_instance() {
-    return reinterpret_cast<const EnumValueOptions*>(
-               &_EnumValueOptions_default_instance_);
+  static inline const EnumValueOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const EnumValueOptions*>(&_EnumValueOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    18;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 18;
 
   void UnsafeArenaSwap(EnumValueOptions* other);
   void Swap(EnumValueOptions* other);
-  friend void swap(EnumValueOptions& a, EnumValueOptions& b) {
+  friend void swap(EnumValueOptions& a, EnumValueOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EnumValueOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline EnumValueOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   EnumValueOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -4230,32 +4590,39 @@ class LIBPROTOBUF_EXPORT EnumValueOptions : public ::google::protobuf::Message /
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(EnumValueOptions* other);
-  protected:
+
+protected:
   explicit EnumValueOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -4269,10 +4636,8 @@ class LIBPROTOBUF_EXPORT EnumValueOptions : public ::google::protobuf::Message /
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   // optional bool deprecated = 1 [default = false];
   bool has_deprecated() const;
@@ -4283,84 +4648,100 @@ class LIBPROTOBUF_EXPORT EnumValueOptions : public ::google::protobuf::Message /
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(EnumValueOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.EnumValueOptions)
- private:
+private:
   void set_has_deprecated();
   void clear_has_deprecated();
 
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   bool deprecated_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
   friend void ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::InitDefaultsEnumValueOptionsImpl();
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT ServiceOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ServiceOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT ServiceOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ServiceOptions) */
+{
+public:
   ServiceOptions();
   virtual ~ServiceOptions();
 
   ServiceOptions(const ServiceOptions& from);
 
-  inline ServiceOptions& operator=(const ServiceOptions& from) {
+  inline ServiceOptions& operator=(const ServiceOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  ServiceOptions(ServiceOptions&& from) noexcept
-    : ServiceOptions() {
+#if LANG_CXX11
+  ServiceOptions(ServiceOptions&& from) noexcept : ServiceOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline ServiceOptions& operator=(ServiceOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline ServiceOptions& operator=(ServiceOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const ServiceOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ServiceOptions* internal_default_instance() {
-    return reinterpret_cast<const ServiceOptions*>(
-               &_ServiceOptions_default_instance_);
+  static inline const ServiceOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const ServiceOptions*>(&_ServiceOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    19;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 19;
 
   void UnsafeArenaSwap(ServiceOptions* other);
   void Swap(ServiceOptions* other);
-  friend void swap(ServiceOptions& a, ServiceOptions& b) {
+  friend void swap(ServiceOptions& a, ServiceOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ServiceOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ServiceOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   ServiceOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -4371,32 +4752,39 @@ class LIBPROTOBUF_EXPORT ServiceOptions : public ::google::protobuf::Message /* 
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(ServiceOptions* other);
-  protected:
+
+protected:
   explicit ServiceOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -4410,10 +4798,8 @@ class LIBPROTOBUF_EXPORT ServiceOptions : public ::google::protobuf::Message /* 
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   // optional bool deprecated = 33 [default = false];
   bool has_deprecated() const;
@@ -4424,84 +4810,100 @@ class LIBPROTOBUF_EXPORT ServiceOptions : public ::google::protobuf::Message /* 
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(ServiceOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.ServiceOptions)
- private:
+private:
   void set_has_deprecated();
   void clear_has_deprecated();
 
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   bool deprecated_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
   friend void ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::InitDefaultsServiceOptionsImpl();
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT MethodOptions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MethodOptions) */ {
- public:
+class LIBPROTOBUF_EXPORT MethodOptions
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MethodOptions) */
+{
+public:
   MethodOptions();
   virtual ~MethodOptions();
 
   MethodOptions(const MethodOptions& from);
 
-  inline MethodOptions& operator=(const MethodOptions& from) {
+  inline MethodOptions& operator=(const MethodOptions& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  MethodOptions(MethodOptions&& from) noexcept
-    : MethodOptions() {
+#if LANG_CXX11
+  MethodOptions(MethodOptions&& from) noexcept : MethodOptions()
+  {
     *this = ::std::move(from);
   }
 
-  inline MethodOptions& operator=(MethodOptions&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline MethodOptions& operator=(MethodOptions&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const MethodOptions& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const MethodOptions* internal_default_instance() {
-    return reinterpret_cast<const MethodOptions*>(
-               &_MethodOptions_default_instance_);
+  static inline const MethodOptions* internal_default_instance()
+  {
+    return reinterpret_cast<const MethodOptions*>(&_MethodOptions_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    20;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 20;
 
   void UnsafeArenaSwap(MethodOptions* other);
   void Swap(MethodOptions* other);
-  friend void swap(MethodOptions& a, MethodOptions& b) {
+  friend void swap(MethodOptions& a, MethodOptions& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline MethodOptions* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline MethodOptions* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   MethodOptions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -4512,61 +4914,64 @@ class LIBPROTOBUF_EXPORT MethodOptions : public ::google::protobuf::Message /* @
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(MethodOptions* other);
-  protected:
+
+protected:
   explicit MethodOptions(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
   typedef MethodOptions_IdempotencyLevel IdempotencyLevel;
-  static const IdempotencyLevel IDEMPOTENCY_UNKNOWN =
-    MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN;
-  static const IdempotencyLevel NO_SIDE_EFFECTS =
-    MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS;
-  static const IdempotencyLevel IDEMPOTENT =
-    MethodOptions_IdempotencyLevel_IDEMPOTENT;
-  static inline bool IdempotencyLevel_IsValid(int value) {
+  static const IdempotencyLevel IDEMPOTENCY_UNKNOWN = MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN;
+  static const IdempotencyLevel NO_SIDE_EFFECTS = MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS;
+  static const IdempotencyLevel IDEMPOTENT = MethodOptions_IdempotencyLevel_IDEMPOTENT;
+  static inline bool IdempotencyLevel_IsValid(int value)
+  {
     return MethodOptions_IdempotencyLevel_IsValid(value);
   }
-  static const IdempotencyLevel IdempotencyLevel_MIN =
-    MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN;
-  static const IdempotencyLevel IdempotencyLevel_MAX =
-    MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX;
-  static const int IdempotencyLevel_ARRAYSIZE =
-    MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  IdempotencyLevel_descriptor() {
+  static const IdempotencyLevel IdempotencyLevel_MIN = MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN;
+  static const IdempotencyLevel IdempotencyLevel_MAX = MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX;
+  static const int IdempotencyLevel_ARRAYSIZE = MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* IdempotencyLevel_descriptor()
+  {
     return MethodOptions_IdempotencyLevel_descriptor();
   }
-  static inline const ::std::string& IdempotencyLevel_Name(IdempotencyLevel value) {
+  static inline const ::std::string& IdempotencyLevel_Name(IdempotencyLevel value)
+  {
     return MethodOptions_IdempotencyLevel_Name(value);
   }
-  static inline bool IdempotencyLevel_Parse(const ::std::string& name,
-      IdempotencyLevel* value) {
+  static inline bool IdempotencyLevel_Parse(const ::std::string& name, IdempotencyLevel* value)
+  {
     return MethodOptions_IdempotencyLevel_Parse(name, value);
   }
 
@@ -4579,10 +4984,8 @@ class LIBPROTOBUF_EXPORT MethodOptions : public ::google::protobuf::Message /* @
   const ::google::protobuf::UninterpretedOption& uninterpreted_option(int index) const;
   ::google::protobuf::UninterpretedOption* mutable_uninterpreted_option(int index);
   ::google::protobuf::UninterpretedOption* add_uninterpreted_option();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-      mutable_uninterpreted_option();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-      uninterpreted_option() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>* mutable_uninterpreted_option();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>& uninterpreted_option() const;
 
   // optional bool deprecated = 33 [default = false];
   bool has_deprecated() const;
@@ -4600,7 +5003,7 @@ class LIBPROTOBUF_EXPORT MethodOptions : public ::google::protobuf::Message /* @
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(MethodOptions)
   // @@protoc_insertion_point(class_scope:google.protobuf.MethodOptions)
- private:
+private:
   void set_has_deprecated();
   void clear_has_deprecated();
   void set_has_idempotency_level();
@@ -4609,12 +5012,13 @@ class LIBPROTOBUF_EXPORT MethodOptions : public ::google::protobuf::Message /* @
   ::google::protobuf::internal::ExtensionSet _extensions_;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption > uninterpreted_option_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption> uninterpreted_option_;
   bool deprecated_;
   int idempotency_level_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
@@ -4622,65 +5026,81 @@ class LIBPROTOBUF_EXPORT MethodOptions : public ::google::protobuf::Message /* @
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT UninterpretedOption_NamePart : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.UninterpretedOption.NamePart) */ {
- public:
+class LIBPROTOBUF_EXPORT UninterpretedOption_NamePart
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.UninterpretedOption.NamePart) */
+{
+public:
   UninterpretedOption_NamePart();
   virtual ~UninterpretedOption_NamePart();
 
   UninterpretedOption_NamePart(const UninterpretedOption_NamePart& from);
 
-  inline UninterpretedOption_NamePart& operator=(const UninterpretedOption_NamePart& from) {
+  inline UninterpretedOption_NamePart& operator=(const UninterpretedOption_NamePart& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  UninterpretedOption_NamePart(UninterpretedOption_NamePart&& from) noexcept
-    : UninterpretedOption_NamePart() {
+#if LANG_CXX11
+  UninterpretedOption_NamePart(UninterpretedOption_NamePart&& from) noexcept : UninterpretedOption_NamePart()
+  {
     *this = ::std::move(from);
   }
 
-  inline UninterpretedOption_NamePart& operator=(UninterpretedOption_NamePart&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline UninterpretedOption_NamePart& operator=(UninterpretedOption_NamePart&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const UninterpretedOption_NamePart& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const UninterpretedOption_NamePart* internal_default_instance() {
-    return reinterpret_cast<const UninterpretedOption_NamePart*>(
-               &_UninterpretedOption_NamePart_default_instance_);
+  static inline const UninterpretedOption_NamePart* internal_default_instance()
+  {
+    return reinterpret_cast<const UninterpretedOption_NamePart*>(&_UninterpretedOption_NamePart_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    21;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 21;
 
   void UnsafeArenaSwap(UninterpretedOption_NamePart* other);
   void Swap(UninterpretedOption_NamePart* other);
-  friend void swap(UninterpretedOption_NamePart& a, UninterpretedOption_NamePart& b) {
+  friend void swap(UninterpretedOption_NamePart& a, UninterpretedOption_NamePart& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline UninterpretedOption_NamePart* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline UninterpretedOption_NamePart* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   UninterpretedOption_NamePart* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -4691,32 +5111,39 @@ class LIBPROTOBUF_EXPORT UninterpretedOption_NamePart : public ::google::protobu
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UninterpretedOption_NamePart* other);
-  protected:
+
+protected:
   explicit UninterpretedOption_NamePart(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -4729,23 +5156,22 @@ class LIBPROTOBUF_EXPORT UninterpretedOption_NamePart : public ::google::protobu
   static const int kNamePartFieldNumber = 1;
   const ::std::string& name_part() const;
   void set_name_part(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_name_part(::std::string&& value);
-  #endif
+#endif
   void set_name_part(const char* value);
   void set_name_part(const char* value, size_t size);
   ::std::string* mutable_name_part();
   ::std::string* release_name_part();
   void set_allocated_name_part(::std::string* name_part);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_name_part();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name_part(
-      ::std::string* name_part);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_name_part(::std::string* name_part);
 
   // required bool is_extension = 2;
   bool has_is_extension() const;
@@ -4755,7 +5181,7 @@ class LIBPROTOBUF_EXPORT UninterpretedOption_NamePart : public ::google::protobu
   void set_is_extension(bool value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.UninterpretedOption.NamePart)
- private:
+private:
   void set_has_name_part();
   void clear_has_name_part();
   void set_has_is_extension();
@@ -4765,7 +5191,8 @@ class LIBPROTOBUF_EXPORT UninterpretedOption_NamePart : public ::google::protobu
   size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -4777,65 +5204,80 @@ class LIBPROTOBUF_EXPORT UninterpretedOption_NamePart : public ::google::protobu
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.UninterpretedOption) */ {
- public:
+class LIBPROTOBUF_EXPORT UninterpretedOption
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.UninterpretedOption) */
+{
+public:
   UninterpretedOption();
   virtual ~UninterpretedOption();
 
   UninterpretedOption(const UninterpretedOption& from);
 
-  inline UninterpretedOption& operator=(const UninterpretedOption& from) {
+  inline UninterpretedOption& operator=(const UninterpretedOption& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  UninterpretedOption(UninterpretedOption&& from) noexcept
-    : UninterpretedOption() {
+#if LANG_CXX11
+  UninterpretedOption(UninterpretedOption&& from) noexcept : UninterpretedOption()
+  {
     *this = ::std::move(from);
   }
 
-  inline UninterpretedOption& operator=(UninterpretedOption&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline UninterpretedOption& operator=(UninterpretedOption&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const UninterpretedOption& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const UninterpretedOption* internal_default_instance() {
-    return reinterpret_cast<const UninterpretedOption*>(
-               &_UninterpretedOption_default_instance_);
+  static inline const UninterpretedOption* internal_default_instance()
+  {
+    return reinterpret_cast<const UninterpretedOption*>(&_UninterpretedOption_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    22;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 22;
 
   void UnsafeArenaSwap(UninterpretedOption* other);
   void Swap(UninterpretedOption* other);
-  friend void swap(UninterpretedOption& a, UninterpretedOption& b) {
+  friend void swap(UninterpretedOption& a, UninterpretedOption& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline UninterpretedOption* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline UninterpretedOption* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   UninterpretedOption* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -4846,32 +5288,39 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(UninterpretedOption* other);
-  protected:
+
+protected:
   explicit UninterpretedOption(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -4887,10 +5336,8 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
   const ::google::protobuf::UninterpretedOption_NamePart& name(int index) const;
   ::google::protobuf::UninterpretedOption_NamePart* mutable_name(int index);
   ::google::protobuf::UninterpretedOption_NamePart* add_name();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart >*
-      mutable_name();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart >&
-      name() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart>* mutable_name();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart>& name() const;
 
   // optional string identifier_value = 3;
   bool has_identifier_value() const;
@@ -4898,23 +5345,22 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
   static const int kIdentifierValueFieldNumber = 3;
   const ::std::string& identifier_value() const;
   void set_identifier_value(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_identifier_value(::std::string&& value);
-  #endif
+#endif
   void set_identifier_value(const char* value);
   void set_identifier_value(const char* value, size_t size);
   ::std::string* mutable_identifier_value();
   ::std::string* release_identifier_value();
   void set_allocated_identifier_value(::std::string* identifier_value);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_identifier_value();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_identifier_value(
-      ::std::string* identifier_value);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_identifier_value(::std::string* identifier_value);
 
   // optional bytes string_value = 7;
   bool has_string_value() const;
@@ -4922,23 +5368,22 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
   static const int kStringValueFieldNumber = 7;
   const ::std::string& string_value() const;
   void set_string_value(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_string_value(::std::string&& value);
-  #endif
+#endif
   void set_string_value(const char* value);
   void set_string_value(const void* value, size_t size);
   ::std::string* mutable_string_value();
   ::std::string* release_string_value();
   void set_allocated_string_value(::std::string* string_value);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_string_value();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_string_value(
-      ::std::string* string_value);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_string_value(::std::string* string_value);
 
   // optional string aggregate_value = 8;
   bool has_aggregate_value() const;
@@ -4946,23 +5391,22 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
   static const int kAggregateValueFieldNumber = 8;
   const ::std::string& aggregate_value() const;
   void set_aggregate_value(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_aggregate_value(::std::string&& value);
-  #endif
+#endif
   void set_aggregate_value(const char* value);
   void set_aggregate_value(const char* value, size_t size);
   ::std::string* mutable_aggregate_value();
   ::std::string* release_aggregate_value();
   void set_allocated_aggregate_value(::std::string* aggregate_value);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_aggregate_value();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_aggregate_value(
-      ::std::string* aggregate_value);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_aggregate_value(::std::string* aggregate_value);
 
   // optional uint64 positive_int_value = 4;
   bool has_positive_int_value() const;
@@ -4986,7 +5430,7 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
   void set_double_value(double value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.UninterpretedOption)
- private:
+private:
   void set_has_identifier_value();
   void clear_has_identifier_value();
   void set_has_positive_int_value();
@@ -5001,12 +5445,13 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
   void clear_has_aggregate_value();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart > name_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart> name_;
   ::google::protobuf::internal::ArenaStringPtr identifier_value_;
   ::google::protobuf::internal::ArenaStringPtr string_value_;
   ::google::protobuf::internal::ArenaStringPtr aggregate_value_;
@@ -5018,65 +5463,81 @@ class LIBPROTOBUF_EXPORT UninterpretedOption : public ::google::protobuf::Messag
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.SourceCodeInfo.Location) */ {
- public:
+class LIBPROTOBUF_EXPORT SourceCodeInfo_Location
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.SourceCodeInfo.Location) */
+{
+public:
   SourceCodeInfo_Location();
   virtual ~SourceCodeInfo_Location();
 
   SourceCodeInfo_Location(const SourceCodeInfo_Location& from);
 
-  inline SourceCodeInfo_Location& operator=(const SourceCodeInfo_Location& from) {
+  inline SourceCodeInfo_Location& operator=(const SourceCodeInfo_Location& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SourceCodeInfo_Location(SourceCodeInfo_Location&& from) noexcept
-    : SourceCodeInfo_Location() {
+#if LANG_CXX11
+  SourceCodeInfo_Location(SourceCodeInfo_Location&& from) noexcept : SourceCodeInfo_Location()
+  {
     *this = ::std::move(from);
   }
 
-  inline SourceCodeInfo_Location& operator=(SourceCodeInfo_Location&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SourceCodeInfo_Location& operator=(SourceCodeInfo_Location&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const SourceCodeInfo_Location& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SourceCodeInfo_Location* internal_default_instance() {
-    return reinterpret_cast<const SourceCodeInfo_Location*>(
-               &_SourceCodeInfo_Location_default_instance_);
+  static inline const SourceCodeInfo_Location* internal_default_instance()
+  {
+    return reinterpret_cast<const SourceCodeInfo_Location*>(&_SourceCodeInfo_Location_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    23;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 23;
 
   void UnsafeArenaSwap(SourceCodeInfo_Location* other);
   void Swap(SourceCodeInfo_Location* other);
-  friend void swap(SourceCodeInfo_Location& a, SourceCodeInfo_Location& b) {
+  friend void swap(SourceCodeInfo_Location& a, SourceCodeInfo_Location& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SourceCodeInfo_Location* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SourceCodeInfo_Location* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SourceCodeInfo_Location* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -5087,32 +5548,39 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Me
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SourceCodeInfo_Location* other);
-  protected:
+
+protected:
   explicit SourceCodeInfo_Location(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -5126,10 +5594,8 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Me
   ::google::protobuf::int32 path(int index) const;
   void set_path(int index, ::google::protobuf::int32 value);
   void add_path(::google::protobuf::int32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      path() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_path();
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& path() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32>* mutable_path();
 
   // repeated int32 span = 2 [packed = true];
   int span_size() const;
@@ -5138,10 +5604,8 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Me
   ::google::protobuf::int32 span(int index) const;
   void set_span(int index, ::google::protobuf::int32 value);
   void add_span(::google::protobuf::int32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      span() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_span();
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& span() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32>* mutable_span();
 
   // repeated string leading_detached_comments = 6;
   int leading_detached_comments_size() const;
@@ -5150,16 +5614,16 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Me
   const ::std::string& leading_detached_comments(int index) const;
   ::std::string* mutable_leading_detached_comments(int index);
   void set_leading_detached_comments(int index, const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_leading_detached_comments(int index, ::std::string&& value);
-  #endif
+#endif
   void set_leading_detached_comments(int index, const char* value);
   void set_leading_detached_comments(int index, const char* value, size_t size);
   ::std::string* add_leading_detached_comments();
   void add_leading_detached_comments(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void add_leading_detached_comments(::std::string&& value);
-  #endif
+#endif
   void add_leading_detached_comments(const char* value);
   void add_leading_detached_comments(const char* value, size_t size);
   const ::google::protobuf::RepeatedPtrField< ::std::string>& leading_detached_comments() const;
@@ -5171,23 +5635,22 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Me
   static const int kLeadingCommentsFieldNumber = 3;
   const ::std::string& leading_comments() const;
   void set_leading_comments(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_leading_comments(::std::string&& value);
-  #endif
+#endif
   void set_leading_comments(const char* value);
   void set_leading_comments(const char* value, size_t size);
   ::std::string* mutable_leading_comments();
   ::std::string* release_leading_comments();
   void set_allocated_leading_comments(::std::string* leading_comments);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_leading_comments();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_leading_comments(
-      ::std::string* leading_comments);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_leading_comments(::std::string* leading_comments);
 
   // optional string trailing_comments = 4;
   bool has_trailing_comments() const;
@@ -5195,40 +5658,40 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Me
   static const int kTrailingCommentsFieldNumber = 4;
   const ::std::string& trailing_comments() const;
   void set_trailing_comments(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_trailing_comments(::std::string&& value);
-  #endif
+#endif
   void set_trailing_comments(const char* value);
   void set_trailing_comments(const char* value, size_t size);
   ::std::string* mutable_trailing_comments();
   ::std::string* release_trailing_comments();
   void set_allocated_trailing_comments(::std::string* trailing_comments);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_trailing_comments();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_trailing_comments(
-      ::std::string* trailing_comments);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_trailing_comments(::std::string* trailing_comments);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.SourceCodeInfo.Location)
- private:
+private:
   void set_has_leading_comments();
   void clear_has_leading_comments();
   void set_has_trailing_comments();
   void clear_has_trailing_comments();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > path_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32> path_;
   mutable int _path_cached_byte_size_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > span_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32> span_;
   mutable int _span_cached_byte_size_;
   ::google::protobuf::RepeatedPtrField< ::std::string> leading_detached_comments_;
   ::google::protobuf::internal::ArenaStringPtr leading_comments_;
@@ -5238,65 +5701,80 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo_Location : public ::google::protobuf::Me
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT SourceCodeInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.SourceCodeInfo) */ {
- public:
+class LIBPROTOBUF_EXPORT SourceCodeInfo
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.SourceCodeInfo) */
+{
+public:
   SourceCodeInfo();
   virtual ~SourceCodeInfo();
 
   SourceCodeInfo(const SourceCodeInfo& from);
 
-  inline SourceCodeInfo& operator=(const SourceCodeInfo& from) {
+  inline SourceCodeInfo& operator=(const SourceCodeInfo& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  SourceCodeInfo(SourceCodeInfo&& from) noexcept
-    : SourceCodeInfo() {
+#if LANG_CXX11
+  SourceCodeInfo(SourceCodeInfo&& from) noexcept : SourceCodeInfo()
+  {
     *this = ::std::move(from);
   }
 
-  inline SourceCodeInfo& operator=(SourceCodeInfo&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline SourceCodeInfo& operator=(SourceCodeInfo&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const SourceCodeInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SourceCodeInfo* internal_default_instance() {
-    return reinterpret_cast<const SourceCodeInfo*>(
-               &_SourceCodeInfo_default_instance_);
+  static inline const SourceCodeInfo* internal_default_instance()
+  {
+    return reinterpret_cast<const SourceCodeInfo*>(&_SourceCodeInfo_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    24;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 24;
 
   void UnsafeArenaSwap(SourceCodeInfo* other);
   void Swap(SourceCodeInfo* other);
-  friend void swap(SourceCodeInfo& a, SourceCodeInfo& b) {
+  friend void swap(SourceCodeInfo& a, SourceCodeInfo& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SourceCodeInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline SourceCodeInfo* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   SourceCodeInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -5307,32 +5785,39 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo : public ::google::protobuf::Message /* 
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(SourceCodeInfo* other);
-  protected:
+
+protected:
   explicit SourceCodeInfo(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -5348,85 +5833,99 @@ class LIBPROTOBUF_EXPORT SourceCodeInfo : public ::google::protobuf::Message /* 
   const ::google::protobuf::SourceCodeInfo_Location& location(int index) const;
   ::google::protobuf::SourceCodeInfo_Location* mutable_location(int index);
   ::google::protobuf::SourceCodeInfo_Location* add_location();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location >*
-      mutable_location();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location >&
-      location() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location>* mutable_location();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location>& location() const;
 
   // @@protoc_insertion_point(class_scope:google.protobuf.SourceCodeInfo)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location > location_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location> location_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
   friend void ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::InitDefaultsSourceCodeInfoImpl();
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.GeneratedCodeInfo.Annotation) */ {
- public:
+class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation
+  : public ::google::protobuf::
+        Message /* @@protoc_insertion_point(class_definition:google.protobuf.GeneratedCodeInfo.Annotation) */
+{
+public:
   GeneratedCodeInfo_Annotation();
   virtual ~GeneratedCodeInfo_Annotation();
 
   GeneratedCodeInfo_Annotation(const GeneratedCodeInfo_Annotation& from);
 
-  inline GeneratedCodeInfo_Annotation& operator=(const GeneratedCodeInfo_Annotation& from) {
+  inline GeneratedCodeInfo_Annotation& operator=(const GeneratedCodeInfo_Annotation& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  GeneratedCodeInfo_Annotation(GeneratedCodeInfo_Annotation&& from) noexcept
-    : GeneratedCodeInfo_Annotation() {
+#if LANG_CXX11
+  GeneratedCodeInfo_Annotation(GeneratedCodeInfo_Annotation&& from) noexcept : GeneratedCodeInfo_Annotation()
+  {
     *this = ::std::move(from);
   }
 
-  inline GeneratedCodeInfo_Annotation& operator=(GeneratedCodeInfo_Annotation&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline GeneratedCodeInfo_Annotation& operator=(GeneratedCodeInfo_Annotation&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const GeneratedCodeInfo_Annotation& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const GeneratedCodeInfo_Annotation* internal_default_instance() {
-    return reinterpret_cast<const GeneratedCodeInfo_Annotation*>(
-               &_GeneratedCodeInfo_Annotation_default_instance_);
+  static inline const GeneratedCodeInfo_Annotation* internal_default_instance()
+  {
+    return reinterpret_cast<const GeneratedCodeInfo_Annotation*>(&_GeneratedCodeInfo_Annotation_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    25;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 25;
 
   void UnsafeArenaSwap(GeneratedCodeInfo_Annotation* other);
   void Swap(GeneratedCodeInfo_Annotation* other);
-  friend void swap(GeneratedCodeInfo_Annotation& a, GeneratedCodeInfo_Annotation& b) {
+  friend void swap(GeneratedCodeInfo_Annotation& a, GeneratedCodeInfo_Annotation& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline GeneratedCodeInfo_Annotation* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline GeneratedCodeInfo_Annotation* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   GeneratedCodeInfo_Annotation* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -5437,32 +5936,39 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation : public ::google::protobu
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(GeneratedCodeInfo_Annotation* other);
-  protected:
+
+protected:
   explicit GeneratedCodeInfo_Annotation(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -5476,10 +5982,8 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation : public ::google::protobu
   ::google::protobuf::int32 path(int index) const;
   void set_path(int index, ::google::protobuf::int32 value);
   void add_path(::google::protobuf::int32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      path() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_path();
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& path() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32>* mutable_path();
 
   // optional string source_file = 2;
   bool has_source_file() const;
@@ -5487,23 +5991,22 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation : public ::google::protobu
   static const int kSourceFileFieldNumber = 2;
   const ::std::string& source_file() const;
   void set_source_file(const ::std::string& value);
-  #if LANG_CXX11
+#if LANG_CXX11
   void set_source_file(::std::string&& value);
-  #endif
+#endif
   void set_source_file(const char* value);
   void set_source_file(const char* value, size_t size);
   ::std::string* mutable_source_file();
   ::std::string* release_source_file();
   void set_allocated_source_file(::std::string* source_file);
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
   ::std::string* unsafe_arena_release_source_file();
   PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_source_file(
-      ::std::string* source_file);
+                              "    string fields are deprecated and will be removed in a"
+                              "    future release.")
+  void unsafe_arena_set_allocated_source_file(::std::string* source_file);
 
   // optional int32 begin = 3;
   bool has_begin() const;
@@ -5520,7 +6023,7 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation : public ::google::protobu
   void set_end(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:google.protobuf.GeneratedCodeInfo.Annotation)
- private:
+private:
   void set_has_source_file();
   void clear_has_source_file();
   void set_has_begin();
@@ -5529,12 +6032,13 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation : public ::google::protobu
   void clear_has_end();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > path_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32> path_;
   mutable int _path_cached_byte_size_;
   ::google::protobuf::internal::ArenaStringPtr source_file_;
   ::google::protobuf::int32 begin_;
@@ -5544,65 +6048,80 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo_Annotation : public ::google::protobu
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT GeneratedCodeInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.GeneratedCodeInfo) */ {
- public:
+class LIBPROTOBUF_EXPORT GeneratedCodeInfo
+  : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.GeneratedCodeInfo) */
+{
+public:
   GeneratedCodeInfo();
   virtual ~GeneratedCodeInfo();
 
   GeneratedCodeInfo(const GeneratedCodeInfo& from);
 
-  inline GeneratedCodeInfo& operator=(const GeneratedCodeInfo& from) {
+  inline GeneratedCodeInfo& operator=(const GeneratedCodeInfo& from)
+  {
     CopyFrom(from);
     return *this;
   }
-  #if LANG_CXX11
-  GeneratedCodeInfo(GeneratedCodeInfo&& from) noexcept
-    : GeneratedCodeInfo() {
+#if LANG_CXX11
+  GeneratedCodeInfo(GeneratedCodeInfo&& from) noexcept : GeneratedCodeInfo()
+  {
     *this = ::std::move(from);
   }
 
-  inline GeneratedCodeInfo& operator=(GeneratedCodeInfo&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
+  inline GeneratedCodeInfo& operator=(GeneratedCodeInfo&& from) noexcept
+  {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual())
+    {
+      if (this != &from)
+        InternalSwap(&from);
+    }
+    else
+    {
       CopyFrom(from);
     }
     return *this;
   }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+#endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  {
     return _internal_metadata_.unknown_fields();
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  {
     return _internal_metadata_.mutable_unknown_fields();
   }
 
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL
+  {
     return GetArenaNoVirtual();
   }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL
+  {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
   static const GeneratedCodeInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const GeneratedCodeInfo* internal_default_instance() {
-    return reinterpret_cast<const GeneratedCodeInfo*>(
-               &_GeneratedCodeInfo_default_instance_);
+  static inline const GeneratedCodeInfo* internal_default_instance()
+  {
+    return reinterpret_cast<const GeneratedCodeInfo*>(&_GeneratedCodeInfo_default_instance_);
   }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    26;
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages = 26;
 
   void UnsafeArenaSwap(GeneratedCodeInfo* other);
   void Swap(GeneratedCodeInfo* other);
-  friend void swap(GeneratedCodeInfo& a, GeneratedCodeInfo& b) {
+  friend void swap(GeneratedCodeInfo& a, GeneratedCodeInfo& b)
+  {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline GeneratedCodeInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline GeneratedCodeInfo* New() const PROTOBUF_FINAL
+  {
+    return New(NULL);
+  }
 
   GeneratedCodeInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
@@ -5613,32 +6132,39 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo : public ::google::protobuf::Message 
   bool IsInitialized() const PROTOBUF_FINAL;
 
   size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
+  bool MergePartialFromCodedStream(::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8*
+  InternalSerializeWithCachedSizesToArray(bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL
+  {
+    return _cached_size_;
+  }
+
+private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(GeneratedCodeInfo* other);
-  protected:
+
+protected:
   explicit GeneratedCodeInfo(::google::protobuf::Arena* arena);
-  private:
+
+private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+
+private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const
+  {
     return _internal_metadata_.arena();
   }
-  inline void* MaybeArenaPtr() const {
+  inline void* MaybeArenaPtr() const
+  {
     return _internal_metadata_.raw_arena_ptr();
   }
-  public:
 
+public:
   ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
@@ -5654,61 +6180,64 @@ class LIBPROTOBUF_EXPORT GeneratedCodeInfo : public ::google::protobuf::Message 
   const ::google::protobuf::GeneratedCodeInfo_Annotation& annotation(int index) const;
   ::google::protobuf::GeneratedCodeInfo_Annotation* mutable_annotation(int index);
   ::google::protobuf::GeneratedCodeInfo_Annotation* add_annotation();
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation >*
-      mutable_annotation();
-  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation >&
-      annotation() const;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation>* mutable_annotation();
+  const ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation>& annotation() const;
 
   // @@protoc_insertion_point(class_scope:google.protobuf.GeneratedCodeInfo)
- private:
-
+private:
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation > annotation_;
+  ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation> annotation_;
   friend struct ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::TableStruct;
   friend void ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::InitDefaultsGeneratedCodeInfoImpl();
 };
 // ===================================================================
 
-
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // FileDescriptorSet
 
 // repeated .google.protobuf.FileDescriptorProto file = 1;
-inline int FileDescriptorSet::file_size() const {
+inline int FileDescriptorSet::file_size() const
+{
   return file_.size();
 }
-inline void FileDescriptorSet::clear_file() {
+inline void FileDescriptorSet::clear_file()
+{
   file_.Clear();
 }
-inline const ::google::protobuf::FileDescriptorProto& FileDescriptorSet::file(int index) const {
+inline const ::google::protobuf::FileDescriptorProto& FileDescriptorSet::file(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorSet.file)
   return file_.Get(index);
 }
-inline ::google::protobuf::FileDescriptorProto* FileDescriptorSet::mutable_file(int index) {
+inline ::google::protobuf::FileDescriptorProto* FileDescriptorSet::mutable_file(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorSet.file)
   return file_.Mutable(index);
 }
-inline ::google::protobuf::FileDescriptorProto* FileDescriptorSet::add_file() {
+inline ::google::protobuf::FileDescriptorProto* FileDescriptorSet::add_file()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorSet.file)
   return file_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto >*
-FileDescriptorSet::mutable_file() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto>* FileDescriptorSet::mutable_file()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorSet.file)
   return &file_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto >&
-FileDescriptorSet::file() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FileDescriptorProto>&
+FileDescriptorSet::file() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorSet.file)
   return file_;
 }
@@ -5718,483 +6247,577 @@ FileDescriptorSet::file() const {
 // FileDescriptorProto
 
 // optional string name = 1;
-inline bool FileDescriptorProto::has_name() const {
+inline bool FileDescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void FileDescriptorProto::set_has_name() {
+inline void FileDescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void FileDescriptorProto::clear_has_name() {
+inline void FileDescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void FileDescriptorProto::clear_name() {
+inline void FileDescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& FileDescriptorProto::name() const {
+inline const ::std::string& FileDescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.name)
   return name_.Get();
 }
-inline void FileDescriptorProto::set_name(const ::std::string& value) {
+inline void FileDescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.name)
 }
 #if LANG_CXX11
-inline void FileDescriptorProto::set_name(::std::string&& value) {
+inline void FileDescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileDescriptorProto.name)
 }
 #endif
-inline void FileDescriptorProto::set_name(const char* value) {
+inline void FileDescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileDescriptorProto.name)
 }
-inline void FileDescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void FileDescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileDescriptorProto.name)
 }
-inline ::std::string* FileDescriptorProto::mutable_name() {
+inline ::std::string* FileDescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileDescriptorProto::release_name() {
+inline ::std::string* FileDescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileDescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void FileDescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.name)
 }
-inline ::std::string* FileDescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* FileDescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileDescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileDescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void FileDescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileDescriptorProto.name)
 }
 
 // optional string package = 2;
-inline bool FileDescriptorProto::has_package() const {
+inline bool FileDescriptorProto::has_package() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void FileDescriptorProto::set_has_package() {
+inline void FileDescriptorProto::set_has_package()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void FileDescriptorProto::clear_has_package() {
+inline void FileDescriptorProto::clear_has_package()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void FileDescriptorProto::clear_package() {
+inline void FileDescriptorProto::clear_package()
+{
   package_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_package();
 }
-inline const ::std::string& FileDescriptorProto::package() const {
+inline const ::std::string& FileDescriptorProto::package() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.package)
   return package_.Get();
 }
-inline void FileDescriptorProto::set_package(const ::std::string& value) {
+inline void FileDescriptorProto::set_package(const ::std::string& value)
+{
   set_has_package();
   package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.package)
 }
 #if LANG_CXX11
-inline void FileDescriptorProto::set_package(::std::string&& value) {
+inline void FileDescriptorProto::set_package(::std::string&& value)
+{
   set_has_package();
-  package_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileDescriptorProto.package)
 }
 #endif
-inline void FileDescriptorProto::set_package(const char* value) {
+inline void FileDescriptorProto::set_package(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_package();
-  package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileDescriptorProto.package)
 }
-inline void FileDescriptorProto::set_package(const char* value,
-    size_t size) {
+inline void FileDescriptorProto::set_package(const char* value, size_t size)
+{
   set_has_package();
-  package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+               ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileDescriptorProto.package)
 }
-inline ::std::string* FileDescriptorProto::mutable_package() {
+inline ::std::string* FileDescriptorProto::mutable_package()
+{
   set_has_package();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.package)
   return package_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileDescriptorProto::release_package() {
+inline ::std::string* FileDescriptorProto::release_package()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.package)
   clear_has_package();
   return package_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileDescriptorProto::set_allocated_package(::std::string* package) {
-  if (package != NULL) {
+inline void FileDescriptorProto::set_allocated_package(::std::string* package)
+{
+  if (package != NULL)
+  {
     set_has_package();
-  } else {
+  }
+  else
+  {
     clear_has_package();
   }
-  package_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), package,
-      GetArenaNoVirtual());
+  package_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), package, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.package)
 }
-inline ::std::string* FileDescriptorProto::unsafe_arena_release_package() {
+inline ::std::string* FileDescriptorProto::unsafe_arena_release_package()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileDescriptorProto.package)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_package();
-  return package_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return package_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileDescriptorProto::unsafe_arena_set_allocated_package(
-    ::std::string* package) {
+inline void FileDescriptorProto::unsafe_arena_set_allocated_package(::std::string* package)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (package != NULL) {
+  if (package != NULL)
+  {
     set_has_package();
-  } else {
+  }
+  else
+  {
     clear_has_package();
   }
-  package_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      package, GetArenaNoVirtual());
+  package_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), package,
+                                   GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileDescriptorProto.package)
 }
 
 // repeated string dependency = 3;
-inline int FileDescriptorProto::dependency_size() const {
+inline int FileDescriptorProto::dependency_size() const
+{
   return dependency_.size();
 }
-inline void FileDescriptorProto::clear_dependency() {
+inline void FileDescriptorProto::clear_dependency()
+{
   dependency_.Clear();
 }
-inline const ::std::string& FileDescriptorProto::dependency(int index) const {
+inline const ::std::string& FileDescriptorProto::dependency(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.dependency)
   return dependency_.Get(index);
 }
-inline ::std::string* FileDescriptorProto::mutable_dependency(int index) {
+inline ::std::string* FileDescriptorProto::mutable_dependency(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.dependency)
   return dependency_.Mutable(index);
 }
-inline void FileDescriptorProto::set_dependency(int index, const ::std::string& value) {
+inline void FileDescriptorProto::set_dependency(int index, const ::std::string& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.dependency)
   dependency_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void FileDescriptorProto::set_dependency(int index, ::std::string&& value) {
+inline void FileDescriptorProto::set_dependency(int index, ::std::string&& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.dependency)
   dependency_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void FileDescriptorProto::set_dependency(int index, const char* value) {
+inline void FileDescriptorProto::set_dependency(int index, const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   dependency_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileDescriptorProto.dependency)
 }
-inline void FileDescriptorProto::set_dependency(int index, const char* value, size_t size) {
-  dependency_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
+inline void FileDescriptorProto::set_dependency(int index, const char* value, size_t size)
+{
+  dependency_.Mutable(index)->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileDescriptorProto.dependency)
 }
-inline ::std::string* FileDescriptorProto::add_dependency() {
+inline ::std::string* FileDescriptorProto::add_dependency()
+{
   // @@protoc_insertion_point(field_add_mutable:google.protobuf.FileDescriptorProto.dependency)
   return dependency_.Add();
 }
-inline void FileDescriptorProto::add_dependency(const ::std::string& value) {
+inline void FileDescriptorProto::add_dependency(const ::std::string& value)
+{
   dependency_.Add()->assign(value);
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.dependency)
 }
 #if LANG_CXX11
-inline void FileDescriptorProto::add_dependency(::std::string&& value) {
+inline void FileDescriptorProto::add_dependency(::std::string&& value)
+{
   dependency_.Add(std::move(value));
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.dependency)
 }
 #endif
-inline void FileDescriptorProto::add_dependency(const char* value) {
+inline void FileDescriptorProto::add_dependency(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   dependency_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:google.protobuf.FileDescriptorProto.dependency)
 }
-inline void FileDescriptorProto::add_dependency(const char* value, size_t size) {
+inline void FileDescriptorProto::add_dependency(const char* value, size_t size)
+{
   dependency_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:google.protobuf.FileDescriptorProto.dependency)
 }
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-FileDescriptorProto::dependency() const {
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>& FileDescriptorProto::dependency() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.dependency)
   return dependency_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-FileDescriptorProto::mutable_dependency() {
+inline ::google::protobuf::RepeatedPtrField< ::std::string>* FileDescriptorProto::mutable_dependency()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.dependency)
   return &dependency_;
 }
 
 // repeated int32 public_dependency = 10;
-inline int FileDescriptorProto::public_dependency_size() const {
+inline int FileDescriptorProto::public_dependency_size() const
+{
   return public_dependency_.size();
 }
-inline void FileDescriptorProto::clear_public_dependency() {
+inline void FileDescriptorProto::clear_public_dependency()
+{
   public_dependency_.Clear();
 }
-inline ::google::protobuf::int32 FileDescriptorProto::public_dependency(int index) const {
+inline ::google::protobuf::int32 FileDescriptorProto::public_dependency(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.public_dependency)
   return public_dependency_.Get(index);
 }
-inline void FileDescriptorProto::set_public_dependency(int index, ::google::protobuf::int32 value) {
+inline void FileDescriptorProto::set_public_dependency(int index, ::google::protobuf::int32 value)
+{
   public_dependency_.Set(index, value);
   // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.public_dependency)
 }
-inline void FileDescriptorProto::add_public_dependency(::google::protobuf::int32 value) {
+inline void FileDescriptorProto::add_public_dependency(::google::protobuf::int32 value)
+{
   public_dependency_.Add(value);
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.public_dependency)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-FileDescriptorProto::public_dependency() const {
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32>&
+FileDescriptorProto::public_dependency() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.public_dependency)
   return public_dependency_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-FileDescriptorProto::mutable_public_dependency() {
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32>* FileDescriptorProto::mutable_public_dependency()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.public_dependency)
   return &public_dependency_;
 }
 
 // repeated int32 weak_dependency = 11;
-inline int FileDescriptorProto::weak_dependency_size() const {
+inline int FileDescriptorProto::weak_dependency_size() const
+{
   return weak_dependency_.size();
 }
-inline void FileDescriptorProto::clear_weak_dependency() {
+inline void FileDescriptorProto::clear_weak_dependency()
+{
   weak_dependency_.Clear();
 }
-inline ::google::protobuf::int32 FileDescriptorProto::weak_dependency(int index) const {
+inline ::google::protobuf::int32 FileDescriptorProto::weak_dependency(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.weak_dependency)
   return weak_dependency_.Get(index);
 }
-inline void FileDescriptorProto::set_weak_dependency(int index, ::google::protobuf::int32 value) {
+inline void FileDescriptorProto::set_weak_dependency(int index, ::google::protobuf::int32 value)
+{
   weak_dependency_.Set(index, value);
   // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.weak_dependency)
 }
-inline void FileDescriptorProto::add_weak_dependency(::google::protobuf::int32 value) {
+inline void FileDescriptorProto::add_weak_dependency(::google::protobuf::int32 value)
+{
   weak_dependency_.Add(value);
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.weak_dependency)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-FileDescriptorProto::weak_dependency() const {
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& FileDescriptorProto::weak_dependency() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.weak_dependency)
   return weak_dependency_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-FileDescriptorProto::mutable_weak_dependency() {
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32>* FileDescriptorProto::mutable_weak_dependency()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.weak_dependency)
   return &weak_dependency_;
 }
 
 // repeated .google.protobuf.DescriptorProto message_type = 4;
-inline int FileDescriptorProto::message_type_size() const {
+inline int FileDescriptorProto::message_type_size() const
+{
   return message_type_.size();
 }
-inline void FileDescriptorProto::clear_message_type() {
+inline void FileDescriptorProto::clear_message_type()
+{
   message_type_.Clear();
 }
-inline const ::google::protobuf::DescriptorProto& FileDescriptorProto::message_type(int index) const {
+inline const ::google::protobuf::DescriptorProto& FileDescriptorProto::message_type(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.message_type)
   return message_type_.Get(index);
 }
-inline ::google::protobuf::DescriptorProto* FileDescriptorProto::mutable_message_type(int index) {
+inline ::google::protobuf::DescriptorProto* FileDescriptorProto::mutable_message_type(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.message_type)
   return message_type_.Mutable(index);
 }
-inline ::google::protobuf::DescriptorProto* FileDescriptorProto::add_message_type() {
+inline ::google::protobuf::DescriptorProto* FileDescriptorProto::add_message_type()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.message_type)
   return message_type_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >*
-FileDescriptorProto::mutable_message_type() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>*
+FileDescriptorProto::mutable_message_type()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.message_type)
   return &message_type_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >&
-FileDescriptorProto::message_type() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>&
+FileDescriptorProto::message_type() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.message_type)
   return message_type_;
 }
 
 // repeated .google.protobuf.EnumDescriptorProto enum_type = 5;
-inline int FileDescriptorProto::enum_type_size() const {
+inline int FileDescriptorProto::enum_type_size() const
+{
   return enum_type_.size();
 }
-inline void FileDescriptorProto::clear_enum_type() {
+inline void FileDescriptorProto::clear_enum_type()
+{
   enum_type_.Clear();
 }
-inline const ::google::protobuf::EnumDescriptorProto& FileDescriptorProto::enum_type(int index) const {
+inline const ::google::protobuf::EnumDescriptorProto& FileDescriptorProto::enum_type(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.enum_type)
   return enum_type_.Get(index);
 }
-inline ::google::protobuf::EnumDescriptorProto* FileDescriptorProto::mutable_enum_type(int index) {
+inline ::google::protobuf::EnumDescriptorProto* FileDescriptorProto::mutable_enum_type(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.enum_type)
   return enum_type_.Mutable(index);
 }
-inline ::google::protobuf::EnumDescriptorProto* FileDescriptorProto::add_enum_type() {
+inline ::google::protobuf::EnumDescriptorProto* FileDescriptorProto::add_enum_type()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.enum_type)
   return enum_type_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >*
-FileDescriptorProto::mutable_enum_type() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>*
+FileDescriptorProto::mutable_enum_type()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.enum_type)
   return &enum_type_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >&
-FileDescriptorProto::enum_type() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>&
+FileDescriptorProto::enum_type() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.enum_type)
   return enum_type_;
 }
 
 // repeated .google.protobuf.ServiceDescriptorProto service = 6;
-inline int FileDescriptorProto::service_size() const {
+inline int FileDescriptorProto::service_size() const
+{
   return service_.size();
 }
-inline void FileDescriptorProto::clear_service() {
+inline void FileDescriptorProto::clear_service()
+{
   service_.Clear();
 }
-inline const ::google::protobuf::ServiceDescriptorProto& FileDescriptorProto::service(int index) const {
+inline const ::google::protobuf::ServiceDescriptorProto& FileDescriptorProto::service(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.service)
   return service_.Get(index);
 }
-inline ::google::protobuf::ServiceDescriptorProto* FileDescriptorProto::mutable_service(int index) {
+inline ::google::protobuf::ServiceDescriptorProto* FileDescriptorProto::mutable_service(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.service)
   return service_.Mutable(index);
 }
-inline ::google::protobuf::ServiceDescriptorProto* FileDescriptorProto::add_service() {
+inline ::google::protobuf::ServiceDescriptorProto* FileDescriptorProto::add_service()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.service)
   return service_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto >*
-FileDescriptorProto::mutable_service() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto>*
+FileDescriptorProto::mutable_service()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.service)
   return &service_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto >&
-FileDescriptorProto::service() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::ServiceDescriptorProto>&
+FileDescriptorProto::service() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.service)
   return service_;
 }
 
 // repeated .google.protobuf.FieldDescriptorProto extension = 7;
-inline int FileDescriptorProto::extension_size() const {
+inline int FileDescriptorProto::extension_size() const
+{
   return extension_.size();
 }
-inline void FileDescriptorProto::clear_extension() {
+inline void FileDescriptorProto::clear_extension()
+{
   extension_.Clear();
 }
-inline const ::google::protobuf::FieldDescriptorProto& FileDescriptorProto::extension(int index) const {
+inline const ::google::protobuf::FieldDescriptorProto& FileDescriptorProto::extension(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.extension)
   return extension_.Get(index);
 }
-inline ::google::protobuf::FieldDescriptorProto* FileDescriptorProto::mutable_extension(int index) {
+inline ::google::protobuf::FieldDescriptorProto* FileDescriptorProto::mutable_extension(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.extension)
   return extension_.Mutable(index);
 }
-inline ::google::protobuf::FieldDescriptorProto* FileDescriptorProto::add_extension() {
+inline ::google::protobuf::FieldDescriptorProto* FileDescriptorProto::add_extension()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.extension)
   return extension_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >*
-FileDescriptorProto::mutable_extension() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>*
+FileDescriptorProto::mutable_extension()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.extension)
   return &extension_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >&
-FileDescriptorProto::extension() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>&
+FileDescriptorProto::extension() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.extension)
   return extension_;
 }
 
 // optional .google.protobuf.FileOptions options = 8;
-inline bool FileDescriptorProto::has_options() const {
+inline bool FileDescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void FileDescriptorProto::set_has_options() {
+inline void FileDescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000008u;
 }
-inline void FileDescriptorProto::clear_has_options() {
+inline void FileDescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void FileDescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void FileDescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::FileOptions& FileDescriptorProto::options() const {
+inline const ::google::protobuf::FileOptions& FileDescriptorProto::options() const
+{
   const ::google::protobuf::FileOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::FileOptions*>(
-      &::google::protobuf::_FileOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::FileOptions*>(
+                         &::google::protobuf::_FileOptions_default_instance_);
 }
-inline ::google::protobuf::FileOptions* FileDescriptorProto::release_options() {
+inline ::google::protobuf::FileOptions* FileDescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::FileOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::FileOptions* FileDescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::FileOptions* FileDescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::FileOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::FileOptions* FileDescriptorProto::mutable_options() {
+inline ::google::protobuf::FileOptions* FileDescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.options)
   return options_;
 }
-inline void FileDescriptorProto::set_allocated_options(::google::protobuf::FileOptions* options) {
+inline void FileDescriptorProto::set_allocated_options(::google::protobuf::FileOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -6202,64 +6825,81 @@ inline void FileDescriptorProto::set_allocated_options(::google::protobuf::FileO
 }
 
 // optional .google.protobuf.SourceCodeInfo source_code_info = 9;
-inline bool FileDescriptorProto::has_source_code_info() const {
+inline bool FileDescriptorProto::has_source_code_info() const
+{
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void FileDescriptorProto::set_has_source_code_info() {
+inline void FileDescriptorProto::set_has_source_code_info()
+{
   _has_bits_[0] |= 0x00000010u;
 }
-inline void FileDescriptorProto::clear_has_source_code_info() {
+inline void FileDescriptorProto::clear_has_source_code_info()
+{
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void FileDescriptorProto::clear_source_code_info() {
-  if (source_code_info_ != NULL) source_code_info_->Clear();
+inline void FileDescriptorProto::clear_source_code_info()
+{
+  if (source_code_info_ != NULL)
+    source_code_info_->Clear();
   clear_has_source_code_info();
 }
-inline const ::google::protobuf::SourceCodeInfo& FileDescriptorProto::source_code_info() const {
+inline const ::google::protobuf::SourceCodeInfo& FileDescriptorProto::source_code_info() const
+{
   const ::google::protobuf::SourceCodeInfo* p = source_code_info_;
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.source_code_info)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::SourceCodeInfo*>(
-      &::google::protobuf::_SourceCodeInfo_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::SourceCodeInfo*>(
+                         &::google::protobuf::_SourceCodeInfo_default_instance_);
 }
-inline ::google::protobuf::SourceCodeInfo* FileDescriptorProto::release_source_code_info() {
+inline ::google::protobuf::SourceCodeInfo* FileDescriptorProto::release_source_code_info()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.source_code_info)
   clear_has_source_code_info();
   ::google::protobuf::SourceCodeInfo* temp = source_code_info_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   source_code_info_ = NULL;
   return temp;
 }
-inline ::google::protobuf::SourceCodeInfo* FileDescriptorProto::unsafe_arena_release_source_code_info() {
+inline ::google::protobuf::SourceCodeInfo* FileDescriptorProto::unsafe_arena_release_source_code_info()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileDescriptorProto.source_code_info)
   clear_has_source_code_info();
   ::google::protobuf::SourceCodeInfo* temp = source_code_info_;
   source_code_info_ = NULL;
   return temp;
 }
-inline ::google::protobuf::SourceCodeInfo* FileDescriptorProto::mutable_source_code_info() {
+inline ::google::protobuf::SourceCodeInfo* FileDescriptorProto::mutable_source_code_info()
+{
   set_has_source_code_info();
-  if (source_code_info_ == NULL) {
+  if (source_code_info_ == NULL)
+  {
     _slow_mutable_source_code_info();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.source_code_info)
   return source_code_info_;
 }
-inline void FileDescriptorProto::set_allocated_source_code_info(::google::protobuf::SourceCodeInfo* source_code_info) {
+inline void FileDescriptorProto::set_allocated_source_code_info(::google::protobuf::SourceCodeInfo* source_code_info)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete source_code_info_;
   }
-  if (source_code_info) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(source_code_info);
-    if (message_arena != submessage_arena) {
-      source_code_info = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, source_code_info, submessage_arena);
+  if (source_code_info)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(source_code_info);
+    if (message_arena != submessage_arena)
+    {
+      source_code_info =
+          ::google::protobuf::internal::GetOwnedMessage(message_arena, source_code_info, submessage_arena);
     }
     set_has_source_code_info();
-  } else {
+  }
+  else
+  {
     clear_has_source_code_info();
   }
   source_code_info_ = source_code_info;
@@ -6267,87 +6907,101 @@ inline void FileDescriptorProto::set_allocated_source_code_info(::google::protob
 }
 
 // optional string syntax = 12;
-inline bool FileDescriptorProto::has_syntax() const {
+inline bool FileDescriptorProto::has_syntax() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void FileDescriptorProto::set_has_syntax() {
+inline void FileDescriptorProto::set_has_syntax()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void FileDescriptorProto::clear_has_syntax() {
+inline void FileDescriptorProto::clear_has_syntax()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void FileDescriptorProto::clear_syntax() {
+inline void FileDescriptorProto::clear_syntax()
+{
   syntax_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_syntax();
 }
-inline const ::std::string& FileDescriptorProto::syntax() const {
+inline const ::std::string& FileDescriptorProto::syntax() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.syntax)
   return syntax_.Get();
 }
-inline void FileDescriptorProto::set_syntax(const ::std::string& value) {
+inline void FileDescriptorProto::set_syntax(const ::std::string& value)
+{
   set_has_syntax();
   syntax_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.syntax)
 }
 #if LANG_CXX11
-inline void FileDescriptorProto::set_syntax(::std::string&& value) {
+inline void FileDescriptorProto::set_syntax(::std::string&& value)
+{
   set_has_syntax();
-  syntax_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  syntax_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileDescriptorProto.syntax)
 }
 #endif
-inline void FileDescriptorProto::set_syntax(const char* value) {
+inline void FileDescriptorProto::set_syntax(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_syntax();
-  syntax_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  syntax_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileDescriptorProto.syntax)
 }
-inline void FileDescriptorProto::set_syntax(const char* value,
-    size_t size) {
+inline void FileDescriptorProto::set_syntax(const char* value, size_t size)
+{
   set_has_syntax();
-  syntax_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  syntax_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+              ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileDescriptorProto.syntax)
 }
-inline ::std::string* FileDescriptorProto::mutable_syntax() {
+inline ::std::string* FileDescriptorProto::mutable_syntax()
+{
   set_has_syntax();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.syntax)
   return syntax_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileDescriptorProto::release_syntax() {
+inline ::std::string* FileDescriptorProto::release_syntax()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.syntax)
   clear_has_syntax();
   return syntax_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileDescriptorProto::set_allocated_syntax(::std::string* syntax) {
-  if (syntax != NULL) {
+inline void FileDescriptorProto::set_allocated_syntax(::std::string* syntax)
+{
+  if (syntax != NULL)
+  {
     set_has_syntax();
-  } else {
+  }
+  else
+  {
     clear_has_syntax();
   }
-  syntax_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), syntax,
-      GetArenaNoVirtual());
+  syntax_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), syntax, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.syntax)
 }
-inline ::std::string* FileDescriptorProto::unsafe_arena_release_syntax() {
+inline ::std::string* FileDescriptorProto::unsafe_arena_release_syntax()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileDescriptorProto.syntax)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_syntax();
-  return syntax_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return syntax_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileDescriptorProto::unsafe_arena_set_allocated_syntax(
-    ::std::string* syntax) {
+inline void FileDescriptorProto::unsafe_arena_set_allocated_syntax(::std::string* syntax)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (syntax != NULL) {
+  if (syntax != NULL)
+  {
     set_has_syntax();
-  } else {
+  }
+  else
+  {
     clear_has_syntax();
   }
-  syntax_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      syntax, GetArenaNoVirtual());
+  syntax_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), syntax,
+                                  GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileDescriptorProto.syntax)
 }
 
@@ -6356,112 +7010,140 @@ inline void FileDescriptorProto::unsafe_arena_set_allocated_syntax(
 // DescriptorProto_ExtensionRange
 
 // optional int32 start = 1;
-inline bool DescriptorProto_ExtensionRange::has_start() const {
+inline bool DescriptorProto_ExtensionRange::has_start() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void DescriptorProto_ExtensionRange::set_has_start() {
+inline void DescriptorProto_ExtensionRange::set_has_start()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void DescriptorProto_ExtensionRange::clear_has_start() {
+inline void DescriptorProto_ExtensionRange::clear_has_start()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void DescriptorProto_ExtensionRange::clear_start() {
+inline void DescriptorProto_ExtensionRange::clear_start()
+{
   start_ = 0;
   clear_has_start();
 }
-inline ::google::protobuf::int32 DescriptorProto_ExtensionRange::start() const {
+inline ::google::protobuf::int32 DescriptorProto_ExtensionRange::start() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ExtensionRange.start)
   return start_;
 }
-inline void DescriptorProto_ExtensionRange::set_start(::google::protobuf::int32 value) {
+inline void DescriptorProto_ExtensionRange::set_start(::google::protobuf::int32 value)
+{
   set_has_start();
   start_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ExtensionRange.start)
 }
 
 // optional int32 end = 2;
-inline bool DescriptorProto_ExtensionRange::has_end() const {
+inline bool DescriptorProto_ExtensionRange::has_end() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void DescriptorProto_ExtensionRange::set_has_end() {
+inline void DescriptorProto_ExtensionRange::set_has_end()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void DescriptorProto_ExtensionRange::clear_has_end() {
+inline void DescriptorProto_ExtensionRange::clear_has_end()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void DescriptorProto_ExtensionRange::clear_end() {
+inline void DescriptorProto_ExtensionRange::clear_end()
+{
   end_ = 0;
   clear_has_end();
 }
-inline ::google::protobuf::int32 DescriptorProto_ExtensionRange::end() const {
+inline ::google::protobuf::int32 DescriptorProto_ExtensionRange::end() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ExtensionRange.end)
   return end_;
 }
-inline void DescriptorProto_ExtensionRange::set_end(::google::protobuf::int32 value) {
+inline void DescriptorProto_ExtensionRange::set_end(::google::protobuf::int32 value)
+{
   set_has_end();
   end_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ExtensionRange.end)
 }
 
 // optional .google.protobuf.ExtensionRangeOptions options = 3;
-inline bool DescriptorProto_ExtensionRange::has_options() const {
+inline bool DescriptorProto_ExtensionRange::has_options() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DescriptorProto_ExtensionRange::set_has_options() {
+inline void DescriptorProto_ExtensionRange::set_has_options()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DescriptorProto_ExtensionRange::clear_has_options() {
+inline void DescriptorProto_ExtensionRange::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void DescriptorProto_ExtensionRange::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void DescriptorProto_ExtensionRange::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::ExtensionRangeOptions& DescriptorProto_ExtensionRange::options() const {
+inline const ::google::protobuf::ExtensionRangeOptions& DescriptorProto_ExtensionRange::options() const
+{
   const ::google::protobuf::ExtensionRangeOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ExtensionRange.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::ExtensionRangeOptions*>(
-      &::google::protobuf::_ExtensionRangeOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::ExtensionRangeOptions*>(
+                         &::google::protobuf::_ExtensionRangeOptions_default_instance_);
 }
-inline ::google::protobuf::ExtensionRangeOptions* DescriptorProto_ExtensionRange::release_options() {
+inline ::google::protobuf::ExtensionRangeOptions* DescriptorProto_ExtensionRange::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.DescriptorProto.ExtensionRange.options)
   clear_has_options();
   ::google::protobuf::ExtensionRangeOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::ExtensionRangeOptions* DescriptorProto_ExtensionRange::unsafe_arena_release_options() {
+inline ::google::protobuf::ExtensionRangeOptions* DescriptorProto_ExtensionRange::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.DescriptorProto.ExtensionRange.options)
   clear_has_options();
   ::google::protobuf::ExtensionRangeOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::ExtensionRangeOptions* DescriptorProto_ExtensionRange::mutable_options() {
+inline ::google::protobuf::ExtensionRangeOptions* DescriptorProto_ExtensionRange::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.ExtensionRange.options)
   return options_;
 }
-inline void DescriptorProto_ExtensionRange::set_allocated_options(::google::protobuf::ExtensionRangeOptions* options) {
+inline void DescriptorProto_ExtensionRange::set_allocated_options(::google::protobuf::ExtensionRangeOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -6473,48 +7155,60 @@ inline void DescriptorProto_ExtensionRange::set_allocated_options(::google::prot
 // DescriptorProto_ReservedRange
 
 // optional int32 start = 1;
-inline bool DescriptorProto_ReservedRange::has_start() const {
+inline bool DescriptorProto_ReservedRange::has_start() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DescriptorProto_ReservedRange::set_has_start() {
+inline void DescriptorProto_ReservedRange::set_has_start()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DescriptorProto_ReservedRange::clear_has_start() {
+inline void DescriptorProto_ReservedRange::clear_has_start()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void DescriptorProto_ReservedRange::clear_start() {
+inline void DescriptorProto_ReservedRange::clear_start()
+{
   start_ = 0;
   clear_has_start();
 }
-inline ::google::protobuf::int32 DescriptorProto_ReservedRange::start() const {
+inline ::google::protobuf::int32 DescriptorProto_ReservedRange::start() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ReservedRange.start)
   return start_;
 }
-inline void DescriptorProto_ReservedRange::set_start(::google::protobuf::int32 value) {
+inline void DescriptorProto_ReservedRange::set_start(::google::protobuf::int32 value)
+{
   set_has_start();
   start_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ReservedRange.start)
 }
 
 // optional int32 end = 2;
-inline bool DescriptorProto_ReservedRange::has_end() const {
+inline bool DescriptorProto_ReservedRange::has_end() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void DescriptorProto_ReservedRange::set_has_end() {
+inline void DescriptorProto_ReservedRange::set_has_end()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void DescriptorProto_ReservedRange::clear_has_end() {
+inline void DescriptorProto_ReservedRange::clear_has_end()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void DescriptorProto_ReservedRange::clear_end() {
+inline void DescriptorProto_ReservedRange::clear_end()
+{
   end_ = 0;
   clear_has_end();
 }
-inline ::google::protobuf::int32 DescriptorProto_ReservedRange::end() const {
+inline ::google::protobuf::int32 DescriptorProto_ReservedRange::end() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ReservedRange.end)
   return end_;
 }
-inline void DescriptorProto_ReservedRange::set_end(::google::protobuf::int32 value) {
+inline void DescriptorProto_ReservedRange::set_end(::google::protobuf::int32 value)
+{
   set_has_end();
   end_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ReservedRange.end)
@@ -6525,329 +7219,398 @@ inline void DescriptorProto_ReservedRange::set_end(::google::protobuf::int32 val
 // DescriptorProto
 
 // optional string name = 1;
-inline bool DescriptorProto::has_name() const {
+inline bool DescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DescriptorProto::set_has_name() {
+inline void DescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DescriptorProto::clear_has_name() {
+inline void DescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void DescriptorProto::clear_name() {
+inline void DescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& DescriptorProto::name() const {
+inline const ::std::string& DescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.name)
   return name_.Get();
 }
-inline void DescriptorProto::set_name(const ::std::string& value) {
+inline void DescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.name)
 }
 #if LANG_CXX11
-inline void DescriptorProto::set_name(::std::string&& value) {
+inline void DescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.DescriptorProto.name)
 }
 #endif
-inline void DescriptorProto::set_name(const char* value) {
+inline void DescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.DescriptorProto.name)
 }
-inline void DescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void DescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.DescriptorProto.name)
 }
-inline ::std::string* DescriptorProto::mutable_name() {
+inline ::std::string* DescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* DescriptorProto::release_name() {
+inline ::std::string* DescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.DescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void DescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void DescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.DescriptorProto.name)
 }
-inline ::std::string* DescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* DescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.DescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void DescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void DescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.DescriptorProto.name)
 }
 
 // repeated .google.protobuf.FieldDescriptorProto field = 2;
-inline int DescriptorProto::field_size() const {
+inline int DescriptorProto::field_size() const
+{
   return field_.size();
 }
-inline void DescriptorProto::clear_field() {
+inline void DescriptorProto::clear_field()
+{
   field_.Clear();
 }
-inline const ::google::protobuf::FieldDescriptorProto& DescriptorProto::field(int index) const {
+inline const ::google::protobuf::FieldDescriptorProto& DescriptorProto::field(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.field)
   return field_.Get(index);
 }
-inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::mutable_field(int index) {
+inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::mutable_field(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.field)
   return field_.Mutable(index);
 }
-inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::add_field() {
+inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::add_field()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.field)
   return field_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >*
-DescriptorProto::mutable_field() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>* DescriptorProto::mutable_field()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.field)
   return &field_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >&
-DescriptorProto::field() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>&
+DescriptorProto::field() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.field)
   return field_;
 }
 
 // repeated .google.protobuf.FieldDescriptorProto extension = 6;
-inline int DescriptorProto::extension_size() const {
+inline int DescriptorProto::extension_size() const
+{
   return extension_.size();
 }
-inline void DescriptorProto::clear_extension() {
+inline void DescriptorProto::clear_extension()
+{
   extension_.Clear();
 }
-inline const ::google::protobuf::FieldDescriptorProto& DescriptorProto::extension(int index) const {
+inline const ::google::protobuf::FieldDescriptorProto& DescriptorProto::extension(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.extension)
   return extension_.Get(index);
 }
-inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::mutable_extension(int index) {
+inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::mutable_extension(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.extension)
   return extension_.Mutable(index);
 }
-inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::add_extension() {
+inline ::google::protobuf::FieldDescriptorProto* DescriptorProto::add_extension()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.extension)
   return extension_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >*
-DescriptorProto::mutable_extension() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>*
+DescriptorProto::mutable_extension()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.extension)
   return &extension_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto >&
-DescriptorProto::extension() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::FieldDescriptorProto>&
+DescriptorProto::extension() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.extension)
   return extension_;
 }
 
 // repeated .google.protobuf.DescriptorProto nested_type = 3;
-inline int DescriptorProto::nested_type_size() const {
+inline int DescriptorProto::nested_type_size() const
+{
   return nested_type_.size();
 }
-inline void DescriptorProto::clear_nested_type() {
+inline void DescriptorProto::clear_nested_type()
+{
   nested_type_.Clear();
 }
-inline const ::google::protobuf::DescriptorProto& DescriptorProto::nested_type(int index) const {
+inline const ::google::protobuf::DescriptorProto& DescriptorProto::nested_type(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.nested_type)
   return nested_type_.Get(index);
 }
-inline ::google::protobuf::DescriptorProto* DescriptorProto::mutable_nested_type(int index) {
+inline ::google::protobuf::DescriptorProto* DescriptorProto::mutable_nested_type(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.nested_type)
   return nested_type_.Mutable(index);
 }
-inline ::google::protobuf::DescriptorProto* DescriptorProto::add_nested_type() {
+inline ::google::protobuf::DescriptorProto* DescriptorProto::add_nested_type()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.nested_type)
   return nested_type_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >*
-DescriptorProto::mutable_nested_type() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>* DescriptorProto::mutable_nested_type()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.nested_type)
   return &nested_type_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto >&
-DescriptorProto::nested_type() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto>&
+DescriptorProto::nested_type() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.nested_type)
   return nested_type_;
 }
 
 // repeated .google.protobuf.EnumDescriptorProto enum_type = 4;
-inline int DescriptorProto::enum_type_size() const {
+inline int DescriptorProto::enum_type_size() const
+{
   return enum_type_.size();
 }
-inline void DescriptorProto::clear_enum_type() {
+inline void DescriptorProto::clear_enum_type()
+{
   enum_type_.Clear();
 }
-inline const ::google::protobuf::EnumDescriptorProto& DescriptorProto::enum_type(int index) const {
+inline const ::google::protobuf::EnumDescriptorProto& DescriptorProto::enum_type(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.enum_type)
   return enum_type_.Get(index);
 }
-inline ::google::protobuf::EnumDescriptorProto* DescriptorProto::mutable_enum_type(int index) {
+inline ::google::protobuf::EnumDescriptorProto* DescriptorProto::mutable_enum_type(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.enum_type)
   return enum_type_.Mutable(index);
 }
-inline ::google::protobuf::EnumDescriptorProto* DescriptorProto::add_enum_type() {
+inline ::google::protobuf::EnumDescriptorProto* DescriptorProto::add_enum_type()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.enum_type)
   return enum_type_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >*
-DescriptorProto::mutable_enum_type() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>*
+DescriptorProto::mutable_enum_type()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.enum_type)
   return &enum_type_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto >&
-DescriptorProto::enum_type() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto>&
+DescriptorProto::enum_type() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.enum_type)
   return enum_type_;
 }
 
 // repeated .google.protobuf.DescriptorProto.ExtensionRange extension_range = 5;
-inline int DescriptorProto::extension_range_size() const {
+inline int DescriptorProto::extension_range_size() const
+{
   return extension_range_.size();
 }
-inline void DescriptorProto::clear_extension_range() {
+inline void DescriptorProto::clear_extension_range()
+{
   extension_range_.Clear();
 }
-inline const ::google::protobuf::DescriptorProto_ExtensionRange& DescriptorProto::extension_range(int index) const {
+inline const ::google::protobuf::DescriptorProto_ExtensionRange& DescriptorProto::extension_range(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.extension_range)
   return extension_range_.Get(index);
 }
-inline ::google::protobuf::DescriptorProto_ExtensionRange* DescriptorProto::mutable_extension_range(int index) {
+inline ::google::protobuf::DescriptorProto_ExtensionRange* DescriptorProto::mutable_extension_range(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.extension_range)
   return extension_range_.Mutable(index);
 }
-inline ::google::protobuf::DescriptorProto_ExtensionRange* DescriptorProto::add_extension_range() {
+inline ::google::protobuf::DescriptorProto_ExtensionRange* DescriptorProto::add_extension_range()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.extension_range)
   return extension_range_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange >*
-DescriptorProto::mutable_extension_range() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange>*
+DescriptorProto::mutable_extension_range()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.extension_range)
   return &extension_range_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange >&
-DescriptorProto::extension_range() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ExtensionRange>&
+DescriptorProto::extension_range() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.extension_range)
   return extension_range_;
 }
 
 // repeated .google.protobuf.OneofDescriptorProto oneof_decl = 8;
-inline int DescriptorProto::oneof_decl_size() const {
+inline int DescriptorProto::oneof_decl_size() const
+{
   return oneof_decl_.size();
 }
-inline void DescriptorProto::clear_oneof_decl() {
+inline void DescriptorProto::clear_oneof_decl()
+{
   oneof_decl_.Clear();
 }
-inline const ::google::protobuf::OneofDescriptorProto& DescriptorProto::oneof_decl(int index) const {
+inline const ::google::protobuf::OneofDescriptorProto& DescriptorProto::oneof_decl(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.oneof_decl)
   return oneof_decl_.Get(index);
 }
-inline ::google::protobuf::OneofDescriptorProto* DescriptorProto::mutable_oneof_decl(int index) {
+inline ::google::protobuf::OneofDescriptorProto* DescriptorProto::mutable_oneof_decl(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.oneof_decl)
   return oneof_decl_.Mutable(index);
 }
-inline ::google::protobuf::OneofDescriptorProto* DescriptorProto::add_oneof_decl() {
+inline ::google::protobuf::OneofDescriptorProto* DescriptorProto::add_oneof_decl()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.oneof_decl)
   return oneof_decl_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto >*
-DescriptorProto::mutable_oneof_decl() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto>*
+DescriptorProto::mutable_oneof_decl()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.oneof_decl)
   return &oneof_decl_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto >&
-DescriptorProto::oneof_decl() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::OneofDescriptorProto>&
+DescriptorProto::oneof_decl() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.oneof_decl)
   return oneof_decl_;
 }
 
 // optional .google.protobuf.MessageOptions options = 7;
-inline bool DescriptorProto::has_options() const {
+inline bool DescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void DescriptorProto::set_has_options() {
+inline void DescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void DescriptorProto::clear_has_options() {
+inline void DescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void DescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void DescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::MessageOptions& DescriptorProto::options() const {
+inline const ::google::protobuf::MessageOptions& DescriptorProto::options() const
+{
   const ::google::protobuf::MessageOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::MessageOptions*>(
-      &::google::protobuf::_MessageOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::MessageOptions*>(
+                         &::google::protobuf::_MessageOptions_default_instance_);
 }
-inline ::google::protobuf::MessageOptions* DescriptorProto::release_options() {
+inline ::google::protobuf::MessageOptions* DescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.DescriptorProto.options)
   clear_has_options();
   ::google::protobuf::MessageOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::MessageOptions* DescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::MessageOptions* DescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.DescriptorProto.options)
   clear_has_options();
   ::google::protobuf::MessageOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::MessageOptions* DescriptorProto::mutable_options() {
+inline ::google::protobuf::MessageOptions* DescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.options)
   return options_;
 }
-inline void DescriptorProto::set_allocated_options(::google::protobuf::MessageOptions* options) {
+inline void DescriptorProto::set_allocated_options(::google::protobuf::MessageOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -6855,100 +7618,119 @@ inline void DescriptorProto::set_allocated_options(::google::protobuf::MessageOp
 }
 
 // repeated .google.protobuf.DescriptorProto.ReservedRange reserved_range = 9;
-inline int DescriptorProto::reserved_range_size() const {
+inline int DescriptorProto::reserved_range_size() const
+{
   return reserved_range_.size();
 }
-inline void DescriptorProto::clear_reserved_range() {
+inline void DescriptorProto::clear_reserved_range()
+{
   reserved_range_.Clear();
 }
-inline const ::google::protobuf::DescriptorProto_ReservedRange& DescriptorProto::reserved_range(int index) const {
+inline const ::google::protobuf::DescriptorProto_ReservedRange& DescriptorProto::reserved_range(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.reserved_range)
   return reserved_range_.Get(index);
 }
-inline ::google::protobuf::DescriptorProto_ReservedRange* DescriptorProto::mutable_reserved_range(int index) {
+inline ::google::protobuf::DescriptorProto_ReservedRange* DescriptorProto::mutable_reserved_range(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.reserved_range)
   return reserved_range_.Mutable(index);
 }
-inline ::google::protobuf::DescriptorProto_ReservedRange* DescriptorProto::add_reserved_range() {
+inline ::google::protobuf::DescriptorProto_ReservedRange* DescriptorProto::add_reserved_range()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.reserved_range)
   return reserved_range_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange >*
-DescriptorProto::mutable_reserved_range() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange>*
+DescriptorProto::mutable_reserved_range()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.reserved_range)
   return &reserved_range_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange >&
-DescriptorProto::reserved_range() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::DescriptorProto_ReservedRange>&
+DescriptorProto::reserved_range() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.reserved_range)
   return reserved_range_;
 }
 
 // repeated string reserved_name = 10;
-inline int DescriptorProto::reserved_name_size() const {
+inline int DescriptorProto::reserved_name_size() const
+{
   return reserved_name_.size();
 }
-inline void DescriptorProto::clear_reserved_name() {
+inline void DescriptorProto::clear_reserved_name()
+{
   reserved_name_.Clear();
 }
-inline const ::std::string& DescriptorProto::reserved_name(int index) const {
+inline const ::std::string& DescriptorProto::reserved_name(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.reserved_name)
   return reserved_name_.Get(index);
 }
-inline ::std::string* DescriptorProto::mutable_reserved_name(int index) {
+inline ::std::string* DescriptorProto::mutable_reserved_name(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.reserved_name)
   return reserved_name_.Mutable(index);
 }
-inline void DescriptorProto::set_reserved_name(int index, const ::std::string& value) {
+inline void DescriptorProto::set_reserved_name(int index, const ::std::string& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.reserved_name)
   reserved_name_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void DescriptorProto::set_reserved_name(int index, ::std::string&& value) {
+inline void DescriptorProto::set_reserved_name(int index, ::std::string&& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.reserved_name)
   reserved_name_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void DescriptorProto::set_reserved_name(int index, const char* value) {
+inline void DescriptorProto::set_reserved_name(int index, const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   reserved_name_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:google.protobuf.DescriptorProto.reserved_name)
 }
-inline void DescriptorProto::set_reserved_name(int index, const char* value, size_t size) {
-  reserved_name_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
+inline void DescriptorProto::set_reserved_name(int index, const char* value, size_t size)
+{
+  reserved_name_.Mutable(index)->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.DescriptorProto.reserved_name)
 }
-inline ::std::string* DescriptorProto::add_reserved_name() {
+inline ::std::string* DescriptorProto::add_reserved_name()
+{
   // @@protoc_insertion_point(field_add_mutable:google.protobuf.DescriptorProto.reserved_name)
   return reserved_name_.Add();
 }
-inline void DescriptorProto::add_reserved_name(const ::std::string& value) {
+inline void DescriptorProto::add_reserved_name(const ::std::string& value)
+{
   reserved_name_.Add()->assign(value);
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.reserved_name)
 }
 #if LANG_CXX11
-inline void DescriptorProto::add_reserved_name(::std::string&& value) {
+inline void DescriptorProto::add_reserved_name(::std::string&& value)
+{
   reserved_name_.Add(std::move(value));
   // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.reserved_name)
 }
 #endif
-inline void DescriptorProto::add_reserved_name(const char* value) {
+inline void DescriptorProto::add_reserved_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   reserved_name_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:google.protobuf.DescriptorProto.reserved_name)
 }
-inline void DescriptorProto::add_reserved_name(const char* value, size_t size) {
+inline void DescriptorProto::add_reserved_name(const char* value, size_t size)
+{
   reserved_name_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:google.protobuf.DescriptorProto.reserved_name)
 }
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-DescriptorProto::reserved_name() const {
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>& DescriptorProto::reserved_name() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.reserved_name)
   return reserved_name_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-DescriptorProto::mutable_reserved_name() {
+inline ::google::protobuf::RepeatedPtrField< ::std::string>* DescriptorProto::mutable_reserved_name()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.reserved_name)
   return &reserved_name_;
 }
@@ -6958,31 +7740,38 @@ DescriptorProto::mutable_reserved_name() {
 // ExtensionRangeOptions
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int ExtensionRangeOptions::uninterpreted_option_size() const {
+inline int ExtensionRangeOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void ExtensionRangeOptions::clear_uninterpreted_option() {
+inline void ExtensionRangeOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& ExtensionRangeOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& ExtensionRangeOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* ExtensionRangeOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* ExtensionRangeOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* ExtensionRangeOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* ExtensionRangeOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-ExtensionRangeOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+ExtensionRangeOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-ExtensionRangeOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+ExtensionRangeOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -6992,133 +7781,158 @@ ExtensionRangeOptions::uninterpreted_option() const {
 // FieldDescriptorProto
 
 // optional string name = 1;
-inline bool FieldDescriptorProto::has_name() const {
+inline bool FieldDescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void FieldDescriptorProto::set_has_name() {
+inline void FieldDescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void FieldDescriptorProto::clear_has_name() {
+inline void FieldDescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void FieldDescriptorProto::clear_name() {
+inline void FieldDescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& FieldDescriptorProto::name() const {
+inline const ::std::string& FieldDescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.name)
   return name_.Get();
 }
-inline void FieldDescriptorProto::set_name(const ::std::string& value) {
+inline void FieldDescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.name)
 }
 #if LANG_CXX11
-inline void FieldDescriptorProto::set_name(::std::string&& value) {
+inline void FieldDescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FieldDescriptorProto.name)
 }
 #endif
-inline void FieldDescriptorProto::set_name(const char* value) {
+inline void FieldDescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FieldDescriptorProto.name)
 }
-inline void FieldDescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void FieldDescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FieldDescriptorProto.name)
 }
-inline ::std::string* FieldDescriptorProto::mutable_name() {
+inline ::std::string* FieldDescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FieldDescriptorProto::release_name() {
+inline ::std::string* FieldDescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void FieldDescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.name)
 }
-inline ::std::string* FieldDescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* FieldDescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FieldDescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void FieldDescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FieldDescriptorProto.name)
 }
 
 // optional int32 number = 3;
-inline bool FieldDescriptorProto::has_number() const {
+inline bool FieldDescriptorProto::has_number() const
+{
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void FieldDescriptorProto::set_has_number() {
+inline void FieldDescriptorProto::set_has_number()
+{
   _has_bits_[0] |= 0x00000040u;
 }
-inline void FieldDescriptorProto::clear_has_number() {
+inline void FieldDescriptorProto::clear_has_number()
+{
   _has_bits_[0] &= ~0x00000040u;
 }
-inline void FieldDescriptorProto::clear_number() {
+inline void FieldDescriptorProto::clear_number()
+{
   number_ = 0;
   clear_has_number();
 }
-inline ::google::protobuf::int32 FieldDescriptorProto::number() const {
+inline ::google::protobuf::int32 FieldDescriptorProto::number() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.number)
   return number_;
 }
-inline void FieldDescriptorProto::set_number(::google::protobuf::int32 value) {
+inline void FieldDescriptorProto::set_number(::google::protobuf::int32 value)
+{
   set_has_number();
   number_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.number)
 }
 
 // optional .google.protobuf.FieldDescriptorProto.Label label = 4;
-inline bool FieldDescriptorProto::has_label() const {
+inline bool FieldDescriptorProto::has_label() const
+{
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void FieldDescriptorProto::set_has_label() {
+inline void FieldDescriptorProto::set_has_label()
+{
   _has_bits_[0] |= 0x00000100u;
 }
-inline void FieldDescriptorProto::clear_has_label() {
+inline void FieldDescriptorProto::clear_has_label()
+{
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void FieldDescriptorProto::clear_label() {
+inline void FieldDescriptorProto::clear_label()
+{
   label_ = 1;
   clear_has_label();
 }
-inline ::google::protobuf::FieldDescriptorProto_Label FieldDescriptorProto::label() const {
+inline ::google::protobuf::FieldDescriptorProto_Label FieldDescriptorProto::label() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.label)
-  return static_cast< ::google::protobuf::FieldDescriptorProto_Label >(label_);
+  return static_cast< ::google::protobuf::FieldDescriptorProto_Label>(label_);
 }
-inline void FieldDescriptorProto::set_label(::google::protobuf::FieldDescriptorProto_Label value) {
+inline void FieldDescriptorProto::set_label(::google::protobuf::FieldDescriptorProto_Label value)
+{
   assert(::google::protobuf::FieldDescriptorProto_Label_IsValid(value));
   set_has_label();
   label_ = value;
@@ -7126,24 +7940,30 @@ inline void FieldDescriptorProto::set_label(::google::protobuf::FieldDescriptorP
 }
 
 // optional .google.protobuf.FieldDescriptorProto.Type type = 5;
-inline bool FieldDescriptorProto::has_type() const {
+inline bool FieldDescriptorProto::has_type() const
+{
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void FieldDescriptorProto::set_has_type() {
+inline void FieldDescriptorProto::set_has_type()
+{
   _has_bits_[0] |= 0x00000200u;
 }
-inline void FieldDescriptorProto::clear_has_type() {
+inline void FieldDescriptorProto::clear_has_type()
+{
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void FieldDescriptorProto::clear_type() {
+inline void FieldDescriptorProto::clear_type()
+{
   type_ = 1;
   clear_has_type();
 }
-inline ::google::protobuf::FieldDescriptorProto_Type FieldDescriptorProto::type() const {
+inline ::google::protobuf::FieldDescriptorProto_Type FieldDescriptorProto::type() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.type)
-  return static_cast< ::google::protobuf::FieldDescriptorProto_Type >(type_);
+  return static_cast< ::google::protobuf::FieldDescriptorProto_Type>(type_);
 }
-inline void FieldDescriptorProto::set_type(::google::protobuf::FieldDescriptorProto_Type value) {
+inline void FieldDescriptorProto::set_type(::google::protobuf::FieldDescriptorProto_Type value)
+{
   assert(::google::protobuf::FieldDescriptorProto_Type_IsValid(value));
   set_has_type();
   type_ = value;
@@ -7151,428 +7971,514 @@ inline void FieldDescriptorProto::set_type(::google::protobuf::FieldDescriptorPr
 }
 
 // optional string type_name = 6;
-inline bool FieldDescriptorProto::has_type_name() const {
+inline bool FieldDescriptorProto::has_type_name() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void FieldDescriptorProto::set_has_type_name() {
+inline void FieldDescriptorProto::set_has_type_name()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void FieldDescriptorProto::clear_has_type_name() {
+inline void FieldDescriptorProto::clear_has_type_name()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void FieldDescriptorProto::clear_type_name() {
+inline void FieldDescriptorProto::clear_type_name()
+{
   type_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_type_name();
 }
-inline const ::std::string& FieldDescriptorProto::type_name() const {
+inline const ::std::string& FieldDescriptorProto::type_name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.type_name)
   return type_name_.Get();
 }
-inline void FieldDescriptorProto::set_type_name(const ::std::string& value) {
+inline void FieldDescriptorProto::set_type_name(const ::std::string& value)
+{
   set_has_type_name();
   type_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.type_name)
 }
 #if LANG_CXX11
-inline void FieldDescriptorProto::set_type_name(::std::string&& value) {
+inline void FieldDescriptorProto::set_type_name(::std::string&& value)
+{
   set_has_type_name();
-  type_name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  type_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FieldDescriptorProto.type_name)
 }
 #endif
-inline void FieldDescriptorProto::set_type_name(const char* value) {
+inline void FieldDescriptorProto::set_type_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_type_name();
   type_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                 GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FieldDescriptorProto.type_name)
 }
-inline void FieldDescriptorProto::set_type_name(const char* value,
-    size_t size) {
+inline void FieldDescriptorProto::set_type_name(const char* value, size_t size)
+{
   set_has_type_name();
-  type_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  type_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                 ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FieldDescriptorProto.type_name)
 }
-inline ::std::string* FieldDescriptorProto::mutable_type_name() {
+inline ::std::string* FieldDescriptorProto::mutable_type_name()
+{
   set_has_type_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.type_name)
   return type_name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FieldDescriptorProto::release_type_name() {
+inline ::std::string* FieldDescriptorProto::release_type_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.type_name)
   clear_has_type_name();
   return type_name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::set_allocated_type_name(::std::string* type_name) {
-  if (type_name != NULL) {
+inline void FieldDescriptorProto::set_allocated_type_name(::std::string* type_name)
+{
+  if (type_name != NULL)
+  {
     set_has_type_name();
-  } else {
+  }
+  else
+  {
     clear_has_type_name();
   }
-  type_name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), type_name,
-      GetArenaNoVirtual());
+  type_name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), type_name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.type_name)
 }
-inline ::std::string* FieldDescriptorProto::unsafe_arena_release_type_name() {
+inline ::std::string* FieldDescriptorProto::unsafe_arena_release_type_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FieldDescriptorProto.type_name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_type_name();
   return type_name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                       GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::unsafe_arena_set_allocated_type_name(
-    ::std::string* type_name) {
+inline void FieldDescriptorProto::unsafe_arena_set_allocated_type_name(::std::string* type_name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (type_name != NULL) {
+  if (type_name != NULL)
+  {
     set_has_type_name();
-  } else {
+  }
+  else
+  {
     clear_has_type_name();
   }
-  type_name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      type_name, GetArenaNoVirtual());
+  type_name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), type_name,
+                                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FieldDescriptorProto.type_name)
 }
 
 // optional string extendee = 2;
-inline bool FieldDescriptorProto::has_extendee() const {
+inline bool FieldDescriptorProto::has_extendee() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void FieldDescriptorProto::set_has_extendee() {
+inline void FieldDescriptorProto::set_has_extendee()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void FieldDescriptorProto::clear_has_extendee() {
+inline void FieldDescriptorProto::clear_has_extendee()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void FieldDescriptorProto::clear_extendee() {
+inline void FieldDescriptorProto::clear_extendee()
+{
   extendee_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_extendee();
 }
-inline const ::std::string& FieldDescriptorProto::extendee() const {
+inline const ::std::string& FieldDescriptorProto::extendee() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.extendee)
   return extendee_.Get();
 }
-inline void FieldDescriptorProto::set_extendee(const ::std::string& value) {
+inline void FieldDescriptorProto::set_extendee(const ::std::string& value)
+{
   set_has_extendee();
   extendee_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.extendee)
 }
 #if LANG_CXX11
-inline void FieldDescriptorProto::set_extendee(::std::string&& value) {
+inline void FieldDescriptorProto::set_extendee(::std::string&& value)
+{
   set_has_extendee();
-  extendee_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  extendee_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FieldDescriptorProto.extendee)
 }
 #endif
-inline void FieldDescriptorProto::set_extendee(const char* value) {
+inline void FieldDescriptorProto::set_extendee(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_extendee();
-  extendee_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  extendee_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FieldDescriptorProto.extendee)
 }
-inline void FieldDescriptorProto::set_extendee(const char* value,
-    size_t size) {
+inline void FieldDescriptorProto::set_extendee(const char* value, size_t size)
+{
   set_has_extendee();
-  extendee_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  extendee_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FieldDescriptorProto.extendee)
 }
-inline ::std::string* FieldDescriptorProto::mutable_extendee() {
+inline ::std::string* FieldDescriptorProto::mutable_extendee()
+{
   set_has_extendee();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.extendee)
   return extendee_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FieldDescriptorProto::release_extendee() {
+inline ::std::string* FieldDescriptorProto::release_extendee()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.extendee)
   clear_has_extendee();
   return extendee_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::set_allocated_extendee(::std::string* extendee) {
-  if (extendee != NULL) {
+inline void FieldDescriptorProto::set_allocated_extendee(::std::string* extendee)
+{
+  if (extendee != NULL)
+  {
     set_has_extendee();
-  } else {
+  }
+  else
+  {
     clear_has_extendee();
   }
-  extendee_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), extendee,
-      GetArenaNoVirtual());
+  extendee_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), extendee, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.extendee)
 }
-inline ::std::string* FieldDescriptorProto::unsafe_arena_release_extendee() {
+inline ::std::string* FieldDescriptorProto::unsafe_arena_release_extendee()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FieldDescriptorProto.extendee)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_extendee();
-  return extendee_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return extendee_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::unsafe_arena_set_allocated_extendee(
-    ::std::string* extendee) {
+inline void FieldDescriptorProto::unsafe_arena_set_allocated_extendee(::std::string* extendee)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (extendee != NULL) {
+  if (extendee != NULL)
+  {
     set_has_extendee();
-  } else {
+  }
+  else
+  {
     clear_has_extendee();
   }
-  extendee_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      extendee, GetArenaNoVirtual());
+  extendee_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), extendee,
+                                    GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FieldDescriptorProto.extendee)
 }
 
 // optional string default_value = 7;
-inline bool FieldDescriptorProto::has_default_value() const {
+inline bool FieldDescriptorProto::has_default_value() const
+{
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void FieldDescriptorProto::set_has_default_value() {
+inline void FieldDescriptorProto::set_has_default_value()
+{
   _has_bits_[0] |= 0x00000008u;
 }
-inline void FieldDescriptorProto::clear_has_default_value() {
+inline void FieldDescriptorProto::clear_has_default_value()
+{
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void FieldDescriptorProto::clear_default_value() {
+inline void FieldDescriptorProto::clear_default_value()
+{
   default_value_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_default_value();
 }
-inline const ::std::string& FieldDescriptorProto::default_value() const {
+inline const ::std::string& FieldDescriptorProto::default_value() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.default_value)
   return default_value_.Get();
 }
-inline void FieldDescriptorProto::set_default_value(const ::std::string& value) {
+inline void FieldDescriptorProto::set_default_value(const ::std::string& value)
+{
   set_has_default_value();
   default_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.default_value)
 }
 #if LANG_CXX11
-inline void FieldDescriptorProto::set_default_value(::std::string&& value) {
+inline void FieldDescriptorProto::set_default_value(::std::string&& value)
+{
   set_has_default_value();
-  default_value_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  default_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FieldDescriptorProto.default_value)
 }
 #endif
-inline void FieldDescriptorProto::set_default_value(const char* value) {
+inline void FieldDescriptorProto::set_default_value(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_default_value();
   default_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FieldDescriptorProto.default_value)
 }
-inline void FieldDescriptorProto::set_default_value(const char* value,
-    size_t size) {
+inline void FieldDescriptorProto::set_default_value(const char* value, size_t size)
+{
   set_has_default_value();
-  default_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  default_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                     ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FieldDescriptorProto.default_value)
 }
-inline ::std::string* FieldDescriptorProto::mutable_default_value() {
+inline ::std::string* FieldDescriptorProto::mutable_default_value()
+{
   set_has_default_value();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.default_value)
   return default_value_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FieldDescriptorProto::release_default_value() {
+inline ::std::string* FieldDescriptorProto::release_default_value()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.default_value)
   clear_has_default_value();
   return default_value_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::set_allocated_default_value(::std::string* default_value) {
-  if (default_value != NULL) {
+inline void FieldDescriptorProto::set_allocated_default_value(::std::string* default_value)
+{
+  if (default_value != NULL)
+  {
     set_has_default_value();
-  } else {
+  }
+  else
+  {
     clear_has_default_value();
   }
   default_value_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), default_value,
-      GetArenaNoVirtual());
+                              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.default_value)
 }
-inline ::std::string* FieldDescriptorProto::unsafe_arena_release_default_value() {
+inline ::std::string* FieldDescriptorProto::unsafe_arena_release_default_value()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FieldDescriptorProto.default_value)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_default_value();
   return default_value_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                           GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::unsafe_arena_set_allocated_default_value(
-    ::std::string* default_value) {
+inline void FieldDescriptorProto::unsafe_arena_set_allocated_default_value(::std::string* default_value)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (default_value != NULL) {
+  if (default_value != NULL)
+  {
     set_has_default_value();
-  } else {
+  }
+  else
+  {
     clear_has_default_value();
   }
-  default_value_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      default_value, GetArenaNoVirtual());
+  default_value_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), default_value,
+                                         GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FieldDescriptorProto.default_value)
 }
 
 // optional int32 oneof_index = 9;
-inline bool FieldDescriptorProto::has_oneof_index() const {
+inline bool FieldDescriptorProto::has_oneof_index() const
+{
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void FieldDescriptorProto::set_has_oneof_index() {
+inline void FieldDescriptorProto::set_has_oneof_index()
+{
   _has_bits_[0] |= 0x00000080u;
 }
-inline void FieldDescriptorProto::clear_has_oneof_index() {
+inline void FieldDescriptorProto::clear_has_oneof_index()
+{
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void FieldDescriptorProto::clear_oneof_index() {
+inline void FieldDescriptorProto::clear_oneof_index()
+{
   oneof_index_ = 0;
   clear_has_oneof_index();
 }
-inline ::google::protobuf::int32 FieldDescriptorProto::oneof_index() const {
+inline ::google::protobuf::int32 FieldDescriptorProto::oneof_index() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.oneof_index)
   return oneof_index_;
 }
-inline void FieldDescriptorProto::set_oneof_index(::google::protobuf::int32 value) {
+inline void FieldDescriptorProto::set_oneof_index(::google::protobuf::int32 value)
+{
   set_has_oneof_index();
   oneof_index_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.oneof_index)
 }
 
 // optional string json_name = 10;
-inline bool FieldDescriptorProto::has_json_name() const {
+inline bool FieldDescriptorProto::has_json_name() const
+{
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void FieldDescriptorProto::set_has_json_name() {
+inline void FieldDescriptorProto::set_has_json_name()
+{
   _has_bits_[0] |= 0x00000010u;
 }
-inline void FieldDescriptorProto::clear_has_json_name() {
+inline void FieldDescriptorProto::clear_has_json_name()
+{
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void FieldDescriptorProto::clear_json_name() {
+inline void FieldDescriptorProto::clear_json_name()
+{
   json_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_json_name();
 }
-inline const ::std::string& FieldDescriptorProto::json_name() const {
+inline const ::std::string& FieldDescriptorProto::json_name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.json_name)
   return json_name_.Get();
 }
-inline void FieldDescriptorProto::set_json_name(const ::std::string& value) {
+inline void FieldDescriptorProto::set_json_name(const ::std::string& value)
+{
   set_has_json_name();
   json_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.json_name)
 }
 #if LANG_CXX11
-inline void FieldDescriptorProto::set_json_name(::std::string&& value) {
+inline void FieldDescriptorProto::set_json_name(::std::string&& value)
+{
   set_has_json_name();
-  json_name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  json_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FieldDescriptorProto.json_name)
 }
 #endif
-inline void FieldDescriptorProto::set_json_name(const char* value) {
+inline void FieldDescriptorProto::set_json_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_json_name();
   json_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                 GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FieldDescriptorProto.json_name)
 }
-inline void FieldDescriptorProto::set_json_name(const char* value,
-    size_t size) {
+inline void FieldDescriptorProto::set_json_name(const char* value, size_t size)
+{
   set_has_json_name();
-  json_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  json_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                 ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FieldDescriptorProto.json_name)
 }
-inline ::std::string* FieldDescriptorProto::mutable_json_name() {
+inline ::std::string* FieldDescriptorProto::mutable_json_name()
+{
   set_has_json_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.json_name)
   return json_name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FieldDescriptorProto::release_json_name() {
+inline ::std::string* FieldDescriptorProto::release_json_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.json_name)
   clear_has_json_name();
   return json_name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::set_allocated_json_name(::std::string* json_name) {
-  if (json_name != NULL) {
+inline void FieldDescriptorProto::set_allocated_json_name(::std::string* json_name)
+{
+  if (json_name != NULL)
+  {
     set_has_json_name();
-  } else {
+  }
+  else
+  {
     clear_has_json_name();
   }
-  json_name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), json_name,
-      GetArenaNoVirtual());
+  json_name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), json_name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.json_name)
 }
-inline ::std::string* FieldDescriptorProto::unsafe_arena_release_json_name() {
+inline ::std::string* FieldDescriptorProto::unsafe_arena_release_json_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FieldDescriptorProto.json_name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_json_name();
   return json_name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                       GetArenaNoVirtual());
 }
-inline void FieldDescriptorProto::unsafe_arena_set_allocated_json_name(
-    ::std::string* json_name) {
+inline void FieldDescriptorProto::unsafe_arena_set_allocated_json_name(::std::string* json_name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (json_name != NULL) {
+  if (json_name != NULL)
+  {
     set_has_json_name();
-  } else {
+  }
+  else
+  {
     clear_has_json_name();
   }
-  json_name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      json_name, GetArenaNoVirtual());
+  json_name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), json_name,
+                                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FieldDescriptorProto.json_name)
 }
 
 // optional .google.protobuf.FieldOptions options = 8;
-inline bool FieldDescriptorProto::has_options() const {
+inline bool FieldDescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void FieldDescriptorProto::set_has_options() {
+inline void FieldDescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000020u;
 }
-inline void FieldDescriptorProto::clear_has_options() {
+inline void FieldDescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void FieldDescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void FieldDescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::FieldOptions& FieldDescriptorProto::options() const {
+inline const ::google::protobuf::FieldOptions& FieldDescriptorProto::options() const
+{
   const ::google::protobuf::FieldOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::FieldOptions*>(
-      &::google::protobuf::_FieldOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::FieldOptions*>(
+                         &::google::protobuf::_FieldOptions_default_instance_);
 }
-inline ::google::protobuf::FieldOptions* FieldDescriptorProto::release_options() {
+inline ::google::protobuf::FieldOptions* FieldDescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::FieldOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::FieldOptions* FieldDescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::FieldOptions* FieldDescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FieldDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::FieldOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::FieldOptions* FieldDescriptorProto::mutable_options() {
+inline ::google::protobuf::FieldOptions* FieldDescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.options)
   return options_;
 }
-inline void FieldDescriptorProto::set_allocated_options(::google::protobuf::FieldOptions* options) {
+inline void FieldDescriptorProto::set_allocated_options(::google::protobuf::FieldOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -7584,149 +8490,178 @@ inline void FieldDescriptorProto::set_allocated_options(::google::protobuf::Fiel
 // OneofDescriptorProto
 
 // optional string name = 1;
-inline bool OneofDescriptorProto::has_name() const {
+inline bool OneofDescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void OneofDescriptorProto::set_has_name() {
+inline void OneofDescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void OneofDescriptorProto::clear_has_name() {
+inline void OneofDescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void OneofDescriptorProto::clear_name() {
+inline void OneofDescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& OneofDescriptorProto::name() const {
+inline const ::std::string& OneofDescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.OneofDescriptorProto.name)
   return name_.Get();
 }
-inline void OneofDescriptorProto::set_name(const ::std::string& value) {
+inline void OneofDescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.OneofDescriptorProto.name)
 }
 #if LANG_CXX11
-inline void OneofDescriptorProto::set_name(::std::string&& value) {
+inline void OneofDescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.OneofDescriptorProto.name)
 }
 #endif
-inline void OneofDescriptorProto::set_name(const char* value) {
+inline void OneofDescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.OneofDescriptorProto.name)
 }
-inline void OneofDescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void OneofDescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.OneofDescriptorProto.name)
 }
-inline ::std::string* OneofDescriptorProto::mutable_name() {
+inline ::std::string* OneofDescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.OneofDescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* OneofDescriptorProto::release_name() {
+inline ::std::string* OneofDescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.OneofDescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void OneofDescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void OneofDescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.OneofDescriptorProto.name)
 }
-inline ::std::string* OneofDescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* OneofDescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.OneofDescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void OneofDescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void OneofDescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.OneofDescriptorProto.name)
 }
 
 // optional .google.protobuf.OneofOptions options = 2;
-inline bool OneofDescriptorProto::has_options() const {
+inline bool OneofDescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void OneofDescriptorProto::set_has_options() {
+inline void OneofDescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void OneofDescriptorProto::clear_has_options() {
+inline void OneofDescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void OneofDescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void OneofDescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::OneofOptions& OneofDescriptorProto::options() const {
+inline const ::google::protobuf::OneofOptions& OneofDescriptorProto::options() const
+{
   const ::google::protobuf::OneofOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.OneofDescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::OneofOptions*>(
-      &::google::protobuf::_OneofOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::OneofOptions*>(
+                         &::google::protobuf::_OneofOptions_default_instance_);
 }
-inline ::google::protobuf::OneofOptions* OneofDescriptorProto::release_options() {
+inline ::google::protobuf::OneofOptions* OneofDescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.OneofDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::OneofOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::OneofOptions* OneofDescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::OneofOptions* OneofDescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.OneofDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::OneofOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::OneofOptions* OneofDescriptorProto::mutable_options() {
+inline ::google::protobuf::OneofOptions* OneofDescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.OneofDescriptorProto.options)
   return options_;
 }
-inline void OneofDescriptorProto::set_allocated_options(::google::protobuf::OneofOptions* options) {
+inline void OneofDescriptorProto::set_allocated_options(::google::protobuf::OneofOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -7738,48 +8673,60 @@ inline void OneofDescriptorProto::set_allocated_options(::google::protobuf::Oneo
 // EnumDescriptorProto_EnumReservedRange
 
 // optional int32 start = 1;
-inline bool EnumDescriptorProto_EnumReservedRange::has_start() const {
+inline bool EnumDescriptorProto_EnumReservedRange::has_start() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void EnumDescriptorProto_EnumReservedRange::set_has_start() {
+inline void EnumDescriptorProto_EnumReservedRange::set_has_start()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void EnumDescriptorProto_EnumReservedRange::clear_has_start() {
+inline void EnumDescriptorProto_EnumReservedRange::clear_has_start()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void EnumDescriptorProto_EnumReservedRange::clear_start() {
+inline void EnumDescriptorProto_EnumReservedRange::clear_start()
+{
   start_ = 0;
   clear_has_start();
 }
-inline ::google::protobuf::int32 EnumDescriptorProto_EnumReservedRange::start() const {
+inline ::google::protobuf::int32 EnumDescriptorProto_EnumReservedRange::start() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.EnumReservedRange.start)
   return start_;
 }
-inline void EnumDescriptorProto_EnumReservedRange::set_start(::google::protobuf::int32 value) {
+inline void EnumDescriptorProto_EnumReservedRange::set_start(::google::protobuf::int32 value)
+{
   set_has_start();
   start_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.EnumReservedRange.start)
 }
 
 // optional int32 end = 2;
-inline bool EnumDescriptorProto_EnumReservedRange::has_end() const {
+inline bool EnumDescriptorProto_EnumReservedRange::has_end() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void EnumDescriptorProto_EnumReservedRange::set_has_end() {
+inline void EnumDescriptorProto_EnumReservedRange::set_has_end()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void EnumDescriptorProto_EnumReservedRange::clear_has_end() {
+inline void EnumDescriptorProto_EnumReservedRange::clear_has_end()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void EnumDescriptorProto_EnumReservedRange::clear_end() {
+inline void EnumDescriptorProto_EnumReservedRange::clear_end()
+{
   end_ = 0;
   clear_has_end();
 }
-inline ::google::protobuf::int32 EnumDescriptorProto_EnumReservedRange::end() const {
+inline ::google::protobuf::int32 EnumDescriptorProto_EnumReservedRange::end() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.EnumReservedRange.end)
   return end_;
 }
-inline void EnumDescriptorProto_EnumReservedRange::set_end(::google::protobuf::int32 value) {
+inline void EnumDescriptorProto_EnumReservedRange::set_end(::google::protobuf::int32 value)
+{
   set_has_end();
   end_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.EnumReservedRange.end)
@@ -7790,179 +8737,215 @@ inline void EnumDescriptorProto_EnumReservedRange::set_end(::google::protobuf::i
 // EnumDescriptorProto
 
 // optional string name = 1;
-inline bool EnumDescriptorProto::has_name() const {
+inline bool EnumDescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void EnumDescriptorProto::set_has_name() {
+inline void EnumDescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void EnumDescriptorProto::clear_has_name() {
+inline void EnumDescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void EnumDescriptorProto::clear_name() {
+inline void EnumDescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& EnumDescriptorProto::name() const {
+inline const ::std::string& EnumDescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.name)
   return name_.Get();
 }
-inline void EnumDescriptorProto::set_name(const ::std::string& value) {
+inline void EnumDescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.name)
 }
 #if LANG_CXX11
-inline void EnumDescriptorProto::set_name(::std::string&& value) {
+inline void EnumDescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.EnumDescriptorProto.name)
 }
 #endif
-inline void EnumDescriptorProto::set_name(const char* value) {
+inline void EnumDescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.EnumDescriptorProto.name)
 }
-inline void EnumDescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void EnumDescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.EnumDescriptorProto.name)
 }
-inline ::std::string* EnumDescriptorProto::mutable_name() {
+inline ::std::string* EnumDescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* EnumDescriptorProto::release_name() {
+inline ::std::string* EnumDescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.EnumDescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void EnumDescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void EnumDescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.EnumDescriptorProto.name)
 }
-inline ::std::string* EnumDescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* EnumDescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.EnumDescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void EnumDescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void EnumDescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.EnumDescriptorProto.name)
 }
 
 // repeated .google.protobuf.EnumValueDescriptorProto value = 2;
-inline int EnumDescriptorProto::value_size() const {
+inline int EnumDescriptorProto::value_size() const
+{
   return value_.size();
 }
-inline void EnumDescriptorProto::clear_value() {
+inline void EnumDescriptorProto::clear_value()
+{
   value_.Clear();
 }
-inline const ::google::protobuf::EnumValueDescriptorProto& EnumDescriptorProto::value(int index) const {
+inline const ::google::protobuf::EnumValueDescriptorProto& EnumDescriptorProto::value(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.value)
   return value_.Get(index);
 }
-inline ::google::protobuf::EnumValueDescriptorProto* EnumDescriptorProto::mutable_value(int index) {
+inline ::google::protobuf::EnumValueDescriptorProto* EnumDescriptorProto::mutable_value(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.value)
   return value_.Mutable(index);
 }
-inline ::google::protobuf::EnumValueDescriptorProto* EnumDescriptorProto::add_value() {
+inline ::google::protobuf::EnumValueDescriptorProto* EnumDescriptorProto::add_value()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.value)
   return value_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto >*
-EnumDescriptorProto::mutable_value() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto>*
+EnumDescriptorProto::mutable_value()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumDescriptorProto.value)
   return &value_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto >&
-EnumDescriptorProto::value() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumValueDescriptorProto>&
+EnumDescriptorProto::value() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.EnumDescriptorProto.value)
   return value_;
 }
 
 // optional .google.protobuf.EnumOptions options = 3;
-inline bool EnumDescriptorProto::has_options() const {
+inline bool EnumDescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void EnumDescriptorProto::set_has_options() {
+inline void EnumDescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void EnumDescriptorProto::clear_has_options() {
+inline void EnumDescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void EnumDescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void EnumDescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::EnumOptions& EnumDescriptorProto::options() const {
+inline const ::google::protobuf::EnumOptions& EnumDescriptorProto::options() const
+{
   const ::google::protobuf::EnumOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::EnumOptions*>(
-      &::google::protobuf::_EnumOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::EnumOptions*>(
+                         &::google::protobuf::_EnumOptions_default_instance_);
 }
-inline ::google::protobuf::EnumOptions* EnumDescriptorProto::release_options() {
+inline ::google::protobuf::EnumOptions* EnumDescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.EnumDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::EnumOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::EnumOptions* EnumDescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::EnumOptions* EnumDescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.EnumDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::EnumOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::EnumOptions* EnumDescriptorProto::mutable_options() {
+inline ::google::protobuf::EnumOptions* EnumDescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.options)
   return options_;
 }
-inline void EnumDescriptorProto::set_allocated_options(::google::protobuf::EnumOptions* options) {
+inline void EnumDescriptorProto::set_allocated_options(::google::protobuf::EnumOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -7970,100 +8953,120 @@ inline void EnumDescriptorProto::set_allocated_options(::google::protobuf::EnumO
 }
 
 // repeated .google.protobuf.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
-inline int EnumDescriptorProto::reserved_range_size() const {
+inline int EnumDescriptorProto::reserved_range_size() const
+{
   return reserved_range_.size();
 }
-inline void EnumDescriptorProto::clear_reserved_range() {
+inline void EnumDescriptorProto::clear_reserved_range()
+{
   reserved_range_.Clear();
 }
-inline const ::google::protobuf::EnumDescriptorProto_EnumReservedRange& EnumDescriptorProto::reserved_range(int index) const {
+inline const ::google::protobuf::EnumDescriptorProto_EnumReservedRange&
+EnumDescriptorProto::reserved_range(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.reserved_range)
   return reserved_range_.Get(index);
 }
-inline ::google::protobuf::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::mutable_reserved_range(int index) {
+inline ::google::protobuf::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::mutable_reserved_range(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.reserved_range)
   return reserved_range_.Mutable(index);
 }
-inline ::google::protobuf::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::add_reserved_range() {
+inline ::google::protobuf::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::add_reserved_range()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.reserved_range)
   return reserved_range_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange >*
-EnumDescriptorProto::mutable_reserved_range() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange>*
+EnumDescriptorProto::mutable_reserved_range()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumDescriptorProto.reserved_range)
   return &reserved_range_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange >&
-EnumDescriptorProto::reserved_range() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::EnumDescriptorProto_EnumReservedRange>&
+EnumDescriptorProto::reserved_range() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.EnumDescriptorProto.reserved_range)
   return reserved_range_;
 }
 
 // repeated string reserved_name = 5;
-inline int EnumDescriptorProto::reserved_name_size() const {
+inline int EnumDescriptorProto::reserved_name_size() const
+{
   return reserved_name_.size();
 }
-inline void EnumDescriptorProto::clear_reserved_name() {
+inline void EnumDescriptorProto::clear_reserved_name()
+{
   reserved_name_.Clear();
 }
-inline const ::std::string& EnumDescriptorProto::reserved_name(int index) const {
+inline const ::std::string& EnumDescriptorProto::reserved_name(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.reserved_name)
   return reserved_name_.Get(index);
 }
-inline ::std::string* EnumDescriptorProto::mutable_reserved_name(int index) {
+inline ::std::string* EnumDescriptorProto::mutable_reserved_name(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.reserved_name)
   return reserved_name_.Mutable(index);
 }
-inline void EnumDescriptorProto::set_reserved_name(int index, const ::std::string& value) {
+inline void EnumDescriptorProto::set_reserved_name(int index, const ::std::string& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.reserved_name)
   reserved_name_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void EnumDescriptorProto::set_reserved_name(int index, ::std::string&& value) {
+inline void EnumDescriptorProto::set_reserved_name(int index, ::std::string&& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.reserved_name)
   reserved_name_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void EnumDescriptorProto::set_reserved_name(int index, const char* value) {
+inline void EnumDescriptorProto::set_reserved_name(int index, const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   reserved_name_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:google.protobuf.EnumDescriptorProto.reserved_name)
 }
-inline void EnumDescriptorProto::set_reserved_name(int index, const char* value, size_t size) {
-  reserved_name_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
+inline void EnumDescriptorProto::set_reserved_name(int index, const char* value, size_t size)
+{
+  reserved_name_.Mutable(index)->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.EnumDescriptorProto.reserved_name)
 }
-inline ::std::string* EnumDescriptorProto::add_reserved_name() {
+inline ::std::string* EnumDescriptorProto::add_reserved_name()
+{
   // @@protoc_insertion_point(field_add_mutable:google.protobuf.EnumDescriptorProto.reserved_name)
   return reserved_name_.Add();
 }
-inline void EnumDescriptorProto::add_reserved_name(const ::std::string& value) {
+inline void EnumDescriptorProto::add_reserved_name(const ::std::string& value)
+{
   reserved_name_.Add()->assign(value);
   // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.reserved_name)
 }
 #if LANG_CXX11
-inline void EnumDescriptorProto::add_reserved_name(::std::string&& value) {
+inline void EnumDescriptorProto::add_reserved_name(::std::string&& value)
+{
   reserved_name_.Add(std::move(value));
   // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.reserved_name)
 }
 #endif
-inline void EnumDescriptorProto::add_reserved_name(const char* value) {
+inline void EnumDescriptorProto::add_reserved_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   reserved_name_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:google.protobuf.EnumDescriptorProto.reserved_name)
 }
-inline void EnumDescriptorProto::add_reserved_name(const char* value, size_t size) {
+inline void EnumDescriptorProto::add_reserved_name(const char* value, size_t size)
+{
   reserved_name_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:google.protobuf.EnumDescriptorProto.reserved_name)
 }
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-EnumDescriptorProto::reserved_name() const {
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>& EnumDescriptorProto::reserved_name() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.EnumDescriptorProto.reserved_name)
   return reserved_name_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-EnumDescriptorProto::mutable_reserved_name() {
+inline ::google::protobuf::RepeatedPtrField< ::std::string>* EnumDescriptorProto::mutable_reserved_name()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumDescriptorProto.reserved_name)
   return &reserved_name_;
 }
@@ -8073,173 +9076,208 @@ EnumDescriptorProto::mutable_reserved_name() {
 // EnumValueDescriptorProto
 
 // optional string name = 1;
-inline bool EnumValueDescriptorProto::has_name() const {
+inline bool EnumValueDescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void EnumValueDescriptorProto::set_has_name() {
+inline void EnumValueDescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void EnumValueDescriptorProto::clear_has_name() {
+inline void EnumValueDescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void EnumValueDescriptorProto::clear_name() {
+inline void EnumValueDescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& EnumValueDescriptorProto::name() const {
+inline const ::std::string& EnumValueDescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumValueDescriptorProto.name)
   return name_.Get();
 }
-inline void EnumValueDescriptorProto::set_name(const ::std::string& value) {
+inline void EnumValueDescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.EnumValueDescriptorProto.name)
 }
 #if LANG_CXX11
-inline void EnumValueDescriptorProto::set_name(::std::string&& value) {
+inline void EnumValueDescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.EnumValueDescriptorProto.name)
 }
 #endif
-inline void EnumValueDescriptorProto::set_name(const char* value) {
+inline void EnumValueDescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.EnumValueDescriptorProto.name)
 }
-inline void EnumValueDescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void EnumValueDescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.EnumValueDescriptorProto.name)
 }
-inline ::std::string* EnumValueDescriptorProto::mutable_name() {
+inline ::std::string* EnumValueDescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValueDescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* EnumValueDescriptorProto::release_name() {
+inline ::std::string* EnumValueDescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.EnumValueDescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void EnumValueDescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void EnumValueDescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.EnumValueDescriptorProto.name)
 }
-inline ::std::string* EnumValueDescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* EnumValueDescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.EnumValueDescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void EnumValueDescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void EnumValueDescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.EnumValueDescriptorProto.name)
 }
 
 // optional int32 number = 2;
-inline bool EnumValueDescriptorProto::has_number() const {
+inline bool EnumValueDescriptorProto::has_number() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void EnumValueDescriptorProto::set_has_number() {
+inline void EnumValueDescriptorProto::set_has_number()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void EnumValueDescriptorProto::clear_has_number() {
+inline void EnumValueDescriptorProto::clear_has_number()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void EnumValueDescriptorProto::clear_number() {
+inline void EnumValueDescriptorProto::clear_number()
+{
   number_ = 0;
   clear_has_number();
 }
-inline ::google::protobuf::int32 EnumValueDescriptorProto::number() const {
+inline ::google::protobuf::int32 EnumValueDescriptorProto::number() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumValueDescriptorProto.number)
   return number_;
 }
-inline void EnumValueDescriptorProto::set_number(::google::protobuf::int32 value) {
+inline void EnumValueDescriptorProto::set_number(::google::protobuf::int32 value)
+{
   set_has_number();
   number_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.EnumValueDescriptorProto.number)
 }
 
 // optional .google.protobuf.EnumValueOptions options = 3;
-inline bool EnumValueDescriptorProto::has_options() const {
+inline bool EnumValueDescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void EnumValueDescriptorProto::set_has_options() {
+inline void EnumValueDescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void EnumValueDescriptorProto::clear_has_options() {
+inline void EnumValueDescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void EnumValueDescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void EnumValueDescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::EnumValueOptions& EnumValueDescriptorProto::options() const {
+inline const ::google::protobuf::EnumValueOptions& EnumValueDescriptorProto::options() const
+{
   const ::google::protobuf::EnumValueOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.EnumValueDescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::EnumValueOptions*>(
-      &::google::protobuf::_EnumValueOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::EnumValueOptions*>(
+                         &::google::protobuf::_EnumValueOptions_default_instance_);
 }
-inline ::google::protobuf::EnumValueOptions* EnumValueDescriptorProto::release_options() {
+inline ::google::protobuf::EnumValueOptions* EnumValueDescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.EnumValueDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::EnumValueOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::EnumValueOptions* EnumValueDescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::EnumValueOptions* EnumValueDescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.EnumValueDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::EnumValueOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::EnumValueOptions* EnumValueDescriptorProto::mutable_options() {
+inline ::google::protobuf::EnumValueOptions* EnumValueDescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValueDescriptorProto.options)
   return options_;
 }
-inline void EnumValueDescriptorProto::set_allocated_options(::google::protobuf::EnumValueOptions* options) {
+inline void EnumValueDescriptorProto::set_allocated_options(::google::protobuf::EnumValueOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -8251,179 +9289,215 @@ inline void EnumValueDescriptorProto::set_allocated_options(::google::protobuf::
 // ServiceDescriptorProto
 
 // optional string name = 1;
-inline bool ServiceDescriptorProto::has_name() const {
+inline bool ServiceDescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ServiceDescriptorProto::set_has_name() {
+inline void ServiceDescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ServiceDescriptorProto::clear_has_name() {
+inline void ServiceDescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ServiceDescriptorProto::clear_name() {
+inline void ServiceDescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& ServiceDescriptorProto::name() const {
+inline const ::std::string& ServiceDescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.ServiceDescriptorProto.name)
   return name_.Get();
 }
-inline void ServiceDescriptorProto::set_name(const ::std::string& value) {
+inline void ServiceDescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.ServiceDescriptorProto.name)
 }
 #if LANG_CXX11
-inline void ServiceDescriptorProto::set_name(::std::string&& value) {
+inline void ServiceDescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.ServiceDescriptorProto.name)
 }
 #endif
-inline void ServiceDescriptorProto::set_name(const char* value) {
+inline void ServiceDescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.ServiceDescriptorProto.name)
 }
-inline void ServiceDescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void ServiceDescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.ServiceDescriptorProto.name)
 }
-inline ::std::string* ServiceDescriptorProto::mutable_name() {
+inline ::std::string* ServiceDescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceDescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* ServiceDescriptorProto::release_name() {
+inline ::std::string* ServiceDescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.ServiceDescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void ServiceDescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void ServiceDescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.ServiceDescriptorProto.name)
 }
-inline ::std::string* ServiceDescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* ServiceDescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.ServiceDescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void ServiceDescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void ServiceDescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.ServiceDescriptorProto.name)
 }
 
 // repeated .google.protobuf.MethodDescriptorProto method = 2;
-inline int ServiceDescriptorProto::method_size() const {
+inline int ServiceDescriptorProto::method_size() const
+{
   return method_.size();
 }
-inline void ServiceDescriptorProto::clear_method() {
+inline void ServiceDescriptorProto::clear_method()
+{
   method_.Clear();
 }
-inline const ::google::protobuf::MethodDescriptorProto& ServiceDescriptorProto::method(int index) const {
+inline const ::google::protobuf::MethodDescriptorProto& ServiceDescriptorProto::method(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.ServiceDescriptorProto.method)
   return method_.Get(index);
 }
-inline ::google::protobuf::MethodDescriptorProto* ServiceDescriptorProto::mutable_method(int index) {
+inline ::google::protobuf::MethodDescriptorProto* ServiceDescriptorProto::mutable_method(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceDescriptorProto.method)
   return method_.Mutable(index);
 }
-inline ::google::protobuf::MethodDescriptorProto* ServiceDescriptorProto::add_method() {
+inline ::google::protobuf::MethodDescriptorProto* ServiceDescriptorProto::add_method()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.ServiceDescriptorProto.method)
   return method_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto >*
-ServiceDescriptorProto::mutable_method() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto>*
+ServiceDescriptorProto::mutable_method()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.ServiceDescriptorProto.method)
   return &method_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto >&
-ServiceDescriptorProto::method() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::MethodDescriptorProto>&
+ServiceDescriptorProto::method() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.ServiceDescriptorProto.method)
   return method_;
 }
 
 // optional .google.protobuf.ServiceOptions options = 3;
-inline bool ServiceDescriptorProto::has_options() const {
+inline bool ServiceDescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ServiceDescriptorProto::set_has_options() {
+inline void ServiceDescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ServiceDescriptorProto::clear_has_options() {
+inline void ServiceDescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ServiceDescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void ServiceDescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::ServiceOptions& ServiceDescriptorProto::options() const {
+inline const ::google::protobuf::ServiceOptions& ServiceDescriptorProto::options() const
+{
   const ::google::protobuf::ServiceOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.ServiceDescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::ServiceOptions*>(
-      &::google::protobuf::_ServiceOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::ServiceOptions*>(
+                         &::google::protobuf::_ServiceOptions_default_instance_);
 }
-inline ::google::protobuf::ServiceOptions* ServiceDescriptorProto::release_options() {
+inline ::google::protobuf::ServiceOptions* ServiceDescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.ServiceDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::ServiceOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::ServiceOptions* ServiceDescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::ServiceOptions* ServiceDescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.ServiceDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::ServiceOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::ServiceOptions* ServiceDescriptorProto::mutable_options() {
+inline ::google::protobuf::ServiceOptions* ServiceDescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceDescriptorProto.options)
   return options_;
 }
-inline void ServiceDescriptorProto::set_allocated_options(::google::protobuf::ServiceOptions* options) {
+inline void ServiceDescriptorProto::set_allocated_options(::google::protobuf::ServiceOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -8435,319 +9509,383 @@ inline void ServiceDescriptorProto::set_allocated_options(::google::protobuf::Se
 // MethodDescriptorProto
 
 // optional string name = 1;
-inline bool MethodDescriptorProto::has_name() const {
+inline bool MethodDescriptorProto::has_name() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MethodDescriptorProto::set_has_name() {
+inline void MethodDescriptorProto::set_has_name()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MethodDescriptorProto::clear_has_name() {
+inline void MethodDescriptorProto::clear_has_name()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MethodDescriptorProto::clear_name() {
+inline void MethodDescriptorProto::clear_name()
+{
   name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name();
 }
-inline const ::std::string& MethodDescriptorProto::name() const {
+inline const ::std::string& MethodDescriptorProto::name() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.name)
   return name_.Get();
 }
-inline void MethodDescriptorProto::set_name(const ::std::string& value) {
+inline void MethodDescriptorProto::set_name(const ::std::string& value)
+{
   set_has_name();
   name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.name)
 }
 #if LANG_CXX11
-inline void MethodDescriptorProto::set_name(::std::string&& value) {
+inline void MethodDescriptorProto::set_name(::std::string&& value)
+{
   set_has_name();
-  name_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.MethodDescriptorProto.name)
 }
 #endif
-inline void MethodDescriptorProto::set_name(const char* value) {
+inline void MethodDescriptorProto::set_name(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.MethodDescriptorProto.name)
 }
-inline void MethodDescriptorProto::set_name(const char* value,
-    size_t size) {
+inline void MethodDescriptorProto::set_name(const char* value, size_t size)
+{
   set_has_name();
-  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.MethodDescriptorProto.name)
 }
-inline ::std::string* MethodDescriptorProto::mutable_name() {
+inline ::std::string* MethodDescriptorProto::mutable_name()
+{
   set_has_name();
   // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.name)
   return name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* MethodDescriptorProto::release_name() {
+inline ::std::string* MethodDescriptorProto::release_name()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.name)
   clear_has_name();
   return name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void MethodDescriptorProto::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void MethodDescriptorProto::set_allocated_name(::std::string* name)
+{
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name,
-      GetArenaNoVirtual());
+  name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.MethodDescriptorProto.name)
 }
-inline ::std::string* MethodDescriptorProto::unsafe_arena_release_name() {
+inline ::std::string* MethodDescriptorProto::unsafe_arena_release_name()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.MethodDescriptorProto.name)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name();
-  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+  return name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void MethodDescriptorProto::unsafe_arena_set_allocated_name(
-    ::std::string* name) {
+inline void MethodDescriptorProto::unsafe_arena_set_allocated_name(::std::string* name)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name != NULL) {
+  if (name != NULL)
+  {
     set_has_name();
-  } else {
+  }
+  else
+  {
     clear_has_name();
   }
-  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name, GetArenaNoVirtual());
+  name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.MethodDescriptorProto.name)
 }
 
 // optional string input_type = 2;
-inline bool MethodDescriptorProto::has_input_type() const {
+inline bool MethodDescriptorProto::has_input_type() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MethodDescriptorProto::set_has_input_type() {
+inline void MethodDescriptorProto::set_has_input_type()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MethodDescriptorProto::clear_has_input_type() {
+inline void MethodDescriptorProto::clear_has_input_type()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MethodDescriptorProto::clear_input_type() {
+inline void MethodDescriptorProto::clear_input_type()
+{
   input_type_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_input_type();
 }
-inline const ::std::string& MethodDescriptorProto::input_type() const {
+inline const ::std::string& MethodDescriptorProto::input_type() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.input_type)
   return input_type_.Get();
 }
-inline void MethodDescriptorProto::set_input_type(const ::std::string& value) {
+inline void MethodDescriptorProto::set_input_type(const ::std::string& value)
+{
   set_has_input_type();
   input_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.input_type)
 }
 #if LANG_CXX11
-inline void MethodDescriptorProto::set_input_type(::std::string&& value) {
+inline void MethodDescriptorProto::set_input_type(::std::string&& value)
+{
   set_has_input_type();
-  input_type_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  input_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.MethodDescriptorProto.input_type)
 }
 #endif
-inline void MethodDescriptorProto::set_input_type(const char* value) {
+inline void MethodDescriptorProto::set_input_type(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_input_type();
   input_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                  GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.MethodDescriptorProto.input_type)
 }
-inline void MethodDescriptorProto::set_input_type(const char* value,
-    size_t size) {
+inline void MethodDescriptorProto::set_input_type(const char* value, size_t size)
+{
   set_has_input_type();
-  input_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  input_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                  ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.MethodDescriptorProto.input_type)
 }
-inline ::std::string* MethodDescriptorProto::mutable_input_type() {
+inline ::std::string* MethodDescriptorProto::mutable_input_type()
+{
   set_has_input_type();
   // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.input_type)
   return input_type_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* MethodDescriptorProto::release_input_type() {
+inline ::std::string* MethodDescriptorProto::release_input_type()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.input_type)
   clear_has_input_type();
   return input_type_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void MethodDescriptorProto::set_allocated_input_type(::std::string* input_type) {
-  if (input_type != NULL) {
+inline void MethodDescriptorProto::set_allocated_input_type(::std::string* input_type)
+{
+  if (input_type != NULL)
+  {
     set_has_input_type();
-  } else {
+  }
+  else
+  {
     clear_has_input_type();
   }
   input_type_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), input_type,
-      GetArenaNoVirtual());
+                           GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.MethodDescriptorProto.input_type)
 }
-inline ::std::string* MethodDescriptorProto::unsafe_arena_release_input_type() {
+inline ::std::string* MethodDescriptorProto::unsafe_arena_release_input_type()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.MethodDescriptorProto.input_type)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_input_type();
   return input_type_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                        GetArenaNoVirtual());
 }
-inline void MethodDescriptorProto::unsafe_arena_set_allocated_input_type(
-    ::std::string* input_type) {
+inline void MethodDescriptorProto::unsafe_arena_set_allocated_input_type(::std::string* input_type)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (input_type != NULL) {
+  if (input_type != NULL)
+  {
     set_has_input_type();
-  } else {
+  }
+  else
+  {
     clear_has_input_type();
   }
-  input_type_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      input_type, GetArenaNoVirtual());
+  input_type_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), input_type,
+                                      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.MethodDescriptorProto.input_type)
 }
 
 // optional string output_type = 3;
-inline bool MethodDescriptorProto::has_output_type() const {
+inline bool MethodDescriptorProto::has_output_type() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void MethodDescriptorProto::set_has_output_type() {
+inline void MethodDescriptorProto::set_has_output_type()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void MethodDescriptorProto::clear_has_output_type() {
+inline void MethodDescriptorProto::clear_has_output_type()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void MethodDescriptorProto::clear_output_type() {
+inline void MethodDescriptorProto::clear_output_type()
+{
   output_type_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_output_type();
 }
-inline const ::std::string& MethodDescriptorProto::output_type() const {
+inline const ::std::string& MethodDescriptorProto::output_type() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.output_type)
   return output_type_.Get();
 }
-inline void MethodDescriptorProto::set_output_type(const ::std::string& value) {
+inline void MethodDescriptorProto::set_output_type(const ::std::string& value)
+{
   set_has_output_type();
   output_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.output_type)
 }
 #if LANG_CXX11
-inline void MethodDescriptorProto::set_output_type(::std::string&& value) {
+inline void MethodDescriptorProto::set_output_type(::std::string&& value)
+{
   set_has_output_type();
-  output_type_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  output_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                   GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.MethodDescriptorProto.output_type)
 }
 #endif
-inline void MethodDescriptorProto::set_output_type(const char* value) {
+inline void MethodDescriptorProto::set_output_type(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_output_type();
   output_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                   GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.MethodDescriptorProto.output_type)
 }
-inline void MethodDescriptorProto::set_output_type(const char* value,
-    size_t size) {
+inline void MethodDescriptorProto::set_output_type(const char* value, size_t size)
+{
   set_has_output_type();
-  output_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  output_type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                   ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.MethodDescriptorProto.output_type)
 }
-inline ::std::string* MethodDescriptorProto::mutable_output_type() {
+inline ::std::string* MethodDescriptorProto::mutable_output_type()
+{
   set_has_output_type();
   // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.output_type)
   return output_type_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* MethodDescriptorProto::release_output_type() {
+inline ::std::string* MethodDescriptorProto::release_output_type()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.output_type)
   clear_has_output_type();
   return output_type_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void MethodDescriptorProto::set_allocated_output_type(::std::string* output_type) {
-  if (output_type != NULL) {
+inline void MethodDescriptorProto::set_allocated_output_type(::std::string* output_type)
+{
+  if (output_type != NULL)
+  {
     set_has_output_type();
-  } else {
+  }
+  else
+  {
     clear_has_output_type();
   }
   output_type_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), output_type,
-      GetArenaNoVirtual());
+                            GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.MethodDescriptorProto.output_type)
 }
-inline ::std::string* MethodDescriptorProto::unsafe_arena_release_output_type() {
+inline ::std::string* MethodDescriptorProto::unsafe_arena_release_output_type()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.MethodDescriptorProto.output_type)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_output_type();
   return output_type_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                         GetArenaNoVirtual());
 }
-inline void MethodDescriptorProto::unsafe_arena_set_allocated_output_type(
-    ::std::string* output_type) {
+inline void MethodDescriptorProto::unsafe_arena_set_allocated_output_type(::std::string* output_type)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (output_type != NULL) {
+  if (output_type != NULL)
+  {
     set_has_output_type();
-  } else {
+  }
+  else
+  {
     clear_has_output_type();
   }
-  output_type_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      output_type, GetArenaNoVirtual());
+  output_type_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), output_type,
+                                       GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.MethodDescriptorProto.output_type)
 }
 
 // optional .google.protobuf.MethodOptions options = 4;
-inline bool MethodDescriptorProto::has_options() const {
+inline bool MethodDescriptorProto::has_options() const
+{
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void MethodDescriptorProto::set_has_options() {
+inline void MethodDescriptorProto::set_has_options()
+{
   _has_bits_[0] |= 0x00000008u;
 }
-inline void MethodDescriptorProto::clear_has_options() {
+inline void MethodDescriptorProto::clear_has_options()
+{
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void MethodDescriptorProto::clear_options() {
-  if (options_ != NULL) options_->Clear();
+inline void MethodDescriptorProto::clear_options()
+{
+  if (options_ != NULL)
+    options_->Clear();
   clear_has_options();
 }
-inline const ::google::protobuf::MethodOptions& MethodDescriptorProto::options() const {
+inline const ::google::protobuf::MethodOptions& MethodDescriptorProto::options() const
+{
   const ::google::protobuf::MethodOptions* p = options_;
   // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.options)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::MethodOptions*>(
-      &::google::protobuf::_MethodOptions_default_instance_);
+  return p != NULL ? *p :
+                     *reinterpret_cast<const ::google::protobuf::MethodOptions*>(
+                         &::google::protobuf::_MethodOptions_default_instance_);
 }
-inline ::google::protobuf::MethodOptions* MethodDescriptorProto::release_options() {
+inline ::google::protobuf::MethodOptions* MethodDescriptorProto::release_options()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::MethodOptions* temp = options_;
-  if (GetArenaNoVirtual() != NULL) {
+  if (GetArenaNoVirtual() != NULL)
+  {
     temp = ::google::protobuf::internal::DuplicateIfNonNull(temp, NULL);
   }
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::MethodOptions* MethodDescriptorProto::unsafe_arena_release_options() {
+inline ::google::protobuf::MethodOptions* MethodDescriptorProto::unsafe_arena_release_options()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.MethodDescriptorProto.options)
   clear_has_options();
   ::google::protobuf::MethodOptions* temp = options_;
   options_ = NULL;
   return temp;
 }
-inline ::google::protobuf::MethodOptions* MethodDescriptorProto::mutable_options() {
+inline ::google::protobuf::MethodOptions* MethodDescriptorProto::mutable_options()
+{
   set_has_options();
-  if (options_ == NULL) {
+  if (options_ == NULL)
+  {
     _slow_mutable_options();
   }
   // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.options)
   return options_;
 }
-inline void MethodDescriptorProto::set_allocated_options(::google::protobuf::MethodOptions* options) {
+inline void MethodDescriptorProto::set_allocated_options(::google::protobuf::MethodOptions* options)
+{
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (message_arena == NULL)
+  {
     delete options_;
   }
-  if (options) {
-    ::google::protobuf::Arena* submessage_arena =
-      ::google::protobuf::Arena::GetArena(options);
-    if (message_arena != submessage_arena) {
-      options = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, options, submessage_arena);
+  if (options)
+  {
+    ::google::protobuf::Arena* submessage_arena = ::google::protobuf::Arena::GetArena(options);
+    if (message_arena != submessage_arena)
+    {
+      options = ::google::protobuf::internal::GetOwnedMessage(message_arena, options, submessage_arena);
     }
     set_has_options();
-  } else {
+  }
+  else
+  {
     clear_has_options();
   }
   options_ = options;
@@ -8755,48 +9893,60 @@ inline void MethodDescriptorProto::set_allocated_options(::google::protobuf::Met
 }
 
 // optional bool client_streaming = 5 [default = false];
-inline bool MethodDescriptorProto::has_client_streaming() const {
+inline bool MethodDescriptorProto::has_client_streaming() const
+{
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void MethodDescriptorProto::set_has_client_streaming() {
+inline void MethodDescriptorProto::set_has_client_streaming()
+{
   _has_bits_[0] |= 0x00000010u;
 }
-inline void MethodDescriptorProto::clear_has_client_streaming() {
+inline void MethodDescriptorProto::clear_has_client_streaming()
+{
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void MethodDescriptorProto::clear_client_streaming() {
+inline void MethodDescriptorProto::clear_client_streaming()
+{
   client_streaming_ = false;
   clear_has_client_streaming();
 }
-inline bool MethodDescriptorProto::client_streaming() const {
+inline bool MethodDescriptorProto::client_streaming() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.client_streaming)
   return client_streaming_;
 }
-inline void MethodDescriptorProto::set_client_streaming(bool value) {
+inline void MethodDescriptorProto::set_client_streaming(bool value)
+{
   set_has_client_streaming();
   client_streaming_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.client_streaming)
 }
 
 // optional bool server_streaming = 6 [default = false];
-inline bool MethodDescriptorProto::has_server_streaming() const {
+inline bool MethodDescriptorProto::has_server_streaming() const
+{
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void MethodDescriptorProto::set_has_server_streaming() {
+inline void MethodDescriptorProto::set_has_server_streaming()
+{
   _has_bits_[0] |= 0x00000020u;
 }
-inline void MethodDescriptorProto::clear_has_server_streaming() {
+inline void MethodDescriptorProto::clear_has_server_streaming()
+{
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void MethodDescriptorProto::clear_server_streaming() {
+inline void MethodDescriptorProto::clear_server_streaming()
+{
   server_streaming_ = false;
   clear_has_server_streaming();
 }
-inline bool MethodDescriptorProto::server_streaming() const {
+inline bool MethodDescriptorProto::server_streaming() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.server_streaming)
   return server_streaming_;
 }
-inline void MethodDescriptorProto::set_server_streaming(bool value) {
+inline void MethodDescriptorProto::set_server_streaming(bool value)
+{
   set_has_server_streaming();
   server_streaming_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.server_streaming)
@@ -8807,266 +9957,328 @@ inline void MethodDescriptorProto::set_server_streaming(bool value) {
 // FileOptions
 
 // optional string java_package = 1;
-inline bool FileOptions::has_java_package() const {
+inline bool FileOptions::has_java_package() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void FileOptions::set_has_java_package() {
+inline void FileOptions::set_has_java_package()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void FileOptions::clear_has_java_package() {
+inline void FileOptions::clear_has_java_package()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void FileOptions::clear_java_package() {
+inline void FileOptions::clear_java_package()
+{
   java_package_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_java_package();
 }
-inline const ::std::string& FileOptions::java_package() const {
+inline const ::std::string& FileOptions::java_package() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_package)
   return java_package_.Get();
 }
-inline void FileOptions::set_java_package(const ::std::string& value) {
+inline void FileOptions::set_java_package(const ::std::string& value)
+{
   set_has_java_package();
   java_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_package)
 }
 #if LANG_CXX11
-inline void FileOptions::set_java_package(::std::string&& value) {
+inline void FileOptions::set_java_package(::std::string&& value)
+{
   set_has_java_package();
-  java_package_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  java_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                    GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.java_package)
 }
 #endif
-inline void FileOptions::set_java_package(const char* value) {
+inline void FileOptions::set_java_package(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_java_package();
   java_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                    GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.java_package)
 }
-inline void FileOptions::set_java_package(const char* value,
-    size_t size) {
+inline void FileOptions::set_java_package(const char* value, size_t size)
+{
   set_has_java_package();
-  java_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  java_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                    ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.java_package)
 }
-inline ::std::string* FileOptions::mutable_java_package() {
+inline ::std::string* FileOptions::mutable_java_package()
+{
   set_has_java_package();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.java_package)
   return java_package_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_java_package() {
+inline ::std::string* FileOptions::release_java_package()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.java_package)
   clear_has_java_package();
   return java_package_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_java_package(::std::string* java_package) {
-  if (java_package != NULL) {
+inline void FileOptions::set_allocated_java_package(::std::string* java_package)
+{
+  if (java_package != NULL)
+  {
     set_has_java_package();
-  } else {
+  }
+  else
+  {
     clear_has_java_package();
   }
   java_package_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), java_package,
-      GetArenaNoVirtual());
+                             GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.java_package)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_java_package() {
+inline ::std::string* FileOptions::unsafe_arena_release_java_package()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.java_package)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_java_package();
   return java_package_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                          GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_java_package(
-    ::std::string* java_package) {
+inline void FileOptions::unsafe_arena_set_allocated_java_package(::std::string* java_package)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (java_package != NULL) {
+  if (java_package != NULL)
+  {
     set_has_java_package();
-  } else {
+  }
+  else
+  {
     clear_has_java_package();
   }
-  java_package_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      java_package, GetArenaNoVirtual());
+  java_package_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), java_package,
+                                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.java_package)
 }
 
 // optional string java_outer_classname = 8;
-inline bool FileOptions::has_java_outer_classname() const {
+inline bool FileOptions::has_java_outer_classname() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void FileOptions::set_has_java_outer_classname() {
+inline void FileOptions::set_has_java_outer_classname()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void FileOptions::clear_has_java_outer_classname() {
+inline void FileOptions::clear_has_java_outer_classname()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void FileOptions::clear_java_outer_classname() {
+inline void FileOptions::clear_java_outer_classname()
+{
   java_outer_classname_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_java_outer_classname();
 }
-inline const ::std::string& FileOptions::java_outer_classname() const {
+inline const ::std::string& FileOptions::java_outer_classname() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_outer_classname)
   return java_outer_classname_.Get();
 }
-inline void FileOptions::set_java_outer_classname(const ::std::string& value) {
+inline void FileOptions::set_java_outer_classname(const ::std::string& value)
+{
   set_has_java_outer_classname();
   java_outer_classname_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_outer_classname)
 }
 #if LANG_CXX11
-inline void FileOptions::set_java_outer_classname(::std::string&& value) {
+inline void FileOptions::set_java_outer_classname(::std::string&& value)
+{
   set_has_java_outer_classname();
-  java_outer_classname_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  java_outer_classname_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                            GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.java_outer_classname)
 }
 #endif
-inline void FileOptions::set_java_outer_classname(const char* value) {
+inline void FileOptions::set_java_outer_classname(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_java_outer_classname();
   java_outer_classname_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                            GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.java_outer_classname)
 }
-inline void FileOptions::set_java_outer_classname(const char* value,
-    size_t size) {
+inline void FileOptions::set_java_outer_classname(const char* value, size_t size)
+{
   set_has_java_outer_classname();
-  java_outer_classname_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  java_outer_classname_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                            ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.java_outer_classname)
 }
-inline ::std::string* FileOptions::mutable_java_outer_classname() {
+inline ::std::string* FileOptions::mutable_java_outer_classname()
+{
   set_has_java_outer_classname();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.java_outer_classname)
-  return java_outer_classname_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  return java_outer_classname_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                                       GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_java_outer_classname() {
+inline ::std::string* FileOptions::release_java_outer_classname()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.java_outer_classname)
   clear_has_java_outer_classname();
-  return java_outer_classname_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  return java_outer_classname_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                                       GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_java_outer_classname(::std::string* java_outer_classname) {
-  if (java_outer_classname != NULL) {
+inline void FileOptions::set_allocated_java_outer_classname(::std::string* java_outer_classname)
+{
+  if (java_outer_classname != NULL)
+  {
     set_has_java_outer_classname();
-  } else {
+  }
+  else
+  {
     clear_has_java_outer_classname();
   }
   java_outer_classname_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), java_outer_classname,
-      GetArenaNoVirtual());
+                                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.java_outer_classname)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_java_outer_classname() {
+inline ::std::string* FileOptions::unsafe_arena_release_java_outer_classname()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.java_outer_classname)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_java_outer_classname();
   return java_outer_classname_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                                  GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_java_outer_classname(
-    ::std::string* java_outer_classname) {
+inline void FileOptions::unsafe_arena_set_allocated_java_outer_classname(::std::string* java_outer_classname)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (java_outer_classname != NULL) {
+  if (java_outer_classname != NULL)
+  {
     set_has_java_outer_classname();
-  } else {
+  }
+  else
+  {
     clear_has_java_outer_classname();
   }
   java_outer_classname_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      java_outer_classname, GetArenaNoVirtual());
+                                                java_outer_classname, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.java_outer_classname)
 }
 
 // optional bool java_multiple_files = 10 [default = false];
-inline bool FileOptions::has_java_multiple_files() const {
+inline bool FileOptions::has_java_multiple_files() const
+{
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void FileOptions::set_has_java_multiple_files() {
+inline void FileOptions::set_has_java_multiple_files()
+{
   _has_bits_[0] |= 0x00000200u;
 }
-inline void FileOptions::clear_has_java_multiple_files() {
+inline void FileOptions::clear_has_java_multiple_files()
+{
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void FileOptions::clear_java_multiple_files() {
+inline void FileOptions::clear_java_multiple_files()
+{
   java_multiple_files_ = false;
   clear_has_java_multiple_files();
 }
-inline bool FileOptions::java_multiple_files() const {
+inline bool FileOptions::java_multiple_files() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_multiple_files)
   return java_multiple_files_;
 }
-inline void FileOptions::set_java_multiple_files(bool value) {
+inline void FileOptions::set_java_multiple_files(bool value)
+{
   set_has_java_multiple_files();
   java_multiple_files_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_multiple_files)
 }
 
 // optional bool java_generate_equals_and_hash = 20 [deprecated = true];
-inline bool FileOptions::has_java_generate_equals_and_hash() const {
+inline bool FileOptions::has_java_generate_equals_and_hash() const
+{
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void FileOptions::set_has_java_generate_equals_and_hash() {
+inline void FileOptions::set_has_java_generate_equals_and_hash()
+{
   _has_bits_[0] |= 0x00000400u;
 }
-inline void FileOptions::clear_has_java_generate_equals_and_hash() {
+inline void FileOptions::clear_has_java_generate_equals_and_hash()
+{
   _has_bits_[0] &= ~0x00000400u;
 }
-inline void FileOptions::clear_java_generate_equals_and_hash() {
+inline void FileOptions::clear_java_generate_equals_and_hash()
+{
   java_generate_equals_and_hash_ = false;
   clear_has_java_generate_equals_and_hash();
 }
-inline bool FileOptions::java_generate_equals_and_hash() const {
+inline bool FileOptions::java_generate_equals_and_hash() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_generate_equals_and_hash)
   return java_generate_equals_and_hash_;
 }
-inline void FileOptions::set_java_generate_equals_and_hash(bool value) {
+inline void FileOptions::set_java_generate_equals_and_hash(bool value)
+{
   set_has_java_generate_equals_and_hash();
   java_generate_equals_and_hash_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_generate_equals_and_hash)
 }
 
 // optional bool java_string_check_utf8 = 27 [default = false];
-inline bool FileOptions::has_java_string_check_utf8() const {
+inline bool FileOptions::has_java_string_check_utf8() const
+{
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
-inline void FileOptions::set_has_java_string_check_utf8() {
+inline void FileOptions::set_has_java_string_check_utf8()
+{
   _has_bits_[0] |= 0x00000800u;
 }
-inline void FileOptions::clear_has_java_string_check_utf8() {
+inline void FileOptions::clear_has_java_string_check_utf8()
+{
   _has_bits_[0] &= ~0x00000800u;
 }
-inline void FileOptions::clear_java_string_check_utf8() {
+inline void FileOptions::clear_java_string_check_utf8()
+{
   java_string_check_utf8_ = false;
   clear_has_java_string_check_utf8();
 }
-inline bool FileOptions::java_string_check_utf8() const {
+inline bool FileOptions::java_string_check_utf8() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_string_check_utf8)
   return java_string_check_utf8_;
 }
-inline void FileOptions::set_java_string_check_utf8(bool value) {
+inline void FileOptions::set_java_string_check_utf8(bool value)
+{
   set_has_java_string_check_utf8();
   java_string_check_utf8_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_string_check_utf8)
 }
 
 // optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
-inline bool FileOptions::has_optimize_for() const {
+inline bool FileOptions::has_optimize_for() const
+{
   return (_has_bits_[0] & 0x00020000u) != 0;
 }
-inline void FileOptions::set_has_optimize_for() {
+inline void FileOptions::set_has_optimize_for()
+{
   _has_bits_[0] |= 0x00020000u;
 }
-inline void FileOptions::clear_has_optimize_for() {
+inline void FileOptions::clear_has_optimize_for()
+{
   _has_bits_[0] &= ~0x00020000u;
 }
-inline void FileOptions::clear_optimize_for() {
+inline void FileOptions::clear_optimize_for()
+{
   optimize_for_ = 1;
   clear_has_optimize_for();
 }
-inline ::google::protobuf::FileOptions_OptimizeMode FileOptions::optimize_for() const {
+inline ::google::protobuf::FileOptions_OptimizeMode FileOptions::optimize_for() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.optimize_for)
-  return static_cast< ::google::protobuf::FileOptions_OptimizeMode >(optimize_for_);
+  return static_cast< ::google::protobuf::FileOptions_OptimizeMode>(optimize_for_);
 }
-inline void FileOptions::set_optimize_for(::google::protobuf::FileOptions_OptimizeMode value) {
+inline void FileOptions::set_optimize_for(::google::protobuf::FileOptions_OptimizeMode value)
+{
   assert(::google::protobuf::FileOptions_OptimizeMode_IsValid(value));
   set_has_optimize_for();
   optimize_for_ = value;
@@ -9074,685 +10286,835 @@ inline void FileOptions::set_optimize_for(::google::protobuf::FileOptions_Optimi
 }
 
 // optional string go_package = 11;
-inline bool FileOptions::has_go_package() const {
+inline bool FileOptions::has_go_package() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void FileOptions::set_has_go_package() {
+inline void FileOptions::set_has_go_package()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void FileOptions::clear_has_go_package() {
+inline void FileOptions::clear_has_go_package()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void FileOptions::clear_go_package() {
+inline void FileOptions::clear_go_package()
+{
   go_package_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_go_package();
 }
-inline const ::std::string& FileOptions::go_package() const {
+inline const ::std::string& FileOptions::go_package() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.go_package)
   return go_package_.Get();
 }
-inline void FileOptions::set_go_package(const ::std::string& value) {
+inline void FileOptions::set_go_package(const ::std::string& value)
+{
   set_has_go_package();
   go_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.go_package)
 }
 #if LANG_CXX11
-inline void FileOptions::set_go_package(::std::string&& value) {
+inline void FileOptions::set_go_package(::std::string&& value)
+{
   set_has_go_package();
-  go_package_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  go_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.go_package)
 }
 #endif
-inline void FileOptions::set_go_package(const char* value) {
+inline void FileOptions::set_go_package(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_go_package();
   go_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                  GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.go_package)
 }
-inline void FileOptions::set_go_package(const char* value,
-    size_t size) {
+inline void FileOptions::set_go_package(const char* value, size_t size)
+{
   set_has_go_package();
-  go_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  go_package_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                  ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.go_package)
 }
-inline ::std::string* FileOptions::mutable_go_package() {
+inline ::std::string* FileOptions::mutable_go_package()
+{
   set_has_go_package();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.go_package)
   return go_package_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_go_package() {
+inline ::std::string* FileOptions::release_go_package()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.go_package)
   clear_has_go_package();
   return go_package_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_go_package(::std::string* go_package) {
-  if (go_package != NULL) {
+inline void FileOptions::set_allocated_go_package(::std::string* go_package)
+{
+  if (go_package != NULL)
+  {
     set_has_go_package();
-  } else {
+  }
+  else
+  {
     clear_has_go_package();
   }
   go_package_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), go_package,
-      GetArenaNoVirtual());
+                           GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.go_package)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_go_package() {
+inline ::std::string* FileOptions::unsafe_arena_release_go_package()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.go_package)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_go_package();
   return go_package_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                        GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_go_package(
-    ::std::string* go_package) {
+inline void FileOptions::unsafe_arena_set_allocated_go_package(::std::string* go_package)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (go_package != NULL) {
+  if (go_package != NULL)
+  {
     set_has_go_package();
-  } else {
+  }
+  else
+  {
     clear_has_go_package();
   }
-  go_package_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      go_package, GetArenaNoVirtual());
+  go_package_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), go_package,
+                                      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.go_package)
 }
 
 // optional bool cc_generic_services = 16 [default = false];
-inline bool FileOptions::has_cc_generic_services() const {
+inline bool FileOptions::has_cc_generic_services() const
+{
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void FileOptions::set_has_cc_generic_services() {
+inline void FileOptions::set_has_cc_generic_services()
+{
   _has_bits_[0] |= 0x00001000u;
 }
-inline void FileOptions::clear_has_cc_generic_services() {
+inline void FileOptions::clear_has_cc_generic_services()
+{
   _has_bits_[0] &= ~0x00001000u;
 }
-inline void FileOptions::clear_cc_generic_services() {
+inline void FileOptions::clear_cc_generic_services()
+{
   cc_generic_services_ = false;
   clear_has_cc_generic_services();
 }
-inline bool FileOptions::cc_generic_services() const {
+inline bool FileOptions::cc_generic_services() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.cc_generic_services)
   return cc_generic_services_;
 }
-inline void FileOptions::set_cc_generic_services(bool value) {
+inline void FileOptions::set_cc_generic_services(bool value)
+{
   set_has_cc_generic_services();
   cc_generic_services_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.cc_generic_services)
 }
 
 // optional bool java_generic_services = 17 [default = false];
-inline bool FileOptions::has_java_generic_services() const {
+inline bool FileOptions::has_java_generic_services() const
+{
   return (_has_bits_[0] & 0x00002000u) != 0;
 }
-inline void FileOptions::set_has_java_generic_services() {
+inline void FileOptions::set_has_java_generic_services()
+{
   _has_bits_[0] |= 0x00002000u;
 }
-inline void FileOptions::clear_has_java_generic_services() {
+inline void FileOptions::clear_has_java_generic_services()
+{
   _has_bits_[0] &= ~0x00002000u;
 }
-inline void FileOptions::clear_java_generic_services() {
+inline void FileOptions::clear_java_generic_services()
+{
   java_generic_services_ = false;
   clear_has_java_generic_services();
 }
-inline bool FileOptions::java_generic_services() const {
+inline bool FileOptions::java_generic_services() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_generic_services)
   return java_generic_services_;
 }
-inline void FileOptions::set_java_generic_services(bool value) {
+inline void FileOptions::set_java_generic_services(bool value)
+{
   set_has_java_generic_services();
   java_generic_services_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_generic_services)
 }
 
 // optional bool py_generic_services = 18 [default = false];
-inline bool FileOptions::has_py_generic_services() const {
+inline bool FileOptions::has_py_generic_services() const
+{
   return (_has_bits_[0] & 0x00004000u) != 0;
 }
-inline void FileOptions::set_has_py_generic_services() {
+inline void FileOptions::set_has_py_generic_services()
+{
   _has_bits_[0] |= 0x00004000u;
 }
-inline void FileOptions::clear_has_py_generic_services() {
+inline void FileOptions::clear_has_py_generic_services()
+{
   _has_bits_[0] &= ~0x00004000u;
 }
-inline void FileOptions::clear_py_generic_services() {
+inline void FileOptions::clear_py_generic_services()
+{
   py_generic_services_ = false;
   clear_has_py_generic_services();
 }
-inline bool FileOptions::py_generic_services() const {
+inline bool FileOptions::py_generic_services() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.py_generic_services)
   return py_generic_services_;
 }
-inline void FileOptions::set_py_generic_services(bool value) {
+inline void FileOptions::set_py_generic_services(bool value)
+{
   set_has_py_generic_services();
   py_generic_services_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.py_generic_services)
 }
 
 // optional bool php_generic_services = 42 [default = false];
-inline bool FileOptions::has_php_generic_services() const {
+inline bool FileOptions::has_php_generic_services() const
+{
   return (_has_bits_[0] & 0x00008000u) != 0;
 }
-inline void FileOptions::set_has_php_generic_services() {
+inline void FileOptions::set_has_php_generic_services()
+{
   _has_bits_[0] |= 0x00008000u;
 }
-inline void FileOptions::clear_has_php_generic_services() {
+inline void FileOptions::clear_has_php_generic_services()
+{
   _has_bits_[0] &= ~0x00008000u;
 }
-inline void FileOptions::clear_php_generic_services() {
+inline void FileOptions::clear_php_generic_services()
+{
   php_generic_services_ = false;
   clear_has_php_generic_services();
 }
-inline bool FileOptions::php_generic_services() const {
+inline bool FileOptions::php_generic_services() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.php_generic_services)
   return php_generic_services_;
 }
-inline void FileOptions::set_php_generic_services(bool value) {
+inline void FileOptions::set_php_generic_services(bool value)
+{
   set_has_php_generic_services();
   php_generic_services_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.php_generic_services)
 }
 
 // optional bool deprecated = 23 [default = false];
-inline bool FileOptions::has_deprecated() const {
+inline bool FileOptions::has_deprecated() const
+{
   return (_has_bits_[0] & 0x00010000u) != 0;
 }
-inline void FileOptions::set_has_deprecated() {
+inline void FileOptions::set_has_deprecated()
+{
   _has_bits_[0] |= 0x00010000u;
 }
-inline void FileOptions::clear_has_deprecated() {
+inline void FileOptions::clear_has_deprecated()
+{
   _has_bits_[0] &= ~0x00010000u;
 }
-inline void FileOptions::clear_deprecated() {
+inline void FileOptions::clear_deprecated()
+{
   deprecated_ = false;
   clear_has_deprecated();
 }
-inline bool FileOptions::deprecated() const {
+inline bool FileOptions::deprecated() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.deprecated)
   return deprecated_;
 }
-inline void FileOptions::set_deprecated(bool value) {
+inline void FileOptions::set_deprecated(bool value)
+{
   set_has_deprecated();
   deprecated_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.deprecated)
 }
 
 // optional bool cc_enable_arenas = 31 [default = false];
-inline bool FileOptions::has_cc_enable_arenas() const {
+inline bool FileOptions::has_cc_enable_arenas() const
+{
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void FileOptions::set_has_cc_enable_arenas() {
+inline void FileOptions::set_has_cc_enable_arenas()
+{
   _has_bits_[0] |= 0x00000100u;
 }
-inline void FileOptions::clear_has_cc_enable_arenas() {
+inline void FileOptions::clear_has_cc_enable_arenas()
+{
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void FileOptions::clear_cc_enable_arenas() {
+inline void FileOptions::clear_cc_enable_arenas()
+{
   cc_enable_arenas_ = false;
   clear_has_cc_enable_arenas();
 }
-inline bool FileOptions::cc_enable_arenas() const {
+inline bool FileOptions::cc_enable_arenas() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.cc_enable_arenas)
   return cc_enable_arenas_;
 }
-inline void FileOptions::set_cc_enable_arenas(bool value) {
+inline void FileOptions::set_cc_enable_arenas(bool value)
+{
   set_has_cc_enable_arenas();
   cc_enable_arenas_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.cc_enable_arenas)
 }
 
 // optional string objc_class_prefix = 36;
-inline bool FileOptions::has_objc_class_prefix() const {
+inline bool FileOptions::has_objc_class_prefix() const
+{
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void FileOptions::set_has_objc_class_prefix() {
+inline void FileOptions::set_has_objc_class_prefix()
+{
   _has_bits_[0] |= 0x00000008u;
 }
-inline void FileOptions::clear_has_objc_class_prefix() {
+inline void FileOptions::clear_has_objc_class_prefix()
+{
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void FileOptions::clear_objc_class_prefix() {
+inline void FileOptions::clear_objc_class_prefix()
+{
   objc_class_prefix_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_objc_class_prefix();
 }
-inline const ::std::string& FileOptions::objc_class_prefix() const {
+inline const ::std::string& FileOptions::objc_class_prefix() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.objc_class_prefix)
   return objc_class_prefix_.Get();
 }
-inline void FileOptions::set_objc_class_prefix(const ::std::string& value) {
+inline void FileOptions::set_objc_class_prefix(const ::std::string& value)
+{
   set_has_objc_class_prefix();
   objc_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.objc_class_prefix)
 }
 #if LANG_CXX11
-inline void FileOptions::set_objc_class_prefix(::std::string&& value) {
+inline void FileOptions::set_objc_class_prefix(::std::string&& value)
+{
   set_has_objc_class_prefix();
-  objc_class_prefix_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  objc_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                         GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.objc_class_prefix)
 }
 #endif
-inline void FileOptions::set_objc_class_prefix(const char* value) {
+inline void FileOptions::set_objc_class_prefix(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_objc_class_prefix();
   objc_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                         GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.objc_class_prefix)
 }
-inline void FileOptions::set_objc_class_prefix(const char* value,
-    size_t size) {
+inline void FileOptions::set_objc_class_prefix(const char* value, size_t size)
+{
   set_has_objc_class_prefix();
-  objc_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  objc_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                         ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.objc_class_prefix)
 }
-inline ::std::string* FileOptions::mutable_objc_class_prefix() {
+inline ::std::string* FileOptions::mutable_objc_class_prefix()
+{
   set_has_objc_class_prefix();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.objc_class_prefix)
   return objc_class_prefix_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_objc_class_prefix() {
+inline ::std::string* FileOptions::release_objc_class_prefix()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.objc_class_prefix)
   clear_has_objc_class_prefix();
   return objc_class_prefix_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_objc_class_prefix(::std::string* objc_class_prefix) {
-  if (objc_class_prefix != NULL) {
+inline void FileOptions::set_allocated_objc_class_prefix(::std::string* objc_class_prefix)
+{
+  if (objc_class_prefix != NULL)
+  {
     set_has_objc_class_prefix();
-  } else {
+  }
+  else
+  {
     clear_has_objc_class_prefix();
   }
   objc_class_prefix_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), objc_class_prefix,
-      GetArenaNoVirtual());
+                                  GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.objc_class_prefix)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_objc_class_prefix() {
+inline ::std::string* FileOptions::unsafe_arena_release_objc_class_prefix()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.objc_class_prefix)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_objc_class_prefix();
   return objc_class_prefix_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                               GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_objc_class_prefix(
-    ::std::string* objc_class_prefix) {
+inline void FileOptions::unsafe_arena_set_allocated_objc_class_prefix(::std::string* objc_class_prefix)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (objc_class_prefix != NULL) {
+  if (objc_class_prefix != NULL)
+  {
     set_has_objc_class_prefix();
-  } else {
+  }
+  else
+  {
     clear_has_objc_class_prefix();
   }
   objc_class_prefix_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      objc_class_prefix, GetArenaNoVirtual());
+                                             objc_class_prefix, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.objc_class_prefix)
 }
 
 // optional string csharp_namespace = 37;
-inline bool FileOptions::has_csharp_namespace() const {
+inline bool FileOptions::has_csharp_namespace() const
+{
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void FileOptions::set_has_csharp_namespace() {
+inline void FileOptions::set_has_csharp_namespace()
+{
   _has_bits_[0] |= 0x00000010u;
 }
-inline void FileOptions::clear_has_csharp_namespace() {
+inline void FileOptions::clear_has_csharp_namespace()
+{
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void FileOptions::clear_csharp_namespace() {
+inline void FileOptions::clear_csharp_namespace()
+{
   csharp_namespace_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_csharp_namespace();
 }
-inline const ::std::string& FileOptions::csharp_namespace() const {
+inline const ::std::string& FileOptions::csharp_namespace() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.csharp_namespace)
   return csharp_namespace_.Get();
 }
-inline void FileOptions::set_csharp_namespace(const ::std::string& value) {
+inline void FileOptions::set_csharp_namespace(const ::std::string& value)
+{
   set_has_csharp_namespace();
   csharp_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.csharp_namespace)
 }
 #if LANG_CXX11
-inline void FileOptions::set_csharp_namespace(::std::string&& value) {
+inline void FileOptions::set_csharp_namespace(::std::string&& value)
+{
   set_has_csharp_namespace();
-  csharp_namespace_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  csharp_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.csharp_namespace)
 }
 #endif
-inline void FileOptions::set_csharp_namespace(const char* value) {
+inline void FileOptions::set_csharp_namespace(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_csharp_namespace();
   csharp_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.csharp_namespace)
 }
-inline void FileOptions::set_csharp_namespace(const char* value,
-    size_t size) {
+inline void FileOptions::set_csharp_namespace(const char* value, size_t size)
+{
   set_has_csharp_namespace();
-  csharp_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  csharp_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                        ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.csharp_namespace)
 }
-inline ::std::string* FileOptions::mutable_csharp_namespace() {
+inline ::std::string* FileOptions::mutable_csharp_namespace()
+{
   set_has_csharp_namespace();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.csharp_namespace)
   return csharp_namespace_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_csharp_namespace() {
+inline ::std::string* FileOptions::release_csharp_namespace()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.csharp_namespace)
   clear_has_csharp_namespace();
   return csharp_namespace_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_csharp_namespace(::std::string* csharp_namespace) {
-  if (csharp_namespace != NULL) {
+inline void FileOptions::set_allocated_csharp_namespace(::std::string* csharp_namespace)
+{
+  if (csharp_namespace != NULL)
+  {
     set_has_csharp_namespace();
-  } else {
+  }
+  else
+  {
     clear_has_csharp_namespace();
   }
   csharp_namespace_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), csharp_namespace,
-      GetArenaNoVirtual());
+                                 GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.csharp_namespace)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_csharp_namespace() {
+inline ::std::string* FileOptions::unsafe_arena_release_csharp_namespace()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.csharp_namespace)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_csharp_namespace();
   return csharp_namespace_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                              GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_csharp_namespace(
-    ::std::string* csharp_namespace) {
+inline void FileOptions::unsafe_arena_set_allocated_csharp_namespace(::std::string* csharp_namespace)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (csharp_namespace != NULL) {
+  if (csharp_namespace != NULL)
+  {
     set_has_csharp_namespace();
-  } else {
+  }
+  else
+  {
     clear_has_csharp_namespace();
   }
   csharp_namespace_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      csharp_namespace, GetArenaNoVirtual());
+                                            csharp_namespace, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.csharp_namespace)
 }
 
 // optional string swift_prefix = 39;
-inline bool FileOptions::has_swift_prefix() const {
+inline bool FileOptions::has_swift_prefix() const
+{
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void FileOptions::set_has_swift_prefix() {
+inline void FileOptions::set_has_swift_prefix()
+{
   _has_bits_[0] |= 0x00000020u;
 }
-inline void FileOptions::clear_has_swift_prefix() {
+inline void FileOptions::clear_has_swift_prefix()
+{
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void FileOptions::clear_swift_prefix() {
+inline void FileOptions::clear_swift_prefix()
+{
   swift_prefix_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_swift_prefix();
 }
-inline const ::std::string& FileOptions::swift_prefix() const {
+inline const ::std::string& FileOptions::swift_prefix() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.swift_prefix)
   return swift_prefix_.Get();
 }
-inline void FileOptions::set_swift_prefix(const ::std::string& value) {
+inline void FileOptions::set_swift_prefix(const ::std::string& value)
+{
   set_has_swift_prefix();
   swift_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.swift_prefix)
 }
 #if LANG_CXX11
-inline void FileOptions::set_swift_prefix(::std::string&& value) {
+inline void FileOptions::set_swift_prefix(::std::string&& value)
+{
   set_has_swift_prefix();
-  swift_prefix_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  swift_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                    GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.swift_prefix)
 }
 #endif
-inline void FileOptions::set_swift_prefix(const char* value) {
+inline void FileOptions::set_swift_prefix(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_swift_prefix();
   swift_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                    GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.swift_prefix)
 }
-inline void FileOptions::set_swift_prefix(const char* value,
-    size_t size) {
+inline void FileOptions::set_swift_prefix(const char* value, size_t size)
+{
   set_has_swift_prefix();
-  swift_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  swift_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                    ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.swift_prefix)
 }
-inline ::std::string* FileOptions::mutable_swift_prefix() {
+inline ::std::string* FileOptions::mutable_swift_prefix()
+{
   set_has_swift_prefix();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.swift_prefix)
   return swift_prefix_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_swift_prefix() {
+inline ::std::string* FileOptions::release_swift_prefix()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.swift_prefix)
   clear_has_swift_prefix();
   return swift_prefix_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_swift_prefix(::std::string* swift_prefix) {
-  if (swift_prefix != NULL) {
+inline void FileOptions::set_allocated_swift_prefix(::std::string* swift_prefix)
+{
+  if (swift_prefix != NULL)
+  {
     set_has_swift_prefix();
-  } else {
+  }
+  else
+  {
     clear_has_swift_prefix();
   }
   swift_prefix_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), swift_prefix,
-      GetArenaNoVirtual());
+                             GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.swift_prefix)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_swift_prefix() {
+inline ::std::string* FileOptions::unsafe_arena_release_swift_prefix()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.swift_prefix)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_swift_prefix();
   return swift_prefix_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                          GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_swift_prefix(
-    ::std::string* swift_prefix) {
+inline void FileOptions::unsafe_arena_set_allocated_swift_prefix(::std::string* swift_prefix)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (swift_prefix != NULL) {
+  if (swift_prefix != NULL)
+  {
     set_has_swift_prefix();
-  } else {
+  }
+  else
+  {
     clear_has_swift_prefix();
   }
-  swift_prefix_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      swift_prefix, GetArenaNoVirtual());
+  swift_prefix_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), swift_prefix,
+                                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.swift_prefix)
 }
 
 // optional string php_class_prefix = 40;
-inline bool FileOptions::has_php_class_prefix() const {
+inline bool FileOptions::has_php_class_prefix() const
+{
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void FileOptions::set_has_php_class_prefix() {
+inline void FileOptions::set_has_php_class_prefix()
+{
   _has_bits_[0] |= 0x00000040u;
 }
-inline void FileOptions::clear_has_php_class_prefix() {
+inline void FileOptions::clear_has_php_class_prefix()
+{
   _has_bits_[0] &= ~0x00000040u;
 }
-inline void FileOptions::clear_php_class_prefix() {
+inline void FileOptions::clear_php_class_prefix()
+{
   php_class_prefix_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_php_class_prefix();
 }
-inline const ::std::string& FileOptions::php_class_prefix() const {
+inline const ::std::string& FileOptions::php_class_prefix() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.php_class_prefix)
   return php_class_prefix_.Get();
 }
-inline void FileOptions::set_php_class_prefix(const ::std::string& value) {
+inline void FileOptions::set_php_class_prefix(const ::std::string& value)
+{
   set_has_php_class_prefix();
   php_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.php_class_prefix)
 }
 #if LANG_CXX11
-inline void FileOptions::set_php_class_prefix(::std::string&& value) {
+inline void FileOptions::set_php_class_prefix(::std::string&& value)
+{
   set_has_php_class_prefix();
-  php_class_prefix_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  php_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.php_class_prefix)
 }
 #endif
-inline void FileOptions::set_php_class_prefix(const char* value) {
+inline void FileOptions::set_php_class_prefix(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_php_class_prefix();
   php_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.php_class_prefix)
 }
-inline void FileOptions::set_php_class_prefix(const char* value,
-    size_t size) {
+inline void FileOptions::set_php_class_prefix(const char* value, size_t size)
+{
   set_has_php_class_prefix();
-  php_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  php_class_prefix_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                        ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.php_class_prefix)
 }
-inline ::std::string* FileOptions::mutable_php_class_prefix() {
+inline ::std::string* FileOptions::mutable_php_class_prefix()
+{
   set_has_php_class_prefix();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.php_class_prefix)
   return php_class_prefix_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_php_class_prefix() {
+inline ::std::string* FileOptions::release_php_class_prefix()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.php_class_prefix)
   clear_has_php_class_prefix();
   return php_class_prefix_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_php_class_prefix(::std::string* php_class_prefix) {
-  if (php_class_prefix != NULL) {
+inline void FileOptions::set_allocated_php_class_prefix(::std::string* php_class_prefix)
+{
+  if (php_class_prefix != NULL)
+  {
     set_has_php_class_prefix();
-  } else {
+  }
+  else
+  {
     clear_has_php_class_prefix();
   }
   php_class_prefix_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), php_class_prefix,
-      GetArenaNoVirtual());
+                                 GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.php_class_prefix)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_php_class_prefix() {
+inline ::std::string* FileOptions::unsafe_arena_release_php_class_prefix()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.php_class_prefix)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_php_class_prefix();
   return php_class_prefix_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                              GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_php_class_prefix(
-    ::std::string* php_class_prefix) {
+inline void FileOptions::unsafe_arena_set_allocated_php_class_prefix(::std::string* php_class_prefix)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (php_class_prefix != NULL) {
+  if (php_class_prefix != NULL)
+  {
     set_has_php_class_prefix();
-  } else {
+  }
+  else
+  {
     clear_has_php_class_prefix();
   }
   php_class_prefix_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      php_class_prefix, GetArenaNoVirtual());
+                                            php_class_prefix, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.php_class_prefix)
 }
 
 // optional string php_namespace = 41;
-inline bool FileOptions::has_php_namespace() const {
+inline bool FileOptions::has_php_namespace() const
+{
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void FileOptions::set_has_php_namespace() {
+inline void FileOptions::set_has_php_namespace()
+{
   _has_bits_[0] |= 0x00000080u;
 }
-inline void FileOptions::clear_has_php_namespace() {
+inline void FileOptions::clear_has_php_namespace()
+{
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void FileOptions::clear_php_namespace() {
+inline void FileOptions::clear_php_namespace()
+{
   php_namespace_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_php_namespace();
 }
-inline const ::std::string& FileOptions::php_namespace() const {
+inline const ::std::string& FileOptions::php_namespace() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.php_namespace)
   return php_namespace_.Get();
 }
-inline void FileOptions::set_php_namespace(const ::std::string& value) {
+inline void FileOptions::set_php_namespace(const ::std::string& value)
+{
   set_has_php_namespace();
   php_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.php_namespace)
 }
 #if LANG_CXX11
-inline void FileOptions::set_php_namespace(::std::string&& value) {
+inline void FileOptions::set_php_namespace(::std::string&& value)
+{
   set_has_php_namespace();
-  php_namespace_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  php_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.FileOptions.php_namespace)
 }
 #endif
-inline void FileOptions::set_php_namespace(const char* value) {
+inline void FileOptions::set_php_namespace(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_php_namespace();
   php_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.FileOptions.php_namespace)
 }
-inline void FileOptions::set_php_namespace(const char* value,
-    size_t size) {
+inline void FileOptions::set_php_namespace(const char* value, size_t size)
+{
   set_has_php_namespace();
-  php_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  php_namespace_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                     ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileOptions.php_namespace)
 }
-inline ::std::string* FileOptions::mutable_php_namespace() {
+inline ::std::string* FileOptions::mutable_php_namespace()
+{
   set_has_php_namespace();
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.php_namespace)
   return php_namespace_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* FileOptions::release_php_namespace() {
+inline ::std::string* FileOptions::release_php_namespace()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.php_namespace)
   clear_has_php_namespace();
   return php_namespace_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void FileOptions::set_allocated_php_namespace(::std::string* php_namespace) {
-  if (php_namespace != NULL) {
+inline void FileOptions::set_allocated_php_namespace(::std::string* php_namespace)
+{
+  if (php_namespace != NULL)
+  {
     set_has_php_namespace();
-  } else {
+  }
+  else
+  {
     clear_has_php_namespace();
   }
   php_namespace_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), php_namespace,
-      GetArenaNoVirtual());
+                              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.php_namespace)
 }
-inline ::std::string* FileOptions::unsafe_arena_release_php_namespace() {
+inline ::std::string* FileOptions::unsafe_arena_release_php_namespace()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.FileOptions.php_namespace)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_php_namespace();
   return php_namespace_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                           GetArenaNoVirtual());
 }
-inline void FileOptions::unsafe_arena_set_allocated_php_namespace(
-    ::std::string* php_namespace) {
+inline void FileOptions::unsafe_arena_set_allocated_php_namespace(::std::string* php_namespace)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (php_namespace != NULL) {
+  if (php_namespace != NULL)
+  {
     set_has_php_namespace();
-  } else {
+  }
+  else
+  {
     clear_has_php_namespace();
   }
-  php_namespace_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      php_namespace, GetArenaNoVirtual());
+  php_namespace_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), php_namespace,
+                                         GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileOptions.php_namespace)
 }
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int FileOptions::uninterpreted_option_size() const {
+inline int FileOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void FileOptions::clear_uninterpreted_option() {
+inline void FileOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& FileOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& FileOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* FileOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* FileOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* FileOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* FileOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.FileOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-FileOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+FileOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-FileOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+FileOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FileOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -9762,127 +11124,158 @@ FileOptions::uninterpreted_option() const {
 // MessageOptions
 
 // optional bool message_set_wire_format = 1 [default = false];
-inline bool MessageOptions::has_message_set_wire_format() const {
+inline bool MessageOptions::has_message_set_wire_format() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MessageOptions::set_has_message_set_wire_format() {
+inline void MessageOptions::set_has_message_set_wire_format()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MessageOptions::clear_has_message_set_wire_format() {
+inline void MessageOptions::clear_has_message_set_wire_format()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MessageOptions::clear_message_set_wire_format() {
+inline void MessageOptions::clear_message_set_wire_format()
+{
   message_set_wire_format_ = false;
   clear_has_message_set_wire_format();
 }
-inline bool MessageOptions::message_set_wire_format() const {
+inline bool MessageOptions::message_set_wire_format() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.message_set_wire_format)
   return message_set_wire_format_;
 }
-inline void MessageOptions::set_message_set_wire_format(bool value) {
+inline void MessageOptions::set_message_set_wire_format(bool value)
+{
   set_has_message_set_wire_format();
   message_set_wire_format_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.message_set_wire_format)
 }
 
 // optional bool no_standard_descriptor_accessor = 2 [default = false];
-inline bool MessageOptions::has_no_standard_descriptor_accessor() const {
+inline bool MessageOptions::has_no_standard_descriptor_accessor() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MessageOptions::set_has_no_standard_descriptor_accessor() {
+inline void MessageOptions::set_has_no_standard_descriptor_accessor()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MessageOptions::clear_has_no_standard_descriptor_accessor() {
+inline void MessageOptions::clear_has_no_standard_descriptor_accessor()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MessageOptions::clear_no_standard_descriptor_accessor() {
+inline void MessageOptions::clear_no_standard_descriptor_accessor()
+{
   no_standard_descriptor_accessor_ = false;
   clear_has_no_standard_descriptor_accessor();
 }
-inline bool MessageOptions::no_standard_descriptor_accessor() const {
+inline bool MessageOptions::no_standard_descriptor_accessor() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.no_standard_descriptor_accessor)
   return no_standard_descriptor_accessor_;
 }
-inline void MessageOptions::set_no_standard_descriptor_accessor(bool value) {
+inline void MessageOptions::set_no_standard_descriptor_accessor(bool value)
+{
   set_has_no_standard_descriptor_accessor();
   no_standard_descriptor_accessor_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.no_standard_descriptor_accessor)
 }
 
 // optional bool deprecated = 3 [default = false];
-inline bool MessageOptions::has_deprecated() const {
+inline bool MessageOptions::has_deprecated() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void MessageOptions::set_has_deprecated() {
+inline void MessageOptions::set_has_deprecated()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void MessageOptions::clear_has_deprecated() {
+inline void MessageOptions::clear_has_deprecated()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void MessageOptions::clear_deprecated() {
+inline void MessageOptions::clear_deprecated()
+{
   deprecated_ = false;
   clear_has_deprecated();
 }
-inline bool MessageOptions::deprecated() const {
+inline bool MessageOptions::deprecated() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.deprecated)
   return deprecated_;
 }
-inline void MessageOptions::set_deprecated(bool value) {
+inline void MessageOptions::set_deprecated(bool value)
+{
   set_has_deprecated();
   deprecated_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.deprecated)
 }
 
 // optional bool map_entry = 7;
-inline bool MessageOptions::has_map_entry() const {
+inline bool MessageOptions::has_map_entry() const
+{
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void MessageOptions::set_has_map_entry() {
+inline void MessageOptions::set_has_map_entry()
+{
   _has_bits_[0] |= 0x00000008u;
 }
-inline void MessageOptions::clear_has_map_entry() {
+inline void MessageOptions::clear_has_map_entry()
+{
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void MessageOptions::clear_map_entry() {
+inline void MessageOptions::clear_map_entry()
+{
   map_entry_ = false;
   clear_has_map_entry();
 }
-inline bool MessageOptions::map_entry() const {
+inline bool MessageOptions::map_entry() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.map_entry)
   return map_entry_;
 }
-inline void MessageOptions::set_map_entry(bool value) {
+inline void MessageOptions::set_map_entry(bool value)
+{
   set_has_map_entry();
   map_entry_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.map_entry)
 }
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int MessageOptions::uninterpreted_option_size() const {
+inline int MessageOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void MessageOptions::clear_uninterpreted_option() {
+inline void MessageOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& MessageOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& MessageOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* MessageOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* MessageOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.MessageOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* MessageOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* MessageOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.MessageOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-MessageOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+MessageOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.MessageOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-MessageOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+MessageOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.MessageOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -9892,24 +11285,30 @@ MessageOptions::uninterpreted_option() const {
 // FieldOptions
 
 // optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];
-inline bool FieldOptions::has_ctype() const {
+inline bool FieldOptions::has_ctype() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void FieldOptions::set_has_ctype() {
+inline void FieldOptions::set_has_ctype()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void FieldOptions::clear_has_ctype() {
+inline void FieldOptions::clear_has_ctype()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void FieldOptions::clear_ctype() {
+inline void FieldOptions::clear_ctype()
+{
   ctype_ = 0;
   clear_has_ctype();
 }
-inline ::google::protobuf::FieldOptions_CType FieldOptions::ctype() const {
+inline ::google::protobuf::FieldOptions_CType FieldOptions::ctype() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.ctype)
-  return static_cast< ::google::protobuf::FieldOptions_CType >(ctype_);
+  return static_cast< ::google::protobuf::FieldOptions_CType>(ctype_);
 }
-inline void FieldOptions::set_ctype(::google::protobuf::FieldOptions_CType value) {
+inline void FieldOptions::set_ctype(::google::protobuf::FieldOptions_CType value)
+{
   assert(::google::protobuf::FieldOptions_CType_IsValid(value));
   set_has_ctype();
   ctype_ = value;
@@ -9917,48 +11316,60 @@ inline void FieldOptions::set_ctype(::google::protobuf::FieldOptions_CType value
 }
 
 // optional bool packed = 2;
-inline bool FieldOptions::has_packed() const {
+inline bool FieldOptions::has_packed() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void FieldOptions::set_has_packed() {
+inline void FieldOptions::set_has_packed()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void FieldOptions::clear_has_packed() {
+inline void FieldOptions::clear_has_packed()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void FieldOptions::clear_packed() {
+inline void FieldOptions::clear_packed()
+{
   packed_ = false;
   clear_has_packed();
 }
-inline bool FieldOptions::packed() const {
+inline bool FieldOptions::packed() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.packed)
   return packed_;
 }
-inline void FieldOptions::set_packed(bool value) {
+inline void FieldOptions::set_packed(bool value)
+{
   set_has_packed();
   packed_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.packed)
 }
 
 // optional .google.protobuf.FieldOptions.JSType jstype = 6 [default = JS_NORMAL];
-inline bool FieldOptions::has_jstype() const {
+inline bool FieldOptions::has_jstype() const
+{
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void FieldOptions::set_has_jstype() {
+inline void FieldOptions::set_has_jstype()
+{
   _has_bits_[0] |= 0x00000020u;
 }
-inline void FieldOptions::clear_has_jstype() {
+inline void FieldOptions::clear_has_jstype()
+{
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void FieldOptions::clear_jstype() {
+inline void FieldOptions::clear_jstype()
+{
   jstype_ = 0;
   clear_has_jstype();
 }
-inline ::google::protobuf::FieldOptions_JSType FieldOptions::jstype() const {
+inline ::google::protobuf::FieldOptions_JSType FieldOptions::jstype() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.jstype)
-  return static_cast< ::google::protobuf::FieldOptions_JSType >(jstype_);
+  return static_cast< ::google::protobuf::FieldOptions_JSType>(jstype_);
 }
-inline void FieldOptions::set_jstype(::google::protobuf::FieldOptions_JSType value) {
+inline void FieldOptions::set_jstype(::google::protobuf::FieldOptions_JSType value)
+{
   assert(::google::protobuf::FieldOptions_JSType_IsValid(value));
   set_has_jstype();
   jstype_ = value;
@@ -9966,103 +11377,128 @@ inline void FieldOptions::set_jstype(::google::protobuf::FieldOptions_JSType val
 }
 
 // optional bool lazy = 5 [default = false];
-inline bool FieldOptions::has_lazy() const {
+inline bool FieldOptions::has_lazy() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void FieldOptions::set_has_lazy() {
+inline void FieldOptions::set_has_lazy()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void FieldOptions::clear_has_lazy() {
+inline void FieldOptions::clear_has_lazy()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void FieldOptions::clear_lazy() {
+inline void FieldOptions::clear_lazy()
+{
   lazy_ = false;
   clear_has_lazy();
 }
-inline bool FieldOptions::lazy() const {
+inline bool FieldOptions::lazy() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.lazy)
   return lazy_;
 }
-inline void FieldOptions::set_lazy(bool value) {
+inline void FieldOptions::set_lazy(bool value)
+{
   set_has_lazy();
   lazy_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.lazy)
 }
 
 // optional bool deprecated = 3 [default = false];
-inline bool FieldOptions::has_deprecated() const {
+inline bool FieldOptions::has_deprecated() const
+{
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void FieldOptions::set_has_deprecated() {
+inline void FieldOptions::set_has_deprecated()
+{
   _has_bits_[0] |= 0x00000008u;
 }
-inline void FieldOptions::clear_has_deprecated() {
+inline void FieldOptions::clear_has_deprecated()
+{
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void FieldOptions::clear_deprecated() {
+inline void FieldOptions::clear_deprecated()
+{
   deprecated_ = false;
   clear_has_deprecated();
 }
-inline bool FieldOptions::deprecated() const {
+inline bool FieldOptions::deprecated() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.deprecated)
   return deprecated_;
 }
-inline void FieldOptions::set_deprecated(bool value) {
+inline void FieldOptions::set_deprecated(bool value)
+{
   set_has_deprecated();
   deprecated_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.deprecated)
 }
 
 // optional bool weak = 10 [default = false];
-inline bool FieldOptions::has_weak() const {
+inline bool FieldOptions::has_weak() const
+{
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void FieldOptions::set_has_weak() {
+inline void FieldOptions::set_has_weak()
+{
   _has_bits_[0] |= 0x00000010u;
 }
-inline void FieldOptions::clear_has_weak() {
+inline void FieldOptions::clear_has_weak()
+{
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void FieldOptions::clear_weak() {
+inline void FieldOptions::clear_weak()
+{
   weak_ = false;
   clear_has_weak();
 }
-inline bool FieldOptions::weak() const {
+inline bool FieldOptions::weak() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.weak)
   return weak_;
 }
-inline void FieldOptions::set_weak(bool value) {
+inline void FieldOptions::set_weak(bool value)
+{
   set_has_weak();
   weak_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.weak)
 }
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int FieldOptions::uninterpreted_option_size() const {
+inline int FieldOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void FieldOptions::clear_uninterpreted_option() {
+inline void FieldOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& FieldOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& FieldOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* FieldOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* FieldOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.FieldOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* FieldOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* FieldOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.FieldOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-FieldOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+FieldOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.FieldOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-FieldOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+FieldOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.FieldOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -10072,31 +11508,38 @@ FieldOptions::uninterpreted_option() const {
 // OneofOptions
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int OneofOptions::uninterpreted_option_size() const {
+inline int OneofOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void OneofOptions::clear_uninterpreted_option() {
+inline void OneofOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& OneofOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& OneofOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.OneofOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* OneofOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* OneofOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.OneofOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* OneofOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* OneofOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.OneofOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-OneofOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+OneofOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.OneofOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-OneofOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+OneofOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.OneofOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -10106,79 +11549,98 @@ OneofOptions::uninterpreted_option() const {
 // EnumOptions
 
 // optional bool allow_alias = 2;
-inline bool EnumOptions::has_allow_alias() const {
+inline bool EnumOptions::has_allow_alias() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void EnumOptions::set_has_allow_alias() {
+inline void EnumOptions::set_has_allow_alias()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void EnumOptions::clear_has_allow_alias() {
+inline void EnumOptions::clear_has_allow_alias()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void EnumOptions::clear_allow_alias() {
+inline void EnumOptions::clear_allow_alias()
+{
   allow_alias_ = false;
   clear_has_allow_alias();
 }
-inline bool EnumOptions::allow_alias() const {
+inline bool EnumOptions::allow_alias() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumOptions.allow_alias)
   return allow_alias_;
 }
-inline void EnumOptions::set_allow_alias(bool value) {
+inline void EnumOptions::set_allow_alias(bool value)
+{
   set_has_allow_alias();
   allow_alias_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.EnumOptions.allow_alias)
 }
 
 // optional bool deprecated = 3 [default = false];
-inline bool EnumOptions::has_deprecated() const {
+inline bool EnumOptions::has_deprecated() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void EnumOptions::set_has_deprecated() {
+inline void EnumOptions::set_has_deprecated()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void EnumOptions::clear_has_deprecated() {
+inline void EnumOptions::clear_has_deprecated()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void EnumOptions::clear_deprecated() {
+inline void EnumOptions::clear_deprecated()
+{
   deprecated_ = false;
   clear_has_deprecated();
 }
-inline bool EnumOptions::deprecated() const {
+inline bool EnumOptions::deprecated() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumOptions.deprecated)
   return deprecated_;
 }
-inline void EnumOptions::set_deprecated(bool value) {
+inline void EnumOptions::set_deprecated(bool value)
+{
   set_has_deprecated();
   deprecated_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.EnumOptions.deprecated)
 }
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int EnumOptions::uninterpreted_option_size() const {
+inline int EnumOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void EnumOptions::clear_uninterpreted_option() {
+inline void EnumOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& EnumOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& EnumOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* EnumOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* EnumOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* EnumOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* EnumOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.EnumOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-EnumOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+EnumOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-EnumOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+EnumOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.EnumOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -10188,55 +11650,68 @@ EnumOptions::uninterpreted_option() const {
 // EnumValueOptions
 
 // optional bool deprecated = 1 [default = false];
-inline bool EnumValueOptions::has_deprecated() const {
+inline bool EnumValueOptions::has_deprecated() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void EnumValueOptions::set_has_deprecated() {
+inline void EnumValueOptions::set_has_deprecated()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void EnumValueOptions::clear_has_deprecated() {
+inline void EnumValueOptions::clear_has_deprecated()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void EnumValueOptions::clear_deprecated() {
+inline void EnumValueOptions::clear_deprecated()
+{
   deprecated_ = false;
   clear_has_deprecated();
 }
-inline bool EnumValueOptions::deprecated() const {
+inline bool EnumValueOptions::deprecated() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumValueOptions.deprecated)
   return deprecated_;
 }
-inline void EnumValueOptions::set_deprecated(bool value) {
+inline void EnumValueOptions::set_deprecated(bool value)
+{
   set_has_deprecated();
   deprecated_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.EnumValueOptions.deprecated)
 }
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int EnumValueOptions::uninterpreted_option_size() const {
+inline int EnumValueOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void EnumValueOptions::clear_uninterpreted_option() {
+inline void EnumValueOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& EnumValueOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& EnumValueOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.EnumValueOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* EnumValueOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* EnumValueOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValueOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* EnumValueOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* EnumValueOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.EnumValueOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-EnumValueOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+EnumValueOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumValueOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-EnumValueOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+EnumValueOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.EnumValueOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -10246,55 +11721,68 @@ EnumValueOptions::uninterpreted_option() const {
 // ServiceOptions
 
 // optional bool deprecated = 33 [default = false];
-inline bool ServiceOptions::has_deprecated() const {
+inline bool ServiceOptions::has_deprecated() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ServiceOptions::set_has_deprecated() {
+inline void ServiceOptions::set_has_deprecated()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ServiceOptions::clear_has_deprecated() {
+inline void ServiceOptions::clear_has_deprecated()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ServiceOptions::clear_deprecated() {
+inline void ServiceOptions::clear_deprecated()
+{
   deprecated_ = false;
   clear_has_deprecated();
 }
-inline bool ServiceOptions::deprecated() const {
+inline bool ServiceOptions::deprecated() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.ServiceOptions.deprecated)
   return deprecated_;
 }
-inline void ServiceOptions::set_deprecated(bool value) {
+inline void ServiceOptions::set_deprecated(bool value)
+{
   set_has_deprecated();
   deprecated_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.ServiceOptions.deprecated)
 }
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int ServiceOptions::uninterpreted_option_size() const {
+inline int ServiceOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void ServiceOptions::clear_uninterpreted_option() {
+inline void ServiceOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& ServiceOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& ServiceOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.ServiceOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* ServiceOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* ServiceOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* ServiceOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* ServiceOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.ServiceOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-ServiceOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+ServiceOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.ServiceOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-ServiceOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+ServiceOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.ServiceOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -10304,48 +11792,60 @@ ServiceOptions::uninterpreted_option() const {
 // MethodOptions
 
 // optional bool deprecated = 33 [default = false];
-inline bool MethodOptions::has_deprecated() const {
+inline bool MethodOptions::has_deprecated() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MethodOptions::set_has_deprecated() {
+inline void MethodOptions::set_has_deprecated()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MethodOptions::clear_has_deprecated() {
+inline void MethodOptions::clear_has_deprecated()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MethodOptions::clear_deprecated() {
+inline void MethodOptions::clear_deprecated()
+{
   deprecated_ = false;
   clear_has_deprecated();
 }
-inline bool MethodOptions::deprecated() const {
+inline bool MethodOptions::deprecated() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodOptions.deprecated)
   return deprecated_;
 }
-inline void MethodOptions::set_deprecated(bool value) {
+inline void MethodOptions::set_deprecated(bool value)
+{
   set_has_deprecated();
   deprecated_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.MethodOptions.deprecated)
 }
 
 // optional .google.protobuf.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];
-inline bool MethodOptions::has_idempotency_level() const {
+inline bool MethodOptions::has_idempotency_level() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MethodOptions::set_has_idempotency_level() {
+inline void MethodOptions::set_has_idempotency_level()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MethodOptions::clear_has_idempotency_level() {
+inline void MethodOptions::clear_has_idempotency_level()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MethodOptions::clear_idempotency_level() {
+inline void MethodOptions::clear_idempotency_level()
+{
   idempotency_level_ = 0;
   clear_has_idempotency_level();
 }
-inline ::google::protobuf::MethodOptions_IdempotencyLevel MethodOptions::idempotency_level() const {
+inline ::google::protobuf::MethodOptions_IdempotencyLevel MethodOptions::idempotency_level() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodOptions.idempotency_level)
-  return static_cast< ::google::protobuf::MethodOptions_IdempotencyLevel >(idempotency_level_);
+  return static_cast< ::google::protobuf::MethodOptions_IdempotencyLevel>(idempotency_level_);
 }
-inline void MethodOptions::set_idempotency_level(::google::protobuf::MethodOptions_IdempotencyLevel value) {
+inline void MethodOptions::set_idempotency_level(::google::protobuf::MethodOptions_IdempotencyLevel value)
+{
   assert(::google::protobuf::MethodOptions_IdempotencyLevel_IsValid(value));
   set_has_idempotency_level();
   idempotency_level_ = value;
@@ -10353,31 +11853,38 @@ inline void MethodOptions::set_idempotency_level(::google::protobuf::MethodOptio
 }
 
 // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
-inline int MethodOptions::uninterpreted_option_size() const {
+inline int MethodOptions::uninterpreted_option_size() const
+{
   return uninterpreted_option_.size();
 }
-inline void MethodOptions::clear_uninterpreted_option() {
+inline void MethodOptions::clear_uninterpreted_option()
+{
   uninterpreted_option_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption& MethodOptions::uninterpreted_option(int index) const {
+inline const ::google::protobuf::UninterpretedOption& MethodOptions::uninterpreted_option(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.MethodOptions.uninterpreted_option)
   return uninterpreted_option_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption* MethodOptions::mutable_uninterpreted_option(int index) {
+inline ::google::protobuf::UninterpretedOption* MethodOptions::mutable_uninterpreted_option(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.MethodOptions.uninterpreted_option)
   return uninterpreted_option_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption* MethodOptions::add_uninterpreted_option() {
+inline ::google::protobuf::UninterpretedOption* MethodOptions::add_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.MethodOptions.uninterpreted_option)
   return uninterpreted_option_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >*
-MethodOptions::mutable_uninterpreted_option() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>*
+MethodOptions::mutable_uninterpreted_option()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.MethodOptions.uninterpreted_option)
   return &uninterpreted_option_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption >&
-MethodOptions::uninterpreted_option() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption>&
+MethodOptions::uninterpreted_option() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.MethodOptions.uninterpreted_option)
   return uninterpreted_option_;
 }
@@ -10387,109 +11894,131 @@ MethodOptions::uninterpreted_option() const {
 // UninterpretedOption_NamePart
 
 // required string name_part = 1;
-inline bool UninterpretedOption_NamePart::has_name_part() const {
+inline bool UninterpretedOption_NamePart::has_name_part() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void UninterpretedOption_NamePart::set_has_name_part() {
+inline void UninterpretedOption_NamePart::set_has_name_part()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void UninterpretedOption_NamePart::clear_has_name_part() {
+inline void UninterpretedOption_NamePart::clear_has_name_part()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void UninterpretedOption_NamePart::clear_name_part() {
+inline void UninterpretedOption_NamePart::clear_name_part()
+{
   name_part_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_name_part();
 }
-inline const ::std::string& UninterpretedOption_NamePart::name_part() const {
+inline const ::std::string& UninterpretedOption_NamePart::name_part() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.NamePart.name_part)
   return name_part_.Get();
 }
-inline void UninterpretedOption_NamePart::set_name_part(const ::std::string& value) {
+inline void UninterpretedOption_NamePart::set_name_part(const ::std::string& value)
+{
   set_has_name_part();
   name_part_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.NamePart.name_part)
 }
 #if LANG_CXX11
-inline void UninterpretedOption_NamePart::set_name_part(::std::string&& value) {
+inline void UninterpretedOption_NamePart::set_name_part(::std::string&& value)
+{
   set_has_name_part();
-  name_part_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  name_part_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.UninterpretedOption.NamePart.name_part)
 }
 #endif
-inline void UninterpretedOption_NamePart::set_name_part(const char* value) {
+inline void UninterpretedOption_NamePart::set_name_part(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_name_part();
   name_part_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                 GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.UninterpretedOption.NamePart.name_part)
 }
-inline void UninterpretedOption_NamePart::set_name_part(const char* value,
-    size_t size) {
+inline void UninterpretedOption_NamePart::set_name_part(const char* value, size_t size)
+{
   set_has_name_part();
-  name_part_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  name_part_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                 ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.UninterpretedOption.NamePart.name_part)
 }
-inline ::std::string* UninterpretedOption_NamePart::mutable_name_part() {
+inline ::std::string* UninterpretedOption_NamePart::mutable_name_part()
+{
   set_has_name_part();
   // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.NamePart.name_part)
   return name_part_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* UninterpretedOption_NamePart::release_name_part() {
+inline ::std::string* UninterpretedOption_NamePart::release_name_part()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.NamePart.name_part)
   clear_has_name_part();
   return name_part_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void UninterpretedOption_NamePart::set_allocated_name_part(::std::string* name_part) {
-  if (name_part != NULL) {
+inline void UninterpretedOption_NamePart::set_allocated_name_part(::std::string* name_part)
+{
+  if (name_part != NULL)
+  {
     set_has_name_part();
-  } else {
+  }
+  else
+  {
     clear_has_name_part();
   }
-  name_part_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name_part,
-      GetArenaNoVirtual());
+  name_part_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name_part, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.NamePart.name_part)
 }
-inline ::std::string* UninterpretedOption_NamePart::unsafe_arena_release_name_part() {
+inline ::std::string* UninterpretedOption_NamePart::unsafe_arena_release_name_part()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.UninterpretedOption.NamePart.name_part)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_name_part();
   return name_part_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                       GetArenaNoVirtual());
 }
-inline void UninterpretedOption_NamePart::unsafe_arena_set_allocated_name_part(
-    ::std::string* name_part) {
+inline void UninterpretedOption_NamePart::unsafe_arena_set_allocated_name_part(::std::string* name_part)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (name_part != NULL) {
+  if (name_part != NULL)
+  {
     set_has_name_part();
-  } else {
+  }
+  else
+  {
     clear_has_name_part();
   }
-  name_part_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      name_part, GetArenaNoVirtual());
+  name_part_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name_part,
+                                     GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.UninterpretedOption.NamePart.name_part)
 }
 
 // required bool is_extension = 2;
-inline bool UninterpretedOption_NamePart::has_is_extension() const {
+inline bool UninterpretedOption_NamePart::has_is_extension() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void UninterpretedOption_NamePart::set_has_is_extension() {
+inline void UninterpretedOption_NamePart::set_has_is_extension()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void UninterpretedOption_NamePart::clear_has_is_extension() {
+inline void UninterpretedOption_NamePart::clear_has_is_extension()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void UninterpretedOption_NamePart::clear_is_extension() {
+inline void UninterpretedOption_NamePart::clear_is_extension()
+{
   is_extension_ = false;
   clear_has_is_extension();
 }
-inline bool UninterpretedOption_NamePart::is_extension() const {
+inline bool UninterpretedOption_NamePart::is_extension() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.NamePart.is_extension)
   return is_extension_;
 }
-inline void UninterpretedOption_NamePart::set_is_extension(bool value) {
+inline void UninterpretedOption_NamePart::set_is_extension(bool value)
+{
   set_has_is_extension();
   is_extension_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.NamePart.is_extension)
@@ -10500,359 +12029,438 @@ inline void UninterpretedOption_NamePart::set_is_extension(bool value) {
 // UninterpretedOption
 
 // repeated .google.protobuf.UninterpretedOption.NamePart name = 2;
-inline int UninterpretedOption::name_size() const {
+inline int UninterpretedOption::name_size() const
+{
   return name_.size();
 }
-inline void UninterpretedOption::clear_name() {
+inline void UninterpretedOption::clear_name()
+{
   name_.Clear();
 }
-inline const ::google::protobuf::UninterpretedOption_NamePart& UninterpretedOption::name(int index) const {
+inline const ::google::protobuf::UninterpretedOption_NamePart& UninterpretedOption::name(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.name)
   return name_.Get(index);
 }
-inline ::google::protobuf::UninterpretedOption_NamePart* UninterpretedOption::mutable_name(int index) {
+inline ::google::protobuf::UninterpretedOption_NamePart* UninterpretedOption::mutable_name(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.name)
   return name_.Mutable(index);
 }
-inline ::google::protobuf::UninterpretedOption_NamePart* UninterpretedOption::add_name() {
+inline ::google::protobuf::UninterpretedOption_NamePart* UninterpretedOption::add_name()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.UninterpretedOption.name)
   return name_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart >*
-UninterpretedOption::mutable_name() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart>*
+UninterpretedOption::mutable_name()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.UninterpretedOption.name)
   return &name_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart >&
-UninterpretedOption::name() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::UninterpretedOption_NamePart>&
+UninterpretedOption::name() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.UninterpretedOption.name)
   return name_;
 }
 
 // optional string identifier_value = 3;
-inline bool UninterpretedOption::has_identifier_value() const {
+inline bool UninterpretedOption::has_identifier_value() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void UninterpretedOption::set_has_identifier_value() {
+inline void UninterpretedOption::set_has_identifier_value()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void UninterpretedOption::clear_has_identifier_value() {
+inline void UninterpretedOption::clear_has_identifier_value()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void UninterpretedOption::clear_identifier_value() {
+inline void UninterpretedOption::clear_identifier_value()
+{
   identifier_value_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_identifier_value();
 }
-inline const ::std::string& UninterpretedOption::identifier_value() const {
+inline const ::std::string& UninterpretedOption::identifier_value() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.identifier_value)
   return identifier_value_.Get();
 }
-inline void UninterpretedOption::set_identifier_value(const ::std::string& value) {
+inline void UninterpretedOption::set_identifier_value(const ::std::string& value)
+{
   set_has_identifier_value();
   identifier_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.identifier_value)
 }
 #if LANG_CXX11
-inline void UninterpretedOption::set_identifier_value(::std::string&& value) {
+inline void UninterpretedOption::set_identifier_value(::std::string&& value)
+{
   set_has_identifier_value();
-  identifier_value_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  identifier_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.UninterpretedOption.identifier_value)
 }
 #endif
-inline void UninterpretedOption::set_identifier_value(const char* value) {
+inline void UninterpretedOption::set_identifier_value(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_identifier_value();
   identifier_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.UninterpretedOption.identifier_value)
 }
-inline void UninterpretedOption::set_identifier_value(const char* value,
-    size_t size) {
+inline void UninterpretedOption::set_identifier_value(const char* value, size_t size)
+{
   set_has_identifier_value();
-  identifier_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  identifier_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                        ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.UninterpretedOption.identifier_value)
 }
-inline ::std::string* UninterpretedOption::mutable_identifier_value() {
+inline ::std::string* UninterpretedOption::mutable_identifier_value()
+{
   set_has_identifier_value();
   // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.identifier_value)
   return identifier_value_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* UninterpretedOption::release_identifier_value() {
+inline ::std::string* UninterpretedOption::release_identifier_value()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.identifier_value)
   clear_has_identifier_value();
   return identifier_value_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void UninterpretedOption::set_allocated_identifier_value(::std::string* identifier_value) {
-  if (identifier_value != NULL) {
+inline void UninterpretedOption::set_allocated_identifier_value(::std::string* identifier_value)
+{
+  if (identifier_value != NULL)
+  {
     set_has_identifier_value();
-  } else {
+  }
+  else
+  {
     clear_has_identifier_value();
   }
   identifier_value_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), identifier_value,
-      GetArenaNoVirtual());
+                                 GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.identifier_value)
 }
-inline ::std::string* UninterpretedOption::unsafe_arena_release_identifier_value() {
+inline ::std::string* UninterpretedOption::unsafe_arena_release_identifier_value()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.UninterpretedOption.identifier_value)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_identifier_value();
   return identifier_value_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                              GetArenaNoVirtual());
 }
-inline void UninterpretedOption::unsafe_arena_set_allocated_identifier_value(
-    ::std::string* identifier_value) {
+inline void UninterpretedOption::unsafe_arena_set_allocated_identifier_value(::std::string* identifier_value)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (identifier_value != NULL) {
+  if (identifier_value != NULL)
+  {
     set_has_identifier_value();
-  } else {
+  }
+  else
+  {
     clear_has_identifier_value();
   }
   identifier_value_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      identifier_value, GetArenaNoVirtual());
+                                            identifier_value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.UninterpretedOption.identifier_value)
 }
 
 // optional uint64 positive_int_value = 4;
-inline bool UninterpretedOption::has_positive_int_value() const {
+inline bool UninterpretedOption::has_positive_int_value() const
+{
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void UninterpretedOption::set_has_positive_int_value() {
+inline void UninterpretedOption::set_has_positive_int_value()
+{
   _has_bits_[0] |= 0x00000008u;
 }
-inline void UninterpretedOption::clear_has_positive_int_value() {
+inline void UninterpretedOption::clear_has_positive_int_value()
+{
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void UninterpretedOption::clear_positive_int_value() {
+inline void UninterpretedOption::clear_positive_int_value()
+{
   positive_int_value_ = GOOGLE_ULONGLONG(0);
   clear_has_positive_int_value();
 }
-inline ::google::protobuf::uint64 UninterpretedOption::positive_int_value() const {
+inline ::google::protobuf::uint64 UninterpretedOption::positive_int_value() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.positive_int_value)
   return positive_int_value_;
 }
-inline void UninterpretedOption::set_positive_int_value(::google::protobuf::uint64 value) {
+inline void UninterpretedOption::set_positive_int_value(::google::protobuf::uint64 value)
+{
   set_has_positive_int_value();
   positive_int_value_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.positive_int_value)
 }
 
 // optional int64 negative_int_value = 5;
-inline bool UninterpretedOption::has_negative_int_value() const {
+inline bool UninterpretedOption::has_negative_int_value() const
+{
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void UninterpretedOption::set_has_negative_int_value() {
+inline void UninterpretedOption::set_has_negative_int_value()
+{
   _has_bits_[0] |= 0x00000010u;
 }
-inline void UninterpretedOption::clear_has_negative_int_value() {
+inline void UninterpretedOption::clear_has_negative_int_value()
+{
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void UninterpretedOption::clear_negative_int_value() {
+inline void UninterpretedOption::clear_negative_int_value()
+{
   negative_int_value_ = GOOGLE_LONGLONG(0);
   clear_has_negative_int_value();
 }
-inline ::google::protobuf::int64 UninterpretedOption::negative_int_value() const {
+inline ::google::protobuf::int64 UninterpretedOption::negative_int_value() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.negative_int_value)
   return negative_int_value_;
 }
-inline void UninterpretedOption::set_negative_int_value(::google::protobuf::int64 value) {
+inline void UninterpretedOption::set_negative_int_value(::google::protobuf::int64 value)
+{
   set_has_negative_int_value();
   negative_int_value_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.negative_int_value)
 }
 
 // optional double double_value = 6;
-inline bool UninterpretedOption::has_double_value() const {
+inline bool UninterpretedOption::has_double_value() const
+{
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void UninterpretedOption::set_has_double_value() {
+inline void UninterpretedOption::set_has_double_value()
+{
   _has_bits_[0] |= 0x00000020u;
 }
-inline void UninterpretedOption::clear_has_double_value() {
+inline void UninterpretedOption::clear_has_double_value()
+{
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void UninterpretedOption::clear_double_value() {
+inline void UninterpretedOption::clear_double_value()
+{
   double_value_ = 0;
   clear_has_double_value();
 }
-inline double UninterpretedOption::double_value() const {
+inline double UninterpretedOption::double_value() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.double_value)
   return double_value_;
 }
-inline void UninterpretedOption::set_double_value(double value) {
+inline void UninterpretedOption::set_double_value(double value)
+{
   set_has_double_value();
   double_value_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.double_value)
 }
 
 // optional bytes string_value = 7;
-inline bool UninterpretedOption::has_string_value() const {
+inline bool UninterpretedOption::has_string_value() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void UninterpretedOption::set_has_string_value() {
+inline void UninterpretedOption::set_has_string_value()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void UninterpretedOption::clear_has_string_value() {
+inline void UninterpretedOption::clear_has_string_value()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void UninterpretedOption::clear_string_value() {
+inline void UninterpretedOption::clear_string_value()
+{
   string_value_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_string_value();
 }
-inline const ::std::string& UninterpretedOption::string_value() const {
+inline const ::std::string& UninterpretedOption::string_value() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.string_value)
   return string_value_.Get();
 }
-inline void UninterpretedOption::set_string_value(const ::std::string& value) {
+inline void UninterpretedOption::set_string_value(const ::std::string& value)
+{
   set_has_string_value();
   string_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.string_value)
 }
 #if LANG_CXX11
-inline void UninterpretedOption::set_string_value(::std::string&& value) {
+inline void UninterpretedOption::set_string_value(::std::string&& value)
+{
   set_has_string_value();
-  string_value_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  string_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                    GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.UninterpretedOption.string_value)
 }
 #endif
-inline void UninterpretedOption::set_string_value(const char* value) {
+inline void UninterpretedOption::set_string_value(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_string_value();
   string_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                    GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.UninterpretedOption.string_value)
 }
-inline void UninterpretedOption::set_string_value(const void* value,
-    size_t size) {
+inline void UninterpretedOption::set_string_value(const void* value, size_t size)
+{
   set_has_string_value();
-  string_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  string_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                    ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.UninterpretedOption.string_value)
 }
-inline ::std::string* UninterpretedOption::mutable_string_value() {
+inline ::std::string* UninterpretedOption::mutable_string_value()
+{
   set_has_string_value();
   // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.string_value)
   return string_value_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* UninterpretedOption::release_string_value() {
+inline ::std::string* UninterpretedOption::release_string_value()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.string_value)
   clear_has_string_value();
   return string_value_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void UninterpretedOption::set_allocated_string_value(::std::string* string_value) {
-  if (string_value != NULL) {
+inline void UninterpretedOption::set_allocated_string_value(::std::string* string_value)
+{
+  if (string_value != NULL)
+  {
     set_has_string_value();
-  } else {
+  }
+  else
+  {
     clear_has_string_value();
   }
   string_value_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), string_value,
-      GetArenaNoVirtual());
+                             GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.string_value)
 }
-inline ::std::string* UninterpretedOption::unsafe_arena_release_string_value() {
+inline ::std::string* UninterpretedOption::unsafe_arena_release_string_value()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.UninterpretedOption.string_value)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_string_value();
   return string_value_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                          GetArenaNoVirtual());
 }
-inline void UninterpretedOption::unsafe_arena_set_allocated_string_value(
-    ::std::string* string_value) {
+inline void UninterpretedOption::unsafe_arena_set_allocated_string_value(::std::string* string_value)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (string_value != NULL) {
+  if (string_value != NULL)
+  {
     set_has_string_value();
-  } else {
+  }
+  else
+  {
     clear_has_string_value();
   }
-  string_value_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      string_value, GetArenaNoVirtual());
+  string_value_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), string_value,
+                                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.UninterpretedOption.string_value)
 }
 
 // optional string aggregate_value = 8;
-inline bool UninterpretedOption::has_aggregate_value() const {
+inline bool UninterpretedOption::has_aggregate_value() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void UninterpretedOption::set_has_aggregate_value() {
+inline void UninterpretedOption::set_has_aggregate_value()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void UninterpretedOption::clear_has_aggregate_value() {
+inline void UninterpretedOption::clear_has_aggregate_value()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void UninterpretedOption::clear_aggregate_value() {
+inline void UninterpretedOption::clear_aggregate_value()
+{
   aggregate_value_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_aggregate_value();
 }
-inline const ::std::string& UninterpretedOption::aggregate_value() const {
+inline const ::std::string& UninterpretedOption::aggregate_value() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.aggregate_value)
   return aggregate_value_.Get();
 }
-inline void UninterpretedOption::set_aggregate_value(const ::std::string& value) {
+inline void UninterpretedOption::set_aggregate_value(const ::std::string& value)
+{
   set_has_aggregate_value();
   aggregate_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.aggregate_value)
 }
 #if LANG_CXX11
-inline void UninterpretedOption::set_aggregate_value(::std::string&& value) {
+inline void UninterpretedOption::set_aggregate_value(::std::string&& value)
+{
   set_has_aggregate_value();
-  aggregate_value_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  aggregate_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                       GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.UninterpretedOption.aggregate_value)
 }
 #endif
-inline void UninterpretedOption::set_aggregate_value(const char* value) {
+inline void UninterpretedOption::set_aggregate_value(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_aggregate_value();
   aggregate_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                       GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.UninterpretedOption.aggregate_value)
 }
-inline void UninterpretedOption::set_aggregate_value(const char* value,
-    size_t size) {
+inline void UninterpretedOption::set_aggregate_value(const char* value, size_t size)
+{
   set_has_aggregate_value();
-  aggregate_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  aggregate_value_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                       ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.UninterpretedOption.aggregate_value)
 }
-inline ::std::string* UninterpretedOption::mutable_aggregate_value() {
+inline ::std::string* UninterpretedOption::mutable_aggregate_value()
+{
   set_has_aggregate_value();
   // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.aggregate_value)
   return aggregate_value_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* UninterpretedOption::release_aggregate_value() {
+inline ::std::string* UninterpretedOption::release_aggregate_value()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.aggregate_value)
   clear_has_aggregate_value();
   return aggregate_value_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void UninterpretedOption::set_allocated_aggregate_value(::std::string* aggregate_value) {
-  if (aggregate_value != NULL) {
+inline void UninterpretedOption::set_allocated_aggregate_value(::std::string* aggregate_value)
+{
+  if (aggregate_value != NULL)
+  {
     set_has_aggregate_value();
-  } else {
+  }
+  else
+  {
     clear_has_aggregate_value();
   }
   aggregate_value_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), aggregate_value,
-      GetArenaNoVirtual());
+                                GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.aggregate_value)
 }
-inline ::std::string* UninterpretedOption::unsafe_arena_release_aggregate_value() {
+inline ::std::string* UninterpretedOption::unsafe_arena_release_aggregate_value()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.UninterpretedOption.aggregate_value)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_aggregate_value();
   return aggregate_value_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                             GetArenaNoVirtual());
 }
-inline void UninterpretedOption::unsafe_arena_set_allocated_aggregate_value(
-    ::std::string* aggregate_value) {
+inline void UninterpretedOption::unsafe_arena_set_allocated_aggregate_value(::std::string* aggregate_value)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (aggregate_value != NULL) {
+  if (aggregate_value != NULL)
+  {
     set_has_aggregate_value();
-  } else {
+  }
+  else
+  {
     clear_has_aggregate_value();
   }
   aggregate_value_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      aggregate_value, GetArenaNoVirtual());
+                                           aggregate_value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.UninterpretedOption.aggregate_value)
 }
 
@@ -10861,300 +12469,359 @@ inline void UninterpretedOption::unsafe_arena_set_allocated_aggregate_value(
 // SourceCodeInfo_Location
 
 // repeated int32 path = 1 [packed = true];
-inline int SourceCodeInfo_Location::path_size() const {
+inline int SourceCodeInfo_Location::path_size() const
+{
   return path_.size();
 }
-inline void SourceCodeInfo_Location::clear_path() {
+inline void SourceCodeInfo_Location::clear_path()
+{
   path_.Clear();
 }
-inline ::google::protobuf::int32 SourceCodeInfo_Location::path(int index) const {
+inline ::google::protobuf::int32 SourceCodeInfo_Location::path(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.path)
   return path_.Get(index);
 }
-inline void SourceCodeInfo_Location::set_path(int index, ::google::protobuf::int32 value) {
+inline void SourceCodeInfo_Location::set_path(int index, ::google::protobuf::int32 value)
+{
   path_.Set(index, value);
   // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.path)
 }
-inline void SourceCodeInfo_Location::add_path(::google::protobuf::int32 value) {
+inline void SourceCodeInfo_Location::add_path(::google::protobuf::int32 value)
+{
   path_.Add(value);
   // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.path)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-SourceCodeInfo_Location::path() const {
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& SourceCodeInfo_Location::path() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.Location.path)
   return path_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-SourceCodeInfo_Location::mutable_path() {
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32>* SourceCodeInfo_Location::mutable_path()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.Location.path)
   return &path_;
 }
 
 // repeated int32 span = 2 [packed = true];
-inline int SourceCodeInfo_Location::span_size() const {
+inline int SourceCodeInfo_Location::span_size() const
+{
   return span_.size();
 }
-inline void SourceCodeInfo_Location::clear_span() {
+inline void SourceCodeInfo_Location::clear_span()
+{
   span_.Clear();
 }
-inline ::google::protobuf::int32 SourceCodeInfo_Location::span(int index) const {
+inline ::google::protobuf::int32 SourceCodeInfo_Location::span(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.span)
   return span_.Get(index);
 }
-inline void SourceCodeInfo_Location::set_span(int index, ::google::protobuf::int32 value) {
+inline void SourceCodeInfo_Location::set_span(int index, ::google::protobuf::int32 value)
+{
   span_.Set(index, value);
   // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.span)
 }
-inline void SourceCodeInfo_Location::add_span(::google::protobuf::int32 value) {
+inline void SourceCodeInfo_Location::add_span(::google::protobuf::int32 value)
+{
   span_.Add(value);
   // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.span)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-SourceCodeInfo_Location::span() const {
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& SourceCodeInfo_Location::span() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.Location.span)
   return span_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-SourceCodeInfo_Location::mutable_span() {
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32>* SourceCodeInfo_Location::mutable_span()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.Location.span)
   return &span_;
 }
 
 // optional string leading_comments = 3;
-inline bool SourceCodeInfo_Location::has_leading_comments() const {
+inline bool SourceCodeInfo_Location::has_leading_comments() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void SourceCodeInfo_Location::set_has_leading_comments() {
+inline void SourceCodeInfo_Location::set_has_leading_comments()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void SourceCodeInfo_Location::clear_has_leading_comments() {
+inline void SourceCodeInfo_Location::clear_has_leading_comments()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void SourceCodeInfo_Location::clear_leading_comments() {
+inline void SourceCodeInfo_Location::clear_leading_comments()
+{
   leading_comments_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_leading_comments();
 }
-inline const ::std::string& SourceCodeInfo_Location::leading_comments() const {
+inline const ::std::string& SourceCodeInfo_Location::leading_comments() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.leading_comments)
   return leading_comments_.Get();
 }
-inline void SourceCodeInfo_Location::set_leading_comments(const ::std::string& value) {
+inline void SourceCodeInfo_Location::set_leading_comments(const ::std::string& value)
+{
   set_has_leading_comments();
   leading_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.leading_comments)
 }
 #if LANG_CXX11
-inline void SourceCodeInfo_Location::set_leading_comments(::std::string&& value) {
+inline void SourceCodeInfo_Location::set_leading_comments(::std::string&& value)
+{
   set_has_leading_comments();
-  leading_comments_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  leading_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.SourceCodeInfo.Location.leading_comments)
 }
 #endif
-inline void SourceCodeInfo_Location::set_leading_comments(const char* value) {
+inline void SourceCodeInfo_Location::set_leading_comments(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_leading_comments();
   leading_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                        GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.SourceCodeInfo.Location.leading_comments)
 }
-inline void SourceCodeInfo_Location::set_leading_comments(const char* value,
-    size_t size) {
+inline void SourceCodeInfo_Location::set_leading_comments(const char* value, size_t size)
+{
   set_has_leading_comments();
-  leading_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  leading_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                        ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.SourceCodeInfo.Location.leading_comments)
 }
-inline ::std::string* SourceCodeInfo_Location::mutable_leading_comments() {
+inline ::std::string* SourceCodeInfo_Location::mutable_leading_comments()
+{
   set_has_leading_comments();
   // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.Location.leading_comments)
   return leading_comments_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* SourceCodeInfo_Location::release_leading_comments() {
+inline ::std::string* SourceCodeInfo_Location::release_leading_comments()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.SourceCodeInfo.Location.leading_comments)
   clear_has_leading_comments();
   return leading_comments_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void SourceCodeInfo_Location::set_allocated_leading_comments(::std::string* leading_comments) {
-  if (leading_comments != NULL) {
+inline void SourceCodeInfo_Location::set_allocated_leading_comments(::std::string* leading_comments)
+{
+  if (leading_comments != NULL)
+  {
     set_has_leading_comments();
-  } else {
+  }
+  else
+  {
     clear_has_leading_comments();
   }
   leading_comments_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), leading_comments,
-      GetArenaNoVirtual());
+                                 GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.SourceCodeInfo.Location.leading_comments)
 }
-inline ::std::string* SourceCodeInfo_Location::unsafe_arena_release_leading_comments() {
+inline ::std::string* SourceCodeInfo_Location::unsafe_arena_release_leading_comments()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.SourceCodeInfo.Location.leading_comments)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_leading_comments();
   return leading_comments_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                              GetArenaNoVirtual());
 }
-inline void SourceCodeInfo_Location::unsafe_arena_set_allocated_leading_comments(
-    ::std::string* leading_comments) {
+inline void SourceCodeInfo_Location::unsafe_arena_set_allocated_leading_comments(::std::string* leading_comments)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (leading_comments != NULL) {
+  if (leading_comments != NULL)
+  {
     set_has_leading_comments();
-  } else {
+  }
+  else
+  {
     clear_has_leading_comments();
   }
   leading_comments_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      leading_comments, GetArenaNoVirtual());
+                                            leading_comments, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.SourceCodeInfo.Location.leading_comments)
 }
 
 // optional string trailing_comments = 4;
-inline bool SourceCodeInfo_Location::has_trailing_comments() const {
+inline bool SourceCodeInfo_Location::has_trailing_comments() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void SourceCodeInfo_Location::set_has_trailing_comments() {
+inline void SourceCodeInfo_Location::set_has_trailing_comments()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void SourceCodeInfo_Location::clear_has_trailing_comments() {
+inline void SourceCodeInfo_Location::clear_has_trailing_comments()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void SourceCodeInfo_Location::clear_trailing_comments() {
+inline void SourceCodeInfo_Location::clear_trailing_comments()
+{
   trailing_comments_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_trailing_comments();
 }
-inline const ::std::string& SourceCodeInfo_Location::trailing_comments() const {
+inline const ::std::string& SourceCodeInfo_Location::trailing_comments() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.trailing_comments)
   return trailing_comments_.Get();
 }
-inline void SourceCodeInfo_Location::set_trailing_comments(const ::std::string& value) {
+inline void SourceCodeInfo_Location::set_trailing_comments(const ::std::string& value)
+{
   set_has_trailing_comments();
   trailing_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.trailing_comments)
 }
 #if LANG_CXX11
-inline void SourceCodeInfo_Location::set_trailing_comments(::std::string&& value) {
+inline void SourceCodeInfo_Location::set_trailing_comments(::std::string&& value)
+{
   set_has_trailing_comments();
-  trailing_comments_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  trailing_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                         GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.SourceCodeInfo.Location.trailing_comments)
 }
 #endif
-inline void SourceCodeInfo_Location::set_trailing_comments(const char* value) {
+inline void SourceCodeInfo_Location::set_trailing_comments(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_trailing_comments();
   trailing_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                         GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.SourceCodeInfo.Location.trailing_comments)
 }
-inline void SourceCodeInfo_Location::set_trailing_comments(const char* value,
-    size_t size) {
+inline void SourceCodeInfo_Location::set_trailing_comments(const char* value, size_t size)
+{
   set_has_trailing_comments();
-  trailing_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  trailing_comments_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                         ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.SourceCodeInfo.Location.trailing_comments)
 }
-inline ::std::string* SourceCodeInfo_Location::mutable_trailing_comments() {
+inline ::std::string* SourceCodeInfo_Location::mutable_trailing_comments()
+{
   set_has_trailing_comments();
   // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.Location.trailing_comments)
   return trailing_comments_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* SourceCodeInfo_Location::release_trailing_comments() {
+inline ::std::string* SourceCodeInfo_Location::release_trailing_comments()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.SourceCodeInfo.Location.trailing_comments)
   clear_has_trailing_comments();
   return trailing_comments_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void SourceCodeInfo_Location::set_allocated_trailing_comments(::std::string* trailing_comments) {
-  if (trailing_comments != NULL) {
+inline void SourceCodeInfo_Location::set_allocated_trailing_comments(::std::string* trailing_comments)
+{
+  if (trailing_comments != NULL)
+  {
     set_has_trailing_comments();
-  } else {
+  }
+  else
+  {
     clear_has_trailing_comments();
   }
   trailing_comments_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), trailing_comments,
-      GetArenaNoVirtual());
+                                  GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.SourceCodeInfo.Location.trailing_comments)
 }
-inline ::std::string* SourceCodeInfo_Location::unsafe_arena_release_trailing_comments() {
+inline ::std::string* SourceCodeInfo_Location::unsafe_arena_release_trailing_comments()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.SourceCodeInfo.Location.trailing_comments)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_trailing_comments();
   return trailing_comments_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                               GetArenaNoVirtual());
 }
-inline void SourceCodeInfo_Location::unsafe_arena_set_allocated_trailing_comments(
-    ::std::string* trailing_comments) {
+inline void SourceCodeInfo_Location::unsafe_arena_set_allocated_trailing_comments(::std::string* trailing_comments)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (trailing_comments != NULL) {
+  if (trailing_comments != NULL)
+  {
     set_has_trailing_comments();
-  } else {
+  }
+  else
+  {
     clear_has_trailing_comments();
   }
   trailing_comments_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      trailing_comments, GetArenaNoVirtual());
+                                             trailing_comments, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.SourceCodeInfo.Location.trailing_comments)
 }
 
 // repeated string leading_detached_comments = 6;
-inline int SourceCodeInfo_Location::leading_detached_comments_size() const {
+inline int SourceCodeInfo_Location::leading_detached_comments_size() const
+{
   return leading_detached_comments_.size();
 }
-inline void SourceCodeInfo_Location::clear_leading_detached_comments() {
+inline void SourceCodeInfo_Location::clear_leading_detached_comments()
+{
   leading_detached_comments_.Clear();
 }
-inline const ::std::string& SourceCodeInfo_Location::leading_detached_comments(int index) const {
+inline const ::std::string& SourceCodeInfo_Location::leading_detached_comments(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
   return leading_detached_comments_.Get(index);
 }
-inline ::std::string* SourceCodeInfo_Location::mutable_leading_detached_comments(int index) {
+inline ::std::string* SourceCodeInfo_Location::mutable_leading_detached_comments(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
   return leading_detached_comments_.Mutable(index);
 }
-inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const ::std::string& value) {
+inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const ::std::string& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
   leading_detached_comments_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, ::std::string&& value) {
+inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, ::std::string&& value)
+{
   // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
   leading_detached_comments_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const char* value) {
+inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   leading_detached_comments_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
 }
-inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const char* value, size_t size) {
-  leading_detached_comments_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
+inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const char* value, size_t size)
+{
+  leading_detached_comments_.Mutable(index)->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
 }
-inline ::std::string* SourceCodeInfo_Location::add_leading_detached_comments() {
+inline ::std::string* SourceCodeInfo_Location::add_leading_detached_comments()
+{
   // @@protoc_insertion_point(field_add_mutable:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
   return leading_detached_comments_.Add();
 }
-inline void SourceCodeInfo_Location::add_leading_detached_comments(const ::std::string& value) {
+inline void SourceCodeInfo_Location::add_leading_detached_comments(const ::std::string& value)
+{
   leading_detached_comments_.Add()->assign(value);
   // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
 }
 #if LANG_CXX11
-inline void SourceCodeInfo_Location::add_leading_detached_comments(::std::string&& value) {
+inline void SourceCodeInfo_Location::add_leading_detached_comments(::std::string&& value)
+{
   leading_detached_comments_.Add(std::move(value));
   // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
 }
 #endif
-inline void SourceCodeInfo_Location::add_leading_detached_comments(const char* value) {
+inline void SourceCodeInfo_Location::add_leading_detached_comments(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   leading_detached_comments_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
 }
-inline void SourceCodeInfo_Location::add_leading_detached_comments(const char* value, size_t size) {
+inline void SourceCodeInfo_Location::add_leading_detached_comments(const char* value, size_t size)
+{
   leading_detached_comments_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-SourceCodeInfo_Location::leading_detached_comments() const {
+SourceCodeInfo_Location::leading_detached_comments() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
   return leading_detached_comments_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-SourceCodeInfo_Location::mutable_leading_detached_comments() {
+inline ::google::protobuf::RepeatedPtrField< ::std::string>* SourceCodeInfo_Location::mutable_leading_detached_comments()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
   return &leading_detached_comments_;
 }
@@ -11164,31 +12831,38 @@ SourceCodeInfo_Location::mutable_leading_detached_comments() {
 // SourceCodeInfo
 
 // repeated .google.protobuf.SourceCodeInfo.Location location = 1;
-inline int SourceCodeInfo::location_size() const {
+inline int SourceCodeInfo::location_size() const
+{
   return location_.size();
 }
-inline void SourceCodeInfo::clear_location() {
+inline void SourceCodeInfo::clear_location()
+{
   location_.Clear();
 }
-inline const ::google::protobuf::SourceCodeInfo_Location& SourceCodeInfo::location(int index) const {
+inline const ::google::protobuf::SourceCodeInfo_Location& SourceCodeInfo::location(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.location)
   return location_.Get(index);
 }
-inline ::google::protobuf::SourceCodeInfo_Location* SourceCodeInfo::mutable_location(int index) {
+inline ::google::protobuf::SourceCodeInfo_Location* SourceCodeInfo::mutable_location(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.location)
   return location_.Mutable(index);
 }
-inline ::google::protobuf::SourceCodeInfo_Location* SourceCodeInfo::add_location() {
+inline ::google::protobuf::SourceCodeInfo_Location* SourceCodeInfo::add_location()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.location)
   return location_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location >*
-SourceCodeInfo::mutable_location() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location>*
+SourceCodeInfo::mutable_location()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.location)
   return &location_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location >&
-SourceCodeInfo::location() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::SourceCodeInfo_Location>&
+SourceCodeInfo::location() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.location)
   return location_;
 }
@@ -11198,163 +12872,198 @@ SourceCodeInfo::location() const {
 // GeneratedCodeInfo_Annotation
 
 // repeated int32 path = 1 [packed = true];
-inline int GeneratedCodeInfo_Annotation::path_size() const {
+inline int GeneratedCodeInfo_Annotation::path_size() const
+{
   return path_.size();
 }
-inline void GeneratedCodeInfo_Annotation::clear_path() {
+inline void GeneratedCodeInfo_Annotation::clear_path()
+{
   path_.Clear();
 }
-inline ::google::protobuf::int32 GeneratedCodeInfo_Annotation::path(int index) const {
+inline ::google::protobuf::int32 GeneratedCodeInfo_Annotation::path(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.path)
   return path_.Get(index);
 }
-inline void GeneratedCodeInfo_Annotation::set_path(int index, ::google::protobuf::int32 value) {
+inline void GeneratedCodeInfo_Annotation::set_path(int index, ::google::protobuf::int32 value)
+{
   path_.Set(index, value);
   // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.path)
 }
-inline void GeneratedCodeInfo_Annotation::add_path(::google::protobuf::int32 value) {
+inline void GeneratedCodeInfo_Annotation::add_path(::google::protobuf::int32 value)
+{
   path_.Add(value);
   // @@protoc_insertion_point(field_add:google.protobuf.GeneratedCodeInfo.Annotation.path)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-GeneratedCodeInfo_Annotation::path() const {
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32>& GeneratedCodeInfo_Annotation::path() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.GeneratedCodeInfo.Annotation.path)
   return path_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-GeneratedCodeInfo_Annotation::mutable_path() {
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32>* GeneratedCodeInfo_Annotation::mutable_path()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.GeneratedCodeInfo.Annotation.path)
   return &path_;
 }
 
 // optional string source_file = 2;
-inline bool GeneratedCodeInfo_Annotation::has_source_file() const {
+inline bool GeneratedCodeInfo_Annotation::has_source_file() const
+{
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void GeneratedCodeInfo_Annotation::set_has_source_file() {
+inline void GeneratedCodeInfo_Annotation::set_has_source_file()
+{
   _has_bits_[0] |= 0x00000001u;
 }
-inline void GeneratedCodeInfo_Annotation::clear_has_source_file() {
+inline void GeneratedCodeInfo_Annotation::clear_has_source_file()
+{
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void GeneratedCodeInfo_Annotation::clear_source_file() {
+inline void GeneratedCodeInfo_Annotation::clear_source_file()
+{
   source_file_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   clear_has_source_file();
 }
-inline const ::std::string& GeneratedCodeInfo_Annotation::source_file() const {
+inline const ::std::string& GeneratedCodeInfo_Annotation::source_file() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
   return source_file_.Get();
 }
-inline void GeneratedCodeInfo_Annotation::set_source_file(const ::std::string& value) {
+inline void GeneratedCodeInfo_Annotation::set_source_file(const ::std::string& value)
+{
   set_has_source_file();
   source_file_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
 }
 #if LANG_CXX11
-inline void GeneratedCodeInfo_Annotation::set_source_file(::std::string&& value) {
+inline void GeneratedCodeInfo_Annotation::set_source_file(::std::string&& value)
+{
   set_has_source_file();
-  source_file_.Set(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  source_file_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value),
+                   GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
 }
 #endif
-inline void GeneratedCodeInfo_Annotation::set_source_file(const char* value) {
+inline void GeneratedCodeInfo_Annotation::set_source_file(const char* value)
+{
   GOOGLE_DCHECK(value != NULL);
   set_has_source_file();
   source_file_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
+                   GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
 }
-inline void GeneratedCodeInfo_Annotation::set_source_file(const char* value,
-    size_t size) {
+inline void GeneratedCodeInfo_Annotation::set_source_file(const char* value, size_t size)
+{
   set_has_source_file();
-  source_file_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  source_file_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                   ::std::string(reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
 }
-inline ::std::string* GeneratedCodeInfo_Annotation::mutable_source_file() {
+inline ::std::string* GeneratedCodeInfo_Annotation::mutable_source_file()
+{
   set_has_source_file();
   // @@protoc_insertion_point(field_mutable:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
   return source_file_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* GeneratedCodeInfo_Annotation::release_source_file() {
+inline ::std::string* GeneratedCodeInfo_Annotation::release_source_file()
+{
   // @@protoc_insertion_point(field_release:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
   clear_has_source_file();
   return source_file_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline void GeneratedCodeInfo_Annotation::set_allocated_source_file(::std::string* source_file) {
-  if (source_file != NULL) {
+inline void GeneratedCodeInfo_Annotation::set_allocated_source_file(::std::string* source_file)
+{
+  if (source_file != NULL)
+  {
     set_has_source_file();
-  } else {
+  }
+  else
+  {
     clear_has_source_file();
   }
   source_file_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), source_file,
-      GetArenaNoVirtual());
+                            GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
 }
-inline ::std::string* GeneratedCodeInfo_Annotation::unsafe_arena_release_source_file() {
+inline ::std::string* GeneratedCodeInfo_Annotation::unsafe_arena_release_source_file()
+{
   // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   clear_has_source_file();
   return source_file_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
+                                         GetArenaNoVirtual());
 }
-inline void GeneratedCodeInfo_Annotation::unsafe_arena_set_allocated_source_file(
-    ::std::string* source_file) {
+inline void GeneratedCodeInfo_Annotation::unsafe_arena_set_allocated_source_file(::std::string* source_file)
+{
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (source_file != NULL) {
+  if (source_file != NULL)
+  {
     set_has_source_file();
-  } else {
+  }
+  else
+  {
     clear_has_source_file();
   }
-  source_file_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      source_file, GetArenaNoVirtual());
+  source_file_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), source_file,
+                                       GetArenaNoVirtual());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
 }
 
 // optional int32 begin = 3;
-inline bool GeneratedCodeInfo_Annotation::has_begin() const {
+inline bool GeneratedCodeInfo_Annotation::has_begin() const
+{
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void GeneratedCodeInfo_Annotation::set_has_begin() {
+inline void GeneratedCodeInfo_Annotation::set_has_begin()
+{
   _has_bits_[0] |= 0x00000002u;
 }
-inline void GeneratedCodeInfo_Annotation::clear_has_begin() {
+inline void GeneratedCodeInfo_Annotation::clear_has_begin()
+{
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void GeneratedCodeInfo_Annotation::clear_begin() {
+inline void GeneratedCodeInfo_Annotation::clear_begin()
+{
   begin_ = 0;
   clear_has_begin();
 }
-inline ::google::protobuf::int32 GeneratedCodeInfo_Annotation::begin() const {
+inline ::google::protobuf::int32 GeneratedCodeInfo_Annotation::begin() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.begin)
   return begin_;
 }
-inline void GeneratedCodeInfo_Annotation::set_begin(::google::protobuf::int32 value) {
+inline void GeneratedCodeInfo_Annotation::set_begin(::google::protobuf::int32 value)
+{
   set_has_begin();
   begin_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.begin)
 }
 
 // optional int32 end = 4;
-inline bool GeneratedCodeInfo_Annotation::has_end() const {
+inline bool GeneratedCodeInfo_Annotation::has_end() const
+{
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void GeneratedCodeInfo_Annotation::set_has_end() {
+inline void GeneratedCodeInfo_Annotation::set_has_end()
+{
   _has_bits_[0] |= 0x00000004u;
 }
-inline void GeneratedCodeInfo_Annotation::clear_has_end() {
+inline void GeneratedCodeInfo_Annotation::clear_has_end()
+{
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void GeneratedCodeInfo_Annotation::clear_end() {
+inline void GeneratedCodeInfo_Annotation::clear_end()
+{
   end_ = 0;
   clear_has_end();
 }
-inline ::google::protobuf::int32 GeneratedCodeInfo_Annotation::end() const {
+inline ::google::protobuf::int32 GeneratedCodeInfo_Annotation::end() const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.end)
   return end_;
 }
-inline void GeneratedCodeInfo_Annotation::set_end(::google::protobuf::int32 value) {
+inline void GeneratedCodeInfo_Annotation::set_end(::google::protobuf::int32 value)
+{
   set_has_end();
   end_ = value;
   // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.end)
@@ -11365,37 +13074,44 @@ inline void GeneratedCodeInfo_Annotation::set_end(::google::protobuf::int32 valu
 // GeneratedCodeInfo
 
 // repeated .google.protobuf.GeneratedCodeInfo.Annotation annotation = 1;
-inline int GeneratedCodeInfo::annotation_size() const {
+inline int GeneratedCodeInfo::annotation_size() const
+{
   return annotation_.size();
 }
-inline void GeneratedCodeInfo::clear_annotation() {
+inline void GeneratedCodeInfo::clear_annotation()
+{
   annotation_.Clear();
 }
-inline const ::google::protobuf::GeneratedCodeInfo_Annotation& GeneratedCodeInfo::annotation(int index) const {
+inline const ::google::protobuf::GeneratedCodeInfo_Annotation& GeneratedCodeInfo::annotation(int index) const
+{
   // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.annotation)
   return annotation_.Get(index);
 }
-inline ::google::protobuf::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::mutable_annotation(int index) {
+inline ::google::protobuf::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::mutable_annotation(int index)
+{
   // @@protoc_insertion_point(field_mutable:google.protobuf.GeneratedCodeInfo.annotation)
   return annotation_.Mutable(index);
 }
-inline ::google::protobuf::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::add_annotation() {
+inline ::google::protobuf::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::add_annotation()
+{
   // @@protoc_insertion_point(field_add:google.protobuf.GeneratedCodeInfo.annotation)
   return annotation_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation >*
-GeneratedCodeInfo::mutable_annotation() {
+inline ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation>*
+GeneratedCodeInfo::mutable_annotation()
+{
   // @@protoc_insertion_point(field_mutable_list:google.protobuf.GeneratedCodeInfo.annotation)
   return &annotation_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation >&
-GeneratedCodeInfo::annotation() const {
+inline const ::google::protobuf::RepeatedPtrField< ::google::protobuf::GeneratedCodeInfo_Annotation>&
+GeneratedCodeInfo::annotation() const
+{
   // @@protoc_insertion_point(field_list:google.protobuf.GeneratedCodeInfo.annotation)
   return annotation_;
 }
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
@@ -11449,43 +13165,67 @@ GeneratedCodeInfo::annotation() const {
 
 // -------------------------------------------------------------------
 
-
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace protobuf
 }  // namespace google
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::google::protobuf::FieldDescriptorProto_Type> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldDescriptorProto_Type>() {
+struct is_proto_enum< ::google::protobuf::FieldDescriptorProto_Type> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldDescriptorProto_Type>()
+{
   return ::google::protobuf::FieldDescriptorProto_Type_descriptor();
 }
-template <> struct is_proto_enum< ::google::protobuf::FieldDescriptorProto_Label> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldDescriptorProto_Label>() {
+struct is_proto_enum< ::google::protobuf::FieldDescriptorProto_Label> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldDescriptorProto_Label>()
+{
   return ::google::protobuf::FieldDescriptorProto_Label_descriptor();
 }
-template <> struct is_proto_enum< ::google::protobuf::FileOptions_OptimizeMode> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FileOptions_OptimizeMode>() {
+struct is_proto_enum< ::google::protobuf::FileOptions_OptimizeMode> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FileOptions_OptimizeMode>()
+{
   return ::google::protobuf::FileOptions_OptimizeMode_descriptor();
 }
-template <> struct is_proto_enum< ::google::protobuf::FieldOptions_CType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldOptions_CType>() {
+struct is_proto_enum< ::google::protobuf::FieldOptions_CType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldOptions_CType>()
+{
   return ::google::protobuf::FieldOptions_CType_descriptor();
 }
-template <> struct is_proto_enum< ::google::protobuf::FieldOptions_JSType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldOptions_JSType>() {
+struct is_proto_enum< ::google::protobuf::FieldOptions_JSType> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::FieldOptions_JSType>()
+{
   return ::google::protobuf::FieldOptions_JSType_descriptor();
 }
-template <> struct is_proto_enum< ::google::protobuf::MethodOptions_IdempotencyLevel> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::MethodOptions_IdempotencyLevel>() {
+struct is_proto_enum< ::google::protobuf::MethodOptions_IdempotencyLevel> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::google::protobuf::MethodOptions_IdempotencyLevel>()
+{
   return ::google::protobuf::MethodOptions_IdempotencyLevel_descriptor();
 }
 

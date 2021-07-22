@@ -39,14 +39,17 @@
 #include <google/protobuf/field_mask.pb.h>
 #include <google/protobuf/stubs/stringpiece.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-
-class LIBPROTOBUF_EXPORT FieldMaskUtil {
+namespace google
+{
+namespace protobuf
+{
+namespace util
+{
+class LIBPROTOBUF_EXPORT FieldMaskUtil
+{
   typedef google::protobuf::FieldMask FieldMask;
 
- public:
+public:
   // Converts FieldMask to/from string, formatted by separating each path
   // with a comma (e.g., "foo_bar,baz.quz").
   static string ToString(const FieldMask& mask);
@@ -63,20 +66,22 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
   // descriptor traverses, if field_descriptors is not null.
   // Return false if the path is not valid, and the content of field_descriptors
   // is unspecified.
-  static bool GetFieldDescriptors(
-      const Descriptor* descriptor, StringPiece path,
-      std::vector<const FieldDescriptor*>* field_descriptors);
+  static bool GetFieldDescriptors(const Descriptor* descriptor, StringPiece path,
+                                  std::vector<const FieldDescriptor*>* field_descriptors);
 
   // Checks whether the given path is valid for type T.
   template <typename T>
-  static bool IsValidPath(StringPiece path) {
+  static bool IsValidPath(StringPiece path)
+  {
     return GetFieldDescriptors(T::descriptor(), path, NULL);
   }
 
   // Checks whether the given FieldMask is valid for type T.
   template <typename T>
-  static bool IsValidFieldMask(const FieldMask& mask) {
-    for (int i = 0; i < mask.paths_size(); ++i) {
+  static bool IsValidFieldMask(const FieldMask& mask)
+  {
+    for (int i = 0; i < mask.paths_size(); ++i)
+    {
       if (!GetFieldDescriptors(T::descriptor(), mask.paths(i), NULL))
         return false;
     }
@@ -86,7 +91,8 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
   // Adds a path to FieldMask after checking whether the given path is valid.
   // This method check-fails if the path is not a valid path for type T.
   template <typename T>
-  static void AddPathToFieldMask(StringPiece path, FieldMask* mask) {
+  static void AddPathToFieldMask(StringPiece path, FieldMask* mask)
+  {
     GOOGLE_CHECK(IsValidPath<T>(path));
     mask->add_paths(path);
   }
@@ -94,7 +100,8 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
   // Creates a FieldMask with all fields of type T. This FieldMask only
   // contains fields of T but not any sub-message fields.
   template <typename T>
-  static void GetFieldMaskForAllFields(FieldMask* out) {
+  static void GetFieldMaskForAllFields(FieldMask* out)
+  {
     InternalGetFieldMaskForAllFields(T::descriptor(), out);
   }
 
@@ -106,17 +113,15 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
   static void ToCanonicalForm(const FieldMask& mask, FieldMask* out);
 
   // Creates an union of two FieldMasks.
-  static void Union(const FieldMask& mask1, const FieldMask& mask2,
-                    FieldMask* out);
+  static void Union(const FieldMask& mask1, const FieldMask& mask2, FieldMask* out);
 
   // Creates an intersection of two FieldMasks.
-  static void Intersect(const FieldMask& mask1, const FieldMask& mask2,
-                        FieldMask* out);
+  static void Intersect(const FieldMask& mask1, const FieldMask& mask2, FieldMask* out);
 
   // Subtracts mask2 from mask1 base of type T.
   template <typename T>
-  static void Subtract(const FieldMask& mask1, const FieldMask& mask2,
-                       FieldMask* out) {
+  static void Subtract(const FieldMask& mask1, const FieldMask& mask2, FieldMask* out)
+  {
     InternalSubtract(T::descriptor(), mask1, mask2, out);
   }
 
@@ -128,8 +133,8 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
   // Merges fields specified in a FieldMask into another message. See the
   // comments in MergeOptions regarding compatibility with
   // google/protobuf/field_mask.proto
-  static void MergeMessageTo(const Message& source, const FieldMask& mask,
-                             const MergeOptions& options, Message* destination);
+  static void MergeMessageTo(const Message& source, const FieldMask& mask, const MergeOptions& options,
+                             Message* destination);
 
   class TrimOptions;
   // Removes from 'message' any field that is not represented in the given
@@ -139,10 +144,9 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
   // Removes from 'message' any field that is not represented in the given
   // FieldMask with customized TrimOptions.
   // If the FieldMask is empty, does nothing.
-  static void TrimMessage(const FieldMask& mask, Message* message,
-                          const TrimOptions& options);
+  static void TrimMessage(const FieldMask& mask, Message* message, const TrimOptions& options);
 
- private:
+private:
   friend class SnakeCaseCamelCaseTest;
   // Converts a field name from snake_case to camelCase:
   //   1. Every character after "_" will be converted to uppercase.
@@ -172,11 +176,9 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
   // successfully.
   static bool CamelCaseToSnakeCase(StringPiece input, string* output);
 
-  static void InternalGetFieldMaskForAllFields(const Descriptor* descriptor,
-                                               FieldMask* out);
+  static void InternalGetFieldMaskForAllFields(const Descriptor* descriptor, FieldMask* out);
 
-  static void InternalSubtract(const Descriptor* descriptor,
-                               const FieldMask& mask1, const FieldMask& mask2,
+  static void InternalSubtract(const Descriptor* descriptor, const FieldMask& mask1, const FieldMask& mask2,
                                FieldMask* out);
 };
 
@@ -184,48 +186,64 @@ class LIBPROTOBUF_EXPORT FieldMaskUtil {
 // google/protobuf/field_mask.proto, set replace_message_fields and
 // replace_repeated_fields to 'true'. The default options are not compatible
 // with google/protobuf/field_mask.proto.
-class LIBPROTOBUF_EXPORT FieldMaskUtil::MergeOptions {
- public:
-  MergeOptions()
-      : replace_message_fields_(false), replace_repeated_fields_(false) {}
+class LIBPROTOBUF_EXPORT FieldMaskUtil::MergeOptions
+{
+public:
+  MergeOptions() : replace_message_fields_(false), replace_repeated_fields_(false)
+  {
+  }
   // When merging message fields, the default behavior is to merge the
   // content of two message fields together. If you instead want to use
   // the field from the source message to replace the corresponding field
   // in the destination message, set this flag to true. When this flag is set,
   // specified submessage fields that are missing in source will be cleared in
   // destination.
-  void set_replace_message_fields(bool value) {
+  void set_replace_message_fields(bool value)
+  {
     replace_message_fields_ = value;
   }
-  bool replace_message_fields() const { return replace_message_fields_; }
+  bool replace_message_fields() const
+  {
+    return replace_message_fields_;
+  }
   // The default merging behavior will append entries from the source
   // repeated field to the destination repeated field. If you only want
   // to keep the entries from the source repeated field, set this flag
   // to true.
-  void set_replace_repeated_fields(bool value) {
+  void set_replace_repeated_fields(bool value)
+  {
     replace_repeated_fields_ = value;
   }
-  bool replace_repeated_fields() const { return replace_repeated_fields_; }
+  bool replace_repeated_fields() const
+  {
+    return replace_repeated_fields_;
+  }
 
- private:
+private:
   bool replace_message_fields_;
   bool replace_repeated_fields_;
 };
 
-class LIBPROTOBUF_EXPORT FieldMaskUtil::TrimOptions {
- public:
-  TrimOptions()
-      : keep_required_fields_(false) {}
+class LIBPROTOBUF_EXPORT FieldMaskUtil::TrimOptions
+{
+public:
+  TrimOptions() : keep_required_fields_(false)
+  {
+  }
   // When trimming message fields, the default behavior is to trim required
   // fields of the present message if they are not specified in the field mask.
   // If you instead want to keep required fields of the present message even
   // they are not speicifed in the field mask, set this flag to true.
-  void set_keep_required_fields(bool value) {
+  void set_keep_required_fields(bool value)
+  {
     keep_required_fields_ = value;
   }
-  bool keep_required_fields() const { return keep_required_fields_; }
+  bool keep_required_fields() const
+  {
+    return keep_required_fields_;
+  }
 
- private:
+private:
   bool keep_required_fields_;
 };
 

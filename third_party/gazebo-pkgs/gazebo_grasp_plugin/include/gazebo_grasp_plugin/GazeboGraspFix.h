@@ -11,7 +11,6 @@
 
 namespace gazebo
 {
-
 /**
  * Inspired by gazebo::physics::Gripper, this plugin fixes an object which is grasped to the
  * robot hand to avoid problems with physics engines and to help the object staying in
@@ -42,7 +41,8 @@ namespace gazebo
  *
  *    Description of the arguments:
  *
- *    - ``<arm>`` contains a collections of specification for each arm which can grasp one object (there may be several ``<arm>`` tags):
+ *    - ``<arm>`` contains a collections of specification for each arm which can grasp one object (there may be several
+ * ``<arm>`` tags):
  *        - ``<arm_name>`` is the name of this arm. Has to be unique.
  *        - ``<palm_link>`` has to be the link to which the finger joints are attached.
  *        - ``<gripper_link>`` tags have to include -all- link names of the gripper/hand which are used to
@@ -91,166 +91,161 @@ namespace gazebo
  */
 class GazeboGraspFix : public ModelPlugin
 {
-  public:
-    GazeboGraspFix();
-    GazeboGraspFix(physics::ModelPtr _model);
-    virtual ~GazeboGraspFix();
+public:
+  GazeboGraspFix();
+  GazeboGraspFix(physics::ModelPtr _model);
+  virtual ~GazeboGraspFix();
 
-    /**
-     * Gets called just after the object has been attached to the palm link on \e armName
-     */
-    virtual void OnAttach(const std::string &objectName,
-                          const std::string &armName) {}
-    /**
-     * Gets called just after the object has been detached to the palm link on \e armName
-     */
-    virtual void OnDetach(const std::string &objectName,
-                          const std::string &armName) {}
+  /**
+   * Gets called just after the object has been attached to the palm link on \e armName
+   */
+  virtual void OnAttach(const std::string& objectName, const std::string& armName)
+  {
+  }
+  /**
+   * Gets called just after the object has been detached to the palm link on \e armName
+   */
+  virtual void OnDetach(const std::string& objectName, const std::string& armName)
+  {
+  }
 
-  private:
-    virtual void Init();
-    virtual void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
-    /**
-     * Collects for each object all forces which are currently applied on it.
-     * Then, for each object, checks whether of all the forces applied,
-     * there are opposing forces.
-     * This is done by calling CheckGrip() with the list of all forces applied.
-     * If CheckGrip() returns true, the number of "grip counts"
-     * is increased for the holding arm (but grip counts will never exceed \e max_grip_count).
-     * If the number of grip counts for this object exceeds \e grip_count_threshold,
-     * the object is attached by calling GazeboGraspGripper::HandleAttach(object-name),
-     * setting \e attached and \e attachedObjName, and \e GazeboGraspGripper::attachGripContacts
-     * is updated with the contact points currently existing for this object (current entry in \e contacts).
-     *
-     * Then, goes through all entries in \e gripCount, and unless it's an object
-     * we just detected as "gripped", the counter is decreased.
-     * If the counter is is smaller than \e grip_count_threshold, the object should
-     * potentially be released, but this criterion happens too easily
-     * (the fingers in gazebo may have started wobbling as the arm moves around, and although they are still
-     * close to the object, the grip is not detected any more).
-     * So to be sure, and additional criterion has to be satisfied before the object is released:
-     * check that the collision point (the place on the link where the contact originally
-     * was detected) has not moved too far from where it originally was, relative to the object.
-     */
-    void OnUpdate();
+private:
+  virtual void Init();
+  virtual void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+  /**
+   * Collects for each object all forces which are currently applied on it.
+   * Then, for each object, checks whether of all the forces applied,
+   * there are opposing forces.
+   * This is done by calling CheckGrip() with the list of all forces applied.
+   * If CheckGrip() returns true, the number of "grip counts"
+   * is increased for the holding arm (but grip counts will never exceed \e max_grip_count).
+   * If the number of grip counts for this object exceeds \e grip_count_threshold,
+   * the object is attached by calling GazeboGraspGripper::HandleAttach(object-name),
+   * setting \e attached and \e attachedObjName, and \e GazeboGraspGripper::attachGripContacts
+   * is updated with the contact points currently existing for this object (current entry in \e contacts).
+   *
+   * Then, goes through all entries in \e gripCount, and unless it's an object
+   * we just detected as "gripped", the counter is decreased.
+   * If the counter is is smaller than \e grip_count_threshold, the object should
+   * potentially be released, but this criterion happens too easily
+   * (the fingers in gazebo may have started wobbling as the arm moves around, and although they are still
+   * close to the object, the grip is not detected any more).
+   * So to be sure, and additional criterion has to be satisfied before the object is released:
+   * check that the collision point (the place on the link where the contact originally
+   * was detected) has not moved too far from where it originally was, relative to the object.
+   */
+  void OnUpdate();
 
-    void InitValues();
+  void InitValues();
 
+  /**
+   * Gets called upon detection of contacts.
+   * A list of contacts is passed in \_msg. One contact has two bodies, and only
+   * the ones where one of the bodies is a gripper link are considered.
+   * Each contact consists of a *list* of forces with their own origin/position each
+   * (e.g. when the object and gripper are colliding at several places).
+   * The averages of each contact's force vectors along with their origins is computed.
+   * This "average contact force/origin" for each contact is then added to the \e this->contacts map.
+   * If an entry for this object/link pair already exists, the average force (and its origin)
+   * is *added* to the existing force/origin, and the average count is increased. This is to get
+   * the average force application over time between link and object.
+   */
+  void OnContact(const ConstContactsPtr& ptr);
 
-    /**
-     * Gets called upon detection of contacts.
-     * A list of contacts is passed in \_msg. One contact has two bodies, and only
-     * the ones where one of the bodies is a gripper link are considered.
-     * Each contact consists of a *list* of forces with their own origin/position each
-     * (e.g. when the object and gripper are colliding at several places).
-     * The averages of each contact's force vectors along with their origins is computed.
-     * This "average contact force/origin" for each contact is then added to the \e this->contacts map.
-     * If an entry for this object/link pair already exists, the average force (and its origin)
-     * is *added* to the existing force/origin, and the average count is increased. This is to get
-     * the average force application over time between link and object.
-     */
-    void OnContact(const ConstContactsPtr &ptr);
+  //    bool CheckGrip(const std::vector<GzVector3> &forces, float minAngleDiff,
+  //                   float lengthRatio);
 
-//    bool CheckGrip(const std::vector<GzVector3> &forces, float minAngleDiff,
-//                   float lengthRatio);
+  bool IsGripperLink(const std::string& linkName, std::string& gripperName) const;
 
-    bool IsGripperLink(const std::string &linkName, std::string &gripperName) const;
+  /**
+   * return objects (key) and the gripper (value) to which it is attached
+   */
+  std::map<std::string, std::string> GetAttachedObjects() const;
 
-    /**
-     * return objects (key) and the gripper (value) to which it is attached
-     */
-    std::map<std::string, std::string> GetAttachedObjects() const;
+  /**
+   * Helper class to collect contact info per object.
+   * Forward declaration here.
+   */
+  class ObjectContactInfo;
 
-    /**
-     * Helper class to collect contact info per object.
-     * Forward declaration here.
-     */
-    class ObjectContactInfo;
+  /**
+   * Helper function to determine if object attached to a gripper in ObjectContactInfo.
+   */
+  bool ObjectAttachedToGripper(const ObjectContactInfo& objContInfo, std::string& attachedToGripper) const;
 
-    /**
-     * Helper function to determine if object attached to a gripper in ObjectContactInfo.
-     */
-    bool ObjectAttachedToGripper(const ObjectContactInfo &objContInfo,
-                                 std::string &attachedToGripper) const;
+  /**
+   * Helper function to determine if object attached to this gripper
+   */
+  bool ObjectAttachedToGripper(const std::string& gripperName, std::string& attachedToGripper) const;
 
-    /**
-     * Helper function to determine if object attached to this gripper
-     */
-    bool ObjectAttachedToGripper(const std::string &gripperName,
-                                 std::string &attachedToGripper) const;
+  // physics::ModelPtr model;
+  // physics::PhysicsEnginePtr physics;
+  physics::WorldPtr world;
 
+  // sorted by their name, all grippers of the robot
+  std::map<std::string, GazeboGraspGripper> grippers;
 
-    // physics::ModelPtr model;
-    // physics::PhysicsEnginePtr physics;
-    physics::WorldPtr world;
+  event::ConnectionPtr update_connection;
+  transport::NodePtr node;
+  transport::SubscriberPtr contactSub;  // subscriber to contact updates
 
-    // sorted by their name, all grippers of the robot
-    std::map<std::string, GazeboGraspGripper> grippers;
+  // tolerance (in degrees) between force vectors to
+  // beconsidered "opposing"
+  float forcesAngleTolerance;
 
-    event::ConnectionPtr update_connection;
-    transport::NodePtr node;
-    transport::SubscriberPtr contactSub; //subscriber to contact updates
+  // when an object is attached, collisions with it may be disabled, in case the
+  // robot still keeps wobbling.
+  bool disableCollisionsOnAttach;
 
-    // tolerance (in degrees) between force vectors to
-    // beconsidered "opposing"
-    float forcesAngleTolerance;
+  // all collisions per gazebo collision link (each entry
+  // belongs to a physics::CollisionPtr element). The key
+  // is the collision link name, the value is the gripper name
+  // this collision link belongs to.
+  std::map<std::string, std::string> collisions;
 
-    // when an object is attached, collisions with it may be disabled, in case the
-    // robot still keeps wobbling.
-    bool disableCollisionsOnAttach;
+  /**
+   * Helper class to encapsulate a collision information. Forward declaration here.
+   */
+  class CollidingPoint;
 
-    // all collisions per gazebo collision link (each entry
-    // belongs to a physics::CollisionPtr element). The key
-    // is the collision link name, the value is the gripper name
-    // this collision link belongs to.
-    std::map<std::string, std::string> collisions;
+  // Contact forces sorted by object name the gripper collides with (first key)
+  // and the link colliding (second key).
+  std::map<std::string, std::map<std::string, CollidingPoint> > contacts;
+  boost::mutex mutexContacts;  // mutex protects contacts
 
+  // when an object was first attached, it had these colliding points.
+  // First key is object name, second is the link colliding, as in \e contacts.
+  // Only the links of *one* gripper are stored here. This indirectly imposes the
+  // limitation that no two grippers can grasp the object (while it would be
+  // possible, the release condition is tied to only one link, so the object may
+  // not be released properly).
+  std::map<std::string, std::map<std::string, CollidingPoint> > attachGripContacts;
 
-    /**
-     * Helper class to encapsulate a collision information. Forward declaration here.
-     */
-    class CollidingPoint;
+  // Records how many subsequent update calls the grip on that object has been recorded
+  // as "holding". Every loop, if a grip is not recorded, this number decreases.
+  // When it reaches \e grip_count_threshold, it will be attached.
+  // The number won't increase above max_grip_count once it has reached that number.
+  std::map<std::string, int> gripCounts;
 
-    // Contact forces sorted by object name the gripper collides with (first key)
-    // and the link colliding (second key).
-    std::map<std::string, std::map<std::string, CollidingPoint> > contacts;
-    boost::mutex mutexContacts; //mutex protects contacts
+  // *maximum* number in \e gripCounts to be recorded.
+  int maxGripCount;
 
-    // when an object was first attached, it had these colliding points.
-    // First key is object name, second is the link colliding, as in \e contacts.
-    // Only the links of *one* gripper are stored here. This indirectly imposes the
-    // limitation that no two grippers can grasp the object (while it would be
-    // possible, the release condition is tied to only one link, so the object may
-    // not be released properly).
-    std::map<std::string, std::map<std::string, CollidingPoint> >
-    attachGripContacts;
+  // number of recorded "grips" in the past (in gripCount) which, when it is exceeded, counts
+  // as the object grasped, and when it is lower, as released.
+  int gripCountThreshold;
 
+  // once an object is gripped, the relative position of the collision link surface to the
+  // object is remembered. As soon as this distance changes more than release_tolerance,
+  // the object is released.
+  float releaseTolerance;
 
-    // Records how many subsequent update calls the grip on that object has been recorded
-    // as "holding". Every loop, if a grip is not recorded, this number decreases.
-    // When it reaches \e grip_count_threshold, it will be attached.
-    // The number won't increase above max_grip_count once it has reached that number.
-    std::map<std::string, int> gripCounts;
+  // nano seconds between two updates
+  common::Time updateRate;
 
-    // *maximum* number in \e gripCounts to be recorded.
-    int maxGripCount;
-
-    // number of recorded "grips" in the past (in gripCount) which, when it is exceeded, counts
-    // as the object grasped, and when it is lower, as released.
-    int gripCountThreshold;
-
-    // once an object is gripped, the relative position of the collision link surface to the
-    // object is remembered. As soon as this distance changes more than release_tolerance,
-    // the object is released.
-    float releaseTolerance;
-
-    //nano seconds between two updates
-    common::Time updateRate;
-
-    //last time OnUpdate() was called
-    common::Time prevUpdateTime;
+  // last time OnUpdate() was called
+  common::Time prevUpdateTime;
 };
 
-}
+}  // namespace gazebo
 
 #endif  // GAZEBO_GAZEBOGRASPFIX_H

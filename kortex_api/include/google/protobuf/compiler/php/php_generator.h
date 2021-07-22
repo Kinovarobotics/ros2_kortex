@@ -36,19 +36,18 @@
 
 #include <string>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace php {
-
-class LIBPROTOC_EXPORT Generator
-    : public google::protobuf::compiler::CodeGenerator {
-  virtual bool Generate(
-      const FileDescriptor* file,
-      const string& parameter,
-      GeneratorContext* generator_context,
-      string* error) const;
-
+namespace google
+{
+namespace protobuf
+{
+namespace compiler
+{
+namespace php
+{
+class LIBPROTOC_EXPORT Generator : public google::protobuf::compiler::CodeGenerator
+{
+  virtual bool Generate(const FileDescriptor* file, const string& parameter, GeneratorContext* generator_context,
+                        string* error) const;
 };
 
 // To skip reserved keywords in php, some generated classname are prefixed.

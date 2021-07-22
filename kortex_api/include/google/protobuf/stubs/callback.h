@@ -7,9 +7,10 @@
 // ===================================================================
 // emulates google3/base/callback.h
 
-namespace google {
-namespace protobuf {
-
+namespace google
+{
+namespace protobuf
+{
 // Abstract interface for a callback.  When calling an RPC, you must provide
 // a Closure to call when the procedure completes.  See the Service interface
 // in service.h.
@@ -67,136 +68,175 @@ namespace protobuf {
 //   string my_str;
 //   NewCallback(&Foo, my_str);  // WON'T WORK:  Can't use referecnes.
 // However, correctly-typed pointers will work just fine.
-class LIBPROTOBUF_EXPORT Closure {
- public:
-  Closure() {}
+class LIBPROTOBUF_EXPORT Closure
+{
+public:
+  Closure()
+  {
+  }
   virtual ~Closure();
 
   virtual void Run() = 0;
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Closure);
 };
 
-template<typename R>
-class ResultCallback {
- public:
-  ResultCallback() {}
-  virtual ~ResultCallback() {}
+template <typename R>
+class ResultCallback
+{
+public:
+  ResultCallback()
+  {
+  }
+  virtual ~ResultCallback()
+  {
+  }
 
   virtual R Run() = 0;
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback);
 };
 
-template<typename R, typename A1>
-class LIBPROTOBUF_EXPORT ResultCallback1 {
- public:
-  ResultCallback1() {}
-  virtual ~ResultCallback1() {}
+template <typename R, typename A1>
+class LIBPROTOBUF_EXPORT ResultCallback1
+{
+public:
+  ResultCallback1()
+  {
+  }
+  virtual ~ResultCallback1()
+  {
+  }
 
   virtual R Run(A1) = 0;
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback1);
 };
 
-template<typename R, typename A1, typename A2>
-class LIBPROTOBUF_EXPORT ResultCallback2 {
- public:
-  ResultCallback2() {}
-  virtual ~ResultCallback2() {}
+template <typename R, typename A1, typename A2>
+class LIBPROTOBUF_EXPORT ResultCallback2
+{
+public:
+  ResultCallback2()
+  {
+  }
+  virtual ~ResultCallback2()
+  {
+  }
 
-  virtual R Run(A1,A2) = 0;
+  virtual R Run(A1, A2) = 0;
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback2);
 };
 
-namespace internal {
-
-class LIBPROTOBUF_EXPORT FunctionClosure0 : public Closure {
- public:
+namespace internal
+{
+class LIBPROTOBUF_EXPORT FunctionClosure0 : public Closure
+{
+public:
   typedef void (*FunctionType)();
 
-  FunctionClosure0(FunctionType function, bool self_deleting)
-    : function_(function), self_deleting_(self_deleting) {}
+  FunctionClosure0(FunctionType function, bool self_deleting) : function_(function), self_deleting_(self_deleting)
+  {
+  }
   ~FunctionClosure0();
 
-  void Run() {
+  void Run()
+  {
     bool needs_delete = self_deleting_;  // read in case callback deletes
     function_();
-    if (needs_delete) delete this;
+    if (needs_delete)
+      delete this;
   }
 
- private:
+private:
   FunctionType function_;
   bool self_deleting_;
 };
 
 template <typename Class>
-class MethodClosure0 : public Closure {
- public:
+class MethodClosure0 : public Closure
+{
+public:
   typedef void (Class::*MethodType)();
 
   MethodClosure0(Class* object, MethodType method, bool self_deleting)
-    : object_(object), method_(method), self_deleting_(self_deleting) {}
-  ~MethodClosure0() {}
-
-  void Run() {
-    bool needs_delete = self_deleting_;  // read in case callback deletes
-    (object_->*method_)();
-    if (needs_delete) delete this;
+    : object_(object), method_(method), self_deleting_(self_deleting)
+  {
+  }
+  ~MethodClosure0()
+  {
   }
 
- private:
+  void Run()
+  {
+    bool needs_delete = self_deleting_;  // read in case callback deletes
+    (object_->*method_)();
+    if (needs_delete)
+      delete this;
+  }
+
+private:
   Class* object_;
   MethodType method_;
   bool self_deleting_;
 };
 
 template <typename Arg1>
-class FunctionClosure1 : public Closure {
- public:
+class FunctionClosure1 : public Closure
+{
+public:
   typedef void (*FunctionType)(Arg1 arg1);
 
-  FunctionClosure1(FunctionType function, bool self_deleting,
-                   Arg1 arg1)
-    : function_(function), self_deleting_(self_deleting),
-      arg1_(arg1) {}
-  ~FunctionClosure1() {}
-
-  void Run() {
-    bool needs_delete = self_deleting_;  // read in case callback deletes
-    function_(arg1_);
-    if (needs_delete) delete this;
+  FunctionClosure1(FunctionType function, bool self_deleting, Arg1 arg1)
+    : function_(function), self_deleting_(self_deleting), arg1_(arg1)
+  {
+  }
+  ~FunctionClosure1()
+  {
   }
 
- private:
+  void Run()
+  {
+    bool needs_delete = self_deleting_;  // read in case callback deletes
+    function_(arg1_);
+    if (needs_delete)
+      delete this;
+  }
+
+private:
   FunctionType function_;
   bool self_deleting_;
   Arg1 arg1_;
 };
 
 template <typename Class, typename Arg1>
-class MethodClosure1 : public Closure {
- public:
+class MethodClosure1 : public Closure
+{
+public:
   typedef void (Class::*MethodType)(Arg1 arg1);
 
-  MethodClosure1(Class* object, MethodType method, bool self_deleting,
-                 Arg1 arg1)
-    : object_(object), method_(method), self_deleting_(self_deleting),
-      arg1_(arg1) {}
-  ~MethodClosure1() {}
-
-  void Run() {
-    bool needs_delete = self_deleting_;  // read in case callback deletes
-    (object_->*method_)(arg1_);
-    if (needs_delete) delete this;
+  MethodClosure1(Class* object, MethodType method, bool self_deleting, Arg1 arg1)
+    : object_(object), method_(method), self_deleting_(self_deleting), arg1_(arg1)
+  {
+  }
+  ~MethodClosure1()
+  {
   }
 
- private:
+  void Run()
+  {
+    bool needs_delete = self_deleting_;  // read in case callback deletes
+    (object_->*method_)(arg1_);
+    if (needs_delete)
+      delete this;
+  }
+
+private:
   Class* object_;
   MethodType method_;
   bool self_deleting_;
@@ -204,23 +244,28 @@ class MethodClosure1 : public Closure {
 };
 
 template <typename Arg1, typename Arg2>
-class FunctionClosure2 : public Closure {
- public:
+class FunctionClosure2 : public Closure
+{
+public:
   typedef void (*FunctionType)(Arg1 arg1, Arg2 arg2);
 
-  FunctionClosure2(FunctionType function, bool self_deleting,
-                   Arg1 arg1, Arg2 arg2)
-    : function_(function), self_deleting_(self_deleting),
-      arg1_(arg1), arg2_(arg2) {}
-  ~FunctionClosure2() {}
-
-  void Run() {
-    bool needs_delete = self_deleting_;  // read in case callback deletes
-    function_(arg1_, arg2_);
-    if (needs_delete) delete this;
+  FunctionClosure2(FunctionType function, bool self_deleting, Arg1 arg1, Arg2 arg2)
+    : function_(function), self_deleting_(self_deleting), arg1_(arg1), arg2_(arg2)
+  {
+  }
+  ~FunctionClosure2()
+  {
   }
 
- private:
+  void Run()
+  {
+    bool needs_delete = self_deleting_;  // read in case callback deletes
+    function_(arg1_, arg2_);
+    if (needs_delete)
+      delete this;
+  }
+
+private:
   FunctionType function_;
   bool self_deleting_;
   Arg1 arg1_;
@@ -228,23 +273,28 @@ class FunctionClosure2 : public Closure {
 };
 
 template <typename Class, typename Arg1, typename Arg2>
-class MethodClosure2 : public Closure {
- public:
+class MethodClosure2 : public Closure
+{
+public:
   typedef void (Class::*MethodType)(Arg1 arg1, Arg2 arg2);
 
-  MethodClosure2(Class* object, MethodType method, bool self_deleting,
-                 Arg1 arg1, Arg2 arg2)
-    : object_(object), method_(method), self_deleting_(self_deleting),
-      arg1_(arg1), arg2_(arg2) {}
-  ~MethodClosure2() {}
-
-  void Run() {
-    bool needs_delete = self_deleting_;  // read in case callback deletes
-    (object_->*method_)(arg1_, arg2_);
-    if (needs_delete) delete this;
+  MethodClosure2(Class* object, MethodType method, bool self_deleting, Arg1 arg1, Arg2 arg2)
+    : object_(object), method_(method), self_deleting_(self_deleting), arg1_(arg1), arg2_(arg2)
+  {
+  }
+  ~MethodClosure2()
+  {
   }
 
- private:
+  void Run()
+  {
+    bool needs_delete = self_deleting_;  // read in case callback deletes
+    (object_->*method_)(arg1_, arg2_);
+    if (needs_delete)
+      delete this;
+  }
+
+private:
   Class* object_;
   MethodType method_;
   bool self_deleting_;
@@ -252,148 +302,179 @@ class MethodClosure2 : public Closure {
   Arg2 arg2_;
 };
 
-template<typename R>
-class FunctionResultCallback_0_0 : public ResultCallback<R> {
- public:
+template <typename R>
+class FunctionResultCallback_0_0 : public ResultCallback<R>
+{
+public:
   typedef R (*FunctionType)();
 
   FunctionResultCallback_0_0(FunctionType function, bool self_deleting)
-      : function_(function), self_deleting_(self_deleting) {}
-  ~FunctionResultCallback_0_0() {}
+    : function_(function), self_deleting_(self_deleting)
+  {
+  }
+  ~FunctionResultCallback_0_0()
+  {
+  }
 
-  R Run() {
+  R Run()
+  {
     bool needs_delete = self_deleting_;  // read in case callback deletes
     R result = function_();
-    if (needs_delete) delete this;
+    if (needs_delete)
+      delete this;
     return result;
   }
 
- private:
+private:
   FunctionType function_;
   bool self_deleting_;
 };
 
-template<typename R, typename P1>
-class FunctionResultCallback_1_0 : public ResultCallback<R> {
- public:
+template <typename R, typename P1>
+class FunctionResultCallback_1_0 : public ResultCallback<R>
+{
+public:
   typedef R (*FunctionType)(P1);
 
-  FunctionResultCallback_1_0(FunctionType function, bool self_deleting,
-                             P1 p1)
-      : function_(function), self_deleting_(self_deleting), p1_(p1) {}
-  ~FunctionResultCallback_1_0() {}
+  FunctionResultCallback_1_0(FunctionType function, bool self_deleting, P1 p1)
+    : function_(function), self_deleting_(self_deleting), p1_(p1)
+  {
+  }
+  ~FunctionResultCallback_1_0()
+  {
+  }
 
-  R Run() {
+  R Run()
+  {
     bool needs_delete = self_deleting_;  // read in case callback deletes
     R result = function_(p1_);
-    if (needs_delete) delete this;
+    if (needs_delete)
+      delete this;
     return result;
   }
 
- private:
+private:
   FunctionType function_;
   bool self_deleting_;
   P1 p1_;
 };
 
-template<typename R, typename Arg1>
-class FunctionResultCallback_0_1 : public ResultCallback1<R, Arg1> {
- public:
+template <typename R, typename Arg1>
+class FunctionResultCallback_0_1 : public ResultCallback1<R, Arg1>
+{
+public:
   typedef R (*FunctionType)(Arg1 arg1);
 
   FunctionResultCallback_0_1(FunctionType function, bool self_deleting)
-      : function_(function), self_deleting_(self_deleting) {}
-  ~FunctionResultCallback_0_1() {}
+    : function_(function), self_deleting_(self_deleting)
+  {
+  }
+  ~FunctionResultCallback_0_1()
+  {
+  }
 
-  R Run(Arg1 a1) {
+  R Run(Arg1 a1)
+  {
     bool needs_delete = self_deleting_;  // read in case callback deletes
     R result = function_(a1);
-    if (needs_delete) delete this;
+    if (needs_delete)
+      delete this;
     return result;
   }
 
- private:
+private:
   FunctionType function_;
   bool self_deleting_;
 };
 
-template<typename R, typename P1, typename A1>
-class FunctionResultCallback_1_1 : public ResultCallback1<R, A1> {
- public:
+template <typename R, typename P1, typename A1>
+class FunctionResultCallback_1_1 : public ResultCallback1<R, A1>
+{
+public:
   typedef R (*FunctionType)(P1, A1);
 
-  FunctionResultCallback_1_1(FunctionType function, bool self_deleting,
-                             P1 p1)
-      : function_(function), self_deleting_(self_deleting), p1_(p1) {}
-  ~FunctionResultCallback_1_1() {}
+  FunctionResultCallback_1_1(FunctionType function, bool self_deleting, P1 p1)
+    : function_(function), self_deleting_(self_deleting), p1_(p1)
+  {
+  }
+  ~FunctionResultCallback_1_1()
+  {
+  }
 
-  R Run(A1 a1) {
+  R Run(A1 a1)
+  {
     bool needs_delete = self_deleting_;  // read in case callback deletes
     R result = function_(p1_, a1);
-    if (needs_delete) delete this;
+    if (needs_delete)
+      delete this;
     return result;
   }
 
- private:
+private:
   FunctionType function_;
   bool self_deleting_;
   P1 p1_;
 };
 
 template <typename T>
-struct InternalConstRef {
+struct InternalConstRef
+{
   typedef typename remove_reference<T>::type base_type;
   typedef const base_type& type;
 };
 
-template<typename R, typename T>
-class MethodResultCallback_0_0 : public ResultCallback<R> {
- public:
+template <typename R, typename T>
+class MethodResultCallback_0_0 : public ResultCallback<R>
+{
+public:
   typedef R (T::*MethodType)();
   MethodResultCallback_0_0(T* object, MethodType method, bool self_deleting)
-      : object_(object),
-        method_(method),
-        self_deleting_(self_deleting) {}
-  ~MethodResultCallback_0_0() {}
+    : object_(object), method_(method), self_deleting_(self_deleting)
+  {
+  }
+  ~MethodResultCallback_0_0()
+  {
+  }
 
-  R Run() {
+  R Run()
+  {
     bool needs_delete = self_deleting_;
     R result = (object_->*method_)();
-    if (needs_delete) delete this;
+    if (needs_delete)
+      delete this;
     return result;
   }
 
- private:
+private:
   T* object_;
   MethodType method_;
   bool self_deleting_;
 };
 
-template <typename R, typename T, typename P1, typename P2, typename P3,
-          typename P4, typename P5, typename A1, typename A2>
-class MethodResultCallback_5_2 : public ResultCallback2<R, A1, A2> {
- public:
+template <typename R, typename T, typename P1, typename P2, typename P3, typename P4, typename P5, typename A1,
+          typename A2>
+class MethodResultCallback_5_2 : public ResultCallback2<R, A1, A2>
+{
+public:
   typedef R (T::*MethodType)(P1, P2, P3, P4, P5, A1, A2);
-  MethodResultCallback_5_2(T* object, MethodType method, bool self_deleting,
-                           P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
-      : object_(object),
-        method_(method),
-        self_deleting_(self_deleting),
-        p1_(p1),
-        p2_(p2),
-        p3_(p3),
-        p4_(p4),
-        p5_(p5) {}
-  ~MethodResultCallback_5_2() {}
+  MethodResultCallback_5_2(T* object, MethodType method, bool self_deleting, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
+    : object_(object), method_(method), self_deleting_(self_deleting), p1_(p1), p2_(p2), p3_(p3), p4_(p4), p5_(p5)
+  {
+  }
+  ~MethodResultCallback_5_2()
+  {
+  }
 
-  R Run(A1 a1, A2 a2) {
+  R Run(A1 a1, A2 a2)
+  {
     bool needs_delete = self_deleting_;
     R result = (object_->*method_)(p1_, p2_, p3_, p4_, p5_, a1, a2);
-    if (needs_delete) delete this;
+    if (needs_delete)
+      delete this;
     return result;
   }
 
- private:
+private:
   T* object_;
   MethodType method_;
   bool self_deleting_;
@@ -407,168 +488,166 @@ class MethodResultCallback_5_2 : public ResultCallback2<R, A1, A2> {
 }  // namespace internal
 
 // See Closure.
-inline Closure* NewCallback(void (*function)()) {
+inline Closure* NewCallback(void (*function)())
+{
   return new internal::FunctionClosure0(function, true);
 }
 
 // See Closure.
-inline Closure* NewPermanentCallback(void (*function)()) {
+inline Closure* NewPermanentCallback(void (*function)())
+{
   return new internal::FunctionClosure0(function, false);
 }
 
 // See Closure.
 template <typename Class>
-inline Closure* NewCallback(Class* object, void (Class::*method)()) {
+inline Closure* NewCallback(Class* object, void (Class::*method)())
+{
   return new internal::MethodClosure0<Class>(object, method, true);
 }
 
 // See Closure.
 template <typename Class>
-inline Closure* NewPermanentCallback(Class* object, void (Class::*method)()) {
+inline Closure* NewPermanentCallback(Class* object, void (Class::*method)())
+{
   return new internal::MethodClosure0<Class>(object, method, false);
 }
 
 // See Closure.
 template <typename Arg1>
-inline Closure* NewCallback(void (*function)(Arg1),
-                            Arg1 arg1) {
+inline Closure* NewCallback(void (*function)(Arg1), Arg1 arg1)
+{
   return new internal::FunctionClosure1<Arg1>(function, true, arg1);
 }
 
 // See Closure.
 template <typename Arg1>
-inline Closure* NewPermanentCallback(void (*function)(Arg1),
-                                     Arg1 arg1) {
+inline Closure* NewPermanentCallback(void (*function)(Arg1), Arg1 arg1)
+{
   return new internal::FunctionClosure1<Arg1>(function, false, arg1);
 }
 
 // See Closure.
 template <typename Class, typename Arg1>
-inline Closure* NewCallback(Class* object, void (Class::*method)(Arg1),
-                            Arg1 arg1) {
+inline Closure* NewCallback(Class* object, void (Class::*method)(Arg1), Arg1 arg1)
+{
   return new internal::MethodClosure1<Class, Arg1>(object, method, true, arg1);
 }
 
 // See Closure.
 template <typename Class, typename Arg1>
-inline Closure* NewPermanentCallback(Class* object, void (Class::*method)(Arg1),
-                                     Arg1 arg1) {
+inline Closure* NewPermanentCallback(Class* object, void (Class::*method)(Arg1), Arg1 arg1)
+{
   return new internal::MethodClosure1<Class, Arg1>(object, method, false, arg1);
 }
 
 // See Closure.
 template <typename Arg1, typename Arg2>
-inline Closure* NewCallback(void (*function)(Arg1, Arg2),
-                            Arg1 arg1, Arg2 arg2) {
-  return new internal::FunctionClosure2<Arg1, Arg2>(
-    function, true, arg1, arg2);
+inline Closure* NewCallback(void (*function)(Arg1, Arg2), Arg1 arg1, Arg2 arg2)
+{
+  return new internal::FunctionClosure2<Arg1, Arg2>(function, true, arg1, arg2);
 }
 
 // See Closure.
 template <typename Arg1, typename Arg2>
-inline Closure* NewPermanentCallback(void (*function)(Arg1, Arg2),
-                                     Arg1 arg1, Arg2 arg2) {
-  return new internal::FunctionClosure2<Arg1, Arg2>(
-    function, false, arg1, arg2);
+inline Closure* NewPermanentCallback(void (*function)(Arg1, Arg2), Arg1 arg1, Arg2 arg2)
+{
+  return new internal::FunctionClosure2<Arg1, Arg2>(function, false, arg1, arg2);
 }
 
 // See Closure.
 template <typename Class, typename Arg1, typename Arg2>
-inline Closure* NewCallback(Class* object, void (Class::*method)(Arg1, Arg2),
-                            Arg1 arg1, Arg2 arg2) {
-  return new internal::MethodClosure2<Class, Arg1, Arg2>(
-    object, method, true, arg1, arg2);
+inline Closure* NewCallback(Class* object, void (Class::*method)(Arg1, Arg2), Arg1 arg1, Arg2 arg2)
+{
+  return new internal::MethodClosure2<Class, Arg1, Arg2>(object, method, true, arg1, arg2);
 }
 
 // See Closure.
 template <typename Class, typename Arg1, typename Arg2>
-inline Closure* NewPermanentCallback(
-    Class* object, void (Class::*method)(Arg1, Arg2),
-    Arg1 arg1, Arg2 arg2) {
-  return new internal::MethodClosure2<Class, Arg1, Arg2>(
-    object, method, false, arg1, arg2);
+inline Closure* NewPermanentCallback(Class* object, void (Class::*method)(Arg1, Arg2), Arg1 arg1, Arg2 arg2)
+{
+  return new internal::MethodClosure2<Class, Arg1, Arg2>(object, method, false, arg1, arg2);
 }
 
 // See ResultCallback
-template<typename R>
-inline ResultCallback<R>* NewCallback(R (*function)()) {
+template <typename R>
+inline ResultCallback<R>* NewCallback(R (*function)())
+{
   return new internal::FunctionResultCallback_0_0<R>(function, true);
 }
 
 // See ResultCallback
-template<typename R>
-inline ResultCallback<R>* NewPermanentCallback(R (*function)()) {
+template <typename R>
+inline ResultCallback<R>* NewPermanentCallback(R (*function)())
+{
   return new internal::FunctionResultCallback_0_0<R>(function, false);
 }
 
 // See ResultCallback
-template<typename R, typename P1>
-inline ResultCallback<R>* NewCallback(R (*function)(P1), P1 p1) {
-  return new internal::FunctionResultCallback_1_0<R, P1>(
-      function, true, p1);
+template <typename R, typename P1>
+inline ResultCallback<R>* NewCallback(R (*function)(P1), P1 p1)
+{
+  return new internal::FunctionResultCallback_1_0<R, P1>(function, true, p1);
 }
 
 // See ResultCallback
-template<typename R, typename P1>
-inline ResultCallback<R>* NewPermanentCallback(
-    R (*function)(P1), P1 p1) {
-  return new internal::FunctionResultCallback_1_0<R, P1>(
-      function, false, p1);
+template <typename R, typename P1>
+inline ResultCallback<R>* NewPermanentCallback(R (*function)(P1), P1 p1)
+{
+  return new internal::FunctionResultCallback_1_0<R, P1>(function, false, p1);
 }
 
 // See ResultCallback1
-template<typename R, typename A1>
-inline ResultCallback1<R, A1>* NewCallback(R (*function)(A1)) {
+template <typename R, typename A1>
+inline ResultCallback1<R, A1>* NewCallback(R (*function)(A1))
+{
   return new internal::FunctionResultCallback_0_1<R, A1>(function, true);
 }
 
 // See ResultCallback1
-template<typename R, typename A1>
-inline ResultCallback1<R, A1>* NewPermanentCallback(R (*function)(A1)) {
+template <typename R, typename A1>
+inline ResultCallback1<R, A1>* NewPermanentCallback(R (*function)(A1))
+{
   return new internal::FunctionResultCallback_0_1<R, A1>(function, false);
 }
 
 // See ResultCallback1
-template<typename R, typename P1, typename A1>
-inline ResultCallback1<R, A1>* NewCallback(R (*function)(P1, A1), P1 p1) {
-  return new internal::FunctionResultCallback_1_1<R, P1, A1>(
-      function, true, p1);
+template <typename R, typename P1, typename A1>
+inline ResultCallback1<R, A1>* NewCallback(R (*function)(P1, A1), P1 p1)
+{
+  return new internal::FunctionResultCallback_1_1<R, P1, A1>(function, true, p1);
 }
 
 // See ResultCallback1
-template<typename R, typename P1, typename A1>
-inline ResultCallback1<R, A1>* NewPermanentCallback(
-    R (*function)(P1, A1), P1 p1) {
-  return new internal::FunctionResultCallback_1_1<R, P1, A1>(
-      function, false, p1);
+template <typename R, typename P1, typename A1>
+inline ResultCallback1<R, A1>* NewPermanentCallback(R (*function)(P1, A1), P1 p1)
+{
+  return new internal::FunctionResultCallback_1_1<R, P1, A1>(function, false, p1);
 }
 
 // See MethodResultCallback_0_0
 template <typename R, typename T1, typename T2>
-inline ResultCallback<R>* NewPermanentCallback(
-    T1* object, R (T2::*function)()) {
+inline ResultCallback<R>* NewPermanentCallback(T1* object, R (T2::*function)())
+{
   return new internal::MethodResultCallback_0_0<R, T1>(object, function, false);
 }
 
 // See MethodResultCallback_5_2
-template <typename R, typename T, typename P1, typename P2, typename P3,
-          typename P4, typename P5, typename A1, typename A2>
-inline ResultCallback2<R, A1, A2>* NewPermanentCallback(
-    T* object, R (T::*function)(P1, P2, P3, P4, P5, A1, A2),
-    typename internal::InternalConstRef<P1>::type p1,
-    typename internal::InternalConstRef<P2>::type p2,
-    typename internal::InternalConstRef<P3>::type p3,
-    typename internal::InternalConstRef<P4>::type p4,
-    typename internal::InternalConstRef<P5>::type p5) {
-  return new internal::MethodResultCallback_5_2<R, T, P1, P2, P3, P4, P5, A1,
-                                                A2>(object, function, false, p1,
-                                                    p2, p3, p4, p5);
+template <typename R, typename T, typename P1, typename P2, typename P3, typename P4, typename P5, typename A1,
+          typename A2>
+inline ResultCallback2<R, A1, A2>*
+NewPermanentCallback(T* object, R (T::*function)(P1, P2, P3, P4, P5, A1, A2),
+                     typename internal::InternalConstRef<P1>::type p1, typename internal::InternalConstRef<P2>::type p2,
+                     typename internal::InternalConstRef<P3>::type p3, typename internal::InternalConstRef<P4>::type p4,
+                     typename internal::InternalConstRef<P5>::type p5)
+{
+  return new internal::MethodResultCallback_5_2<R, T, P1, P2, P3, P4, P5, A1, A2>(object, function, false, p1, p2, p3,
+                                                                                  p4, p5);
 }
 
 // A function which does nothing.  Useful for creating no-op callbacks, e.g.:
 //   Closure* nothing = NewCallback(&DoNothing);
 void LIBPROTOBUF_EXPORT DoNothing();
-
 
 }  // namespace protobuf
 }  // namespace google

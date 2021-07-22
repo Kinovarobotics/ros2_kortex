@@ -36,12 +36,17 @@
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/stringpiece.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace error {
+namespace google
+{
+namespace protobuf
+{
+namespace util
+{
+namespace error
+{
 // These values must match error codes defined in google/rpc/code.proto.
-enum Code {
+enum Code
+{
   OK = 0,
   CANCELLED = 1,
   UNKNOWN = 2,
@@ -62,8 +67,9 @@ enum Code {
 };
 }  // namespace error
 
-class LIBPROTOBUF_EXPORT Status {
- public:
+class LIBPROTOBUF_EXPORT Status
+{
+public:
   // Creates a "successful" status.
   Status();
 
@@ -74,33 +80,39 @@ class LIBPROTOBUF_EXPORT Status {
   Status(error::Code error_code, StringPiece error_message);
   Status(const Status&);
   Status& operator=(const Status& x);
-  ~Status() {}
+  ~Status()
+  {
+  }
 
   // Some pre-defined Status objects
-  static const Status OK;             // Identical to 0-arg constructor
+  static const Status OK;  // Identical to 0-arg constructor
   static const Status CANCELLED;
   static const Status UNKNOWN;
 
   // Accessor
-  bool ok() const {
+  bool ok() const
+  {
     return error_code_ == error::OK;
   }
-  int error_code() const {
+  int error_code() const
+  {
     return error_code_;
   }
-  StringPiece error_message() const {
+  StringPiece error_message() const
+  {
     return error_message_;
   }
 
   bool operator==(const Status& x) const;
-  bool operator!=(const Status& x) const {
+  bool operator!=(const Status& x) const
+  {
     return !operator==(x);
   }
 
   // Return a combination of the error code name and message.
   string ToString() const;
 
- private:
+private:
   error::Code error_code_;
   string error_message_;
 };

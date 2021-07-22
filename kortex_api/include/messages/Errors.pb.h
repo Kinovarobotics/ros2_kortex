@@ -26,13 +26,15 @@
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_Errors_2eproto {
+namespace protobuf_Errors_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[1];
@@ -41,17 +43,22 @@ struct TableStruct {
   static const ::google::protobuf::uint32 offsets[];
 };
 void AddDescriptors();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
 }
 }  // namespace protobuf_Errors_2eproto
-namespace Kinova {
-namespace Api {
+namespace Kinova
+{
+namespace Api
+{
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-
-enum ErrorCodes {
+namespace Kinova
+{
+namespace Api
+{
+enum ErrorCodes
+{
   ERROR_NONE = 0,
   ERROR_PROTOCOL_SERVER = 1,
   ERROR_PROTOCOL_CLIENT = 2,
@@ -66,16 +73,16 @@ const ErrorCodes ErrorCodes_MAX = ERROR_INTERNAL;
 const int ErrorCodes_ARRAYSIZE = ErrorCodes_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ErrorCodes_descriptor();
-inline const ::std::string& ErrorCodes_Name(ErrorCodes value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ErrorCodes_descriptor(), value);
+inline const ::std::string& ErrorCodes_Name(ErrorCodes value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ErrorCodes_descriptor(), value);
 }
-inline bool ErrorCodes_Parse(
-    const ::std::string& name, ErrorCodes* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ErrorCodes>(
-    ErrorCodes_descriptor(), name, value);
+inline bool ErrorCodes_Parse(const ::std::string& name, ErrorCodes* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ErrorCodes>(ErrorCodes_descriptor(), name, value);
 }
-enum SubErrorCodes {
+enum SubErrorCodes
+{
   SUB_ERROR_NONE = 0,
   METHOD_FAILED = 1,
   UNIMPLEMENTED = 2,
@@ -185,29 +192,26 @@ const SubErrorCodes SubErrorCodes_MAX = CONTROL_PERMISSION_DENIED;
 const int SubErrorCodes_ARRAYSIZE = SubErrorCodes_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* SubErrorCodes_descriptor();
-inline const ::std::string& SubErrorCodes_Name(SubErrorCodes value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    SubErrorCodes_descriptor(), value);
+inline const ::std::string& SubErrorCodes_Name(SubErrorCodes value)
+{
+  return ::google::protobuf::internal::NameOfEnum(SubErrorCodes_descriptor(), value);
 }
-inline bool SubErrorCodes_Parse(
-    const ::std::string& name, SubErrorCodes* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<SubErrorCodes>(
-    SubErrorCodes_descriptor(), name, value);
+inline bool SubErrorCodes_Parse(const ::std::string& name, SubErrorCodes* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<SubErrorCodes>(SubErrorCodes_descriptor(), name, value);
 }
 // ===================================================================
 
-
 // ===================================================================
-
 
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
@@ -215,17 +219,26 @@ inline bool SubErrorCodes_Parse(
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::ErrorCodes> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ErrorCodes>() {
+struct is_proto_enum< ::Kinova::Api::ErrorCodes> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::ErrorCodes>()
+{
   return ::Kinova::Api::ErrorCodes_descriptor();
 }
-template <> struct is_proto_enum< ::Kinova::Api::SubErrorCodes> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::SubErrorCodes>() {
+struct is_proto_enum< ::Kinova::Api::SubErrorCodes> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::SubErrorCodes>()
+{
   return ::Kinova::Api::SubErrorCodes_descriptor();
 }
 

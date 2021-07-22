@@ -1,7 +1,6 @@
 #ifndef _NOTIFICATION_HANDLER_H_
 #define _NOTIFICATION_HANDLER_H_
 
-
 #include <memory>
 #include <map>
 #include <vector>
@@ -22,77 +21,82 @@ namespace Kinova
 {
 namespace Api
 {
+struct AbstractCallbackFunction
+{
+  AbstractCallbackFunction() = default;
+  virtual ~AbstractCallbackFunction() = default;
 
-    struct AbstractCallbackFunction
+  virtual Error call(Frame& msgFrameNotif) = 0;
+};
+
+template <class DataType>
+struct CallbackFunction : public AbstractCallbackFunction
+{
+  static constexpr bool isOk = std::is_base_of<::google::protobuf::Message, DataType>::value;
+  static_assert(isOk, "DataType must inherit from ::google::protobuf::Message");
+
+  std::function<void(DataType)> m_callbackFct;
+
+  CallbackFunction(std::function<void(DataType)> callback) : AbstractCallbackFunction()
+  {
+    m_callbackFct = callback;
+  }
+  virtual ~CallbackFunction() override
+  {
+  }
+
+  virtual Error call(Frame& msgFrameNotif) override
+  {
+    Error error;
+    error.set_error_code(ErrorCodes::ERROR_NONE);
+
+    DataType decodedMsgNotif;
+    if (!decodedMsgNotif.ParseFromString(msgFrameNotif.payload()))
     {
-        AbstractCallbackFunction() = default;
-        virtual ~AbstractCallbackFunction() = default;
+      HeaderInfo headerInfo(msgFrameNotif.header());
 
-        virtual Error call(Frame& msgFrameNotif) = 0;
-    };
-
-    template <class DataType>
-    struct CallbackFunction : public AbstractCallbackFunction
+      error.set_error_code(ERROR_PROTOCOL_CLIENT);
+      error.set_error_sub_code(PAYLOAD_DECODING_ERR);
+      error.set_error_sub_string(string("The data payload could not be deserialized : notification for serviceId=") +
+                                 to_string(headerInfo.m_serviceInfo.serviceId) + " \n");
+    }
+    else
     {
-        static constexpr bool isOk = std::is_base_of<::google::protobuf::Message, DataType>::value;
-        static_assert(isOk, "DataType must inherit from ::google::protobuf::Message");
+      // todo ???  thread(m_callbackFct, move(decodedMsgNotif)).detach();
+      thread(m_callbackFct, decodedMsgNotif).detach();
+    }
 
-        std::function< void (DataType) > m_callbackFct;
+    return error;
+  }
+};
 
-        CallbackFunction(std::function< void(DataType) > callback) : AbstractCallbackFunction() { m_callbackFct = callback; }
-        virtual ~CallbackFunction() override {}
+// todoErr add the validation information beside the callback
+typedef std::unordered_map<uint32_t, vector<shared_ptr<AbstractCallbackFunction>>> CallbackMap;
 
-        virtual Error call(Frame& msgFrameNotif) override
-        {
-            Error error;
-            error.set_error_code(ErrorCodes::ERROR_NONE);
+class NotificationHandler
+{
+  CallbackMap m_callbackMap;
+  std::mutex m_mutex;
 
-            DataType decodedMsgNotif;
-            if( !decodedMsgNotif.ParseFromString(msgFrameNotif.payload()) )
-            {
-                HeaderInfo headerInfo( msgFrameNotif.header() );
+public:
+  NotificationHandler();
+  ~NotificationHandler();
 
-                error.set_error_code(ERROR_PROTOCOL_CLIENT);
-                error.set_error_sub_code(PAYLOAD_DECODING_ERR);
-                error.set_error_sub_string(string("The data payload could not be deserialized : notification for serviceId=") + to_string(headerInfo.m_serviceInfo.serviceId) + " \n");
-            }
-            else
-            {
-                // todo ???  thread(m_callbackFct, move(decodedMsgNotif)).detach();
-                thread(m_callbackFct, decodedMsgNotif).detach();
-            }
+  template <class DataType>
+  void addCallback(uint32_t idKey, std::function<void(DataType)> callback)
+  {
+    std::lock_guard<std::mutex> w_scoped(m_mutex);
+    std::shared_ptr<AbstractCallbackFunction> fct = std::make_shared<CallbackFunction<DataType>>(callback);
+    m_callbackMap[idKey].push_back(fct);
+  }
 
-            return error;
-        }
-    };
+  void clearIdKeyCallbacks(uint32_t idKey);
+  void clearAll();
 
-    // todoErr add the validation information beside the callback
-    typedef std::unordered_map< uint32_t, vector< shared_ptr<AbstractCallbackFunction> > > CallbackMap;
+  Error call(Frame& msgFrameNotif);
+};
 
-    class NotificationHandler
-    {
-        CallbackMap     m_callbackMap;
-        std::mutex      m_mutex;
+}  // namespace Api
+}  // namespace Kinova
 
-    public:
-        NotificationHandler();
-        ~NotificationHandler();
-
-        template <class DataType>
-        void addCallback( uint32_t idKey, std::function<void(DataType)> callback )
-        {
-            std::lock_guard<std::mutex> w_scoped(m_mutex);
-            std::shared_ptr<AbstractCallbackFunction> fct = std::make_shared<CallbackFunction<DataType>>(callback);
-            m_callbackMap[idKey].push_back( fct );
-        }
-
-        void clearIdKeyCallbacks( uint32_t idKey );
-        void clearAll();
-
-        Error call(Frame& msgFrameNotif);
-    };
-
-}
-}
-
-#endif // _NOTIFICATION_HANDLER_H_
+#endif  // _NOTIFICATION_HANDLER_H_
