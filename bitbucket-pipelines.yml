@@ -18,7 +18,7 @@ pipelines:
         script:
           - apk add --update bash coreutils tar
           - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
-          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy DOCKER_IMAGE=moveit/moveit2:foxy-source AFTER_SETUP_UPSTREAM_WORKSPACE_EMBED="set +u && source ~/ws_moveit/install/setup.bash && set - u"
+          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy DOCKER_IMAGE=moveit/moveit2:foxy-source BEFORE_INSTALL_TARGET_DEPENDENCIES_EMBED="set +u && source ~/ws_moveit/install/setup.bash && set - u"
   branches:
     "master":
     - step:
@@ -36,7 +36,7 @@ pipelines:
         script:
           - apk add --update bash coreutils tar
           - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
-          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy
+          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy DOCKER_IMAGE=moveit/moveit2:foxy-source BEFORE_INSTALL_TARGET_DEPENDENCIES_EMBED="set +u && source ~/ws_moveit/install/setup.bash && set - u"
   custom:
     "Build and Test":
     - step:
@@ -46,7 +46,7 @@ pipelines:
         script:
           - apk add --update bash coreutils tar
           - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
-          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy
+          - .industrial_ci/bitbucket.sh ROS_DISTRO=foxy DOCKER_IMAGE=moveit/moveit2:foxy-source BEFORE_INSTALL_TARGET_DEPENDENCIES_EMBED="set +u && source ~/ws_moveit/install/setup.bash && set - u"
     "Formatting (pre-commit) (Manual Trigger)":
       - step:
           name: Formatting (pre-commit)
