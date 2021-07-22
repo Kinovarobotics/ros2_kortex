@@ -35,9 +35,10 @@
 
 #include <google/protobuf/stubs/common.h>
 
-namespace google {
-namespace protobuf {
-
+namespace google
+{
+namespace protobuf
+{
 // STLDeleteContainerPointers()
 //  For a range within a container of pointers, calls delete
 //  (non-array version) on these pointers.
@@ -49,9 +50,10 @@ namespace protobuf {
 // advanced, which could result in the hash function trying to deference a
 // stale pointer.
 template <class ForwardIterator>
-void STLDeleteContainerPointers(ForwardIterator begin,
-                                ForwardIterator end) {
-  while (begin != end) {
+void STLDeleteContainerPointers(ForwardIterator begin, ForwardIterator end)
+{
+  while (begin != end)
+  {
     ForwardIterator temp = begin;
     ++begin;
     delete *temp;
@@ -64,7 +66,8 @@ void STLDeleteContainerPointers(ForwardIterator begin,
 // improve performance.  However, since it's totally non-portable it has no
 // place in open source code.  Feel free to fill this function in with your
 // own disgusting hack if you want the perf boost.
-inline void STLStringResizeUninitialized(string* s, size_t new_size) {
+inline void STLStringResizeUninitialized(string* s, size_t new_size)
+{
   s->resize(new_size);
 }
 
@@ -80,7 +83,8 @@ inline void STLStringResizeUninitialized(string* s, size_t new_size) {
 // (http://www.open-std.org/JTC1/SC22/WG21/docs/lwg-active.html#530)
 // proposes this as the method. According to Matt Austern, this should
 // already work on all current implementations.
-inline char* string_as_array(string* str) {
+inline char* string_as_array(string* str)
+{
   // DO NOT USE const_cast<char*>(str->data())! See the unittest for why.
   return str->empty() ? NULL : &*str->begin();
 }
@@ -96,8 +100,10 @@ inline char* string_as_array(string* str) {
 // ElementDeleter (defined below), which ensures that your container's elements
 // are deleted when the ElementDeleter goes out of scope.
 template <class T>
-void STLDeleteElements(T *container) {
-  if (!container) return;
+void STLDeleteElements(T* container)
+{
+  if (!container)
+    return;
   STLDeleteContainerPointers(container->begin(), container->end());
   container->clear();
 }
@@ -107,9 +113,12 @@ void STLDeleteElements(T *container) {
 // in the case it's given a NULL pointer.
 
 template <class T>
-void STLDeleteValues(T *v) {
-  if (!v) return;
-  for (typename T::iterator i = v->begin(); i != v->end(); ++i) {
+void STLDeleteValues(T* v)
+{
+  if (!v)
+    return;
+  for (typename T::iterator i = v->begin(); i != v->end(); ++i)
+  {
     delete i->second;
   }
   v->clear();

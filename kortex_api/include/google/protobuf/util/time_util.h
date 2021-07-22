@@ -45,16 +45,19 @@
 #include <google/protobuf/duration.pb.h>
 #include <google/protobuf/timestamp.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-
+namespace google
+{
+namespace protobuf
+{
+namespace util
+{
 // Utility functions for Timestamp and Duration.
-class LIBPROTOBUF_EXPORT TimeUtil {
+class LIBPROTOBUF_EXPORT TimeUtil
+{
   typedef google::protobuf::Timestamp Timestamp;
   typedef google::protobuf::Duration Duration;
 
- public:
+public:
   // The min/max Timestamp/Duration values we support.
   //
   // For "0001-01-01T00:00:00Z".
@@ -157,87 +160,104 @@ class LIBPROTOBUF_EXPORT TimeUtil {
 }  // namespace util
 }  // namespace protobuf
 
-
-namespace protobuf {
+namespace protobuf
+{
 // Overloaded operators for Duration.
 //
 // Assignment operators.
 LIBPROTOBUF_EXPORT Duration& operator+=(Duration& d1, const Duration& d2);  // NOLINT
 LIBPROTOBUF_EXPORT Duration& operator-=(Duration& d1, const Duration& d2);  // NOLINT
-LIBPROTOBUF_EXPORT Duration& operator*=(Duration& d, int64 r);  // NOLINT
-LIBPROTOBUF_EXPORT Duration& operator*=(Duration& d, double r);  // NOLINT
-LIBPROTOBUF_EXPORT Duration& operator/=(Duration& d, int64 r);  // NOLINT
-LIBPROTOBUF_EXPORT Duration& operator/=(Duration& d, double r);  // NOLINT
+LIBPROTOBUF_EXPORT Duration& operator*=(Duration& d, int64 r);              // NOLINT
+LIBPROTOBUF_EXPORT Duration& operator*=(Duration& d, double r);             // NOLINT
+LIBPROTOBUF_EXPORT Duration& operator/=(Duration& d, int64 r);              // NOLINT
+LIBPROTOBUF_EXPORT Duration& operator/=(Duration& d, double r);             // NOLINT
 // Overload for other integer types.
 template <typename T>
-Duration& operator*=(Duration& d, T r) {  // NOLINT
+Duration& operator*=(Duration& d, T r)
+{  // NOLINT
   int64 x = r;
   return d *= x;
 }
 template <typename T>
-Duration& operator/=(Duration& d, T r) {  // NOLINT
+Duration& operator/=(Duration& d, T r)
+{  // NOLINT
   int64 x = r;
   return d /= x;
 }
 LIBPROTOBUF_EXPORT Duration& operator%=(Duration& d1, const Duration& d2);  // NOLINT
 // Relational operators.
-inline bool operator<(const Duration& d1, const Duration& d2) {
-  if (d1.seconds() == d2.seconds()) {
+inline bool operator<(const Duration& d1, const Duration& d2)
+{
+  if (d1.seconds() == d2.seconds())
+  {
     return d1.nanos() < d2.nanos();
   }
   return d1.seconds() < d2.seconds();
 }
-inline bool operator>(const Duration& d1, const Duration& d2) {
+inline bool operator>(const Duration& d1, const Duration& d2)
+{
   return d2 < d1;
 }
-inline bool operator>=(const Duration& d1, const Duration& d2) {
+inline bool operator>=(const Duration& d1, const Duration& d2)
+{
   return !(d1 < d2);
 }
-inline bool operator<=(const Duration& d1, const Duration& d2) {
+inline bool operator<=(const Duration& d1, const Duration& d2)
+{
   return !(d2 < d1);
 }
-inline bool operator==(const Duration& d1, const Duration& d2) {
+inline bool operator==(const Duration& d1, const Duration& d2)
+{
   return d1.seconds() == d2.seconds() && d1.nanos() == d2.nanos();
 }
-inline bool operator!=(const Duration& d1, const Duration& d2) {
+inline bool operator!=(const Duration& d1, const Duration& d2)
+{
   return !(d1 == d2);
 }
 // Additive operators
-inline Duration operator-(const Duration& d) {
+inline Duration operator-(const Duration& d)
+{
   Duration result;
   result.set_seconds(-d.seconds());
   result.set_nanos(-d.nanos());
   return result;
 }
-inline Duration operator+(const Duration& d1, const Duration& d2) {
+inline Duration operator+(const Duration& d1, const Duration& d2)
+{
   Duration result = d1;
   return result += d2;
 }
-inline Duration operator-(const Duration& d1, const Duration& d2) {
+inline Duration operator-(const Duration& d1, const Duration& d2)
+{
   Duration result = d1;
   return result -= d2;
 }
 // Multiplicative operators
-template<typename T>
-inline Duration operator*(Duration d, T r) {
+template <typename T>
+inline Duration operator*(Duration d, T r)
+{
   return d *= r;
 }
-template<typename T>
-inline Duration operator*(T r, Duration d) {
+template <typename T>
+inline Duration operator*(T r, Duration d)
+{
   return d *= r;
 }
-template<typename T>
-inline Duration operator/(Duration d, T r) {
+template <typename T>
+inline Duration operator/(Duration d, T r)
+{
   return d /= r;
 }
 LIBPROTOBUF_EXPORT int64 operator/(const Duration& d1, const Duration& d2);
 
-inline Duration operator%(const Duration& d1, const Duration& d2) {
+inline Duration operator%(const Duration& d1, const Duration& d2)
+{
   Duration result = d1;
   return result %= d2;
 }
 
-inline std::ostream& operator<<(std::ostream& out, const Duration& d) {
+inline std::ostream& operator<<(std::ostream& out, const Duration& d)
+{
   out << google::protobuf::util::TimeUtil::ToString(d);
   return out;
 }
@@ -248,49 +268,59 @@ inline std::ostream& operator<<(std::ostream& out, const Duration& d) {
 LIBPROTOBUF_EXPORT Timestamp& operator+=(Timestamp& t, const Duration& d);  // NOLINT
 LIBPROTOBUF_EXPORT Timestamp& operator-=(Timestamp& t, const Duration& d);  // NOLINT
 // Relational operators.
-inline bool operator<(const Timestamp& t1, const Timestamp& t2) {
-  if (t1.seconds() == t2.seconds()) {
+inline bool operator<(const Timestamp& t1, const Timestamp& t2)
+{
+  if (t1.seconds() == t2.seconds())
+  {
     return t1.nanos() < t2.nanos();
   }
   return t1.seconds() < t2.seconds();
 }
-inline bool operator>(const Timestamp& t1, const Timestamp& t2) {
+inline bool operator>(const Timestamp& t1, const Timestamp& t2)
+{
   return t2 < t1;
 }
-inline bool operator>=(const Timestamp& t1, const Timestamp& t2) {
+inline bool operator>=(const Timestamp& t1, const Timestamp& t2)
+{
   return !(t1 < t2);
 }
-inline bool operator<=(const Timestamp& t1, const Timestamp& t2) {
+inline bool operator<=(const Timestamp& t1, const Timestamp& t2)
+{
   return !(t2 < t1);
 }
-inline bool operator==(const Timestamp& t1, const Timestamp& t2) {
+inline bool operator==(const Timestamp& t1, const Timestamp& t2)
+{
   return t1.seconds() == t2.seconds() && t1.nanos() == t2.nanos();
 }
-inline bool operator!=(const Timestamp& t1, const Timestamp& t2) {
+inline bool operator!=(const Timestamp& t1, const Timestamp& t2)
+{
   return !(t1 == t2);
 }
 // Additive operators.
-inline Timestamp operator+(const Timestamp& t, const Duration& d) {
+inline Timestamp operator+(const Timestamp& t, const Duration& d)
+{
   Timestamp result = t;
   return result += d;
 }
-inline Timestamp operator+(const Duration& d, const Timestamp& t) {
+inline Timestamp operator+(const Duration& d, const Timestamp& t)
+{
   Timestamp result = t;
   return result += d;
 }
-inline Timestamp operator-(const Timestamp& t, const Duration& d) {
+inline Timestamp operator-(const Timestamp& t, const Duration& d)
+{
   Timestamp result = t;
   return result -= d;
 }
 LIBPROTOBUF_EXPORT Duration operator-(const Timestamp& t1, const Timestamp& t2);
 
-inline std::ostream& operator<<(std::ostream& out, const Timestamp& t) {
+inline std::ostream& operator<<(std::ostream& out, const Timestamp& t)
+{
   out << google::protobuf::util::TimeUtil::ToString(t);
   return out;
 }
 
 }  // namespace protobuf
-
 
 }  // namespace google
 #endif  // GOOGLE_PROTOBUF_UTIL_TIME_UTIL_H__

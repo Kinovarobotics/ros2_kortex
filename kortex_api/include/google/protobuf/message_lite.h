@@ -45,17 +45,20 @@
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/stubs/port.h>
 
-namespace google {
-namespace protobuf {
+namespace google
+{
+namespace protobuf
+{
 class Arena;
-namespace io {
+namespace io
+{
 class CodedInputStream;
 class CodedOutputStream;
 class ZeroCopyInputStream;
 class ZeroCopyOutputStream;
-}
-namespace internal {
-
+}  // namespace io
+namespace internal
+{
 class WireFormatLite;
 
 #ifndef SWIG
@@ -66,14 +69,18 @@ class WireFormatLite;
 // GOOGLE_CHECK-fail, because the full size_t resolution is still returned from
 // ByteSizeLong() and checked against INT_MAX; we can catch the overflow
 // there.
-inline int ToCachedSize(size_t size) { return static_cast<int>(size); }
+inline int ToCachedSize(size_t size)
+{
+  return static_cast<int>(size);
+}
 
 // We mainly calculate sizes in terms of size_t, but some functions that
 // compute sizes return "int".  These int sizes are expected to always be
 // positive. This function is more efficient than casting an int to size_t
 // directly on 64-bit platforms because it avoids making the compiler emit a
 // sign extending instruction, which we don't want and don't want to pay for.
-inline size_t FromIntSize(int size) {
+inline size_t FromIntSize(int size)
+{
   // Convert to unsigned before widening so sign extension is not necessary.
   return static_cast<unsigned int>(size);
 }
@@ -81,7 +88,8 @@ inline size_t FromIntSize(int size) {
 // For cases where a legacy function returns an integer size.  We GOOGLE_DCHECK()
 // that the conversion will fit within an integer; if this is false then we
 // are losing information.
-inline int ToIntSize(size_t size) {
+inline int ToIntSize(size_t size)
+{
   GOOGLE_DCHECK_LE(size, static_cast<size_t>(INT_MAX));
   return static_cast<int>(size);
 }
@@ -100,13 +108,16 @@ inline int ToIntSize(size_t size) {
 // 4. Call Destruct() only if the object is initialized.
 //    After the call, the object becomes uninitialized.
 template <typename T>
-class ExplicitlyConstructed {
- public:
-  void DefaultConstruct() {
+class ExplicitlyConstructed
+{
+public:
+  void DefaultConstruct()
+  {
     new (&union_) T();
   }
 
-  void Destruct() {
+  void Destruct()
+  {
     get_mutable()->~T();
   }
 
@@ -114,14 +125,19 @@ class ExplicitlyConstructed {
   constexpr
 #endif
       const T&
-      get() const {
+      get() const
+  {
     return reinterpret_cast<const T&>(union_);
   }
-  T* get_mutable() { return reinterpret_cast<T*>(&union_); }
+  T* get_mutable()
+  {
+    return reinterpret_cast<T*>(&union_);
+  }
 
- private:
+private:
   // Prefer c++14 aligned_storage, but for compatibility this will do.
-  union AlignedUnion {
+  union AlignedUnion
+  {
     char space[sizeof(T)];
     int64 align_to_int64;
     void* align_to_ptr;
@@ -134,12 +150,13 @@ extern ExplicitlyConstructed< ::std::string> fixed_address_empty_string;
 LIBPROTOBUF_EXPORT extern ProtobufOnceType empty_string_once_init_;
 LIBPROTOBUF_EXPORT void InitEmptyString();
 
-
-LIBPROTOBUF_EXPORT inline const ::std::string& GetEmptyStringAlreadyInited() {
+LIBPROTOBUF_EXPORT inline const ::std::string& GetEmptyStringAlreadyInited()
+{
   return fixed_address_empty_string.get();
 }
 
-LIBPROTOBUF_EXPORT inline const ::std::string& GetEmptyString() {
+LIBPROTOBUF_EXPORT inline const ::std::string& GetEmptyString()
+{
   ::google::protobuf::GoogleOnceInit(&empty_string_once_init_, &InitEmptyString);
   return GetEmptyStringAlreadyInited();
 }
@@ -171,10 +188,15 @@ LIBPROTOBUF_EXPORT size_t StringSpaceUsedExcludingSelfLong(const string& str);
 // is best when you only have a small number of message types linked
 // into your binary, in which case the size of the protocol buffers
 // runtime itself is the biggest problem.
-class LIBPROTOBUF_EXPORT MessageLite {
- public:
-  inline MessageLite() {}
-  virtual ~MessageLite() {}
+class LIBPROTOBUF_EXPORT MessageLite
+{
+public:
+  inline MessageLite()
+  {
+  }
+  virtual ~MessageLite()
+  {
+  }
 
   // Basic Operations ------------------------------------------------
 
@@ -194,7 +216,10 @@ class LIBPROTOBUF_EXPORT MessageLite {
   // use the GetArenaNoVirtual() generated-code method. Default implementation
   // to reduce code size by avoiding the need for per-type implementations
   // when types do not implement arena support.
-  virtual ::google::protobuf::Arena* GetArena() const { return NULL; }
+  virtual ::google::protobuf::Arena* GetArena() const
+  {
+    return NULL;
+  }
 
   // Get a pointer that may be equal to this message's arena, or may not be.
   // If the value returned by this method is equal to some arena pointer, then
@@ -205,7 +230,10 @@ class LIBPROTOBUF_EXPORT MessageLite {
   // store the arena pointer directly, and sometimes in a more indirect way,
   // and allow a fastpath comparison against the arena pointer when it's easy
   // to obtain.
-  virtual void* GetMaybeArenaPointer() const { return GetArena(); }
+  virtual void* GetMaybeArenaPointer() const
+  {
+    return GetArena();
+  }
 
   // Clear all fields of the message and set them to their default values.
   // Clear() avoids freeing memory, assuming that any memory allocated
@@ -252,8 +280,7 @@ class LIBPROTOBUF_EXPORT MessageLite {
   bool ParseFromBoundedZeroCopyStream(io::ZeroCopyInputStream* input, int size);
   // Like ParseFromBoundedZeroCopyStream(), but accepts messages that are
   // missing required fields.
-  bool ParsePartialFromBoundedZeroCopyStream(io::ZeroCopyInputStream* input,
-                                             int size);
+  bool ParsePartialFromBoundedZeroCopyStream(io::ZeroCopyInputStream* input, int size);
   // Parses a protocol buffer contained in a string. Returns true on success.
   // This function takes a string in the (non-human-readable) binary wire
   // format, matching the encoding output by MessageLite::SerializeToString().
@@ -268,7 +295,6 @@ class LIBPROTOBUF_EXPORT MessageLite {
   // Like ParseFromArray(), but accepts messages that are missing
   // required fields.
   bool ParsePartialFromArray(const void* data, int size);
-
 
   // Reads a protocol buffer from the stream and merges it into this
   // Message.  Singular fields read from the input overwrite what is
@@ -289,7 +315,6 @@ class LIBPROTOBUF_EXPORT MessageLite {
   // MergeFromCodedStream() is just implemented as MergePartialFromCodedStream()
   // followed by IsInitialized().
   virtual bool MergePartialFromCodedStream(io::CodedInputStream* input) = 0;
-
 
   // Serialization ---------------------------------------------------
   // Methods for serializing in protocol buffer format.  Most of these
@@ -342,15 +367,15 @@ class LIBPROTOBUF_EXPORT MessageLite {
 
   // Legacy ByteSize() API.
   PROTOBUF_RUNTIME_DEPRECATED("Please use ByteSizeLong() instead")
-  int ByteSize() const {
+  int ByteSize() const
+  {
     return internal::ToIntSize(ByteSizeLong());
   }
 
   // Serializes the message without recomputing the size.  The message must not
   // have changed since the last call to ByteSize(), and the value returned by
   // ByteSize must be non-negative.  Otherwise the results are undefined.
-  virtual void SerializeWithCachedSizes(
-      io::CodedOutputStream* output) const;
+  virtual void SerializeWithCachedSizes(io::CodedOutputStream* output) const;
 
   // Functions below here are not part of the public interface.  It isn't
   // enforced, but they should be treated as private, and will be private
@@ -377,12 +402,14 @@ class LIBPROTOBUF_EXPORT MessageLite {
   // method.)
   virtual int GetCachedSize() const = 0;
 
-  virtual uint8* InternalSerializeWithCachedSizesToArray(bool deterministic,
-                                                         uint8* target) const;
+  virtual uint8* InternalSerializeWithCachedSizesToArray(bool deterministic, uint8* target) const;
 
- private:
+private:
   // TODO(gerbens) make this a pure abstract function
-  virtual const void* InternalGetTable() const { return NULL; }
+  virtual const void* InternalGetTable() const
+  {
+    return NULL;
+  }
 
   friend class internal::WireFormatLite;
   friend class Message;
@@ -390,13 +417,14 @@ class LIBPROTOBUF_EXPORT MessageLite {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageLite);
 };
 
-namespace internal {
-
+namespace internal
+{
 extern bool LIBPROTOBUF_EXPORT proto3_preserve_unknown_;
 
 // DO NOT USE: For migration only. Will be removed when Proto3 defaults to
 // preserve unknowns.
-inline bool GetProto3PreserveUnknownsDefault() {
+inline bool GetProto3PreserveUnknownsDefault()
+{
   return proto3_preserve_unknown_;
 }
 
@@ -404,7 +432,6 @@ inline bool GetProto3PreserveUnknownsDefault() {
 // preserve unknowns.
 void LIBPROTOBUF_EXPORT SetProto3PreserveUnknownsDefault(bool preserve);
 }  // namespace internal
-
 
 }  // namespace protobuf
 

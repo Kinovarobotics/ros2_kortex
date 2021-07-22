@@ -39,20 +39,23 @@
 #include <google/protobuf/unknown_field_set.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 
-namespace google {
-namespace protobuf {
+namespace google
+{
+namespace protobuf
+{
 class Arena;
-namespace internal {
-template <typename Derived, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
+namespace internal
+{
+template <typename Derived, typename Key, typename Value, WireFormatLite::FieldType kKeyFieldType,
           WireFormatLite::FieldType kValueFieldType, int default_enum_value>
 class MapField;
 }
-}
+}  // namespace protobuf
 
-namespace protobuf {
-namespace internal {
-
+namespace protobuf
+{
+namespace internal
+{
 // MapEntry is the returned google::protobuf::Message when calling AddMessage of
 // google::protobuf::Reflection. In order to let it work with generated message
 // reflection, its in-memory type is the same as generated message with the same
@@ -80,27 +83,27 @@ namespace internal {
 // while we need to explicitly specify the cpp type if proto type is
 // TYPE_MESSAGE to infer the in-memory type.  Moreover, default_enum_value is
 // used to initialize enum field in proto2.
-template <typename Derived, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
+template <typename Derived, typename Key, typename Value, WireFormatLite::FieldType kKeyFieldType,
           WireFormatLite::FieldType kValueFieldType, int default_enum_value>
-class MapEntry
-    : public MapEntryImpl<Derived, Message, Key, Value, kKeyFieldType,
-                          kValueFieldType, default_enum_value> {
- public:
-  MapEntry() : _internal_metadata_(NULL) {}
+class MapEntry : public MapEntryImpl<Derived, Message, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value>
+{
+public:
+  MapEntry() : _internal_metadata_(NULL)
+  {
+  }
   explicit MapEntry(Arena* arena)
-      : MapEntryImpl<Derived, Message, Key, Value, kKeyFieldType,
-                     kValueFieldType, default_enum_value>(arena),
-        _internal_metadata_(arena) {}
+    : MapEntryImpl<Derived, Message, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value>(arena)
+    , _internal_metadata_(arena)
+  {
+  }
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
 
   InternalMetadataWithArena _internal_metadata_;
 
- private:
+private:
   friend class ::google::protobuf::Arena;
-  template <typename C, typename K, typename V,
-            WireFormatLite::FieldType k_wire_type, WireFormatLite::FieldType,
+  template <typename C, typename K, typename V, WireFormatLite::FieldType k_wire_type, WireFormatLite::FieldType,
             int default_enum>
   friend class internal::MapField;
   friend class internal::GeneratedMessageReflection;
@@ -109,23 +112,21 @@ class MapEntry
 };
 
 // Specialization for the full runtime
-template <typename Derived, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
+template <typename Derived, typename Key, typename Value, WireFormatLite::FieldType kKeyFieldType,
           WireFormatLite::FieldType kValueFieldType, int default_enum_value>
-struct MapEntryHelper<MapEntry<Derived, Key, Value, kKeyFieldType,
-                               kValueFieldType, default_enum_value> >
-    : MapEntryHelper<MapEntryLite<Derived, Key, Value, kKeyFieldType,
-                                  kValueFieldType, default_enum_value> > {
+struct MapEntryHelper<MapEntry<Derived, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value> >
+  : MapEntryHelper<MapEntryLite<Derived, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value> >
+{
   explicit MapEntryHelper(const MapPair<Key, Value>& map_pair)
-      : MapEntryHelper<MapEntryLite<Derived, Key, Value, kKeyFieldType,
-                                    kValueFieldType, default_enum_value> >(
-            map_pair) {}
+    : MapEntryHelper<MapEntryLite<Derived, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value> >(map_pair)
+  {
+  }
 };
 
-template <typename Derived, typename K, typename V,
-          WireFormatLite::FieldType key, WireFormatLite::FieldType value,
+template <typename Derived, typename K, typename V, WireFormatLite::FieldType key, WireFormatLite::FieldType value,
           int default_enum>
-struct DeconstructMapEntry<MapEntry<Derived, K, V, key, value, default_enum> > {
+struct DeconstructMapEntry<MapEntry<Derived, K, V, key, value, default_enum> >
+{
   typedef K Key;
   typedef V Value;
   static const WireFormatLite::FieldType kKeyFieldType = key;

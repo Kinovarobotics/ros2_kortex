@@ -32,8 +32,7 @@ namespace k_api = Kinova::Api;
 
 namespace kortex2_driver
 {
-class KortexMultiInterfaceHardware
-: public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
+class KortexMultiInterfaceHardware : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
 {
 public:
   KortexMultiInterfaceHardware();
@@ -41,7 +40,7 @@ public:
   RCLCPP_SHARED_PTR_DEFINITIONS(KortexMultiInterfaceHardware);
 
   KORTEX2_DRIVER_PUBLIC
-  return_type configure(const hardware_interface::HardwareInfo & info) final;
+  return_type configure(const hardware_interface::HardwareInfo& info) final;
 
   KORTEX2_DRIVER_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() final;
@@ -50,9 +49,8 @@ public:
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() final;
 
   KORTEX2_DRIVER_PUBLIC
-  return_type prepare_command_mode_switch(
-    const std::vector<std::string> & start_interfaces,
-    const std::vector<std::string> & stop_interfaces) final;
+  return_type prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
+                                          const std::vector<std::string>& stop_interfaces) final;
 
   KORTEX2_DRIVER_PUBLIC
   return_type start() final;
@@ -76,8 +74,8 @@ private:
   k_api::Base::BaseClient base_;
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
 
-  k_api::BaseCyclic::Command  base_command_;
-  std::size_t  actuator_count_;
+  k_api::BaseCyclic::Command base_command_;
+  std::size_t actuator_count_;
 
   // Store the commands for the robot
   std::vector<double> hw_commands_positions_;

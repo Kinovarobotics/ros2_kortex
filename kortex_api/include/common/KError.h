@@ -12,31 +12,33 @@ namespace Kinova
 {
 namespace Api
 {
-    class KError
-    {
-    public:
-        KError(Kinova::Api::ErrorCodes errorCode, Kinova::Api::SubErrorCodes errorSubCode, std::string errorDescription);
-        KError(const HeaderInfo& header, Kinova::Api::ErrorCodes errorCode, Kinova::Api::SubErrorCodes errorSubCode, std::string errorDescription);
-        KError(const Error& error);
-        KError(const HeaderInfo& header, const Error& error);
+class KError
+{
+public:
+  KError(Kinova::Api::ErrorCodes errorCode, Kinova::Api::SubErrorCodes errorSubCode, std::string errorDescription);
+  KError(const HeaderInfo& header, Kinova::Api::ErrorCodes errorCode, Kinova::Api::SubErrorCodes errorSubCode,
+         std::string errorDescription);
+  KError(const Error& error);
+  KError(const HeaderInfo& header, const Error& error);
 
-        static Error fillError(Kinova::Api::ErrorCodes errorCode, Kinova::Api::SubErrorCodes errorSubCode, std::string errorDescription);
+  static Error fillError(Kinova::Api::ErrorCodes errorCode, Kinova::Api::SubErrorCodes errorSubCode,
+                         std::string errorDescription);
 
-        std::string toString() const;
+  std::string toString() const;
 
-        bool            isThereHeaderInfo();
-        HeaderInfo      getHeader();
-        Error           getError();
+  bool isThereHeaderInfo();
+  HeaderInfo getHeader();
+  Error getError();
 
-        KError& operator =(const KError& other) = default;
+  KError& operator=(const KError& other) = default;
 
-    private:
-        bool            m_isThereHeaderInfo;
-        HeaderInfo      m_header;
-        Error           m_error;
-    };
+private:
+  bool m_isThereHeaderInfo;
+  HeaderInfo m_header;
+  Error m_error;
+};
 
-} // namespace Api
-} // namespace Kinova
+}  // namespace Api
+}  // namespace Kinova
 
 #endif

@@ -33,7 +33,8 @@
 
 #include <stddef.h>
 
-struct FileToc {
+struct FileToc
+{
   const char* name;
   const char* data;
 };

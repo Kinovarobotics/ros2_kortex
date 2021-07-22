@@ -37,10 +37,12 @@
 // ===================================================================
 // emulates google3/base/logging.h
 
-namespace google {
-namespace protobuf {
-
-enum LogLevel {
+namespace google
+{
+namespace protobuf
+{
+enum LogLevel
+{
   LOGLEVEL_INFO,     // Informational.  This is never actually used by
                      // libprotobuf.
   LOGLEVEL_WARNING,  // Warns about issues that, although not technically a
@@ -62,16 +64,18 @@ enum LogLevel {
 };
 
 class StringPiece;
-namespace util {
+namespace util
+{
 class Status;
 }
 class uint128;
-namespace internal {
-
+namespace internal
+{
 class LogFinisher;
 
-class LIBPROTOBUF_EXPORT LogMessage {
- public:
+class LIBPROTOBUF_EXPORT LogMessage
+{
+public:
   LogMessage(LogLevel level, const char* filename, int line);
   ~LogMessage();
 
@@ -90,7 +94,7 @@ class LIBPROTOBUF_EXPORT LogMessage {
   LogMessage& operator<<(const ::google::protobuf::util::Status& status);
   LogMessage& operator<<(const uint128& value);
 
- private:
+private:
   friend class LogFinisher;
   void Finish();
 
@@ -102,15 +106,22 @@ class LIBPROTOBUF_EXPORT LogMessage {
 
 // Used to make the entire "LOG(BLAH) << etc." expression have a void return
 // type and print a newline after each message.
-class LIBPROTOBUF_EXPORT LogFinisher {
- public:
+class LIBPROTOBUF_EXPORT LogFinisher
+{
+public:
   void operator=(LogMessage& other);
 };
 
-template<typename T>
-bool IsOk(T status) { return status.ok(); }
-template<>
-inline bool IsOk(bool status) { return status; }
+template <typename T>
+bool IsOk(T status)
+{
+  return status.ok();
+}
+template <>
+inline bool IsOk(bool status)
+{
+  return status;
+}
 
 }  // namespace internal
 
@@ -141,55 +152,55 @@ inline bool IsOk(bool status) { return status; }
 #undef GOOGLE_DCHECK_GT
 #undef GOOGLE_DCHECK_GE
 
-#define GOOGLE_LOG(LEVEL)                                                 \
-  ::google::protobuf::internal::LogFinisher() =                           \
-    ::google::protobuf::internal::LogMessage(                             \
-      ::google::protobuf::LOGLEVEL_##LEVEL, __FILE__, __LINE__)
-#define GOOGLE_LOG_IF(LEVEL, CONDITION) \
-  !(CONDITION) ? (void)0 : GOOGLE_LOG(LEVEL)
+#define GOOGLE_LOG(LEVEL)                                                                                              \
+  ::google::protobuf::internal::LogFinisher() =                                                                        \
+      ::google::protobuf::internal::LogMessage(::google::protobuf::LOGLEVEL_##LEVEL, __FILE__, __LINE__)
+#define GOOGLE_LOG_IF(LEVEL, CONDITION) !(CONDITION) ? (void)0 : GOOGLE_LOG(LEVEL)
 
-#define GOOGLE_CHECK(EXPRESSION) \
-  GOOGLE_LOG_IF(FATAL, !(EXPRESSION)) << "CHECK failed: " #EXPRESSION ": "
+#define GOOGLE_CHECK(EXPRESSION) GOOGLE_LOG_IF(FATAL, !(EXPRESSION)) << "CHECK failed: " #EXPRESSION ": "
 #define GOOGLE_CHECK_OK(A) GOOGLE_CHECK(::google::protobuf::internal::IsOk(A))
 #define GOOGLE_CHECK_EQ(A, B) GOOGLE_CHECK((A) == (B))
 #define GOOGLE_CHECK_NE(A, B) GOOGLE_CHECK((A) != (B))
-#define GOOGLE_CHECK_LT(A, B) GOOGLE_CHECK((A) <  (B))
+#define GOOGLE_CHECK_LT(A, B) GOOGLE_CHECK((A) < (B))
 #define GOOGLE_CHECK_LE(A, B) GOOGLE_CHECK((A) <= (B))
-#define GOOGLE_CHECK_GT(A, B) GOOGLE_CHECK((A) >  (B))
+#define GOOGLE_CHECK_GT(A, B) GOOGLE_CHECK((A) > (B))
 #define GOOGLE_CHECK_GE(A, B) GOOGLE_CHECK((A) >= (B))
 
-namespace internal {
-template<typename T>
-T* CheckNotNull(const char* /* file */, int /* line */,
-                const char* name, T* val) {
-  if (val == NULL) {
+namespace internal
+{
+template <typename T>
+T* CheckNotNull(const char* /* file */, int /* line */, const char* name, T* val)
+{
+  if (val == NULL)
+  {
     GOOGLE_LOG(FATAL) << name;
   }
   return val;
 }
 }  // namespace internal
-#define GOOGLE_CHECK_NOTNULL(A) \
-  ::google::protobuf::internal::CheckNotNull(\
-      __FILE__, __LINE__, "'" #A "' must not be NULL", (A))
+#define GOOGLE_CHECK_NOTNULL(A)                                                                                        \
+  ::google::protobuf::internal::CheckNotNull(__FILE__, __LINE__, "'" #A "' must not be NULL", (A))
 
 #ifdef NDEBUG
 
 #define GOOGLE_DLOG(LEVEL) GOOGLE_LOG_IF(LEVEL, false)
 
-#define GOOGLE_DCHECK(EXPRESSION) while(false) GOOGLE_CHECK(EXPRESSION)
+#define GOOGLE_DCHECK(EXPRESSION)                                                                                      \
+  while (false)                                                                                                        \
+  GOOGLE_CHECK(EXPRESSION)
 #define GOOGLE_DCHECK_OK(E) GOOGLE_DCHECK(::google::protobuf::internal::IsOk(E))
 #define GOOGLE_DCHECK_EQ(A, B) GOOGLE_DCHECK((A) == (B))
 #define GOOGLE_DCHECK_NE(A, B) GOOGLE_DCHECK((A) != (B))
-#define GOOGLE_DCHECK_LT(A, B) GOOGLE_DCHECK((A) <  (B))
+#define GOOGLE_DCHECK_LT(A, B) GOOGLE_DCHECK((A) < (B))
 #define GOOGLE_DCHECK_LE(A, B) GOOGLE_DCHECK((A) <= (B))
-#define GOOGLE_DCHECK_GT(A, B) GOOGLE_DCHECK((A) >  (B))
+#define GOOGLE_DCHECK_GT(A, B) GOOGLE_DCHECK((A) > (B))
 #define GOOGLE_DCHECK_GE(A, B) GOOGLE_DCHECK((A) >= (B))
 
 #else  // NDEBUG
 
 #define GOOGLE_DLOG GOOGLE_LOG
 
-#define GOOGLE_DCHECK    GOOGLE_CHECK
+#define GOOGLE_DCHECK GOOGLE_CHECK
 #define GOOGLE_DCHECK_OK GOOGLE_CHECK_OK
 #define GOOGLE_DCHECK_EQ GOOGLE_CHECK_EQ
 #define GOOGLE_DCHECK_NE GOOGLE_CHECK_NE
@@ -200,8 +211,7 @@ T* CheckNotNull(const char* /* file */, int /* line */,
 
 #endif  // !NDEBUG
 
-typedef void LogHandler(LogLevel level, const char* filename, int line,
-                        const std::string& message);
+typedef void LogHandler(LogLevel level, const char* filename, int line, const std::string& message);
 
 // The protobuf library sometimes writes warning and error messages to
 // stderr.  These messages are primarily useful for developers, but may
@@ -225,8 +235,9 @@ LIBPROTOBUF_EXPORT LogHandler* SetLogHandler(LogHandler* new_func);
 // accidentally suppress log messages occurring in another thread, but
 // since messages are generally for debugging purposes only, this isn't
 // a big deal.  If you want to intercept log messages, use SetLogHandler().
-class LIBPROTOBUF_EXPORT LogSilencer {
- public:
+class LIBPROTOBUF_EXPORT LogSilencer
+{
+public:
   LogSilencer();
   ~LogSilencer();
 };

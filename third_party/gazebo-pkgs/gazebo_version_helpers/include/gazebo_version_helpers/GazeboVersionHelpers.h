@@ -5,7 +5,6 @@
 
 namespace gazebo
 {
-
 // typedefs
 #if GAZEBO_MAJOR_VERSION >= 8
 namespace gz_math = ignition::math;
@@ -27,120 +26,113 @@ typedef gz_math::Matrix3 GzMatrix3;
 // //////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-GzPose3 GetWorldPose(const gazebo::physics::LinkPtr &link);
+GzPose3 GetWorldPose(const gazebo::physics::LinkPtr& link);
 
 ///////////////////////////////////////////////////////////////////////////////
-GzVector3 GetWorldVelocity(const gazebo::physics::LinkPtr &link);
+GzVector3 GetWorldVelocity(const gazebo::physics::LinkPtr& link);
 
 ///////////////////////////////////////////////////////////////////////////////
 GzMatrix4 GetIdentity();
 
 ///////////////////////////////////////////////////////////////////////////////
-GzMatrix4 GetMatrix(const GzPose3 &pose);
+GzMatrix4 GetMatrix(const GzPose3& pose);
 
 ///////////////////////////////////////////////////////////////////////////////
-GzMatrix4 GetMatrix(const GzVector3 &pos);
+GzMatrix4 GetMatrix(const GzVector3& pos);
 
 ///////////////////////////////////////////////////////////////////////////////
-double GetLength(const GzVector3 &v);
+double GetLength(const GzVector3& v);
 
 ///////////////////////////////////////////////////////////////////////////////
 GzVector3 GetVector(const double x, const double y, const double z);
 
 ///////////////////////////////////////////////////////////////////////////////
-void SetX(GzVector3 &v, const double val);
-void SetY(GzVector3 &v, const double val);
-void SetZ(GzVector3 &v, const double val);
-double GetX(const GzVector3 &v);
-double GetY(const GzVector3 &v);
-double GetZ(const GzVector3 &v);
-
-
-///////////////////////////////////////////////////////////////////////////////
-void SetX(GzQuaternion &q, const double val);
-void SetY(GzQuaternion &q, const double val);
-void SetZ(GzQuaternion &q, const double val);
-void SetW(GzQuaternion &q, const double val);
-double GetX(const GzQuaternion &q);
-double GetY(const GzQuaternion &q);
-double GetZ(const GzQuaternion &q);
-double GetW(const GzQuaternion &q);
+void SetX(GzVector3& v, const double val);
+void SetY(GzVector3& v, const double val);
+void SetZ(GzVector3& v, const double val);
+double GetX(const GzVector3& v);
+double GetY(const GzVector3& v);
+double GetZ(const GzVector3& v);
 
 ///////////////////////////////////////////////////////////////////////////////
-GzVector3 GetPos(const GzPose3 &pose);
-///////////////////////////////////////////////////////////////////////////////
-GzVector3 GetPos(const GzMatrix4 &mat);
+void SetX(GzQuaternion& q, const double val);
+void SetY(GzQuaternion& q, const double val);
+void SetZ(GzQuaternion& q, const double val);
+void SetW(GzQuaternion& q, const double val);
+double GetX(const GzQuaternion& q);
+double GetY(const GzQuaternion& q);
+double GetZ(const GzQuaternion& q);
+double GetW(const GzQuaternion& q);
 
 ///////////////////////////////////////////////////////////////////////////////
-GzQuaternion GetRot(const GzPose3 &pose);
+GzVector3 GetPos(const GzPose3& pose);
 ///////////////////////////////////////////////////////////////////////////////
-GzQuaternion GetRot(const GzMatrix4 &mat);
+GzVector3 GetPos(const GzMatrix4& mat);
 
 ///////////////////////////////////////////////////////////////////////////////
-gazebo::physics::PhysicsEnginePtr GetPhysics(
-  const gazebo::physics::WorldPtr &world);
-
+GzQuaternion GetRot(const GzPose3& pose);
+///////////////////////////////////////////////////////////////////////////////
+GzQuaternion GetRot(const GzMatrix4& mat);
 
 ///////////////////////////////////////////////////////////////////////////////
-gazebo::physics::EntityPtr GetEntityByName(
-  const gazebo::physics::WorldPtr &world, const std::string &name);
+gazebo::physics::PhysicsEnginePtr GetPhysics(const gazebo::physics::WorldPtr& world);
 
 ///////////////////////////////////////////////////////////////////////////////
-gazebo::physics::ModelPtr GetModelByName(
-  const gazebo::physics::WorldPtr &world, const std::string &name);
+gazebo::physics::EntityPtr GetEntityByName(const gazebo::physics::WorldPtr& world, const std::string& name);
 
 ///////////////////////////////////////////////////////////////////////////////
-gazebo::physics::Model_V GetModels(const gazebo::physics::WorldPtr &world);
+gazebo::physics::ModelPtr GetModelByName(const gazebo::physics::WorldPtr& world, const std::string& name);
 
 ///////////////////////////////////////////////////////////////////////////////
-template<typename T>
+gazebo::physics::Model_V GetModels(const gazebo::physics::WorldPtr& world);
+
+///////////////////////////////////////////////////////////////////////////////
+template <typename T>
 GzVector3 GetSize3(const T& t)
 {
 #if GAZEBO_MAJOR_VERSION >= 8
-    return t.Size();
+  return t.Size();
 #else
-    return t.GetSize();
+  return t.GetSize();
 #endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-template<typename T>
+template <typename T>
 std::string GetName(const T& t)
 {
 #if GAZEBO_MAJOR_VERSION >= 8
-    return t.Name();
+  return t.Name();
 #else
-    return t.GetName();
+  return t.GetName();
 #endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-template<typename T>
-gz_math::Box GetBoundingBox(const T &t)
+template <typename T>
+gz_math::Box GetBoundingBox(const T& t)
 {
 #if GAZEBO_MAJOR_VERSION >= 8
-    return t.BoundingBox();
+  return t.BoundingBox();
 #else
-    return t.GetBoundingBox();
+  return t.GetBoundingBox();
 #endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-GzVector3 GetBoundingBoxDimensions(const gz_math::Box &box);
+GzVector3 GetBoundingBoxDimensions(const gz_math::Box& box);
 
 ///////////////////////////////////////////////////////////////////////////////
-template<typename T>
-GzPose3 GetRelativePose(const T &t)
+template <typename T>
+GzPose3 GetRelativePose(const T& t)
 {
 #if GAZEBO_MAJOR_VERSION >= 8
-    return t.RelativePose();
+  return t.RelativePose();
 #else
-    return t.GetRelativePose();
+  return t.GetRelativePose();
 #endif
 }
 
-
-
-}  // namespace
+}  // namespace gazebo
 
 #endif  //  GAZEBO_VERSIONHELPERS_H

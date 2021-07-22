@@ -35,71 +35,100 @@
 #include <google/protobuf/map_entry_lite.h>
 #include <google/protobuf/wire_format_lite.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
-
+namespace google
+{
+namespace protobuf
+{
+namespace internal
+{
 // This class provides access to map field using generated api. It is used for
 // internal generated message implentation only. Users should never use this
 // directly.
-template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType key_wire_type,
+template <typename Derived, typename Key, typename T, WireFormatLite::FieldType key_wire_type,
           WireFormatLite::FieldType value_wire_type, int default_enum_value = 0>
-class MapFieldLite {
+class MapFieldLite
+{
   // Define message type for internal repeated field.
   typedef Derived EntryType;
 
- public:
+public:
   typedef Map<Key, T> MapType;
   typedef EntryType EntryTypeTrait;
 
-  MapFieldLite() : arena_(NULL) { SetDefaultEnumValue(); }
+  MapFieldLite() : arena_(NULL)
+  {
+    SetDefaultEnumValue();
+  }
 
-  explicit MapFieldLite(Arena* arena) : arena_(arena), map_(arena) {
+  explicit MapFieldLite(Arena* arena) : arena_(arena), map_(arena)
+  {
     SetDefaultEnumValue();
   }
 
   // Accessors
-  const Map<Key, T>& GetMap() const { return map_; }
-  Map<Key, T>* MutableMap() { return &map_; }
+  const Map<Key, T>& GetMap() const
+  {
+    return map_;
+  }
+  Map<Key, T>* MutableMap()
+  {
+    return &map_;
+  }
 
   // Convenient methods for generated message implementation.
-  int size() const { return static_cast<int>(map_.size()); }
-  void Clear() { return map_.clear(); }
-  void MergeFrom(const MapFieldLite& other) {
-    for (typename Map<Key, T>::const_iterator it = other.map_.begin();
-         it != other.map_.end(); ++it) {
+  int size() const
+  {
+    return static_cast<int>(map_.size());
+  }
+  void Clear()
+  {
+    return map_.clear();
+  }
+  void MergeFrom(const MapFieldLite& other)
+  {
+    for (typename Map<Key, T>::const_iterator it = other.map_.begin(); it != other.map_.end(); ++it)
+    {
       map_[it->first] = it->second;
     }
   }
-  void Swap(MapFieldLite* other) { map_.swap(other->map_); }
+  void Swap(MapFieldLite* other)
+  {
+    map_.swap(other->map_);
+  }
 
   // Set default enum value only for proto2 map field whose value is enum type.
-  void SetDefaultEnumValue() {
+  void SetDefaultEnumValue()
+  {
     MutableMap()->SetDefaultEnumValue(default_enum_value);
   }
 
   // Used in the implementation of parsing. Caller should take the ownership iff
   // arena_ is NULL.
-  EntryType* NewEntry() const {
-    if (arena_ == NULL) {
+  EntryType* NewEntry() const
+  {
+    if (arena_ == NULL)
+    {
       return new EntryType();
-    } else {
+    }
+    else
+    {
       return Arena::CreateMessage<EntryType>(arena_);
     }
   }
   // Used in the implementation of serializing enum value type. Caller should
   // take the ownership iff arena_ is NULL.
-  EntryType* NewEnumEntryWrapper(const Key& key, const T t) const {
+  EntryType* NewEnumEntryWrapper(const Key& key, const T t) const
+  {
     return EntryType::EnumWrap(key, t, arena_);
   }
   // Used in the implementation of serializing other value types. Caller should
   // take the ownership iff arena_ is NULL.
-  EntryType* NewEntryWrapper(const Key& key, const T& t) const {
+  EntryType* NewEntryWrapper(const Key& key, const T& t) const
+  {
     return EntryType::Wrap(key, t, arena_);
   }
 
- private:
+private:
   typedef void DestructorSkippable_;
 
   Arena* arena_;
@@ -113,26 +142,27 @@ class MapFieldLite {
 // protobuf compiler from ever having to emit loops in IsInitialized() methods.
 // We want the C++ compiler to inline this or not as it sees fit.
 template <typename Key, typename T>
-bool AllAreInitialized(const Map<Key, T>& t) {
-  for (typename Map<Key, T>::const_iterator it = t.begin(); it != t.end();
-       ++it) {
-    if (!it->second.IsInitialized()) return false;
+bool AllAreInitialized(const Map<Key, T>& t)
+{
+  for (typename Map<Key, T>::const_iterator it = t.begin(); it != t.end(); ++it)
+  {
+    if (!it->second.IsInitialized())
+      return false;
   }
   return true;
 }
 
 template <typename MEntry>
-struct MapEntryToMapField : MapEntryToMapField<typename MEntry::SuperType> {};
+struct MapEntryToMapField : MapEntryToMapField<typename MEntry::SuperType>
+{
+};
 
-template <typename T, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
+template <typename T, typename Key, typename Value, WireFormatLite::FieldType kKeyFieldType,
           WireFormatLite::FieldType kValueFieldType, int default_enum_value>
-struct MapEntryToMapField<MapEntryLite<T, Key, Value, kKeyFieldType,
-                                       kValueFieldType, default_enum_value> > {
-  typedef MapFieldLite<MapEntryLite<T, Key, Value, kKeyFieldType,
-                                    kValueFieldType, default_enum_value>,
-                       Key, Value, kKeyFieldType, kValueFieldType,
-                       default_enum_value>
+struct MapEntryToMapField<MapEntryLite<T, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value> >
+{
+  typedef MapFieldLite<MapEntryLite<T, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value>, Key, Value,
+                       kKeyFieldType, kValueFieldType, default_enum_value>
       MapFieldType;
 };
 

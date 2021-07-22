@@ -36,16 +36,18 @@
 #include <string>
 
 #include <google/protobuf/stubs/common.h>
-namespace google {
-namespace protobuf {
+namespace google
+{
+namespace protobuf
+{
 class DescriptorPool;
-namespace util {
+namespace util
+{
 class TypeResolver;
 
 // Creates a TypeResolver that serves type information in the given descriptor
 // pool. Caller takes ownership of the returned TypeResolver.
-LIBPROTOBUF_EXPORT TypeResolver* NewTypeResolverForDescriptorPool(
-    const string& url_prefix, const DescriptorPool* pool);
+LIBPROTOBUF_EXPORT TypeResolver* NewTypeResolverForDescriptorPool(const string& url_prefix, const DescriptorPool* pool);
 
 }  // namespace util
 }  // namespace protobuf

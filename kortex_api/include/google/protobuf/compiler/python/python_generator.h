@@ -41,9 +41,10 @@
 #include <google/protobuf/stubs/mutex.h>
 #include <google/protobuf/stubs/common.h>
 
-namespace google {
-namespace protobuf {
-
+namespace google
+{
+namespace protobuf
+{
 class Descriptor;
 class EnumDescriptor;
 class EnumValueDescriptor;
@@ -51,27 +52,30 @@ class FieldDescriptor;
 class OneofDescriptor;
 class ServiceDescriptor;
 
-namespace io { class Printer; }
+namespace io
+{
+class Printer;
+}
 
-namespace compiler {
-namespace python {
-
+namespace compiler
+{
+namespace python
+{
 // CodeGenerator implementation for generated Python protocol buffer classes.
 // If you create your own protocol compiler binary and you want it to support
 // Python output, you can do so by registering an instance of this
 // CodeGenerator with the CommandLineInterface in your main() function.
-class LIBPROTOC_EXPORT Generator : public CodeGenerator {
- public:
+class LIBPROTOC_EXPORT Generator : public CodeGenerator
+{
+public:
   Generator();
   virtual ~Generator();
 
   // CodeGenerator methods.
-  virtual bool Generate(const FileDescriptor* file,
-                        const string& parameter,
-                        GeneratorContext* generator_context,
+  virtual bool Generate(const FileDescriptor* file, const string& parameter, GeneratorContext* generator_context,
                         string* error) const;
 
- private:
+private:
   void PrintImports() const;
   void PrintFileDescriptor() const;
   void PrintTopLevelEnums() const;
@@ -81,14 +85,10 @@ class LIBPROTOC_EXPORT Generator : public CodeGenerator {
 
   void PrintTopLevelExtensions() const;
 
-  void PrintFieldDescriptor(
-      const FieldDescriptor& field, bool is_extension) const;
-  void PrintFieldDescriptorsInDescriptor(
-      const Descriptor& message_descriptor,
-      bool is_extension,
-      const string& list_variable_name,
-      int (Descriptor::*CountFn)() const,
-      const FieldDescriptor* (Descriptor::*GetterFn)(int) const) const;
+  void PrintFieldDescriptor(const FieldDescriptor& field, bool is_extension) const;
+  void PrintFieldDescriptorsInDescriptor(const Descriptor& message_descriptor, bool is_extension,
+                                         const string& list_variable_name, int (Descriptor::*CountFn)() const,
+                                         const FieldDescriptor* (Descriptor::*GetterFn)(int) const) const;
   void PrintFieldsInDescriptor(const Descriptor& message_descriptor) const;
   void PrintExtensionsInDescriptor(const Descriptor& message_descriptor) const;
   void PrintMessageDescriptors() const;
@@ -96,34 +96,25 @@ class LIBPROTOC_EXPORT Generator : public CodeGenerator {
   void PrintNestedDescriptors(const Descriptor& containing_descriptor) const;
 
   void PrintMessages() const;
-  void PrintMessage(const Descriptor& message_descriptor, const string& prefix,
-                    std::vector<string>* to_register) const;
-  void PrintNestedMessages(const Descriptor& containing_descriptor,
-                           const string& prefix,
+  void PrintMessage(const Descriptor& message_descriptor, const string& prefix, std::vector<string>* to_register) const;
+  void PrintNestedMessages(const Descriptor& containing_descriptor, const string& prefix,
                            std::vector<string>* to_register) const;
 
   void FixForeignFieldsInDescriptors() const;
-  void FixForeignFieldsInDescriptor(
-      const Descriptor& descriptor,
-      const Descriptor* containing_descriptor) const;
-  void FixForeignFieldsInField(const Descriptor* containing_type,
-                               const FieldDescriptor& field,
+  void FixForeignFieldsInDescriptor(const Descriptor& descriptor, const Descriptor* containing_descriptor) const;
+  void FixForeignFieldsInField(const Descriptor* containing_type, const FieldDescriptor& field,
                                const string& python_dict_name) const;
   void AddMessageToFileDescriptor(const Descriptor& descriptor) const;
   void AddEnumToFileDescriptor(const EnumDescriptor& descriptor) const;
   void AddExtensionToFileDescriptor(const FieldDescriptor& descriptor) const;
   void AddServiceToFileDescriptor(const ServiceDescriptor& descriptor) const;
-  string FieldReferencingExpression(const Descriptor* containing_type,
-                                    const FieldDescriptor& field,
+  string FieldReferencingExpression(const Descriptor* containing_type, const FieldDescriptor& field,
                                     const string& python_dict_name) const;
   template <typename DescriptorT>
-  void FixContainingTypeInDescriptor(
-      const DescriptorT& descriptor,
-      const Descriptor* containing_descriptor) const;
+  void FixContainingTypeInDescriptor(const DescriptorT& descriptor, const Descriptor* containing_descriptor) const;
 
   void FixForeignFieldsInExtensions() const;
-  void FixForeignFieldsInExtension(
-      const FieldDescriptor& extension_field) const;
+  void FixForeignFieldsInExtension(const FieldDescriptor& extension_field) const;
   void FixForeignFieldsInNestedExtensions(const Descriptor& descriptor) const;
 
   void PrintServices() const;
@@ -131,23 +122,19 @@ class LIBPROTOC_EXPORT Generator : public CodeGenerator {
   void PrintServiceDescriptor(const ServiceDescriptor& descriptor) const;
   void PrintServiceClass(const ServiceDescriptor& descriptor) const;
   void PrintServiceStub(const ServiceDescriptor& descriptor) const;
-  void PrintDescriptorKeyAndModuleName(
-      const ServiceDescriptor& descriptor) const;
+  void PrintDescriptorKeyAndModuleName(const ServiceDescriptor& descriptor) const;
 
   void PrintEnumValueDescriptor(const EnumValueDescriptor& descriptor) const;
-  string OptionsValue(const string& class_name,
-                      const string& serialized_options) const;
+  string OptionsValue(const string& class_name, const string& serialized_options) const;
   bool GeneratingDescriptorProto() const;
 
   template <typename DescriptorT>
   string ModuleLevelDescriptorName(const DescriptorT& descriptor) const;
   string ModuleLevelMessageName(const Descriptor& descriptor) const;
-  string ModuleLevelServiceDescriptorName(
-      const ServiceDescriptor& descriptor) const;
+  string ModuleLevelServiceDescriptorName(const ServiceDescriptor& descriptor) const;
 
   template <typename DescriptorT, typename DescriptorProtoT>
-  void PrintSerializedPbInterval(
-      const DescriptorT& descriptor, DescriptorProtoT& proto) const;
+  void PrintSerializedPbInterval(const DescriptorT& descriptor, DescriptorProtoT& proto) const;
 
   void FixAllDescriptorOptions() const;
   void FixOptionsForField(const FieldDescriptor& field) const;
@@ -155,8 +142,7 @@ class LIBPROTOC_EXPORT Generator : public CodeGenerator {
   void FixOptionsForEnum(const EnumDescriptor& descriptor) const;
   void FixOptionsForMessage(const Descriptor& descriptor) const;
 
-  void CopyPublicDependenciesAliases(
-      const string& copy_from, const FileDescriptor* file) const;
+  void CopyPublicDependenciesAliases(const string& copy_from, const FileDescriptor* file) const;
 
   // Very coarse-grained lock to ensure that Generate() is reentrant.
   // Guards file_, printer_ and file_descriptor_serialized_.

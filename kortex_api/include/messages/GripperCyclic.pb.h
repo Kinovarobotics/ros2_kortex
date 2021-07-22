@@ -26,15 +26,17 @@
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/extension_set.h>   // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
-#include "Common.pb.h"  // IWYU pragma: export
+#include "Common.pb.h"                // IWYU pragma: export
 #include "GripperCyclicMessage.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
-namespace protobuf_GripperCyclic_2eproto {
+namespace protobuf_GripperCyclic_2eproto
+{
 // Internal implementation detail -- do not use these members.
-struct TableStruct {
+struct TableStruct
+{
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
   static const ::google::protobuf::internal::ParseTable schema[1];
@@ -43,20 +45,27 @@ struct TableStruct {
   static const ::google::protobuf::uint32 offsets[];
 };
 void AddDescriptors();
-inline void InitDefaults() {
+inline void InitDefaults()
+{
 }
 }  // namespace protobuf_GripperCyclic_2eproto
-namespace Kinova {
-namespace Api {
-namespace GripperCyclic {
+namespace Kinova
+{
+namespace Api
+{
+namespace GripperCyclic
+{
 }  // namespace GripperCyclic
 }  // namespace Api
 }  // namespace Kinova
-namespace Kinova {
-namespace Api {
-namespace GripperCyclic {
-
-enum ServiceVersion {
+namespace Kinova
+{
+namespace Api
+{
+namespace GripperCyclic
+{
+enum ServiceVersion
+{
   RESERVED_0 = 0,
   CURRENT_VERSION = 1,
   ServiceVersion_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
@@ -68,29 +77,26 @@ const ServiceVersion ServiceVersion_MAX = CURRENT_VERSION;
 const int ServiceVersion_ARRAYSIZE = ServiceVersion_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServiceVersion_descriptor();
-inline const ::std::string& ServiceVersion_Name(ServiceVersion value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ServiceVersion_descriptor(), value);
+inline const ::std::string& ServiceVersion_Name(ServiceVersion value)
+{
+  return ::google::protobuf::internal::NameOfEnum(ServiceVersion_descriptor(), value);
 }
-inline bool ServiceVersion_Parse(
-    const ::std::string& name, ServiceVersion* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(
-    ServiceVersion_descriptor(), name, value);
+inline bool ServiceVersion_Parse(const ::std::string& name, ServiceVersion* value)
+{
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceVersion>(ServiceVersion_descriptor(), name, value);
 }
 // ===================================================================
 
-
 // ===================================================================
-
 
 // ===================================================================
 
 #ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 #ifdef __GNUC__
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
@@ -99,12 +105,17 @@ inline bool ServiceVersion_Parse(
 }  // namespace Api
 }  // namespace Kinova
 
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::Kinova::Api::GripperCyclic::ServiceVersion> : ::google::protobuf::internal::true_type {};
+namespace google
+{
+namespace protobuf
+{
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::GripperCyclic::ServiceVersion>() {
+struct is_proto_enum< ::Kinova::Api::GripperCyclic::ServiceVersion> : ::google::protobuf::internal::true_type
+{
+};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Kinova::Api::GripperCyclic::ServiceVersion>()
+{
   return ::Kinova::Api::GripperCyclic::ServiceVersion_descriptor();
 }
 

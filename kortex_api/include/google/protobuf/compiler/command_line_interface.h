@@ -46,19 +46,21 @@
 #include <set>
 #include <utility>
 
-namespace google {
-namespace protobuf {
+namespace google
+{
+namespace protobuf
+{
+class Descriptor;           // descriptor.h
+class DescriptorPool;       // descriptor.h
+class FileDescriptor;       // descriptor.h
+class FileDescriptorSet;    // descriptor.h
+class FileDescriptorProto;  // descriptor.pb.h
+template <typename T>
+class RepeatedPtrField;          // repeated_field.h
+class SimpleDescriptorDatabase;  // descriptor_database.h
 
-class Descriptor;            // descriptor.h
-class DescriptorPool;        // descriptor.h
-class FileDescriptor;        // descriptor.h
-class FileDescriptorSet;     // descriptor.h
-class FileDescriptorProto;   // descriptor.pb.h
-template<typename T> class RepeatedPtrField;  // repeated_field.h
-class SimpleDescriptorDatabase;               // descriptor_database.h
-
-namespace compiler {
-
+namespace compiler
+{
 class CodeGenerator;     // code_generator.h
 class GeneratorContext;  // code_generator.h
 class DiskSourceTree;    // importer.h
@@ -101,8 +103,9 @@ class DiskSourceTree;    // importer.h
 // relative virtual path, the physical file path takes precendence.
 //
 // For a full description of the command-line syntax, invoke it with --help.
-class LIBPROTOC_EXPORT CommandLineInterface {
- public:
+class LIBPROTOC_EXPORT CommandLineInterface
+{
+public:
   static const char* const kPathSeparator;
 
   CommandLineInterface();
@@ -124,9 +127,7 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   //   protoc --foo_out=enable_bar:outdir
   // The text before the colon is passed to CodeGenerator::Generate() as the
   // "parameter".
-  void RegisterGenerator(const string& flag_name,
-                         CodeGenerator* generator,
-                         const string& help_text);
+  void RegisterGenerator(const string& flag_name, CodeGenerator* generator, const string& help_text);
 
   // Register a code generator for a language.
   // Besides flag_name you can specify another option_flag_name that could be
@@ -136,9 +137,7 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   // Then you could invoke the compiler with a command like:
   //   protoc --foo_out=enable_bar:outdir --foo_opt=enable_baz
   // This will pass "enable_bar,enable_baz" as the parameter to the generator.
-  void RegisterGenerator(const string& flag_name,
-                         const string& option_flag_name,
-                         CodeGenerator* generator,
+  void RegisterGenerator(const string& flag_name, const string& option_flag_name, CodeGenerator* generator,
                          const string& help_text);
 
   // Enables "plugins".  In this mode, if a command-line flag ends with "_out"
@@ -190,17 +189,19 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   // always try to find the .proto file relative to the current directory
   // first and if the file is not found, it will then treat the input path
   // as a virutal path.
-  void SetInputsAreProtoPathRelative(bool /* enable */) {}
+  void SetInputsAreProtoPathRelative(bool /* enable */)
+  {
+  }
 
   // Provides some text which will be printed when the --version flag is
   // used.  The version of libprotoc will also be printed on the next line
   // after this text.
-  void SetVersionInfo(const string& text) {
+  void SetVersionInfo(const string& text)
+  {
     version_info_ = text;
   }
 
-
- private:
+private:
   // -----------------------------------------------------------------
 
   class ErrorPrinter;
@@ -214,11 +215,11 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   // Remaps each file in input_files_ so that it is relative to one of the
   // directories in proto_path_.  Returns false if an error occurred.  This
   // is only used if inputs_are_proto_path_relative_ is false.
-  bool MakeInputsBeProtoPathRelative(
-    DiskSourceTree* source_tree);
+  bool MakeInputsBeProtoPathRelative(DiskSourceTree* source_tree);
 
   // Return status for ParseArguments() and InterpretArgument().
-  enum ParseArgumentStatus {
+  enum ParseArgumentStatus
+  {
     PARSE_ARGUMENT_DONE_AND_CONTINUE,
     PARSE_ARGUMENT_DONE_AND_EXIT,
     PARSE_ARGUMENT_FAIL
@@ -245,8 +246,7 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   bool ParseArgument(const char* arg, string* name, string* value);
 
   // Interprets arguments parsed with ParseArgument.
-  ParseArgumentStatus InterpretArgument(const string& name,
-                                        const string& value);
+  ParseArgumentStatus InterpretArgument(const string& name, const string& value);
 
   // Print the --help text to stderr.
   void PrintHelpText();
@@ -258,31 +258,24 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   bool PopulateSimpleDescriptorDatabase(SimpleDescriptorDatabase* database);
 
   // Parses input_files_ into parsed_files
-  bool ParseInputFiles(DescriptorPool* descriptor_pool,
-                       std::vector<const FileDescriptor*>* parsed_files);
+  bool ParseInputFiles(DescriptorPool* descriptor_pool, std::vector<const FileDescriptor*>* parsed_files);
 
   // Generate the given output file from the given input.
   struct OutputDirective;  // see below
-  bool GenerateOutput(const std::vector<const FileDescriptor*>& parsed_files,
-                      const OutputDirective& output_directive,
+  bool GenerateOutput(const std::vector<const FileDescriptor*>& parsed_files, const OutputDirective& output_directive,
                       GeneratorContext* generator_context);
-  bool GeneratePluginOutput(
-      const std::vector<const FileDescriptor*>& parsed_files,
-      const string& plugin_name, const string& parameter,
-      GeneratorContext* generator_context, string* error);
+  bool GeneratePluginOutput(const std::vector<const FileDescriptor*>& parsed_files, const string& plugin_name,
+                            const string& parameter, GeneratorContext* generator_context, string* error);
 
   // Implements --encode and --decode.
   bool EncodeOrDecode(const DescriptorPool* pool);
 
   // Implements the --descriptor_set_out option.
-  bool WriteDescriptorSet(
-      const std::vector<const FileDescriptor*>& parsed_files);
+  bool WriteDescriptorSet(const std::vector<const FileDescriptor*>& parsed_files);
 
   // Implements the --dependency_out option
-  bool GenerateDependencyManifestFile(
-      const std::vector<const FileDescriptor*>& parsed_files,
-      const GeneratorContextMap& output_directories,
-      DiskSourceTree* source_tree);
+  bool GenerateDependencyManifestFile(const std::vector<const FileDescriptor*>& parsed_files,
+                                      const GeneratorContextMap& output_directories, DiskSourceTree* source_tree);
 
   // Get all transitive dependencies of the given file (including the file
   // itself), adding them to the given list of FileDescriptorProtos.  The
@@ -293,12 +286,9 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   // true then include the source code information in the FileDescriptorProtos.
   // If include_json_name is true, populate the json_name field of
   // FieldDescriptorProto for all fields.
-  static void GetTransitiveDependencies(
-      const FileDescriptor* file,
-      bool include_json_name,
-      bool include_source_code_info,
-      std::set<const FileDescriptor*>* already_seen,
-      RepeatedPtrField<FileDescriptorProto>* output);
+  static void GetTransitiveDependencies(const FileDescriptor* file, bool include_json_name,
+                                        bool include_source_code_info, std::set<const FileDescriptor*>* already_seen,
+                                        RepeatedPtrField<FileDescriptorProto>* output);
 
   // Implements the --print_free_field_numbers. This function prints free field
   // numbers into stdout for the message and it's nested message types in
@@ -325,7 +315,8 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   string version_info_;
 
   // Registered generators.
-  struct GeneratorInfo {
+  struct GeneratorInfo
+  {
     string flag_name;
     string option_flag_name;
     CodeGenerator* generator;
@@ -351,7 +342,8 @@ class LIBPROTOC_EXPORT CommandLineInterface {
   std::map<string, string> plugins_;
 
   // Stuff parsed from command line.
-  enum Mode {
+  enum Mode
+  {
     MODE_COMPILE,  // Normal mode:  parse .proto files and compile them.
     MODE_ENCODE,   // --encode:  read text from stdin, write binary to stdout.
     MODE_DECODE,   // --decode:  read binary from stdin, write text to stdout.
@@ -360,23 +352,24 @@ class LIBPROTOC_EXPORT CommandLineInterface {
 
   Mode mode_;
 
-  enum PrintMode {
-    PRINT_NONE,               // Not in MODE_PRINT
-    PRINT_FREE_FIELDS,        // --print_free_fields
+  enum PrintMode
+  {
+    PRINT_NONE,         // Not in MODE_PRINT
+    PRINT_FREE_FIELDS,  // --print_free_fields
   };
 
   PrintMode print_mode_;
 
-  enum ErrorFormat {
-    ERROR_FORMAT_GCC,   // GCC error output format (default).
-    ERROR_FORMAT_MSVS   // Visual Studio output (--error_format=msvs).
+  enum ErrorFormat
+  {
+    ERROR_FORMAT_GCC,  // GCC error output format (default).
+    ERROR_FORMAT_MSVS  // Visual Studio output (--error_format=msvs).
   };
 
   ErrorFormat error_format_;
 
-  std::vector<std::pair<string, string> >
-      proto_path_;                   // Search path for proto files.
-  std::vector<string> input_files_;  // Names of the input proto files.
+  std::vector<std::pair<string, string> > proto_path_;  // Search path for proto files.
+  std::vector<string> input_files_;                     // Names of the input proto files.
 
   // Names of proto files which are allowed to be imported. Used by build
   // systems to enforce depend-on-what-you-import.
@@ -389,9 +382,10 @@ class LIBPROTOC_EXPORT CommandLineInterface {
 
   // output_directives_ lists all the files we are supposed to output and what
   // generator to use for each.
-  struct OutputDirective {
-    string name;                // E.g. "--foo_out"
-    CodeGenerator* generator;   // NULL for plugins
+  struct OutputDirective
+  {
+    string name;               // E.g. "--foo_out"
+    CodeGenerator* generator;  // NULL for plugins
     string parameter;
     string output_location;
   };

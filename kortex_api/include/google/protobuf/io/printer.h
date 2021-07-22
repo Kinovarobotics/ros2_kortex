@@ -42,42 +42,48 @@
 #include <vector>
 #include <google/protobuf/stubs/common.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
-
-class ZeroCopyOutputStream;     // zero_copy_stream.h
+namespace google
+{
+namespace protobuf
+{
+namespace io
+{
+class ZeroCopyOutputStream;  // zero_copy_stream.h
 
 // Records annotations about a Printer's output.
-class LIBPROTOBUF_EXPORT AnnotationCollector {
- public:
+class LIBPROTOBUF_EXPORT AnnotationCollector
+{
+public:
   // Records that the bytes in file_path beginning with begin_offset and ending
   // before end_offset are associated with the SourceCodeInfo-style path.
-  virtual void AddAnnotation(size_t begin_offset, size_t end_offset,
-                             const string& file_path,
+  virtual void AddAnnotation(size_t begin_offset, size_t end_offset, const string& file_path,
                              const std::vector<int>& path) = 0;
 
-  virtual ~AnnotationCollector() {}
+  virtual ~AnnotationCollector()
+  {
+  }
 };
 
 // Records annotations about a Printer's output to the given protocol buffer,
 // assuming that the buffer has an ::Annotation message exposing path,
 // source_file, begin and end fields.
 template <typename AnnotationProto>
-class AnnotationProtoCollector : public AnnotationCollector {
- public:
+class AnnotationProtoCollector : public AnnotationCollector
+{
+public:
   // annotation_proto is the protocol buffer to which new Annotations should be
   // added. It is not owned by the AnnotationProtoCollector.
-  explicit AnnotationProtoCollector(AnnotationProto* annotation_proto)
-      : annotation_proto_(annotation_proto) {}
+  explicit AnnotationProtoCollector(AnnotationProto* annotation_proto) : annotation_proto_(annotation_proto)
+  {
+  }
 
   // Override for AnnotationCollector::AddAnnotation.
-  virtual void AddAnnotation(size_t begin_offset, size_t end_offset,
-                             const string& file_path,
-                             const std::vector<int>& path) {
-    typename AnnotationProto::Annotation* annotation =
-        annotation_proto_->add_annotation();
-    for (int i = 0; i < path.size(); ++i) {
+  virtual void AddAnnotation(size_t begin_offset, size_t end_offset, const string& file_path,
+                             const std::vector<int>& path)
+  {
+    typename AnnotationProto::Annotation* annotation = annotation_proto_->add_annotation();
+    for (int i = 0; i < path.size(); ++i)
+    {
       annotation->add_path(path[i]);
     }
     annotation->set_source_file(file_path);
@@ -85,7 +91,7 @@ class AnnotationProtoCollector : public AnnotationCollector {
     annotation->set_end(end_offset);
   }
 
- private:
+private:
   // The protocol buffer to which new annotations should be added.
   AnnotationProto* const annotation_proto_;
 };
@@ -162,8 +168,9 @@ class AnnotationProtoCollector : public AnnotationCollector {
 // This code associates the span covering "call(bar,bar)" in the output with the
 // call_ descriptor.
 
-class LIBPROTOBUF_EXPORT Printer {
- public:
+class LIBPROTOBUF_EXPORT Printer
+{
+public:
   // Create a printer that writes text to the given output stream.  Use the
   // given character as the delimiter for variables.
   Printer(ZeroCopyOutputStream* output, char variable_delimiter);
@@ -172,15 +179,15 @@ class LIBPROTOBUF_EXPORT Printer {
   // given character as the delimiter for variables.  If annotation_collector
   // is not null, Printer will provide it with annotations about code written
   // to the stream.  annotation_collector is not owned by Printer.
-  Printer(ZeroCopyOutputStream* output, char variable_delimiter,
-          AnnotationCollector* annotation_collector);
+  Printer(ZeroCopyOutputStream* output, char variable_delimiter, AnnotationCollector* annotation_collector);
 
   ~Printer();
 
   // Link a subsitution variable emitted by the last call to Print to the object
   // described by descriptor.
   template <typename SomeDescriptor>
-  void Annotate(const char* varname, const SomeDescriptor* descriptor) {
+  void Annotate(const char* varname, const SomeDescriptor* descriptor)
+  {
     Annotate(varname, varname, descriptor);
   }
 
@@ -189,9 +196,10 @@ class LIBPROTOBUF_EXPORT Printer {
   // begins at begin_varname's value and ends after the last character of the
   // value substituted for end_varname.
   template <typename SomeDescriptor>
-  void Annotate(const char* begin_varname, const char* end_varname,
-                const SomeDescriptor* descriptor) {
-    if (annotation_collector_ == NULL) {
+  void Annotate(const char* begin_varname, const char* end_varname, const SomeDescriptor* descriptor)
+  {
+    if (annotation_collector_ == NULL)
+    {
       // Annotations aren't turned on for this Printer, so don't pay the cost
       // of building the location path.
       return;
@@ -203,7 +211,8 @@ class LIBPROTOBUF_EXPORT Printer {
 
   // Link a subsitution variable emitted by the last call to Print to the file
   // with path file_name.
-  void Annotate(const char* varname, const string& file_name) {
+  void Annotate(const char* varname, const string& file_name)
+  {
     Annotate(varname, varname, file_name);
   }
 
@@ -211,9 +220,10 @@ class LIBPROTOBUF_EXPORT Printer {
   // the last call to Print to the file with path file_name. The range begins
   // at begin_varname's value and ends after the last character of the value
   // substituted for end_varname.
-  void Annotate(const char* begin_varname, const char* end_varname,
-                const string& file_name) {
-    if (annotation_collector_ == NULL) {
+  void Annotate(const char* begin_varname, const char* end_varname, const string& file_name)
+  {
+    if (annotation_collector_ == NULL)
+    {
       // Annotations aren't turned on for this Printer.
       return;
     }
@@ -233,47 +243,31 @@ class LIBPROTOBUF_EXPORT Printer {
   // Like the first Print(), except the substitutions are given as parameters.
   void Print(const char* text, const char* variable, const string& value);
   // Like the first Print(), except the substitutions are given as parameters.
-  void Print(const char* text, const char* variable1, const string& value1,
-                               const char* variable2, const string& value2);
+  void Print(const char* text, const char* variable1, const string& value1, const char* variable2, const string& value2);
   // Like the first Print(), except the substitutions are given as parameters.
-  void Print(const char* text, const char* variable1, const string& value1,
-                               const char* variable2, const string& value2,
-                               const char* variable3, const string& value3);
+  void Print(const char* text, const char* variable1, const string& value1, const char* variable2, const string& value2,
+             const char* variable3, const string& value3);
   // Like the first Print(), except the substitutions are given as parameters.
-  void Print(const char* text, const char* variable1, const string& value1,
-                               const char* variable2, const string& value2,
-                               const char* variable3, const string& value3,
-                               const char* variable4, const string& value4);
+  void Print(const char* text, const char* variable1, const string& value1, const char* variable2, const string& value2,
+             const char* variable3, const string& value3, const char* variable4, const string& value4);
   // Like the first Print(), except the substitutions are given as parameters.
-  void Print(const char* text, const char* variable1, const string& value1,
-                               const char* variable2, const string& value2,
-                               const char* variable3, const string& value3,
-                               const char* variable4, const string& value4,
-                               const char* variable5, const string& value5);
+  void Print(const char* text, const char* variable1, const string& value1, const char* variable2, const string& value2,
+             const char* variable3, const string& value3, const char* variable4, const string& value4,
+             const char* variable5, const string& value5);
   // Like the first Print(), except the substitutions are given as parameters.
-  void Print(const char* text, const char* variable1, const string& value1,
-                               const char* variable2, const string& value2,
-                               const char* variable3, const string& value3,
-                               const char* variable4, const string& value4,
-                               const char* variable5, const string& value5,
-                               const char* variable6, const string& value6);
+  void Print(const char* text, const char* variable1, const string& value1, const char* variable2, const string& value2,
+             const char* variable3, const string& value3, const char* variable4, const string& value4,
+             const char* variable5, const string& value5, const char* variable6, const string& value6);
   // Like the first Print(), except the substitutions are given as parameters.
-  void Print(const char* text, const char* variable1, const string& value1,
-                               const char* variable2, const string& value2,
-                               const char* variable3, const string& value3,
-                               const char* variable4, const string& value4,
-                               const char* variable5, const string& value5,
-                               const char* variable6, const string& value6,
-                               const char* variable7, const string& value7);
+  void Print(const char* text, const char* variable1, const string& value1, const char* variable2, const string& value2,
+             const char* variable3, const string& value3, const char* variable4, const string& value4,
+             const char* variable5, const string& value5, const char* variable6, const string& value6,
+             const char* variable7, const string& value7);
   // Like the first Print(), except the substitutions are given as parameters.
-  void Print(const char* text, const char* variable1, const string& value1,
-                               const char* variable2, const string& value2,
-                               const char* variable3, const string& value3,
-                               const char* variable4, const string& value4,
-                               const char* variable5, const string& value5,
-                               const char* variable6, const string& value6,
-                               const char* variable7, const string& value7,
-                               const char* variable8, const string& value8);
+  void Print(const char* text, const char* variable1, const string& value1, const char* variable2, const string& value2,
+             const char* variable3, const string& value3, const char* variable4, const string& value4,
+             const char* variable5, const string& value5, const char* variable6, const string& value6,
+             const char* variable7, const string& value7, const char* variable8, const string& value8);
 
   // Indent text by two spaces.  After calling Indent(), two spaces will be
   // inserted at the beginning of each line of text.  Indent() may be called
@@ -299,17 +293,20 @@ class LIBPROTOBUF_EXPORT Printer {
   // True if any write to the underlying stream failed.  (We don't just
   // crash in this case because this is an I/O failure, not a programming
   // error.)
-  bool failed() const { return failed_; }
+  bool failed() const
+  {
+    return failed_;
+  }
 
- private:
+private:
   // Link the output range defined by the substitution variables as emitted by
   // the last call to Print to the object found at the SourceCodeInfo-style path
   // in a file with path file_path. The range begins at the start of
   // begin_varname's value and ends after the last character of the value
   // substituted for end_varname. Note that begin_varname and end_varname
   // may refer to the same variable.
-  void Annotate(const char* begin_varname, const char* end_varname,
-                const string& file_path, const std::vector<int>& path);
+  void Annotate(const char* begin_varname, const char* end_varname, const string& file_path,
+                const std::vector<int>& path);
 
   // Copy size worth of bytes from data to buffer_.
   void CopyToBuffer(const char* data, int size);
@@ -346,8 +343,7 @@ class LIBPROTOBUF_EXPORT Printer {
   // varname if varname was used once in the last call to Print. If varname
   // was not used, or if it was used multiple times, returns false (and
   // fails a debug assertion).
-  bool GetSubstitutionRange(const char* varname,
-                            std::pair<size_t, size_t>* range);
+  bool GetSubstitutionRange(const char* varname, std::pair<size_t, size_t>* range);
 
   // If non-null, annotation_collector_ is used to store annotations about
   // generated code.

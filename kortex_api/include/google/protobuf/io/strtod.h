@@ -35,10 +35,12 @@
 #ifndef GOOGLE_PROTOBUF_IO_STRTOD_H__
 #define GOOGLE_PROTOBUF_IO_STRTOD_H__
 
-namespace google {
-namespace protobuf {
-namespace io {
-
+namespace google
+{
+namespace protobuf
+{
+namespace io
+{
 // A locale-independent version of the standard strtod(), which always
 // uses a dot as the decimal separator.
 double NoLocaleStrtod(const char* str, char** endptr);

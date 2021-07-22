@@ -44,13 +44,14 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/unknown_field_set.h>
 
-
-namespace google {
-namespace protobuf {
+namespace google
+{
+namespace protobuf
+{
 class DynamicMessage;
 class MapKey;
-namespace internal {
-
+namespace internal
+{
 class ContendedMapCleanTest;
 class GeneratedMessageReflection;
 class MapFieldAccessor;
@@ -58,16 +59,14 @@ class MapFieldAccessor;
 // This class provides access to map field using reflection, which is the same
 // as those provided for RepeatedPtrField<Message>. It is used for internal
 // reflection implentation only. Users should never use this directly.
-class LIBPROTOBUF_EXPORT MapFieldBase {
- public:
-  MapFieldBase()
-      : arena_(NULL),
-        repeated_field_(NULL),
-        state_(STATE_MODIFIED_MAP) {}
-  explicit MapFieldBase(Arena* arena)
-      : arena_(arena),
-        repeated_field_(NULL),
-        state_(STATE_MODIFIED_MAP) {
+class LIBPROTOBUF_EXPORT MapFieldBase
+{
+public:
+  MapFieldBase() : arena_(NULL), repeated_field_(NULL), state_(STATE_MODIFIED_MAP)
+  {
+  }
+  explicit MapFieldBase(Arena* arena) : arena_(arena), repeated_field_(NULL), state_(STATE_MODIFIED_MAP)
+  {
     // Mutex's destructor needs to be called explicitly to release resources
     // acquired in its constructor.
     arena->OwnDestructor(&mutex_);
@@ -84,13 +83,11 @@ class LIBPROTOBUF_EXPORT MapFieldBase {
 
   // Pure virtual map APIs for Map Reflection.
   virtual bool ContainsMapKey(const MapKey& map_key) const = 0;
-  virtual bool InsertOrLookupMapValue(
-      const MapKey& map_key, MapValueRef* val) = 0;
+  virtual bool InsertOrLookupMapValue(const MapKey& map_key, MapValueRef* val) = 0;
   // Insures operations after won't get executed before calling this.
   bool IsMapValid() const;
   virtual bool DeleteMapValue(const MapKey& map_key) = 0;
-  virtual bool EqualIterator(const MapIterator& a,
-                             const MapIterator& b) const = 0;
+  virtual bool EqualIterator(const MapIterator& a, const MapIterator& b) const = 0;
   virtual void MapBegin(MapIterator* map_iter) const = 0;
   virtual void MapEnd(MapIterator* map_iter) const = 0;
   // Sync Map with repeated field and returns the size of map.
@@ -100,11 +97,12 @@ class LIBPROTOBUF_EXPORT MapFieldBase {
   // sizeof(*this)
   size_t SpaceUsedExcludingSelfLong() const;
 
-  int SpaceUsedExcludingSelf() const {
+  int SpaceUsedExcludingSelf() const
+  {
     return internal::ToIntSize(SpaceUsedExcludingSelfLong());
   }
 
- protected:
+protected:
   // Gets the size of space used by map field.
   virtual size_t SpaceUsedExcludingSelfNoLock() const;
 
@@ -116,7 +114,9 @@ class LIBPROTOBUF_EXPORT MapFieldBase {
   // Synchronizes the content in RepeatedPtrField to Map if there is any change
   // to RepeatedPtrField after last synchronization.
   void SyncMapWithRepeatedField() const;
-  virtual void SyncMapWithRepeatedFieldNoLock() const {}
+  virtual void SyncMapWithRepeatedFieldNoLock() const
+  {
+  }
 
   // Tells MapFieldBase that there is new change to Map.
   void SetMapDirty();
@@ -127,24 +127,25 @@ class LIBPROTOBUF_EXPORT MapFieldBase {
   // Provides derived class the access to repeated field.
   void* MutableRepeatedPtrField() const;
 
-  enum State {
+  enum State
+  {
     STATE_MODIFIED_MAP = 0,       // map has newly added data that has not been
                                   // synchronized to repeated field
     STATE_MODIFIED_REPEATED = 1,  // repeated field has newly added data that
                                   // has not been synchronized to map
-    CLEAN = 2,  // data in map and repeated field are same
+    CLEAN = 2,                    // data in map and repeated field are same
   };
 
   Arena* arena_;
   mutable RepeatedPtrField<Message>* repeated_field_;
 
-  mutable Mutex mutex_;  // The thread to synchronize map and repeated field
-                         // needs to get lock first;
+  mutable Mutex mutex_;              // The thread to synchronize map and repeated field
+                                     // needs to get lock first;
   mutable volatile Atomic32 state_;  // 0: STATE_MODIFIED_MAP
                                      // 1: STATE_MODIFIED_REPEATED
                                      // 2: CLEAN
 
- private:
+private:
   friend class ContendedMapCleanTest;
   friend class GeneratedMessageReflection;
   friend class MapFieldAccessor;
@@ -164,8 +165,7 @@ class LIBPROTOBUF_EXPORT MapFieldBase {
 
   // Copy the map<...>::iterator from other_iterator to
   // this_iterator.
-  virtual void CopyIterator(MapIterator* this_iterator,
-                            const MapIterator& other_iterator) const = 0;
+  virtual void CopyIterator(MapIterator* this_iterator, const MapIterator& other_iterator) const = 0;
 
   // IncreaseIterator() is called by operator++() of MapIterator only.
   // It implements the ++ operator of MapIterator.
@@ -175,12 +175,19 @@ class LIBPROTOBUF_EXPORT MapFieldBase {
 
 // This class provides common Map Reflection implementations for generated
 // message and dynamic message.
-template<typename Key, typename T>
-class TypeDefinedMapFieldBase : public MapFieldBase {
- public:
-  TypeDefinedMapFieldBase() {}
-  explicit TypeDefinedMapFieldBase(Arena* arena) : MapFieldBase(arena) {}
-  ~TypeDefinedMapFieldBase() {}
+template <typename Key, typename T>
+class TypeDefinedMapFieldBase : public MapFieldBase
+{
+public:
+  TypeDefinedMapFieldBase()
+  {
+  }
+  explicit TypeDefinedMapFieldBase(Arena* arena) : MapFieldBase(arena)
+  {
+  }
+  ~TypeDefinedMapFieldBase()
+  {
+  }
   void MapBegin(MapIterator* map_iter) const;
   void MapEnd(MapIterator* map_iter) const;
   bool EqualIterator(const MapIterator& a, const MapIterator& b) const;
@@ -188,15 +195,13 @@ class TypeDefinedMapFieldBase : public MapFieldBase {
   virtual const Map<Key, T>& GetMap() const = 0;
   virtual Map<Key, T>* MutableMap() = 0;
 
- protected:
-  typename Map<Key, T>::const_iterator& InternalGetIterator(
-      const MapIterator* map_iter) const;
+protected:
+  typename Map<Key, T>::const_iterator& InternalGetIterator(const MapIterator* map_iter) const;
 
- private:
+private:
   void InitializeIterator(MapIterator* map_iter) const;
   void DeleteIterator(MapIterator* map_iter) const;
-  void CopyIterator(MapIterator* this_iteratorm,
-                    const MapIterator& that_iterator) const;
+  void CopyIterator(MapIterator* this_iteratorm, const MapIterator& that_iterator) const;
   void IncreaseIterator(MapIterator* map_iter) const;
 
   virtual void SetMapIteratorValue(MapIterator* map_iter) const = 0;
@@ -206,10 +211,10 @@ class TypeDefinedMapFieldBase : public MapFieldBase {
 // This class provides access to map field using generated api. It is used for
 // internal generated message implentation only. Users should never use this
 // directly.
-template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
+template <typename Derived, typename Key, typename T, WireFormatLite::FieldType kKeyFieldType,
           WireFormatLite::FieldType kValueFieldType, int default_enum_value = 0>
-class MapField : public TypeDefinedMapFieldBase<Key, T> {
+class MapField : public TypeDefinedMapFieldBase<Key, T>
+{
   // Provide utilities to parse/serialize key/value.  Provide utilities to
   // manipulate internal stored type.
   typedef MapTypeHandler<kKeyFieldType, Key> KeyTypeHandler;
@@ -217,14 +222,10 @@ class MapField : public TypeDefinedMapFieldBase<Key, T> {
 
   // Define message type for internal repeated field.
   typedef Derived EntryType;
-  typedef MapEntryLite<Derived, Key, T, kKeyFieldType, kValueFieldType,
-                       default_enum_value>
-      EntryLiteType;
+  typedef MapEntryLite<Derived, Key, T, kKeyFieldType, kValueFieldType, default_enum_value> EntryLiteType;
 
   // Define abbreviation for parent MapFieldLite
-  typedef MapFieldLite<Derived, Key, T, kKeyFieldType, kValueFieldType,
-                       default_enum_value>
-      MapFieldLiteType;
+  typedef MapFieldLite<Derived, Key, T, kKeyFieldType, kValueFieldType, default_enum_value> MapFieldLiteType;
 
   // Enum needs to be handled differently from other types because it has
   // different exposed type in google::protobuf::Map's api and repeated field's api. For
@@ -233,25 +234,30 @@ class MapField : public TypeDefinedMapFieldBase<Key, T> {
   static const bool kIsValueEnum = ValueTypeHandler::kIsEnum;
   typedef typename MapIf<kIsValueEnum, T, const T&>::type CastValueType;
 
- public:
+public:
   typedef typename Derived::SuperType EntryTypeTrait;
   typedef Map<Key, T> MapType;
 
-  MapField() {}
-  explicit MapField(Arena* arena)
-      : TypeDefinedMapFieldBase<Key, T>(arena), impl_(arena) {}
+  MapField()
+  {
+  }
+  explicit MapField(Arena* arena) : TypeDefinedMapFieldBase<Key, T>(arena), impl_(arena)
+  {
+  }
 
   // Implement MapFieldBase
   bool ContainsMapKey(const MapKey& map_key) const;
   bool InsertOrLookupMapValue(const MapKey& map_key, MapValueRef* val);
   bool DeleteMapValue(const MapKey& map_key);
 
-  const Map<Key, T>& GetMap() const {
+  const Map<Key, T>& GetMap() const
+  {
     MapFieldBase::SyncMapWithRepeatedField();
     return impl_.GetMap();
   }
 
-  Map<Key, T>* MutableMap() {
+  Map<Key, T>* MutableMap()
+  {
     MapFieldBase::SyncMapWithRepeatedField();
     Map<Key, T>* result = impl_.MutableMap();
     MapFieldBase::SetMapDirty();
@@ -266,19 +272,24 @@ class MapField : public TypeDefinedMapFieldBase<Key, T> {
 
   // Used in the implementation of parsing. Caller should take the ownership iff
   // arena_ is NULL.
-  EntryType* NewEntry() const { return impl_.NewEntry(); }
+  EntryType* NewEntry() const
+  {
+    return impl_.NewEntry();
+  }
   // Used in the implementation of serializing enum value type. Caller should
   // take the ownership iff arena_ is NULL.
-  EntryType* NewEnumEntryWrapper(const Key& key, const T t) const {
+  EntryType* NewEnumEntryWrapper(const Key& key, const T t) const
+  {
     return impl_.NewEnumEntryWrapper(key, t);
   }
   // Used in the implementation of serializing other value types. Caller should
   // take the ownership iff arena_ is NULL.
-  EntryType* NewEntryWrapper(const Key& key, const T& t) const {
+  EntryType* NewEntryWrapper(const Key& key, const T& t) const
+  {
     return impl_.NewEntryWrapper(key, t);
   }
 
- private:
+private:
   MapFieldLiteType impl_;
 
   typedef void InternalArenaConstructable_;
@@ -296,18 +307,16 @@ class MapField : public TypeDefinedMapFieldBase<Key, T> {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapField);
 };
 
-template <typename T, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
+template <typename T, typename Key, typename Value, WireFormatLite::FieldType kKeyFieldType,
           WireFormatLite::FieldType kValueFieldType, int default_enum_value>
-struct MapEntryToMapField<MapEntry<T, Key, Value, kKeyFieldType,
-                                   kValueFieldType, default_enum_value> > {
-  typedef MapField<T, Key, Value, kKeyFieldType, kValueFieldType,
-                   default_enum_value>
-      MapFieldType;
+struct MapEntryToMapField<MapEntry<T, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value> >
+{
+  typedef MapField<T, Key, Value, kKeyFieldType, kValueFieldType, default_enum_value> MapFieldType;
 };
 
-class LIBPROTOBUF_EXPORT DynamicMapField: public TypeDefinedMapFieldBase<MapKey, MapValueRef> {
- public:
+class LIBPROTOBUF_EXPORT DynamicMapField : public TypeDefinedMapFieldBase<MapKey, MapValueRef>
+{
+public:
   explicit DynamicMapField(const Message* default_entry);
   DynamicMapField(const Message* default_entry, Arena* arena);
   ~DynamicMapField();
@@ -322,7 +331,7 @@ class LIBPROTOBUF_EXPORT DynamicMapField: public TypeDefinedMapFieldBase<MapKey,
 
   int size() const;
 
- private:
+private:
   Map<MapKey, MapValueRef> map_;
   const Message* default_entry_;
 
@@ -336,110 +345,124 @@ class LIBPROTOBUF_EXPORT DynamicMapField: public TypeDefinedMapFieldBase<MapKey,
 
 }  // namespace internal
 
-#define TYPE_CHECK(EXPECTEDTYPE, METHOD)                        \
-  if (type() != EXPECTEDTYPE) {                                 \
-    GOOGLE_LOG(FATAL)                                                  \
-        << "Protocol Buffer map usage error:\n"                 \
-        << METHOD << " type does not match\n"                   \
-        << "  Expected : "                                      \
-        << FieldDescriptor::CppTypeName(EXPECTEDTYPE) << "\n"   \
-        << "  Actual   : "                                      \
-        << FieldDescriptor::CppTypeName(type());                \
+#define TYPE_CHECK(EXPECTEDTYPE, METHOD)                                                                               \
+  if (type() != EXPECTEDTYPE)                                                                                          \
+  {                                                                                                                    \
+    GOOGLE_LOG(FATAL) << "Protocol Buffer map usage error:\n"                                                          \
+                      << METHOD << " type does not match\n"                                                            \
+                      << "  Expected : " << FieldDescriptor::CppTypeName(EXPECTEDTYPE) << "\n"                         \
+                      << "  Actual   : " << FieldDescriptor::CppTypeName(type());                                      \
   }
 
 // MapKey is an union type for representing any possible
 // map key.
-class LIBPROTOBUF_EXPORT MapKey {
- public:
-  MapKey() : type_(0) {
+class LIBPROTOBUF_EXPORT MapKey
+{
+public:
+  MapKey() : type_(0)
+  {
   }
-  MapKey(const MapKey& other) : type_(0) {
+  MapKey(const MapKey& other) : type_(0)
+  {
     CopyFrom(other);
   }
-  MapKey& operator=(const MapKey& other) {
+  MapKey& operator=(const MapKey& other)
+  {
     CopyFrom(other);
     return *this;
   }
 
-  ~MapKey() {
-    if (type_ == FieldDescriptor::CPPTYPE_STRING) {
+  ~MapKey()
+  {
+    if (type_ == FieldDescriptor::CPPTYPE_STRING)
+    {
       delete val_.string_value_;
     }
   }
 
-  FieldDescriptor::CppType type() const {
-    if (type_ == 0) {
-      GOOGLE_LOG(FATAL)
-          << "Protocol Buffer map usage error:\n"
-          << "MapKey::type MapKey is not initialized. "
-          << "Call set methods to initialize MapKey.";
+  FieldDescriptor::CppType type() const
+  {
+    if (type_ == 0)
+    {
+      GOOGLE_LOG(FATAL) << "Protocol Buffer map usage error:\n"
+                        << "MapKey::type MapKey is not initialized. "
+                        << "Call set methods to initialize MapKey.";
     }
     return (FieldDescriptor::CppType)type_;
   }
 
-  void SetInt64Value(int64 value) {
+  void SetInt64Value(int64 value)
+  {
     SetType(FieldDescriptor::CPPTYPE_INT64);
     val_.int64_value_ = value;
   }
-  void SetUInt64Value(uint64 value) {
+  void SetUInt64Value(uint64 value)
+  {
     SetType(FieldDescriptor::CPPTYPE_UINT64);
     val_.uint64_value_ = value;
   }
-  void SetInt32Value(int32 value) {
+  void SetInt32Value(int32 value)
+  {
     SetType(FieldDescriptor::CPPTYPE_INT32);
     val_.int32_value_ = value;
   }
-  void SetUInt32Value(uint32 value) {
+  void SetUInt32Value(uint32 value)
+  {
     SetType(FieldDescriptor::CPPTYPE_UINT32);
     val_.uint32_value_ = value;
   }
-  void SetBoolValue(bool value) {
+  void SetBoolValue(bool value)
+  {
     SetType(FieldDescriptor::CPPTYPE_BOOL);
     val_.bool_value_ = value;
   }
-  void SetStringValue(const string& val) {
+  void SetStringValue(const string& val)
+  {
     SetType(FieldDescriptor::CPPTYPE_STRING);
     *val_.string_value_ = val;
   }
 
-  int64 GetInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64,
-               "MapKey::GetInt64Value");
+  int64 GetInt64Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64, "MapKey::GetInt64Value");
     return val_.int64_value_;
   }
-  uint64 GetUInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64,
-               "MapKey::GetUInt64Value");
+  uint64 GetUInt64Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64, "MapKey::GetUInt64Value");
     return val_.uint64_value_;
   }
-  int32 GetInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32,
-               "MapKey::GetInt32Value");
+  int32 GetInt32Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32, "MapKey::GetInt32Value");
     return val_.int32_value_;
   }
-  uint32 GetUInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32,
-               "MapKey::GetUInt32Value");
+  uint32 GetUInt32Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32, "MapKey::GetUInt32Value");
     return val_.uint32_value_;
   }
-  bool GetBoolValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL,
-               "MapKey::GetBoolValue");
+  bool GetBoolValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL, "MapKey::GetBoolValue");
     return val_.bool_value_;
   }
-  const string& GetStringValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING,
-               "MapKey::GetStringValue");
+  const string& GetStringValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING, "MapKey::GetStringValue");
     return *val_.string_value_;
   }
 
-  bool operator<(const MapKey& other) const {
-    if (type_ != other.type_) {
+  bool operator<(const MapKey& other) const
+  {
+    if (type_ != other.type_)
+    {
       // We could define a total order that handles this case, but
       // there currently no need.  So, for now, fail.
       GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
     }
-    switch (type()) {
+    switch (type())
+    {
       case FieldDescriptor::CPPTYPE_DOUBLE:
       case FieldDescriptor::CPPTYPE_FLOAT:
       case FieldDescriptor::CPPTYPE_ENUM:
@@ -462,12 +485,15 @@ class LIBPROTOBUF_EXPORT MapKey {
     return false;
   }
 
-  bool operator==(const MapKey& other) const {
-    if (type_ != other.type_) {
+  bool operator==(const MapKey& other) const
+  {
+    if (type_ != other.type_)
+    {
       // To be consistent with operator<, we don't allow this either.
       GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
     }
-    switch (type()) {
+    switch (type())
+    {
       case FieldDescriptor::CPPTYPE_DOUBLE:
       case FieldDescriptor::CPPTYPE_FLOAT:
       case FieldDescriptor::CPPTYPE_ENUM:
@@ -491,9 +517,11 @@ class LIBPROTOBUF_EXPORT MapKey {
     return false;
   }
 
-  void CopyFrom(const MapKey& other) {
+  void CopyFrom(const MapKey& other)
+  {
     SetType(other.type());
-    switch (type_) {
+    switch (type_)
+    {
       case FieldDescriptor::CPPTYPE_DOUBLE:
       case FieldDescriptor::CPPTYPE_FLOAT:
       case FieldDescriptor::CPPTYPE_ENUM:
@@ -521,14 +549,17 @@ class LIBPROTOBUF_EXPORT MapKey {
     }
   }
 
- private:
+private:
   template <typename K, typename V>
   friend class internal::TypeDefinedMapFieldBase;
   friend class MapIterator;
   friend class internal::DynamicMapField;
 
-  union KeyValue {
-    KeyValue() {}
+  union KeyValue
+  {
+    KeyValue()
+    {
+    }
     string* string_value_;
     int64 int64_value_;
     int32 int32_value_;
@@ -537,13 +568,17 @@ class LIBPROTOBUF_EXPORT MapKey {
     bool bool_value_;
   } val_;
 
-  void SetType(FieldDescriptor::CppType type) {
-    if (type_ == type) return;
-    if (type_ == FieldDescriptor::CPPTYPE_STRING) {
+  void SetType(FieldDescriptor::CppType type)
+  {
+    if (type_ == type)
+      return;
+    if (type_ == FieldDescriptor::CPPTYPE_STRING)
+    {
       delete val_.string_value_;
     }
     type_ = type;
-    if (type_ == FieldDescriptor::CPPTYPE_STRING) {
+    if (type_ == FieldDescriptor::CPPTYPE_STRING)
+    {
       val_.string_value_ = new string;
     }
   }
@@ -553,120 +588,121 @@ class LIBPROTOBUF_EXPORT MapKey {
 };
 
 // MapValueRef points to a map value.
-class LIBPROTOBUF_EXPORT MapValueRef {
- public:
-  MapValueRef() : data_(NULL), type_(0) {}
+class LIBPROTOBUF_EXPORT MapValueRef
+{
+public:
+  MapValueRef() : data_(NULL), type_(0)
+  {
+  }
 
-  void SetInt64Value(int64 value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64,
-               "MapValueRef::SetInt64Value");
+  void SetInt64Value(int64 value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64, "MapValueRef::SetInt64Value");
     *reinterpret_cast<int64*>(data_) = value;
   }
-  void SetUInt64Value(uint64 value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64,
-               "MapValueRef::SetUInt64Value");
+  void SetUInt64Value(uint64 value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64, "MapValueRef::SetUInt64Value");
     *reinterpret_cast<uint64*>(data_) = value;
   }
-  void SetInt32Value(int32 value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32,
-               "MapValueRef::SetInt32Value");
+  void SetInt32Value(int32 value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32, "MapValueRef::SetInt32Value");
     *reinterpret_cast<int32*>(data_) = value;
   }
-  void SetUInt32Value(uint32 value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32,
-               "MapValueRef::SetUInt32Value");
+  void SetUInt32Value(uint32 value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32, "MapValueRef::SetUInt32Value");
     *reinterpret_cast<uint32*>(data_) = value;
   }
-  void SetBoolValue(bool value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL,
-               "MapValueRef::SetBoolValue");
+  void SetBoolValue(bool value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL, "MapValueRef::SetBoolValue");
     *reinterpret_cast<bool*>(data_) = value;
   }
   // TODO(jieluo) - Checks that enum is member.
-  void SetEnumValue(int value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM,
-               "MapValueRef::SetEnumValue");
+  void SetEnumValue(int value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM, "MapValueRef::SetEnumValue");
     *reinterpret_cast<int*>(data_) = value;
   }
-  void SetStringValue(const string& value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING,
-               "MapValueRef::SetStringValue");
+  void SetStringValue(const string& value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING, "MapValueRef::SetStringValue");
     *reinterpret_cast<string*>(data_) = value;
   }
-  void SetFloatValue(float value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_FLOAT,
-               "MapValueRef::SetFloatValue");
+  void SetFloatValue(float value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_FLOAT, "MapValueRef::SetFloatValue");
     *reinterpret_cast<float*>(data_) = value;
   }
-  void SetDoubleValue(double value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_DOUBLE,
-               "MapValueRef::SetDoubleValue");
+  void SetDoubleValue(double value)
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_DOUBLE, "MapValueRef::SetDoubleValue");
     *reinterpret_cast<double*>(data_) = value;
   }
 
-  int64 GetInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64,
-               "MapValueRef::GetInt64Value");
+  int64 GetInt64Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64, "MapValueRef::GetInt64Value");
     return *reinterpret_cast<int64*>(data_);
   }
-  uint64 GetUInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64,
-               "MapValueRef::GetUInt64Value");
+  uint64 GetUInt64Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64, "MapValueRef::GetUInt64Value");
     return *reinterpret_cast<uint64*>(data_);
   }
-  int32 GetInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32,
-               "MapValueRef::GetInt32Value");
+  int32 GetInt32Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32, "MapValueRef::GetInt32Value");
     return *reinterpret_cast<int32*>(data_);
   }
-  uint32 GetUInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32,
-               "MapValueRef::GetUInt32Value");
+  uint32 GetUInt32Value() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32, "MapValueRef::GetUInt32Value");
     return *reinterpret_cast<uint32*>(data_);
   }
-  bool GetBoolValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL,
-               "MapValueRef::GetBoolValue");
+  bool GetBoolValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL, "MapValueRef::GetBoolValue");
     return *reinterpret_cast<bool*>(data_);
   }
-  int GetEnumValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM,
-               "MapValueRef::GetEnumValue");
+  int GetEnumValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM, "MapValueRef::GetEnumValue");
     return *reinterpret_cast<int*>(data_);
   }
-  const string& GetStringValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING,
-               "MapValueRef::GetStringValue");
+  const string& GetStringValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING, "MapValueRef::GetStringValue");
     return *reinterpret_cast<string*>(data_);
   }
-  float GetFloatValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_FLOAT,
-               "MapValueRef::GetFloatValue");
+  float GetFloatValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_FLOAT, "MapValueRef::GetFloatValue");
     return *reinterpret_cast<float*>(data_);
   }
-  double GetDoubleValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_DOUBLE,
-               "MapValueRef::GetDoubleValue");
+  double GetDoubleValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_DOUBLE, "MapValueRef::GetDoubleValue");
     return *reinterpret_cast<double*>(data_);
   }
 
-  const Message& GetMessageValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_MESSAGE,
-               "MapValueRef::GetMessageValue");
+  const Message& GetMessageValue() const
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_MESSAGE, "MapValueRef::GetMessageValue");
     return *reinterpret_cast<Message*>(data_);
   }
 
-  Message* MutableMessageValue() {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_MESSAGE,
-               "MapValueRef::MutableMessageValue");
+  Message* MutableMessageValue()
+  {
+    TYPE_CHECK(FieldDescriptor::CPPTYPE_MESSAGE, "MapValueRef::MutableMessageValue");
     return reinterpret_cast<Message*>(data_);
   }
 
- private:
-  template <typename Derived, typename K, typename V,
-            internal::WireFormatLite::FieldType key_wire_type,
-            internal::WireFormatLite::FieldType value_wire_type,
-            int default_enum_value>
+private:
+  template <typename Derived, typename K, typename V, internal::WireFormatLite::FieldType key_wire_type,
+            internal::WireFormatLite::FieldType value_wire_type, int default_enum_value>
   friend class internal::MapField;
   template <typename K, typename V>
   friend class internal::TypeDefinedMapFieldBase;
@@ -674,33 +710,40 @@ class LIBPROTOBUF_EXPORT MapValueRef {
   friend class internal::GeneratedMessageReflection;
   friend class internal::DynamicMapField;
 
-  void SetType(FieldDescriptor::CppType type) {
+  void SetType(FieldDescriptor::CppType type)
+  {
     type_ = type;
   }
 
-  FieldDescriptor::CppType type() const {
-    if (type_ == 0 || data_ == NULL) {
-      GOOGLE_LOG(FATAL)
-          << "Protocol Buffer map usage error:\n"
-          << "MapValueRef::type MapValueRef is not initialized.";
+  FieldDescriptor::CppType type() const
+  {
+    if (type_ == 0 || data_ == NULL)
+    {
+      GOOGLE_LOG(FATAL) << "Protocol Buffer map usage error:\n"
+                        << "MapValueRef::type MapValueRef is not initialized.";
     }
     return (FieldDescriptor::CppType)type_;
   }
-  void SetValue(const void* val) {
+  void SetValue(const void* val)
+  {
     data_ = const_cast<void*>(val);
   }
-  void CopyFrom(const MapValueRef& other) {
+  void CopyFrom(const MapValueRef& other)
+  {
     type_ = other.type_;
     data_ = other.data_;
   }
   // Only used in DynamicMapField
-  void DeleteData() {
-    switch (type_) {
-#define HANDLE_TYPE(CPPTYPE, TYPE)                              \
-      case google::protobuf::FieldDescriptor::CPPTYPE_##CPPTYPE: {        \
-        delete reinterpret_cast<TYPE*>(data_);                  \
-        break;                                                  \
-      }
+  void DeleteData()
+  {
+    switch (type_)
+    {
+#define HANDLE_TYPE(CPPTYPE, TYPE)                                                                                     \
+  case google::protobuf::FieldDescriptor::CPPTYPE_##CPPTYPE:                                                           \
+  {                                                                                                                    \
+    delete reinterpret_cast<TYPE*>(data_);                                                                             \
+    break;                                                                                                             \
+  }
       HANDLE_TYPE(INT32, int32);
       HANDLE_TYPE(INT64, int64);
       HANDLE_TYPE(UINT32, uint32);
@@ -724,64 +767,74 @@ class LIBPROTOBUF_EXPORT MapValueRef {
 
 #undef TYPE_CHECK
 
-class LIBPROTOBUF_EXPORT MapIterator {
- public:
-  MapIterator(Message* message, const FieldDescriptor* field) {
+class LIBPROTOBUF_EXPORT MapIterator
+{
+public:
+  MapIterator(Message* message, const FieldDescriptor* field)
+  {
     const Reflection* reflection = message->GetReflection();
     map_ = reflection->MapData(message, field);
     key_.SetType(field->message_type()->FindFieldByName("key")->cpp_type());
     value_.SetType(field->message_type()->FindFieldByName("value")->cpp_type());
     map_->InitializeIterator(this);
   }
-  MapIterator(const MapIterator& other) {
+  MapIterator(const MapIterator& other)
+  {
     map_ = other.map_;
     map_->InitializeIterator(this);
     map_->CopyIterator(this, other);
   }
-  ~MapIterator() {
+  ~MapIterator()
+  {
     map_->DeleteIterator(this);
   }
-  MapIterator& operator=(const MapIterator& other) {
+  MapIterator& operator=(const MapIterator& other)
+  {
     map_ = other.map_;
     map_->CopyIterator(this, other);
     return *this;
   }
-  friend bool operator==(const MapIterator& a, const MapIterator& b) {
+  friend bool operator==(const MapIterator& a, const MapIterator& b)
+  {
     return a.map_->EqualIterator(a, b);
   }
-  friend bool operator!=(const MapIterator& a, const MapIterator& b) {
+  friend bool operator!=(const MapIterator& a, const MapIterator& b)
+  {
     return !a.map_->EqualIterator(a, b);
   }
-  MapIterator& operator++() {
+  MapIterator& operator++()
+  {
     map_->IncreaseIterator(this);
     return *this;
   }
-  MapIterator operator++(int) {
+  MapIterator operator++(int)
+  {
     // iter_ is copied from Map<...>::iterator, no need to
     // copy from its self again. Use the same implementation
     // with operator++()
     map_->IncreaseIterator(this);
     return *this;
   }
-  const MapKey& GetKey() {
+  const MapKey& GetKey()
+  {
     return key_;
   }
-  const MapValueRef& GetValueRef() {
+  const MapValueRef& GetValueRef()
+  {
     return value_;
   }
-  MapValueRef* MutableValueRef() {
+  MapValueRef* MutableValueRef()
+  {
     map_->SetMapDirty();
     return &value_;
   }
 
- private:
+private:
   template <typename Key, typename T>
   friend class internal::TypeDefinedMapFieldBase;
   friend class internal::DynamicMapField;
-  template <typename Derived, typename Key, typename T,
-            internal::WireFormatLite::FieldType kKeyFieldType,
-            internal::WireFormatLite::FieldType kValueFieldType,
-            int default_enum_value>
+  template <typename Derived, typename Key, typename T, internal::WireFormatLite::FieldType kKeyFieldType,
+            internal::WireFormatLite::FieldType kValueFieldType, int default_enum_value>
   friend class internal::MapField;
 
   // reinterpret_cast from heap-allocated Map<...>::iterator*. MapIterator owns
@@ -800,11 +853,13 @@ class LIBPROTOBUF_EXPORT MapIterator {
 }  // namespace google
 
 GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_START
-template<>
-struct hash<google::protobuf::MapKey> {
-  size_t
-  operator()(const google::protobuf::MapKey& map_key) const {
-    switch (map_key.type()) {
+template <>
+struct hash<google::protobuf::MapKey>
+{
+  size_t operator()(const google::protobuf::MapKey& map_key) const
+  {
+    switch (map_key.type())
+    {
       case google::protobuf::FieldDescriptor::CPPTYPE_DOUBLE:
       case google::protobuf::FieldDescriptor::CPPTYPE_FLOAT:
       case google::protobuf::FieldDescriptor::CPPTYPE_ENUM:
@@ -827,9 +882,8 @@ struct hash<google::protobuf::MapKey> {
     GOOGLE_LOG(FATAL) << "Can't get here.";
     return 0;
   }
-  bool
-  operator()(const google::protobuf::MapKey& map_key1,
-             const google::protobuf::MapKey& map_key2) const {
+  bool operator()(const google::protobuf::MapKey& map_key1, const google::protobuf::MapKey& map_key2) const
+  {
     return map_key1 < map_key2;
   }
 };

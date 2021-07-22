@@ -110,21 +110,27 @@
 #include <string>
 #include <google/protobuf/stubs/common.h>
 
-namespace google {
-
-namespace protobuf {
-namespace io {
-
+namespace google
+{
+namespace protobuf
+{
+namespace io
+{
 // Defined in this file.
 class ZeroCopyInputStream;
 class ZeroCopyOutputStream;
 
 // Abstract interface similar to an input stream but designed to minimize
 // copying.
-class LIBPROTOBUF_EXPORT ZeroCopyInputStream {
- public:
-  ZeroCopyInputStream() {}
-  virtual ~ZeroCopyInputStream() {}
+class LIBPROTOBUF_EXPORT ZeroCopyInputStream
+{
+public:
+  ZeroCopyInputStream()
+  {
+  }
+  virtual ~ZeroCopyInputStream()
+  {
+  }
 
   // Obtains a chunk of data from the stream.
   //
@@ -171,17 +177,21 @@ class LIBPROTOBUF_EXPORT ZeroCopyInputStream {
   // Returns the total number of bytes read since this object was created.
   virtual int64 ByteCount() const = 0;
 
-
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyInputStream);
 };
 
 // Abstract interface similar to an output stream but designed to minimize
 // copying.
-class LIBPROTOBUF_EXPORT ZeroCopyOutputStream {
- public:
-  ZeroCopyOutputStream() {}
-  virtual ~ZeroCopyOutputStream() {}
+class LIBPROTOBUF_EXPORT ZeroCopyOutputStream
+{
+public:
+  ZeroCopyOutputStream()
+  {
+  }
+  virtual ~ZeroCopyOutputStream()
+  {
+  }
 
   // Obtains a buffer into which data can be written.  Any data written
   // into this buffer will eventually (maybe instantly, maybe later on)
@@ -234,10 +244,12 @@ class LIBPROTOBUF_EXPORT ZeroCopyOutputStream {
   // NOTE: It is caller's responsibility to ensure that the chunk of memory
   // remains live until all of the data has been consumed from the stream.
   virtual bool WriteAliasedRaw(const void* data, int size);
-  virtual bool AllowsAliasing() const { return false; }
+  virtual bool AllowsAliasing() const
+  {
+    return false;
+  }
 
-
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyOutputStream);
 };
 

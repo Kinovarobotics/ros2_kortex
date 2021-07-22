@@ -38,15 +38,19 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/arenastring.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
-
+namespace google
+{
+namespace protobuf
+{
+namespace internal
+{
 // Helper class used to implement google::protobuf::Any.
-class LIBPROTOBUF_EXPORT AnyMetadata {
+class LIBPROTOBUF_EXPORT AnyMetadata
+{
   typedef ArenaStringPtr UrlType;
   typedef ArenaStringPtr ValueType;
- public:
+
+public:
   // AnyMetadata does not take ownership of "type_url" and "value".
   AnyMetadata(UrlType* type_url, ValueType* value);
 
@@ -70,12 +74,13 @@ class LIBPROTOBUF_EXPORT AnyMetadata {
   // Checks whether the type specified in the type URL matches the given type.
   // A type is consdiered matching if its full name matches the full name after
   // the last "/" in the type URL.
-  template<typename T>
-  bool Is() const {
+  template <typename T>
+  bool Is() const
+  {
     return InternalIs(T::default_instance().GetDescriptor());
   }
 
- private:
+private:
   bool InternalIs(const Descriptor* message) const;
 
   UrlType* type_url_;
@@ -96,8 +101,7 @@ bool ParseAnyTypeUrl(const string& type_url, string* full_type_name);
 
 // See if message is of type google.protobuf.Any, if so, return the descriptors
 // for "type_url" and "value" fields.
-bool GetAnyFieldDescriptors(const Message& message,
-                            const FieldDescriptor** type_url_field,
+bool GetAnyFieldDescriptors(const Message& message, const FieldDescriptor** type_url_field,
                             const FieldDescriptor** value_field);
 
 }  // namespace internal

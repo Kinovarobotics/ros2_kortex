@@ -44,9 +44,10 @@
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/descriptor.h>
 
-namespace google {
-namespace protobuf {
-
+namespace google
+{
+namespace protobuf
+{
 // Defined in this file.
 class DescriptorDatabase;
 class SimpleDescriptorDatabase;
@@ -62,28 +63,28 @@ class MergedDescriptorDatabase;
 // calling DescriptorPool::BuildFile() for each one.  Instead, a DescriptorPool
 // can be created which wraps a DescriptorDatabase and only builds particular
 // descriptors when they are needed.
-class LIBPROTOBUF_EXPORT DescriptorDatabase {
- public:
-  inline DescriptorDatabase() {}
+class LIBPROTOBUF_EXPORT DescriptorDatabase
+{
+public:
+  inline DescriptorDatabase()
+  {
+  }
   virtual ~DescriptorDatabase();
 
   // Find a file by file name.  Fills in in *output and returns true if found.
   // Otherwise, returns false, leaving the contents of *output undefined.
-  virtual bool FindFileByName(const string& filename,
-                              FileDescriptorProto* output) = 0;
+  virtual bool FindFileByName(const string& filename, FileDescriptorProto* output) = 0;
 
   // Find the file that declares the given fully-qualified symbol name.
   // If found, fills in *output and returns true, otherwise returns false
   // and leaves *output undefined.
-  virtual bool FindFileContainingSymbol(const string& symbol_name,
-                                        FileDescriptorProto* output) = 0;
+  virtual bool FindFileContainingSymbol(const string& symbol_name, FileDescriptorProto* output) = 0;
 
   // Find the file which defines an extension extending the given message type
   // with the given field number.  If found, fills in *output and returns true,
   // otherwise returns false and leaves *output undefined.  containing_type
   // must be a fully-qualified type name.
-  virtual bool FindFileContainingExtension(const string& containing_type,
-                                           int field_number,
+  virtual bool FindFileContainingExtension(const string& containing_type, int field_number,
                                            FileDescriptorProto* output) = 0;
 
   // Finds the tag numbers used by all known extensions of
@@ -96,11 +97,10 @@ class LIBPROTOBUF_EXPORT DescriptorDatabase {
   //
   // This method has a default implementation that always returns
   // false.
-  virtual bool FindAllExtensionNumbers(const string& /* extendee_type */,
-                                       std::vector<int>* /* output */) {
+  virtual bool FindAllExtensionNumbers(const string& /* extendee_type */, std::vector<int>* /* output */)
+  {
     return false;
   }
-
 
   // Finds the file names and appends them to the output in an
   // undefined order. This method is best-effort: it's not guaranteed that the
@@ -110,11 +110,12 @@ class LIBPROTOBUF_EXPORT DescriptorDatabase {
   //
   // This method has a default implementation that always returns
   // false.
-  virtual bool FindAllFileNames(std::vector<string>* output) {
+  virtual bool FindAllFileNames(std::vector<string>* output)
+  {
     return false;
   }
 
- private:
+private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DescriptorDatabase);
 };
 
@@ -139,8 +140,9 @@ class LIBPROTOBUF_EXPORT DescriptorDatabase {
 // FileDescriptor::CopyTo()) will always use fully-qualified names for all
 // types.  You only need to worry if you are constructing FileDescriptorProtos
 // yourself, or are calling compiler::Parser directly.
-class LIBPROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
- public:
+class LIBPROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase
+{
+public:
   SimpleDescriptorDatabase();
   ~SimpleDescriptorDatabase();
 
@@ -154,42 +156,34 @@ class LIBPROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
   bool AddAndOwn(const FileDescriptorProto* file);
 
   // implements DescriptorDatabase -----------------------------------
-  bool FindFileByName(const string& filename,
-                      FileDescriptorProto* output);
-  bool FindFileContainingSymbol(const string& symbol_name,
-                                FileDescriptorProto* output);
-  bool FindFileContainingExtension(const string& containing_type,
-                                   int field_number,
-                                   FileDescriptorProto* output);
-  bool FindAllExtensionNumbers(const string& extendee_type,
-                               std::vector<int>* output);
+  bool FindFileByName(const string& filename, FileDescriptorProto* output);
+  bool FindFileContainingSymbol(const string& symbol_name, FileDescriptorProto* output);
+  bool FindFileContainingExtension(const string& containing_type, int field_number, FileDescriptorProto* output);
+  bool FindAllExtensionNumbers(const string& extendee_type, std::vector<int>* output);
 
- private:
+private:
   // So that it can use DescriptorIndex.
   friend class EncodedDescriptorDatabase;
 
   // An index mapping file names, symbol names, and extension numbers to
   // some sort of values.
   template <typename Value>
-  class DescriptorIndex {
-   public:
+  class DescriptorIndex
+  {
+  public:
     // Helpers to recursively add particular descriptors and all their contents
     // to the index.
-    bool AddFile(const FileDescriptorProto& file,
-                 Value value);
+    bool AddFile(const FileDescriptorProto& file, Value value);
     bool AddSymbol(const string& name, Value value);
-    bool AddNestedExtensions(const DescriptorProto& message_type,
-                             Value value);
-    bool AddExtension(const FieldDescriptorProto& field,
-                      Value value);
+    bool AddNestedExtensions(const DescriptorProto& message_type, Value value);
+    bool AddExtension(const FieldDescriptorProto& field, Value value);
 
     Value FindFile(const string& filename);
     Value FindSymbol(const string& name);
     Value FindExtension(const string& containing_type, int field_number);
-    bool FindAllExtensionNumbers(const string& containing_type,
-                                 std::vector<int>* output);
+    bool FindAllExtensionNumbers(const string& containing_type, std::vector<int>* output);
 
-   private:
+  private:
     std::map<string, Value> by_name_;
     std::map<string, Value> by_symbol_;
     std::map<std::pair<string, int>, Value> by_extension_;
@@ -247,8 +241,7 @@ class LIBPROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
 
     // Find the last entry in the by_symbol_ map whose key is less than or
     // equal to the given name.
-    typename std::map<string, Value>::iterator FindLastLessOrEqual(
-        const string& name);
+    typename std::map<string, Value>::iterator FindLastLessOrEqual(const string& name);
 
     // True if either the arguments are equal or super_symbol identifies a
     // parent symbol of sub_symbol (e.g. "foo.bar" is a parent of
@@ -260,14 +253,12 @@ class LIBPROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
     bool ValidateSymbolName(const string& name);
   };
 
-
   DescriptorIndex<const FileDescriptorProto*> index_;
   std::vector<const FileDescriptorProto*> files_to_delete_;
 
   // If file is non-NULL, copy it into *output and return true, otherwise
   // return false.
-  bool MaybeCopy(const FileDescriptorProto* file,
-                 FileDescriptorProto* output);
+  bool MaybeCopy(const FileDescriptorProto* file, FileDescriptorProto* output);
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(SimpleDescriptorDatabase);
 };
@@ -277,8 +268,9 @@ class LIBPROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
 //
 // The same caveats regarding FindFileContainingExtension() apply as with
 // SimpleDescriptorDatabase.
-class LIBPROTOBUF_EXPORT EncodedDescriptorDatabase : public DescriptorDatabase {
- public:
+class LIBPROTOBUF_EXPORT EncodedDescriptorDatabase : public DescriptorDatabase
+{
+public:
   EncodedDescriptorDatabase();
   ~EncodedDescriptorDatabase();
 
@@ -295,84 +287,65 @@ class LIBPROTOBUF_EXPORT EncodedDescriptorDatabase : public DescriptorDatabase {
   bool AddCopy(const void* encoded_file_descriptor, int size);
 
   // Like FindFileContainingSymbol but returns only the name of the file.
-  bool FindNameOfFileContainingSymbol(const string& symbol_name,
-                                      string* output);
+  bool FindNameOfFileContainingSymbol(const string& symbol_name, string* output);
 
   // implements DescriptorDatabase -----------------------------------
-  bool FindFileByName(const string& filename,
-                      FileDescriptorProto* output);
-  bool FindFileContainingSymbol(const string& symbol_name,
-                                FileDescriptorProto* output);
-  bool FindFileContainingExtension(const string& containing_type,
-                                   int field_number,
-                                   FileDescriptorProto* output);
-  bool FindAllExtensionNumbers(const string& extendee_type,
-                               std::vector<int>* output);
+  bool FindFileByName(const string& filename, FileDescriptorProto* output);
+  bool FindFileContainingSymbol(const string& symbol_name, FileDescriptorProto* output);
+  bool FindFileContainingExtension(const string& containing_type, int field_number, FileDescriptorProto* output);
+  bool FindAllExtensionNumbers(const string& extendee_type, std::vector<int>* output);
 
- private:
-  SimpleDescriptorDatabase::DescriptorIndex<std::pair<const void*, int> >
-      index_;
+private:
+  SimpleDescriptorDatabase::DescriptorIndex<std::pair<const void*, int> > index_;
   std::vector<void*> files_to_delete_;
 
   // If encoded_file.first is non-NULL, parse the data into *output and return
   // true, otherwise return false.
-  bool MaybeParse(std::pair<const void*, int> encoded_file,
-                  FileDescriptorProto* output);
+  bool MaybeParse(std::pair<const void*, int> encoded_file, FileDescriptorProto* output);
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EncodedDescriptorDatabase);
 };
 
 // A DescriptorDatabase that fetches files from a given pool.
-class LIBPROTOBUF_EXPORT DescriptorPoolDatabase : public DescriptorDatabase {
- public:
+class LIBPROTOBUF_EXPORT DescriptorPoolDatabase : public DescriptorDatabase
+{
+public:
   explicit DescriptorPoolDatabase(const DescriptorPool& pool);
   ~DescriptorPoolDatabase();
 
   // implements DescriptorDatabase -----------------------------------
-  bool FindFileByName(const string& filename,
-                      FileDescriptorProto* output);
-  bool FindFileContainingSymbol(const string& symbol_name,
-                                FileDescriptorProto* output);
-  bool FindFileContainingExtension(const string& containing_type,
-                                   int field_number,
-                                   FileDescriptorProto* output);
-  bool FindAllExtensionNumbers(const string& extendee_type,
-                               std::vector<int>* output);
+  bool FindFileByName(const string& filename, FileDescriptorProto* output);
+  bool FindFileContainingSymbol(const string& symbol_name, FileDescriptorProto* output);
+  bool FindFileContainingExtension(const string& containing_type, int field_number, FileDescriptorProto* output);
+  bool FindAllExtensionNumbers(const string& extendee_type, std::vector<int>* output);
 
- private:
+private:
   const DescriptorPool& pool_;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DescriptorPoolDatabase);
 };
 
 // A DescriptorDatabase that wraps two or more others.  It first searches the
 // first database and, if that fails, tries the second, and so on.
-class LIBPROTOBUF_EXPORT MergedDescriptorDatabase : public DescriptorDatabase {
- public:
+class LIBPROTOBUF_EXPORT MergedDescriptorDatabase : public DescriptorDatabase
+{
+public:
   // Merge just two databases.  The sources remain property of the caller.
-  MergedDescriptorDatabase(DescriptorDatabase* source1,
-                           DescriptorDatabase* source2);
+  MergedDescriptorDatabase(DescriptorDatabase* source1, DescriptorDatabase* source2);
   // Merge more than two databases.  The sources remain property of the caller.
   // The vector may be deleted after the constructor returns but the
   // DescriptorDatabases need to stick around.
-  explicit MergedDescriptorDatabase(
-      const std::vector<DescriptorDatabase*>& sources);
+  explicit MergedDescriptorDatabase(const std::vector<DescriptorDatabase*>& sources);
   ~MergedDescriptorDatabase();
 
   // implements DescriptorDatabase -----------------------------------
-  bool FindFileByName(const string& filename,
-                      FileDescriptorProto* output);
-  bool FindFileContainingSymbol(const string& symbol_name,
-                                FileDescriptorProto* output);
-  bool FindFileContainingExtension(const string& containing_type,
-                                   int field_number,
-                                   FileDescriptorProto* output);
+  bool FindFileByName(const string& filename, FileDescriptorProto* output);
+  bool FindFileContainingSymbol(const string& symbol_name, FileDescriptorProto* output);
+  bool FindFileContainingExtension(const string& containing_type, int field_number, FileDescriptorProto* output);
   // Merges the results of calling all databases. Returns true iff any
   // of the databases returned true.
-  bool FindAllExtensionNumbers(const string& extendee_type,
-                               std::vector<int>* output);
+  bool FindAllExtensionNumbers(const string& extendee_type, std::vector<int>* output);
 
-
- private:
+private:
   std::vector<DescriptorDatabase*> sources_;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MergedDescriptorDatabase);
 };
