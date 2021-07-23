@@ -18,11 +18,11 @@
       <!-- ros2 control include -->
       <xacro:include filename="$(find kortex_description)/arms/gen3/${dof}dof/urdf/kortex.ros2_control.xacro" />
       <xacro:kortex_ros2_control
-        name="KortexMultiInterfaceHardware" prefix="$(arg prefix)"
-        use_fake_hardware="$(arg use_fake_hardware)"
-        fake_sensor_commands="$(arg fake_sensor_commands)"
+        name="KortexMultiInterfaceHardware" prefix="${prefix}"
+        use_fake_hardware="${use_fake_hardware}"
+        fake_sensor_commands="${fake_sensor_commands}"
         tf_prefix=""
-        robot_ip="$(arg robot_ip)" />
+        robot_ip="${robot_ip}" />
 
       <joint name="${prefix}base_joint" type="fixed">
         <xacro:insert_block name="origin" />
