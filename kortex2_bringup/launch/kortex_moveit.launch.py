@@ -67,7 +67,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_package",
-            default_value="gen3_move_it_config",
+            default_value="gen3_robotiq_2f_85_move_it_config",
             description="MoveIt configuration package for the robot. Usually the argument \
         is not set, it enables use of a custom config package.",
         )
@@ -82,7 +82,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_file",
-            default_value="gen3.srdf.xacro",
+            default_value="gen3_robotiq_2f_85.srdf.xacro",
             description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )
@@ -93,6 +93,13 @@ def generate_launch_description():
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper",
+            default_value='"robotiq_2f_85"',
+            description="Name of the gripper attached to the arm",
         )
     )
     declared_arguments.append(
@@ -125,6 +132,7 @@ def generate_launch_description():
     moveit_config_package = LaunchConfiguration("moveit_config_package")
     moveit_config_file = LaunchConfiguration("moveit_config_file")
     prefix = LaunchConfiguration("prefix")
+    gripper = LaunchConfiguration("gripper")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     launch_rviz = LaunchConfiguration("launch_rviz")
@@ -151,6 +159,9 @@ def generate_launch_description():
             " ",
             "fake_sensor_commands:=",
             fake_sensor_commands,
+            " ",
+            "gripper:=",
+            gripper,
             " ",
         ]
     )
