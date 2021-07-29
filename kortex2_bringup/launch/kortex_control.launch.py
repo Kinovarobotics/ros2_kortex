@@ -202,6 +202,16 @@ def generate_launch_description():
         ],
     )
 
+    collision_sensor_spawner = Node(
+        package="controller_manager",
+        executable="spawner.py",
+        arguments=[
+            "collision_sensor",
+            "--controller-manager",
+            "/controller_manager",
+        ],
+    )
+
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
@@ -213,6 +223,7 @@ def generate_launch_description():
         robot_state_publisher_node,
         rviz_node,
         joint_state_broadcaster_spawner,
+        collision_sensor_spawner,
         robot_controller_spawner,
     ]
 

@@ -20,7 +20,7 @@ find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(kortex_api REQUIRED)
 
-## COMPILE
+## Main driver plugin
 add_library(
   ${PROJECT_NAME}
   SHARED

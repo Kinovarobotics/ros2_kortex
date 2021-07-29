@@ -1,0 +1,8 @@
+<library path="collision_sensor">
+  <class name="collision_sensor/CollisionSensor"
+         type="collision_sensor::CollisionSensor" base_class_type="controller_interface::ControllerInterface">
+  <description>
+	  Listen to joint torques and detect collisions.
+  </description>
+  </class>
+</library>

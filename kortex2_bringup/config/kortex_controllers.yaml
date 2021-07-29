@@ -8,6 +8,23 @@ controller_manager:
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
+    collision_sensor:
+      type: collision_sensor/CollisionSensor
+
+collision_sensor:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+    state_interfaces:
+      - effort
+    torque_threshold_newton_meters: 0.5
+    consecutive_outliers_to_trigger: 5
 
 joint_trajectory_controller:
   ros__parameters:

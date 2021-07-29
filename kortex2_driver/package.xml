@@ -5,6 +5,7 @@
   <version>0.0.0</version>
   <description>ROS2 driver package for the Kinova Robot Hardware.</description>
   <maintainer email="marq.rasmussen@picknik.ai">Marq Rasmussen</maintainer>
+  <maintainer email="zelenak@picknik.ai">Andy Zelenak</maintainer>
   <license>Proprietary</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
