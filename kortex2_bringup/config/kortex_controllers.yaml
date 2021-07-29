@@ -36,4 +36,4 @@ joint_trajectory_controller:
 
 hand_controller:
   ros__parameters:
-    joint: robotiq_85_left_knuckle_joint
+    joint: finger_joint
