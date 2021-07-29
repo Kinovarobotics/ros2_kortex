@@ -20,4 +20,4 @@ hand_controller:
   type: GripperCommand
   default: true
   joints:
-    - robotiq_85_left_knuckle_joint
+    - finger_joint
