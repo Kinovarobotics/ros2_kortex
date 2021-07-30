@@ -27,7 +27,7 @@
 #include "collision_sensor/visibility_control.h"
 #include "collision_sensor/contact_detection/contact_detection.hpp"
 #include "semantic_components/imu_sensor.hpp"
-#include "sensor_msgs/msg/imu.hpp"
+#include "std_msgs/msg/bool.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 #include "realtime_tools/realtime_publisher.h"
@@ -69,6 +69,11 @@ protected:
   // This object handles the contact detection calculations
   std::shared_ptr<ContactDetection> contact_monitor_;
   std::atomic<bool> is_active_;
+
+  // Publish true when contact is detected
+  rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr contact_publisher_;
+  using BoolPublisher = realtime_tools::RealtimePublisher<std_msgs::msg::Bool>;
+  std::unique_ptr<BoolPublisher> realtime_publisher_;
 };
 
 }  // namespace collision_sensor

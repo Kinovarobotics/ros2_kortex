@@ -84,6 +84,19 @@ CallbackReturn CollisionSensor::on_configure(const rclcpp_lifecycle::State& /*pr
   // Print output so users can be sure the interface setup is correct
   RCLCPP_INFO(logger, "State interfaces are [%s].", get_interface_list(state_interface_types_).c_str());
 
+  try
+  {
+    // register contact status publisher
+    contact_publisher_ =
+        node_->create_publisher<std_msgs::msg::Bool>("~/contact_detected", rclcpp::SystemDefaultsQoS());
+    realtime_publisher_ = std::make_unique<BoolPublisher>(contact_publisher_);
+  }
+  catch (const std::exception& e)
+  {
+    fprintf(stderr, "Exception thrown during publisher creation at configure stage with message : %s \n", e.what());
+    return CallbackReturn::ERROR;
+  }
+
   RCLCPP_DEBUG(node_->get_logger(), "configure successful");
   return CallbackReturn::SUCCESS;
 }
@@ -131,11 +144,24 @@ controller_interface::return_type CollisionSensor::update()
       torques.at(joint_index) = state_interfaces_.at(joint_index).get_value();
     }
 
+    // If contact
     if (contact_monitor_->registerMeasurement(torques) == ReturnCode::CONTACT_DETECTED)
     {
-      // TODO(andyz): what do we want to do when contact is detected? Publish a bool?
-      RCLCPP_ERROR_STREAM(node_->get_logger(), "Collision detected!");
+      if (realtime_publisher_ && realtime_publisher_->trylock())
+      {
+        realtime_publisher_->msg_.data = true;
+      }
     }
+    // No contact
+    else
+    {
+      if (realtime_publisher_ && realtime_publisher_->trylock())
+      {
+        realtime_publisher_->msg_.data = false;
+      }
+    }
+
+    realtime_publisher_->unlockAndPublish();
   }
 
   return controller_interface::return_type::OK;
