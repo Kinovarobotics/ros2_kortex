@@ -238,7 +238,7 @@ def generate_launch_description():
         rviz_node,
         joint_state_broadcaster_spawner,
         robot_controller_spawner,
-        robot_hand_controller_spawner
+        robot_hand_controller_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes_to_start)
