@@ -19,6 +19,7 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(realtime_tools REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
 
 ## A low-level library for contact detection
 add_library(
@@ -58,6 +59,7 @@ ament_target_dependencies(
   rclcpp
   rclcpp_lifecycle
   realtime_tools
+  std_srvs
 )
 target_link_libraries(collision_sensor contact_detection)
 
