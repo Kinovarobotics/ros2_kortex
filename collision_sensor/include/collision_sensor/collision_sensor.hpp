@@ -26,9 +26,9 @@
 #include "controller_interface/controller_interface.hpp"
 #include "collision_sensor/visibility_control.h"
 #include "collision_sensor/contact_detection/contact_detection.hpp"
+#include "kortex2_msgs/srv/select_monitored_joints.hpp"
 #include "semantic_components/imu_sensor.hpp"
 #include "std_msgs/msg/bool.hpp"
-#include "std_srvs/srv/empty.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 #include "realtime_tools/realtime_publisher.h"
@@ -62,8 +62,8 @@ public:
   controller_interface::return_type update() override;
 
 protected:
-  void select_monitored_joints(const std::shared_ptr<std_srvs::srv::Empty::Request> request,
-                               std::shared_ptr<std_srvs::srv::Empty::Response> response);
+  void select_monitored_joints(const std::shared_ptr<kortex2_msgs::srv::SelectMonitoredJoints::Request> request,
+                               std::shared_ptr<kortex2_msgs::srv::SelectMonitoredJoints::Response> response);
 
   std::vector<std::string> joint_names_;
   std::vector<std::string> state_interface_types_;
@@ -80,7 +80,7 @@ protected:
   std::unique_ptr<BoolPublisher> realtime_publisher_;
 
   // Service to select which joints are monitored
-  rclcpp::Service<std_srvs::srv::Empty>::SharedPtr select_monitored_joints_srv_;
+  rclcpp::Service<kortex2_msgs::srv::SelectMonitoredJoints>::SharedPtr select_monitored_joints_srv_;
 };
 
 }  // namespace collision_sensor

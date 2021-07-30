@@ -98,7 +98,7 @@ CallbackReturn CollisionSensor::on_configure(const rclcpp_lifecycle::State& /*pr
   }
 
   // Service to select which joints are monitored
-  select_monitored_joints_srv_ = node_->create_service<std_srvs::srv::Empty>(
+  select_monitored_joints_srv_ = node_->create_service<kortex2_msgs::srv::SelectMonitoredJoints>(
       "~/select_monitored_joints",
       std::bind(&CollisionSensor::select_monitored_joints, this, std::placeholders::_1, std::placeholders::_2));
 
@@ -142,8 +142,6 @@ controller_interface::return_type CollisionSensor::update()
 {
   if (is_active_)
   {
-    RCLCPP_WARN(node_->get_logger(), "Doin' it.");
-
     std::vector<double> torques(num_dof_);
 
     for (size_t joint_index = 0; joint_index < state_interfaces_.size(); ++joint_index)
@@ -174,10 +172,18 @@ controller_interface::return_type CollisionSensor::update()
   return controller_interface::return_type::OK;
 }
 
-void CollisionSensor::select_monitored_joints(const std::shared_ptr<std_srvs::srv::Empty::Request> request,
-                                              std::shared_ptr<std_srvs::srv::Empty::Response> response)
+void CollisionSensor::select_monitored_joints(
+    const std::shared_ptr<kortex2_msgs::srv::SelectMonitoredJoints::Request> request,
+    std::shared_ptr<kortex2_msgs::srv::SelectMonitoredJoints::Response> response)
 {
-  RCLCPP_ERROR(node_->get_logger(), "Service called!");
+  std::vector<size_t> joints_to_monitor;
+  RCLCPP_ERROR(node_->get_logger(), "Monitoring these joints:");
+  for (const uint8_t& joint : request->joints_to_monitor)
+  {
+    joints_to_monitor.push_back((size_t)joint);
+    RCLCPP_INFO_STREAM(node_->get_logger(), joints_to_monitor.back());
+  }
+  contact_monitor_->selectActiveJoints(joints_to_monitor);
 }
 
 }  // namespace collision_sensor

@@ -57,13 +57,12 @@ ReturnCode ContactDetection::registerMeasurement(std::vector<double>& current_jo
 
 ReturnCode ContactDetection::selectActiveJoints(std::vector<size_t>& active_joint_indices)
 {
-  if (active_joint_indices.size() > num_dof_)
+  if ((active_joint_indices.size() > num_dof_) || (active_joint_indices.size() < 1))
   {
     return WRONG_ACTIVE_JOINT_DIMENSION;
   }
 
   active_joints_ = active_joint_indices;
-  per_joint_outlier_count_ = std::vector<size_t>(active_joint_indices.size(), 0);
   return NO_ERROR;
 }
 
