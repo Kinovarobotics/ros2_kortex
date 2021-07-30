@@ -131,7 +131,7 @@ controller_interface::return_type CollisionSensor::update()
       torques.at(joint_index) = state_interfaces_.at(joint_index).get_value();
     }
 
-    if (contact_monitor_->registerMeasurement(torques))
+    if (contact_monitor_->registerMeasurement(torques) == ReturnCode::CONTACT_DETECTED)
     {
       // TODO(andyz): what do we want to do when contact is detected? Publish a bool?
       RCLCPP_ERROR_STREAM(node_->get_logger(), "Collision detected!");

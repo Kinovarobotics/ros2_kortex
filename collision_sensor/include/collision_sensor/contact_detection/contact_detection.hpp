@@ -3,7 +3,7 @@
 // A class for synchronous filtering and contact detection from torque signals
 
 #include "collision_sensor/contact_detection/butterworth_low_pass_filter.hpp"
-#include "collision_sensor/contact_detection/error_codes.hpp"
+#include "collision_sensor/contact_detection/return_codes.hpp"
 
 #include <cstddef>
 #include <vector>
