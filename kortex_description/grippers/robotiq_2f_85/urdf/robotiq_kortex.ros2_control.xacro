@@ -13,7 +13,7 @@
           <param name="state_following_offset">0.0</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">
-          <plugin>kortex2_driver/KortexMultiInterfaceHardware</plugin>
+          <plugin>kortex2_gripper_driver/KortexGripperInterfaceHardware</plugin>
           <param name="robot_ip">${robot_ip}</param>
           <param name="tf_prefix">"${tf_prefix}"</param>
         </xacro:unless>

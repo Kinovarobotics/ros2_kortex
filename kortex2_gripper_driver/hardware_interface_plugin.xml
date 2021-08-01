@@ -1,0 +1,9 @@
+<library path="kortex2_gripper_driver">
+  <class name="kortex2_gripper_driver/KortexGripperInterfaceHardware"
+         type="kortex2_gripper_driver::KortexGripperInterfaceHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ROS2 Control for the Kinova Kortex Robotiq Gripper protocol.
+    </description>
+  </class>
+</library>
