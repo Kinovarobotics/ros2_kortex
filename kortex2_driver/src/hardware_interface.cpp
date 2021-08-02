@@ -38,12 +38,14 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
     return return_type::ERROR;
   }
 
-  hw_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  hw_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  hw_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  hw_commands_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  hw_commands_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  hw_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_commands_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_commands_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  gripper_command_position_.resize(1, std::numeric_limits<double>::quiet_NaN());
+  gripper_position_.resize(1, std::numeric_limits<double>::quiet_NaN());
   control_lvl_.resize(info_.joints.size(), integration_lvl_t::POSITION);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
@@ -97,11 +99,11 @@ std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::ex
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_positions_[i]));
+        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &arm_positions_[i]));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &hw_velocities_[i]));
+        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &arm_velocities_[i]));
     state_interfaces.emplace_back(
-        hardware_interface::StateInterface(info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &hw_efforts_[i]));
+        hardware_interface::StateInterface(info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
   }
 
   return state_interfaces;
@@ -113,11 +115,11 @@ std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_commands_positions_[i]));
+        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &arm_commands_positions_[i]));
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &hw_commands_velocities_[i]));
+        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &arm_commands_velocities_[i]));
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &hw_commands_efforts_[i]));
+        info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]));
   }
 
   return command_interfaces;
@@ -164,8 +166,8 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     {
       if (key.find(info_.joints[i].name) != std::string::npos)
       {
-        hw_commands_velocities_[i] = 0;
-        hw_commands_efforts_[i] = 0;
+        arm_commands_velocities_[i] = 0;
+        arm_commands_efforts_[i] = 0;
         control_lvl_[i] = integration_lvl_t::UNDEFINED;  // Revert to undefined
       }
     }
@@ -217,7 +219,7 @@ return_type KortexMultiInterfaceHardware::start()
   auto base_feedback = base_cyclic_.RefreshFeedback();
   actuator_count_ = base_.GetActuatorCount().count();
 
-  // Add each actuator to the base_comnmand_ and set the command to it's current position
+  // Add each actuator to the base_command_ and set the command to its current position
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
     base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
@@ -228,31 +230,31 @@ return_type KortexMultiInterfaceHardware::start()
   // Set some default values
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
-    if (std::isnan(hw_positions_[i]))
+    if (std::isnan(arm_positions_[i]))
     {
-      hw_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+      arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
           KortexMathUtil::toRad(base_feedback.actuators(i).position()));  // rad
     }
-    if (std::isnan(hw_velocities_[i]))
+    if (std::isnan(arm_velocities_[i]))
     {
-      hw_velocities_[i] = 0;
+      arm_velocities_[i] = 0;
     }
-    if (std::isnan(hw_efforts_[i]))
+    if (std::isnan(arm_efforts_[i]))
     {
-      hw_efforts_[i] = 0;
+      arm_efforts_[i] = 0;
     }
-    if (std::isnan(hw_commands_positions_[i]))
+    if (std::isnan(arm_commands_positions_[i]))
     {
-      hw_commands_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+      arm_commands_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
           KortexMathUtil::toRad(base_feedback.actuators(i).position()));  // rad
     }
-    if (std::isnan(hw_commands_velocities_[i]))
+    if (std::isnan(arm_commands_velocities_[i]))
     {
-      hw_commands_velocities_[i] = 0;
+      arm_commands_velocities_[i] = 0;
     }
-    if (std::isnan(hw_commands_efforts_[i]))
+    if (std::isnan(arm_commands_efforts_[i]))
     {
-      hw_commands_efforts_[i] = 0;
+      arm_commands_efforts_[i] = 0;
     }
     control_lvl_[i] = integration_lvl_t::UNDEFINED;
   }
@@ -300,17 +302,17 @@ return_type KortexMultiInterfaceHardware::read()
         return return_type::OK;
         break;
       case integration_lvl_t::POSITION:
-        hw_efforts_[i] = feedback.actuators(i).torque();                              // N*m
-        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity());  // rad/sec
-        hw_positions_[i] =
+        arm_efforts_[i] = feedback.actuators(i).torque();                              // N*m
+        arm_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity());  // rad/sec
+        arm_positions_[i] =
             KortexMathUtil::wrapRadiansFromMinusPiToPi(KortexMathUtil::toRad(feedback.actuators(i).position()));  // rad
         break;
       case integration_lvl_t::VELOCITY:
-        hw_efforts_[i] = feedback.actuators(i).torque();                              // N*m
-        hw_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity());  // rad/sec
+        arm_efforts_[i] = feedback.actuators(i).torque();                              // N*m
+        arm_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity());  // rad/sec
         break;
       case integration_lvl_t::EFFORT:
-        hw_efforts_[i] = feedback.actuators(i).torque();  // N*m
+        arm_efforts_[i] = feedback.actuators(i).torque();  // N*m
         break;
     }
   }
@@ -321,6 +323,16 @@ return_type KortexMultiInterfaceHardware::write()
 {
   Kinova::Api::BaseCyclic::Feedback feedback;
 
+  // If gripper command is different than current position, send it
+  if (gripper_command_position_ != gripper_position_)
+  {
+    Kinova::Api::Base::GripperCommand command;
+    base_.SendGripperCommand(command);
+    // void SendGripperCommand(const GripperCommand& grippercommand, uint32_t deviceId = 0,
+    //                     const RouterClientSendOptions& options = { false, 0, 3000 });
+    return return_type::OK;
+  }
+
   // Incrementing identifier ensures actuators can reject out of time frames
   base_command_.set_frame_id(base_command_.frame_id() + 1);
   if (base_command_.frame_id() > 65535)
@@ -329,8 +341,8 @@ return_type KortexMultiInterfaceHardware::write()
   // update the command for each joint
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
-    float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(hw_commands_positions_[i]));
-    float cmd_vel = KortexMathUtil::toDeg(hw_commands_velocities_[i]);
+    float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i]));
+    float cmd_vel = KortexMathUtil::toDeg(arm_commands_velocities_[i]);
 
     base_command_.mutable_actuators(i)->set_position(cmd_degrees);
     base_command_.mutable_actuators(i)->set_velocity(cmd_vel);
