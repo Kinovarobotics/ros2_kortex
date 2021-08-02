@@ -17,7 +17,7 @@ class BagSubscriber : public rclcpp::Node
 public:
   BagSubscriber()
     : Node(LOGNAME)
-    , contact_monitor_(7 /* dof */, 0.5 /* torque threshold [Nm] */, 5 /* consecutive outliers to trigger */)
+    , contact_monitor_(7 /* dof */, 0.2 /* torque threshold [Nm] */, 8 /* consecutive outliers to trigger */)
   {
     joint_state_sub_ = this->create_subscription<sensor_msgs::msg::JointState>(
         "/joint_states", 1, std::bind(&BagSubscriber::jointStateCB, this, std::placeholders::_1));

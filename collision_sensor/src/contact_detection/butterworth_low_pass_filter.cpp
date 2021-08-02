@@ -10,7 +10,7 @@ namespace
 {
 constexpr double EPSILON = 1e-9;
 // TODO(andyz): read from yaml
-constexpr double FILTER_COEFFICIENT = 2;
+constexpr double FILTER_COEFFICIENT = 1.1;
 }  // namespace
 
 ButterworthFilter::ButterworthFilter()

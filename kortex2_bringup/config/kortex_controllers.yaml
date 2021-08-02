@@ -23,8 +23,8 @@ collision_sensor:
       - joint_7
     state_interfaces:
       - effort
-    torque_threshold_newton_meters: 0.5
-    consecutive_outliers_to_trigger: 5
+    torque_threshold_newton_meters: 0.2
+    consecutive_outliers_to_trigger: 8
 
 joint_trajectory_controller:
   ros__parameters:
