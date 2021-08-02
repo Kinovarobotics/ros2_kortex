@@ -1,4 +1,5 @@
 #include "kortex2_driver/hardware_interface.hpp"
+#include "kortex2_driver/kortex_math_util.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -26,6 +27,9 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , session_manager_real_time_{ &router_udp_realtime_ }
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
+  // TODO(andyz): make these configurable. They are hard-coded for Robotiq 2f-85 (taken from URDF)
+  , gripper_joint_limit_min_(0)    // rad
+  , gripper_joint_limit_max_(0.8)  // rad
 {
   rclcpp::on_shutdown(std::bind(&KortexMultiInterfaceHardware::stop, this));
 }
@@ -44,8 +48,8 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
   arm_commands_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   arm_commands_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   arm_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  gripper_command_position_.resize(1, std::numeric_limits<double>::quiet_NaN());
-  gripper_position_.resize(1, std::numeric_limits<double>::quiet_NaN());
+  gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
+  gripper_position_ = std::numeric_limits<double>::quiet_NaN();
   control_lvl_.resize(info_.joints.size(), integration_lvl_t::POSITION);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
@@ -326,10 +330,17 @@ return_type KortexMultiInterfaceHardware::write()
   // If gripper command is different than current position, send it
   if (gripper_command_position_ != gripper_position_)
   {
-    Kinova::Api::Base::GripperCommand command;
-    base_.SendGripperCommand(command);
-    // void SendGripperCommand(const GripperCommand& grippercommand, uint32_t deviceId = 0,
-    //                     const RouterClientSendOptions& options = { false, 0, 3000 });
+    // Good example in robotiq_gripper_command_action_server.cpp
+    Kinova::Api::Base::GripperCommand proto_gripper_command;
+    proto_gripper_command.set_mode(Kinova::Api::Base::GripperMode::GRIPPER_POSITION);
+    auto gripper = proto_gripper_command.mutable_gripper();
+    // Position for a finger must be between relative (between 0 and 1), but position is absolute in the Goal coming from ROS
+    double relative_position = KortexMathUtil::relative_position_from_absolute(
+        gripper_command_position_, gripper_joint_limit_min_, gripper_joint_limit_max_);
+    auto finger = gripper->add_finger();
+    finger->set_finger_identifier(0);
+    finger->set_value(relative_position);
+    base_.SendGripperCommand(proto_gripper_command);
     return return_type::OK;
   }
 

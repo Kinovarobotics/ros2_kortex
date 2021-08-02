@@ -15,7 +15,6 @@
 #include "hardware_interface/types/hardware_interface_status_values.hpp"
 
 #include "kortex2_driver/visibility_control.h"
-#include "kortex2_driver/kortex_math_util.hpp"
 
 #include <BaseClientRpc.h>
 #include <BaseCyclicClientRpc.h>
@@ -86,8 +85,10 @@ private:
   std::vector<double> arm_velocities_;
   std::vector<double> arm_efforts_;
   // Gripper
-  std::vector<double> gripper_command_position_;
-  std::vector<double> gripper_position_;
+  double gripper_command_position_;
+  double gripper_position_;
+  double gripper_joint_limit_min_;  // rad
+  double gripper_joint_limit_max_;  // rad
 
   // Enum defining at which control level we are
   // Dumb way of maintaining the command_interface type per joint.

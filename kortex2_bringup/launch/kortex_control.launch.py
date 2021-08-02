@@ -112,6 +112,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "gripper_controller",
+            default_value="gripper_controller",
+            description="Robot hand controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "launch_rviz", default_value="true", description="Launch RViz?"
         )
     )
@@ -129,6 +136,7 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
+    gripper_controller = LaunchConfiguration("gripper_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
 
     robot_description_content = Command(
@@ -208,12 +216,19 @@ def generate_launch_description():
         arguments=[robot_controller, "-c", "/controller_manager"],
     )
 
+    gripper_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner.py",
+        arguments=[gripper_controller, "-c", "/controller_manager"],
+    )
+
     nodes_to_start = [
         control_node,
         robot_state_publisher_node,
         rviz_node,
         joint_state_broadcaster_spawner,
         robot_controller_spawner,
+        gripper_controller_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes_to_start)
