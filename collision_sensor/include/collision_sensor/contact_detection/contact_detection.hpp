@@ -38,6 +38,8 @@ private:
 
   // A single outlier doesn't mean much. Check for this many consecutive outliers
   size_t consecutive_outliers_to_trigger_;
+
+  bool joint_torque_filters_initialized_;
 };
 
 }  // namespace collision_sensor

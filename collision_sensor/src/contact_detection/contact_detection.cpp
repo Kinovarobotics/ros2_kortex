@@ -7,6 +7,7 @@ ContactDetection::ContactDetection(size_t num_dof, double torque_threshold_newto
   : num_dof_(num_dof)
   , torque_threshold_newton_meters_(torque_threshold_newton_meters)
   , consecutive_outliers_to_trigger_(consecutive_outliers_to_trigger)
+  , joint_torque_filters_initialized_(false)
 {
   filters_.resize(num_dof_);
 
@@ -24,6 +25,15 @@ ReturnCode ContactDetection::registerMeasurement(std::vector<double>& current_jo
   if (current_joint_torques.size() != num_dof_)
   {
     return WRONG_JOINT_TORQUE_DIMENSION;
+  }
+
+  if (!joint_torque_filters_initialized_)
+  {
+    for (size_t joint = 0; joint < num_dof_; ++joint)
+    {
+      filters_.at(joint).reset(current_joint_torques.at(joint));
+    }
+    joint_torque_filters_initialized_ = true;
   }
 
   // For each joint, check if the current measurement is a deviation from the running average
