@@ -14,3 +14,10 @@ joint_trajectory_controller:
     - joint_5
     - joint_6
     - joint_7
+
+hand_controller:
+  action_ns: gripper_cmd
+  type: GripperCommand
+  default: true
+  joints:
+    - finger_joint
