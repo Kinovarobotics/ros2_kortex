@@ -334,7 +334,7 @@ return_type KortexMultiInterfaceHardware::write()
     Kinova::Api::Base::GripperCommand proto_gripper_command;
     proto_gripper_command.set_mode(Kinova::Api::Base::GripperMode::GRIPPER_POSITION);
     auto gripper = proto_gripper_command.mutable_gripper();
-    // Position for a finger must be between relative (between 0 and 1), but position is absolute in the Goal coming from ROS
+    // Position for a finger must be between relative (between 0 and 1), but position target is absolute
     double relative_position = KortexMathUtil::relative_position_from_absolute(
         gripper_command_position_, gripper_joint_limit_min_, gripper_joint_limit_max_);
     auto finger = gripper->add_finger();
