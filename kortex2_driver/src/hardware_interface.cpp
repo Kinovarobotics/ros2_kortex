@@ -42,6 +42,8 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
     return return_type::ERROR;
   }
 
+  info_ = info;
+
   arm_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   arm_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   arm_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());

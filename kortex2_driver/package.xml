@@ -9,9 +9,14 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>forward_command_controller</depend>
   <depend>hardware_interface</depend>
+  <depend>joint_state_controller</depend>
+  <depend>joint_trajectory_controller</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
   <depend>kortex_api</depend>
 
   <test_depend>ament_cmake_gtest</test_depend>

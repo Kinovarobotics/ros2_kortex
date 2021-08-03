@@ -15,9 +15,9 @@ To simulate the robot and generate paths with MoveIt run the following:
 
 To work with a physical robot and generate/execute paths with MoveIt run the following:
 
-        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=192.168.0.10 use_fake_hardware:=false launch_rviz:=false
+        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false launch_rviz:=false
 
-        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.0.10 use_fake_hardware:=false
+        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false
 
 ## Download links
 
