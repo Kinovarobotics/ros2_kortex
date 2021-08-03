@@ -54,16 +54,6 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
   {
-    // KortexMultiInterface has exactly 3 state interfaces
-    // and 3 command interfaces on each joint
-    // TODO (marqrazz) enable the effort interface and re-enable all 3 interfaces
-    if (joint.command_interfaces.size() != 2)
-    {
-      RCLCPP_FATAL(LOGGER, "Joint '%s' has %d command interfaces. 2 expected.", joint.name.c_str(),
-                   joint.command_interfaces.size());
-      return return_type::ERROR;
-    }
-
     if (!(joint.command_interfaces[0].name == hardware_interface::HW_IF_POSITION ||
           joint.command_interfaces[0].name == hardware_interface::HW_IF_VELOCITY ||
           joint.command_interfaces[0].name == hardware_interface::HW_IF_EFFORT))
@@ -71,13 +61,6 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
       RCLCPP_FATAL(LOGGER, "Joint '%s' has %s command interface. Expected %s, %s, or %s.", joint.name.c_str(),
                    joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION,
                    hardware_interface::HW_IF_VELOCITY, hardware_interface::HW_IF_EFFORT);
-      return return_type::ERROR;
-    }
-
-    if (joint.state_interfaces.size() != 3)
-    {
-      RCLCPP_FATAL(LOGGER, "Joint '%s'has %d state interfaces. 3 expected.", joint.name.c_str(),
-                   joint.state_interfaces.size());
       return return_type::ERROR;
     }
 
