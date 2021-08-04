@@ -33,14 +33,14 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
 {
   rclcpp::on_shutdown(std::bind(&KortexMultiInterfaceHardware::stop, this));
 
-  RCLCPP_INFO(LOGGER, "Connecting to robot at %s ...", info_.hardware_parameters["robot_ip"].c_str());
-
   // The robot's IP address.
-  std::string robot_ip = info_.hardware_parameters["robot_ip"];
+  std::string robot_ip = "192.168.1.10";  // TODO: read in info_.hardware_parameters["robot_ip"];
   // Username to log into the robot controller
   std::string username = "admin";  // TODO: read in info_.hardware_parameters["username"];
   // Password to log into the robot controller
   std::string password = "admin";  // TODO: read in info_.hardware_parameters["password"];
+
+  RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
 
   transport_tcp_.connect(robot_ip, PORT);
   transport_udp_realtime_.connect(robot_ip, PORT_REAL_TIME);
@@ -57,12 +57,13 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   session_manager_.CreateSession(create_session_info);
   session_manager_real_time_.CreateSession(create_session_info);
   RCLCPP_INFO(LOGGER, "Session created");
-
-  auto servoing_mode = k_api::Base::ServoingModeInformation();
-  // Set the base in low-level servoing mode
-  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode);
-  actuator_count_ = base_.GetActuatorCount().count();
+  /*
+    auto servoing_mode = k_api::Base::ServoingModeInformation();
+    // Set the base in low-level servoing mode
+    servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode);
+    actuator_count_ = base_.GetActuatorCount().count();
+  */
 }
 
 return_type KortexMultiInterfaceHardware::configure(const hardware_interface::HardwareInfo& info)
@@ -213,9 +214,10 @@ return_type KortexMultiInterfaceHardware::start()
   {
     base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
   }
-  // Send a first frame
-  base_feedback = base_cyclic_.Refresh(base_command_);
-
+  /*
+    // Send a first frame
+    base_feedback = base_cyclic_.Refresh(base_command_);
+  */
   // Set some default values
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -256,12 +258,12 @@ return_type KortexMultiInterfaceHardware::start()
 return_type KortexMultiInterfaceHardware::stop()
 {
   RCLCPP_INFO(LOGGER, "Stopping... please wait...");
-
-  auto servoing_mode = k_api::Base::ServoingModeInformation();
-  // Set back the servoing mode to Single Level Servoing
-  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode);
-
+  /*
+    auto servoing_mode = k_api::Base::ServoingModeInformation();
+    // Set back the servoing mode to Single Level Servoing
+    servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode);
+  */
   // Close API session
   session_manager_.CloseSession();
   session_manager_real_time_.CloseSession();
@@ -329,35 +331,36 @@ return_type KortexMultiInterfaceHardware::write()
     return return_type::OK;
   }
 
-  // Incrementing identifier ensures actuators can reject out of time frames
-  base_command_.set_frame_id(base_command_.frame_id() + 1);
-  if (base_command_.frame_id() > 65535)
-    base_command_.set_frame_id(0);
+  /*
+    // Incrementing identifier ensures actuators can reject out of time frames
+    base_command_.set_frame_id(base_command_.frame_id() + 1);
+    if (base_command_.frame_id() > 65535)
+      base_command_.set_frame_id(0);
 
-  // update the command for each joint
-  for (std::size_t i = 0; i < actuator_count_; i++)
-  {
-    float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i]));
-    float cmd_vel = KortexMathUtil::toDeg(arm_commands_velocities_[i]);
+    // update the command for each joint
+    for (std::size_t i = 0; i < actuator_count_; i++)
+    {
+      float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i]));
+      float cmd_vel = KortexMathUtil::toDeg(arm_commands_velocities_[i]);
 
-    base_command_.mutable_actuators(i)->set_position(cmd_degrees);
-    base_command_.mutable_actuators(i)->set_velocity(cmd_vel);
-    base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
-  }
+      base_command_.mutable_actuators(i)->set_position(cmd_degrees);
+      base_command_.mutable_actuators(i)->set_velocity(cmd_vel);
+      base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
+    }
 
-  // send the command to the robot
-  try
-  {
-    feedback = base_cyclic_.Refresh(base_command_, 0);
-  }
-  catch (k_api::KDetailedException& ex)
-  {
-    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+    // send the command to the robot
+    try
+    {
+      feedback = base_cyclic_.Refresh(base_command_, 0);
+    }
+    catch (k_api::KDetailedException& ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
 
-    RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
-                                    k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
-  }
-
+      RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                                      k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+    }
+  */
   return return_type::OK;
 }
 

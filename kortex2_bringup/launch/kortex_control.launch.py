@@ -67,7 +67,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_package",
-            default_value="gen3_move_it_config",
+            default_value="gen3_robotiq_2f_85_move_it_config",
             description="MoveIt configuration package for the robot. Usually the argument \
         is not set, it enables use of a custom config package.",
         )
@@ -86,6 +86,13 @@ def generate_launch_description():
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper",
+            default_value="robotiq_2f_85",
+            description="Name of the gripper attached to the arm",
         )
     )
     declared_arguments.append(
@@ -112,8 +119,8 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "gripper_controller",
-            default_value="gripper_controller",
+            "robot_hand_controller",
+            default_value="hand_controller",
             description="Robot hand controller to start.",
         )
     )
@@ -133,10 +140,11 @@ def generate_launch_description():
     moveit_config_package = LaunchConfiguration("moveit_config_package")
     description_file = LaunchConfiguration("description_file")
     prefix = LaunchConfiguration("prefix")
+    gripper = LaunchConfiguration("gripper")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
-    gripper_controller = LaunchConfiguration("gripper_controller")
+    robot_hand_controller = LaunchConfiguration("robot_hand_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
 
     robot_description_content = Command(
@@ -161,6 +169,9 @@ def generate_launch_description():
             " ",
             "fake_sensor_commands:=",
             fake_sensor_commands,
+            " ",
+            "gripper:=",
+            gripper,
             " ",
         ]
     )
@@ -216,19 +227,18 @@ def generate_launch_description():
         arguments=[robot_controller, "-c", "/controller_manager"],
     )
 
-    gripper_controller_spawner = Node(
+    robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
-        arguments=[gripper_controller, "-c", "/controller_manager"],
+        arguments=[robot_hand_controller, "-c", "/controller_manager"],
     )
-
     nodes_to_start = [
         control_node,
         robot_state_publisher_node,
         rviz_node,
         joint_state_broadcaster_spawner,
         robot_controller_spawner,
-        gripper_controller_spawner,
+        robot_hand_controller_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes_to_start)

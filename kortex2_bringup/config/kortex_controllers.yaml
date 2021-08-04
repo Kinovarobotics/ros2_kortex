@@ -9,7 +9,7 @@ controller_manager:
       type: joint_trajectory_controller/JointTrajectoryController
 
     # The gripper controller just relays position commands
-    gripper_controller:
+    hand_controller:
       type: forward_command_controller/ForwardCommandController
 
 joint_trajectory_controller:
@@ -34,7 +34,7 @@ joint_trajectory_controller:
       stopped_velocity_tolerance: 0.0
       goal_time: 0.0
 
-gripper_controller:
+hand_controller:
   ros__parameters:
     joints:
       - finger_joint

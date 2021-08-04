@@ -67,7 +67,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_package",
-            default_value="gen3_move_it_config",
+            default_value="gen3_robotiq_2f_85_move_it_config",
             description="MoveIt configuration package for the robot. Usually the argument \
         is not set, it enables use of a custom config package.",
         )
@@ -82,7 +82,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_file",
-            default_value="gen3.srdf.xacro",
+            default_value="gen3_robotiq_2f_85.srdf.xacro",
             description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )
@@ -178,7 +178,9 @@ def generate_launch_description():
         "robot_description_semantic": robot_description_semantic_content
     }
 
-    kinematics_yaml = load_yaml("gen3_move_it_config", "config/kinematics.yaml")
+    kinematics_yaml = load_yaml(
+        "gen3_robotiq_2f_85_move_it_config", "config/kinematics.yaml"
+    )
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
     # Planning Configuration
@@ -189,11 +191,15 @@ def generate_launch_description():
             "start_state_max_bounds_error": 0.1,
         }
     }
-    ompl_planning_yaml = load_yaml("gen3_move_it_config", "config/ompl_planning.yaml")
+    ompl_planning_yaml = load_yaml(
+        "gen3_robotiq_2f_85_move_it_config", "config/ompl_planning.yaml"
+    )
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 
     # Trajectory Execution Configuration
-    controllers_yaml = load_yaml("gen3_move_it_config", "config/7dof/controllers.yaml")
+    controllers_yaml = load_yaml(
+        "gen3_robotiq_2f_85_move_it_config", "config/7dof/controllers.yaml"
+    )
     moveit_controllers = {
         "moveit_simple_controller_manager": controllers_yaml,
         "moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager",
