@@ -5,9 +5,6 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    hand_controller:
-      type: position_controllers/GripperActionController
-
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
@@ -33,7 +30,3 @@ joint_trajectory_controller:
     constraints:
       stopped_velocity_tolerance: 0.0
       goal_time: 0.0
-
-hand_controller:
-  ros__parameters:
-    joint: finger_joint

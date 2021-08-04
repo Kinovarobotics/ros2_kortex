@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 2.8.3)
 project(gen3_robotiq_2f_85_move_it_config)
 
-find_package(ament_cmake REQUIRED)
+find_package(catkin REQUIRED)
 
-install(DIRECTORY config rviz
-  DESTINATION share/${PROJECT_NAME}
-)
+catkin_package()
 
-ament_package()
+install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  PATTERN "setup_assistant.launch" EXCLUDE)
+install(DIRECTORY config DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
