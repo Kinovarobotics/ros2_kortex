@@ -32,6 +32,37 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , gripper_joint_limit_max_(0.8)  // rad
 {
   rclcpp::on_shutdown(std::bind(&KortexMultiInterfaceHardware::stop, this));
+
+  RCLCPP_INFO(LOGGER, "Connecting to robot at %s ...", info_.hardware_parameters["robot_ip"].c_str());
+
+  // The robot's IP address.
+  std::string robot_ip = info_.hardware_parameters["robot_ip"];
+  // Username to log into the robot controller
+  std::string username = "admin";  // TODO: read in info_.hardware_parameters["username"];
+  // Password to log into the robot controller
+  std::string password = "admin";  // TODO: read in info_.hardware_parameters["password"];
+
+  transport_tcp_.connect(robot_ip, PORT);
+  transport_udp_realtime_.connect(robot_ip, PORT_REAL_TIME);
+
+  // Set session data connection information
+  auto create_session_info = k_api::Session::CreateSessionInfo();
+  create_session_info.set_username(username);
+  create_session_info.set_password(password);
+  create_session_info.set_session_inactivity_timeout(60000);    // (milliseconds)
+  create_session_info.set_connection_inactivity_timeout(2000);  // (milliseconds)
+
+  // Session manager service wrapper
+  RCLCPP_INFO(LOGGER, "Creating session for communication");
+  session_manager_.CreateSession(create_session_info);
+  session_manager_real_time_.CreateSession(create_session_info);
+  RCLCPP_INFO(LOGGER, "Session created");
+
+  auto servoing_mode = k_api::Base::ServoingModeInformation();
+  // Set the base in low-level servoing mode
+  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+  base_.SetServoingMode(servoing_mode);
+  actuator_count_ = base_.GetActuatorCount().count();
 }
 
 return_type KortexMultiInterfaceHardware::configure(const hardware_interface::HardwareInfo& info)
@@ -176,38 +207,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
 
 return_type KortexMultiInterfaceHardware::start()
 {
-  RCLCPP_INFO(LOGGER, "Connecting to robot at %s ...", info_.hardware_parameters["robot_ip"].c_str());
-
-  // The robot's IP address.
-  std::string robot_ip = info_.hardware_parameters["robot_ip"];
-  // Username to log into the robot controller
-  std::string username = "admin";  // TODO: read in info_.hardware_parameters["username"];
-  // Password to log into the robot controller
-  std::string password = "admin";  // TODO: read in info_.hardware_parameters["password"];
-
-  transport_tcp_.connect(robot_ip, PORT);
-  transport_udp_realtime_.connect(robot_ip, PORT_REAL_TIME);
-
-  // Set session data connection information
-  auto create_session_info = k_api::Session::CreateSessionInfo();
-  create_session_info.set_username(username);
-  create_session_info.set_password(password);
-  create_session_info.set_session_inactivity_timeout(60000);    // (milliseconds)
-  create_session_info.set_connection_inactivity_timeout(2000);  // (milliseconds)
-
-  // Session manager service wrapper
-  RCLCPP_INFO(LOGGER, "Creating session for communication");
-  session_manager_.CreateSession(create_session_info);
-  session_manager_real_time_.CreateSession(create_session_info);
-  RCLCPP_INFO(LOGGER, "Session created");
-
-  auto servoing_mode = k_api::Base::ServoingModeInformation();
-  // Set the base in low-level servoing mode
-  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode);
   auto base_feedback = base_cyclic_.RefreshFeedback();
-  actuator_count_ = base_.GetActuatorCount().count();
-
   // Add each actuator to the base_command_ and set the command to its current position
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
