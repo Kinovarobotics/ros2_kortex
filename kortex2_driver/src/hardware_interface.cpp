@@ -57,13 +57,12 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   session_manager_.CreateSession(create_session_info);
   session_manager_real_time_.CreateSession(create_session_info);
   RCLCPP_INFO(LOGGER, "Session created");
-  /*
-    auto servoing_mode = k_api::Base::ServoingModeInformation();
-    // Set the base in low-level servoing mode
-    servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-    base_.SetServoingMode(servoing_mode);
-    actuator_count_ = base_.GetActuatorCount().count();
-  */
+
+  auto servoing_mode = k_api::Base::ServoingModeInformation();
+  // Set the base in low-level servoing mode
+  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+  base_.SetServoingMode(servoing_mode);
+  actuator_count_ = base_.GetActuatorCount().count();
 }
 
 return_type KortexMultiInterfaceHardware::configure(const hardware_interface::HardwareInfo& info)
@@ -210,14 +209,26 @@ return_type KortexMultiInterfaceHardware::start()
 {
   auto base_feedback = base_cyclic_.RefreshFeedback();
   // Add each actuator to the base_command_ and set the command to its current position
-  for (std::size_t i = 0; i < actuator_count_; i++)
-  {
-    base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
-  }
   /*
-    // Send a first frame
-    base_feedback = base_cyclic_.Refresh(base_command_);
+    for (std::size_t i = 0; i < actuator_count_; i++)
+    {
+      base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
+    }
+
+      // Send a first frame
+      base_feedback = base_cyclic_.Refresh(base_command_);
   */
+
+  // Initialize gripper
+  float gripper_initial_position = base_feedback.interconnect().gripper_feedback().motor()[0].position();
+  // Initialize interconnect command to current gripper position.
+  base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
+
+  gripper_motor_command_ = base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
+  gripper_motor_command_->set_position(gripper_initial_position);
+  gripper_motor_command_->set_velocity(0.0);
+  gripper_motor_command_->set_force(100.0);
+
   // Set some default values
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -258,12 +269,12 @@ return_type KortexMultiInterfaceHardware::start()
 return_type KortexMultiInterfaceHardware::stop()
 {
   RCLCPP_INFO(LOGGER, "Stopping... please wait...");
-  /*
-    auto servoing_mode = k_api::Base::ServoingModeInformation();
-    // Set back the servoing mode to Single Level Servoing
-    servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-    base_.SetServoingMode(servoing_mode);
-  */
+
+  auto servoing_mode = k_api::Base::ServoingModeInformation();
+  // Set back the servoing mode to Single Level Servoing
+  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+  base_.SetServoingMode(servoing_mode);
+
   // Close API session
   session_manager_.CloseSession();
   session_manager_real_time_.CloseSession();
@@ -317,17 +328,29 @@ return_type KortexMultiInterfaceHardware::write()
   // If gripper command is different than current position, send it
   if (gripper_command_position_ != gripper_position_)
   {
-    // Good example in robotiq_gripper_command_action_server.cpp
-    Kinova::Api::Base::GripperCommand proto_gripper_command;
-    proto_gripper_command.set_mode(Kinova::Api::Base::GripperMode::GRIPPER_POSITION);
-    auto gripper = proto_gripper_command.mutable_gripper();
-    // Position for a finger must be between relative (between 0 and 1), but position target is absolute
-    double relative_position = KortexMathUtil::relative_position_from_absolute(
-        gripper_command_position_, gripper_joint_limit_min_, gripper_joint_limit_max_);
-    auto finger = gripper->add_finger();
-    finger->set_finger_identifier(0);
-    finger->set_value(relative_position);
-    base_.SendGripperCommand(proto_gripper_command);
+    /*
+        // "high level" example:
+        // https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/examples/106-Gripper_command/01-gripper_command.cpp
+        Kinova::Api::Base::GripperCommand proto_gripper_command;
+        proto_gripper_command.set_mode(Kinova::Api::Base::GripperMode::GRIPPER_POSITION);
+
+        auto finger = proto_gripper_command.mutable_gripper()->add_finger();
+        finger->set_finger_identifier(1);
+        // Position for a finger must be between relative (between 0 and 1), but position target is absolute
+        double relative_position = KortexMathUtil::relative_position_from_absolute(
+            gripper_command_position_, gripper_joint_limit_min_, gripper_joint_limit_max_);
+        finger->set_value(relative_position);
+        base_.SendGripperCommand(proto_gripper_command);
+    */
+    // "low level" example:
+    // https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/examples/107-Gripper_low_level_command/01-gripper_low_level_command.cpp
+    base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
+    gripper_motor_command_ = base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
+    gripper_motor_command_->set_position(1);
+    gripper_motor_command_->set_velocity(1);
+
+    auto base_feedback_ = base_cyclic_.Refresh(base_command_);
+
     return return_type::OK;
   }
 
