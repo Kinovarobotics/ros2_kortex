@@ -15,18 +15,19 @@ namespace
 const rclcpp::Logger LOGGER = rclcpp::get_logger("KortexGripperInterfaceHardware");
 }
 
-std::string interfaces_to_string(
-  const std::vector<std::string> & start_interfaces,
-  const std::vector<std::string> & stop_interfaces)
+std::string interfaces_to_string(const std::vector<std::string>& start_interfaces,
+                                 const std::vector<std::string>& stop_interfaces)
 {
   std::stringstream ss;
   ss << "Start interfaces: " << std::endl << "[" << std::endl;
-  for (const auto & start_if : start_interfaces) {
+  for (const auto& start_if : start_interfaces)
+  {
     ss << "  " << start_if << std::endl;
   }
   ss << "]" << std::endl;
   ss << "Stop interfaces: " << std::endl << "[" << std::endl;
-  for (const auto & stop_if : stop_interfaces) {
+  for (const auto& stop_if : stop_interfaces)
+  {
     ss << "  " << stop_if << std::endl;
   }
   ss << "]" << std::endl;
@@ -55,6 +56,8 @@ return_type KortexGripperInterfaceHardware::configure(const hardware_interface::
   {
     return return_type::ERROR;
   }
+
+  info_ = info;
 
   hw_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   hw_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
@@ -131,11 +134,12 @@ std::vector<hardware_interface::CommandInterface> KortexGripperInterfaceHardware
 }
 
 return_type KortexGripperInterfaceHardware::prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
-                                                                      const std::vector<std::string>& stop_interfaces)
+                                                                        const std::vector<std::string>& stop_interfaces)
 {
   // Prepare for new command modes
   std::vector<integration_lvl_t> new_modes = {};
-  // RCLCPP_ERROR(LOGGER, "*************** prepare_command_mode_switch: %s", interfaces_to_string(start_interfaces, stop_interfaces).c_str());
+  // RCLCPP_ERROR(LOGGER, "*************** prepare_command_mode_switch: %s", interfaces_to_string(start_interfaces,
+  // stop_interfaces).c_str());
   for (std::string key : start_interfaces)
   {
     for (std::size_t i = 0; i < info_.joints.size(); i++)
@@ -234,7 +238,7 @@ return_type KortexGripperInterfaceHardware::start()
   base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
 
   gripper_command = base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
-  gripper_command->set_position(gripper_initial_position );
+  gripper_command->set_position(gripper_initial_position);
   gripper_command->set_velocity(0.0);
   gripper_command->set_force(100.0);
 
@@ -298,7 +302,7 @@ return_type KortexGripperInterfaceHardware::read()
   k_api::Base::Gripper gripper_feedback;
   k_api::Base::GripperRequest gripper_request;
   gripper_request.set_mode(k_api::Base::GRIPPER_POSITION);
-  gripper_feedback = base_.GetMeasuredGripperMovement(gripper_request);  
+  gripper_feedback = base_.GetMeasuredGripperMovement(gripper_request);
   hw_positions_[0] = gripper_feedback.finger(0).value();
 
   return return_type::OK;
@@ -339,7 +343,6 @@ return_type KortexGripperInterfaceHardware::write()
 
   return return_type::OK;
 }
-
 
 }  // namespace kortex2_gripper_driver
 
