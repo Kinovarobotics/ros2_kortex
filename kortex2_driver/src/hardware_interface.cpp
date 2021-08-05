@@ -27,9 +27,6 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , session_manager_real_time_{ &router_udp_realtime_ }
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
-  // TODO(andyz): make these configurable. They are hard-coded for Robotiq 2f-85 (taken from URDF)
-  , gripper_joint_limit_min_(0)    // rad
-  , gripper_joint_limit_max_(0.8)  // rad
 {
   rclcpp::on_shutdown(std::bind(&KortexMultiInterfaceHardware::stop, this));
 
@@ -83,7 +80,7 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
   arm_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
-  control_lvl_.resize(info_.joints.size(), integration_lvl_t::POSITION);
+  arm_joints_control_level_.resize(info_.joints.size(), integration_lvl_t::POSITION);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
   {
@@ -168,16 +165,6 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
       }
     }
   }
-  // Example criteria: All joints must be given new command mode at the same time
-  if (new_modes.size() != info_.joints.size())
-  {
-    return return_type::ERROR;
-  }
-  // Example criteria: All joints must have the same command mode
-  if (!std::all_of(new_modes.begin() + 1, new_modes.end(), [&](integration_lvl_t mode) { return mode == new_modes[0]; }))
-  {
-    return return_type::ERROR;
-  }
 
   // Stop motion on all relevant joints that are stopping
   for (std::string key : stop_interfaces)
@@ -188,20 +175,17 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
       {
         arm_commands_velocities_[i] = 0;
         arm_commands_efforts_[i] = 0;
-        control_lvl_[i] = integration_lvl_t::UNDEFINED;  // Revert to undefined
+        arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;  // Revert to undefined
       }
     }
   }
+
   // Set the new command modes
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
-    if (control_lvl_[i] != integration_lvl_t::UNDEFINED)
-    {
-      // Something else is using the joint! Abort!
-      return return_type::ERROR;
-    }
-    control_lvl_[i] = new_modes[i];
+    arm_joints_control_level_[i] = new_modes[i];
   }
+
   return return_type::OK;
 }
 
@@ -210,25 +194,24 @@ return_type KortexMultiInterfaceHardware::start()
   auto base_feedback = base_cyclic_.RefreshFeedback();
   // Add each actuator to the base_command_ and set the command to its current position
   /*
-    for (std::size_t i = 0; i < actuator_count_; i++)
-    {
-      base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
-    }
+      for (std::size_t i = 0; i < actuator_count_; i++)
+      {
+        base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
+      }
 
-      // Send a first frame
-      base_feedback = base_cyclic_.Refresh(base_command_);
+    // Initialize gripper
+    float gripper_initial_position = base_feedback.interconnect().gripper_feedback().motor()[0].position();
+    // Initialize interconnect command to current gripper position.
+    base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
+
+    gripper_motor_command_ = base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
+    gripper_motor_command_->set_position(gripper_initial_position);
+    gripper_motor_command_->set_velocity(0.0);
+    gripper_motor_command_->set_force(100.0);
+
+    // Send a first frame
+    base_feedback = base_cyclic_.Refresh(base_command_);
   */
-
-  // Initialize gripper
-  float gripper_initial_position = base_feedback.interconnect().gripper_feedback().motor()[0].position();
-  // Initialize interconnect command to current gripper position.
-  base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
-
-  gripper_motor_command_ = base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
-  gripper_motor_command_->set_position(gripper_initial_position);
-  gripper_motor_command_->set_velocity(0.0);
-  gripper_motor_command_->set_force(100.0);
-
   // Set some default values
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -258,11 +241,11 @@ return_type KortexMultiInterfaceHardware::start()
     {
       arm_commands_efforts_[i] = 0;
     }
-    control_lvl_[i] = integration_lvl_t::UNDEFINED;
+    arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;
   }
   status_ = hardware_interface::status::STARTED;
 
-  RCLCPP_INFO(LOGGER, "System successfully started! %u", control_lvl_[0]);
+  RCLCPP_INFO(LOGGER, "System successfully started! %u", arm_joints_control_level_[0]);
   return return_type::OK;
 }
 
@@ -297,7 +280,7 @@ return_type KortexMultiInterfaceHardware::read()
   auto feedback = base_cyclic_.RefreshFeedback();
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
-    switch (control_lvl_[i])
+    switch (arm_joints_control_level_[i])
     {
       case integration_lvl_t::UNDEFINED:
         RCLCPP_INFO(LOGGER, "Nothing is using the hardware interface!");
@@ -324,36 +307,24 @@ return_type KortexMultiInterfaceHardware::read()
 return_type KortexMultiInterfaceHardware::write()
 {
   Kinova::Api::BaseCyclic::Feedback feedback;
+  /*
+    // If gripper command is different than current position, send it
+    if (gripper_command_position_ != gripper_position_)
+    {
+      /*
+      // example:
+      //
+    https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/examples/107-Gripper_low_level_command/01-gripper_low_level_command.cpp
+      base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
+      gripper_motor_command_ = base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
+      gripper_motor_command_->set_position(1);
+      gripper_motor_command_->set_velocity(1);
 
-  // If gripper command is different than current position, send it
-  if (gripper_command_position_ != gripper_position_)
-  {
-    /*
-        // "high level" example:
-        // https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/examples/106-Gripper_command/01-gripper_command.cpp
-        Kinova::Api::Base::GripperCommand proto_gripper_command;
-        proto_gripper_command.set_mode(Kinova::Api::Base::GripperMode::GRIPPER_POSITION);
-
-        auto finger = proto_gripper_command.mutable_gripper()->add_finger();
-        finger->set_finger_identifier(1);
-        // Position for a finger must be between relative (between 0 and 1), but position target is absolute
-        double relative_position = KortexMathUtil::relative_position_from_absolute(
-            gripper_command_position_, gripper_joint_limit_min_, gripper_joint_limit_max_);
-        finger->set_value(relative_position);
-        base_.SendGripperCommand(proto_gripper_command);
-    */
-    // "low level" example:
-    // https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/examples/107-Gripper_low_level_command/01-gripper_low_level_command.cpp
-    base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
-    gripper_motor_command_ = base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
-    gripper_motor_command_->set_position(1);
-    gripper_motor_command_->set_velocity(1);
-
-    auto base_feedback_ = base_cyclic_.Refresh(base_command_);
-
-    return return_type::OK;
-  }
-
+      auto base_feedback_ = base_cyclic_.Refresh(base_command_);
+      // TODO(andyz): returning here means the arm cannot move while gripper is actuated
+      return return_type::OK;
+    }
+  */
   /*
     // Incrementing identifier ensures actuators can reject out of time frames
     base_command_.set_frame_id(base_command_.frame_id() + 1);

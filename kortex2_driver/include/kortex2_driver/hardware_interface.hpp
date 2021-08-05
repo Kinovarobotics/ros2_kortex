@@ -86,8 +86,6 @@ private:
   k_api::GripperCyclic::MotorCommand* gripper_motor_command_;
   double gripper_command_position_;
   double gripper_position_;
-  double gripper_joint_limit_min_;  // rad
-  double gripper_joint_limit_max_;  // rad
 
   // Enum defining at which control level we are
   // Dumb way of maintaining the command_interface type per joint.
@@ -99,7 +97,7 @@ private:
     EFFORT = 3
   };
 
-  std::vector<integration_lvl_t> control_lvl_;
+  std::vector<integration_lvl_t> arm_joints_control_level_;
 };
 
 }  // namespace kortex2_driver
