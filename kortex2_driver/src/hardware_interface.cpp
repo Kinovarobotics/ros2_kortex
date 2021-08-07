@@ -342,7 +342,7 @@ return_type KortexMultiInterfaceHardware::write()
   Kinova::Api::BaseCyclic::Feedback feedback;
   gripper_motor_command_->set_position(gripper_command_position_);  // % position
   gripper_motor_command_->set_velocity(100.0);  // % speed TODO read in as paramter from kortex_controllers.yaml
-  gripper_motor_command_->set_force(100.0);    // % torque TODO read in as paramter from kortex_controllers.yaml
+  gripper_motor_command_->set_force(100.0);     // % torque TODO read in as paramter from kortex_controllers.yaml
 
   // Incrementing identifier ensures actuators can reject out of time frames
   base_command_.set_frame_id(base_command_.frame_id() + 1);
