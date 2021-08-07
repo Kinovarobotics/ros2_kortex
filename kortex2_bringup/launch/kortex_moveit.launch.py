@@ -67,7 +67,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_package",
-            default_value="gen3_move_it_config",
+            default_value="gen3_robotiq_2f_85_move_it_config",
             description="MoveIt configuration package for the robot. Usually the argument \
         is not set, it enables use of a custom config package.",
         )
@@ -82,7 +82,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_file",
-            default_value="gen3.srdf.xacro",
+            default_value="gen3_robotiq_2f_85.srdf.xacro",
             description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )
@@ -93,6 +93,13 @@ def generate_launch_description():
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper",
+            default_value="robotiq_2f_85",
+            description="Name of the gripper attached to the arm",
         )
     )
     declared_arguments.append(
@@ -125,6 +132,7 @@ def generate_launch_description():
     moveit_config_package = LaunchConfiguration("moveit_config_package")
     moveit_config_file = LaunchConfiguration("moveit_config_file")
     prefix = LaunchConfiguration("prefix")
+    gripper = LaunchConfiguration("gripper")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     launch_rviz = LaunchConfiguration("launch_rviz")
@@ -145,6 +153,9 @@ def generate_launch_description():
             " ",
             "prefix:=",
             prefix,
+            " ",
+            "gripper:=",
+            gripper,
             " ",
             "use_fake_hardware:=",
             use_fake_hardware,
@@ -178,7 +189,9 @@ def generate_launch_description():
         "robot_description_semantic": robot_description_semantic_content
     }
 
-    kinematics_yaml = load_yaml("gen3_move_it_config", "config/kinematics.yaml")
+    kinematics_yaml = load_yaml(
+        "gen3_robotiq_2f_85_move_it_config", "config/kinematics.yaml"
+    )
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
     # Planning Configuration
@@ -189,11 +202,15 @@ def generate_launch_description():
             "start_state_max_bounds_error": 0.1,
         }
     }
-    ompl_planning_yaml = load_yaml("gen3_move_it_config", "config/ompl_planning.yaml")
+    ompl_planning_yaml = load_yaml(
+        "gen3_robotiq_2f_85_move_it_config", "config/ompl_planning.yaml"
+    )
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 
     # Trajectory Execution Configuration
-    controllers_yaml = load_yaml("gen3_move_it_config", "config/7dof/controllers.yaml")
+    controllers_yaml = load_yaml(
+        "gen3_robotiq_2f_85_move_it_config", "config/7dof/controllers.yaml"
+    )
     moveit_controllers = {
         "moveit_simple_controller_manager": controllers_yaml,
         "moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager",

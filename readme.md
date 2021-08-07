@@ -15,9 +15,25 @@ To simulate the robot and generate paths with MoveIt run the following:
 
 To work with a physical robot and generate/execute paths with MoveIt run the following:
 
-        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=192.168.0.10 use_fake_hardware:=false launch_rviz:=false
+        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false launch_rviz:=false
 
-        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.0.10 use_fake_hardware:=false
+        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false
+
+Gripper is currently on a command topic:
+
+        /hand_controller/commands
+
+You can test the gripper with the following but replace <> with value as a percentage of open (`0.0=open`, `100.0=close`)
+
+        rezilient_ws$ ros2 topic pub /hand_controller/commands std_msgs/msg/Float64MultiArray "layout:
+        dim:
+        - label: ''
+        size: 0
+        stride: 0
+        data_offset: 0
+        data:
+        - <desired_gripper_position value as float>"
+
 
 ## Download links
 

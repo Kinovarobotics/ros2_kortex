@@ -15,7 +15,6 @@
 #include "hardware_interface/types/hardware_interface_status_values.hpp"
 
 #include "kortex2_driver/visibility_control.h"
-#include "kortex2_driver/kortex_math_util.hpp"
 
 #include <BaseClientRpc.h>
 #include <BaseCyclicClientRpc.h>
@@ -71,19 +70,22 @@ private:
   k_api::TransportClientUdp transport_udp_realtime_;
   k_api::RouterClient router_udp_realtime_;
   k_api::SessionManager session_manager_real_time_;
+
+  // Control of the robot arm itself
   k_api::Base::BaseClient base_;
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
-
   k_api::BaseCyclic::Command base_command_;
   std::size_t actuator_count_;
-
-  // Store the commands for the robot
-  std::vector<double> hw_commands_positions_;
-  std::vector<double> hw_commands_velocities_;
-  std::vector<double> hw_commands_efforts_;
-  std::vector<double> hw_positions_;
-  std::vector<double> hw_velocities_;
-  std::vector<double> hw_efforts_;
+  std::vector<double> arm_commands_positions_;
+  std::vector<double> arm_commands_velocities_;
+  std::vector<double> arm_commands_efforts_;
+  std::vector<double> arm_positions_;
+  std::vector<double> arm_velocities_;
+  std::vector<double> arm_efforts_;
+  // Gripper
+  k_api::GripperCyclic::MotorCommand* gripper_motor_command_;
+  double gripper_command_position_;
+  double gripper_position_;
 
   // Enum defining at which control level we are
   // Dumb way of maintaining the command_interface type per joint.
@@ -95,7 +97,7 @@ private:
     EFFORT = 3
   };
 
-  std::vector<integration_lvl_t> control_lvl_;
+  std::vector<integration_lvl_t> arm_joints_control_level_;
 };
 
 }  // namespace kortex2_driver
