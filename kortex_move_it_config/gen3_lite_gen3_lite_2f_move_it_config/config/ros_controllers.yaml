@@ -13,3 +13,10 @@ controller_list:
       - $(arg prefix)joint_4
       - $(arg prefix)joint_5
       - $(arg prefix)joint_6
+
+  - name: "$(arg prefix)gen3_lite_2f_gripper_controller"
+    action_ns: gripper_cmd
+    default: True
+    type: GripperCommand
+    joints:
+      - $(arg prefix)right_finger_bottom_joint

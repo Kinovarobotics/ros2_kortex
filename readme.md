@@ -19,6 +19,22 @@ To work with a physical robot and generate/execute paths with MoveIt run the fol
 
         ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false
 
+Gripper is currently on a command topic:
+
+        /hand_controller/commands
+
+You can test the gripper with the following but replace <> with value as a percentage of open (`0.0=open`, `100.0=close`)
+
+        rezilient_ws$ ros2 topic pub /hand_controller/commands std_msgs/msg/Float64MultiArray "layout:
+        dim:
+        - label: ''
+        size: 0
+        stride: 0
+        data_offset: 0
+        data:
+        - <desired_gripper_position value as float>"
+
+
 ## Download links
 
 You can refer to the [Kortex repository "Download links" section](https://github.com/Kinovarobotics/kortex#download-links) to download the firmware package and the release notes.
