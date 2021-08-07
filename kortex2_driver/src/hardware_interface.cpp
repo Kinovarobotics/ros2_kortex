@@ -163,18 +163,16 @@ std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::
 return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
                                                                       const std::vector<std::string>& stop_interfaces)
 {
-  // RCLCPP_WARN(LOGGER, "Prepare for new command modes");
   // Prepare for new command modes
   std::vector<integration_lvl_t> new_modes = {};
   std::vector<std::size_t> new_mode_joint_index = {};
   for (std::string key : start_interfaces)
   {
-    // RCLCPP_WARN(LOGGER, "New command mode for joint: %s, total joints: %u", key.c_str(), info_.joints.size());
+    RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s, total joints: %u", key.c_str(), info_.joints.size());
     for (std::size_t i = 0; i < info_.joints.size(); i++)
     {
       if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION)
       {
-        // RCLCPP_WARN(LOGGER, "Joint: %s Index: %u", info_.joints[i].name.c_str(), i);
         new_modes.push_back(integration_lvl_t::POSITION);
         new_mode_joint_index.push_back(i);
       }
@@ -209,7 +207,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   for (std::size_t i = 0; i < new_modes.size(); i++)
   {
     arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
-    // RCLCPP_WARN(LOGGER, "arm_joints_control_level_[%d], mode: %u", new_mode_joint_index[i], new_modes[i]);
+    RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%d], mode: %u", new_mode_joint_index[i], new_modes[i]);
   }
 
   return return_type::OK;
@@ -343,7 +341,7 @@ return_type KortexMultiInterfaceHardware::write()
 {
   Kinova::Api::BaseCyclic::Feedback feedback;
   gripper_motor_command_->set_position(gripper_command_position_);  // % position
-  gripper_motor_command_->set_velocity(40.0);  // % speed TODO read in as paramter from kortex_controllers.yaml
+  gripper_motor_command_->set_velocity(100.0);  // % speed TODO read in as paramter from kortex_controllers.yaml
   gripper_motor_command_->set_force(100.0);    // % torque TODO read in as paramter from kortex_controllers.yaml
 
   // Incrementing identifier ensures actuators can reject out of time frames
