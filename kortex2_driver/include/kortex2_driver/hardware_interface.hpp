@@ -71,7 +71,7 @@ private:
   k_api::RouterClient router_udp_realtime_;
   k_api::SessionManager session_manager_real_time_;
 
-  // Control of the robot arm itself
+  // Robot arm
   k_api::Base::BaseClient base_;
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
   k_api::BaseCyclic::Command base_command_;
@@ -82,6 +82,7 @@ private:
   std::vector<double> arm_positions_;
   std::vector<double> arm_velocities_;
   std::vector<double> arm_efforts_;
+  std::vector<float> end_effector_force_;
   // Gripper
   k_api::GripperCyclic::MotorCommand* gripper_motor_command_;
   double gripper_command_position_;

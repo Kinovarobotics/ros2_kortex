@@ -334,6 +334,12 @@ return_type KortexMultiInterfaceHardware::read()
         break;
     }
   }
+
+  end_effector_force_[0] = feedback.base().tool_external_wrench_force_x();
+  RCLCPP_INFO_STREAM(LOGGER, end_effector_force_[0]);
+  end_effector_force_[1] = feedback.base().tool_external_wrench_force_y();
+  end_effector_force_[2] = feedback.base().tool_external_wrench_force_z();
+
   return return_type::OK;
 }
 
