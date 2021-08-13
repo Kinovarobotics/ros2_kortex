@@ -31,8 +31,7 @@ def generate_launch_description():
     declared_arguments = []
     # Robot specific arguments
     declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_type", description="Type/series of robot.")
+        DeclareLaunchArgument("robot_type", description="Type/series of robot.")
     )
     # TODO(anyone): enable this
     # choices=['gen3', 'gen3_lite', ...]))
@@ -161,8 +160,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(description_package),
-                 "robots", description_file]
+                [FindPackageShare(description_package), "robots", description_file]
             ),
             " ",
             "robot_ip:=",
