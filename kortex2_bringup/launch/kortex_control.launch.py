@@ -31,7 +31,8 @@ def generate_launch_description():
     declared_arguments = []
     # Robot specific arguments
     declared_arguments.append(
-        DeclareLaunchArgument("robot_type", description="Type/series of robot.")
+        DeclareLaunchArgument(
+            "robot_type", description="Type/series of robot.")
     )
     # TODO(anyone): enable this
     # choices=['gen3', 'gen3_lite', ...]))
@@ -119,6 +120,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "robot_pos_controller",
+            default_value="position_controller",
+            description="Robot controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "robot_hand_controller",
             default_value="hand_controller",
             description="Robot hand controller to start.",
@@ -143,7 +151,8 @@ def generate_launch_description():
     gripper = LaunchConfiguration("gripper")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
-    robot_controller = LaunchConfiguration("robot_controller")
+    robot_traj_controller = LaunchConfiguration("robot_controller")
+    robot_pos_controller = LaunchConfiguration("robot_pos_controller")
     robot_hand_controller = LaunchConfiguration("robot_hand_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
 
@@ -152,7 +161,8 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(description_package), "robots", description_file]
+                [FindPackageShare(description_package),
+                 "robots", description_file]
             ),
             " ",
             "robot_ip:=",
@@ -221,10 +231,16 @@ def generate_launch_description():
         ],
     )
 
-    robot_controller_spawner = Node(
+    robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
-        arguments=[robot_controller, "-c", "/controller_manager"],
+        arguments=[robot_traj_controller, "-c", "/controller_manager"],
+    )
+
+    robot_pos_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner.py",
+        arguments=[robot_pos_controller, "-c", "/controller_manager"],
     )
 
     robot_hand_controller_spawner = Node(
@@ -237,7 +253,8 @@ def generate_launch_description():
         robot_state_publisher_node,
         rviz_node,
         joint_state_broadcaster_spawner,
-        robot_controller_spawner,
+        robot_traj_controller_spawner,
+        # robot_pos_controller_spawner,
         robot_hand_controller_spawner,
     ]
 
