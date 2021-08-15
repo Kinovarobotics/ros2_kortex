@@ -81,7 +81,7 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
   arm_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
-  arm_joints_control_level_.resize(info_.joints.size(), integration_lvl_t::POSITION);
+  arm_joints_control_level_.resize(info_.joints.size(), integration_lvl_t::UNDEFINED);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
   {
@@ -268,7 +268,7 @@ return_type KortexMultiInterfaceHardware::start()
   }
   status_ = hardware_interface::status::STARTED;
 
-  RCLCPP_INFO(LOGGER, "System successfully started! %u", arm_joints_control_level_[0]);
+  RCLCPP_INFO(LOGGER, "System successfully started! Control level: %u", arm_joints_control_level_[0]);
   return return_type::OK;
 }
 
@@ -352,29 +352,56 @@ return_type KortexMultiInterfaceHardware::write()
   // update the command for each joint
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
-    float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i]));
-    float cmd_vel = KortexMathUtil::toDeg(arm_commands_velocities_[i]);
-
-    base_command_.mutable_actuators(i)->set_position(cmd_degrees);
-    base_command_.mutable_actuators(i)->set_velocity(cmd_vel);
+    switch (arm_joints_control_level_[i])
+    {
+      case integration_lvl_t::UNDEFINED:
+      {
+        RCLCPP_INFO(LOGGER, "Nothing is using the hardware interface! %u", i);
+        base_command_.mutable_actuators(i)->clear_position();
+        base_command_.mutable_actuators(i)->clear_velocity();
+        return return_type::OK;
+      }
+      case integration_lvl_t::POSITION:
+      {
+        float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i]));
+        base_command_.mutable_actuators(i)->set_position(cmd_degrees);
+        base_command_.mutable_actuators(i)->clear_velocity();
+        break;
+      }
+      case integration_lvl_t::VELOCITY:
+      {
+        float cmd_vel = KortexMathUtil::toDeg(arm_commands_velocities_[i]);
+        base_command_.mutable_actuators(i)->set_velocity(cmd_vel);
+        base_command_.mutable_actuators(i)->clear_position();
+        break;
+      }
+      default:
+      {
+        RCLCPP_ERROR(LOGGER, "Undefined command level in the hw interface. Not setting any command");
+        base_command_.mutable_actuators(i)->clear_position();
+        base_command_.mutable_actuators(i)->clear_velocity();
+        return return_type::ERROR;
+      }
+    }
     base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
+
+    // send the command to the robot
+    try
+    {
+      feedback = base_cyclic_.Refresh(base_command_, 0);
+    }
+    catch (k_api::KDetailedException& ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+      RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                                      k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+      return return_type::ERROR;
+    }
   }
 
-  // send the command to the robot
-  try
-  {
-    feedback = base_cyclic_.Refresh(base_command_, 0);
-  }
-  catch (k_api::KDetailedException& ex)
-  {
-    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
-
-    RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
-                                    k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
-  }
   return return_type::OK;
 }
-
 }  // namespace kortex2_driver
 
 #include "pluginlib/class_list_macros.hpp"
