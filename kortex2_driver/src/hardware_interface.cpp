@@ -384,20 +384,20 @@ return_type KortexMultiInterfaceHardware::write()
       }
     }
     base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
+  }
 
-    // send the command to the robot
-    try
-    {
-      feedback = base_cyclic_.Refresh(base_command_, 0);
-    }
-    catch (k_api::KDetailedException& ex)
-    {
-      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+  // send the command to the robot
+  try
+  {
+    feedback = base_cyclic_.Refresh(base_command_, 0);
+  }
+  catch (k_api::KDetailedException& ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
 
-      RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
-                                      k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
-      return return_type::ERROR;
-    }
+    RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                                    k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+    return return_type::ERROR;
   }
 
   return return_type::OK;
