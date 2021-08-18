@@ -8,7 +8,7 @@ controller_manager:
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
-    position_controller:
+    streaming_controller:
       type: position_controllers/JointGroupPositionController
 
     # The gripper controller just relays position commands
@@ -37,7 +37,7 @@ joint_trajectory_controller:
       stopped_velocity_tolerance: 0.0
       goal_time: 0.0
 
-position_controller:
+streaming_controller:
   ros__parameters:
     joints:
       - joint_1
