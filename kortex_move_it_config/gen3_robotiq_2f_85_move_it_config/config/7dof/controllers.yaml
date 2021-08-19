@@ -1,5 +1,6 @@
 controller_names:
   - joint_trajectory_controller
+  - hand_controller
 
 joint_trajectory_controller:
   action_ns: follow_joint_trajectory
@@ -15,3 +16,9 @@ joint_trajectory_controller:
     - joint_7
 
      # Gripper is currently on a command topic: /hand_controller/commands
+hand_controller:
+  action_ns: gripper_cmd
+  type: GripperCommand
+  default: true
+  joints:
+    - finger_joint
