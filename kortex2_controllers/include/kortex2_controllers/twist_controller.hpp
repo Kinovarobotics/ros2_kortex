@@ -33,14 +33,16 @@ using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface
 /**
  * \brief Forward a twist command to the proprietary Kinova servoing API
  *
- * This is similar functionality to MoveIt Servo, but Kinova does not expose the low-level controllers in a way
- * that works well with Servo.
+ * This jogging is similar in functionality to MoveIt Servo, but Kinova does not expose the low-level controllers in a
+ * way that works well with Servo.
+ *
+ * This controller type inherits from a ForwardCommandController. The difference is, it takes a geometry_msgs/Twist.
  *
  * \param joints Names of the joints to control.
  * \param interface_name Name of the interface to command.
  *
  * Subscribes to:
- * - \b commands (geometry_msgs::msg::Twist) : The commands to apply in frame X by default.
+ * - \b commands (geometry_msgs::msg::Twist) : The commands to apply in the tool frame.
  */
 class TwistController : public forward_command_controller::ForwardCommandController
 {

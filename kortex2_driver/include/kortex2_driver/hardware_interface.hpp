@@ -75,7 +75,7 @@ private:
   k_api::Base::BaseClient base_;
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
   k_api::BaseCyclic::Command base_command_;
-  std::size_t actuator_count_;
+  std::size_t kinova_joint_count_;
   std::vector<double> arm_commands_positions_;
   std::vector<double> arm_commands_velocities_;
   std::vector<double> arm_commands_efforts_;
@@ -91,10 +91,11 @@ private:
   // Dumb way of maintaining the command_interface type per joint.
   enum class integration_lvl_t : std::uint8_t
   {
-    UNDEFINED = 0,
+    UNDEFINED = 0,  // Motion will stop if UNDEFINED
     POSITION = 1,
     VELOCITY = 2,
-    EFFORT = 3
+    EFFORT = 3,
+    TWIST = 4
   };
 
   std::vector<integration_lvl_t> arm_joints_control_level_;
