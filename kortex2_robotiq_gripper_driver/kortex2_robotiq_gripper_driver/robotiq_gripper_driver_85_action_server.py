@@ -52,8 +52,9 @@ from rclpy.exceptions import ParameterNotDeclaredException
 from rcl_interfaces.msg import ParameterType
 
 from control_msgs.action import GripperCommand
-from robotiq_85_msgs.msg import GripperCmd, GripperStat
 
+from std_msgs.msg import Float64MultiArray
+from sensor_msgs.msg import JointState
 
 class Robotiq85ActionServer(Node):
     def __init__(self):
@@ -61,16 +62,14 @@ class Robotiq85ActionServer(Node):
 
         self.declare_parameter('timeout', 5.0)
         self.declare_parameter('position_tolerance', 0.005)
-        self.declare_parameter('gripper_speed', 0.0565)
 
         self._timeout = self.get_parameter('timeout').get_parameter_value().double_value
         self._position_tolerance = self.get_parameter('position_tolerance').get_parameter_value().double_value
-        self._gripper_speed = self.get_parameter('gripper_speed').get_parameter_value().double_value
 
-        self.create_subscription(GripperStat, "/gripper/stat", self._update_gripper_stat, 10)
-        self._gripper_pub = self.create_publisher(GripperCmd, '/gripper/cmd', 10)
+        self.create_subscription(JointState, "/joint_states", self._update_gripper_stat, 10)
+        self._gripper_pub = self.create_publisher(Float64MultiArray, '/hand_controller/commands', 10)
 
-        self._stat = None
+        self._gripper_position = None
 
         self._action_server = ActionServer(
             self,
@@ -114,13 +113,12 @@ class Robotiq85ActionServer(Node):
         self.get_logger().info('Gripper executing goal...')
 
         # Send goal to gripper
-        cmd_msg = GripperCmd()
-        cmd_msg.position = goal_handle.request.command.position
-        cmd_msg.force = goal_handle.request.command.max_effort
-        cmd_msg.speed = self._gripper_speed
+        cmd_msg = Float64MultiArray()
 
+        self.get_logger().warn("Commanded position: " + str(goal_handle.request.command.position))
+
+        cmd_msg.data = [goal_handle.request.command.position]
         self._gripper_pub.publish(cmd_msg)
-
         thread = threading.Thread(target=rclpy.spin, args=(self, ), daemon=True)
         thread.start()
 
@@ -141,14 +139,12 @@ class Robotiq85ActionServer(Node):
                 break
 
 
-            if self._stat is None:
+            if self._gripper_position is None:
                 self.get_logger().warn("No gripper feedback yet")
             else:
-                feedback_msg.position = self._stat.position
-                feedback_msg.stalled = not self._stat.is_moving
-
+                feedback_msg.position = self._gripper_position
                 # Position tolerance achieved or object grasped
-                if (fabs(goal_handle.request.command.position - feedback_msg.position) < self._position_tolerance or self._stat.obj_detected):
+                if (fabs(goal_handle.request.command.position - feedback_msg.position) < self._position_tolerance):
                     feedback_msg.reached_goal = True
                     self.get_logger().info('Goal achieved: %r'% feedback_msg.reached_goal)
 
@@ -167,8 +163,12 @@ class Robotiq85ActionServer(Node):
 
     def _update_gripper_stat(self, data):
         # self.get_logger().warn("recieving feedback")
-        self._stat = data
+        # self.get_logger().warn(str(data.name[2]) + " = " + str(data.position[2]))
 
+        self._gripper_position = None
+        # Check to make sure that the joint is the gripper finger
+        if str(data.name[2]) == "finger_joint":
+            self._gripper_position = data.position[2]
 
 
 def main(args=None):
