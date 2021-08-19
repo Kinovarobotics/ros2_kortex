@@ -33,8 +33,8 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************
  Author: Boston Cleek
- File:   single_robotiq_85_action_server
- Brief:  Action server for Robotiq 85 communication
+ File:   robotiq_gripper_driver_85_action_server
+ Brief:  Action server for Robotiq 85 attached to the kotex gen3 communication
  Platform: Linux/ROS Foxy
 """
 
@@ -51,8 +51,6 @@ from rclpy.executors import MultiThreadedExecutor
 from rclpy.exceptions import ParameterNotDeclaredException
 from rcl_interfaces.msg import ParameterType
 
-from robotiq_85_driver.driver.robotiq_85_gripper import Robotiq85Gripper
-from sensor_msgs.msg import JointState
 from control_msgs.action import GripperCommand
 from robotiq_85_msgs.msg import GripperCmd, GripperStat
 
