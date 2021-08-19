@@ -188,13 +188,12 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
         new_modes.push_back(integration_lvl_t::EFFORT);
         new_mode_joint_index.push_back(i);
       }
-      /*
-            if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_TWIST)
-            {
-              new_modes.push_back(integration_lvl_t::TWIST);
-              new_mode_joint_index.push_back(i);
-            }
-      */
+      // There is no predefined hardware_interface type for "twist"
+      if (key == info_.joints[i].name + "/" + "twist")
+      {
+        new_modes.push_back(integration_lvl_t::TWIST);
+        new_mode_joint_index.push_back(i);
+      }
     }
   }
 
@@ -212,56 +211,48 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     }
   }
 
-  /*
-    // If starting a Kinova-proprietary controller which bypasses ROS and communicates directly to the Kinova API, do
-    // not allow any other command types. They could conflict.
-    bool kinova_bypass = false;
-    for (std::string key : start_interfaces)
+  // If starting a Kinova-proprietary controller which bypasses ROS and communicates directly to the Kinova API, do
+  // not allow any other command types. They could conflict.
+  bool kinova_bypass = false;
+  for (std::string key : start_interfaces)
+  {
+    for (std::size_t i = 0; i < new_modes.size(); ++i)
     {
-      for (std::size_t i = 0; i < new_modes.size(); ++i)
+      if (new_modes[i] == integration_lvl_t::TWIST)
       {
-        if (new_modes[i] == integration_lvl_t::TWIST)
-        {
-          kinova_bypass = true;
-        }
+        kinova_bypass = true;
       }
     }
-    if (kinova_bypass)
+  }
+  if (kinova_bypass)
+  {
+    // Only set twist interfaces
+    for (std::size_t i = 0; i < new_modes.size(); ++i)
     {
-      // Only set twist interfaces
-      for (std::size_t i = 0; i < new_modes.size(); ++i)
+      if (new_modes[i] == integration_lvl_t::TWIST)
       {
-        if (new_modes[i] == integration_lvl_t::TWIST)
-        {
-          arm_joints_control_level_[new_mode_joint_index[i]] = integration_lvl_t::TWIST;
-          RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%d], mode: %u", new_mode_joint_index[i], new_modes[i]);
-        }
-        else
-        {
-          arm_joints_control_level_[new_mode_joint_index[i]] = integration_lvl_t::UNDEFINED;
-        }
-      }
-      return return_type::OK;
-    }
-    // Normal operation, normal controller starting
-    else
-    {
-      // Set the new command modes
-      for (std::size_t i = 0; i < new_modes.size(); ++i)
-      {
-        arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
+        arm_joints_control_level_[new_mode_joint_index[i]] = integration_lvl_t::TWIST;
         RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%d], mode: %u", new_mode_joint_index[i], new_modes[i]);
       }
-      return return_type::OK;
+      else
+      {
+        arm_joints_control_level_[new_mode_joint_index[i]] = integration_lvl_t::UNDEFINED;
+      }
     }
-  */
-
-  // Set the new command modes
-  for (std::size_t i = 0; i < new_modes.size(); i++)
-  {
-    arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
-    RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%d], mode: %u", new_mode_joint_index[i], new_modes[i]);
+    return return_type::OK;
   }
+  // Normal operation, set the new command modes
+  else
+  {
+    // Set the new command modes
+    for (std::size_t i = 0; i < new_modes.size(); ++i)
+    {
+      arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
+      RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%d], mode: %u", new_mode_joint_index[i], new_modes[i]);
+    }
+    return return_type::OK;
+  }
+
   return return_type::OK;
 }
 
