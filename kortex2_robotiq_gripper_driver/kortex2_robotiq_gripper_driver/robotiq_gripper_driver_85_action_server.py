@@ -114,14 +114,13 @@ class Robotiq85ActionServer(Node):
 
         # Send goal to gripper
         cmd_msg = Float64MultiArray()
-
-        self.get_logger().warn("Commanded position: " + str(goal_handle.request.command.position))
-
         cmd_msg.data = [goal_handle.request.command.position]
         self._gripper_pub.publish(cmd_msg)
+
         thread = threading.Thread(target=rclpy.spin, args=(self, ), daemon=True)
         thread.start()
 
+        # Feedback msg to the client
         feedback_msg = GripperCommand.Feedback()
         result_msg = GripperCommand.Result()
         result_msg.reached_goal = False

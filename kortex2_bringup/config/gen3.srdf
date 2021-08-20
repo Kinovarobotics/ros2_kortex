@@ -66,20 +66,20 @@
     <joint name="joint_7" value="0"/>
   </group_state>
   <group_state group="gripper" name="open">
-    <joint name="left_inner_finger_joint" value="0"/>
-    <joint name="right_inner_knuckle_joint" value="0"/>
+    <joint name="left_inner_finger_joint" value="-100.0"/>
+    <joint name="right_inner_knuckle_joint" value="100.0"/>
     <joint name="finger_joint" value="100.0"/>
-    <joint name="right_inner_finger_joint" value="0"/>
-    <joint name="left_inner_knuckle_joint" value="0"/>
-    <joint name="right_outer_knuckle_joint" value="0"/>
+    <joint name="right_inner_finger_joint" value="-100.0"/>
+    <joint name="left_inner_knuckle_joint" value="100.0"/>
+    <joint name="right_outer_knuckle_joint" value="100.0"/>
   </group_state>
   <group_state group="gripper" name="close">
-    <joint name="left_inner_finger_joint" value="0.8"/>
-    <joint name="right_inner_knuckle_joint" value="0.8"/>
+    <joint name="left_inner_finger_joint" value="0.0"/>
+    <joint name="right_inner_knuckle_joint" value="0.0"/>
     <joint name="finger_joint" value="0.0"/>
-    <joint name="right_inner_finger_joint" value="-0.8"/>
-    <joint name="left_inner_knuckle_joint" value="0.8"/>
-    <joint name="right_outer_knuckle_joint" value="0.8"/>
+    <joint name="right_inner_finger_joint" value="-0.0"/>
+    <joint name="left_inner_knuckle_joint" value="0.0"/>
+    <joint name="right_outer_knuckle_joint" value="0.0"/>
   </group_state>
   <!--END EFFECTOR - Purpose - Represent information about an end effector.-->
   <end_effector group="gripper" name="gripper" parent_link="base_link"/>
@@ -218,4 +218,8 @@
   <disable_collisions link1="robotiq_arg2f_base_link" link2="spherical_wrist_2_link" reason="Never"/>
   <disable_collisions link1="shoulder_link" link2="spherical_wrist_1_link" reason="Never"/>
   <disable_collisions link1="spherical_wrist_1_link" link2="spherical_wrist_2_link" reason="Adjacent"/>
+
+  <disable_collisions link1="wrist_camera_link_visual" link2="wrist_mounted_camera_link" reason="Never"/>
+  <disable_collisions link1="wrist_camera_link_visual" link2="bracelet_link" reason="Never"/>
+
 </robot>
