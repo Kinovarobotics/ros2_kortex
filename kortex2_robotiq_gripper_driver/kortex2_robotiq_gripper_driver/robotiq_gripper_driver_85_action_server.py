@@ -109,7 +109,6 @@ class Robotiq85ActionServer(Node):
                 self.get_logger().warn('Gripper timeout reached')
                 break
 
-
             if self._gripper_position is None:
                 self.get_logger().warn("No gripper feedback yet")
             else:
