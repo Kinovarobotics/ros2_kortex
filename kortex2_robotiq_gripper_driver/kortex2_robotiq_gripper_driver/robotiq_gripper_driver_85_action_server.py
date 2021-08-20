@@ -32,7 +32,7 @@
 *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************
- Author: Boston Cleek
+ Author: Boston Cleek + Brennand Pierce
  File:   robotiq_gripper_driver_85_action_server
  Brief:  Action server for Robotiq 85 attached to the kotex gen3 communication
  Platform: Linux/ROS Foxy
@@ -52,7 +52,6 @@ from rclpy.exceptions import ParameterNotDeclaredException
 from rcl_interfaces.msg import ParameterType
 
 from control_msgs.action import GripperCommand
-
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState
 
@@ -117,13 +116,9 @@ class Robotiq85ActionServer(Node):
         cmd_msg.data = [goal_handle.request.command.position]
         self._gripper_pub.publish(cmd_msg)
 
-        thread = threading.Thread(target=rclpy.spin, args=(self, ), daemon=True)
-        thread.start()
-
         # Feedback msg to the client
         feedback_msg = GripperCommand.Feedback()
-        result_msg = GripperCommand.Result()
-        result_msg.reached_goal = False
+        feedback_msg.reached_goal = False
 
         # update at 100Hz
         rate = self.create_rate(100)
@@ -149,21 +144,28 @@ class Robotiq85ActionServer(Node):
 
                 goal_handle.publish_feedback(feedback_msg)
 
-                if feedback_msg.reached_goal:
-                    goal_handle.succeed()
-                    break;
+            # Check to see if we have reached the goal.s
+            if feedback_msg.reached_goal:
+                self.get_logger().debug('Reached goal, exiting loop')
+                break;
 
             rate.sleep()
 
-        thread.join()
+        # Copy the feedback current state to the result msg.
+        result_msg = GripperCommand.Result()
         result_msg = feedback_msg
-        return result
+
+        if result_msg.reached_goal:
+            self.get_logger().info('Setting action to succeeded')
+            goal_handle.succeed()
+        else:
+            self.get_logger().info('Setting action to abort')
+            goal_handle.abort()
+
+        return result_msg
 
 
     def _update_gripper_stat(self, data):
-        # self.get_logger().warn("recieving feedback")
-        # self.get_logger().warn(str(data.name[2]) + " = " + str(data.position[2]))
-
         self._gripper_position = None
         # Check to make sure that the joint is the gripper finger
         if str(data.name[2]) == "finger_joint":
