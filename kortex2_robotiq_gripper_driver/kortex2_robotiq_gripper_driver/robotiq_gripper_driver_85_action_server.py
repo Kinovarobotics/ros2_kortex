@@ -77,7 +77,7 @@ class Robotiq85ActionServer(Node):
             goal_callback=self._goal_callback,
             cancel_callback=self._cancel_callback,
             execute_callback=self._execute_callback,
-            callback_group=MutuallyExclusiveCallbackGroup())
+            callback_group=ReentrantCallbackGroup())
 
 
         self.get_logger().info('Gripper server ready')
@@ -114,6 +114,7 @@ class Robotiq85ActionServer(Node):
         # Send goal to gripper
         cmd_msg = Float64MultiArray()
         cmd_msg.data = [goal_handle.request.command.position]
+        self.get_logger().info("Got goal position: " + str(goal_handle.request.command.position))
         self._gripper_pub.publish(cmd_msg)
 
         # Feedback msg to the client
@@ -153,7 +154,10 @@ class Robotiq85ActionServer(Node):
 
         # Copy the feedback current state to the result msg.
         result_msg = GripperCommand.Result()
-        result_msg = feedback_msg
+        result_msg.reached_goal = feedback_msg.reached_goal
+        result_msg.stalled = feedback_msg.stalled
+        result_msg.position = feedback_msg.position
+        result_msg.effort = feedback_msg.effort
 
         if result_msg.reached_goal:
             self.get_logger().info('Setting action to succeeded')
