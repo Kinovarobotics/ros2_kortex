@@ -3,13 +3,11 @@
 <package format="3">
   <name>kortex2_robotiq_gripper_driver</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="bren@brenpierce.com">bren</maintainer>
-  <license>TODO: License declaration</license>
+  <description>action server to control the gripper on the kinov arm</description>
+  <maintainer email="bren.pierce@picknik.ai">bren</maintainer>
+  <license>Proprietary</license>
 
   <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
 
   <export>
