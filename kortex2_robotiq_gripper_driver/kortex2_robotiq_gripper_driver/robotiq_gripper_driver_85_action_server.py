@@ -31,66 +31,69 @@ from control_msgs.action import GripperCommand
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState
 
+
 class Robotiq85ActionServer(Node):
     def __init__(self):
-        super().__init__('robotiq_gripper_driver_85_action_server')
+        super().__init__("robotiq_gripper_driver_85_action_server")
 
-        self.declare_parameter('timeout', 5.0)
-        self.declare_parameter('position_tolerance', 0.005)
+        self.declare_parameter("timeout", 5.0)
+        self.declare_parameter("position_tolerance", 0.005)
 
-        self._timeout = self.get_parameter('timeout').get_parameter_value().double_value
-        self._position_tolerance = self.get_parameter('position_tolerance').get_parameter_value().double_value
+        self._timeout = self.get_parameter("timeout").get_parameter_value().double_value
+        self._position_tolerance = (
+            self.get_parameter("position_tolerance").get_parameter_value().double_value
+        )
 
-        self.create_subscription(JointState, "/joint_states", self._update_gripper_stat, 10)
-        self._gripper_pub = self.create_publisher(Float64MultiArray, '/hand_controller/commands', 10)
+        self.create_subscription(
+            JointState, "/joint_states", self._update_gripper_stat, 10
+        )
+        self._gripper_pub = self.create_publisher(
+            Float64MultiArray, "/hand_controller/commands", 10
+        )
 
         self._gripper_position = None
 
         self._action_server = ActionServer(
             self,
             GripperCommand,
-            '/hand_controller/gripper_cmd',
+            "/hand_controller/gripper_cmd",
             goal_callback=self._goal_callback,
             cancel_callback=self._cancel_callback,
             execute_callback=self._execute_callback,
-            callback_group=ReentrantCallbackGroup())
+            callback_group=ReentrantCallbackGroup(),
+        )
 
-
-        self.get_logger().info('Gripper server ready')
-
+        self.get_logger().info("Gripper server ready")
 
     def get_time(self):
         time_msg = self.get_clock().now().to_msg()
         return float(time_msg.sec) + (float(time_msg.nanosec) * 1e-9)
 
-
     def shutdown(self):
         self.get_logger().info("Shutdown gripper")
         self._gripper.shutdown()
-
 
     def destroy(self):
         self._action_server.destroy()
         super().destroy_node()
 
-
     def _goal_callback(self, goal_request):
-        self.get_logger().info('Gripper received goal request')
+        self.get_logger().info("Gripper received goal request")
         return GoalResponse.ACCEPT
 
-
     def _cancel_callback(self, goal_handle):
-        self.get_logger().info('Gripper received cancel request')
+        self.get_logger().info("Gripper received cancel request")
         return CancelResponse.ACCEPT
 
-
     def _execute_callback(self, goal_handle):
-        self.get_logger().info('Gripper executing goal...')
+        self.get_logger().info("Gripper executing goal...")
 
         # Send goal to gripper
         cmd_msg = Float64MultiArray()
         cmd_msg.data = [goal_handle.request.command.position]
-        self.get_logger().info("Got goal position: " + str(goal_handle.request.command.position))
+        self.get_logger().info(
+            "Got goal position: " + str(goal_handle.request.command.position)
+        )
         self._gripper_pub.publish(cmd_msg)
 
         # Feedback msg to the client
@@ -106,7 +109,7 @@ class Robotiq85ActionServer(Node):
             # print("cb:", dt)
 
             if not (dt < self._timeout):
-                self.get_logger().warn('Gripper timeout reached')
+                self.get_logger().warn("Gripper timeout reached")
                 break
 
             if self._gripper_position is None:
@@ -114,16 +117,21 @@ class Robotiq85ActionServer(Node):
             else:
                 feedback_msg.position = self._gripper_position
                 # Position tolerance achieved or object grasped
-                if (fabs(goal_handle.request.command.position - feedback_msg.position) < self._position_tolerance):
+                if (
+                    fabs(goal_handle.request.command.position - feedback_msg.position)
+                    < self._position_tolerance
+                ):
                     feedback_msg.reached_goal = True
-                    self.get_logger().info('Goal achieved: %r'% feedback_msg.reached_goal)
+                    self.get_logger().info(
+                        "Goal achieved: %r" % feedback_msg.reached_goal
+                    )
 
                 goal_handle.publish_feedback(feedback_msg)
 
             # Check to see if we have reached the goal.s
             if feedback_msg.reached_goal:
-                self.get_logger().debug('Reached goal, exiting loop')
-                break;
+                self.get_logger().debug("Reached goal, exiting loop")
+                break
 
             rate.sleep()
 
@@ -135,14 +143,13 @@ class Robotiq85ActionServer(Node):
         result_msg.effort = feedback_msg.effort
 
         if result_msg.reached_goal:
-            self.get_logger().info('Setting action to succeeded')
+            self.get_logger().info("Setting action to succeeded")
             goal_handle.succeed()
         else:
-            self.get_logger().info('Setting action to abort')
+            self.get_logger().info("Setting action to abort")
             goal_handle.abort()
 
         return result_msg
-
 
     def _update_gripper_stat(self, data):
         self._gripper_position = None
