@@ -59,8 +59,8 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   // Set the base in low-level servoing mode
   servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
   base_.SetServoingMode(servoing_mode);
-  actuator_count_ = base_.GetActuatorCount().count();
-  RCLCPP_INFO(LOGGER, "Actuator count: %u", actuator_count_);
+  kinova_joint_count_ = base_.GetActuatorCount().count();
+  RCLCPP_INFO(LOGGER, "Actuator count: %u", kinova_joint_count_);
 }
 
 return_type KortexMultiInterfaceHardware::configure(const hardware_interface::HardwareInfo& info)
@@ -73,15 +73,17 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
 
   info_ = info;
 
-  arm_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_positions_.resize(kinova_joint_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_velocities_.resize(kinova_joint_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_efforts_.resize(kinova_joint_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_positions_.resize(kinova_joint_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_velocities_.resize(kinova_joint_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_efforts_.resize(kinova_joint_count_, std::numeric_limits<double>::quiet_NaN());
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
-  arm_joints_control_level_.resize(info_.joints.size(), integration_lvl_t::POSITION);
+  // By defaulting to UNDEFINED, Kinova joints will not receive commands.
+  // A ROS2 controller needs to be started
+  arm_joints_control_level_.resize(kinova_joint_count_, integration_lvl_t::UNDEFINED);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
   {
@@ -114,7 +116,7 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
 std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::export_state_interfaces()
 {
   std::vector<hardware_interface::StateInterface> state_interfaces;
-  for (std::size_t i = 0; i < info_.joints.size(); i++)
+  for (std::size_t i = 0; i < info_.joints.size(); ++i)
   {
     RCLCPP_WARN(LOGGER, "export_state_interfaces for joint: %s", info_.joints[i].name.c_str());
     if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
@@ -139,7 +141,7 @@ std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::ex
 std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::export_command_interfaces()
 {
   std::vector<hardware_interface::CommandInterface> command_interfaces;
-  for (std::size_t i = 0; i < info_.joints.size(); i++)
+  for (std::size_t i = 0; i < info_.joints.size(); ++i)
   {
     if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
     {
@@ -169,7 +171,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   for (std::string key : start_interfaces)
   {
     RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s, total joints: %u", key.c_str(), info_.joints.size());
-    for (std::size_t i = 0; i < info_.joints.size(); i++)
+    for (std::size_t i = 0; i < info_.joints.size(); ++i)
     {
       if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION)
       {
@@ -192,7 +194,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   // Stop motion on all relevant joints that are stopping
   for (std::string key : stop_interfaces)
   {
-    for (std::size_t i = 0; i < info_.joints.size(); i++)
+    for (std::size_t i = 0; i < info_.joints.size(); ++i)
     {
       if (key.find(info_.joints[i].name) != std::string::npos)
       {
@@ -204,7 +206,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   }
 
   // Set the new command modes
-  for (std::size_t i = 0; i < new_modes.size(); i++)
+  for (std::size_t i = 0; i < new_modes.size(); ++i)
   {
     arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
     RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%d], mode: %u", new_mode_joint_index[i], new_modes[i]);
@@ -217,7 +219,7 @@ return_type KortexMultiInterfaceHardware::start()
 {
   auto base_feedback = base_cyclic_.RefreshFeedback();
   // Add each actuator to the base_command_ and set the command to its current position
-  for (std::size_t i = 0; i < actuator_count_; i++)
+  for (std::size_t i = 0; i < kinova_joint_count_; ++i)
   {
     base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
   }
@@ -235,7 +237,7 @@ return_type KortexMultiInterfaceHardware::start()
   // Send a first frame
   base_feedback = base_cyclic_.Refresh(base_command_);
   // Set some default values
-  for (std::size_t i = 0; i < actuator_count_; i++)
+  for (std::size_t i = 0; i < kinova_joint_count_; ++i)
   {
     if (std::isnan(arm_positions_[i]))
     {
@@ -301,7 +303,7 @@ return_type KortexMultiInterfaceHardware::stop()
 return_type KortexMultiInterfaceHardware::read()
 {
   auto feedback = base_cyclic_.RefreshFeedback();
-  for (std::size_t i = 0; i < info_.joints.size(); i++)
+  for (std::size_t i = 0; i < info_.joints.size(); ++i)
   {
     // RCLCPP_WARN(LOGGER, "Joint: %s", info_.joints[i].name.c_str());
     switch (arm_joints_control_level_[i])
@@ -310,7 +312,7 @@ return_type KortexMultiInterfaceHardware::read()
         RCLCPP_INFO(LOGGER, "Nothing is using the hardware interface! %u", i);
         return return_type::OK;
         break;
-      case integration_lvl_t::POSITION:
+      default:
         if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
         {
           // max joint angle = 0.81 for robotiq_2f_85
@@ -324,13 +326,6 @@ return_type KortexMultiInterfaceHardware::read()
           arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
               KortexMathUtil::toRad(feedback.actuators(i).position()));  // rad
         }
-        break;
-      case integration_lvl_t::VELOCITY:
-        arm_efforts_[i] = feedback.actuators(i).torque();                              // N*m
-        arm_velocities_[i] = KortexMathUtil::toRad(feedback.actuators(i).velocity());  // rad/sec
-        break;
-      case integration_lvl_t::EFFORT:
-        arm_efforts_[i] = feedback.actuators(i).torque();  // N*m
         break;
     }
   }
@@ -350,7 +345,7 @@ return_type KortexMultiInterfaceHardware::write()
     base_command_.set_frame_id(0);
 
   // update the command for each joint
-  for (std::size_t i = 0; i < actuator_count_; i++)
+  for (std::size_t i = 0; i < kinova_joint_count_; ++i)
   {
     float cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i]));
     float cmd_vel = KortexMathUtil::toDeg(arm_commands_velocities_[i]);
