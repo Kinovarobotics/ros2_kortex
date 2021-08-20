@@ -1,7 +1,7 @@
 # This config uses industrial_ci (https://github.com/ros-industrial/industrial_ci.git).
 # For troubleshooting, see readme (https://github.com/ros-industrial/industrial_ci/blob/master/README.rst)
 
-name: Build and Test (Foxy)
+name: Build and Test (Rolling)
 
 # This determines when this workflow is run
 on:
@@ -21,8 +21,8 @@ jobs:
 
     env:
       CCACHE_DIR: /github/home/.ccache
-      DOCKER_IMAGE: moveit/moveit2:foxy-source
-      ROS_DISTRO: foxy
+      DOCKER_IMAGE: ghcr.io/ros-planning/moveit2:rolling-source
+      ROS_DISTRO: rolling
       ROS_REPO: main
       UNDERLAY: /root/ws_moveit/install
     runs-on: ubuntu-latest
