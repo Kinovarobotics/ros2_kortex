@@ -6,7 +6,7 @@ namespace kortex2_hacks
 namespace
 {
 constexpr char INCOMING_TWIST_TOPIC[] = "/twist_cmd";
-constexpr char OUTGOING_ARRAY_TOPIC[] = "/streaming_controller/command";
+constexpr char OUTGOING_ARRAY_TOPIC[] = "/streaming_controller/commands";
 }  // namespace
 
 TwistToArrayRepublisher::TwistToArrayRepublisher(rclcpp::NodeOptions options)
