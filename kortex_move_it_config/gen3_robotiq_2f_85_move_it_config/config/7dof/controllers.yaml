@@ -15,7 +15,6 @@ joint_trajectory_controller:
     - joint_6
     - joint_7
 
-     # Gripper is currently on a command topic: /hand_controller/commands
 hand_controller:
   action_ns: gripper_cmd
   type: GripperCommand
