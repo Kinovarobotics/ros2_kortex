@@ -62,7 +62,7 @@
         <joint name="$(arg prefix)joint_6" value="0" />
         <joint name="$(arg prefix)joint_7" value="0" />
     </group_state>
-    <group_state name="opened" group="gripper">
+    <group_state name="open" group="gripper">
         <joint name="$(arg prefix)left_inner_finger_joint" value="0" />
         <joint name="$(arg prefix)right_inner_knuckle_joint" value="0" />
         <joint name="$(arg prefix)finger_joint" value="0" />
@@ -70,7 +70,7 @@
         <joint name="$(arg prefix)left_inner_knuckle_joint" value="0" />
         <joint name="$(arg prefix)right_outer_knuckle_joint" value="0" />
     </group_state>
-    <group_state name="closed" group="gripper">
+    <group_state name="close" group="gripper">
         <joint name="$(arg prefix)left_inner_finger_joint" value="0.8" />
         <joint name="$(arg prefix)right_inner_knuckle_joint" value="0.8" />
         <joint name="$(arg prefix)finger_joint" value="0.8" />
