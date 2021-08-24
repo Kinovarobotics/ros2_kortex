@@ -66,20 +66,20 @@
     <joint name="joint_7" value="0"/>
   </group_state>
   <group_state group="gripper" name="close">
-    <joint name="left_inner_finger_joint" value="-100.0"/>
-    <joint name="right_inner_knuckle_joint" value="100.0"/>
-    <joint name="finger_joint" value="100.0"/>
-    <joint name="right_inner_finger_joint" value="-100.0"/>
-    <joint name="left_inner_knuckle_joint" value="100.0"/>
-    <joint name="right_outer_knuckle_joint" value="100.0"/>
+    <joint name="left_inner_finger_joint" value="-99.0"/>
+    <joint name="right_inner_knuckle_joint" value="99.0"/>
+    <joint name="finger_joint" value="99.0"/>
+    <joint name="right_inner_finger_joint" value="-99.0"/>
+    <joint name="left_inner_knuckle_joint" value="99.0"/>
+    <joint name="right_outer_knuckle_joint" value="99.0"/>
   </group_state>
   <group_state group="gripper" name="open">
-    <joint name="left_inner_finger_joint" value="0.0"/>
-    <joint name="right_inner_knuckle_joint" value="0.0"/>
-    <joint name="finger_joint" value="0.0"/>
-    <joint name="right_inner_finger_joint" value="-0.0"/>
-    <joint name="left_inner_knuckle_joint" value="0.0"/>
-    <joint name="right_outer_knuckle_joint" value="0.0"/>
+    <joint name="left_inner_finger_joint" value="-1.0"/>
+    <joint name="right_inner_knuckle_joint" value="1.0"/>
+    <joint name="finger_joint" value="1.0"/>
+    <joint name="right_inner_finger_joint" value="-1.0"/>
+    <joint name="left_inner_knuckle_joint" value="1.0"/>
+    <joint name="right_outer_knuckle_joint" value="1.0"/>
   </group_state>
   <!--END EFFECTOR - Purpose - Represent information about an end effector.-->
   <end_effector group="gripper" name="gripper" parent_link="base_link"/>
