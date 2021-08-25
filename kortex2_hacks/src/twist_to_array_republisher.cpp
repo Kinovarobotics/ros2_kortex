@@ -19,13 +19,13 @@ TwistToArrayRepublisher::TwistToArrayRepublisher(rclcpp::NodeOptions options)
 
   last_user_msg_time_ = rclcpp::Clock().now();
 
-  timer_ = this->create_wall_timer(std::chrono::milliseconds(200), 
-                                   std::bind(&TwistToArrayRepublisher::timerCallback, this));
+  timer_ =
+      this->create_wall_timer(std::chrono::milliseconds(200), std::bind(&TwistToArrayRepublisher::timerCallback, this));
 }
 
 void TwistToArrayRepublisher::timerCallback()
 {
-  if((rclcpp::Clock().now() - last_user_msg_time_).seconds() > 0.1)
+  if ((rclcpp::Clock().now() - last_user_msg_time_).seconds() > 0.1)
   {
     std_msgs::msg::Float64MultiArray array_msg;
     array_msg.data.resize(7);
@@ -44,8 +44,8 @@ void TwistToArrayRepublisher::timerCallback()
 
 void TwistToArrayRepublisher::twistCallback(const geometry_msgs::msg::TwistStamped::ConstPtr& twist_msg)
 {
-  float scale_linear_mult = 0.07; // scale the incomming linear velocity commands
-  float scale_angular_mult = 4.0; // scale the incomming angular velocity commands
+  float scale_linear_mult = 0.07;  // scale the incomming linear velocity commands
+  float scale_angular_mult = 4.0;  // scale the incomming angular velocity commands
   // Convert twist to array
   std_msgs::msg::Float64MultiArray array_msg;
   array_msg.data.resize(7);
