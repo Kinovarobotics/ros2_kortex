@@ -65,7 +65,7 @@
     <joint name="joint_6" value="0"/>
     <joint name="joint_7" value="0"/>
   </group_state>
-  <group_state group="manipulator" name="pose_a">
+  <group_state group="manipulator" name="cup">
     <joint name="joint_1" value="0.8464847"/>
     <joint name="joint_2" value="1.447"/>
     <joint name="joint_3" value="3.573"/>
@@ -74,7 +74,7 @@
     <joint name="joint_6" value="1.911"/>
     <joint name="joint_7" value="1.627"/>
   </group_state>
-  <group_state group="manipulator" name="pose_b">
+  <group_state group="manipulator" name="puzzle">
     <joint name="joint_1" value="0.942"/>
     <joint name="joint_2" value="0.520"/>
     <joint name="joint_3" value="3.676"/>
