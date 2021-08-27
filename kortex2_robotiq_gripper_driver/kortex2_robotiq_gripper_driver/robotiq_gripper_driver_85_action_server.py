@@ -37,11 +37,16 @@ class Robotiq85ActionServer(Node):
         super().__init__("robotiq_gripper_driver_85_action_server")
 
         self.declare_parameter("timeout", 5.0)
-        self.declare_parameter("position_tolerance", 0.005)
+        self.declare_parameter("position_tolerance", 0.001)
+        self.declare_parameter("gear_ratio", 1.0)
 
         self._timeout = self.get_parameter("timeout").get_parameter_value().double_value
         self._position_tolerance = (
             self.get_parameter("position_tolerance").get_parameter_value().double_value
+        )
+        # The command to the gripper is 0 - 100 But we get the input and joint state 0 - 0.8
+        self._gear_ratio = (
+            self.get_parameter("gear_ratio").get_parameter_value().double_value
         )
 
         self.create_subscription(
@@ -90,7 +95,10 @@ class Robotiq85ActionServer(Node):
 
         # Send goal to gripper
         cmd_msg = Float64MultiArray()
-        cmd_msg.data = [goal_handle.request.command.position]
+        gripper_command_postion = (
+            self._gear_ratio * goal_handle.request.command.position
+        )
+        cmd_msg.data = [gripper_command_postion]
         self.get_logger().info(
             "Got goal position: " + str(goal_handle.request.command.position)
         )
@@ -122,7 +130,7 @@ class Robotiq85ActionServer(Node):
                     < self._position_tolerance
                 ):
                     feedback_msg.reached_goal = True
-                    self.get_logger().info(
+                    self.get_logger().debug(
                         "Goal achieved: %r" % feedback_msg.reached_goal
                     )
 
@@ -143,10 +151,20 @@ class Robotiq85ActionServer(Node):
         result_msg.effort = feedback_msg.effort
 
         if result_msg.reached_goal:
-            self.get_logger().info("Setting action to succeeded")
+            self.get_logger().info(
+                "Setting action to succeeded: desired position = "
+                + str(goal_handle.request.command.position)
+                + ", measured position = "
+                + str(result_msg.position)
+            )
             goal_handle.succeed()
         else:
-            self.get_logger().info("Setting action to abort")
+            self.get_logger().warn(
+                "Setting action to abort: desired position = "
+                + str(goal_handle.request.command.position)
+                + ", measured position = "
+                + str(result_msg.position)
+            )
             goal_handle.abort()
 
         return result_msg
