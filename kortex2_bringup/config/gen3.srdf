@@ -65,6 +65,24 @@
     <joint name="joint_6" value="0"/>
     <joint name="joint_7" value="0"/>
   </group_state>
+  <group_state group="manipulator" name="cup">
+    <joint name="joint_1" value="0.8464847"/>
+    <joint name="joint_2" value="1.447"/>
+    <joint name="joint_3" value="3.573"/>
+    <joint name="joint_4" value="4.360"/>
+    <joint name="joint_5" value="1.506"/>
+    <joint name="joint_6" value="1.911"/>
+    <joint name="joint_7" value="1.627"/>
+  </group_state>
+  <group_state group="manipulator" name="puzzle">
+    <joint name="joint_1" value="0.942"/>
+    <joint name="joint_2" value="0.520"/>
+    <joint name="joint_3" value="3.676"/>
+    <joint name="joint_4" value="3.798"/>
+    <joint name="joint_5" value="1.768"/>
+    <joint name="joint_6" value="1.352"/>
+    <joint name="joint_7" value="1.536"/>
+  </group_state>
   <group_state group="gripper" name="close">
     <joint name="left_inner_finger_joint" value="-0.8"/>
     <joint name="right_inner_knuckle_joint" value="0.8"/>

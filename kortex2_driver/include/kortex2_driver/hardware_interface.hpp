@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "rclcpp/macros.hpp"
+#include "rclcpp/time.hpp"
 
 #include "hardware_interface/base_interface.hpp"
 #include "hardware_interface/handle.hpp"
@@ -76,6 +77,8 @@ private:
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
   k_api::BaseCyclic::Command base_command_;
   std::size_t actuator_count_;
+  // To minimize bandwidth we syncronize feedback with the robot only when write() is called
+  k_api::BaseCyclic::Feedback feedback_;
   std::vector<double> arm_commands_positions_;
   std::vector<double> arm_commands_velocities_;
   std::vector<double> arm_commands_efforts_;
@@ -86,6 +89,10 @@ private:
   k_api::GripperCyclic::MotorCommand* gripper_motor_command_;
   double gripper_command_position_;
   double gripper_position_;
+
+  rclcpp::Time controller_switch_time_;
+  bool block_write = false;
+  k_api::Base::ServoingMode arm_mode_;
 
   // Enum defining at which control level we are
   // Dumb way of maintaining the command_interface type per joint.
