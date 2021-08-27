@@ -44,6 +44,7 @@ class Robotiq85ActionServer(Node):
         self._position_tolerance = (
             self.get_parameter("position_tolerance").get_parameter_value().double_value
         )
+
         # The command to the gripper is 0 - 100 But we get the input and joint state 0 - 0.8
         self._gear_ratio = (
             self.get_parameter("gear_ratio").get_parameter_value().double_value
@@ -124,11 +125,12 @@ class Robotiq85ActionServer(Node):
                 self.get_logger().warn("No gripper feedback yet")
             else:
                 feedback_msg.position = self._gripper_position
+                distance_error = fabs(
+                    goal_handle.request.command.position - feedback_msg.position
+                )
+
                 # Position tolerance achieved or object grasped
-                if (
-                    fabs(goal_handle.request.command.position - feedback_msg.position)
-                    < self._position_tolerance
-                ):
+                if distance_error < self._position_tolerance:
                     feedback_msg.reached_goal = True
                     self.get_logger().debug(
                         "Goal achieved: %r" % feedback_msg.reached_goal
@@ -174,6 +176,8 @@ class Robotiq85ActionServer(Node):
         # Check to make sure that the joint is the gripper finger
         if str(data.name[2]) == "finger_joint":
             self._gripper_position = data.position[2]
+        else:
+            self.get_logger().error("The robot joint order is wrong!!!!")
 
 
 def main(args=None):
