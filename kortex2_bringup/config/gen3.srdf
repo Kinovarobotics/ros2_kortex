@@ -84,15 +84,15 @@
     <joint name="joint_7" value="1.536"/>
   </group_state>
   <group_state group="gripper" name="close">
-    <joint name="left_inner_finger_joint" value="-100.0"/>
-    <joint name="right_inner_knuckle_joint" value="100.0"/>
-    <joint name="finger_joint" value="100.0"/>
-    <joint name="right_inner_finger_joint" value="-100.0"/>
-    <joint name="left_inner_knuckle_joint" value="100.0"/>
-    <joint name="right_outer_knuckle_joint" value="100.0"/>
+    <joint name="left_inner_finger_joint" value="-0.8"/>
+    <joint name="right_inner_knuckle_joint" value="0.8"/>
+    <joint name="finger_joint" value="0.8"/>
+    <joint name="right_inner_finger_joint" value="-0.8"/>
+    <joint name="left_inner_knuckle_joint" value="0.8"/>
+    <joint name="right_outer_knuckle_joint" value="0.8"/>
   </group_state>
   <group_state group="gripper" name="open">
-    <joint name="left_inner_finger_joint" value="0.0"/>
+    <joint name="left_inner_finger_joint" value="-0.0"/>
     <joint name="right_inner_knuckle_joint" value="0.0"/>
     <joint name="finger_joint" value="0.0"/>
     <joint name="right_inner_finger_joint" value="-0.0"/>
