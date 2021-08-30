@@ -25,14 +25,16 @@ Gripper is currently on a command topic:
 
 You can test the gripper with the following but replace <> with value as a percentage of open (`0.0=open`, `100.0=close`)
 
-        rezilient_ws$ ros2 topic pub /hand_controller/commands std_msgs/msg/Float64MultiArray "layout:
-        dim:
-        - label: ''
-        size: 0
-        stride: 0
-        data_offset: 0
-        data:
-        - <desired_gripper_position value as float>"
+```bash
+ros2 topic pub /hand_controller/commands std_msgs/msg/Float64MultiArray "layout:
+  dim:
+  - label: ''
+    size: 0
+    stride: 0
+  data_offset: 0
+data:
+- 0"
+```
 
 
 ## Download links
