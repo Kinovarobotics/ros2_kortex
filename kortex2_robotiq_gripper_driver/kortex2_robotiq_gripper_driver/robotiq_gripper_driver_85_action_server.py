@@ -26,9 +26,10 @@ from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallb
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.exceptions import ParameterNotDeclaredException
 from rcl_interfaces.msg import ParameterType
+from rclpy.qos import QoSProfile, QoSDurabilityPolicy
 
 from control_msgs.action import GripperCommand
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float64MultiArray, Bool
 from sensor_msgs.msg import JointState
 
 
@@ -52,6 +53,15 @@ class Robotiq85ActionServer(Node):
 
         self.create_subscription(
             JointState, "/joint_states", self._update_gripper_stat, 10
+        )
+        self._estop_active = False
+        self.create_subscription(
+            Bool,
+            "/estop_active",
+            self._estop_active_cb,
+            qos_profile=QoSProfile(
+                depth=1, durability=QoSDurabilityPolicy.TRANSIENT_LOCAL
+            ),
         )
         self._gripper_pub = self.create_publisher(
             Float64MultiArray, "/hand_controller/commands", 10
@@ -85,6 +95,8 @@ class Robotiq85ActionServer(Node):
 
     def _goal_callback(self, goal_request):
         self.get_logger().info("Gripper received goal request")
+        if self._estop_active:
+            return GoalResponse.REJECT
         return GoalResponse.ACCEPT
 
     def _cancel_callback(self, goal_handle):
@@ -178,6 +190,10 @@ class Robotiq85ActionServer(Node):
             self._gripper_position = data.position[2]
         else:
             self.get_logger().error("The robot joint order is wrong!!!!")
+
+    def _estop_active_cb(self, data: Bool):
+        self._estop_active = data.data
+        self.get_logger().error(f"E-Stop {'Activated' if data.data else 'Cleared'}")
 
 
 def main(args=None):
