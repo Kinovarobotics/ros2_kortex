@@ -75,13 +75,13 @@
     <joint name="joint_7" value="1.627"/>
   </group_state>
   <group_state group="manipulator" name="puzzle">
-    <joint name="joint_1" value="0.942"/>
-    <joint name="joint_2" value="0.520"/>
-    <joint name="joint_3" value="3.676"/>
-    <joint name="joint_4" value="3.798"/>
-    <joint name="joint_5" value="1.768"/>
-    <joint name="joint_6" value="1.352"/>
-    <joint name="joint_7" value="1.536"/>
+    <joint name="joint_1" value="0.0"/>
+    <joint name="joint_2" value="0.567"/>
+    <joint name="joint_3" value="-3.1"/>
+    <joint name="joint_4" value="-0.68"/>
+    <joint name="joint_5" value="-0.059"/>
+    <joint name="joint_6" value="-1.904"/>
+    <joint name="joint_7" value="1.61"/>
   </group_state>
   <group_state group="gripper" name="close">
     <joint name="left_inner_finger_joint" value="-0.8"/>
@@ -239,5 +239,17 @@
 
   <disable_collisions link1="wrist_camera_link_visual" link2="wrist_mounted_camera_link" reason="Never"/>
   <disable_collisions link1="wrist_camera_link_visual" link2="bracelet_link" reason="Never"/>
+  <disable_collisions link1="lower_collision_wall" link2="robot_stand_base_link" reason="Never"/> 
+  <disable_collisions link1="right_collision_wall" link2="table_link" reason="Never"/> 
+  <disable_collisions link1="left_collision_wall" link2="table_link" reason="Never"/>
+  <disable_collisions link1="table_front_collision_wall" link2="table_link" reason="Never"/>
+  <disable_collisions link1="table_right_collision_wall" link2="table_link" reason="Never"/>
+  <disable_collisions link1="table_left_collision_wall" link2="table_link" reason="Never"/>
 
+  <disable_collisions link1="rear_right_collision_wall" link2="table_right_collision_wall" reason="Never"/> 
+  <disable_collisions link1="table_front_collision_wall" link2="table_right_collision_wall" reason="Never"/> 
+  <disable_collisions link1="table_front_collision_wall" link2="table_left_collision_wall" reason="Never"/>
+  <disable_collisions link1="rear_left_collision_wall" link2="table_left_collision_wall" reason="Never"/>
+  <disable_collisions link1="rear_left_collision_wall" link2="rear_right_collision_wall" reason="Never"/>
+  <disable_collisions link1="rear_left_collision_wall" link2="table_left_collision_wall" reason="Never"/>   
 </robot>
