@@ -165,9 +165,10 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   // Prepare for new command modes
   std::vector<integration_lvl_t> new_modes = {};
   std::vector<std::size_t> new_mode_joint_index = {};
+  RCLCPP_INFO(LOGGER, "Controller switch requested");
   for (std::string key : start_interfaces)
   {
-    RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s, total joints: %lu", key.c_str(), info_.joints.size());
+    RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s", key.c_str());
     for (std::size_t i = 0; i < info_.joints.size(); i++)
     {
       if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION)
@@ -207,6 +208,33 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
         arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;  // Revert to undefined
       }
     }
+  }
+
+  // if we are sending twist messages to Kinova and our controller controller is changing we need to ensure the arm is stopped!
+  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING &&
+      arm_joints_control_level_[6] == integration_lvl_t::UNDEFINED)
+  {
+    block_write = true;
+    std::this_thread::sleep_for(
+        std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
+    arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
+    RCLCPP_INFO(LOGGER, "Switching to NO_SERVOING_MODE");
+    auto command = k_api::Base::TwistCommand();
+    command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
+    // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
+    // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
+    command.set_duration(0);
+
+    auto twist = command.mutable_twist();
+    twist->set_linear_x(0.0f);
+    twist->set_linear_y(0.0f);
+    twist->set_linear_z(0.0f);
+    twist->set_angular_x(0.0f);
+    twist->set_angular_y(0.0f);
+    twist->set_angular_z(0.0f);
+    base_.SendTwistCommand(command);
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    block_write = false;
   }
 
   // Set the new command modes
@@ -274,6 +302,10 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     RCLCPP_INFO(LOGGER, "Switching to SINGLE_LEVEL_SERVOING");
     controller_switch_time_ = rclcpp::Clock().now();
     block_write = false;
+  }
+  else
+  {
+    RCLCPP_INFO(LOGGER, "Arm controller is not changing modes. arm_mode: %u", arm_mode_);
   }
 
   return return_type::OK;
