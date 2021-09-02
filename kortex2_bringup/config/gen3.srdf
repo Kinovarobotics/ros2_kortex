@@ -100,7 +100,7 @@
     <joint name="right_outer_knuckle_joint" value="0.0"/>
   </group_state>
   <!--END EFFECTOR - Purpose - Represent information about an end effector.-->
-  <end_effector group="gripper" name="gripper" parent_link="base_link"/>
+  <end_effector group="gripper" name="gripper" parent_link="bracelet_link" parent_group="manipulator"/>
   <!--PASSIVE JOINT - Purpose - this element is used to mark joints that are not actuated-->
   <passive_joint name="left_inner_finger_joint"/>
   <passive_joint name="left_inner_knuckle_joint"/>
