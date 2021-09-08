@@ -13,7 +13,8 @@
     *origin
     robot_ip
     use_fake_hardware
-    fake_sensor_commands">
+    fake_sensor_commands
+    max_velocity_scaling_factor">
 
       <!-- ros2 control include -->
       <xacro:include filename="$(find kortex_description)/arms/gen3/${dof}dof/urdf/kortex.ros2_control.xacro" />
@@ -85,7 +86,7 @@
         xyz="0 0 1" />
       <limit
         effort="39"
-        velocity="1.3963" />
+        velocity="${max_velocity_scaling_factor * 1.3963}" />
     </joint>
     <link name="${prefix}half_arm_1_link">
       <inertial>
@@ -119,7 +120,7 @@
         link="${prefix}half_arm_1_link" />
       <axis
         xyz="0 0 1" />
-      <limit lower="-1.4" upper="1.4" effort="39" velocity="1.3963" />
+      <limit lower="-1.4" upper="1.4" effort="39" velocity="${max_velocity_scaling_factor * 1.3963}" />
     </joint>
     <link name="${prefix}half_arm_2_link">
       <inertial>
@@ -155,7 +156,7 @@
         xyz="0 0 1" />
       <limit
         effort="39"
-        velocity="1.3963" />
+        velocity="${max_velocity_scaling_factor * 1.3963}" />
     </joint>
     <link name="${prefix}forearm_link">
       <inertial>
@@ -189,7 +190,7 @@
         link="${prefix}forearm_link" />
       <axis
         xyz="0 0 1" />
-      <limit lower="-2.66" upper="2.66" effort="39" velocity="1.3963" />
+      <limit lower="-2.66" upper="2.66" effort="39" velocity="${max_velocity_scaling_factor * 1.3963}" />
     </joint>
     <link name="${prefix}spherical_wrist_1_link">
       <inertial>
@@ -225,7 +226,7 @@
         xyz="0 0 1" />
       <limit
         effort="9"
-        velocity="1.2218" />
+        velocity="${max_velocity_scaling_factor * 1.2218}" />
     </joint>
     <link name="${prefix}spherical_wrist_2_link">
       <inertial>
@@ -259,7 +260,7 @@
         link="${prefix}spherical_wrist_2_link" />
       <axis
         xyz="0 0 1" />
-      <limit lower="-2.23" upper="2.23" effort="9" velocity="1.2218" />
+      <limit lower="-2.23" upper="2.23" effort="9" velocity="${max_velocity_scaling_factor * 1.2218}" />
     </joint>
     <xacro:if value="${vision}">
     <link name="${prefix}bracelet_link">
@@ -321,7 +322,7 @@
         xyz="0 0 1" />
       <limit
         effort="9"
-        velocity="1.2218" />
+        velocity="${max_velocity_scaling_factor * 1.2218}" />
     </joint>
     <link name="${prefix}end_effector_link" />
     <joint

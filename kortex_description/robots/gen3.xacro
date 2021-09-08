@@ -12,6 +12,7 @@
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="use_fake_hardware" default="true" />
     <xacro:arg name="fake_sensor_commands" default="true" />
+    <xacro:arg name="max_velocity_scaling_factor" default="1.0" />
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
     <link name="world" />
