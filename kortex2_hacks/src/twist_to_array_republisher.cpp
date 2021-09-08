@@ -52,8 +52,8 @@ void TwistToArrayRepublisher::twistCallback(const geometry_msgs::msg::TwistStamp
   array_msg.data[0] = twist_msg->twist.linear.x * scale_linear_mult;
   array_msg.data[1] = twist_msg->twist.linear.y * scale_linear_mult;
   array_msg.data[2] = twist_msg->twist.linear.z * scale_linear_mult;
-  array_msg.data[3] = twist_msg->twist.angular.x * scale_angular_mult;
-  array_msg.data[4] = twist_msg->twist.angular.y * scale_angular_mult;
+  // array_msg.data[3] = twist_msg->twist.angular.x * scale_angular_mult;
+  // array_msg.data[4] = twist_msg->twist.angular.y * scale_angular_mult;
   array_msg.data[5] = twist_msg->twist.angular.z * scale_angular_mult;
   array_msg.data[6] = 0.0;
 
