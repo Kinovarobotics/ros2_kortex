@@ -241,7 +241,8 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   for (std::size_t i = 0; i < new_modes.size(); i++)
   {
     // if this interface is not free then we cant switch modes!
-    if (arm_joints_control_level_[new_mode_joint_index[i]] != integration_lvl_t::UNDEFINED)
+    if (arm_joints_control_level_[new_mode_joint_index[i]] != integration_lvl_t::UNDEFINED &&
+      info_.joints[new_mode_joint_index[i]].name != "finger_joint")  // TODO find a better way to identify gripper joint(s)
     {
       RCLCPP_ERROR(
           LOGGER,
