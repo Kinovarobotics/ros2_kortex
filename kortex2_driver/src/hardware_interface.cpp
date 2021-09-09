@@ -209,7 +209,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
       }
     }
   }
-  //If we are not starting anything we are done
+  // If we are not starting anything we are done
   if(new_modes.empty())
     return return_type::OK;
 
