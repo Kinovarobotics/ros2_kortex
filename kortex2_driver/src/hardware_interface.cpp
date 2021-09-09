@@ -209,6 +209,9 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
       }
     }
   }
+  //If we are not starting anything we are done
+  if(new_modes.empty())
+    return return_type::OK;
 
   // if we are sending twist messages to Kinova and our controller controller is changing we need to ensure the arm is stopped!
   if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING &&
@@ -241,8 +244,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   for (std::size_t i = 0; i < new_modes.size(); i++)
   {
     // if this interface is not free then we cant switch modes!
-    if (arm_joints_control_level_[new_mode_joint_index[i]] != integration_lvl_t::UNDEFINED &&
-      info_.joints[new_mode_joint_index[i]].name != "finger_joint")  // TODO find a better way to identify gripper joint(s)
+    if (arm_joints_control_level_[new_mode_joint_index[i]] != integration_lvl_t::UNDEFINED)
     {
       RCLCPP_ERROR(
           LOGGER,
