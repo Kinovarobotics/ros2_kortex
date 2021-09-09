@@ -210,7 +210,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     }
   }
   // If we are not starting anything we are done
-  if(new_modes.empty())
+  if (new_modes.empty())
     return return_type::OK;
 
   // if we are sending twist messages to Kinova and our controller controller is changing we need to ensure the arm is stopped!
