@@ -176,9 +176,8 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     }
   }
 
-  // if we are sending twist messages to Kinova and our controller controller is changing we need to ensure the arm is stopped!
-  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING &&
-      arm_joints_control_level_[6] == integration_lvl_t::UNDEFINED)
+  // if we are sending twist messages to Kinova we need to ensure the arm is stopped!
+  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
   {
     block_write = true;
     std::this_thread::sleep_for(
