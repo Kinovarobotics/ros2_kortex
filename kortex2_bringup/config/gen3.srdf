@@ -41,7 +41,7 @@
   <group_state group="manipulator" name="home">
     <joint name="joint_1" value="0"/>
     <joint name="joint_2" value="0.26"/>
-    <joint name="joint_3" value="3.14"/>
+    <joint name="joint_3" value="3.0"/>
     <joint name="joint_4" value="-2.27"/>
     <joint name="joint_5" value="0"/>
     <joint name="joint_6" value="0.96"/>
@@ -50,7 +50,7 @@
   <group_state group="manipulator" name="weigh">
     <joint name="joint_1" value="0"/>
     <joint name="joint_2" value="0"/>
-    <joint name="joint_3" value="3.14"/>
+    <joint name="joint_3" value="3.0"/>
     <joint name="joint_4" value="-2.27"/>
     <joint name="joint_5" value="0"/>
     <joint name="joint_6" value="0.7"/>
@@ -59,7 +59,7 @@
   <group_state group="manipulator" name="retract">
     <joint name="joint_1" value="0"/>
     <joint name="joint_2" value="-0.35"/>
-    <joint name="joint_3" value="3.14"/>
+    <joint name="joint_3" value="3.0"/>
     <joint name="joint_4" value="-2.54"/>
     <joint name="joint_5" value="0"/>
     <joint name="joint_6" value="-0.87"/>
@@ -86,7 +86,7 @@
   <group_state group="manipulator" name="puzzle">
     <joint name="joint_1" value="0.0"/>
     <joint name="joint_2" value="0.567"/>
-    <joint name="joint_3" value="-3.1"/>
+    <joint name="joint_3" value="-3.0"/>
     <joint name="joint_4" value="-0.68"/>
     <joint name="joint_5" value="-0.059"/>
     <joint name="joint_6" value="-1.904"/>
