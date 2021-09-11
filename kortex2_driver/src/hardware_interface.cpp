@@ -242,9 +242,10 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   }
 
   // If we are not starting any controllers we are done
-  if (new_modes.empty()) {
-      block_write = false;
-      return return_type::OK;
+  if (new_modes.empty())
+  {
+    block_write = false;
+    return return_type::OK;
   }
   // Set the new command modes
   for (std::size_t i = 0; i < new_modes.size(); i++)
