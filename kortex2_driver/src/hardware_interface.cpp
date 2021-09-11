@@ -162,40 +162,6 @@ std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::
 return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
                                                                       const std::vector<std::string>& stop_interfaces)
 {
-  // Prepare for new command modes
-  std::vector<integration_lvl_t> new_modes = {};
-  std::vector<std::size_t> new_mode_joint_index = {};
-  RCLCPP_INFO(LOGGER, "Controller switch requested");
-  for (std::string key : start_interfaces)
-  {
-    RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s", key.c_str());
-    for (std::size_t i = 0; i < info_.joints.size(); i++)
-    {
-      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION)
-      {
-        new_modes.push_back(integration_lvl_t::POSITION);
-        new_mode_joint_index.push_back(i);
-      }
-      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY)
-      {
-        if (new_mode_joint_index.back() == i)
-        {
-          new_modes.back() = integration_lvl_t::VELOCITY;
-        }
-        else
-        {
-          new_modes.push_back(integration_lvl_t::VELOCITY);
-          new_mode_joint_index.push_back(i);
-        }
-      }
-      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_EFFORT)
-      {
-        new_modes.push_back(integration_lvl_t::EFFORT);
-        new_mode_joint_index.push_back(i);
-      }
-    }
-  }
-
   // Stop motion on all relevant joints that are stopping
   for (std::string key : stop_interfaces)
   {
@@ -235,6 +201,40 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     base_.SendTwistCommand(command);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     block_write = false;
+  }
+
+  // Prepare for new command modes
+  std::vector<integration_lvl_t> new_modes = {};
+  std::vector<std::size_t> new_mode_joint_index = {};
+  RCLCPP_INFO(LOGGER, "Controller switch requested");
+  for (std::string key : start_interfaces)
+  {
+    RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s", key.c_str());
+    for (std::size_t i = 0; i < info_.joints.size(); i++)
+    {
+      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION)
+      {
+        new_modes.push_back(integration_lvl_t::POSITION);
+        new_mode_joint_index.push_back(i);
+      }
+      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY)
+      {
+        if (new_mode_joint_index.back() == i)
+        {
+          new_modes.back() = integration_lvl_t::VELOCITY;
+        }
+        else
+        {
+          new_modes.push_back(integration_lvl_t::VELOCITY);
+          new_mode_joint_index.push_back(i);
+        }
+      }
+      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_EFFORT)
+      {
+        new_modes.push_back(integration_lvl_t::EFFORT);
+        new_mode_joint_index.push_back(i);
+      }
+    }
   }
 
   // If we are not starting any controllers we are done
