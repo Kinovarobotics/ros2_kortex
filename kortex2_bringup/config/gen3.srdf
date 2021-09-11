@@ -75,13 +75,13 @@
     <joint name="joint_7" value="0"/>
   </group_state>
   <group_state group="manipulator" name="cup">
-    <joint name="joint_1" value="-0.82"/>
-    <joint name="joint_2" value="1.28"/>
-    <joint name="joint_3" value="2.65"/>
-    <joint name="joint_4" value="-2.06"/>
-    <joint name="joint_5" value="-1.70"/>
-    <joint name="joint_6" value="1.95"/>
-    <joint name="joint_7" value="1.32"/>
+    <joint name="joint_1" value="1.40"/>
+    <joint name="joint_2" value="1.07"/>
+    <joint name="joint_3" value="-3.02"/>
+    <joint name="joint_4" value="-1.70"/>
+    <joint name="joint_5" value="2.17"/>
+    <joint name="joint_6" value="1.64"/>
+    <joint name="joint_7" value="1.36"/>
   </group_state>
   <group_state group="manipulator" name="puzzle">
     <joint name="joint_1" value="0.0"/>
