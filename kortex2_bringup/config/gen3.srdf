@@ -84,12 +84,12 @@
     <joint name="joint_7" value="1.43"/>
   </group_state>
   <group_state group="manipulator" name="puzzle">
-    <joint name="joint_1" value="0.0"/>
-    <joint name="joint_2" value="0.567"/>
+    <joint name="joint_1" value="0.02"/>
+    <joint name="joint_2" value="0.37"/>
     <joint name="joint_3" value="-3.0"/>
-    <joint name="joint_4" value="-0.68"/>
-    <joint name="joint_5" value="-0.059"/>
-    <joint name="joint_6" value="-1.904"/>
+    <joint name="joint_4" value="-0.48"/>
+    <joint name="joint_5" value="-0.11"/>
+    <joint name="joint_6" value="-1.97"/>
     <joint name="joint_7" value="1.61"/>
   </group_state>
   <group_state group="gripper" name="close">
