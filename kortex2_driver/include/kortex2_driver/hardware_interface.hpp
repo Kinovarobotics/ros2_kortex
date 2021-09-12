@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -91,7 +92,7 @@ private:
   double gripper_position_;
 
   rclcpp::Time controller_switch_time_;
-  bool block_write = false;
+  std::atomic<bool> block_write = false;
   k_api::Base::ServoingMode arm_mode_;
 
   // Enum defining at which control level we are

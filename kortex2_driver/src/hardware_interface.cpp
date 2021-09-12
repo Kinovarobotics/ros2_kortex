@@ -162,6 +162,10 @@ std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::
 return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
                                                                       const std::vector<std::string>& stop_interfaces)
 {
+  // sleep to ensure all outgoing write commands have finished
+  block_write = true;
+  std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
   // Prepare for new command modes
   std::vector<integration_lvl_t> new_modes = {};
   std::vector<std::size_t> new_mode_joint_index = {};
@@ -214,9 +218,9 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING &&
       arm_joints_control_level_[6] == integration_lvl_t::UNDEFINED)
   {
-    block_write = true;
-    std::this_thread::sleep_for(
-        std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
+    // block_write = true;
+    // std::this_thread::sleep_for(
+    //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
     arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
     RCLCPP_INFO(LOGGER, "Switching to NO_SERVOING_MODE");
     auto command = k_api::Base::TwistCommand();
@@ -234,13 +238,15 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     twist->set_angular_z(0.0f);
     base_.SendTwistCommand(command);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    block_write = false;
+    // block_write = false;
   }
 
   // If we are not starting any controllers we are done
   if (new_modes.empty())
+  {
+    block_write = false;
     return return_type::OK;
-
+  }
   // Set the new command modes
   for (std::size_t i = 0; i < new_modes.size(); i++)
   {
@@ -251,6 +257,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
           LOGGER,
           "Attempting to start interface that is already claimed. Joint mode index: %ld, arm_joints_control_level_[%d]",
           new_mode_joint_index[i], arm_joints_control_level_[new_mode_joint_index[i]]);
+      block_write = false;
       return return_type::ERROR;
     }
     arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
@@ -264,9 +271,9 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
       info_.joints[new_mode_joint_index.front()].name !=
           "finger_joint")  // TODO find a better way to identify gripper joint(s)
   {
-    block_write = true;
-    std::this_thread::sleep_for(
-        std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
+    // block_write = true;
+    // std::this_thread::sleep_for(
+    //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
     auto servoing_mode = k_api::Base::ServoingModeInformation();
     // Set the base in low-level servoing mode
     arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
@@ -282,15 +289,15 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     }
     RCLCPP_INFO(LOGGER, "Switching to LOW_LEVEL_SERVOING");
     controller_switch_time_ = rclcpp::Clock().now();
-    block_write = false;
+    // block_write = false;
   }
   else if (arm_joints_control_level_[6] == integration_lvl_t::POSITION &&
            info_.joints[new_mode_joint_index.front()].name !=
                "finger_joint")  // TODO find a better way to identify gripper joint(s)
   {
-    block_write = true;
-    std::this_thread::sleep_for(
-        std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
+    // block_write = true;
+    // std::this_thread::sleep_for(
+    //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
     auto servoing_mode = k_api::Base::ServoingModeInformation();
     // Set the base in low-level servoing mode
     arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
@@ -305,13 +312,14 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     }
     RCLCPP_INFO(LOGGER, "Switching to SINGLE_LEVEL_SERVOING");
     controller_switch_time_ = rclcpp::Clock().now();
-    block_write = false;
+    // block_write = false;
   }
   else
   {
     RCLCPP_INFO(LOGGER, "Arm controller is not changing modes. arm_mode: %u", arm_mode_);
   }
 
+  block_write = false;
   return return_type::OK;
 }
 
