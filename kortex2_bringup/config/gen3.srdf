@@ -75,22 +75,22 @@
     <joint name="joint_7" value="0"/>
   </group_state>
   <group_state group="manipulator" name="cup">
-    <joint name="joint_1" value="1.42"/>
-    <joint name="joint_2" value="0.97"/>
+    <joint name="joint_1" value="1.39"/>
+    <joint name="joint_2" value="0.99"/>
     <joint name="joint_3" value="-3.00"/>
-    <joint name="joint_4" value="-1.88"/>
-    <joint name="joint_5" value="2.10"/>
-    <joint name="joint_6" value="1.52"/>
+    <joint name="joint_4" value="-1.85"/>
+    <joint name="joint_5" value="2.05"/>
+    <joint name="joint_6" value="1.74"/>
     <joint name="joint_7" value="1.43"/>
   </group_state>
   <group_state group="manipulator" name="puzzle">
-    <joint name="joint_1" value="0.0"/>
-    <joint name="joint_2" value="0.567"/>
+    <joint name="joint_1" value="0.00"/>
+    <joint name="joint_2" value="0.56"/>
     <joint name="joint_3" value="-3.0"/>
-    <joint name="joint_4" value="-0.68"/>
-    <joint name="joint_5" value="-0.059"/>
-    <joint name="joint_6" value="-1.904"/>
-    <joint name="joint_7" value="1.61"/>
+    <joint name="joint_4" value="-0.67"/>
+    <joint name="joint_5" value="-0.08"/>
+    <joint name="joint_6" value="-1.84"/>
+    <joint name="joint_7" value="1.65"/>
   </group_state>
   <group_state group="gripper" name="close">
     <joint name="left_inner_finger_joint" value="-0.8"/>
