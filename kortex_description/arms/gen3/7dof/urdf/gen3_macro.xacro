@@ -13,7 +13,8 @@
     *origin
     robot_ip
     use_fake_hardware
-    fake_sensor_commands">
+    fake_sensor_commands
+    use_internal_bus_gripper_comm:=false">
 
       <!-- ros2 control include -->
       <xacro:include filename="$(find kortex_description)/arms/gen3/${dof}dof/urdf/kortex.ros2_control.xacro" />
@@ -22,7 +23,8 @@
         use_fake_hardware="${use_fake_hardware}"
         fake_sensor_commands="${fake_sensor_commands}"
         tf_prefix=""
-        robot_ip="${robot_ip}" />
+        robot_ip="${robot_ip}"
+        use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
 
       <joint name="${prefix}base_joint" type="fixed">
         <xacro:insert_block name="origin" />

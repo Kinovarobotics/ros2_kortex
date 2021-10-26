@@ -118,6 +118,13 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     }
   }
 
+  // TODO (livanov93): appropriate actions if internal bus is used for gripper communication
+  if ((info_.hardware_parameters["use_internal_bus_gripper_comm"] == "true") ||
+      (info_.hardware_parameters["use_internal_bus_gripper_comm"] == "True"))
+  {
+    RCLCPP_ERROR(LOGGER, "Internal bus communication for gripper required, not implemented yet!");
+  }
+
   RCLCPP_INFO(LOGGER, "Hardware Interface successfully configured");
   return CallbackReturn::SUCCESS;
 }
