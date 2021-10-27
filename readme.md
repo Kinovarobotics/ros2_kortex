@@ -26,7 +26,7 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
    source install/setup.bash
    ```
-   
+
 ## Usage
 To launch and view the robots URDF run:
 

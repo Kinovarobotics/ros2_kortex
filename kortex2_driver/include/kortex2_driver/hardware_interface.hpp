@@ -33,7 +33,7 @@ namespace k_api = Kinova::Api;
 
 namespace kortex2_driver
 {
-class KortexMultiInterfaceHardware : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
+class KortexMultiInterfaceHardware : public hardware_interface::SystemInterface
 {
 public:
   KortexMultiInterfaceHardware();
@@ -41,7 +41,7 @@ public:
   RCLCPP_SHARED_PTR_DEFINITIONS(KortexMultiInterfaceHardware);
 
   KORTEX2_DRIVER_PUBLIC
-  return_type configure(const hardware_interface::HardwareInfo& info) final;
+  CallbackReturn on_init(const hardware_interface::HardwareInfo& info) final;
 
   KORTEX2_DRIVER_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() final;
@@ -54,10 +54,10 @@ public:
                                           const std::vector<std::string>& stop_interfaces) final;
 
   KORTEX2_DRIVER_PUBLIC
-  return_type start() final;
+  CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) final;
 
   KORTEX2_DRIVER_PUBLIC
-  return_type stop() final;
+  CallbackReturn on_deactivate(const rclcpp_lifecycle::State& previous_state) final;
 
   KORTEX2_DRIVER_PUBLIC
   return_type read() final;
