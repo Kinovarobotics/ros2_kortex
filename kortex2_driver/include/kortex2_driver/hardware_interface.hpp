@@ -89,6 +89,10 @@ private:
   std::vector<double> arm_positions_;
   std::vector<double> arm_velocities_;
   std::vector<double> arm_efforts_;
+
+  // twist command interfaces
+  std::vector<double> twist_commands_;
+
   // Gripper
   k_api::GripperCyclic::MotorCommand* gripper_motor_command_;
   double gripper_command_position_;
@@ -108,7 +112,17 @@ private:
     EFFORT = 3
   };
 
-  std::vector<integration_lvl_t> arm_joints_control_level_;
+    std::vector<integration_lvl_t> arm_joints_control_level_;
+
+    // what controller is running
+    bool joint_based_controller_running_;
+    bool twist_controller_running_;
+
+    void sendTwistCommand();
+
+    void sendGripperCommand();
+
+    void sendGripperMotorCommand(float position, float velocity=100.0, float force=100.0);
 };
 
 }  // namespace kortex2_driver

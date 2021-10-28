@@ -58,6 +58,10 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
   base_.SetServoingMode(servoing_mode);
   actuator_count_ = base_.GetActuatorCount().count();
+
+    // no controller is running
+     joint_based_controller_running_ = false;
+     twist_controller_running_ = false;
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::HardwareInfo& info)
@@ -79,6 +83,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
   arm_joints_control_level_.resize(info_.joints.size(), integration_lvl_t::UNDEFINED);  // start in undefined
+
+    // set size of the twist interface
+    twist_commands_.resize(6);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
   {
@@ -152,6 +159,14 @@ std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::
           info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]));
     }
   }
+
+  // register twist command interfaces
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.linear.x", &twist_commands_[0]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.linear.y", &twist_commands_[1]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.linear.z", &twist_commands_[2]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.angular.x", &twist_commands_[3]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.angular.y", &twist_commands_[4]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.angular.z", &twist_commands_[5]));
 
   return command_interfaces;
 }
@@ -448,45 +463,13 @@ return_type KortexMultiInterfaceHardware::write()
   }
 
   // Twist controller active
-  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING && twist_controller_running_)
   {
-    // TODO (marqrazz): The command interface is not properly locking so when we switch controllers
-    // the last active controller is still sending commands to `arm_commands_positions_` which causes
-    // the arm to servo based on the old commands.
-    if ((rclcpp::Clock().now() - controller_switch_time_).seconds() < 0.5)
-    {
+      sendTwistCommand();
+
+      sendGripperCommand();
+
       feedback_ = base_cyclic_.RefreshFeedback();
-      for (std::size_t j = 0; j < actuator_count_; j++)
-      {
-        arm_commands_positions_[j] = 0.0;  // This is a twist command at this point
-      }
-      return return_type::OK;
-    }
-
-    auto command = k_api::Base::TwistCommand();
-    command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
-    // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
-    // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
-    command.set_duration(0);
-
-    auto twist = command.mutable_twist();
-    twist->set_linear_x(float(arm_commands_positions_[0]));
-    twist->set_linear_y(float(arm_commands_positions_[1]));
-    twist->set_linear_z(float(arm_commands_positions_[2]));
-    twist->set_angular_x(float(arm_commands_positions_[3]));
-    twist->set_angular_y(float(arm_commands_positions_[4]));
-    twist->set_angular_z(float(arm_commands_positions_[5]));
-    base_.SendTwistCommand(command);
-
-    k_api::Base::GripperCommand gripper_command;
-    gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
-    auto finger = gripper_command.mutable_gripper()->add_finger();
-    finger->set_finger_identifier(1);
-    ;
-    finger->set_value(gripper_command_position_ / 100.0);  // This values needs to be between 0 and 1
-    base_.SendGripperCommand(gripper_command);
-
-    feedback_ = base_cyclic_.RefreshFeedback();
     return return_type::OK;
   }
   // Keep alive mode - no controller active
@@ -498,72 +481,100 @@ return_type KortexMultiInterfaceHardware::write()
     return return_type::OK;
   }
   // Per joint controller active
+  if (joint_based_controller_running_) {
+      sendGripperMotorCommand(static_cast<float>(gripper_command_position_));
 
-  gripper_motor_command_->set_position(
-      gripper_command_position_);               // % open/closed, this values needs to be between 0 and 1
-  gripper_motor_command_->set_velocity(100.0);  // % speed TODO read in as paramter from kortex_controllers.yaml
-  gripper_motor_command_->set_force(100.0);     // % torque TODO read in as paramter from kortex_controllers.yaml
+      // Incrementing identifier ensures actuators can reject out of time frames
+      base_command_.set_frame_id(base_command_.frame_id() + 1);
+      if (base_command_.frame_id() > 65535)
+          base_command_.set_frame_id(0);
 
-  // Incrementing identifier ensures actuators can reject out of time frames
-  base_command_.set_frame_id(base_command_.frame_id() + 1);
-  if (base_command_.frame_id() > 65535)
-    base_command_.set_frame_id(0);
+      // update the command for each joint
+      for (std::size_t i = 0; i < actuator_count_; i++) {
+          float cmd_degrees = 0.0;
 
-  // update the command for each joint
-  for (std::size_t i = 0; i < actuator_count_; i++)
-  {
-    float cmd_degrees = 0.0;
+          // TODO (marqrazz): The command interface is not properly locking so when we switch controllers
+          // the last active controller is still sending commands to `arm_commands_positions_` which causes
+          // the arm to jump because the command delta is large.
+          if (abs(arm_commands_positions_[i] - arm_positions_[i]) > 0.1 &&
+              (rclcpp::Clock().now() - controller_switch_time_).seconds() < 0.5) {
+              RCLCPP_WARN(LOGGER,
+                          "Arms joint[%ld] command error is too large, setting command to current robot position. Error: %f. "
+                          "Command: %f, Actual: %f",
+                          i, abs(arm_commands_positions_[i] - arm_positions_[i]), arm_commands_positions_[i],
+                          arm_positions_[i]);
+              feedback_ = base_cyclic_.RefreshFeedback();
+              for (std::size_t j = 0; j < actuator_count_; j++) {
+                  arm_commands_positions_[j] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+                          KortexMathUtil::toRad(feedback_.actuators(j).position()));  // rad
+              }
+              return return_type::OK;
+          } else {
+              cmd_degrees = static_cast<float>(
+                      KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i])));
+          }
+          float cmd_vel = static_cast<float>(KortexMathUtil::toDeg(arm_commands_velocities_[i]));
 
-    // TODO (marqrazz): The command interface is not properly locking so when we switch controllers
-    // the last active controller is still sending commands to `arm_commands_positions_` which causes
-    // the arm to jump because the command delta is large.
-    if (abs(arm_commands_positions_[i] - arm_positions_[i]) > 0.1 &&
-        (rclcpp::Clock().now() - controller_switch_time_).seconds() < 0.5)
-    {
-      RCLCPP_WARN(LOGGER,
-                  "Arms joint[%ld] command error is too large, setting command to current robot position. Error: %f. "
-                  "Command: %f, Actual: %f",
-                  i, abs(arm_commands_positions_[i] - arm_positions_[i]), arm_commands_positions_[i],
-                  arm_positions_[i]);
-      feedback_ = base_cyclic_.RefreshFeedback();
-      for (std::size_t j = 0; j < actuator_count_; j++)
-      {
-        arm_commands_positions_[j] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
-            KortexMathUtil::toRad(feedback_.actuators(j).position()));  // rad
+          base_command_.mutable_actuators(i)->set_position(cmd_degrees);
+          // base_command_.mutable_actuators(i)->set_velocity(cmd_vel);  // This is currently not implemented properly in the kortex api
+          base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
+      }
+
+      // send the command to the robot
+      try {
+          feedback_ = base_cyclic_.Refresh(base_command_, 0);
+      }
+      catch (k_api::KDetailedException &ex) {
+          RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+          RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                  k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+
+          // attempt to clear any robot faults
+          base_.ClearFaults();
+          feedback_ = base_cyclic_.RefreshFeedback();
+          RCLCPP_WARN(LOGGER, "Attempting to clear faults. [base_active_state: %u]", feedback_.base().active_state());
       }
       return return_type::OK;
-    }
-    else
-    {
-      cmd_degrees = static_cast<float>(
-          KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i])));
-    }
-    float cmd_vel = static_cast<float>(KortexMathUtil::toDeg(arm_commands_velocities_[i]));
-
-    base_command_.mutable_actuators(i)->set_position(cmd_degrees);
-    // base_command_.mutable_actuators(i)->set_velocity(cmd_vel);  // This is currently not implemented properly in the kortex api
-    base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
   }
-
-  // send the command to the robot
-  try
-  {
-    feedback_ = base_cyclic_.Refresh(base_command_, 0);
-  }
-  catch (k_api::KDetailedException& ex)
-  {
-    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
-
-    RCLCPP_ERROR_STREAM(LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
-                                    k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
-
-    // attempt to clear any robot faults
-    base_.ClearFaults();
-    feedback_ = base_cyclic_.RefreshFeedback();
-    RCLCPP_WARN(LOGGER, "Attempting to clear faults. [base_active_state: %u]", feedback_.base().active_state());
-  }
-  return return_type::OK;
 }
+
+    void KortexMultiInterfaceHardware::sendGripperMotorCommand(float position, float velocity, float force) {
+
+        // % open/closed, this values needs to be between 0 and 1
+        gripper_motor_command_->set_position(position);
+        // % speed TODO read in as paramter from kortex_controllers.yaml
+        gripper_motor_command_->set_velocity(velocity);
+        // % torque TODO read in as paramter from kortex_controllers.yaml
+        gripper_motor_command_->set_force(force);
+
+    }
+
+    void KortexMultiInterfaceHardware::sendGripperCommand() {
+        k_api::Base::GripperCommand gripper_command;
+        gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
+        auto finger = gripper_command.mutable_gripper()->add_finger();
+        finger->set_finger_identifier(1);;
+        finger->set_value(gripper_command_position_ / 100.0);  // This values needs to be between 0 and 1
+        base_.SendGripperCommand(gripper_command);
+    }
+
+    void KortexMultiInterfaceHardware::sendTwistCommand() {
+        auto command = k_api::Base::TwistCommand();
+        command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
+        // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
+// see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
+        command.set_duration(0);
+
+        auto twist = command.mutable_twist();
+        twist->set_linear_x(float(twist_commands_[0]));
+        twist->set_linear_y(float(twist_commands_[1]));
+        twist->set_linear_z(float(twist_commands_[2]));
+        twist->set_angular_x(float(twist_commands_[3]));
+        twist->set_angular_y(float(twist_commands_[4]));
+        twist->set_angular_z(float(twist_commands_[5]));
+        base_.SendTwistCommand(command);
+    }
 
 }  // namespace kortex2_driver
 
