@@ -297,8 +297,8 @@ integration_lvl_t::UNDEFINED) {
           RCLCPP_ERROR(
                   LOGGER,
                   "Attempting to start interface that is already claimed. Joint mode index: %ld,
-arm_joints_control_level_[%u]", new_mode_joint_index[i], arm_joints_control_level_[new_mode_joint_index[i]]); block_write
-= false; return return_type::ERROR;
+arm_joints_control_level_[%u]", new_mode_joint_index[i], arm_joints_control_level_[new_mode_joint_index[i]]);
+block_write = false; return return_type::ERROR;
       }
       arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
       RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%ld] mode: %u", new_mode_joint_index[i], new_modes[i]);
@@ -360,10 +360,29 @@ arm_joints_control_level_[%u]", new_mode_joint_index[i], arm_joints_control_leve
   return return_type::OK;
 }
 
-return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>&,
-                                                                      const vector<std::string>&)
+return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>& start_interfaces,
+                                                                      const vector<std::string>& stop_interfaces)
 {
-  return return_type::OK;
+  hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
+
+  RCLCPP_INFO(LOGGER, "perform START");
+
+  // Starting interfaces
+  // add start interface per joint in tmp var for later check
+  for (const auto& key : start_interfaces)
+  {
+    RCLCPP_INFO(LOGGER, "Starting '%s'", key.c_str());
+  }
+
+  // Stopping interfaces
+  // add stop interface per joint in tmp var for later check
+  for (const auto& key : stop_interfaces)
+  {
+    RCLCPP_INFO(LOGGER, "Stopping '%s'", key.c_str());
+  }
+  RCLCPP_INFO(LOGGER, "perform END");
+
+  return ret_val;
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_activate(const rclcpp_lifecycle::State& /* previous_state */)
