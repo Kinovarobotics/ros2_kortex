@@ -33,6 +33,13 @@ namespace k_api = Kinova::Api;
 
 namespace kortex2_driver
 {
+enum class StoppingInterface
+{
+  NONE,
+  STOP_POS_VEL,
+  STOP_TWIST,
+  STOP_GRIPPER
+};
 class KortexMultiInterfaceHardware : public hardware_interface::SystemInterface
 {
 public:
@@ -118,6 +125,9 @@ private:
   bool joint_based_controller_running_;
   bool twist_controller_running_;
   bool gripper_controller_running_;
+  // switching auxiliary vars
+  std::vector<uint> stop_modes_;
+  std::vector<std::string> start_modes_;
 
   bool first_pass_;
 
