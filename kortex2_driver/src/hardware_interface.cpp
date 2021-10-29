@@ -27,6 +27,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , session_manager_real_time_{ &router_udp_realtime_ }
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
+  , first_pass_(true)
 {
   // The robot's IP address.
   std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];
@@ -64,6 +65,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   // no controller is running
   joint_based_controller_running_ = false;
   twist_controller_running_ = false;
+  gripper_controller_running_ = false;
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::HardwareInfo& info)
@@ -430,6 +432,11 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(const rclcpp_lifecycl
 
 return_type KortexMultiInterfaceHardware::read()
 {
+  if (first_pass_)
+  {
+    feedback_ = base_cyclic_.RefreshFeedback();
+    first_pass_ = false;
+  }
   readGripperPosition();
 
   for (std::size_t i = 0; i < actuator_count_; i++)
@@ -452,9 +459,9 @@ return_type KortexMultiInterfaceHardware::read()
 }
 
 void KortexMultiInterfaceHardware::readGripperPosition()
-{  // max joint angle = 0.81 for robotiq_2f_85
-   // TODO read in as paramter from kortex_controllers.yaml
-    RCLCPP_INFO(LOGGER, "Reading gripper...");
+{
+  // max joint angle = 0.81 for robotiq_2f_85
+  // TODO read in as paramter from kortex_controllers.yaml
   gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
 }
 
@@ -502,7 +509,6 @@ return_type KortexMultiInterfaceHardware::write()
 
   // read one step late because reading before sending commands
   // generates errors
-  RCLCPP_INFO(LOGGER, "Reading arm...");
   feedback_ = base_cyclic_.RefreshFeedback();
   return return_type::OK;
 }

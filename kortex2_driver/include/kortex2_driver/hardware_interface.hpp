@@ -117,6 +117,9 @@ private:
   // what controller is running
   bool joint_based_controller_running_;
   bool twist_controller_running_;
+  bool gripper_controller_running_;
+
+  bool first_pass_;
 
   // temp variables to use in update loop
   float cmd_degrees_tmp_;
