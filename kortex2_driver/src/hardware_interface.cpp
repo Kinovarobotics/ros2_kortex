@@ -346,7 +346,10 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(const rclcpp_lifecycle:
 {
   RCLCPP_INFO(LOGGER, "Activating KortexMultiInterfaceHardware...");
   base_.ClearFaults();
+
+  // first read
   auto base_feedback = base_cyclic_.RefreshFeedback();
+
   // Add each actuator to the base_command_ and set the command to its current position
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -451,6 +454,7 @@ return_type KortexMultiInterfaceHardware::read()
 void KortexMultiInterfaceHardware::readGripperPosition()
 {  // max joint angle = 0.81 for robotiq_2f_85
    // TODO read in as paramter from kortex_controllers.yaml
+    RCLCPP_INFO(LOGGER, "Reading gripper...");
   gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
 }
 
@@ -496,8 +500,9 @@ return_type KortexMultiInterfaceHardware::write()
     RCLCPP_DEBUG(LOGGER, "No controller active!");
   }
 
-  // read one step late because reading before sending commadns
+  // read one step late because reading before sending commands
   // generates errors
+  RCLCPP_INFO(LOGGER, "Reading arm...");
   feedback_ = base_cyclic_.RefreshFeedback();
   return return_type::OK;
 }
