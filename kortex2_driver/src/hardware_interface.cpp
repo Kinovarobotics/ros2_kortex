@@ -74,15 +74,15 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
 
   info_ = info;
 
-  arm_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_positions_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_velocities_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_efforts_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_positions_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_velocities_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_efforts_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_joints_control_level_.resize(actuator_count_, integration_lvl_t::UNDEFINED);  // start in undefined
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
-  arm_joints_control_level_.resize(info_.joints.size(), integration_lvl_t::UNDEFINED);  // start in undefined
 
   // set size of the twist interface
   twist_commands_.resize(6);
@@ -117,6 +117,8 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
 std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::export_state_interfaces()
 {
   std::vector<hardware_interface::StateInterface> state_interfaces;
+  std::vector<string> arm_joint_names;
+
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
     RCLCPP_DEBUG(LOGGER, "export_state_interfaces for joint: %s", info_.joints[i].name.c_str());
@@ -127,13 +129,18 @@ std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::ex
     }
     else
     {
-      state_interfaces.emplace_back(hardware_interface::StateInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_POSITION, &arm_positions_[i]));
-      state_interfaces.emplace_back(hardware_interface::StateInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &arm_velocities_[i]));
-      state_interfaces.emplace_back(
-          hardware_interface::StateInterface(info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
+      arm_joint_names.emplace_back(info_.joints[i].name);
     }
+  }
+
+  for (std::size_t i = 0; i < arm_joint_names.size(); i++)
+  {
+    state_interfaces.emplace_back(
+        hardware_interface::StateInterface(arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_positions_[i]));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_velocities_[i]));
+    state_interfaces.emplace_back(
+        hardware_interface::StateInterface(arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
   }
 
   return state_interfaces;
@@ -142,21 +149,30 @@ std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::ex
 std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::export_command_interfaces()
 {
   std::vector<hardware_interface::CommandInterface> command_interfaces;
+  std::vector<string> arm_joint_names;
+
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
-    if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
+    // TODO find a better way to identify gripper joint(s)
+    if (info_.joints[i].name == "finger_joint")
     {
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
           info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_command_position_));
     }
     else
     {
+      arm_joint_names.emplace_back(info_.joints[i].name);
+    }
+  }
+  for (std::size_t i = 0; i < arm_joint_names.size(); i++)
+  {
+    {
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_POSITION, &arm_commands_positions_[i]));
+          arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_commands_positions_[i]));
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &arm_commands_velocities_[i]));
+          arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_commands_velocities_[i]));
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]));
+          arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]));
     }
   }
 
