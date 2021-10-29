@@ -112,17 +112,26 @@ private:
     EFFORT = 3
   };
 
-    std::vector<integration_lvl_t> arm_joints_control_level_;
+  std::vector<integration_lvl_t> arm_joints_control_level_;
 
-    // what controller is running
-    bool joint_based_controller_running_;
-    bool twist_controller_running_;
+  // what controller is running
+  bool joint_based_controller_running_;
+  bool twist_controller_running_;
 
-    void sendTwistCommand();
+  void sendTwistCommand();
 
-    void sendGripperCommand();
+  void sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
+                          double force = 100.0);
 
-    void sendGripperMotorCommand(float position, float velocity=100.0, float force=100.0);
+  void incrementId();
+
+  float cmd_degrees_tmp_;
+  float cmd_vel_tmp_;
+  int num_turns_tmp_ = 0;
+
+  void writeCommands();
+
+  void prepareCommands();
 };
 
 }  // namespace kortex2_driver
