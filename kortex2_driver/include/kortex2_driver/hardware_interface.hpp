@@ -118,20 +118,20 @@ private:
   bool joint_based_controller_running_;
   bool twist_controller_running_;
 
-  void sendTwistCommand();
-
-  void sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
-                          double force = 100.0);
-
-  void incrementId();
-
+  // temp variables to use in update loop
   float cmd_degrees_tmp_;
   float cmd_vel_tmp_;
   int num_turns_tmp_ = 0;
 
+  void sendTwistCommand();
+  void sendJointCommand();
+  void incrementId();
   void writeCommands();
-
   void prepareCommands();
+  void sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
+                          double force = 100.0);
+
+  void readGripperPosition();
 };
 
 }  // namespace kortex2_driver

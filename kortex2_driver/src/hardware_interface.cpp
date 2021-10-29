@@ -425,36 +425,31 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(const rclcpp_lifecycl
 
 return_type KortexMultiInterfaceHardware::read()
 {
-  for (std::size_t i = 0; i < info_.joints.size(); i++)
+  readGripperPosition();
+
+  for (std::size_t i = 0; i < actuator_count_; i++)
   {
-    switch (arm_joints_control_level_[i])
+    if (arm_joints_control_level_[i] == integration_lvl_t::UNDEFINED)
     {
-      case integration_lvl_t::UNDEFINED:
-        // RCLCPP_INFO(LOGGER, "Nothing is using the hardware interface! %u", i);
-        return return_type::OK;
-        break;
-      default:
-        if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
-        {
-          // max joint angle = 0.81 for robotiq_2f_85
-          // TODO read in as paramter from kortex_controllers.yaml
-          gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
-        }
-        else
-        {
-          // read torque
-          arm_efforts_[i] = feedback_.actuators(i).torque();  // N*m
-          // read velocity
-          arm_velocities_[i] = KortexMathUtil::toRad(feedback_.actuators(i).velocity());  // rad/sec
-          // read position
-          num_turns_tmp_ = 0;
-          arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
-              KortexMathUtil::toRad(feedback_.actuators(i).position()), num_turns_tmp_);  // rad
-        }
-        break;
+      return return_type::OK;
     }
+    // read torque
+    arm_efforts_[i] = feedback_.actuators(i).torque();  // N*m
+    // read velocity
+    arm_velocities_[i] = KortexMathUtil::toRad(feedback_.actuators(i).velocity());  // rad/sec
+    // read position
+    num_turns_tmp_ = 0;
+    arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+        KortexMathUtil::toRad(feedback_.actuators(i).position()), num_turns_tmp_);  // rad
   }
+
   return return_type::OK;
+}
+
+void KortexMultiInterfaceHardware::readGripperPosition()
+{  // max joint angle = 0.81 for robotiq_2f_85
+   // TODO read in as paramter from kortex_controllers.yaml
+  gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
 }
 
 return_type KortexMultiInterfaceHardware::write()
@@ -465,34 +460,21 @@ return_type KortexMultiInterfaceHardware::write()
     return return_type::OK;
   }
 
-  // Twist controller active
   if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING && twist_controller_running_)
   {
+    // Twist controller active
+
     // twist control
     sendTwistCommand();
 
     // gripper control
     sendGripperCommand(arm_mode_, gripper_command_position_);
-
-    // read action
-    feedback_ = base_cyclic_.RefreshFeedback();
-
-    return return_type::OK;
   }
-
-  // Keep alive mode - no controller active
-  if (arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
-      feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
+  else if (joint_based_controller_running_ && (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
+           (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL))
   {
-    // read
-    feedback_ = base_cyclic_.RefreshFeedback();
-    RCLCPP_DEBUG(LOGGER, " Arm is not in LOW_LEVEL_SERVOING mode");
-    return return_type::OK;
-  }
+    // Per joint controller active
 
-  // Per joint controller active
-  if (joint_based_controller_running_)
-  {
     // gripper control
     sendGripperCommand(arm_mode_, gripper_command_position_);
 
@@ -502,9 +484,18 @@ return_type KortexMultiInterfaceHardware::write()
     prepareCommands();
 
     writeCommands();
-
-    return return_type::OK;
   }
+  else if (arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
+           feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
+  {
+    // Keep alive mode - no controller active
+    RCLCPP_DEBUG(LOGGER, " Arm is not in LOW_LEVEL_SERVOING mode");
+  }
+
+  // read one step late because reading before sending commadns
+  // generates errors
+  feedback_ = base_cyclic_.RefreshFeedback();
+  return return_type::OK;
 }
 
 void KortexMultiInterfaceHardware::prepareCommands()
@@ -591,6 +582,12 @@ void KortexMultiInterfaceHardware::sendTwistCommand()
   twist->set_angular_y(float(twist_commands_[4]));
   twist->set_angular_z(float(twist_commands_[5]));
   base_.SendTwistCommand(command);
+}
+
+void KortexMultiInterfaceHardware::sendJointCommand()
+{
+  prepareCommands();
+  writeCommands();
 }
 
 }  // namespace kortex2_driver
