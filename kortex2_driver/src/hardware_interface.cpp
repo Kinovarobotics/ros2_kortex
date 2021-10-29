@@ -29,7 +29,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , base_cyclic_{ &router_udp_realtime_ }
 {
   // The robot's IP address.
-  std::string robot_ip = "192.168.0.10";  // TODO: read in info_.hardware_parameters["robot_ip"];
+  std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];
   // Username to log into the robot controller
   std::string username = "admin";  // TODO: read in info_.hardware_parameters["username"];
   // Password to log into the robot controller
