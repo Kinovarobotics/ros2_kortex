@@ -57,9 +57,11 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   // Set the base in low-level servoing mode
   servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
   base_.SetServoingMode(servoing_mode);
-  actuator_count_ = base_.GetActuatorCount().count();
 
-  // no controller is running
+  actuator_count_ = base_.GetActuatorCount().count();
+  RCLCPP_INFO(LOGGER, "Actuator count reported by robot is '%lu'", actuator_count_);
+
+    // no controller is running
   joint_based_controller_running_ = false;
   twist_controller_running_ = false;
 }
