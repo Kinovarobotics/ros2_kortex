@@ -9,7 +9,7 @@ controller_manager:
       type: joint_trajectory_controller/JointTrajectoryController
 
     streaming_controller:
-      type: forward_command_controller/MultiInterfaceForwardCommandController
+      type: kortex2_controllers/TwistController
 
     # The gripper controller just relays position commands
     hand_controller:
