@@ -11,7 +11,7 @@
 
   <depend>forward_command_controller</depend>
   <depend>hardware_interface</depend>
-  <depend>joint_state_controller</depend>
+  <depend>joint_state_broadcaster</depend>
   <depend>joint_trajectory_controller</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
