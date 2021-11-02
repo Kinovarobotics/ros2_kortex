@@ -3,6 +3,31 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
 
 **Warning** Currently the only packages ported to ROS2 are 'kortex_description`, 'kortex2_driver`, 'kortex2_bringup` and 'gen3_move_it_config`
 
+## Getting started
+
+1. [Install ROS2 Rolling](https://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html)
+2. Make sure that `colcon`, its extensions and `vcs` are installed:
+   ```
+   sudo apt install python3-colcon-common-extensions python3-vcstool
+   ```
+
+3. Create a new ROS2 workspace:
+   ```
+   export COLCON_WS=~/workspace/ros2_cortex_ws
+   mkdir -p $COLCON_WS/src
+   ```
+
+4. Pull relevant packages, install dependencies, compile, and source the workspace by using:
+   ```
+   cd $COLCON_WS
+   git clone https://github.com/PickNikRobotics/ros2_cortex.git src/ros2_cortex
+   vcs import src --skip-existing --input src/ros2_cortex/ros2_cortex.repos
+   rosdep install --ignore-src --from-paths src -y -r
+   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+   source install/setup.bash
+   ```
+
+## Usage
 To launch and view the robots URDF run:
 
         ros2 launch kortex_description view_robot.launch.py

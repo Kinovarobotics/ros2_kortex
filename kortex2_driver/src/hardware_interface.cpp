@@ -28,8 +28,6 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
 {
-  rclcpp::on_shutdown(std::bind(&KortexMultiInterfaceHardware::stop, this));
-
   // The robot's IP address.
   std::string robot_ip = "192.168.0.10";  // TODO: read in info_.hardware_parameters["robot_ip"];
   // Username to log into the robot controller
@@ -62,12 +60,12 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   actuator_count_ = base_.GetActuatorCount().count();
 }
 
-return_type KortexMultiInterfaceHardware::configure(const hardware_interface::HardwareInfo& info)
+CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::HardwareInfo& info)
 {
   RCLCPP_INFO(LOGGER, "Configuring Hardware Interface");
-  if (configure_default(info) != return_type::OK)
+  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
   {
-    return return_type::ERROR;
+    return CallbackReturn::ERROR;
   }
 
   info_ = info;
@@ -91,7 +89,7 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
       RCLCPP_FATAL(LOGGER, "Joint '%s' has %s command interface. Expected %s, %s, or %s.", joint.name.c_str(),
                    joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION,
                    hardware_interface::HW_IF_VELOCITY, hardware_interface::HW_IF_EFFORT);
-      return return_type::ERROR;
+      return CallbackReturn::ERROR;
     }
 
     if (!(joint.state_interfaces[0].name == hardware_interface::HW_IF_POSITION ||
@@ -101,13 +99,12 @@ return_type KortexMultiInterfaceHardware::configure(const hardware_interface::Ha
       RCLCPP_FATAL(LOGGER, "Joint '%s' has %s state interface. Expected %s, %s, or %s.", joint.name.c_str(),
                    joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION,
                    hardware_interface::HW_IF_VELOCITY, hardware_interface::HW_IF_EFFORT);
-      return return_type::ERROR;
+      return CallbackReturn::ERROR;
     }
   }
 
   RCLCPP_INFO(LOGGER, "Hardware Interface successfully configured");
-  status_ = hardware_interface::status::CONFIGURED;
-  return return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
 
 std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::export_state_interfaces()
@@ -255,7 +252,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     {
       RCLCPP_ERROR(
           LOGGER,
-          "Attempting to start interface that is already claimed. Joint mode index: %ld, arm_joints_control_level_[%d]",
+          "Attempting to start interface that is already claimed. Joint mode index: %ld, arm_joints_control_level_[%u]",
           new_mode_joint_index[i], arm_joints_control_level_[new_mode_joint_index[i]]);
       block_write = false;
       return return_type::ERROR;
@@ -323,7 +320,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   return return_type::OK;
 }
 
-return_type KortexMultiInterfaceHardware::start()
+CallbackReturn KortexMultiInterfaceHardware::on_activate(const rclcpp_lifecycle::State& /* previous_state */)
 {
   base_.ClearFaults();
   auto base_feedback = base_cyclic_.RefreshFeedback();
@@ -376,13 +373,12 @@ return_type KortexMultiInterfaceHardware::start()
     }
     arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;
   }
-  status_ = hardware_interface::status::STARTED;
 
   RCLCPP_INFO(LOGGER, "System successfully started!");
-  return return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
 
-return_type KortexMultiInterfaceHardware::stop()
+CallbackReturn KortexMultiInterfaceHardware::on_deactivate(const rclcpp_lifecycle::State& /* previous_state */)
 {
   RCLCPP_INFO(LOGGER, "Stopping... please wait...");
 
@@ -401,11 +397,9 @@ return_type KortexMultiInterfaceHardware::stop()
   router_udp_realtime_.SetActivationStatus(false);
   transport_udp_realtime_.disconnect();
 
-  status_ = hardware_interface::status::STOPPED;
-
   RCLCPP_INFO(LOGGER, "System successfully stopped!");
 
-  return return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
 
 return_type KortexMultiInterfaceHardware::read()
@@ -532,9 +526,10 @@ return_type KortexMultiInterfaceHardware::write()
     }
     else
     {
-      cmd_degrees = KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i]));
+      cmd_degrees = static_cast<float>(
+          KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i])));
     }
-    float cmd_vel = KortexMathUtil::toDeg(arm_commands_velocities_[i]);
+    float cmd_vel = static_cast<float>(KortexMathUtil::toDeg(arm_commands_velocities_[i]));
 
     base_command_.mutable_actuators(i)->set_position(cmd_degrees);
     // base_command_.mutable_actuators(i)->set_velocity(cmd_vel);  // This is currently not implemented properly in the kortex api
