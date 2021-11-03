@@ -28,6 +28,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
   , first_pass_(true)
+  , gripper_joint_name_("finger_joint")
 {
   // The robot's IP address.
   std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];
@@ -54,10 +55,13 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   session_manager_real_time_.CreateSession(create_session_info);
   RCLCPP_INFO(LOGGER, "Session created");
 
-  auto servoing_mode = k_api::Base::ServoingModeInformation();
-  // Set the base in low-level servoing mode
-  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode);
+  // make sure robot is in unspecified servoing mode
+  // decide this on controller switching
+  auto servoingMode = k_api::Base::ServoingModeInformation();
+  servoingMode.set_servoing_mode(k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE);
+  base_.SetServoingMode(servoingMode);
+  arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   actuator_count_ = base_.GetActuatorCount().count();
   RCLCPP_INFO(LOGGER, "Actuator count reported by robot is '%lu'", actuator_count_);
@@ -126,7 +130,7 @@ std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::ex
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
     RCLCPP_DEBUG(LOGGER, "export_state_interfaces for joint: %s", info_.joints[i].name.c_str());
-    if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
+    if (info_.joints[i].name == gripper_joint_name_)  // TODO find a better way to identify gripper joint(s)
     {
       state_interfaces.emplace_back(hardware_interface::StateInterface(
           info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
@@ -158,7 +162,7 @@ std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
     // TODO find a better way to identify gripper joint(s)
-    if (info_.joints[i].name == "finger_joint")
+    if (info_.joints[i].name == gripper_joint_name_)
     {
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
           info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_command_position_));
@@ -209,6 +213,59 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   for (const auto& key : start_interfaces)
   {
     RCLCPP_INFO(LOGGER, "Starting '%s'", key.c_str());
+    for (auto& joint : info_.joints)
+    {
+      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
+      {
+        start_modes_.emplace_back(hardware_interface::HW_IF_POSITION);
+      }
+      if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
+      {
+        start_modes_.emplace_back(hardware_interface::HW_IF_VELOCITY);
+      }
+      if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
+      {
+        continue;
+        // not supporting effort command interface
+        //              start_modes_.emplace_back(hardware_interface::HW_IF_EFFORT);
+      }
+      if ((key == "tcp/twist.linear.x") || (key == "tcp/twist.linear.y") || (key == "tcp/twist.linear.z") ||
+          (key == "tcp/twist.angular.x") || (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
+      {
+        start_modes_.emplace_back(hardware_interface::HW_IF_TWIST);
+      }
+    }
+  }
+  // pos-vel based controller requires (2 x actuator) interfaces
+  // twist controller requires 6 interfaces
+  // hand controller requires 1 interface
+  if (!start_modes_.empty() && (start_modes_.size() != actuator_count_ * 2) && (start_modes_.size() != 6) &&
+      (start_modes_.size() != 1))
+  {
+    return hardware_interface::return_type::ERROR;
+  }
+
+  // check for pos-vel based controller
+  if (!start_modes_.empty() && (start_modes_.size() == 2 * actuator_count_) &&
+      ((std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != 6) ||
+       (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != 6)))
+  {
+    return hardware_interface::return_type::ERROR;
+  }
+
+  // check for twist controller
+  if (!start_modes_.empty() && (start_modes_.size() == 6) &&
+      (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) != 6))
+  {
+    return hardware_interface::return_type::ERROR;
+  }
+
+  // check for hand controller
+  auto it = std::find_if(start_interfaces.begin(), start_interfaces.end(),
+                         [this](const std::string& i) { return i.find(gripper_joint_name_) != std::string::npos; });
+  if (!start_modes_.empty() && (start_modes_.size() == 1) && (it == start_interfaces.end()))
+  {
+    return hardware_interface::return_type::ERROR;
   }
 
   // Stopping interfaces

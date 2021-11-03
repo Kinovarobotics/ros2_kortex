@@ -23,6 +23,12 @@
 #include <TransportClientTcp.h>
 #include <TransportClientUdp.h>
 
+namespace hardware_interface
+{
+constexpr char HW_IF_TWIST[] = "twist";
+
+}  // namespace hardware_interface
+
 using hardware_interface::return_type;
 
 namespace k_api = Kinova::Api;
@@ -128,6 +134,9 @@ private:
   std::vector<std::string> start_modes_;
 
   bool first_pass_;
+
+  // gripper stuff
+  std::string gripper_joint_name_;
 
   // temp variables to use in update loop
   float cmd_degrees_tmp_;
