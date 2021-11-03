@@ -52,6 +52,9 @@ public:
   KORTEX2_DRIVER_PUBLIC
   return_type prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
                                           const std::vector<std::string>& stop_interfaces) final;
+  KORTEX2_DRIVER_PUBLIC
+  return_type perform_command_mode_switch(const std::vector<std::string>& /*start_interfaces*/,
+                                          const std::vector<std::string>& /*stop_interfaces*/) final;
 
   KORTEX2_DRIVER_PUBLIC
   CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) final;

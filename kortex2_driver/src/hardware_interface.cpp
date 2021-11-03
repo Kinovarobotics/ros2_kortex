@@ -320,6 +320,12 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   return return_type::OK;
 }
 
+return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>&,
+                                                                      const vector<std::string>&)
+{
+  return return_type::OK;
+}
+
 CallbackReturn KortexMultiInterfaceHardware::on_activate(const rclcpp_lifecycle::State& /* previous_state */)
 {
   base_.ClearFaults();
@@ -441,6 +447,7 @@ return_type KortexMultiInterfaceHardware::write()
     return return_type::OK;
   }
 
+  // Twist controller active
   if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
   {
     // TODO (marqrazz): The command interface is not properly locking so when we switch controllers
@@ -482,6 +489,7 @@ return_type KortexMultiInterfaceHardware::write()
     feedback_ = base_cyclic_.RefreshFeedback();
     return return_type::OK;
   }
+  // Keep alive mode - no controller active
   if (arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
       feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
   {
@@ -489,6 +497,7 @@ return_type KortexMultiInterfaceHardware::write()
     RCLCPP_DEBUG(LOGGER, " Arm is not in LOW_LEVEL_SERVOING mode");
     return return_type::OK;
   }
+  // Per joint controller active
 
   gripper_motor_command_->set_position(
       gripper_command_position_);               // % open/closed, this values needs to be between 0 and 1
