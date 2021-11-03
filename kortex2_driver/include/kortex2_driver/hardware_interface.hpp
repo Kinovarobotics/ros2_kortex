@@ -144,7 +144,6 @@ private:
   int num_turns_tmp_ = 0;
 
   void sendTwistCommand();
-  void sendJointCommand();
   void incrementId();
   void sendJointCommands();
   void prepareCommands();

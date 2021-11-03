@@ -474,20 +474,70 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vect
 
   RCLCPP_INFO(LOGGER, "perform START");
 
-  // Starting interfaces
-  // add start interface per joint in tmp var for later check
-  for (const auto& key : start_interfaces)
+  if (!stop_modes_.empty() &&
+      std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) != stop_modes_.end())
   {
-    RCLCPP_INFO(LOGGER, "Starting '%s'", key.c_str());
+    joint_based_controller_running_ = false;
+    arm_commands_positions_ = arm_positions_;
+    arm_commands_velocities_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  }
+  else if (!stop_modes_.empty() &&
+           std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_TWIST) != stop_modes_.end())
+  {
+    twist_controller_running_ = false;
+    twist_commands_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  }
+  else if (!stop_modes_.empty() &&
+           std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_GRIPPER) != stop_modes_.end())
+  {
+    gripper_controller_running_ = false;
+    gripper_command_position_ = gripper_position_;
   }
 
-  // Stopping interfaces
-  // add stop interface per joint in tmp var for later check
-  for (const auto& key : stop_interfaces)
+  if (!start_modes_.empty() &&
+      (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != start_modes_.end()) &&
+      (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != start_modes_.end()))
   {
-    RCLCPP_INFO(LOGGER, "Stopping '%s'", key.c_str());
+    auto servoingMode = k_api::Base::ServoingModeInformation();
+    servoingMode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+    base_.SetServoingMode(servoingMode);
+    arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
+    // TODO (anyone) check if it works without sleep
+    // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+    twist_controller_running_ = false;
+    arm_commands_positions_ = arm_positions_;
+    arm_commands_velocities_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    joint_based_controller_running_ = true;
   }
+  else if (!start_modes_.empty() &&
+           std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) != start_modes_.end())
+  {
+    auto servoingMode = k_api::Base::ServoingModeInformation();
+    servoingMode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+    base_.SetServoingMode(servoingMode);
+    arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
+    // TODO (anyone) check if it works without sleep
+    // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+    joint_based_controller_running_ = false;
+    twist_commands_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    twist_controller_running_ = true;
+  }
+  else if (!start_modes_.empty() && (start_modes_.size() == 1) &&
+           (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) !=
+            start_modes_.end()))
+  {
+    gripper_command_position_ = gripper_position_;
+    gripper_controller_running_ = true;
+  }
+
+  start_modes_.clear();
+  stop_modes_.clear();
+
   RCLCPP_INFO(LOGGER, "perform END");
+
+  block_write = false;
 
   return ret_val;
 }
@@ -713,24 +763,27 @@ void KortexMultiInterfaceHardware::incrementId()
 void KortexMultiInterfaceHardware::sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position,
                                                       double velocity, double force)
 {
-  if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+  if (gripper_controller_running_)
   {
-    k_api::Base::GripperCommand gripper_command;
-    gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
-    auto finger = gripper_command.mutable_gripper()->add_finger();
-    finger->set_finger_identifier(1);
-    ;
-    finger->set_value(static_cast<float>(position / 100.0));  // This values needs to be between 0 and 1
-    base_.SendGripperCommand(gripper_command);
-  }
-  else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
-  {
-    // % open/closed, this values needs to be between 0 and 1
-    gripper_motor_command_->set_position(static_cast<float>(position));
-    // % speed TODO read in as paramter from kortex_controllers.yaml
-    gripper_motor_command_->set_velocity(static_cast<float>(velocity));
-    // % torque TODO read in as paramter from kortex_controllers.yaml
-    gripper_motor_command_->set_force(static_cast<float>(force));
+    if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+    {
+      k_api::Base::GripperCommand gripper_command;
+      gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
+      auto finger = gripper_command.mutable_gripper()->add_finger();
+      finger->set_finger_identifier(1);
+      ;
+      finger->set_value(static_cast<float>(position / 100.0));  // This values needs to be between 0 and 1
+      base_.SendGripperCommand(gripper_command);
+    }
+    else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+    {
+      // % open/closed, this values needs to be between 0 and 1
+      gripper_motor_command_->set_position(static_cast<float>(position));
+      // % speed TODO read in as paramter from kortex_controllers.yaml
+      gripper_motor_command_->set_velocity(static_cast<float>(velocity));
+      // % torque TODO read in as paramter from kortex_controllers.yaml
+      gripper_motor_command_->set_force(static_cast<float>(force));
+    }
   }
 }
 
@@ -750,12 +803,6 @@ void KortexMultiInterfaceHardware::sendTwistCommand()
   twist->set_angular_y(float(twist_commands_[4]));
   twist->set_angular_z(float(twist_commands_[5]));
   base_.SendTwistCommand(command);
-}
-
-void KortexMultiInterfaceHardware::sendJointCommand()
-{
-  prepareCommands();
-  sendJointCommands();
 }
 
 }  // namespace kortex2_driver
