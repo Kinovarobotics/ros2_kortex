@@ -130,7 +130,7 @@ private:
   bool twist_controller_running_;
   bool gripper_controller_running_;
   // switching auxiliary vars
-  std::vector<uint> stop_modes_;
+  std::vector<StoppingInterface> stop_modes_;
   std::vector<std::string> start_modes_;
 
   bool first_pass_;
