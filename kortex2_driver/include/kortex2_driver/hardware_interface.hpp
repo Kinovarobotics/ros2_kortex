@@ -137,7 +137,7 @@ private:
   void sendTwistCommand();
   void sendJointCommand();
   void incrementId();
-  void writeCommands();
+  void sendJointCommands();
   void prepareCommands();
   void sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
                           double force = 100.0);

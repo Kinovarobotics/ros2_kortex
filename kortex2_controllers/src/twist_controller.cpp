@@ -91,7 +91,8 @@ CallbackReturn TwistController::on_deactivate(const rclcpp_lifecycle::State& /*p
   return CallbackReturn::SUCCESS;
 }
 
-controller_interface::return_type TwistController::update(const rclcpp::Time& /*time*/, const rclcpp::Duration& /*period*/)
+controller_interface::return_type TwistController::update(const rclcpp::Time& /*time*/,
+                                                          const rclcpp::Duration& /*period*/)
 {
   auto twist_commands = rt_command_ptr_.readFromRT();
 

@@ -478,6 +478,8 @@ return_type KortexMultiInterfaceHardware::read()
     feedback_ = base_cyclic_.RefreshFeedback();
     first_pass_ = false;
   }
+
+  // read gripper state
   readGripperPosition();
 
   for (std::size_t i = 0; i < actuator_count_; i++)
@@ -534,14 +536,11 @@ return_type KortexMultiInterfaceHardware::write()
     // gripper control
     sendGripperCommand(arm_mode_, gripper_command_position_);
 
-    // identifier++
-    incrementId();
-
-    prepareCommands();
-
-    writeCommands();
+    // send commands to the joints
+    sendJointCommands();
   }
-  else if (arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
+  else if ((!joint_based_controller_running_ && !twist_controller_running_) ||
+           arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
            feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
   {
     // Keep alive mode - no controller active
@@ -570,8 +569,14 @@ void KortexMultiInterfaceHardware::prepareCommands()
   }
 }
 
-void KortexMultiInterfaceHardware::writeCommands()
-{  // send the command to the robot
+void KortexMultiInterfaceHardware::sendJointCommands()
+{
+  // identifier++
+  incrementId();
+
+  prepareCommands();
+
+  // send the command to the robot
   try
   {
     feedback_ = base_cyclic_.Refresh(base_command_);
@@ -643,7 +648,7 @@ void KortexMultiInterfaceHardware::sendTwistCommand()
 void KortexMultiInterfaceHardware::sendJointCommand()
 {
   prepareCommands();
-  writeCommands();
+  sendJointCommands();
 }
 
 }  // namespace kortex2_driver
