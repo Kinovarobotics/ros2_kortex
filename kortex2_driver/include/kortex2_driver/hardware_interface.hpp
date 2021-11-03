@@ -139,6 +139,7 @@ private:
 
   // gripper stuff
   std::string gripper_joint_name_;
+  bool use_internal_bus_gripper_comm_;
 
   // temp variables to use in update loop
   float cmd_degrees_tmp_;

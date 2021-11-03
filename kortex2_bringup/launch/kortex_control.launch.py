@@ -138,8 +138,9 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "use_internal_bus_gripper_comm", default_value="false",
-            description="Use internal bus for gripper communication?"
+            "use_internal_bus_gripper_comm",
+            default_value="false",
+            description="Use internal bus for gripper communication?",
         )
     )
 
