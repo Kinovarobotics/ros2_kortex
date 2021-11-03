@@ -306,7 +306,8 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
 
     // check if pos-vel based controller is stopping
     if (!stop_modes_.empty() && (stop_modes_.size() == 2 * actuator_count_) &&
-        (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) != 2 * actuator_count_))
+        (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) !=
+         static_cast<long>(2 * actuator_count_)))
     {
       return hardware_interface::return_type::ERROR;
     }
@@ -467,8 +468,8 @@ block_write = false; return return_type::ERROR;
   return return_type::OK;
 }
 
-return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>& start_interfaces,
-                                                                      const vector<std::string>& stop_interfaces)
+return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>& /*start_interfaces*/,
+                                                                      const vector<std::string>& /*stop_interfaces*/)
 {
   hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
 
