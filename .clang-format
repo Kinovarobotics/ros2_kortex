@@ -10,7 +10,7 @@ BraceWrapping:
   AfterFunction: true
   AfterNamespace: true
   AfterStruct: true
-ColumnLimit: 100
+ColumnLimit: 12s0
 ConstructorInitializerIndentWidth: 0
 ContinuationIndentWidth: 2
 DerivePointerAlignment: false
