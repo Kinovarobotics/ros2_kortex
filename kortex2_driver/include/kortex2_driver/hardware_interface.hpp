@@ -9,12 +9,10 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp/time.hpp"
 
-#include "hardware_interface/base_interface.hpp"
 #include "hardware_interface/handle.hpp"
 #include "hardware_interface/hardware_info.hpp"
 #include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
-#include "hardware_interface/types/hardware_interface_status_values.hpp"
 
 #include "kortex2_driver/visibility_control.h"
 
@@ -25,6 +23,12 @@
 #include <TransportClientTcp.h>
 #include <TransportClientUdp.h>
 
+namespace hardware_interface
+{
+constexpr char HW_IF_TWIST[] = "twist";
+
+}  // namespace hardware_interface
+
 using hardware_interface::return_type;
 
 namespace k_api = Kinova::Api;
@@ -33,6 +37,13 @@ namespace k_api = Kinova::Api;
 
 namespace kortex2_driver
 {
+enum class StoppingInterface
+{
+  NONE,
+  STOP_POS_VEL,
+  STOP_TWIST,
+  STOP_GRIPPER
+};
 class KortexMultiInterfaceHardware : public hardware_interface::SystemInterface
 {
 public:
@@ -89,6 +100,10 @@ private:
   std::vector<double> arm_positions_;
   std::vector<double> arm_velocities_;
   std::vector<double> arm_efforts_;
+
+  // twist command interfaces
+  std::vector<double> twist_commands_;
+
   // Gripper
   k_api::GripperCyclic::MotorCommand* gripper_motor_command_;
   double gripper_command_position_;
@@ -109,6 +124,35 @@ private:
   };
 
   std::vector<integration_lvl_t> arm_joints_control_level_;
+
+  // changing active controller on the hardware
+  k_api::Base::ServoingModeInformation servoing_mode_hw_;
+  // what controller is running
+  bool joint_based_controller_running_;
+  bool twist_controller_running_;
+  bool gripper_controller_running_;
+  // switching auxiliary vars
+  std::vector<StoppingInterface> stop_modes_;
+  std::vector<std::string> start_modes_;
+
+  bool first_pass_;
+
+  // gripper stuff
+  std::string gripper_joint_name_;
+
+  // temp variables to use in update loop
+  float cmd_degrees_tmp_;
+  float cmd_vel_tmp_;
+  int num_turns_tmp_ = 0;
+
+  void sendTwistCommand();
+  void incrementId();
+  void sendJointCommands();
+  void prepareCommands();
+  void sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
+                          double force = 100.0);
+
+  void readGripperPosition();
 };
 
 }  // namespace kortex2_driver

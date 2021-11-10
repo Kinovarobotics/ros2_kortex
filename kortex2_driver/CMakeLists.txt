@@ -17,7 +17,7 @@ add_definitions(-D_OS_UNIX=1)
 find_package(ament_cmake REQUIRED)
 find_package(forward_command_controller REQUIRED)
 find_package(hardware_interface REQUIRED)
-find_package(joint_state_controller REQUIRED)
+find_package(joint_state_broadcaster REQUIRED)
 find_package(joint_trajectory_controller REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -41,7 +41,7 @@ ament_target_dependencies(
   ${PROJECT_NAME}
   forward_command_controller
   hardware_interface
-  joint_state_controller
+  joint_state_broadcaster
   joint_trajectory_controller
   pluginlib
   rclcpp

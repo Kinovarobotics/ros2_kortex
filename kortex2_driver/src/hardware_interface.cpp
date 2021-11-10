@@ -27,9 +27,12 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , session_manager_real_time_{ &router_udp_realtime_ }
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
+  , servoing_mode_hw_(k_api::Base::ServoingModeInformation())
+  , first_pass_(true)
+  , gripper_joint_name_("")
 {
   // The robot's IP address.
-  std::string robot_ip = "192.168.0.10";  // TODO: read in info_.hardware_parameters["robot_ip"];
+  std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];
   // Username to log into the robot controller
   std::string username = "admin";  // TODO: read in info_.hardware_parameters["username"];
   // Password to log into the robot controller
@@ -53,11 +56,20 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   session_manager_real_time_.CreateSession(create_session_info);
   RCLCPP_INFO(LOGGER, "Session created");
 
-  auto servoing_mode = k_api::Base::ServoingModeInformation();
-  // Set the base in low-level servoing mode
-  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode);
+  // make sure robot is in unspecified servoing mode
+  // decide this on controller switching
+  servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE);
+  base_.SetServoingMode(servoing_mode_hw_);
+  arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
   actuator_count_ = base_.GetActuatorCount().count();
+  RCLCPP_INFO(LOGGER, "Actuator count reported by robot is '%lu'", actuator_count_);
+
+  // no controller is running
+  joint_based_controller_running_ = false;
+  twist_controller_running_ = false;
+  gripper_controller_running_ = false;
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::HardwareInfo& info)
@@ -70,15 +82,18 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
 
   info_ = info;
 
-  arm_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_positions_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_velocities_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-  arm_commands_efforts_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+  arm_positions_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_velocities_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_efforts_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_positions_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_velocities_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_commands_efforts_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_joints_control_level_.resize(actuator_count_, integration_lvl_t::UNDEFINED);  // start in undefined
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
-  arm_joints_control_level_.resize(info_.joints.size(), integration_lvl_t::UNDEFINED);  // start in undefined
+
+  // set size of the twist interface
+  twist_commands_.resize(6);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
   {
@@ -110,23 +125,30 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
 std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::export_state_interfaces()
 {
   std::vector<hardware_interface::StateInterface> state_interfaces;
+  std::vector<string> arm_joint_names;
+
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
     RCLCPP_DEBUG(LOGGER, "export_state_interfaces for joint: %s", info_.joints[i].name.c_str());
-    if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
+    if (info_.joints[i].name == gripper_joint_name_)  // TODO find a better way to identify gripper joint(s)
     {
       state_interfaces.emplace_back(hardware_interface::StateInterface(
           info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
     }
     else
     {
-      state_interfaces.emplace_back(hardware_interface::StateInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_POSITION, &arm_positions_[i]));
-      state_interfaces.emplace_back(hardware_interface::StateInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &arm_velocities_[i]));
-      state_interfaces.emplace_back(
-          hardware_interface::StateInterface(info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
+      arm_joint_names.emplace_back(info_.joints[i].name);
     }
+  }
+
+  for (std::size_t i = 0; i < arm_joint_names.size(); i++)
+  {
+    state_interfaces.emplace_back(
+        hardware_interface::StateInterface(arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_positions_[i]));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_velocities_[i]));
+    state_interfaces.emplace_back(
+        hardware_interface::StateInterface(arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
   }
 
   return state_interfaces;
@@ -135,23 +157,40 @@ std::vector<hardware_interface::StateInterface> KortexMultiInterfaceHardware::ex
 std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::export_command_interfaces()
 {
   std::vector<hardware_interface::CommandInterface> command_interfaces;
+  std::vector<string> arm_joint_names;
+
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
-    if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
+    // TODO find a better way to identify gripper joint(s)
+    if (info_.joints[i].name == gripper_joint_name_)
     {
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
           info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_command_position_));
     }
     else
     {
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_POSITION, &arm_commands_positions_[i]));
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &arm_commands_velocities_[i]));
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-          info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]));
+      arm_joint_names.emplace_back(info_.joints[i].name);
     }
   }
+  for (std::size_t i = 0; i < arm_joint_names.size(); i++)
+  {
+    {
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+          arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_commands_positions_[i]));
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+          arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_commands_velocities_[i]));
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+          arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]));
+    }
+  }
+
+  // register twist command interfaces
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.linear.x", &twist_commands_[0]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.linear.y", &twist_commands_[1]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.linear.z", &twist_commands_[2]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.angular.x", &twist_commands_[3]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.angular.y", &twist_commands_[4]));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface("tcp", "twist.angular.z", &twist_commands_[5]));
 
   return command_interfaces;
 }
@@ -159,106 +198,218 @@ std::vector<hardware_interface::CommandInterface> KortexMultiInterfaceHardware::
 return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
                                                                       const std::vector<std::string>& stop_interfaces)
 {
+  hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
+
   // sleep to ensure all outgoing write commands have finished
   block_write = true;
   std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+  start_modes_.clear();
+  stop_modes_.clear();
+  RCLCPP_INFO(LOGGER, "prepare START");
+
+  // Starting interfaces
+  // add start interface per joint in tmp var for later check
+  for (const auto& key : start_interfaces)
+  {
+    RCLCPP_INFO(LOGGER, "Starting '%s'", key.c_str());
+    for (auto& joint : info_.joints)
+    {
+      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
+      {
+        start_modes_.emplace_back(hardware_interface::HW_IF_POSITION);
+      }
+      if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
+      {
+        start_modes_.emplace_back(hardware_interface::HW_IF_VELOCITY);
+      }
+      if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
+      {
+        continue;
+        // not supporting effort command interface
+        //              start_modes_.emplace_back(hardware_interface::HW_IF_EFFORT);
+        RCLCPP_ERROR(LOGGER, "KortexMultiInterfaceHardware does not support effort command interface!");
+      }
+      if ((key == "tcp/twist.linear.x") || (key == "tcp/twist.linear.y") || (key == "tcp/twist.linear.z") ||
+          (key == "tcp/twist.angular.x") || (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
+      {
+        start_modes_.emplace_back(hardware_interface::HW_IF_TWIST);
+      }
+    }
+  }
+  // pos-vel based controller requires (2 x actuator) interfaces
+  // twist controller requires 6 interfaces
+  // hand controller requires 1 interface
+  if (!start_modes_.empty() && (start_modes_.size() != actuator_count_ * 2) && (start_modes_.size() != 6) &&
+      (start_modes_.size() != 1))
+  {
+    return hardware_interface::return_type::ERROR;
+  }
+
+  // check for pos-vel based controller
+  if ((start_modes_.size() == 2 * actuator_count_) &&
+      ((std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != 6) ||
+       (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != 6)))
+  {
+    return hardware_interface::return_type::ERROR;
+  }
+
+  // check for twist controller
+  if ((start_modes_.size() == 6) &&
+      (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) != 6))
+  {
+    return hardware_interface::return_type::ERROR;
+  }
+
+  // check for hand controller
+  auto it = std::find_if(start_interfaces.begin(), start_interfaces.end(),
+                         [this](const std::string& s) { return s.find(gripper_joint_name_) != std::string::npos; });
+  if ((start_modes_.size() == 1) && (it == start_interfaces.end()))
+  {
+    return hardware_interface::return_type::ERROR;
+  }
+
+  // Stopping interfaces
+  // add stop interface per joint in tmp var for later check
+  for (const auto& key : stop_interfaces)
+  {
+    RCLCPP_INFO(LOGGER, "Stopping '%s'", key.c_str());
+
+    for (auto& joint : info_.joints)
+    {
+      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION && joint.name == gripper_joint_name_)
+      {
+        stop_modes_.push_back(StoppingInterface::STOP_GRIPPER);
+        continue;
+      }
+      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
+      {
+        stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
+      }
+      if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
+      {
+        stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
+      }
+      if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
+      {
+        continue;
+        // not supporting effort command interface
+        //              start_modes_.emplace_back(hardware_interface::HW_IF_EFFORT);
+        RCLCPP_ERROR(LOGGER, "KortexMultiInterfaceHardware does not support effort command interface!");
+      }
+      if ((key == "tcp/twist.linear.x") || (key == "tcp/twist.linear.y") || (key == "tcp/twist.linear.z") ||
+          (key == "tcp/twist.angular.x") || (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
+      {
+        stop_modes_.push_back(StoppingInterface::STOP_TWIST);
+      }
+    }
+
+    // check if pos-vel based controller is stopping
+    if (!stop_modes_.empty() && (stop_modes_.size() == 2 * actuator_count_) &&
+        (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) !=
+         static_cast<long>(2 * actuator_count_)))
+    {
+      return hardware_interface::return_type::ERROR;
+    }
+
+    // check if twist controller is stopping
+    if (!stop_modes_.empty() && (stop_modes_.size() == 6) &&
+        (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_TWIST) != 6))
+    {
+      return hardware_interface::return_type::ERROR;
+    }
+    // check if hand controller is stopping
+    if (!stop_modes_.empty() && (stop_modes_.size() == 1) &&
+        (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_GRIPPER) != 1))
+    {
+      return hardware_interface::return_type::ERROR;
+    }
+  }
+  RCLCPP_INFO(LOGGER, "prepare END");
+
+  return ret_val;
+  /*{
 
   // Prepare for new command modes
   std::vector<integration_lvl_t> new_modes = {};
   std::vector<std::size_t> new_mode_joint_index = {};
   RCLCPP_INFO(LOGGER, "Controller switch requested");
-  for (std::string key : start_interfaces)
-  {
-    RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s", key.c_str());
-    for (std::size_t i = 0; i < info_.joints.size(); i++)
-    {
-      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION)
-      {
-        new_modes.push_back(integration_lvl_t::POSITION);
-        new_mode_joint_index.push_back(i);
+  for (std::string key: start_interfaces) {
+      RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s", key.c_str());
+      for (std::size_t i = 0; i < info_.joints.size(); i++) {
+          if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION) {
+              new_modes.push_back(integration_lvl_t::POSITION);
+              new_mode_joint_index.push_back(i);
+          }
+          if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY) {
+              if (new_mode_joint_index.back() == i) {
+                  new_modes.back() = integration_lvl_t::VELOCITY;
+              } else {
+                  new_modes.push_back(integration_lvl_t::VELOCITY);
+                  new_mode_joint_index.push_back(i);
+              }
+          }
+          if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_EFFORT) {
+              new_modes.push_back(integration_lvl_t::EFFORT);
+              new_mode_joint_index.push_back(i);
+          }
       }
-      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY)
-      {
-        if (new_mode_joint_index.back() == i)
-        {
-          new_modes.back() = integration_lvl_t::VELOCITY;
-        }
-        else
-        {
-          new_modes.push_back(integration_lvl_t::VELOCITY);
-          new_mode_joint_index.push_back(i);
-        }
-      }
-      if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_EFFORT)
-      {
-        new_modes.push_back(integration_lvl_t::EFFORT);
-        new_mode_joint_index.push_back(i);
-      }
-    }
   }
 
   // Stop motion on all relevant joints that are stopping
-  for (std::string key : stop_interfaces)
-  {
-    for (std::size_t i = 0; i < info_.joints.size(); i++)
-    {
-      if (key.find(info_.joints[i].name) != std::string::npos)
-      {
-        arm_commands_velocities_[i] = 0;
-        arm_commands_efforts_[i] = 0;
-        arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;  // Revert to undefined
+  for (std::string key: stop_interfaces) {
+      for (std::size_t i = 0; i < info_.joints.size(); i++) {
+          if (key.find(info_.joints[i].name) != std::string::npos) {
+              arm_commands_velocities_[i] = 0;
+              arm_commands_efforts_[i] = 0;
+              arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;  // Revert to undefined
+          }
       }
-    }
   }
 
-  // if we are sending twist messages to Kinova and our controller controller is changing we need to ensure the arm is stopped!
-  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING &&
-      arm_joints_control_level_[6] == integration_lvl_t::UNDEFINED)
-  {
-    // block_write = true;
-    // std::this_thread::sleep_for(
-    //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
-    arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
-    RCLCPP_INFO(LOGGER, "Switching to NO_SERVOING_MODE");
-    auto command = k_api::Base::TwistCommand();
-    command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
-    // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
-    // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
-    command.set_duration(0);
+  // if we are sending twist messages to Kinova and our controller controller is changing we need to ensure the arm is
+stopped! if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING && arm_joints_control_level_[6] ==
+integration_lvl_t::UNDEFINED) {
+      // block_write = true;
+      // std::this_thread::sleep_for(
+      //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
+      arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
+      RCLCPP_INFO(LOGGER, "Switching to NO_SERVOING_MODE");
+      auto command = k_api::Base::TwistCommand();
+      command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
+      // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
+      // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
+      command.set_duration(0);
 
-    auto twist = command.mutable_twist();
-    twist->set_linear_x(0.0f);
-    twist->set_linear_y(0.0f);
-    twist->set_linear_z(0.0f);
-    twist->set_angular_x(0.0f);
-    twist->set_angular_y(0.0f);
-    twist->set_angular_z(0.0f);
-    base_.SendTwistCommand(command);
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    // block_write = false;
+      auto twist = command.mutable_twist();
+      twist->set_linear_x(0.0f);
+      twist->set_linear_y(0.0f);
+      twist->set_linear_z(0.0f);
+      twist->set_angular_x(0.0f);
+      twist->set_angular_y(0.0f);
+      twist->set_angular_z(0.0f);
+      base_.SendTwistCommand(command);
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      // block_write = false;
   }
 
   // If we are not starting any controllers we are done
-  if (new_modes.empty())
-  {
-    block_write = false;
-    return return_type::OK;
+  if (new_modes.empty()) {
+      block_write = false;
+      return return_type::OK;
   }
   // Set the new command modes
-  for (std::size_t i = 0; i < new_modes.size(); i++)
-  {
-    // if this interface is not free then we cant switch modes!
-    if (arm_joints_control_level_[new_mode_joint_index[i]] != integration_lvl_t::UNDEFINED)
-    {
-      RCLCPP_ERROR(
-          LOGGER,
-          "Attempting to start interface that is already claimed. Joint mode index: %ld, arm_joints_control_level_[%u]",
-          new_mode_joint_index[i], arm_joints_control_level_[new_mode_joint_index[i]]);
-      block_write = false;
-      return return_type::ERROR;
-    }
-    arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
-    RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%ld] mode: %u", new_mode_joint_index[i], new_modes[i]);
+  for (std::size_t i = 0; i < new_modes.size(); i++) {
+      // if this interface is not free then we cant switch modes!
+      if (arm_joints_control_level_[new_mode_joint_index[i]] != integration_lvl_t::UNDEFINED) {
+          RCLCPP_ERROR(
+                  LOGGER,
+                  "Attempting to start interface that is already claimed. Joint mode index: %ld,
+arm_joints_control_level_[%u]", new_mode_joint_index[i], arm_joints_control_level_[new_mode_joint_index[i]]);
+block_write = false; return return_type::ERROR;
+      }
+      arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
+      RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%ld] mode: %u", new_mode_joint_index[i], new_modes[i]);
   }
 
   // TODO (marqrazz): NEED better way to detect that we are switching kinova servo mode!
@@ -266,70 +417,138 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   // if the arm is in integration_lvl_t::POSITION then we are using the `streaming_controller`
   if (arm_joints_control_level_[6] == integration_lvl_t::VELOCITY &&
       info_.joints[new_mode_joint_index.front()].name !=
-          "finger_joint")  // TODO find a better way to identify gripper joint(s)
+      "finger_joint")  // TODO find a better way to identify gripper joint(s)
   {
-    // block_write = true;
-    // std::this_thread::sleep_for(
-    //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
-    auto servoing_mode = k_api::Base::ServoingModeInformation();
-    // Set the base in low-level servoing mode
-    arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
-    servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-    base_.SetServoingMode(servoing_mode);
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    feedback_ = base_cyclic_.RefreshFeedback();
-    for (std::size_t i = 0; i < actuator_count_; i++)
-    {
-      arm_commands_positions_[i] =
-          KortexMathUtil::wrapRadiansFromMinusPiToPi(KortexMathUtil::toRad(feedback_.actuators(i).position()));  // rad
-      // RCLCPP_ERROR(LOGGER, "setting joint[%ld] position: %f", i, arm_commands_positions_[i]);
-    }
-    RCLCPP_INFO(LOGGER, "Switching to LOW_LEVEL_SERVOING");
-    controller_switch_time_ = rclcpp::Clock().now();
-    // block_write = false;
-  }
-  else if (arm_joints_control_level_[6] == integration_lvl_t::POSITION &&
-           info_.joints[new_mode_joint_index.front()].name !=
-               "finger_joint")  // TODO find a better way to identify gripper joint(s)
+      // block_write = true;
+      // std::this_thread::sleep_for(
+      //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
+      auto servoing_mode = k_api::Base::ServoingModeInformation();
+      // Set the base in low-level servoing mode
+      arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
+      servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+      base_.SetServoingMode(servoing_mode);
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      feedback_ = base_cyclic_.RefreshFeedback();
+      for (std::size_t i = 0; i < actuator_count_; i++) {
+          arm_commands_positions_[i] =
+                  KortexMathUtil::wrapRadiansFromMinusPiToPi(
+                          KortexMathUtil::toRad(feedback_.actuators(i).position()));  // rad
+          // RCLCPP_ERROR(LOGGER, "setting joint[%ld] position: %f", i, arm_commands_positions_[i]);
+      }
+      RCLCPP_INFO(LOGGER, "Switching to LOW_LEVEL_SERVOING");
+      controller_switch_time_ = rclcpp::Clock().now();
+      // block_write = false;
+  } else if (arm_joints_control_level_[6] == integration_lvl_t::POSITION &&
+             info_.joints[new_mode_joint_index.front()].name !=
+             "finger_joint")  // TODO find a better way to identify gripper joint(s)
   {
-    // block_write = true;
-    // std::this_thread::sleep_for(
-    //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
-    auto servoing_mode = k_api::Base::ServoingModeInformation();
-    // Set the base in low-level servoing mode
-    arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
-    servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-    base_.SetServoingMode(servoing_mode);
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    feedback_ = base_cyclic_.RefreshFeedback();
-    for (std::size_t i = 0; i < actuator_count_; i++)
-    {
-      arm_commands_positions_[i] = 0.0;  // this is a twist command at this point
-      // RCLCPP_ERROR(LOGGER, "setting joint[%d] position: %f", i, arm_commands_positions_[i]);
-    }
-    RCLCPP_INFO(LOGGER, "Switching to SINGLE_LEVEL_SERVOING");
-    controller_switch_time_ = rclcpp::Clock().now();
-    // block_write = false;
-  }
-  else
-  {
-    RCLCPP_INFO(LOGGER, "Arm controller is not changing modes. arm_mode: %u", arm_mode_);
+      // block_write = true;
+      // std::this_thread::sleep_for(
+      //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
+      auto servoing_mode = k_api::Base::ServoingModeInformation();
+      // Set the base in low-level servoing mode
+      arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
+      servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+      base_.SetServoingMode(servoing_mode);
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      feedback_ = base_cyclic_.RefreshFeedback();
+      for (std::size_t i = 0; i < actuator_count_; i++) {
+          arm_commands_positions_[i] = 0.0;  // this is a twist command at this point
+          // RCLCPP_ERROR(LOGGER, "setting joint[%d] position: %f", i, arm_commands_positions_[i]);
+      }
+      RCLCPP_INFO(LOGGER, "Switching to SINGLE_LEVEL_SERVOING");
+      controller_switch_time_ = rclcpp::Clock().now();
+      // block_write = false;
+  } else {
+      RCLCPP_INFO(LOGGER, "Arm controller is not changing modes. arm_mode: %u", arm_mode_);
   }
 
   block_write = false;
+} */
   return return_type::OK;
 }
 
-return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>&,
-                                                                      const vector<std::string>&)
+return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>& /*start_interfaces*/,
+                                                                      const vector<std::string>& /*stop_interfaces*/)
 {
-  return return_type::OK;
+  hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
+
+  RCLCPP_INFO(LOGGER, "perform START");
+
+  if (!stop_modes_.empty() &&
+      std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) != stop_modes_.end())
+  {
+    joint_based_controller_running_ = false;
+    arm_commands_positions_ = arm_positions_;
+    arm_commands_velocities_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  }
+  else if (!stop_modes_.empty() &&
+           std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_TWIST) != stop_modes_.end())
+  {
+    twist_controller_running_ = false;
+    twist_commands_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  }
+  else if (!stop_modes_.empty() &&
+           std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_GRIPPER) != stop_modes_.end())
+  {
+    gripper_controller_running_ = false;
+    gripper_command_position_ = gripper_position_;
+  }
+
+  if (!start_modes_.empty() &&
+      (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != start_modes_.end()) &&
+      (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != start_modes_.end()))
+  {
+    servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode_hw_);
+    arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
+    // TODO (anyone) check if it works without sleep
+    // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+    twist_controller_running_ = false;
+    arm_commands_positions_ = arm_positions_;
+    arm_commands_velocities_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    joint_based_controller_running_ = true;
+  }
+  else if (!start_modes_.empty() &&
+           std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) != start_modes_.end())
+  {
+    servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode_hw_);
+    arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
+    // TODO (anyone) check if it works without sleep
+    // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+    joint_based_controller_running_ = false;
+    twist_commands_ = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    twist_controller_running_ = true;
+  }
+  else if (!start_modes_.empty() && (start_modes_.size() == 1) &&
+           (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) !=
+            start_modes_.end()))
+  {
+    gripper_command_position_ = gripper_position_;
+    gripper_controller_running_ = true;
+  }
+
+  start_modes_.clear();
+  stop_modes_.clear();
+
+  RCLCPP_INFO(LOGGER, "perform END");
+
+  block_write = false;
+
+  return ret_val;
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_activate(const rclcpp_lifecycle::State& /* previous_state */)
 {
+  RCLCPP_INFO(LOGGER, "Activating KortexMultiInterfaceHardware...");
   base_.ClearFaults();
+
+  // first read
   auto base_feedback = base_cyclic_.RefreshFeedback();
+
   // Add each actuator to the base_command_ and set the command to its current position
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -380,13 +599,13 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(const rclcpp_lifecycle:
     arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;
   }
 
-  RCLCPP_INFO(LOGGER, "System successfully started!");
+  RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully activated!");
   return CallbackReturn::SUCCESS;
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_deactivate(const rclcpp_lifecycle::State& /* previous_state */)
 {
-  RCLCPP_INFO(LOGGER, "Stopping... please wait...");
+  RCLCPP_INFO(LOGGER, "Deactivating KortexMultiInterfaceHardware...");
 
   auto servoing_mode = k_api::Base::ServoingModeInformation();
   // Set back the servoing mode to Single Level Servoing
@@ -403,40 +622,46 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(const rclcpp_lifecycl
   router_udp_realtime_.SetActivationStatus(false);
   transport_udp_realtime_.disconnect();
 
-  RCLCPP_INFO(LOGGER, "System successfully stopped!");
+  RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully deactivated!");
 
   return CallbackReturn::SUCCESS;
 }
 
 return_type KortexMultiInterfaceHardware::read()
 {
-  for (std::size_t i = 0; i < info_.joints.size(); i++)
+  if (first_pass_)
   {
-    switch (arm_joints_control_level_[i])
-    {
-      case integration_lvl_t::UNDEFINED:
-        // RCLCPP_INFO(LOGGER, "Nothing is using the hardware interface! %u", i);
-        return return_type::OK;
-        break;
-      default:
-        if (info_.joints[i].name == "finger_joint")  // TODO find a better way to identify gripper joint(s)
-        {
-          // max joint angle = 0.81 for robotiq_2f_85
-          // TODO read in as paramter from kortex_controllers.yaml
-          gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
-        }
-        else
-        {
-          arm_efforts_[i] = feedback_.actuators(i).torque();                              // N*m
-          arm_velocities_[i] = KortexMathUtil::toRad(feedback_.actuators(i).velocity());  // rad/sec
-          int num_turns = 0;
-          arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
-              KortexMathUtil::toRad(feedback_.actuators(i).position()), num_turns);  // rad
-        }
-        break;
-    }
+    feedback_ = base_cyclic_.RefreshFeedback();
+    first_pass_ = false;
   }
+
+  // read gripper state
+  readGripperPosition();
+
+  for (std::size_t i = 0; i < actuator_count_; i++)
+  {
+    if (arm_joints_control_level_[i] == integration_lvl_t::UNDEFINED)
+    {
+      return return_type::OK;
+    }
+    // read torque
+    arm_efforts_[i] = feedback_.actuators(i).torque();  // N*m
+    // read velocity
+    arm_velocities_[i] = KortexMathUtil::toRad(feedback_.actuators(i).velocity());  // rad/sec
+    // read position
+    num_turns_tmp_ = 0;
+    arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
+        KortexMathUtil::toRad(feedback_.actuators(i).position()), num_turns_tmp_);  // rad
+  }
+
   return return_type::OK;
+}
+
+void KortexMultiInterfaceHardware::readGripperPosition()
+{
+  // max joint angle = 0.81 for robotiq_2f_85
+  // TODO read in as paramter from kortex_controllers.yaml
+  gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
 }
 
 return_type KortexMultiInterfaceHardware::write()
@@ -447,108 +672,73 @@ return_type KortexMultiInterfaceHardware::write()
     return return_type::OK;
   }
 
-  // Twist controller active
   if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
   {
-    // TODO (marqrazz): The command interface is not properly locking so when we switch controllers
-    // the last active controller is still sending commands to `arm_commands_positions_` which causes
-    // the arm to servo based on the old commands.
-    if ((rclcpp::Clock().now() - controller_switch_time_).seconds() < 0.5)
+    // Twist controller active
+    if (twist_controller_running_)
     {
-      feedback_ = base_cyclic_.RefreshFeedback();
-      for (std::size_t j = 0; j < actuator_count_; j++)
-      {
-        arm_commands_positions_[j] = 0.0;  // This is a twist command at this point
-      }
-      return return_type::OK;
+      // twist control
+      sendTwistCommand();
     }
 
-    auto command = k_api::Base::TwistCommand();
-    command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
-    // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
-    // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
-    command.set_duration(0);
-
-    auto twist = command.mutable_twist();
-    twist->set_linear_x(float(arm_commands_positions_[0]));
-    twist->set_linear_y(float(arm_commands_positions_[1]));
-    twist->set_linear_z(float(arm_commands_positions_[2]));
-    twist->set_angular_x(float(arm_commands_positions_[3]));
-    twist->set_angular_y(float(arm_commands_positions_[4]));
-    twist->set_angular_z(float(arm_commands_positions_[5]));
-    base_.SendTwistCommand(command);
-
-    k_api::Base::GripperCommand gripper_command;
-    gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
-    auto finger = gripper_command.mutable_gripper()->add_finger();
-    finger->set_finger_identifier(1);
-    ;
-    finger->set_value(gripper_command_position_ / 100.0);  // This values needs to be between 0 and 1
-    base_.SendGripperCommand(gripper_command);
-
-    feedback_ = base_cyclic_.RefreshFeedback();
-    return return_type::OK;
+    // gripper control
+    sendGripperCommand(arm_mode_, gripper_command_position_);
   }
-  // Keep alive mode - no controller active
-  if (arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
-      feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
+  else if ((arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
+           (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL))
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
-    RCLCPP_DEBUG(LOGGER, " Arm is not in LOW_LEVEL_SERVOING mode");
-    return return_type::OK;
+    // Per joint controller active
+
+    // gripper control
+    sendGripperCommand(arm_mode_, gripper_command_position_);
+
+    if (joint_based_controller_running_)
+    {
+      // send commands to the joints
+      sendJointCommands();
+    }
   }
-  // Per joint controller active
-
-  gripper_motor_command_->set_position(
-      gripper_command_position_);               // % open/closed, this values needs to be between 0 and 1
-  gripper_motor_command_->set_velocity(100.0);  // % speed TODO read in as paramter from kortex_controllers.yaml
-  gripper_motor_command_->set_force(100.0);     // % torque TODO read in as paramter from kortex_controllers.yaml
-
-  // Incrementing identifier ensures actuators can reject out of time frames
-  base_command_.set_frame_id(base_command_.frame_id() + 1);
-  if (base_command_.frame_id() > 65535)
-    base_command_.set_frame_id(0);
-
-  // update the command for each joint
-  for (std::size_t i = 0; i < actuator_count_; i++)
+  else if ((!joint_based_controller_running_ && !twist_controller_running_) ||
+           arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
+           feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
   {
-    float cmd_degrees = 0.0;
-
-    // TODO (marqrazz): The command interface is not properly locking so when we switch controllers
-    // the last active controller is still sending commands to `arm_commands_positions_` which causes
-    // the arm to jump because the command delta is large.
-    if (abs(arm_commands_positions_[i] - arm_positions_[i]) > 0.1 &&
-        (rclcpp::Clock().now() - controller_switch_time_).seconds() < 0.5)
-    {
-      RCLCPP_WARN(LOGGER,
-                  "Arms joint[%ld] command error is too large, setting command to current robot position. Error: %f. "
-                  "Command: %f, Actual: %f",
-                  i, abs(arm_commands_positions_[i] - arm_positions_[i]), arm_commands_positions_[i],
-                  arm_positions_[i]);
-      feedback_ = base_cyclic_.RefreshFeedback();
-      for (std::size_t j = 0; j < actuator_count_; j++)
-      {
-        arm_commands_positions_[j] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
-            KortexMathUtil::toRad(feedback_.actuators(j).position()));  // rad
-      }
-      return return_type::OK;
-    }
-    else
-    {
-      cmd_degrees = static_cast<float>(
-          KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i])));
-    }
-    float cmd_vel = static_cast<float>(KortexMathUtil::toDeg(arm_commands_velocities_[i]));
-
-    base_command_.mutable_actuators(i)->set_position(cmd_degrees);
-    // base_command_.mutable_actuators(i)->set_velocity(cmd_vel);  // This is currently not implemented properly in the kortex api
-    base_command_.mutable_actuators(i)->set_command_id(base_command_.frame_id());
+    // Keep alive mode - no controller active
+    RCLCPP_DEBUG(LOGGER, "No controller active!");
   }
+
+  // read one step late because reading before sending commands
+  // generates errors
+  feedback_ = base_cyclic_.RefreshFeedback();
+  return return_type::OK;
+}
+
+void KortexMultiInterfaceHardware::prepareCommands()
+{  // update the command for each joint
+  for (size_t i = 0; i < actuator_count_; i++)
+  {
+    // set command per joint
+    cmd_degrees_tmp_ =
+        static_cast<float>(KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i])));
+    cmd_vel_tmp_ = static_cast<float>(KortexMathUtil::toDeg(arm_commands_velocities_[i]));
+
+    base_command_.mutable_actuators(static_cast<int>(i))->set_position(cmd_degrees_tmp_);
+    // Velocity command interface not implemented properly in the kortex api
+    // base_command_.mutable_actuators(i)->set_velocity(cmd_vel_tmp_);
+    base_command_.mutable_actuators(static_cast<int>(i))->set_command_id(base_command_.frame_id());
+  }
+}
+
+void KortexMultiInterfaceHardware::sendJointCommands()
+{
+  // identifier++
+  incrementId();
+
+  prepareCommands();
 
   // send the command to the robot
   try
   {
-    feedback_ = base_cyclic_.Refresh(base_command_, 0);
+    feedback_ = base_cyclic_.Refresh(base_command_);
   }
   catch (k_api::KDetailedException& ex)
   {
@@ -562,7 +752,58 @@ return_type KortexMultiInterfaceHardware::write()
     feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_WARN(LOGGER, "Attempting to clear faults. [base_active_state: %u]", feedback_.base().active_state());
   }
-  return return_type::OK;
+}
+
+void KortexMultiInterfaceHardware::incrementId()
+{
+  // Incrementing identifier ensures actuators can reject out of time frames
+  base_command_.set_frame_id(base_command_.frame_id() + 1);
+  if (base_command_.frame_id() > 65535)
+    base_command_.set_frame_id(0);
+}
+
+void KortexMultiInterfaceHardware::sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position,
+                                                      double velocity, double force)
+{
+  if (gripper_controller_running_ && !std::isnan(position))
+  {
+    if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+    {
+      k_api::Base::GripperCommand gripper_command;
+      gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
+      auto finger = gripper_command.mutable_gripper()->add_finger();
+      finger->set_finger_identifier(1);
+      finger->set_value(static_cast<float>(position / 100.0));  // This values needs to be between 0 and 1
+      base_.SendGripperCommand(gripper_command);
+    }
+    else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+    {
+      // % open/closed, this values needs to be between 0 and 1
+      gripper_motor_command_->set_position(static_cast<float>(position));
+      // % speed TODO read in as paramter from kortex_controllers.yaml
+      gripper_motor_command_->set_velocity(static_cast<float>(velocity));
+      // % torque TODO read in as paramter from kortex_controllers.yaml
+      gripper_motor_command_->set_force(static_cast<float>(force));
+    }
+  }
+}
+
+void KortexMultiInterfaceHardware::sendTwistCommand()
+{
+  auto command = k_api::Base::TwistCommand();
+  command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
+  // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
+  // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
+  command.set_duration(0);
+
+  auto twist = command.mutable_twist();
+  twist->set_linear_x(float(twist_commands_[0]));
+  twist->set_linear_y(float(twist_commands_[1]));
+  twist->set_linear_z(float(twist_commands_[2]));
+  twist->set_angular_x(float(twist_commands_[3]));
+  twist->set_angular_y(float(twist_commands_[4]));
+  twist->set_angular_z(float(twist_commands_[5]));
+  base_.SendTwistCommand(command);
 }
 
 }  // namespace kortex2_driver
