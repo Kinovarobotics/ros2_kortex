@@ -247,7 +247,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   }
 
   // check for pos-vel based controller
-  if (!start_modes_.empty() && (start_modes_.size() == 2 * actuator_count_) &&
+  if ((start_modes_.size() == 2 * actuator_count_) &&
       ((std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != 6) ||
        (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != 6)))
   {
@@ -255,7 +255,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   }
 
   // check for twist controller
-  if (!start_modes_.empty() && (start_modes_.size() == 6) &&
+  if ((start_modes_.size() == 6) &&
       (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) != 6))
   {
     return hardware_interface::return_type::ERROR;
@@ -264,7 +264,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   // check for hand controller
   auto it = std::find_if(start_interfaces.begin(), start_interfaces.end(),
                          [this](const std::string& s) { return s.find(gripper_joint_name_) != std::string::npos; });
-  if (!start_modes_.empty() && (start_modes_.size() == 1) && (it == start_interfaces.end()))
+  if ((start_modes_.size() == 1) && (it == start_interfaces.end()))
   {
     return hardware_interface::return_type::ERROR;
   }
