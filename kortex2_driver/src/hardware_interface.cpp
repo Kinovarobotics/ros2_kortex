@@ -27,9 +27,9 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , session_manager_real_time_{ &router_udp_realtime_ }
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
-  , first_pass_(true)
-  , gripper_joint_name_("finger_joint")
   , servoing_mode_hw_(k_api::Base::ServoingModeInformation())
+  , first_pass_(true)
+  , gripper_joint_name_("")
 {
   // The robot's IP address.
   std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];

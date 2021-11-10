@@ -125,6 +125,8 @@ private:
 
   std::vector<integration_lvl_t> arm_joints_control_level_;
 
+  // changing active controller on the hardware
+  k_api::Base::ServoingModeInformation servoing_mode_hw_;
   // what controller is running
   bool joint_based_controller_running_;
   bool twist_controller_running_;
