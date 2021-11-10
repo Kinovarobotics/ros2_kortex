@@ -674,28 +674,31 @@ return_type KortexMultiInterfaceHardware::write()
     return return_type::OK;
   }
 
-  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING && twist_controller_running_)
+  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
   {
     // Twist controller active
-    RCLCPP_INFO(LOGGER, "Twist controller active!");
-
-    // twist control
-    sendTwistCommand();
+    if (twist_controller_running_)
+    {
+      // twist control
+      sendTwistCommand();
+    }
 
     // gripper control
     sendGripperCommand(arm_mode_, gripper_command_position_);
   }
-  else if (joint_based_controller_running_ && (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
+  else if ((arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
            (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL))
   {
     // Per joint controller active
-    RCLCPP_INFO(LOGGER, "Joint controller active!");
 
     // gripper control
     sendGripperCommand(arm_mode_, gripper_command_position_);
 
-    // send commands to the joints
-    sendJointCommands();
+    if (joint_based_controller_running_)
+    {
+      // send commands to the joints
+      sendJointCommands();
+    }
   }
   else if ((!joint_based_controller_running_ && !twist_controller_running_) ||
            arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
@@ -764,7 +767,7 @@ void KortexMultiInterfaceHardware::incrementId()
 void KortexMultiInterfaceHardware::sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position,
                                                       double velocity, double force)
 {
-  if (gripper_controller_running_)
+  if (gripper_controller_running_ && !std::isnan(position))
   {
     if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
     {
@@ -772,7 +775,6 @@ void KortexMultiInterfaceHardware::sendGripperCommand(k_api::Base::ServoingMode 
       gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
       auto finger = gripper_command.mutable_gripper()->add_finger();
       finger->set_finger_identifier(1);
-      ;
       finger->set_value(static_cast<float>(position / 100.0));  // This values needs to be between 0 and 1
       base_.SendGripperCommand(gripper_command);
     }
