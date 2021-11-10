@@ -29,6 +29,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , base_cyclic_{ &router_udp_realtime_ }
   , first_pass_(true)
   , gripper_joint_name_("finger_joint")
+  , servoing_mode_hw_(k_api::Base::ServoingModeInformation())
 {
   // The robot's IP address.
   std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];
@@ -57,9 +58,8 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
 
   // make sure robot is in unspecified servoing mode
   // decide this on controller switching
-  auto servoingMode = k_api::Base::ServoingModeInformation();
-  servoingMode.set_servoing_mode(k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE);
-  base_.SetServoingMode(servoingMode);
+  servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE);
+  base_.SetServoingMode(servoing_mode_hw_);
   arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
@@ -499,9 +499,8 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vect
       (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != start_modes_.end()) &&
       (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != start_modes_.end()))
   {
-    auto servoingMode = k_api::Base::ServoingModeInformation();
-    servoingMode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-    base_.SetServoingMode(servoingMode);
+    servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
     // TODO (anyone) check if it works without sleep
     // std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -514,9 +513,8 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vect
   else if (!start_modes_.empty() &&
            std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) != start_modes_.end())
   {
-    auto servoingMode = k_api::Base::ServoingModeInformation();
-    servoingMode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-    base_.SetServoingMode(servoingMode);
+    servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
     // TODO (anyone) check if it works without sleep
     // std::this_thread::sleep_for(std::chrono::milliseconds(500));
