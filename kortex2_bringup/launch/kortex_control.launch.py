@@ -136,6 +136,13 @@ def generate_launch_description():
             "launch_rviz", default_value="true", description="Launch RViz?"
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_internal_bus_gripper_comm",
+            default_value="false",
+            description="Use internal bus for gripper communication?",
+        )
+    )
 
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
@@ -154,6 +161,7 @@ def generate_launch_description():
     robot_pos_controller = LaunchConfiguration("robot_pos_controller")
     robot_hand_controller = LaunchConfiguration("robot_hand_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
+    use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
 
     robot_description_content = Command(
         [
@@ -180,6 +188,9 @@ def generate_launch_description():
             " ",
             "gripper:=",
             gripper,
+            " ",
+            "use_internal_bus_gripper_comm:=",
+            use_internal_bus_gripper_comm,
             " ",
         ]
     )

@@ -3,6 +3,7 @@
 
   <xacro:macro name="kortex_ros2_control" params="name prefix
     use_fake_hardware:=false fake_sensor_commands:=false
+    use_internal_bus_gripper_comm:=false
     tf_prefix robot_ip">
 
     <ros2_control name="${name}" type="system">
@@ -16,6 +17,7 @@
           <plugin>kortex2_driver/KortexMultiInterfaceHardware</plugin>
           <param name="robot_ip">${robot_ip}</param>
           <param name="tf_prefix">"${tf_prefix}"</param>
+          <param name="use_internal_bus_gripper_comm">${use_internal_bus_gripper_comm}</param>
         </xacro:unless>
       </hardware>
       <joint name="${prefix}joint_1">

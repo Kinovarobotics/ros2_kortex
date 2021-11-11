@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <xacro:macro name="load_robot" params="parent arm gripper dof vision robot_ip sim prefix use_fake_hardware fake_sensor_commands">
+    <xacro:macro name="load_robot" params="parent arm gripper dof vision robot_ip sim prefix use_fake_hardware fake_sensor_commands use_internal_bus_gripper_comm:=false">
 
         <!-- Files to include -->
         <xacro:include filename="$(find kortex_description)/arms/${arm}/${dof}dof/urdf/${arm}_macro.xacro" />
@@ -22,7 +22,7 @@
         <!-- Run the macros -->
 
         <!-- Load the arm -->
-        <xacro:load_arm parent="${parent}" dof="${dof}" vision="${vision}" robot_ip="${robot_ip}" prefix="${prefix}" use_fake_hardware="${use_fake_hardware}" fake_sensor_commands="${fake_sensor_commands}">
+        <xacro:load_arm parent="${parent}" dof="${dof}" vision="${vision}" robot_ip="${robot_ip}" prefix="${prefix}" use_fake_hardware="${use_fake_hardware}" fake_sensor_commands="${fake_sensor_commands}" use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:load_arm>
 

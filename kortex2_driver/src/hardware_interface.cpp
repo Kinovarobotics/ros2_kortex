@@ -30,6 +30,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , servoing_mode_hw_(k_api::Base::ServoingModeInformation())
   , first_pass_(true)
   , gripper_joint_name_("")
+  , use_internal_bus_gripper_comm_(false)
 {
   // The robot's IP address.
   std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];
@@ -116,6 +117,14 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
                    hardware_interface::HW_IF_VELOCITY, hardware_interface::HW_IF_EFFORT);
       return CallbackReturn::ERROR;
     }
+  }
+
+  // TODO (livanov93): appropriate actions if internal bus is used for gripper communication
+  if ((info_.hardware_parameters["use_internal_bus_gripper_comm"] == "true") ||
+      (info_.hardware_parameters["use_internal_bus_gripper_comm"] == "True"))
+  {
+    use_internal_bus_gripper_comm_ = true;
+    RCLCPP_INFO(LOGGER, "Using internal bus communication for gripper!");
   }
 
   RCLCPP_INFO(LOGGER, "Hardware Interface successfully configured");
@@ -765,7 +774,7 @@ void KortexMultiInterfaceHardware::incrementId()
 void KortexMultiInterfaceHardware::sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position,
                                                       double velocity, double force)
 {
-  if (gripper_controller_running_ && !std::isnan(position))
+  if (gripper_controller_running_ && !std::isnan(position) && use_internal_bus_gripper_comm_)
   {
     if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
     {
