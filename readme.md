@@ -13,15 +13,15 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
 
 3. Create a new ROS2 workspace:
    ```
-   export COLCON_WS=~/workspace/ros2_cortex_ws
+   export COLCON_WS=~/workspace/ros2_kortex_ws
    mkdir -p $COLCON_WS/src
    ```
 
 4. Pull relevant packages, install dependencies, compile, and source the workspace by using:
    ```
    cd $COLCON_WS
-   git clone https://github.com/PickNikRobotics/ros2_cortex.git src/ros2_cortex
-   vcs import src --skip-existing --input src/ros2_cortex/ros2_cortex.repos
+   git clone https://github.com/PickNikRobotics/ros2_kortex.git src/ros2_kortex
+   vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex.repos
    rosdep install --ignore-src --from-paths src -y -r
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
    source install/setup.bash
