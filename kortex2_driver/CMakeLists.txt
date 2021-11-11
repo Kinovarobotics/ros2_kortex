@@ -34,15 +34,10 @@ target_include_directories(
 )
 ament_target_dependencies(
   ${PROJECT_NAME}
-  forward_command_controller
   hardware_interface
-  joint_state_broadcaster
-  joint_trajectory_controller
+  kortex_api
   pluginlib
   rclcpp
-  ros2_control
-  ros2_controllers
-  kortex_api
 )
 
 pluginlib_export_plugin_description_file(hardware_interface hardware_interface_plugin.xml)
