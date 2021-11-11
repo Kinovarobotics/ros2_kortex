@@ -3,7 +3,7 @@ project(gen3_robotiq_2f_85_move_it_config)
 
 find_package(ament_cmake REQUIRED)
 
-install(DIRECTORY config
+install(DIRECTORY config rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
