@@ -40,6 +40,42 @@ def generate_launch_description():
             "robot_ip", description="IP address by which the robot can be reached."
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "username", description="Robot session username.", default_value="admin"
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "password", description="Robot session password.", default_value="admin"
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "port", description="Robot port for tcp connection.", default_value="10000"
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "port_realtime",
+            description="Robot port for udp realtime control.",
+            default_value="10001",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "session_inactivity_timeout_ms",
+            description="Robot session inactivity timeout in milliseconds.",
+            default_value="60000",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "connection_inactivity_timeout_ms",
+            description="Robot connection inactivity timeout in milliseconds.",
+            default_value="2000",
+        )
+    )
     # General arguments
     declared_arguments.append(
         DeclareLaunchArgument(
