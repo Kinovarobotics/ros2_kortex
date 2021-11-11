@@ -42,7 +42,7 @@ void TwistToArrayRepublisher::timerCallback()
   }
 }
 
-void TwistToArrayRepublisher::twistCallback(const geometry_msgs::msg::TwistStamped::ConstPtr& twist_msg)
+void TwistToArrayRepublisher::twistCallback(const geometry_msgs::msg::TwistStamped::ConstSharedPtr& twist_msg)
 {
   float scale_linear_mult = 0.07;  // scale the incomming linear velocity commands
   float scale_angular_mult = 4.0;  // scale the incomming angular velocity commands
