@@ -48,14 +48,50 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   info_ = info;
   // The robot's IP address.
   std::string robot_ip = info_.hardware_parameters["robot_ip"];
+  if (robot_ip.empty())
+  {
+    RCLCPP_ERROR(LOGGER, "Robot ip is empty!");
+    return CallbackReturn::ERROR;
+  }
   // Username to log into the robot controller
   std::string username = info_.hardware_parameters["username"];
+  if (username.empty())
+  {
+    RCLCPP_ERROR(LOGGER, "Username is empty!");
+    return CallbackReturn::ERROR;
+  }
   // Password to log into the robot controller
   std::string password = info_.hardware_parameters["password"];
+  if (password.empty())
+  {
+    RCLCPP_ERROR(LOGGER, "Password is empty!");
+    return CallbackReturn::ERROR;
+  }
   int port = std::stoi(info_.hardware_parameters["port"]);
+  if (port <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect port number!");
+    return CallbackReturn::ERROR;
+  }
   int port_realtime = std::stoi(info_.hardware_parameters["port_realtime"]);
+  if (port_realtime <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect realtime port number!");
+    return CallbackReturn::ERROR;
+  }
+
   int session_inactivity_timeout = std::stoi(info_.hardware_parameters["session_inactivity_timeout_ms"]);
+  if (session_inactivity_timeout <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect session inactivity timeout!");
+    return CallbackReturn::ERROR;
+  }
   int connection_inactivity_timeout = std::stoi(info_.hardware_parameters["connection_inactivity_timeout_ms"]);
+  if (connection_inactivity_timeout <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect connection inactivity timeout!");
+    return CallbackReturn::ERROR;
+  }
 
   RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
 
