@@ -32,8 +32,6 @@ constexpr char HW_IF_TWIST[] = "twist";
 using hardware_interface::return_type;
 
 namespace k_api = Kinova::Api;
-#define PORT 10000
-#define PORT_REAL_TIME 10001
 
 namespace kortex2_driver
 {
