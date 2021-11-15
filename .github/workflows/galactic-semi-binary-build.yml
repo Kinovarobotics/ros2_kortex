@@ -1,4 +1,4 @@
-name: Galactic Binary Build
+name: Galactic Semi-Binary Build
 on:
   pull_request:
     branches:
@@ -11,8 +11,8 @@ on:
     - cron: '13 4 * * *'
 
 jobs:
-  galactic_binary:
-    name: galactic binary build
+  galactic_semi_binary:
+    name: galactic semi-binary build
     runs-on: ubuntu-latest
     strategy:
       matrix:
