@@ -3,6 +3,29 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
 
 **Warning** Currently the only packages ported to ROS2 are 'kortex_description`, 'kortex2_driver`, 'kortex2_bringup` and 'gen3_move_it_config`
 
+## Build status
+
+ROS2 Distro | Branch | Build status
+:---------: | :----: | :----------:
+**Rolling** | [`rolling`](https://github.com/PickNikRobotics/ros2_kortex/tree/rolling) | [![Rolling Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?branch=master)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml?branch=master) <br /> [![Rolling Semi-Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml/badge.svg?branch=master)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml?branch=master) <br /> [![Rolling Source Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-source-build.yml/badge.svg?branch=master)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-source-build.yml?branch=master)
+**Galactic** | [`galactic`](https://github.com/PickNikRobotics/ros2_kortex/tree/galactic) | [![Galactic Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/galactic-binary-build.yml/badge.svg?branch=master)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/galactic-binary-build.yml?branch=master) <br /> [![Galactic Semi-Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/galactic-semi-binary-build.yml/badge.svg?branch=master)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/galactic-semi-binary-build.yml?branch=master) <br /> [![Galactic Source Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/galactic-source-build.yml/badge.svg?branch=master)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/galactic-source-build.yml?branch=master)
+
+### Explanation of different build types
+
+**NOTE**: There are three build stages checking current and future compatibility of the package.
+
+1. Binary builds - against released packages (main and testing) in ROS distributions. Shows that direct local build is possible.
+
+   Uses repos file: `src/$NAME$/$NAME$-not-released.<ros-distro>.repos`
+
+1. Semi-binary builds - against released core ROS packages (main and testing), but the immediate dependencies are pulled from source.
+   Shows that local build with dependencies is possible and if fails there we can expect that after the next package sync we will not be able to build.
+
+   Uses repos file: `src/$NAME$/$NAME$.repos`
+
+1. Source build - also core ROS packages are build from source. It shows potential issues in the mid future.
+
+
 ## Getting started
 
 1. [Install ROS2 Rolling](https://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html)

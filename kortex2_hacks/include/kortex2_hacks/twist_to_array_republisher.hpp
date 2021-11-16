@@ -12,7 +12,7 @@ public:
   TwistToArrayRepublisher(rclcpp::NodeOptions options);
 
 private:
-  void twistCallback(const geometry_msgs::msg::TwistStamped::ConstPtr& twist_msg);
+  void twistCallback(const geometry_msgs::msg::TwistStamped::ConstSharedPtr & twist_msg);
   void timerCallback();
 
   rclcpp::Subscription<geometry_msgs::msg::TwistStamped>::SharedPtr twist_sub_;
