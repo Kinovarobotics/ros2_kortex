@@ -12,6 +12,12 @@
     prefix
     *origin
     robot_ip
+    username
+    password
+    port
+    port_realtime
+    session_inactivity_timeout_ms
+    connection_inactivity_timeout_ms
     use_fake_hardware
     fake_sensor_commands
     use_internal_bus_gripper_comm:=false">
@@ -24,6 +30,12 @@
         fake_sensor_commands="${fake_sensor_commands}"
         tf_prefix=""
         robot_ip="${robot_ip}"
+        username="${username}"
+        password="${password}"
+        port="${port}"
+        port_realtime="${port_realtime}"
+        session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
+        connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
         use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
 
       <joint name="${prefix}base_joint" type="fixed">

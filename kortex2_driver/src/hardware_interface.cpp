@@ -28,49 +28,13 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , base_{ &router_tcp_ }
   , base_cyclic_{ &router_udp_realtime_ }
   , servoing_mode_hw_(k_api::Base::ServoingModeInformation())
+  , joint_based_controller_running_(false)
+  , twist_controller_running_(false)
+  , gripper_controller_running_(false)
   , first_pass_(true)
   , gripper_joint_name_("")
   , use_internal_bus_gripper_comm_(false)
 {
-  // The robot's IP address.
-  std::string robot_ip = "192.168.11.11";  // TODO: read in info_.hardware_parameters["robot_ip"];
-  // Username to log into the robot controller
-  std::string username = "admin";  // TODO: read in info_.hardware_parameters["username"];
-  // Password to log into the robot controller
-  std::string password = "admin";  // TODO: read in info_.hardware_parameters["password"];
-
-  RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
-
-  transport_tcp_.connect(robot_ip, PORT);
-  transport_udp_realtime_.connect(robot_ip, PORT_REAL_TIME);
-
-  // Set session data connection information
-  auto create_session_info = k_api::Session::CreateSessionInfo();
-  create_session_info.set_username(username);
-  create_session_info.set_password(password);
-  create_session_info.set_session_inactivity_timeout(60000);    // (milliseconds)
-  create_session_info.set_connection_inactivity_timeout(2000);  // (milliseconds)
-
-  // Session manager service wrapper
-  RCLCPP_INFO(LOGGER, "Creating session for communication");
-  session_manager_.CreateSession(create_session_info);
-  session_manager_real_time_.CreateSession(create_session_info);
-  RCLCPP_INFO(LOGGER, "Session created");
-
-  // make sure robot is in unspecified servoing mode
-  // decide this on controller switching
-  servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE);
-  base_.SetServoingMode(servoing_mode_hw_);
-  arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
-  std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-  actuator_count_ = base_.GetActuatorCount().count();
-  RCLCPP_INFO(LOGGER, "Actuator count reported by robot is '%lu'", actuator_count_);
-
-  // no controller is running
-  joint_based_controller_running_ = false;
-  twist_controller_running_ = false;
-  gripper_controller_running_ = false;
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::HardwareInfo& info)
@@ -82,6 +46,81 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   }
 
   info_ = info;
+  // The robot's IP address.
+  std::string robot_ip = info_.hardware_parameters["robot_ip"];
+  if (robot_ip.empty())
+  {
+    RCLCPP_ERROR(LOGGER, "Robot ip is empty!");
+    return CallbackReturn::ERROR;
+  }
+  // Username to log into the robot controller
+  std::string username = info_.hardware_parameters["username"];
+  if (username.empty())
+  {
+    RCLCPP_ERROR(LOGGER, "Username is empty!");
+    return CallbackReturn::ERROR;
+  }
+  // Password to log into the robot controller
+  std::string password = info_.hardware_parameters["password"];
+  if (password.empty())
+  {
+    RCLCPP_ERROR(LOGGER, "Password is empty!");
+    return CallbackReturn::ERROR;
+  }
+  int port = std::stoi(info_.hardware_parameters["port"]);
+  if (port <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect port number!");
+    return CallbackReturn::ERROR;
+  }
+  int port_realtime = std::stoi(info_.hardware_parameters["port_realtime"]);
+  if (port_realtime <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect realtime port number!");
+    return CallbackReturn::ERROR;
+  }
+
+  int session_inactivity_timeout = std::stoi(info_.hardware_parameters["session_inactivity_timeout_ms"]);
+  if (session_inactivity_timeout <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect session inactivity timeout!");
+    return CallbackReturn::ERROR;
+  }
+  int connection_inactivity_timeout = std::stoi(info_.hardware_parameters["connection_inactivity_timeout_ms"]);
+  if (connection_inactivity_timeout <= 0)
+  {
+    RCLCPP_ERROR(LOGGER, "Incorrect connection inactivity timeout!");
+    return CallbackReturn::ERROR;
+  }
+
+  RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
+
+  // connections
+  transport_tcp_.connect(robot_ip, port);
+  transport_udp_realtime_.connect(robot_ip, port_realtime);
+
+  // Set session data connection information
+  auto create_session_info = k_api::Session::CreateSessionInfo();
+  create_session_info.set_username(username);
+  create_session_info.set_password(password);
+  create_session_info.set_session_inactivity_timeout(session_inactivity_timeout);        // (milliseconds)
+  create_session_info.set_connection_inactivity_timeout(connection_inactivity_timeout);  // (milliseconds)
+
+  // Session manager service wrapper
+  RCLCPP_INFO(LOGGER, "Creating session for communication");
+  session_manager_.CreateSession(create_session_info);
+  session_manager_real_time_.CreateSession(create_session_info);
+  RCLCPP_INFO(LOGGER, "Session created");
+
+  // make sure robot is in unspecified servoing mode
+  // decide this on controller switching
+  servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
+  base_.SetServoingMode(servoing_mode_hw_);
+  arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+  actuator_count_ = base_.GetActuatorCount().count();
+  RCLCPP_INFO(LOGGER, "Actuator count reported by robot is '%lu'", actuator_count_);
 
   arm_positions_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
   arm_velocities_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
@@ -119,7 +158,6 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     }
   }
 
-  // TODO (livanov93): appropriate actions if internal bus is used for gripper communication
   if ((info_.hardware_parameters["use_internal_bus_gripper_comm"] == "true") ||
       (info_.hardware_parameters["use_internal_bus_gripper_comm"] == "True"))
   {
@@ -257,8 +295,10 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
 
   // check for pos-vel based controller
   if ((start_modes_.size() == 2 * actuator_count_) &&
-      ((std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != 6) ||
-       (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != 6)))
+      ((static_cast<size_t>(std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION)) !=
+        actuator_count_) ||
+       (static_cast<size_t>(std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY)) !=
+        actuator_count_)))
   {
     return hardware_interface::return_type::ERROR;
   }
@@ -337,144 +377,6 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
   RCLCPP_INFO(LOGGER, "prepare END");
 
   return ret_val;
-  /*{
-
-  // Prepare for new command modes
-  std::vector<integration_lvl_t> new_modes = {};
-  std::vector<std::size_t> new_mode_joint_index = {};
-  RCLCPP_INFO(LOGGER, "Controller switch requested");
-  for (std::string key: start_interfaces) {
-      RCLCPP_DEBUG(LOGGER, "New command mode for joint: %s", key.c_str());
-      for (std::size_t i = 0; i < info_.joints.size(); i++) {
-          if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION) {
-              new_modes.push_back(integration_lvl_t::POSITION);
-              new_mode_joint_index.push_back(i);
-          }
-          if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY) {
-              if (new_mode_joint_index.back() == i) {
-                  new_modes.back() = integration_lvl_t::VELOCITY;
-              } else {
-                  new_modes.push_back(integration_lvl_t::VELOCITY);
-                  new_mode_joint_index.push_back(i);
-              }
-          }
-          if (key == info_.joints[i].name + "/" + hardware_interface::HW_IF_EFFORT) {
-              new_modes.push_back(integration_lvl_t::EFFORT);
-              new_mode_joint_index.push_back(i);
-          }
-      }
-  }
-
-  // Stop motion on all relevant joints that are stopping
-  for (std::string key: stop_interfaces) {
-      for (std::size_t i = 0; i < info_.joints.size(); i++) {
-          if (key.find(info_.joints[i].name) != std::string::npos) {
-              arm_commands_velocities_[i] = 0;
-              arm_commands_efforts_[i] = 0;
-              arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;  // Revert to undefined
-          }
-      }
-  }
-
-  // if we are sending twist messages to Kinova and our controller controller is changing we need to ensure the arm is
-stopped! if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING && arm_joints_control_level_[6] ==
-integration_lvl_t::UNDEFINED) {
-      // block_write = true;
-      // std::this_thread::sleep_for(
-      //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
-      arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
-      RCLCPP_INFO(LOGGER, "Switching to NO_SERVOING_MODE");
-      auto command = k_api::Base::TwistCommand();
-      command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
-      // command.set_duration = execute time (milliseconds) according to the api -> (not implemented yet)
-      // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
-      command.set_duration(0);
-
-      auto twist = command.mutable_twist();
-      twist->set_linear_x(0.0f);
-      twist->set_linear_y(0.0f);
-      twist->set_linear_z(0.0f);
-      twist->set_angular_x(0.0f);
-      twist->set_angular_y(0.0f);
-      twist->set_angular_z(0.0f);
-      base_.SendTwistCommand(command);
-      std::this_thread::sleep_for(std::chrono::milliseconds(500));
-      // block_write = false;
-  }
-
-  // If we are not starting any controllers we are done
-  if (new_modes.empty()) {
-      block_write = false;
-      return return_type::OK;
-  }
-  // Set the new command modes
-  for (std::size_t i = 0; i < new_modes.size(); i++) {
-      // if this interface is not free then we cant switch modes!
-      if (arm_joints_control_level_[new_mode_joint_index[i]] != integration_lvl_t::UNDEFINED) {
-          RCLCPP_ERROR(
-                  LOGGER,
-                  "Attempting to start interface that is already claimed. Joint mode index: %ld,
-arm_joints_control_level_[%u]", new_mode_joint_index[i], arm_joints_control_level_[new_mode_joint_index[i]]);
-block_write = false; return return_type::ERROR;
-      }
-      arm_joints_control_level_[new_mode_joint_index[i]] = new_modes[i];
-      RCLCPP_DEBUG(LOGGER, "arm_joints_control_level_[%ld] mode: %u", new_mode_joint_index[i], new_modes[i]);
-  }
-
-  // TODO (marqrazz): NEED better way to detect that we are switching kinova servo mode!
-  // Current hack is that if the arm is in integration_lvl_t::VELOCITY then we using the `joint_trajectory_controller`
-  // if the arm is in integration_lvl_t::POSITION then we are using the `streaming_controller`
-  if (arm_joints_control_level_[6] == integration_lvl_t::VELOCITY &&
-      info_.joints[new_mode_joint_index.front()].name !=
-      "finger_joint")  // TODO find a better way to identify gripper joint(s)
-  {
-      // block_write = true;
-      // std::this_thread::sleep_for(
-      //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
-      auto servoing_mode = k_api::Base::ServoingModeInformation();
-      // Set the base in low-level servoing mode
-      arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
-      servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-      base_.SetServoingMode(servoing_mode);
-      std::this_thread::sleep_for(std::chrono::milliseconds(500));
-      feedback_ = base_cyclic_.RefreshFeedback();
-      for (std::size_t i = 0; i < actuator_count_; i++) {
-          arm_commands_positions_[i] =
-                  KortexMathUtil::wrapRadiansFromMinusPiToPi(
-                          KortexMathUtil::toRad(feedback_.actuators(i).position()));  // rad
-          // RCLCPP_ERROR(LOGGER, "setting joint[%ld] position: %f", i, arm_commands_positions_[i]);
-      }
-      RCLCPP_INFO(LOGGER, "Switching to LOW_LEVEL_SERVOING");
-      controller_switch_time_ = rclcpp::Clock().now();
-      // block_write = false;
-  } else if (arm_joints_control_level_[6] == integration_lvl_t::POSITION &&
-             info_.joints[new_mode_joint_index.front()].name !=
-             "finger_joint")  // TODO find a better way to identify gripper joint(s)
-  {
-      // block_write = true;
-      // std::this_thread::sleep_for(
-      //     std::chrono::milliseconds(50));  // sleep to ensure all outgoing write commands have finished
-      auto servoing_mode = k_api::Base::ServoingModeInformation();
-      // Set the base in low-level servoing mode
-      arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
-      servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-      base_.SetServoingMode(servoing_mode);
-      std::this_thread::sleep_for(std::chrono::milliseconds(500));
-      feedback_ = base_cyclic_.RefreshFeedback();
-      for (std::size_t i = 0; i < actuator_count_; i++) {
-          arm_commands_positions_[i] = 0.0;  // this is a twist command at this point
-          // RCLCPP_ERROR(LOGGER, "setting joint[%d] position: %f", i, arm_commands_positions_[i]);
-      }
-      RCLCPP_INFO(LOGGER, "Switching to SINGLE_LEVEL_SERVOING");
-      controller_switch_time_ = rclcpp::Clock().now();
-      // block_write = false;
-  } else {
-      RCLCPP_INFO(LOGGER, "Arm controller is not changing modes. arm_mode: %u", arm_mode_);
-  }
-
-  block_write = false;
-} */
-  return return_type::OK;
 }
 
 return_type KortexMultiInterfaceHardware::perform_command_mode_switch(const vector<std::string>& /*start_interfaces*/,
