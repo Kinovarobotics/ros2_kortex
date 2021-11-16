@@ -114,9 +114,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
 
   // make sure robot is in unspecified servoing mode
   // decide this on controller switching
-  servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE);
+  servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
   base_.SetServoingMode(servoing_mode_hw_);
-  arm_mode_ = k_api::Base::ServoingMode::UNSPECIFIED_SERVOING_MODE;
+  arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   actuator_count_ = base_.GetActuatorCount().count();
@@ -295,8 +295,10 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
 
   // check for pos-vel based controller
   if ((start_modes_.size() == 2 * actuator_count_) &&
-      ((std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) != 6) ||
-       (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) != 6)))
+      ((static_cast<size_t>(std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION)) !=
+        actuator_count_) ||
+       (static_cast<size_t>(std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY)) !=
+        actuator_count_)))
   {
     return hardware_interface::return_type::ERROR;
   }
