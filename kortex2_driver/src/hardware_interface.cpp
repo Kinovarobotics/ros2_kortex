@@ -586,10 +586,6 @@ return_type KortexMultiInterfaceHardware::read()
 
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
-    if (arm_joints_control_level_[i] == integration_lvl_t::UNDEFINED)
-    {
-      return return_type::OK;
-    }
     // read torque
     arm_efforts_[i] = feedback_.actuators(i).torque();  // N*m
     // read velocity
