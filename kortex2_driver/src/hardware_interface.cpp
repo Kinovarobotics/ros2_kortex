@@ -312,12 +312,12 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
         //              start_modes_.emplace_back(hardware_interface::HW_IF_EFFORT);
         RCLCPP_ERROR(LOGGER, "KortexMultiInterfaceHardware does not support effort command interface!");
       }
+    }
       if ((key == "tcp/twist.linear.x") || (key == "tcp/twist.linear.y") || (key == "tcp/twist.linear.z") ||
           (key == "tcp/twist.angular.x") || (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
       {
-        start_modes_.emplace_back(hardware_interface::HW_IF_TWIST);
+          start_modes_.emplace_back(hardware_interface::HW_IF_TWIST);
       }
-    }
   }
   // pos-vel based controller requires (2 x actuator) interfaces
   // twist controller requires 6 interfaces
@@ -355,38 +355,33 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
 
   // Stopping interfaces
   // add stop interface per joint in tmp var for later check
-  for (const auto& key : stop_interfaces)
-  {
-    RCLCPP_INFO(LOGGER, "Stopping '%s'", key.c_str());
+  for (const auto& key : stop_interfaces) {
+      RCLCPP_INFO(LOGGER, "Stopping '%s'", key.c_str());
 
-    for (auto& joint : info_.joints)
-    {
-      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION && joint.name == gripper_joint_name_)
-      {
-        stop_modes_.push_back(StoppingInterface::STOP_GRIPPER);
-        continue;
-      }
-      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
-      {
-        stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
-      }
-      if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
-      {
-        stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
-      }
-      if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
-      {
-        continue;
-        // not supporting effort command interface
-        //              start_modes_.emplace_back(hardware_interface::HW_IF_EFFORT);
-        RCLCPP_ERROR(LOGGER, "KortexMultiInterfaceHardware does not support effort command interface!");
+      for (auto &joint : info_.joints) {
+          if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION && joint.name == gripper_joint_name_) {
+              stop_modes_.push_back(StoppingInterface::STOP_GRIPPER);
+              continue;
+          }
+          if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION) {
+              stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
+          }
+          if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY) {
+              stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
+          }
+          if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT) {
+              continue;
+              // not supporting effort command interface
+              //              start_modes_.emplace_back(hardware_interface::HW_IF_EFFORT);
+              RCLCPP_ERROR(LOGGER, "KortexMultiInterfaceHardware does not support effort command interface!");
+          }
       }
       if ((key == "tcp/twist.linear.x") || (key == "tcp/twist.linear.y") || (key == "tcp/twist.linear.z") ||
           (key == "tcp/twist.angular.x") || (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
       {
-        stop_modes_.push_back(StoppingInterface::STOP_TWIST);
+          stop_modes_.push_back(StoppingInterface::STOP_TWIST);
       }
-    }
+  }
 
     // check if pos-vel based controller is stopping
     if (!stop_modes_.empty() && (stop_modes_.size() == 2 * actuator_count_) &&
