@@ -607,7 +607,9 @@ void KortexMultiInterfaceHardware::readGripperPosition()
 {
   // max joint angle = 0.81 for robotiq_2f_85
   // TODO read in as paramter from kortex_controllers.yaml
-  gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
+  if (use_internal_bus_gripper_comm_) {
+      gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
+  }
 }
 
 return_type KortexMultiInterfaceHardware::write()
