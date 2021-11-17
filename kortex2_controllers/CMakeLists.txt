@@ -27,6 +27,7 @@ ament_target_dependencies(
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
 target_compile_definitions(twist_controller PRIVATE "KORTEX2_CONTROLLERS_BUILDING_LIBRARY")
+pluginlib_export_plugin_description_file(controller_interface twist_controller_plugin.xml)
 
 install(
   DIRECTORY include/
