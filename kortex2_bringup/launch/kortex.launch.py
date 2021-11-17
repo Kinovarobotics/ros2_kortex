@@ -95,9 +95,7 @@ def declare_configurable_parameters(parameters):
 
 
 def set_configurable_parameters(parameters):
-    return dict(
-        [(param["name"], LaunchConfiguration(param["name"])) for param in parameters]
-    )
+    return {param["name"]: LaunchConfiguration(param["name"]) for param in parameters}
 
 
 def generate_launch_description():
