@@ -32,7 +32,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , twist_controller_running_(false)
   , gripper_controller_running_(false)
   , first_pass_(true)
-  , gripper_joint_name_("")
+  , gripper_joint_name_("finger_joint")
   , use_internal_bus_gripper_comm_(false)
 {
 }
