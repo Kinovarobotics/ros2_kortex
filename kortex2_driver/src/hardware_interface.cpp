@@ -32,7 +32,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   , twist_controller_running_(false)
   , gripper_controller_running_(false)
   , first_pass_(true)
-  , gripper_joint_name_("finger_joint")
+  , gripper_joint_name_("")
   , use_internal_bus_gripper_comm_(false)
 {
 }
@@ -52,6 +52,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   {
     RCLCPP_ERROR(LOGGER, "Robot ip is empty!");
     return CallbackReturn::ERROR;
+  }else
+  {
+      RCLCPP_INFO(LOGGER, "Robot ip is '%s'", robot_ip.c_str());
   }
   // Username to log into the robot controller
   std::string username = info_.hardware_parameters["username"];
@@ -59,6 +62,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   {
     RCLCPP_ERROR(LOGGER, "Username is empty!");
     return CallbackReturn::ERROR;
+  }else
+  {
+      RCLCPP_INFO(LOGGER, "Username is '%s'", username.c_str());
   }
   // Password to log into the robot controller
   std::string password = info_.hardware_parameters["password"];
@@ -73,11 +79,21 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     RCLCPP_ERROR(LOGGER, "Incorrect port number!");
     return CallbackReturn::ERROR;
   }
+  else
+  {
+      RCLCPP_INFO(LOGGER, "Port used '%d'", port);
+
+  }
   int port_realtime = std::stoi(info_.hardware_parameters["port_realtime"]);
   if (port_realtime <= 0)
   {
     RCLCPP_ERROR(LOGGER, "Incorrect realtime port number!");
     return CallbackReturn::ERROR;
+  }
+  else
+  {
+      RCLCPP_INFO(LOGGER, "Realtime port used '%d'", port_realtime);
+
   }
 
   int session_inactivity_timeout = std::stoi(info_.hardware_parameters["session_inactivity_timeout_ms"]);
@@ -86,12 +102,31 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     RCLCPP_ERROR(LOGGER, "Incorrect session inactivity timeout!");
     return CallbackReturn::ERROR;
   }
+  else
+  {
+      RCLCPP_INFO(LOGGER, "Session inactivity timeout is '%d'", session_inactivity_timeout);
+
+  }
   int connection_inactivity_timeout = std::stoi(info_.hardware_parameters["connection_inactivity_timeout_ms"]);
   if (connection_inactivity_timeout <= 0)
   {
     RCLCPP_ERROR(LOGGER, "Incorrect connection inactivity timeout!");
     return CallbackReturn::ERROR;
   }
+  else
+  {
+      RCLCPP_INFO(LOGGER, "Connection inactivity timeout is '%d'", connection_inactivity_timeout);
+
+  }
+    // gripper joint name
+    gripper_joint_name_ = info_.hardware_parameters["gripper_joint_name"];
+    if (gripper_joint_name_.empty())
+    {
+        RCLCPP_ERROR(LOGGER, "Gripper joint name is empty!");
+    }else
+    {
+        RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
+    }
 
   RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
 
