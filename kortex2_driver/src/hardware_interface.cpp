@@ -403,7 +403,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(const std:
     {
       return hardware_interface::return_type::ERROR;
     }
-  }
+
   RCLCPP_INFO(LOGGER, "prepare END");
 
   return ret_val;
