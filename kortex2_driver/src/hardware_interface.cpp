@@ -168,7 +168,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
 
   // set size of the twist interface
-  twist_commands_.resize(6);
+  twist_commands_.resize(6, 0.0);
 
   for (const hardware_interface::ComponentInfo& joint : info_.joints)
   {
