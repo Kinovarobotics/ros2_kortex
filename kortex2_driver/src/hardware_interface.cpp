@@ -1,3 +1,27 @@
+// Copyright 2021, PickNik Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//----------------------------------------------------------------------
+/*!\file
+ *
+ * \author Marq Rasmussen marq.rasmussen@picknik.ai
+ * \author  Lovro Ivanov lovro.ivanov@gmail.com
+ * \date    2021-06-15
+ *
+ */
+//----------------------------------------------------------------------
+
 #include "kortex2_driver/hardware_interface.hpp"
 #include "kortex2_driver/kortex_math_util.hpp"
 
@@ -597,7 +621,7 @@ return_type KortexMultiInterfaceHardware::read()
 void KortexMultiInterfaceHardware::readGripperPosition()
 {
   // max joint angle = 0.81 for robotiq_2f_85
-  // TODO read in as paramter from kortex_controllers.yaml
+  // TODO read in as parameter from kortex_controllers.yaml
   if (use_internal_bus_gripper_comm_) {
       gripper_position_ = feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
   }
@@ -719,9 +743,9 @@ void KortexMultiInterfaceHardware::sendGripperCommand(k_api::Base::ServoingMode 
     {
       // % open/closed, this values needs to be between 0 and 1
       gripper_motor_command_->set_position(static_cast<float>(position));
-      // % speed TODO read in as paramter from kortex_controllers.yaml
+      // % speed TODO read in as parameter from kortex_controllers.yaml
       gripper_motor_command_->set_velocity(static_cast<float>(velocity));
-      // % torque TODO read in as paramter from kortex_controllers.yaml
+      // % torque TODO read in as parameter from kortex_controllers.yaml
       gripper_motor_command_->set_force(static_cast<float>(force));
     }
   }
