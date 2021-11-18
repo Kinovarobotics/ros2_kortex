@@ -12,45 +12,54 @@ find_package(controller_interface REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 
-add_library(twist_controller src/twist_controller.cpp)
-target_compile_features(twist_controller PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-target_include_directories(twist_controller PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
-ament_target_dependencies(
-  twist_controller
-  "rclcpp"
-  "controller_interface"
-  "geometry_msgs"
+set(THIS_PACKAGE_INCLUDE_DEPENDS
+  controller_interface
+  geometry_msgs
+)
+
+include_directories(include)
+
+add_library(${PROJECT_NAME} SHARED src/twist_controller.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE
+  include
+)
+
+ament_target_dependencies(${PROJECT_NAME}
+  ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
-target_compile_definitions(twist_controller PRIVATE "KORTEX2_CONTROLLERS_BUILDING_LIBRARY")
+target_compile_definitions(${PROJECT_NAME} PRIVATE "KORTEX2_CONTROLLERS_BUILDING_LIBRARY")
+pluginlib_export_plugin_description_file(controller_interface controller_plugins.xml)
 
-install(
-  DIRECTORY include/
-  DESTINATION include
-)
-install(
-  TARGETS twist_controller
-  EXPORT export_${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
 
+install(DIRECTORY include/
+  DESTINATION include
+)
+
+install(FILES controller_plugins.xml
+  DESTINATION share/${PROJECT_NAME}
+)
+
 if(BUILD_TESTING)
 endif()
+
+ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+ament_export_include_directories(include)
+ament_export_libraries(${PROJECT_NAME})
 
 ament_export_include_directories(
   include
 )
+
 ament_export_libraries(
-  twist_controller
-)
-ament_export_targets(
-  export_${PROJECT_NAME}
+  ${PROJECT_NAME}
 )
 
 ament_package()

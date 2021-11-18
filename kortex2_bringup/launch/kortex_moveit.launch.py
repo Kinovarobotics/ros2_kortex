@@ -118,9 +118,7 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument(
-            "launch_rviz", default_value="true", description="Launch RViz?"
-        )
+        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
     )
 
     # Initialize Arguments
@@ -185,13 +183,9 @@ def generate_launch_description():
             " ",
         ]
     )
-    robot_description_semantic = {
-        "robot_description_semantic": robot_description_semantic_content
-    }
+    robot_description_semantic = {"robot_description_semantic": robot_description_semantic_content}
 
-    kinematics_yaml = load_yaml(
-        "gen3_robotiq_2f_85_move_it_config", "config/kinematics.yaml"
-    )
+    kinematics_yaml = load_yaml("gen3_robotiq_2f_85_move_it_config", "config/kinematics.yaml")
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
     # Planning Configuration

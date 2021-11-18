@@ -1,0 +1,7 @@
+<library path="kortex2_controllers">
+  <class name="kortex2_controllers/TwistController" type="kortex2_controllers::TwistController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    6dof twist controller
+  </description>
+  </class>
+</library>

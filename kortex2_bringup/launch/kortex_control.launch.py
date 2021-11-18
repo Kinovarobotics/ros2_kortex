@@ -168,14 +168,12 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument(
-            "launch_rviz", default_value="true", description="Launch RViz?"
-        )
+        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_internal_bus_gripper_comm",
-            default_value="false",
+            default_value="true",
             description="Use internal bus for gripper communication?",
         )
     )
@@ -285,7 +283,7 @@ def generate_launch_description():
     robot_pos_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
-        arguments=[robot_pos_controller, "-c", "/controller_manager"],
+        arguments=[robot_pos_controller, "--stopped", "-c", "/controller_manager"],
     )
 
     robot_hand_controller_spawner = Node(
@@ -299,7 +297,7 @@ def generate_launch_description():
         rviz_node,
         joint_state_broadcaster_spawner,
         robot_traj_controller_spawner,
-        # robot_pos_controller_spawner,
+        robot_pos_controller_spawner,
         robot_hand_controller_spawner,
     ]
 
