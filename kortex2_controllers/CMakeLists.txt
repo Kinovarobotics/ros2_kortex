@@ -31,8 +31,6 @@ ament_target_dependencies(${PROJECT_NAME}
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
 target_compile_definitions(${PROJECT_NAME} PRIVATE "KORTEX2_CONTROLLERS_BUILDING_LIBRARY")
-# prevent pluginlib from using boost
-target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
 pluginlib_export_plugin_description_file(controller_interface controller_plugins.xml)
 
 install(TARGETS ${PROJECT_NAME}
