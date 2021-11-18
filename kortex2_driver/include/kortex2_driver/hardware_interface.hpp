@@ -21,6 +21,8 @@
  *
  */
 //----------------------------------------------------------------------
+#ifndef KORTEX2_DRIVER__HARDWARE_INTERFACE_HPP_
+#define KORTEX2_DRIVER__HARDWARE_INTERFACE_HPP_
 
 #pragma once
 
@@ -42,8 +44,8 @@
 
 #include <BaseClientRpc.h>
 #include <BaseCyclicClientRpc.h>
-#include <SessionManager.h>
 #include <RouterClient.h>
+#include <SessionManager.h>
 #include <TransportClientTcp.h>
 #include <TransportClientUdp.h>
 
@@ -59,13 +61,7 @@ namespace k_api = Kinova::Api;
 
 namespace kortex2_driver
 {
-enum class StoppingInterface
-{
-  NONE,
-  STOP_POS_VEL,
-  STOP_TWIST,
-  STOP_GRIPPER
-};
+enum class StoppingInterface { NONE, STOP_POS_VEL, STOP_TWIST, STOP_GRIPPER };
 class KortexMultiInterfaceHardware : public hardware_interface::SystemInterface
 {
 public:
@@ -74,7 +70,7 @@ public:
   RCLCPP_SHARED_PTR_DEFINITIONS(KortexMultiInterfaceHardware);
 
   KORTEX2_DRIVER_PUBLIC
-  CallbackReturn on_init(const hardware_interface::HardwareInfo& info) final;
+  CallbackReturn on_init(const hardware_interface::HardwareInfo & info) final;
 
   KORTEX2_DRIVER_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() final;
@@ -83,17 +79,19 @@ public:
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() final;
 
   KORTEX2_DRIVER_PUBLIC
-  return_type prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
-                                          const std::vector<std::string>& stop_interfaces) final;
+  return_type prepare_command_mode_switch(
+    const std::vector<std::string> & start_interfaces,
+    const std::vector<std::string> & stop_interfaces) final;
   KORTEX2_DRIVER_PUBLIC
-  return_type perform_command_mode_switch(const std::vector<std::string>& /*start_interfaces*/,
-                                          const std::vector<std::string>& /*stop_interfaces*/) final;
+  return_type perform_command_mode_switch(
+    const std::vector<std::string> & /*start_interfaces*/,
+    const std::vector<std::string> & /*stop_interfaces*/) final;
 
   KORTEX2_DRIVER_PUBLIC
-  CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) final;
+  CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) final;
 
   KORTEX2_DRIVER_PUBLIC
-  CallbackReturn on_deactivate(const rclcpp_lifecycle::State& previous_state) final;
+  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) final;
 
   KORTEX2_DRIVER_PUBLIC
   return_type read() final;
@@ -114,7 +112,7 @@ private:
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
   k_api::BaseCyclic::Command base_command_;
   std::size_t actuator_count_;
-  // To minimize bandwidth we syncronize feedback with the robot only when write() is called
+  // To minimize bandwidth we synchronize feedback with the robot only when write() is called
   k_api::BaseCyclic::Feedback feedback_;
   std::vector<double> arm_commands_positions_;
   std::vector<double> arm_commands_velocities_;
@@ -127,7 +125,7 @@ private:
   std::vector<double> twist_commands_;
 
   // Gripper
-  k_api::GripperCyclic::MotorCommand* gripper_motor_command_;
+  k_api::GripperCyclic::MotorCommand * gripper_motor_command_;
   double gripper_command_position_;
   double gripper_position_;
 
@@ -137,8 +135,7 @@ private:
 
   // Enum defining at which control level we are
   // Dumb way of maintaining the command_interface type per joint.
-  enum class integration_lvl_t : std::uint8_t
-  {
+  enum class integration_lvl_t : std::uint8_t {
     UNDEFINED = 0,
     POSITION = 1,
     VELOCITY = 2,
@@ -172,10 +169,13 @@ private:
   void incrementId();
   void sendJointCommands();
   void prepareCommands();
-  void sendGripperCommand(k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
-                          double force = 100.0);
+  void sendGripperCommand(
+    k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
+    double force = 100.0);
 
   void readGripperPosition();
 };
 
 }  // namespace kortex2_driver
+
+#endif  // KORTEX2_DRIVER__HARDWARE_INTERFACE_HPP_
