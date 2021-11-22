@@ -42,7 +42,8 @@ controller_interface::InterfaceConfiguration TwistController::command_interface_
   controller_interface::InterfaceConfiguration command_interfaces_config;
   command_interfaces_config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
 
-  for (const auto & interface : interface_names_) {
+  for (const auto & interface : interface_names_)
+  {
     command_interfaces_config.names.push_back(joint_name_ + "/" + interface);
   }
 
@@ -57,11 +58,14 @@ controller_interface::InterfaceConfiguration TwistController::state_interface_co
 
 CallbackReturn TwistController::on_init()
 {
-  try {
+  try
+  {
     auto_declare<std::vector<std::string>>("interface_names", std::vector<std::string>());
 
     auto_declare<std::string>("joint", "");
-  } catch (const std::exception & e) {
+  }
+  catch (const std::exception & e)
+  {
     fprintf(stderr, "Exception thrown during init stage with message: %s \n", e.what());
     return CallbackReturn::ERROR;
   }
@@ -73,17 +77,20 @@ CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State & /*p
 {
   joint_name_ = node_->get_parameter("joint").as_string();
 
-  if (joint_name_.empty()) {
+  if (joint_name_.empty())
+  {
     RCLCPP_ERROR(get_node()->get_logger(), "'joint' parameter was empty");
     return CallbackReturn::ERROR;
   }
 
   // Specialized, child controllers set interfaces before calling configure function.
-  if (interface_names_.empty()) {
+  if (interface_names_.empty())
+  {
     interface_names_ = node_->get_parameter("interface_names").as_string_array();
   }
 
-  if (interface_names_.empty()) {
+  if (interface_names_.empty())
+  {
     RCLCPP_ERROR(get_node()->get_logger(), "'interface_names' parameter was empty");
     return CallbackReturn::ERROR;
   }
@@ -116,11 +123,13 @@ controller_interface::return_type TwistController::update(
   auto twist_commands = rt_command_ptr_.readFromRT();
 
   // no command received yet
-  if (!twist_commands || !(*twist_commands)) {
+  if (!twist_commands || !(*twist_commands))
+  {
     return controller_interface::return_type::OK;
   }
 
-  if (command_interfaces_.size() != 6) {
+  if (command_interfaces_.size() != 6)
+  {
     RCLCPP_ERROR_THROTTLE(
       get_node()->get_logger(), *node_->get_clock(), 1000,
       "Twist controller needs does not match number of interfaces needed 6, given (%zu) interfaces",

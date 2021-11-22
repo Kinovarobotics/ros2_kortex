@@ -32,14 +32,20 @@ double KortexMathUtil::wrapRadiansFromMinusPiToPi(double rad_not_wrapped, int & 
 {
   bool properly_wrapped = false;
   number_of_turns = 0;
-  do {
-    if (rad_not_wrapped > M_PI) {
+  do
+  {
+    if (rad_not_wrapped > M_PI)
+    {
       number_of_turns += 1;
       rad_not_wrapped -= 2.0 * M_PI;
-    } else if (rad_not_wrapped < -M_PI) {
+    }
+    else if (rad_not_wrapped < -M_PI)
+    {
       number_of_turns -= 1;
       rad_not_wrapped += 2.0 * M_PI;
-    } else {
+    }
+    else
+    {
       properly_wrapped = true;
     }
   } while (!properly_wrapped);
@@ -56,14 +62,20 @@ double KortexMathUtil::wrapDegreesFromZeroTo360(double deg_not_wrapped, int & nu
 {
   bool properly_wrapped = false;
   number_of_turns = 0;
-  do {
-    if (deg_not_wrapped > 360.0) {
+  do
+  {
+    if (deg_not_wrapped > 360.0)
+    {
       number_of_turns += 1;
       deg_not_wrapped -= 360.0;
-    } else if (deg_not_wrapped < 0.0) {
+    }
+    else if (deg_not_wrapped < 0.0)
+    {
       number_of_turns -= 1;
       deg_not_wrapped += 360.0;
-    } else {
+    }
+    else
+    {
       properly_wrapped = true;
     }
   } while (!properly_wrapped);

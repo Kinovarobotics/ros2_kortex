@@ -121,14 +121,17 @@ def generate_launch_description():
         launch_arguments=kortex_control_launch_arguments.items(),
     )
 
-    declared_arguments  = declare_configurable_parameters(kortex_common_configurable_parameters)
+    declared_arguments = declare_configurable_parameters(kortex_common_configurable_parameters)
     declared_arguments.extend(
-        declare_configurable_parameters(kortex_moveit_configurable_parameters))
+        declare_configurable_parameters(kortex_moveit_configurable_parameters)
+    )
     declared_arguments.extend(
-        declare_configurable_parameters(kortex_control_configurable_parameters))
+        declare_configurable_parameters(kortex_control_configurable_parameters)
+    )
 
     return LaunchDescription(
-        declared_arguments + [
+        declared_arguments
+        + [
             kortex_moveit,
             kortex_control,
         ]

@@ -26,7 +26,8 @@ TwistToArrayRepublisher::TwistToArrayRepublisher(rclcpp::NodeOptions options)
 
 void TwistToArrayRepublisher::timerCallback()
 {
-  if ((rclcpp::Clock().now() - last_user_msg_time_).seconds() > 0.1) {
+  if ((rclcpp::Clock().now() - last_user_msg_time_).seconds() > 0.1)
+  {
     std_msgs::msg::Float64MultiArray array_msg;
     array_msg.data.resize(7);
     array_msg.data[0] = 0.0;

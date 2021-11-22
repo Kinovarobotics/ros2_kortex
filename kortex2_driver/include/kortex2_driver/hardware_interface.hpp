@@ -61,7 +61,13 @@ namespace k_api = Kinova::Api;
 
 namespace kortex2_driver
 {
-enum class StoppingInterface { NONE, STOP_POS_VEL, STOP_TWIST, STOP_GRIPPER };
+enum class StoppingInterface
+{
+  NONE,
+  STOP_POS_VEL,
+  STOP_TWIST,
+  STOP_GRIPPER
+};
 class KortexMultiInterfaceHardware : public hardware_interface::SystemInterface
 {
 public:
@@ -135,7 +141,8 @@ private:
 
   // Enum defining at which control level we are
   // Dumb way of maintaining the command_interface type per joint.
-  enum class integration_lvl_t : std::uint8_t {
+  enum class integration_lvl_t : std::uint8_t
+  {
     UNDEFINED = 0,
     POSITION = 1,
     VELOCITY = 2,
