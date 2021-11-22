@@ -12,12 +12,12 @@
     prefix
     *origin
     robot_ip
-    username
-    password
-    port
-    port_realtime
-    session_inactivity_timeout_ms
-    connection_inactivity_timeout_ms
+    username:=admin
+    password:=admin
+    port:=10000
+    port_realtime:=10001
+    session_inactivity_timeout_ms:=6000
+    connection_inactivity_timeout_ms:=2000
     use_fake_hardware
     fake_sensor_commands
     use_internal_bus_gripper_comm:=false">
