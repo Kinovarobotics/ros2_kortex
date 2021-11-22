@@ -25,9 +25,9 @@
 #define KORTEX2_CONTROLLERS__TWIST_CONTROLLER_HPP_
 
 #include "controller_interface/controller_interface.hpp"
+#include "geometry_msgs/msg/twist_stamped.hpp"
 #include "kortex2_controllers/visibility_control.h"
 #include "realtime_tools/realtime_buffer.h"
-#include "geometry_msgs/msg/twist_stamped.hpp"
 
 namespace kortex2_controllers
 {
@@ -50,16 +50,17 @@ public:
   CallbackReturn on_init() override;
 
   KORTEX2_CONTROLLERS_PUBLIC
-  CallbackReturn on_configure(const rclcpp_lifecycle::State& previous_state) override;
+  CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
 
   KORTEX2_CONTROLLERS_PUBLIC
-  CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) override;
+  CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
   KORTEX2_CONTROLLERS_PUBLIC
-  CallbackReturn on_deactivate(const rclcpp_lifecycle::State& previous_state) override;
+  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
   KORTEX2_CONTROLLERS_PUBLIC
-  controller_interface::return_type update(const rclcpp::Time& time, const rclcpp::Duration& period) override;
+  controller_interface::return_type update(
+    const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
 protected:
   std::string joint_name_;
