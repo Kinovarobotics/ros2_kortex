@@ -291,12 +291,10 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
 
   start_modes_.clear();
   stop_modes_.clear();
-  RCLCPP_INFO(LOGGER, "prepare START");
 
   // Starting interfaces
   // add start interface per joint in tmp var for later check
   for (const auto & key : start_interfaces) {
-    RCLCPP_INFO(LOGGER, "Starting '%s'", key.c_str());
     for (auto & joint : info_.joints) {
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION) {
         start_modes_.emplace_back(hardware_interface::HW_IF_POSITION);
@@ -360,8 +358,6 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
   // Stopping interfaces
   // add stop interface per joint in tmp var for later check
   for (const auto & key : stop_interfaces) {
-    RCLCPP_INFO(LOGGER, "Stopping '%s'", key.c_str());
-
     for (auto & joint : info_.joints) {
       if (
         key == joint.name + "/" + hardware_interface::HW_IF_POSITION &&
@@ -414,8 +410,6 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
     return hardware_interface::return_type::ERROR;
   }
 
-  RCLCPP_INFO(LOGGER, "prepare END");
-
   return ret_val;
 }
 
@@ -423,8 +417,6 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
   const vector<std::string> & /*start_interfaces*/, const vector<std::string> & /*stop_interfaces*/)
 {
   hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
-
-  RCLCPP_INFO(LOGGER, "perform START");
 
   if (
     !stop_modes_.empty() &&
@@ -480,8 +472,6 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
 
   start_modes_.clear();
   stop_modes_.clear();
-
-  RCLCPP_INFO(LOGGER, "perform END");
 
   block_write = false;
 
