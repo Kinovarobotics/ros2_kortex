@@ -14,18 +14,13 @@
 #
 # Author: Bren Pierce
 
-import threading
-import time
-import numpy as np
 from math import fabs
 
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
-from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallbackGroup
+from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
-from rclpy.exceptions import ParameterNotDeclaredException
-from rcl_interfaces.msg import ParameterType
 
 from control_msgs.action import GripperCommand
 from std_msgs.msg import Float64MultiArray
@@ -143,17 +138,13 @@ class Robotiq85ActionServer(Node):
         if result_msg.reached_goal:
             self.get_logger().info(
                 "Setting action to succeeded: desired position = "
-                + str(goal_handle.request.command.position)
-                + ", measured position = "
-                + str(result_msg.position)
+                "{goal_handle.request.command.position}, measured position = {result_msg.position}"
             )
             goal_handle.succeed()
         else:
             self.get_logger().warn(
-                "Setting action to abort: desired position = "
-                + str(goal_handle.request.command.position)
-                + ", measured position = "
-                + str(result_msg.position)
+                f"Setting action to abort: desired position = "
+                "{goal_handle.request.command.position}, measured position = {result_msg.position}"
             )
             goal_handle.abort()
 
