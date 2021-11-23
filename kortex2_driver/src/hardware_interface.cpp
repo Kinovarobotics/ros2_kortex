@@ -793,7 +793,9 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
       finger->set_value(
         static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
       base_.SendGripperCommand(gripper_command);
-    } else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) {
+    }
+    else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+    {
       // % open/closed, this values needs to be between 0 and 100
       gripper_motor_command_->set_position(static_cast<float>(position / 0.81 * 100.0));
       // % speed TODO read in as parameter from kortex_controllers.yaml
