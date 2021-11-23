@@ -153,8 +153,8 @@ class Robotiq85ActionServer(Node):
     def _update_gripper_stat(self, data):
         self._gripper_position = None
         # Check to make sure that the joint is the gripper finger
-        if str(data.name[2]) == "finger_joint":
-            self._gripper_position = data.position[2]
+        if str(data.name[0]) == "finger_joint":
+            self._gripper_position = data.position[0]
         else:
             self.get_logger().error("The robot joint order is wrong!!!!")
 
