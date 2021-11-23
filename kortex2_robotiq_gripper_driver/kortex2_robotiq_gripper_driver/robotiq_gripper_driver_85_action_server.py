@@ -138,13 +138,13 @@ class Robotiq85ActionServer(Node):
         if result_msg.reached_goal:
             self.get_logger().info(
                 "Setting action to succeeded: desired position = "
-                "{goal_handle.request.command.position}, measured position = {result_msg.position}"
+                f"{goal_handle.request.command.position}, measured position = {result_msg.position}"
             )
             goal_handle.succeed()
         else:
             self.get_logger().warn(
-                f"Setting action to abort: desired position = "
-                "{goal_handle.request.command.position}, measured position = {result_msg.position}"
+                "Setting action to abort: desired position = "
+                f"{goal_handle.request.command.position}, measured position = {result_msg.position}"
             )
             goal_handle.abort()
 

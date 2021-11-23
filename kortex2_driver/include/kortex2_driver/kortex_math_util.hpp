@@ -1,14 +1,13 @@
-#pragma once
-
 /*
  * Copyright (c) 2019 Kinova inc. All rights reserved.
  *
- * This software may be modified and distributed under the
- * terms of the BSD 3-Clause license.
- *
- * Refer to the LICENSE file for details.
- *
+ * Use of this source code is governed by a BSD-style
+ * license that can be found in the LICENSE file or at
+ * https://developers.google.com/open-source/licenses/bsd
  */
+
+#ifndef KORTEX2_DRIVER__KORTEX_MATH_UTIL_HPP_
+#define KORTEX2_DRIVER__KORTEX_MATH_UTIL_HPP_
 
 #include <cmath>
 
@@ -30,3 +29,5 @@ public:
   static double absolute_position_from_relative(
     double relative_position, double min_value, double max_value);
 };
+
+#endif  // KORTEX2_DRIVER__KORTEX_MATH_UTIL_HPP_
