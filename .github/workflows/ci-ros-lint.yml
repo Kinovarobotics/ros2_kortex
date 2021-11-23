@@ -20,7 +20,7 @@ jobs:
         package-name:
           kortex2_bringup
           kortex2_driver
-          
+
 
   ament_lint_100:
     name: ament_${{ matrix.linter }}

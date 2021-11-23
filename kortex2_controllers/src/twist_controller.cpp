@@ -30,16 +30,19 @@ namespace kortex2_controllers
 using hardware_interface::LoanedCommandInterface;
 
 TwistController::TwistController()
-  : controller_interface::ControllerInterface(), rt_command_ptr_(nullptr), twist_command_subscriber_(nullptr)
+: controller_interface::ControllerInterface(),
+  rt_command_ptr_(nullptr),
+  twist_command_subscriber_(nullptr)
 {
 }
 
-controller_interface::InterfaceConfiguration TwistController::command_interface_configuration() const
+controller_interface::InterfaceConfiguration TwistController::command_interface_configuration()
+  const
 {
   controller_interface::InterfaceConfiguration command_interfaces_config;
   command_interfaces_config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
 
-  for (const auto& interface : interface_names_)
+  for (const auto & interface : interface_names_)
   {
     command_interfaces_config.names.push_back(joint_name_ + "/" + interface);
   }
@@ -49,7 +52,8 @@ controller_interface::InterfaceConfiguration TwistController::command_interface_
 
 controller_interface::InterfaceConfiguration TwistController::state_interface_configuration() const
 {
-  return controller_interface::InterfaceConfiguration{ controller_interface::interface_configuration_type::NONE };
+  return controller_interface::InterfaceConfiguration{
+    controller_interface::interface_configuration_type::NONE};
 }
 
 CallbackReturn TwistController::on_init()
@@ -60,7 +64,7 @@ CallbackReturn TwistController::on_init()
 
     auto_declare<std::string>("joint", "");
   }
-  catch (const std::exception& e)
+  catch (const std::exception & e)
   {
     fprintf(stderr, "Exception thrown during init stage with message: %s \n", e.what());
     return CallbackReturn::ERROR;
@@ -69,7 +73,7 @@ CallbackReturn TwistController::on_init()
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State& /*previous_state*/)
+CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State & /*previous_state*/)
 {
   joint_name_ = node_->get_parameter("joint").as_string();
 
@@ -91,31 +95,30 @@ CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State& /*pr
     return CallbackReturn::ERROR;
   }
 
-  twist_command_subscriber_ = get_node()->create_subscription<CmdType>("~/commands", rclcpp::SystemDefaultsQoS(),
-                                                                       [this](const CmdType::SharedPtr msg) {
-                                                                         rt_command_ptr_.writeFromNonRT(msg);
-                                                                       });
+  twist_command_subscriber_ = get_node()->create_subscription<CmdType>(
+    "~/commands", rclcpp::SystemDefaultsQoS(),
+    [this](const CmdType::SharedPtr msg) { rt_command_ptr_.writeFromNonRT(msg); });
 
   RCLCPP_INFO(get_node()->get_logger(), "configure successful");
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn TwistController::on_activate(const rclcpp_lifecycle::State& /*previous_state*/)
+CallbackReturn TwistController::on_activate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
   // reset command buffer if a command came through callback when controller was inactive
   rt_command_ptr_ = realtime_tools::RealtimeBuffer<std::shared_ptr<CmdType>>(nullptr);
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn TwistController::on_deactivate(const rclcpp_lifecycle::State& /*previous_state*/)
+CallbackReturn TwistController::on_deactivate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
   // reset command buffer
   rt_command_ptr_ = realtime_tools::RealtimeBuffer<std::shared_ptr<CmdType>>(nullptr);
   return CallbackReturn::SUCCESS;
 }
 
-controller_interface::return_type TwistController::update(const rclcpp::Time& /*time*/,
-                                                          const rclcpp::Duration& /*period*/)
+controller_interface::return_type TwistController::update(
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   auto twist_commands = rt_command_ptr_.readFromRT();
 
@@ -127,9 +130,10 @@ controller_interface::return_type TwistController::update(const rclcpp::Time& /*
 
   if (command_interfaces_.size() != 6)
   {
-    RCLCPP_ERROR_THROTTLE(get_node()->get_logger(), *node_->get_clock(), 1000,
-                          "Twist controller needs does not match number of interfaces needed 6, given (%zu) interfaces",
-                          command_interfaces_.size());
+    RCLCPP_ERROR_THROTTLE(
+      get_node()->get_logger(), *node_->get_clock(), 1000,
+      "Twist controller needs does not match number of interfaces needed 6, given (%zu) interfaces",
+      command_interfaces_.size());
     return controller_interface::return_type::ERROR;
   }
   command_interfaces_[0].set_value((*twist_commands)->twist.linear.x);
@@ -145,4 +149,5 @@ controller_interface::return_type TwistController::update(const rclcpp::Time& /*
 
 #include "pluginlib/class_list_macros.hpp"
 
-PLUGINLIB_EXPORT_CLASS(kortex2_controllers::TwistController, controller_interface::ControllerInterface)
+PLUGINLIB_EXPORT_CLASS(
+  kortex2_controllers::TwistController, controller_interface::ControllerInterface)

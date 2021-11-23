@@ -10,17 +10,18 @@ constexpr char OUTGOING_ARRAY_TOPIC[] = "/streaming_controller/commands";
 }  // namespace
 
 TwistToArrayRepublisher::TwistToArrayRepublisher(rclcpp::NodeOptions options)
-  : Node("twist_to_array_republisher", options)
+: Node("twist_to_array_republisher", options)
 {
   twist_sub_ = create_subscription<geometry_msgs::msg::TwistStamped>(
-      INCOMING_TWIST_TOPIC, 1, std::bind(&TwistToArrayRepublisher::twistCallback, this, std::placeholders::_1));
+    INCOMING_TWIST_TOPIC, 1,
+    std::bind(&TwistToArrayRepublisher::twistCallback, this, std::placeholders::_1));
 
   array_pub_ = create_publisher<std_msgs::msg::Float64MultiArray>(OUTGOING_ARRAY_TOPIC, 1);
 
   last_user_msg_time_ = rclcpp::Clock().now();
 
-  timer_ =
-      this->create_wall_timer(std::chrono::milliseconds(200), std::bind(&TwistToArrayRepublisher::timerCallback, this));
+  timer_ = this->create_wall_timer(
+    std::chrono::milliseconds(200), std::bind(&TwistToArrayRepublisher::timerCallback, this));
 }
 
 void TwistToArrayRepublisher::timerCallback()
@@ -42,10 +43,11 @@ void TwistToArrayRepublisher::timerCallback()
   }
 }
 
-void TwistToArrayRepublisher::twistCallback(const geometry_msgs::msg::TwistStamped::ConstSharedPtr & twist_msg)
+void TwistToArrayRepublisher::twistCallback(
+  const geometry_msgs::msg::TwistStamped::ConstSharedPtr & twist_msg)
 {
-  float scale_linear_mult = 0.07;  // scale the incomming linear velocity commands
-  float scale_angular_mult = 4.0;  // scale the incomming angular velocity commands
+  float scale_linear_mult = 0.07;  // scale the incoming linear velocity commands
+  float scale_angular_mult = 4.0;  // scale the incoming angular velocity commands
   // Convert twist to array
   std_msgs::msg::Float64MultiArray array_msg;
   array_msg.data.resize(7);

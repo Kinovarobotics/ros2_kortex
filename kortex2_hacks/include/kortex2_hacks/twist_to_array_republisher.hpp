@@ -1,7 +1,7 @@
 #pragma once
 
-#include "rclcpp/rclcpp.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
+#include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/float64_multi_array.hpp"
 
 namespace kortex2_hacks

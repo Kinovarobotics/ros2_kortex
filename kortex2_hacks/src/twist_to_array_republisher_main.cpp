@@ -4,7 +4,7 @@
 
 // Subscribe to twist, convert to Float64MultiArray so we can jog the arm with the Kortex api
 
-int main(int argc, char* argv[])
+int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   rclcpp::executors::SingleThreadedExecutor exec;

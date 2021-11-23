@@ -26,7 +26,7 @@ jobs:
           package-name:
             kortex2_bringup
             kortex2_driver
-            
+
           vcs-repo-file-url: |
             https://raw.githubusercontent.com/ros2/ros2/master/ros2.repos
             https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/ros2_kortex.repos

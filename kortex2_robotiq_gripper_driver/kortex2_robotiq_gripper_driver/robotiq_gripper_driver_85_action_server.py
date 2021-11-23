@@ -14,18 +14,13 @@
 #
 # Author: Bren Pierce
 
-import threading
-import time
-import numpy as np
 from math import fabs
 
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
-from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallbackGroup
+from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
-from rclpy.exceptions import ParameterNotDeclaredException
-from rcl_interfaces.msg import ParameterType
 
 from control_msgs.action import GripperCommand
 from std_msgs.msg import Float64MultiArray
@@ -46,13 +41,9 @@ class Robotiq85ActionServer(Node):
         )
 
         # The command to the gripper is 0 - 100 But we get the input and joint state 0 - 0.8
-        self._gear_ratio = (
-            self.get_parameter("gear_ratio").get_parameter_value().double_value
-        )
+        self._gear_ratio = self.get_parameter("gear_ratio").get_parameter_value().double_value
 
-        self.create_subscription(
-            JointState, "/joint_states", self._update_gripper_stat, 10
-        )
+        self.create_subscription(JointState, "/joint_states", self._update_gripper_stat, 10)
         self._gripper_pub = self.create_publisher(
             Float64MultiArray, "/hand_controller/commands", 10
         )
@@ -96,13 +87,9 @@ class Robotiq85ActionServer(Node):
 
         # Send goal to gripper
         cmd_msg = Float64MultiArray()
-        gripper_command_postion = (
-            self._gear_ratio * goal_handle.request.command.position
-        )
+        gripper_command_postion = self._gear_ratio * goal_handle.request.command.position
         cmd_msg.data = [gripper_command_postion]
-        self.get_logger().info(
-            "Got goal position: " + str(goal_handle.request.command.position)
-        )
+        self.get_logger().info("Got goal position: " + str(goal_handle.request.command.position))
         self._gripper_pub.publish(cmd_msg)
 
         # Feedback msg to the client
@@ -125,16 +112,12 @@ class Robotiq85ActionServer(Node):
                 self.get_logger().warn("No gripper feedback yet")
             else:
                 feedback_msg.position = self._gripper_position
-                distance_error = fabs(
-                    goal_handle.request.command.position - feedback_msg.position
-                )
+                distance_error = fabs(goal_handle.request.command.position - feedback_msg.position)
 
                 # Position tolerance achieved or object grasped
                 if distance_error < self._position_tolerance:
                     feedback_msg.reached_goal = True
-                    self.get_logger().debug(
-                        "Goal achieved: %r" % feedback_msg.reached_goal
-                    )
+                    self.get_logger().debug("Goal achieved: %r" % feedback_msg.reached_goal)
 
                 goal_handle.publish_feedback(feedback_msg)
 
@@ -155,17 +138,13 @@ class Robotiq85ActionServer(Node):
         if result_msg.reached_goal:
             self.get_logger().info(
                 "Setting action to succeeded: desired position = "
-                + str(goal_handle.request.command.position)
-                + ", measured position = "
-                + str(result_msg.position)
+                "{goal_handle.request.command.position}, measured position = {result_msg.position}"
             )
             goal_handle.succeed()
         else:
             self.get_logger().warn(
-                "Setting action to abort: desired position = "
-                + str(goal_handle.request.command.position)
-                + ", measured position = "
-                + str(result_msg.position)
+                f"Setting action to abort: desired position = "
+                "{goal_handle.request.command.position}, measured position = {result_msg.position}"
             )
             goal_handle.abort()
 
