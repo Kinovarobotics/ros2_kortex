@@ -565,7 +565,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
     base_feedback.interconnect().gripper_feedback().motor()[0].position();
   RCLCPP_INFO(LOGGER, "Gripper initial position is '%f'.", gripper_initial_position);
 
-  gripper_command_position_ = gripper_initial_position;
+  // to radians
+  gripper_command_position_ = gripper_initial_position / 100.0 * 0.81;
+
   // Initialize interconnect command to current gripper position.
   base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
   gripper_motor_command_ =
@@ -789,12 +791,12 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
       auto finger = gripper_command.mutable_gripper()->add_finger();
       finger->set_finger_identifier(1);
       finger->set_value(
-        static_cast<float>(position / 100.0));  // This values needs to be between 0 and 1
+        static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
       base_.SendGripperCommand(gripper_command);
     } else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) {
         RCLCPP_INFO(LOGGER, "pos = %f, vel = %f, force = %f", position, velocity, force);
-      // % open/closed, this values needs to be between 0 and 1
-      gripper_motor_command_->set_position(static_cast<float>(position));
+      // % open/closed, this values needs to be between 0 and 100
+      gripper_motor_command_->set_position(static_cast<float>(position / 0.81 * 100.0));
       // % speed TODO read in as parameter from kortex_controllers.yaml
       gripper_motor_command_->set_velocity(static_cast<float>(velocity));
       // % torque TODO read in as parameter from kortex_controllers.yaml
