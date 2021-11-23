@@ -289,7 +289,7 @@ def generate_launch_description():
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
-        arguments=[robot_hand_controller, "--stopped", "-c", "/controller_manager"],
+        arguments=[robot_hand_controller, "-c", "/controller_manager"],
     )
     nodes_to_start = [
         control_node,
