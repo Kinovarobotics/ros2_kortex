@@ -563,12 +563,14 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   // Initialize gripper
   float gripper_initial_position =
     base_feedback.interconnect().gripper_feedback().motor()[0].position();
+  RCLCPP_INFO(LOGGER, "Gripper initial position is '%f'.", gripper_initial_position);
+
   gripper_command_position_ = gripper_initial_position;
   // Initialize interconnect command to current gripper position.
   base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
   gripper_motor_command_ =
     base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
-  gripper_motor_command_->set_position(gripper_initial_position*100.0);  // % position
+  gripper_motor_command_->set_position(gripper_initial_position);  // % position
   gripper_motor_command_->set_velocity(100.0);                     // % speed
   gripper_motor_command_->set_force(100.0);                        // % torque
 
