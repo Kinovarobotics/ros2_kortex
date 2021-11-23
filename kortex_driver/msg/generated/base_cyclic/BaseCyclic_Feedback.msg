@@ -1,5 +1,0 @@
-
-uint32 frame_id
-BaseFeedback base
-ActuatorFeedback[] actuators
-InterconnectCyclic_Feedback interconnect

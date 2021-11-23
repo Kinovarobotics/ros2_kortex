@@ -1,2 +1,0 @@
-
-MappingInfoNotification[] notifications

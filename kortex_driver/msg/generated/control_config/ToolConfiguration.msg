@@ -1,4 +1,0 @@
-
-CartesianTransform tool_transform
-float32 tool_mass
-ControlConfig_Position tool_mass_center

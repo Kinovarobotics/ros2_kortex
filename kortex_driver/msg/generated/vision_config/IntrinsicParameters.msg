@@ -1,8 +1,0 @@
-
-uint32 sensor
-uint32 resolution
-float32 principal_point_x
-float32 principal_point_y
-float32 focal_length_x
-float32 focal_length_y
-DistortionCoefficients distortion_coeffs

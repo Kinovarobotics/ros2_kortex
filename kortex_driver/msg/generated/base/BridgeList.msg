@@ -1,2 +1,0 @@
-
-BridgeConfig[] bridgeConfig

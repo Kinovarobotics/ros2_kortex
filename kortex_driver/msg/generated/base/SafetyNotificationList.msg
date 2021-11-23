@@ -1,2 +1,0 @@
-
-SafetyNotification[] notifications

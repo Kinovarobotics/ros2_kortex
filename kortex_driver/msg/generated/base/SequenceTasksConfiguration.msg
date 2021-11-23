@@ -1,3 +1,0 @@
-
-SequenceTaskHandle sequence_task_handle
-SequenceTask[] sequence_tasks

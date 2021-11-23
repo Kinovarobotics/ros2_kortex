@@ -1,3 +1,0 @@
-
-string main_bundle_version
-FirmwareComponentVersion[] components_versions

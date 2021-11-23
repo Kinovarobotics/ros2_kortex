@@ -1,3 +1,0 @@
-
-uint32 control_mode
-float32 twist_linear_soft_limit

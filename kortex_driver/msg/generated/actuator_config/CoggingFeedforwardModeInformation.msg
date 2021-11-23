@@ -1,2 +1,0 @@
-
-uint32 cogging_feedforward_mode

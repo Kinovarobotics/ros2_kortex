@@ -1,2 +1,0 @@
-
-uint32 calibration_item

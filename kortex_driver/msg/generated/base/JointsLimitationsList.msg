@@ -1,2 +1,0 @@
-
-JointLimitation[] joints_limitations

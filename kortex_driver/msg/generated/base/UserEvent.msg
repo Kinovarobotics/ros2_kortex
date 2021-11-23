@@ -1,6 +1,0 @@
-
-uint32 UNSPECIFIED_USER_EVENT = 0
-
-uint32 LOGGED_OUT = 1
-
-uint32 LOGGED_IN = 2

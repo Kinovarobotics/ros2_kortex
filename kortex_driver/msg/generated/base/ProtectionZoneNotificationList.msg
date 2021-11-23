@@ -1,2 +1,0 @@
-
-ProtectionZoneNotification[] notifications

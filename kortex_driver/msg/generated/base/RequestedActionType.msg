@@ -1,2 +1,0 @@
-
-uint32 action_type

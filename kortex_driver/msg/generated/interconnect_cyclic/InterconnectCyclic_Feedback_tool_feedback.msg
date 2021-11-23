@@ -1,2 +1,0 @@
-
-GripperCyclic_Feedback[] gripper_feedback
