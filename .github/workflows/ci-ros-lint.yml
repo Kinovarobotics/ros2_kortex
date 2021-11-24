@@ -38,7 +38,7 @@ jobs:
       with:
         distribution: rolling
         linter: cpplint
-        arguments: "--linelength=12s0 --filter=-whitespace/newline"
+        arguments: "--linelength=100 --filter=-whitespace/newline"
         package-name:
           kortex2_bringup
           kortex2_controllers
