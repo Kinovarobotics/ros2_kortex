@@ -40,7 +40,7 @@ controller_interface::InterfaceConfiguration FaultController::command_interface_
   config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
 
   config.names.emplace_back("reset_fault/command");
-  config.names.emplace_back("rest_fault/async_success");
+  config.names.emplace_back("reset_fault/async_success");
 
   return config;
 }

@@ -52,6 +52,8 @@
 namespace hardware_interface
 {
 constexpr char HW_IF_TWIST[] = "twist";
+constexpr char HW_IF_FAULT[] = "fault";
+
 
 }  // namespace hardware_interface
 
@@ -66,7 +68,8 @@ enum class StoppingInterface
   NONE,
   STOP_POS_VEL,
   STOP_TWIST,
-  STOP_GRIPPER
+  STOP_GRIPPER,
+  STOP_FAULT_CTRL,
 };
 class KortexMultiInterfaceHardware : public hardware_interface::SystemInterface
 {
@@ -157,6 +160,7 @@ private:
   bool joint_based_controller_running_;
   bool twist_controller_running_;
   bool gripper_controller_running_;
+  bool fault_controller_running_;
   // switching auxiliary vars
   std::vector<StoppingInterface> stop_modes_;
   std::vector<std::string> start_modes_;
@@ -172,7 +176,15 @@ private:
   float cmd_vel_tmp_;
   int num_turns_tmp_ = 0;
 
-  void sendTwistCommand();
+  // fault control
+  double reset_fault_cmd_;
+  double reset_fault_async_success_;
+    static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
+    bool twist_controller_running_tmp_ = false;
+    bool joint_based_controller_running_tmp_ = false;
+    bool gripper_controller_running_tmp_ = false;
+
+    void sendTwistCommand();
   void incrementId();
   void sendJointCommands();
   void prepareCommands();
