@@ -68,8 +68,8 @@ public:
 
 private:
 
-    bool resetFault(const std_srvs::srv::Trigger::Request::SharedPtr& req,
-                      std_srvs::srv::Trigger::Response::SharedPtr& resp) ;
+    bool resetFault(const CmdType::Request::SharedPtr req,
+                    CmdType::Response::SharedPtr resp) ;
 
     rclcpp::Service<CmdType>::SharedPtr trigger_command_srv_;
 

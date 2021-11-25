@@ -50,13 +50,7 @@ controller_interface::InterfaceConfiguration FaultController::state_interface_co
   return controller_interface::InterfaceConfiguration();
 }
 
-CallbackReturn FaultController::on_init()
-{
-  command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(NO_CMD);
-  command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(NO_CMD);
-
-  return CallbackReturn::SUCCESS;
-}
+CallbackReturn FaultController::on_init() { return CallbackReturn::SUCCESS; }
 
 controller_interface::return_type FaultController::update(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
@@ -90,8 +84,7 @@ CallbackReturn FaultController::on_deactivate(const rclcpp_lifecycle::State & /*
 }
 
 bool FaultController::resetFault(
-  const std_srvs::srv::Trigger::Request::SharedPtr & /*req*/,
-  std_srvs::srv::Trigger::Response::SharedPtr & resp)
+  const CmdType::Request::SharedPtr /*req*/, CmdType::Response::SharedPtr resp)
 {
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(ASYNC_WAITING);
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(ISSUE_CMD);

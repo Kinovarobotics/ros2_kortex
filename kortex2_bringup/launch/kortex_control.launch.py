@@ -168,6 +168,13 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
+        DeclareLaunchArgument(
+            "fault_controller",
+            default_value="fault_controller",
+            description="Robot hand controller to start.",
+        )
+    )
+    declared_arguments.append(
         DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
     )
     declared_arguments.append(
@@ -194,6 +201,7 @@ def generate_launch_description():
     robot_traj_controller = LaunchConfiguration("robot_controller")
     robot_pos_controller = LaunchConfiguration("robot_pos_controller")
     robot_hand_controller = LaunchConfiguration("robot_hand_controller")
+    fault_controller = LaunchConfiguration("fault_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
 
@@ -292,6 +300,12 @@ def generate_launch_description():
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
     )
 
+    fault_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner.py",
+        arguments=[fault_controller, "-c", "/controller_manager"],
+    )
+
     robotiq_gripper_server = Node(
         package="kortex2_robotiq_gripper_driver",
         executable="robotiq_gripper_driver_85_action_server",
@@ -311,6 +325,7 @@ def generate_launch_description():
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
         robotiq_gripper_server,
+        fault_controller_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes_to_start)
