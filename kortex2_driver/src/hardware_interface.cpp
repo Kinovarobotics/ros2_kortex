@@ -177,10 +177,20 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   session_manager_real_time_.CreateSession(create_session_info);
   RCLCPP_INFO(LOGGER, "Session created");
 
-  // get current servoing mode, no change on startup
-  servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
-  arm_mode_ = Kinova::Api::Base::LOW_LEVEL_SERVOING;
-  base_.SetServoingMode(servoing_mode_hw_);
+  // reset faults on activation, go back to low level servoing after
+  {
+    servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::SINGLE_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode_hw_);
+    arm_mode_ = Kinova::Api::Base::SINGLE_LEVEL_SERVOING;
+
+    base_.ClearFaults();
+
+    // low level servoing on startup
+    servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
+    arm_mode_ = Kinova::Api::Base::LOW_LEVEL_SERVOING;
+    base_.SetServoingMode(servoing_mode_hw_);
+  }
+
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   actuator_count_ = base_.GetActuatorCount().count();
@@ -596,19 +606,6 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   const rclcpp_lifecycle::State & /* previous_state */)
 {
   RCLCPP_INFO(LOGGER, "Activating KortexMultiInterfaceHardware...");
-  // reser faults on activation, go back to low level servoing after
-  {
-    servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::SINGLE_LEVEL_SERVOING);
-    base_.SetServoingMode(servoing_mode_hw_);
-    arm_mode_ = Kinova::Api::Base::SINGLE_LEVEL_SERVOING;
-
-    base_.ClearFaults();
-
-    servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
-    base_.SetServoingMode(servoing_mode_hw_);
-    arm_mode_ = Kinova::Api::Base::LOW_LEVEL_SERVOING;
-  }
-
   // first read
   auto base_feedback = base_cyclic_.RefreshFeedback();
 
