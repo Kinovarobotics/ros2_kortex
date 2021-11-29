@@ -22,6 +22,11 @@
 //----------------------------------------------------------------------
 
 #include "kortex2_controllers/twist_controller.hpp"
+
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "controller_interface/helpers.hpp"
 #include "hardware_interface/loaned_command_interface.hpp"
 

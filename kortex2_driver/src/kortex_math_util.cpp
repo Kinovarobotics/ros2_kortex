@@ -1,14 +1,8 @@
-/*
- * KINOVA (R) KORTEX (TM)
- *
- * Copyright (c) 2019 Kinova inc. All rights reserved.
- *
- * This software may be modified and distributed under the
- * terms of the BSD 3-Clause license.
- *
- * Refer to the LICENSE file for details.
- *
- */
+// Copyright (c) 2019 Kinova inc. All rights reserved.
+//
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file or at
+// https://developers.google.com/open-source/licenses/bsd
 
 #include "kortex2_driver/kortex_math_util.hpp"
 
@@ -16,9 +10,10 @@ double KortexMathUtil::toRad(double degree) { return degree * M_PI / 180.0; }
 
 double KortexMathUtil::toDeg(double rad) { return rad * 180.0 / M_PI; }
 
-int KortexMathUtil::getNumberOfTurns(double /*rad_not_wrapped*/)
+int KortexMathUtil::getNumberOfTurns(double rad_not_wrapped)
 {
   // it is between
+  rad_not_wrapped = 0;
   return 0;
 }
 

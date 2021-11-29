@@ -24,6 +24,10 @@
 #ifndef KORTEX2_CONTROLLERS__TWIST_CONTROLLER_HPP_
 #define KORTEX2_CONTROLLERS__TWIST_CONTROLLER_HPP_
 
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "controller_interface/controller_interface.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
 #include "kortex2_controllers/visibility_control.h"
