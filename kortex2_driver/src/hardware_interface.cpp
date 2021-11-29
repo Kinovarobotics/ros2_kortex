@@ -177,11 +177,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   session_manager_real_time_.CreateSession(create_session_info);
   RCLCPP_INFO(LOGGER, "Session created");
 
-  // make sure robot is in unspecified servoing mode
-  // decide this on controller switching
-  servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode_hw_);
-  arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
+  // get current servoing mode, no change on startup
+  servoing_mode_hw_ = base_.GetServoingMode();
+  arm_mode_ = servoing_mode_hw_.servoing_mode();
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   actuator_count_ = base_.GetActuatorCount().count();
