@@ -1,2 +1,0 @@
-
-SequenceTask[] sequence_tasks

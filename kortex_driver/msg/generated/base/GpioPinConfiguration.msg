@@ -1,5 +1,0 @@
-
-uint32 pin_id
-uint32 pin_property
-bool output_enable
-bool default_output_value

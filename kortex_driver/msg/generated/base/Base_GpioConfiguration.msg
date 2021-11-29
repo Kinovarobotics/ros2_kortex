@@ -1,3 +1,0 @@
-
-uint32 port_number
-GpioPinConfiguration[] pin_configurations

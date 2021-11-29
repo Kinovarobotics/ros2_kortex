@@ -1,2 +1,0 @@
-
-DeviceHandle[] device_handle

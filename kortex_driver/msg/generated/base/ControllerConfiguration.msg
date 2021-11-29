@@ -1,6 +1,0 @@
-
-ControllerHandle handle
-string name
-MappingHandle active_mapping_handle
-string analog_input_identifier_enum
-string digital_input_identifier_enum

@@ -1,2 +1,0 @@
-
-CartesianLimitation[] limitations

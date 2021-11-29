@@ -1,3 +1,0 @@
-
-Base_Position target_position
-CartesianTrajectoryConstraint constraint

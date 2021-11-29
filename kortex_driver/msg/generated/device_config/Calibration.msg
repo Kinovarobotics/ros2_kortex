@@ -1,3 +1,0 @@
-
-uint32 calibration_item
-CalibrationParameter[] calibration_parameter

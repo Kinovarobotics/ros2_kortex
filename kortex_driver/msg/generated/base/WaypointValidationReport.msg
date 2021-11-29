@@ -1,3 +1,0 @@
-
-TrajectoryErrorReport trajectory_error_report
-WaypointList optimal_waypoint_list

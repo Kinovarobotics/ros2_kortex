@@ -1,2 +1,0 @@
-
-OperatingModeNotification[] notifications

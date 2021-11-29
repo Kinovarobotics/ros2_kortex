@@ -1,2 +1,0 @@
-
-JointAngle[] joint_angles

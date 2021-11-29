@@ -1,2 +1,0 @@
-
-SafetyConfiguration[] configuration

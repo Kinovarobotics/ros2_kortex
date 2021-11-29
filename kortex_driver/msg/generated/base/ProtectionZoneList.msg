@@ -1,2 +1,0 @@
-
-ProtectionZone[] protection_zones
