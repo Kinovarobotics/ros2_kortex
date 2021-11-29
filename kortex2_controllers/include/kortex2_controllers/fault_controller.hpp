@@ -25,63 +25,63 @@
 #define KORTEX2_CONTROLLERS_FAULT_CONTROLLER_HPP
 
 #include "controller_interface/controller_interface.hpp"
-#include "std_srvs/srv/trigger.hpp"
 #include "kortex2_controllers/visibility_control.h"
-
+#include "std_msgs/msg/bool.hpp"
+#include "std_srvs/srv/trigger.hpp"
 
 namespace kortex2_controllers
 {
-    enum CommandInterfaces
-    {
-        RESET_FAULT_CMD = 0u,
-        RESET_FAULT_ASYNC_SUCCESS = 1u,
-    };
+enum CommandInterfaces
+{
+  RESET_FAULT_CMD = 0u,
+  RESET_FAULT_ASYNC_SUCCESS = 1u,
+};
+enum StateInterfaces
+{
+  IN_FAULT = 0u,
+};
 using CmdType = std_srvs::srv::Trigger;
+using FbkType = std_msgs::msg::Bool;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 class FaultController : public controller_interface::ControllerInterface
 {
 public:
-    KORTEX2_CONTROLLERS_PUBLIC
-    FaultController();
+  KORTEX2_CONTROLLERS_PUBLIC
+  FaultController();
 
-    KORTEX2_CONTROLLERS_PUBLIC
-    controller_interface::InterfaceConfiguration command_interface_configuration() const override;
+  KORTEX2_CONTROLLERS_PUBLIC
+  controller_interface::InterfaceConfiguration command_interface_configuration() const override;
 
-    KORTEX2_CONTROLLERS_PUBLIC
-    controller_interface::InterfaceConfiguration state_interface_configuration() const override;
+  KORTEX2_CONTROLLERS_PUBLIC
+  controller_interface::InterfaceConfiguration state_interface_configuration() const override;
 
-    KORTEX2_CONTROLLERS_PUBLIC
-    CallbackReturn on_init() override;
+  KORTEX2_CONTROLLERS_PUBLIC
+  CallbackReturn on_init() override;
 
-    KORTEX2_CONTROLLERS_PUBLIC
-    CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
+  KORTEX2_CONTROLLERS_PUBLIC
+  CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
 
-    KORTEX2_CONTROLLERS_PUBLIC
-    CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
+  KORTEX2_CONTROLLERS_PUBLIC
+  CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
-    KORTEX2_CONTROLLERS_PUBLIC
-    CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
+  KORTEX2_CONTROLLERS_PUBLIC
+  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
-    KORTEX2_CONTROLLERS_PUBLIC
-    controller_interface::return_type update(const rclcpp::Time &time, const rclcpp::Duration &period) override;
+  KORTEX2_CONTROLLERS_PUBLIC
+  controller_interface::return_type update(
+    const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
 private:
+  bool resetFault(const CmdType::Request::SharedPtr req, CmdType::Response::SharedPtr resp);
 
-    bool resetFault(const CmdType::Request::SharedPtr req,
-                    CmdType::Response::SharedPtr resp) ;
+  rclcpp::Publisher<FbkType>::SharedPtr fault_pub_;
+  FbkType state_;
+  rclcpp::Service<CmdType>::SharedPtr trigger_command_srv_;
 
-    rclcpp::Service<CmdType>::SharedPtr trigger_command_srv_;
-
-    static constexpr double ISSUE_CMD = 1.0;
-    static constexpr double ASYNC_WAITING = 2.0;
-    static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
-
-
-
-
-
-
+  static constexpr double ISSUE_CMD = 1.0;
+  static constexpr double ASYNC_WAITING = 2.0;
+  static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
 };
 
 }  // namespace kortex2_controllers

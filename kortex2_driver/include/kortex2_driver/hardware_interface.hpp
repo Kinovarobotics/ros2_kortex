@@ -54,7 +54,6 @@ namespace hardware_interface
 constexpr char HW_IF_TWIST[] = "twist";
 constexpr char HW_IF_FAULT[] = "fault";
 
-
 }  // namespace hardware_interface
 
 using hardware_interface::return_type;
@@ -179,12 +178,13 @@ private:
   // fault control
   double reset_fault_cmd_;
   double reset_fault_async_success_;
-    static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
-    bool twist_controller_running_tmp_ = false;
-    bool joint_based_controller_running_tmp_ = false;
-    bool gripper_controller_running_tmp_ = false;
+  double in_fault_;
+  static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
+  bool twist_controller_running_tmp_ = false;
+  bool joint_based_controller_running_tmp_ = false;
+  bool gripper_controller_running_tmp_ = false;
 
-    void sendTwistCommand();
+  void sendTwistCommand();
   void incrementId();
   void sendJointCommands();
   void prepareCommands();

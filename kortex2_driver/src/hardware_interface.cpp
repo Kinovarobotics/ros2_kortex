@@ -277,6 +277,9 @@ KortexMultiInterfaceHardware::export_state_interfaces()
       arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
   }
 
+  // state interface which reports if robot is faulted
+  state_interfaces.emplace_back(hardware_interface::StateInterface("reset_fault", "in_fault", &in_fault_));
+
   return state_interfaces;
 }
 
@@ -701,6 +704,9 @@ return_type KortexMultiInterfaceHardware::read()
     feedback_ = base_cyclic_.RefreshFeedback();
     first_pass_ = false;
   }
+
+  // read if robot is faulted
+  in_fault_ = (feedback_.base().active_state() == Kinova::Api::Common::ArmState::ARMSTATE_IN_FAULT);
 
   // read gripper state
   readGripperPosition();

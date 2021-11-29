@@ -47,7 +47,12 @@ controller_interface::InterfaceConfiguration FaultController::command_interface_
 
 controller_interface::InterfaceConfiguration FaultController::state_interface_configuration() const
 {
-  return controller_interface::InterfaceConfiguration();
+  controller_interface::InterfaceConfiguration config;
+  config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
+
+  config.names.emplace_back("reset_fault/in_fault");
+
+  return config;
 }
 
 CallbackReturn FaultController::on_init() { return CallbackReturn::SUCCESS; }
@@ -55,6 +60,8 @@ CallbackReturn FaultController::on_init() { return CallbackReturn::SUCCESS; }
 controller_interface::return_type FaultController::update(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
+  state_.data = static_cast<bool>(state_interfaces_[StateInterfaces::IN_FAULT].get_value());
+  fault_pub_->publish(state_);
   return controller_interface::return_type::OK;
 }
 
@@ -67,6 +74,7 @@ CallbackReturn FaultController::on_activate(const rclcpp_lifecycle::State & /*pr
 {
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(NO_CMD);
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(NO_CMD);
+  fault_pub_ = node_->create_publisher<FbkType>("~/in_fault", 1);
   trigger_command_srv_ = node_->create_service<std_srvs::srv::Trigger>(
     "~/reset_fault",
     std::bind(&FaultController::resetFault, this, std::placeholders::_1, std::placeholders::_2));
