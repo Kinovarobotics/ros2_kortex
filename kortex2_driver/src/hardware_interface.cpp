@@ -278,7 +278,8 @@ KortexMultiInterfaceHardware::export_state_interfaces()
   }
 
   // state interface which reports if robot is faulted
-  state_interfaces.emplace_back(hardware_interface::StateInterface("reset_fault", "in_fault", &in_fault_));
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("reset_fault", "in_fault", &in_fault_));
 
   return state_interfaces;
 }
@@ -704,6 +705,9 @@ return_type KortexMultiInterfaceHardware::read()
     feedback_ = base_cyclic_.RefreshFeedback();
     first_pass_ = false;
   }
+
+  // get arm servoing mode
+  arm_mode_ = base_.GetServoingMode().servoing_mode();
 
   // read if robot is faulted
   in_fault_ = (feedback_.base().active_state() == Kinova::Api::Common::ArmState::ARMSTATE_IN_FAULT);
