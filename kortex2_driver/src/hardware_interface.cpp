@@ -665,10 +665,10 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
 {
   RCLCPP_INFO(LOGGER, "Deactivating KortexMultiInterfaceHardware...");
 
-  auto servoing_mode = k_api::Base::ServoingModeInformation();
-  // Set back the servoing mode to Single Level Servoing
-  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode);
+  //  auto servoing_mode = k_api::Base::ServoingModeInformation();
+  //  // Set back the servoing mode to Single Level Servoing
+  //  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+  //  base_.SetServoingMode(servoing_mode);
 
   // Close API session
   session_manager_.CloseSession();
@@ -750,8 +750,13 @@ return_type KortexMultiInterfaceHardware::write()
       // clear faults
       base_.ClearFaults();
       // back to original servoing mode
-      servoing_mode_hw_.set_servoing_mode(arm_mode_);
-      base_.SetServoingMode(servoing_mode_hw_);
+      if (
+        arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING ||
+        arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+      {
+        servoing_mode_hw_.set_servoing_mode(arm_mode_);
+        base_.SetServoingMode(servoing_mode_hw_);
+      }
       // turn on controllers
       twist_controller_running_ = twist_controller_running_tmp_;
       joint_based_controller_running_ = joint_based_controller_running_tmp_;
