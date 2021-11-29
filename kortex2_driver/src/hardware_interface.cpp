@@ -178,8 +178,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   RCLCPP_INFO(LOGGER, "Session created");
 
   // get current servoing mode, no change on startup
-  servoing_mode_hw_ = base_.GetServoingMode();
-  arm_mode_ = servoing_mode_hw_.servoing_mode();
+  servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
+  arm_mode_ = Kinova::Api::Base::LOW_LEVEL_SERVOING;
+  base_.SetServoingMode(servoing_mode_hw_);
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   actuator_count_ = base_.GetActuatorCount().count();
@@ -595,7 +596,18 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   const rclcpp_lifecycle::State & /* previous_state */)
 {
   RCLCPP_INFO(LOGGER, "Activating KortexMultiInterfaceHardware...");
-  base_.ClearFaults();
+  // reser faults on activation, go back to low level servoing after
+  {
+    servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::SINGLE_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode_hw_);
+    arm_mode_ = Kinova::Api::Base::SINGLE_LEVEL_SERVOING;
+
+    base_.ClearFaults();
+
+    servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
+    base_.SetServoingMode(servoing_mode_hw_);
+    arm_mode_ = Kinova::Api::Base::LOW_LEVEL_SERVOING;
+  }
 
   // first read
   auto base_feedback = base_cyclic_.RefreshFeedback();
@@ -665,10 +677,10 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
 {
   RCLCPP_INFO(LOGGER, "Deactivating KortexMultiInterfaceHardware...");
 
-  //  auto servoing_mode = k_api::Base::ServoingModeInformation();
-  //  // Set back the servoing mode to Single Level Servoing
-  //  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-  //  base_.SetServoingMode(servoing_mode);
+  auto servoing_mode = k_api::Base::ServoingModeInformation();
+  // Set back the servoing mode to Single Level Servoing
+  servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+  base_.SetServoingMode(servoing_mode);
 
   // Close API session
   session_manager_.CloseSession();
