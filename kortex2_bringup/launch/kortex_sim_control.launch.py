@@ -184,7 +184,7 @@ def generate_launch_description():
             "ignition_sim:=",
             ignition_sim,
             " ",
-            "gazebo_controllers:=",
+            "simulation_controllers:=",
             robot_controllers,
             " ",
         ]

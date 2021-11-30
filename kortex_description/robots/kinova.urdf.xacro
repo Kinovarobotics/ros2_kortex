@@ -22,6 +22,7 @@
   <xacro:arg name="fake_sensor_commands" default="true" />
   <xacro:arg name="gazebo_sim" default="false" />
   <xacro:arg name="ignition_sim" default="false" />
+  <xacro:arg name="simulation_controllers" default="$(find kortex2_bringup)/config/kortex_controllers.yaml" />
 
 
   <!-- import main macro -->
@@ -58,7 +59,7 @@
     </gazebo>
     <gazebo>
       <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-        <parameters>$(arg gazebo_controllers)</parameters>
+        <parameters>$(arg simulation_controllers)</parameters>
       </plugin>
     </gazebo>
   </xacro:if>
@@ -69,7 +70,7 @@
     </gazebo>
     <gazebo>
       <plugin filename="libignition_ros2_control-system.so" name="ignition_ros2_control::IgnitionROS2ControlPlugin">
-        <parameters>$(arg gazebo_controllers)</parameters>
+        <parameters>$(arg simulation_controllers)</parameters>
         <controller_manager_node_name>$(arg prefix)controller_manager</controller_manager_node_name>
       </plugin>
     </gazebo>
