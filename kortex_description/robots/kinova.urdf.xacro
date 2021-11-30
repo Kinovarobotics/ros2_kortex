@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="$(arg name)">
+  <!-- robot name parameter -->
+  <xacro:arg name="name" default="kinova_arm" />
+
+  <!-- Arguments -->
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="arm" default="NO_ARM_TYPE_DEFINED" />
+  <xacro:arg name="dof" default="7" />
+  <xacro:arg name="vision" default="true" />
+  <xacro:arg name="robot_ip" default="192.168.11.11" />
+  <xacro:arg name="username" default="admin" />
+  <xacro:arg name="password" default="admin" />
+  <xacro:arg name="port" default="10000" />
+  <xacro:arg name="port_realtime" default="10001" />
+  <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
+  <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
+  <xacro:arg name="gripper" default="" />
+  <xacro:arg name="use_internal_bus_gripper_comm" default="false" />
+  <xacro:arg name="use_fake_hardware" default="true" />
+  <xacro:arg name="fake_sensor_commands" default="true" />
+  <xacro:arg name="gazebo_sim" default="false" />
+  <xacro:arg name="ignition_sim" default="false" />
+
+
+  <!-- import main macro -->
+  <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
+
+  <!-- create link fixed to the "world" -->
+  <link name="world" />
+
+  <xacro:load_robot
+    parent="world"
+    arm="$(arg arm)"
+    gripper="$(arg gripper)"
+    dof="$(arg dof)"
+    vision="$(arg vision)"
+    robot_ip="$(arg robot_ip)"
+    username="$(arg username)"
+    password="$(arg password)"
+    port="$(arg port)"
+    port_realtime="$(arg port_realtime)"
+    session_inactivity_timeout_ms="$(arg session_inactivity_timeout_ms)"
+    connection_inactivity_timeout_ms="$(arg connection_inactivity_timeout_ms)"
+    use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
+    prefix="$(arg prefix)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    fake_sensor_commands="$(arg fake_sensor_commands)"
+    gazebo_sim="$(arg gazebo_sim)"
+    ignition_sim="$(arg ignition_sim)" >
+    <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
+  </xacro:load_robot>
+
+  <xacro:if value="$(arg gazebo_sim)">
+    <!-- Gazebo plugins -->
+    <gazebo reference="world">
+    </gazebo>
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(arg gazebo_controllers)</parameters>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+
+  <xacro:if value="$(arg ignition_sim)">
+    <!-- Gazebo plugins -->
+    <gazebo reference="world">
+    </gazebo>
+    <gazebo>
+      <plugin filename="libignition_ros2_control-system.so" name="ignition_ros2_control::IgnitionROS2ControlPlugin">
+        <parameters>$(arg gazebo_controllers)</parameters>
+        <controller_manager_node_name>$(arg prefix)controller_manager</controller_manager_node_name>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+
+</robot>
