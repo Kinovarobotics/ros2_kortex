@@ -11,8 +11,7 @@
 
   <depend>controller_interface</depend>
   <depend>geometry_msgs</depend>
-  <depend>std_msgs</depend>
-  <depend>std_srvs</depend>
+  <depend>example_interfaces</depend>
   <depend>rclcpp</depend>
 
   <export>

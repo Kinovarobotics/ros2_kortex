@@ -171,7 +171,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "fault_controller",
             default_value="fault_controller",
-            description="Robot hand controller to start.",
+            description="Name of the 'fault controller.",
         )
     )
     declared_arguments.append(

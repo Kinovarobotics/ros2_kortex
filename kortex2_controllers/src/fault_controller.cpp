@@ -50,7 +50,7 @@ controller_interface::InterfaceConfiguration FaultController::state_interface_co
   controller_interface::InterfaceConfiguration config;
   config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
 
-  config.names.emplace_back("reset_fault/in_fault");
+  config.names.emplace_back("reset_fault/internal_fault");
 
   return config;
 }
@@ -75,7 +75,7 @@ CallbackReturn FaultController::on_activate(const rclcpp_lifecycle::State & /*pr
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(NO_CMD);
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(NO_CMD);
   fault_pub_ = node_->create_publisher<FbkType>("~/in_fault", 1);
-  trigger_command_srv_ = node_->create_service<std_srvs::srv::Trigger>(
+  trigger_command_srv_ = node_->create_service<example_interfaces::srv::Trigger>(
     "~/reset_fault",
     std::bind(&FaultController::resetFault, this, std::placeholders::_1, std::placeholders::_2));
 

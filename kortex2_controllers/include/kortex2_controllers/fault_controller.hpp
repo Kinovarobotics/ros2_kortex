@@ -26,8 +26,8 @@
 
 #include "controller_interface/controller_interface.hpp"
 #include "kortex2_controllers/visibility_control.h"
-#include "std_msgs/msg/bool.hpp"
-#include "std_srvs/srv/trigger.hpp"
+#include "example_interfaces/msg/bool.hpp"
+#include "example_interfaces/srv/trigger.hpp"
 
 namespace kortex2_controllers
 {
@@ -40,8 +40,8 @@ enum StateInterfaces
 {
   IN_FAULT = 0u,
 };
-using CmdType = std_srvs::srv::Trigger;
-using FbkType = std_msgs::msg::Bool;
+using CmdType = example_interfaces::srv::Trigger;
+using FbkType = example_interfaces::msg::Bool;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 class FaultController : public controller_interface::ControllerInterface

@@ -279,7 +279,7 @@ KortexMultiInterfaceHardware::export_state_interfaces()
 
   // state interface which reports if robot is faulted
   state_interfaces.emplace_back(
-    hardware_interface::StateInterface("reset_fault", "in_fault", &in_fault_));
+    hardware_interface::StateInterface("reset_fault", "internal_fault", &in_fault_));
 
   return state_interfaces;
 }
