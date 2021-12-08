@@ -22,6 +22,7 @@
 //----------------------------------------------------------------------
 
 #include "kortex2_controllers/fault_controller.hpp"
+#include <memory>
 #include "hardware_interface/loaned_command_interface.hpp"
 
 namespace kortex2_controllers

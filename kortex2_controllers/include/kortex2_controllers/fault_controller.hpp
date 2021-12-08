@@ -21,8 +21,11 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef KORTEX2_CONTROLLERS_FAULT_CONTROLLER_HPP
-#define KORTEX2_CONTROLLERS_FAULT_CONTROLLER_HPP
+#ifndef KORTEX2_CONTROLLERS__FAULT_CONTROLLER_HPP_
+#define KORTEX2_CONTROLLERS__FAULT_CONTROLLER_HPP_
+
+#include <limits>
+#include <memory>
 
 #include "controller_interface/controller_interface.hpp"
 #include "example_interfaces/msg/bool.hpp"
@@ -89,4 +92,4 @@ private:
 
 }  // namespace kortex2_controllers
 
-#endif  //KORTEX2_CONTROLLERS_FAULT_CONTROLLER_HPP
+#endif  // KORTEX2_CONTROLLERS__FAULT_CONTROLLER_HPP_

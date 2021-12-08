@@ -428,7 +428,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
     return hardware_interface::return_type::ERROR;
   }
 
-  //check for fault controller
+  // check for fault controller
   // TODO(livanov93) parametrize
   it = std::find_if(
     start_interfaces.begin(), start_interfaces.end(),
