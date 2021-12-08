@@ -121,6 +121,9 @@ bool FaultController::resetFault(
   }
   resp->success = static_cast<bool>(
     command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_value());
+
+  RCLCPP_INFO(node_->get_logger(), "Resetting fault on kinova controller '%s'!", resp->success ? "succeeded" : "failed");
+
   return resp->success;
 }
 
