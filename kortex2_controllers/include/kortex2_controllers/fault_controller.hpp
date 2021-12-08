@@ -25,9 +25,9 @@
 #define KORTEX2_CONTROLLERS_FAULT_CONTROLLER_HPP
 
 #include "controller_interface/controller_interface.hpp"
-#include "kortex2_controllers/visibility_control.h"
 #include "example_interfaces/msg/bool.hpp"
 #include "example_interfaces/srv/trigger.hpp"
+#include "kortex2_controllers/visibility_control.h"
 #include "realtime_tools/realtime_publisher.h"
 
 namespace kortex2_controllers
