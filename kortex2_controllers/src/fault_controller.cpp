@@ -60,9 +60,14 @@ CallbackReturn FaultController::on_init() { return CallbackReturn::SUCCESS; }
 controller_interface::return_type FaultController::update(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-  state_.data = static_cast<bool>(state_interfaces_[StateInterfaces::IN_FAULT].get_value());
-  fault_pub_->publish(state_);
-  return controller_interface::return_type::OK;
+    if (realtime_publisher_ && realtime_publisher_->trylock())
+    {
+        state_.data = static_cast<bool>(state_interfaces_[StateInterfaces::IN_FAULT].get_value());
+        realtime_publisher_->msg_.data = state_.data;
+        realtime_publisher_->unlockAndPublish();
+    }
+
+   return controller_interface::return_type::OK;
 }
 
 CallbackReturn FaultController::on_configure(const rclcpp_lifecycle::State & /*previous_state*/)
@@ -74,7 +79,16 @@ CallbackReturn FaultController::on_activate(const rclcpp_lifecycle::State & /*pr
 {
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(NO_CMD);
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(NO_CMD);
-  fault_pub_ = node_->create_publisher<FbkType>("~/in_fault", 1);
+  try {
+      fault_pub_ = node_->create_publisher<FbkType>("~/internal_fault", 1);
+      realtime_publisher_ = std::make_unique<StatePublisher>(fault_pub_);
+  } catch (const std::exception & e)
+  {
+      fprintf(
+              stderr, "Exception thrown during publisher creation at configure stage with message : %s \n",
+              e.what());
+      return CallbackReturn::ERROR;
+  }
   trigger_command_srv_ = node_->create_service<example_interfaces::srv::Trigger>(
     "~/reset_fault",
     std::bind(&FaultController::resetFault, this, std::placeholders::_1, std::placeholders::_2));

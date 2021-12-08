@@ -28,6 +28,7 @@
 #include "kortex2_controllers/visibility_control.h"
 #include "example_interfaces/msg/bool.hpp"
 #include "example_interfaces/srv/trigger.hpp"
+#include "realtime_tools/realtime_publisher.h"
 
 namespace kortex2_controllers
 {
@@ -75,7 +76,9 @@ public:
 private:
   bool resetFault(const CmdType::Request::SharedPtr req, CmdType::Response::SharedPtr resp);
 
+  using StatePublisher = realtime_tools::RealtimePublisher<FbkType>;
   rclcpp::Publisher<FbkType>::SharedPtr fault_pub_;
+  std::unique_ptr<StatePublisher> realtime_publisher_;
   FbkType state_;
   rclcpp::Service<CmdType>::SharedPtr trigger_command_srv_;
 
