@@ -10,16 +10,18 @@ find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_ros REQUIRED)
 find_package(controller_interface REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(example_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   controller_interface
   geometry_msgs
+  example_interfaces
 )
 
 include_directories(include)
 
-add_library(${PROJECT_NAME} SHARED src/twist_controller.cpp)
+add_library(${PROJECT_NAME} SHARED src/twist_controller.cpp src/fault_controller.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE
   include
 )

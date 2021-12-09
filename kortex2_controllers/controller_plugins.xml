@@ -4,4 +4,9 @@
     6dof twist controller
   </description>
   </class>
+  <class name="kortex2_controllers/FaultController" type="kortex2_controllers::FaultController" base_class_type="controller_interface::ControllerInterface">
+    <description>
+      ros2 fault controller for kinova api
+    </description>
+  </class>
 </library>

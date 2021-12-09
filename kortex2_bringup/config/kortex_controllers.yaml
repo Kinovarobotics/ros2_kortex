@@ -15,6 +15,9 @@ controller_manager:
     hand_controller:
       type: forward_command_controller/ForwardCommandController
 
+    fault_controller:
+      type: kortex2_controllers/FaultController
+
 joint_trajectory_controller:
   ros__parameters:
     joints:
