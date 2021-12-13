@@ -767,13 +767,13 @@ return_type KortexMultiInterfaceHardware::write()
     {
       //      RCLCPP_INFO(LOGGER, "Fault controller check try...");
       // remember controllers
-      twist_controller_running_tmp_ = twist_controller_running_;
-      joint_based_controller_running_tmp_ = twist_controller_running_;
-      gripper_controller_running_tmp_ = gripper_controller_running_;
+      //      twist_controller_running_tmp_ = twist_controller_running_;
+      //      joint_based_controller_running_tmp_ = twist_controller_running_;
+      //      gripper_controller_running_tmp_ = gripper_controller_running_;
       // turn off controllers
-      twist_controller_running_ = false;
-      joint_based_controller_running_ = false;
-      gripper_controller_running_ = false;
+      //      twist_controller_running_ = false;
+      //      joint_based_controller_running_ = false;
+      //      gripper_controller_running_ = false;
       // change servoing mode first
       servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
       base_.SetServoingMode(servoing_mode_hw_);
@@ -788,9 +788,9 @@ return_type KortexMultiInterfaceHardware::write()
         base_.SetServoingMode(servoing_mode_hw_);
       }
       // turn on controllers
-      twist_controller_running_ = twist_controller_running_tmp_;
-      joint_based_controller_running_ = joint_based_controller_running_tmp_;
-      gripper_controller_running_ = gripper_controller_running_tmp_;
+      //      twist_controller_running_ = twist_controller_running_tmp_;
+      //      joint_based_controller_running_ = joint_based_controller_running_tmp_;
+      //      gripper_controller_running_ = gripper_controller_running_tmp_;
 
       reset_fault_async_success_ = 1.0;
     }
