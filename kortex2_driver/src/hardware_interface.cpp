@@ -711,11 +711,11 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
 
 return_type KortexMultiInterfaceHardware::read()
 {
-  //  if (first_pass_)
-  //  {
+  if (first_pass_)
+  {
+    first_pass_ = false;
+  }
   feedback_ = base_cyclic_.RefreshFeedback();
-  //    first_pass_ = false;
-  //  }
 
   // get arm servoing mode
   //  arm_mode_ = base_.GetServoingMode().servoing_mode();
@@ -766,14 +766,6 @@ return_type KortexMultiInterfaceHardware::write()
     try
     {
       //      RCLCPP_INFO(LOGGER, "Fault controller check try...");
-      // remember controllers
-      //      twist_controller_running_tmp_ = twist_controller_running_;
-      //      joint_based_controller_running_tmp_ = twist_controller_running_;
-      //      gripper_controller_running_tmp_ = gripper_controller_running_;
-      // turn off controllers
-      //      twist_controller_running_ = false;
-      //      joint_based_controller_running_ = false;
-      //      gripper_controller_running_ = false;
       // change servoing mode first
       servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
       base_.SetServoingMode(servoing_mode_hw_);
@@ -787,11 +779,6 @@ return_type KortexMultiInterfaceHardware::write()
         servoing_mode_hw_.set_servoing_mode(arm_mode_);
         base_.SetServoingMode(servoing_mode_hw_);
       }
-      // turn on controllers
-      //      twist_controller_running_ = twist_controller_running_tmp_;
-      //      joint_based_controller_running_ = joint_based_controller_running_tmp_;
-      //      gripper_controller_running_ = gripper_controller_running_tmp_;
-
       reset_fault_async_success_ = 1.0;
     }
     catch (k_api::KDetailedException & ex)
@@ -844,10 +831,6 @@ return_type KortexMultiInterfaceHardware::write()
       RCLCPP_DEBUG(LOGGER, "No controller active!");
     }
   }
-
-  // read one step late because reading before sending commands
-  // generates errors
-  //  feedback_ = base_cyclic_.RefreshFeedback();
   return return_type::OK;
 }
 
