@@ -711,11 +711,11 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
 
 return_type KortexMultiInterfaceHardware::read()
 {
-  if (first_pass_)
-  {
-    feedback_ = base_cyclic_.RefreshFeedback();
-    first_pass_ = false;
-  }
+  //  if (first_pass_)
+  //  {
+  feedback_ = base_cyclic_.RefreshFeedback();
+  //    first_pass_ = false;
+  //  }
 
   // get arm servoing mode
   arm_mode_ = base_.GetServoingMode().servoing_mode();
@@ -847,7 +847,7 @@ return_type KortexMultiInterfaceHardware::write()
 
   // read one step late because reading before sending commands
   // generates errors
-  feedback_ = base_cyclic_.RefreshFeedback();
+  //  feedback_ = base_cyclic_.RefreshFeedback();
   return return_type::OK;
 }
 
