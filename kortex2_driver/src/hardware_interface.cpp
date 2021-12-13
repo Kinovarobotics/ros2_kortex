@@ -183,7 +183,18 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = Kinova::Api::Base::SINGLE_LEVEL_SERVOING;
 
-    base_.ClearFaults();
+    try
+    {
+      base_.ClearFaults();
+    }
+    catch (k_api::KDetailedException & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+      RCLCPP_ERROR_STREAM(
+        LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                  k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+    }
 
     // low level servoing on startup
     servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
@@ -795,40 +806,43 @@ return_type KortexMultiInterfaceHardware::write()
     reset_fault_cmd_ = NO_CMD;
   }
 
-  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+  if (in_fault_ == 0.0)
   {
-    // Twist controller active
-    if (twist_controller_running_)
+    if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
     {
-      // twist control
-      sendTwistCommand();
+      // Twist controller active
+      if (twist_controller_running_)
+      {
+        // twist control
+        sendTwistCommand();
+      }
+
+      // gripper control
+      sendGripperCommand(arm_mode_, gripper_command_position_);
     }
-
-    // gripper control
-    sendGripperCommand(arm_mode_, gripper_command_position_);
-  }
-  else if (
-    (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
-    (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL))
-  {
-    // Per joint controller active
-
-    // gripper control
-    sendGripperCommand(arm_mode_, gripper_command_position_);
-
-    if (joint_based_controller_running_)
+    else if (
+      (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
+      (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL))
     {
-      // send commands to the joints
-      sendJointCommands();
+      // Per joint controller active
+
+      // gripper control
+      sendGripperCommand(arm_mode_, gripper_command_position_);
+
+      if (joint_based_controller_running_)
+      {
+        // send commands to the joints
+        sendJointCommands();
+      }
     }
-  }
-  else if (
-    (!joint_based_controller_running_ && !twist_controller_running_) ||
-    arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
-    feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
-  {
-    // Keep alive mode - no controller active
-    RCLCPP_DEBUG(LOGGER, "No controller active!");
+    else if (
+      (!joint_based_controller_running_ && !twist_controller_running_) ||
+      arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
+      feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
+    {
+      // Keep alive mode - no controller active
+      RCLCPP_DEBUG(LOGGER, "No controller active!");
+    }
   }
 
   // read one step late because reading before sending commands
