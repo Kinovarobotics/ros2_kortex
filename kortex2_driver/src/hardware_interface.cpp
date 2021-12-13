@@ -718,7 +718,7 @@ return_type KortexMultiInterfaceHardware::read()
   //  }
 
   // get arm servoing mode
-  arm_mode_ = base_.GetServoingMode().servoing_mode();
+  //  arm_mode_ = base_.GetServoingMode().servoing_mode();
 
   // read if robot is faulted
   in_fault_ = (feedback_.base().active_state() == Kinova::Api::Common::ArmState::ARMSTATE_IN_FAULT);
