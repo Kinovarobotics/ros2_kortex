@@ -757,7 +757,7 @@ return_type KortexMultiInterfaceHardware::write()
 {
   if (block_write)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    //    feedback_ = base_cyclic_.RefreshFeedback();
     return return_type::OK;
   }
 
@@ -908,24 +908,36 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
 {
   if (gripper_controller_running_ && !std::isnan(position) && use_internal_bus_gripper_comm_)
   {
-    if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+    try
     {
-      k_api::Base::GripperCommand gripper_command;
-      gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
-      auto finger = gripper_command.mutable_gripper()->add_finger();
-      finger->set_finger_identifier(1);
-      finger->set_value(
-        static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
-      base_.SendGripperCommand(gripper_command);
+      if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+      {
+        k_api::Base::GripperCommand gripper_command;
+        gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
+        auto finger = gripper_command.mutable_gripper()->add_finger();
+        finger->set_finger_identifier(1);
+        finger->set_value(
+          static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
+        base_.SendGripperCommand(gripper_command);
+      }
+      else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+      {
+        // % open/closed, this values needs to be between 0 and 100
+        gripper_motor_command_->set_position(static_cast<float>(position / 0.81 * 100.0));
+        // % speed TODO read in as parameter from kortex_controllers.yaml
+        gripper_motor_command_->set_velocity(static_cast<float>(velocity));
+        // % torque TODO read in as parameter from kortex_controllers.yaml
+        gripper_motor_command_->set_force(static_cast<float>(force));
+      }
     }
-    else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+    catch (k_api::KDetailedException & ex)
     {
-      // % open/closed, this values needs to be between 0 and 100
-      gripper_motor_command_->set_position(static_cast<float>(position / 0.81 * 100.0));
-      // % speed TODO read in as parameter from kortex_controllers.yaml
-      gripper_motor_command_->set_velocity(static_cast<float>(velocity));
-      // % torque TODO read in as parameter from kortex_controllers.yaml
-      gripper_motor_command_->set_force(static_cast<float>(force));
+      RCLCPP_ERROR(LOGGER, "Exception caught while sending internal gripper command!");
+      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+      RCLCPP_ERROR_STREAM(
+        LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                  k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
     }
   }
 }
