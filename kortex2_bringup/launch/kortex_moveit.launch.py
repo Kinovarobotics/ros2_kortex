@@ -46,16 +46,31 @@ def generate_launch_description():
     declared_arguments = []
     # Robot specific arguments
     declared_arguments.append(
-        DeclareLaunchArgument("robot_type", description="Type/series of robot.")
+        DeclareLaunchArgument(
+            "robot_type", description="Type/series of robot.", choices=["gen3", "gen3_lite"]
+        )
     )
-    # TODO(anyone): enable this
-    # choices=['gen3', 'gen3_lite', ...]))
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_ip", description="IP address by which the robot can be reached."
         )
     )
     # General arguments
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "runtime_config_package",
+            default_value="kortex2_bringup",
+            description='Package with the controller\'s configuration in "config" folder. \
+        Usually the argument is not set, it enables use of a custom setup.',
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "controllers_file",
+            default_value="kortex_controllers.yaml",
+            description="YAML file with the controllers configuration.",
+        )
+    )
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_package",
@@ -66,24 +81,31 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "description_file",
+            default_value="kinova.urdf.xacro",
+            description="URDF/XACRO description file with the robot.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "moveit_config_package",
-            default_value="gen3_robotiq_2f_85_move_it_config",
+            default_value="gen3_move_it_config",
             description="MoveIt configuration package for the robot. Usually the argument \
         is not set, it enables use of a custom config package.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "description_file",
-            default_value="gen3.xacro",
-            description="URDF/XACRO description file with the robot.",
+            "moveit_config_file",
+            default_value="gen3.srdf.xacro",
+            description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "moveit_config_file",
-            default_value="gen3_robotiq_2f_85.srdf.xacro",
-            description="MoveIt SRDF/XACRO description file with the robot.",
+            "robot_name",
+            default_value="arm",
+            description="Name of the robot.",
         )
     )
     declared_arguments.append(
@@ -98,7 +120,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper",
-            default_value="robotiq_2f_85",
+            default_value='""',
             description="Name of the gripper attached to the arm",
         )
     )
@@ -125,10 +147,13 @@ def generate_launch_description():
     robot_type = LaunchConfiguration("robot_type")
     robot_ip = LaunchConfiguration("robot_ip")
     # General arguments
+    runtime_config_package = LaunchConfiguration("runtime_config_package")
+    controllers_file = LaunchConfiguration("controllers_file")
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
     moveit_config_package = LaunchConfiguration("moveit_config_package")
     moveit_config_file = LaunchConfiguration("moveit_config_file")
+    robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
     gripper = LaunchConfiguration("gripper")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -147,13 +172,13 @@ def generate_launch_description():
             robot_ip,
             " ",
             "name:=",
+            robot_name,
+            " ",
+            "arm:=",
             robot_type,
             " ",
             "prefix:=",
             prefix,
-            " ",
-            "gripper:=",
-            gripper,
             " ",
             "use_fake_hardware:=",
             use_fake_hardware,
@@ -161,9 +186,16 @@ def generate_launch_description():
             "fake_sensor_commands:=",
             fake_sensor_commands,
             " ",
+            "gripper:=",
+            gripper,
+            " ",
         ]
     )
     robot_description = {"robot_description": robot_description_content}
+
+    robot_controllers = PathJoinSubstitution(
+        [FindPackageShare(runtime_config_package), "config", controllers_file]
+    )
 
     # MoveIt Configuration
     robot_description_semantic_content = Command(
@@ -171,21 +203,20 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [
-                    FindPackageShare(moveit_config_package),
-                    "config/7dof",
-                    moveit_config_file,
-                ]
+                [FindPackageShare(moveit_config_package), "config", "7dof", moveit_config_file]
             ),
             " ",
-            "prefix:=",
+            "name:=",
+            robot_name,
+            " " "prefix:=",
             prefix,
             " ",
         ]
     )
     robot_description_semantic = {"robot_description_semantic": robot_description_semantic_content}
 
-    kinematics_yaml = load_yaml("gen3_robotiq_2f_85_move_it_config", "config/kinematics.yaml")
+    # TODO(destogl): change this hard-coded name to "moveit_config_package"
+    kinematics_yaml = load_yaml("gen3_move_it_config", "config/kinematics.yaml")
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
     # Planning Configuration
@@ -196,15 +227,12 @@ def generate_launch_description():
             "start_state_max_bounds_error": 0.1,
         }
     }
-    ompl_planning_yaml = load_yaml(
-        "gen3_robotiq_2f_85_move_it_config", "config/ompl_planning.yaml"
-    )
+    ompl_planning_yaml = load_yaml("gen3_move_it_config", "config/ompl_planning.yaml")
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 
     # Trajectory Execution Configuration
-    controllers_yaml = load_yaml(
-        "gen3_robotiq_2f_85_move_it_config", "config/7dof/controllers.yaml"
-    )
+    # TODO(destogl): check how to use ros2_control's controllers-yaml
+    controllers_yaml = load_yaml("gen3_move_it_config", "config/7dof/controllers.yaml")
     moveit_controllers = {
         "moveit_simple_controller_manager": controllers_yaml,
         "moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager",
@@ -280,20 +308,10 @@ def generate_launch_description():
         ],
     )
 
-    # Static TF
-    static_tf = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        name="static_transform_publisher",
-        output="log",
-        arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "world", "base_link"],
-    )
-
     nodes_to_start = [
         move_group_node,
         mongodb_server_node,
         rviz_node,
-        static_tf,
     ]
 
     return LaunchDescription(declared_arguments + nodes_to_start)

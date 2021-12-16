@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Author: Marq Rasmussen
+# Authors: Marq Rasmussen, Denis Stogl
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
@@ -35,8 +35,6 @@ def generate_launch_description():
             "robot_type", description="Type/series of robot.", choices=["gen3", "gen3_lite"]
         )
     )
-    # TODO(anyone): enable this
-    # choices=['gen3', 'gen3_lite', ...]))
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_ip", description="IP address by which the robot can be reached."
@@ -105,7 +103,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_package",
-            default_value="gen3_robotiq_2f_85_move_it_config",
+            default_value="gen3_move_it_config",
             description="MoveIt configuration package for the robot. Usually the argument \
         is not set, it enables use of a custom config package.",
         )
@@ -115,6 +113,13 @@ def generate_launch_description():
             "description_file",
             default_value="kinova.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_name",
+            default_value="arm",
+            description="Name of the robot.",
         )
     )
     declared_arguments.append(
@@ -129,7 +134,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper",
-            default_value="robotiq_2f_85",
+            default_value='""',
             description="Name of the gripper attached to the arm",
         )
     )
@@ -196,6 +201,7 @@ def generate_launch_description():
     description_package = LaunchConfiguration("description_package")
     moveit_config_package = LaunchConfiguration("moveit_config_package")
     description_file = LaunchConfiguration("description_file")
+    robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
     gripper = LaunchConfiguration("gripper")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -219,7 +225,7 @@ def generate_launch_description():
             robot_ip,
             " ",
             "name:=",
-            robot_type,
+            robot_name,
             " ",
             "arm:=",
             robot_type,
@@ -247,6 +253,7 @@ def generate_launch_description():
         [FindPackageShare(runtime_config_package), "config", controllers_file]
     )
 
+    # TODO(destogl): we should also have a non-moveit rviz file
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(moveit_config_package), "rviz", "moveit.rviz"]
     )
@@ -303,6 +310,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
     fault_controller_spawner = Node(
