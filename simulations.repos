@@ -14,3 +14,8 @@ repositories:
     type: git
     url: https://github.com/ros-controls/ros2_control_demos.git
     version: master
+
+  ros_ign:
+    type: git
+    url: https://github.com/ignitionrobotics/ros_ign.git
+    version: ros2
