@@ -183,7 +183,18 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = Kinova::Api::Base::SINGLE_LEVEL_SERVOING;
 
-    base_.ClearFaults();
+    try
+    {
+      base_.ClearFaults();
+    }
+    catch (k_api::KDetailedException & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+      RCLCPP_ERROR_STREAM(
+        LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                  k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+    }
 
     // low level servoing on startup
     servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
@@ -702,12 +713,12 @@ return_type KortexMultiInterfaceHardware::read()
 {
   if (first_pass_)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     first_pass_ = false;
   }
+  feedback_ = base_cyclic_.RefreshFeedback();
 
   // get arm servoing mode
-  arm_mode_ = base_.GetServoingMode().servoing_mode();
+  //  arm_mode_ = base_.GetServoingMode().servoing_mode();
 
   // read if robot is faulted
   in_fault_ = (feedback_.base().active_state() == Kinova::Api::Common::ArmState::ARMSTATE_IN_FAULT);
@@ -746,7 +757,7 @@ return_type KortexMultiInterfaceHardware::write()
 {
   if (block_write)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    //    feedback_ = base_cyclic_.RefreshFeedback();
     return return_type::OK;
   }
 
@@ -755,14 +766,6 @@ return_type KortexMultiInterfaceHardware::write()
     try
     {
       //      RCLCPP_INFO(LOGGER, "Fault controller check try...");
-      // remember controllers
-      twist_controller_running_tmp_ = twist_controller_running_;
-      joint_based_controller_running_tmp_ = twist_controller_running_;
-      gripper_controller_running_tmp_ = gripper_controller_running_;
-      // turn off controllers
-      twist_controller_running_ = false;
-      joint_based_controller_running_ = false;
-      gripper_controller_running_ = false;
       // change servoing mode first
       servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
       base_.SetServoingMode(servoing_mode_hw_);
@@ -776,11 +779,6 @@ return_type KortexMultiInterfaceHardware::write()
         servoing_mode_hw_.set_servoing_mode(arm_mode_);
         base_.SetServoingMode(servoing_mode_hw_);
       }
-      // turn on controllers
-      twist_controller_running_ = twist_controller_running_tmp_;
-      joint_based_controller_running_ = joint_based_controller_running_tmp_;
-      gripper_controller_running_ = gripper_controller_running_tmp_;
-
       reset_fault_async_success_ = 1.0;
     }
     catch (k_api::KDetailedException & ex)
@@ -795,45 +793,44 @@ return_type KortexMultiInterfaceHardware::write()
     reset_fault_cmd_ = NO_CMD;
   }
 
-  if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+  if (in_fault_ == 0.0)
   {
-    // Twist controller active
-    if (twist_controller_running_)
+    if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
     {
-      // twist control
-      sendTwistCommand();
+      // Twist controller active
+      if (twist_controller_running_)
+      {
+        // twist control
+        sendTwistCommand();
+      }
+
+      // gripper control
+      sendGripperCommand(arm_mode_, gripper_command_position_);
     }
-
-    // gripper control
-    sendGripperCommand(arm_mode_, gripper_command_position_);
-  }
-  else if (
-    (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
-    (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL))
-  {
-    // Per joint controller active
-
-    // gripper control
-    sendGripperCommand(arm_mode_, gripper_command_position_);
-
-    if (joint_based_controller_running_)
+    else if (
+      (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
+      (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL))
     {
-      // send commands to the joints
-      sendJointCommands();
+      // Per joint controller active
+
+      // gripper control
+      sendGripperCommand(arm_mode_, gripper_command_position_);
+
+      if (joint_based_controller_running_)
+      {
+        // send commands to the joints
+        sendJointCommands();
+      }
+    }
+    else if (
+      (!joint_based_controller_running_ && !twist_controller_running_) ||
+      arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
+      feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
+    {
+      // Keep alive mode - no controller active
+      RCLCPP_DEBUG(LOGGER, "No controller active!");
     }
   }
-  else if (
-    (!joint_based_controller_running_ && !twist_controller_running_) ||
-    arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
-    feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
-  {
-    // Keep alive mode - no controller active
-    RCLCPP_DEBUG(LOGGER, "No controller active!");
-  }
-
-  // read one step late because reading before sending commands
-  // generates errors
-  feedback_ = base_cyclic_.RefreshFeedback();
   return return_type::OK;
 }
 
@@ -894,24 +891,36 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
 {
   if (gripper_controller_running_ && !std::isnan(position) && use_internal_bus_gripper_comm_)
   {
-    if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+    try
     {
-      k_api::Base::GripperCommand gripper_command;
-      gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
-      auto finger = gripper_command.mutable_gripper()->add_finger();
-      finger->set_finger_identifier(1);
-      finger->set_value(
-        static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
-      base_.SendGripperCommand(gripper_command);
+      if (arm_mode == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+      {
+        k_api::Base::GripperCommand gripper_command;
+        gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
+        auto finger = gripper_command.mutable_gripper()->add_finger();
+        finger->set_finger_identifier(1);
+        finger->set_value(
+          static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
+        base_.SendGripperCommand(gripper_command);
+      }
+      else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+      {
+        // % open/closed, this values needs to be between 0 and 100
+        gripper_motor_command_->set_position(static_cast<float>(position / 0.81 * 100.0));
+        // % speed TODO read in as parameter from kortex_controllers.yaml
+        gripper_motor_command_->set_velocity(static_cast<float>(velocity));
+        // % torque TODO read in as parameter from kortex_controllers.yaml
+        gripper_motor_command_->set_force(static_cast<float>(force));
+      }
     }
-    else if (arm_mode == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+    catch (k_api::KDetailedException & ex)
     {
-      // % open/closed, this values needs to be between 0 and 100
-      gripper_motor_command_->set_position(static_cast<float>(position / 0.81 * 100.0));
-      // % speed TODO read in as parameter from kortex_controllers.yaml
-      gripper_motor_command_->set_velocity(static_cast<float>(velocity));
-      // % torque TODO read in as parameter from kortex_controllers.yaml
-      gripper_motor_command_->set_force(static_cast<float>(force));
+      RCLCPP_ERROR(LOGGER, "Exception caught while sending internal gripper command!");
+      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+      RCLCPP_ERROR_STREAM(
+        LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                  k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
     }
   }
 }
