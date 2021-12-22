@@ -15,7 +15,12 @@
 # Author: Marq Rasmussen
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, RegisterEventHandler
+from launch.actions import (
+    DeclareLaunchArgument,
+    ExecuteProcess,
+    IncludeLaunchDescription,
+    RegisterEventHandler,
+)
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.conditions import IfCondition
@@ -272,7 +277,14 @@ def generate_launch_description():
         package="ros_ign_gazebo",
         executable="create",
         output="screen",
-        arguments=["-string", robot_description_content, "-name", robot_name, "-allow_renaming", "true"],
+        arguments=[
+            "-string",
+            robot_description_content,
+            "-name",
+            robot_name,
+            "-allow_renaming",
+            "true",
+        ],
         condition=IfCondition(ignition_sim),
     )
 
