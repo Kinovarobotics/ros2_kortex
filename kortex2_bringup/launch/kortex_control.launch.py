@@ -15,7 +15,8 @@
 # Authors: Marq Rasmussen, Denis Stogl
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 from launch.conditions import IfCondition
 from launch.substitutions import (
     Command,
@@ -294,6 +295,15 @@ def generate_launch_description():
         ],
     )
 
+    # Delay rviz start after `joint_state_broadcaster`
+    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[rviz_node],
+        ),
+        condition=IfCondition(launch_rviz),
+    )
+
     robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -332,8 +342,8 @@ def generate_launch_description():
     nodes_to_start = [
         control_node,
         robot_state_publisher_node,
-        rviz_node,
         joint_state_broadcaster_spawner,
+        delay_rviz_after_joint_state_broadcaster_spawner,
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,

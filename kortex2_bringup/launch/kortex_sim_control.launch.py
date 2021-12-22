@@ -15,7 +15,8 @@
 # Author: Marq Rasmussen
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.conditions import IfCondition
 from launch.substitutions import (
@@ -95,7 +96,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "name",
+            "robot_name",
             default_value="kinova",
             description="Robot name.",
         )
@@ -142,9 +143,9 @@ def generate_launch_description():
     runtime_config_package = LaunchConfiguration("runtime_config_package")
     controllers_file = LaunchConfiguration("controllers_file")
     description_package = LaunchConfiguration("description_package")
-    description_file = LaunchConfiguration("description_file")
     moveit_config_package = LaunchConfiguration("moveit_config_package")
-    name = LaunchConfiguration("name")
+    description_file = LaunchConfiguration("description_file")
+    robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
     robot_traj_controller = LaunchConfiguration("robot_controller")
     robot_pos_controller = LaunchConfiguration("robot_pos_controller")
@@ -156,7 +157,7 @@ def generate_launch_description():
     )
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz", "urdf_description.rviz"]
+        [FindPackageShare(moveit_config_package), "rviz", "moveit.rviz"]
     )
 
     robot_description_content = Command(
@@ -170,7 +171,7 @@ def generate_launch_description():
             "robot_ip:=xxx.yyy.zzz.www",
             " ",
             "name:=",
-            name,
+            robot_name,
             " ",
             "arm:=",
             robot_type,
@@ -217,6 +218,14 @@ def generate_launch_description():
         ],
     )
 
+    # Delay rviz start after `joint_state_broadcaster`
+    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[rviz_node],
+        )
+    )
+
     robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -254,7 +263,7 @@ def generate_launch_description():
         package="gazebo_ros",
         executable="spawn_entity.py",
         name="spawn_ur",
-        arguments=["-entity", name, "-topic", "robot_description"],
+        arguments=["-entity", robot_name, "-topic", "robot_description"],
         output="screen",
         condition=IfCondition(gazebo_sim),
     )
@@ -263,7 +272,7 @@ def generate_launch_description():
         package="ros_ign_gazebo",
         executable="create",
         output="screen",
-        arguments=["-string", robot_description_content, "-name", name, "-allow_renaming", "true"],
+        arguments=["-string", robot_description_content, "-name", robot_name, "-allow_renaming", "true"],
         condition=IfCondition(ignition_sim),
     )
 
@@ -277,8 +286,8 @@ def generate_launch_description():
 
     nodes_to_start = [
         robot_state_publisher_node,
-        rviz_node,
         joint_state_broadcaster_spawner,
+        delay_rviz_after_joint_state_broadcaster_spawner,
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         # robot_hand_controller_spawner,
