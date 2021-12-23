@@ -93,14 +93,6 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "moveit_config_package",
-            default_value="gen3_robotiq_2f_85_move_it_config",
-            description="MoveIt configuration package for the robot. Usually the argument \
-        is not set, it enables use of a custom config package.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "robot_name",
             default_value="kinova",
             description="Robot name.",
@@ -148,7 +140,6 @@ def generate_launch_description():
     runtime_config_package = LaunchConfiguration("runtime_config_package")
     controllers_file = LaunchConfiguration("controllers_file")
     description_package = LaunchConfiguration("description_package")
-    moveit_config_package = LaunchConfiguration("moveit_config_package")
     description_file = LaunchConfiguration("description_file")
     robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
@@ -162,7 +153,7 @@ def generate_launch_description():
     )
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(moveit_config_package), "rviz", "moveit.rviz"]
+        [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
     )
 
     robot_description_content = Command(

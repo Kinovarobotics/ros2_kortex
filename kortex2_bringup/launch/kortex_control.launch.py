@@ -103,14 +103,6 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "moveit_config_package",
-            default_value="gen3_move_it_config",
-            description="MoveIt configuration package for the robot. Usually the argument \
-        is not set, it enables use of a custom config package.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "description_file",
             default_value="kinova.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
@@ -200,7 +192,6 @@ def generate_launch_description():
     runtime_config_package = LaunchConfiguration("runtime_config_package")
     controllers_file = LaunchConfiguration("controllers_file")
     description_package = LaunchConfiguration("description_package")
-    moveit_config_package = LaunchConfiguration("moveit_config_package")
     description_file = LaunchConfiguration("description_file")
     robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
@@ -254,9 +245,8 @@ def generate_launch_description():
         [FindPackageShare(runtime_config_package), "config", controllers_file]
     )
 
-    # TODO(destogl): we should also have a non-moveit rviz file
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(moveit_config_package), "rviz", "moveit.rviz"]
+        [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
     )
 
     control_node = Node(
