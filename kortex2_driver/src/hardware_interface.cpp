@@ -464,6 +464,12 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
         stop_modes_.push_back(StoppingInterface::STOP_GRIPPER);
         continue;
       }
+      if (
+        key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY &&
+        joint.name == gripper_joint_name_)
+      {
+        continue;
+      }
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
       {
         stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
