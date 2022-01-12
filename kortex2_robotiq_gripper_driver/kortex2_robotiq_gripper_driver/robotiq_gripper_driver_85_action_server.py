@@ -32,16 +32,13 @@ class Robotiq85ActionServer(Node):
         super().__init__("robotiq_gripper_driver_85_action_server")
 
         self.declare_parameter("timeout", 5.0)
-        self.declare_parameter("position_tolerance", 0.001)
+        self.declare_parameter("position_tolerance", 0.05)
         self.declare_parameter("gear_ratio", 1.0)
 
         self._timeout = self.get_parameter("timeout").get_parameter_value().double_value
         self._position_tolerance = (
             self.get_parameter("position_tolerance").get_parameter_value().double_value
         )
-
-        # The command to the gripper is 0 - 100 But we get the input and joint state 0 - 0.8
-        self._gear_ratio = self.get_parameter("gear_ratio").get_parameter_value().double_value
 
         self.create_subscription(JointState, "/joint_states", self._update_gripper_stat, 10)
         self._gripper_pub = self.create_publisher(
@@ -53,7 +50,7 @@ class Robotiq85ActionServer(Node):
         self._action_server = ActionServer(
             self,
             GripperCommand,
-            "/hand_controller/gripper_cmd",
+            "/robotiq_gripper_controller/gripper_cmd",
             goal_callback=self._goal_callback,
             cancel_callback=self._cancel_callback,
             execute_callback=self._execute_callback,
@@ -87,7 +84,7 @@ class Robotiq85ActionServer(Node):
 
         # Send goal to gripper
         cmd_msg = Float64MultiArray()
-        gripper_command_postion = self._gear_ratio * goal_handle.request.command.position
+        gripper_command_postion = goal_handle.request.command.position
         cmd_msg.data = [gripper_command_postion]
         self.get_logger().info("Got goal position: " + str(goal_handle.request.command.position))
         self._gripper_pub.publish(cmd_msg)
