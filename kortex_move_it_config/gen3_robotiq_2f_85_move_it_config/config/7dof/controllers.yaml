@@ -1,6 +1,6 @@
 controller_names:
   - joint_trajectory_controller
-  - hand_controller
+  - robotiq_gripper_controller
 
 joint_trajectory_controller:
   action_ns: follow_joint_trajectory
@@ -15,9 +15,15 @@ joint_trajectory_controller:
     - joint_6
     - joint_7
 
-hand_controller:
+robotiq_gripper_controller:
   action_ns: gripper_cmd
   type: GripperCommand
   default: true
   joints:
     - finger_joint
+    - robotiq_85_left_knuckle_joint
+    - robotiq_85_right_knuckle_joint
+    - robotiq_85_left_inner_knuckle_joint
+    - robotiq_85_right_inner_knuckle_joint
+    - robotiq_85_left_finger_tip_joint
+    - robotiq_85_right_finger_tip_joint
