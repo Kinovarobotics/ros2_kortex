@@ -716,8 +716,9 @@ return_type KortexMultiInterfaceHardware::read()
   if (first_pass_)
   {
     first_pass_ = false;
+    feedback_ = base_cyclic_.RefreshFeedback();
   }
-  feedback_ = base_cyclic_.RefreshFeedback();
+  //  feedback_ = base_cyclic_.RefreshFeedback();
 
   // get arm servoing mode
   //  arm_mode_ = base_.GetServoingMode().servoing_mode();
@@ -759,7 +760,7 @@ return_type KortexMultiInterfaceHardware::write()
 {
   if (block_write)
   {
-    //    feedback_ = base_cyclic_.RefreshFeedback();
+    feedback_ = base_cyclic_.RefreshFeedback();
     return return_type::OK;
   }
 
@@ -833,6 +834,10 @@ return_type KortexMultiInterfaceHardware::write()
       RCLCPP_DEBUG(LOGGER, "No controller active!");
     }
   }
+
+  // read after write
+  feedback_ = base_cyclic_.RefreshFeedback();
+
   return return_type::OK;
 }
 
