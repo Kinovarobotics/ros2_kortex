@@ -835,8 +835,11 @@ return_type KortexMultiInterfaceHardware::write()
     }
   }
 
-  // read after write
-  feedback_ = base_cyclic_.RefreshFeedback();
+  // read after write if jtc is running
+  if (!joint_based_controller_running_)
+  {
+    feedback_ = base_cyclic_.RefreshFeedback();
+  }
 
   return return_type::OK;
 }
