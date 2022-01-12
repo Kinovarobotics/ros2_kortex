@@ -271,6 +271,8 @@ KortexMultiInterfaceHardware::export_state_interfaces()
     {
       state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
+      state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &gripper_velocity_));
     }
     else
     {
