@@ -11,15 +11,15 @@ publisher_joint_trajectory_controller:
     pos4: [0.0, 0.785, 0.0, 0.0, 0.785, 0.0, -1.57]
 
     joints:
-      - joint_1
-      - joint_2
-      - joint_3
-      - joint_4
-      - joint_5
-      - joint_6
-      - joint_7
+      - arm_joint_1
+      - arm_joint_2
+      - arm_joint_3
+      - arm_joint_4
+      - arm_joint_5
+      - arm_joint_6
+      - arm_joint_7
 
-    check_starting_point: true
+    check_starting_point: false
     starting_point_limits:
       joint_1: [-0.1,0.1]
       joint_2: [-0.1,0.1]

@@ -194,7 +194,6 @@ def generate_launch_description():
     )
     robot_description_semantic = {"robot_description_semantic": robot_description_semantic_content}
 
-    # TODO(destogl): change this hard-coded name to "moveit_config_package"
     kinematics_yaml = (
         PathJoinSubstitution(
             [FindPackageShare(moveit_config_package), "config", "kinematics.yaml"]
@@ -210,6 +209,7 @@ def generate_launch_description():
             "start_state_max_bounds_error": 0.1,
         }
     }
+    # TODO(destogl): change this hard-coded name to "moveit_config_package"
     ompl_planning_yaml = load_yaml("gen3_move_it_config", "config/ompl_planning.yaml")
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 

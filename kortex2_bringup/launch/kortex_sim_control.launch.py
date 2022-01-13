@@ -254,11 +254,18 @@ def generate_launch_description():
         condition=IfCondition(gazebo_sim),
     )
 
+    # gazebo = IncludeLaunchDescription(
+    # PythonLaunchDescriptionSource(
+    # [PathJoinSubstitution([FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"])]
+    # ),
+    # launch_arguments={"verbose": "false"}.items(),
+    # )
+
     # Spawn robot
     gazebo_spawn_robot = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        name="spawn_ur",
+        name="spawn_robot",
         arguments=["-entity", robot_name, "-topic", "robot_description"],
         output="screen",
         condition=IfCondition(gazebo_sim),
