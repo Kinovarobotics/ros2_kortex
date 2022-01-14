@@ -2,13 +2,17 @@ repositories:
 
   gazebo_ros2_control:
     type: git
-    url: https://github.com/ros-simulation/gazebo_ros2_control.git
-    version: master
+    url: https://github.com/destogl/gazebo_ros2_control.git
+    version: add-support-for-initial-position
 
-  ign_ros2_control:  # ahcorde/galactic/ign_ros2_control
+  ign_ros2_control:
     type: git
-    url: https://github.com/ignitionrobotics/ign_ros2_control.git
-    version: cd8c9c0569bfc68a0102cb9b0bb34da00e92b5fb  # Migration from Foxy to Galactic (#10)
+    url: https://github.com/StoglRobotics-forks/ign_ros2_control.git
+    version: add-support-for-initial-position
+  ros_ign:
+    type: git
+    url: https://github.com/ignitionrobotics/ros_ign.git
+    version: ros2
 
   ros2_control_demos:
     type: git
