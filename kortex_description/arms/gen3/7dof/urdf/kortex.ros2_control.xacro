@@ -6,8 +6,8 @@
     prefix
     use_fake_hardware:=false
     fake_sensor_commands:=false
-    gazebo_sim:=false
-    ignition_sim:=false
+    sim_gazebo:=false
+    sim_ignition:=false
     use_internal_bus_gripper_comm:=false
     tf_prefix
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0,joint_7=0.0)}
@@ -21,10 +21,10 @@
 
     <ros2_control name="${name}" type="system">
       <hardware>
-        <xacro:if value="${gazebo_sim}">
+        <xacro:if value="${sim_gazebo}">
           <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </xacro:if>
-        <xacro:if value="${ignition_sim}">
+        <xacro:if value="${sim_ignition}">
           <plugin>ign_ros2_control/IgnitionSystem</plugin>
         </xacro:if>
         <xacro:if value="${use_fake_hardware}">
@@ -32,7 +32,7 @@
           <param name="fake_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
-        <xacro:unless value="${use_fake_hardware or gazebo_sim or ignition_sim}">
+        <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition}">
           <plugin>kortex2_driver/KortexMultiInterfaceHardware</plugin>
           <param name="robot_ip">${robot_ip}</param>
           <param name="username">${username}</param>

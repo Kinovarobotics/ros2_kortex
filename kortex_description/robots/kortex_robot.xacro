@@ -20,8 +20,8 @@
     use_internal_bus_gripper_comm:=false
     use_fake_hardware:=false
     fake_sensor_commands:=false
-    gazebo_sim:=false
-    ignition_sim:=false" >
+    sim_gazebo:=false
+    sim_ignition:=false" >
 
     <!-- Include and load arm macro files -->
     <xacro:include filename="$(find kortex_description)/arms/${arm}/${dof}dof/urdf/${arm}_macro.xacro" />
@@ -42,8 +42,8 @@
       use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
       use_fake_hardware="${use_fake_hardware}"
       fake_sensor_commands="${fake_sensor_commands}"
-      gazebo_sim="${gazebo_sim}"
-      ignition_sim="${ignition_sim}" >
+      sim_gazebo="${sim_gazebo}"
+      sim_ignition="${sim_ignition}" >
       <xacro:insert_block name="origin" />
     </xacro:load_arm>
 
@@ -66,7 +66,7 @@
     </xacro:unless>
 
     <!-- Load the Gazebo transmissions and gazebo_ros_control plugin -->
-    <xacro:if value="${gazebo_sim or ignition_sim}">
+    <xacro:if value="${sim_gazebo or sim_ignition}">
       <!-- Arm transmission elements-->
       <xacro:include filename="$(find kortex_description)/arms/${arm}/${dof}dof/urdf/${arm}_transmission_macro.xacro" />
       <xacro:load_gazebo_arm_transmissions prefix="${prefix}"/>

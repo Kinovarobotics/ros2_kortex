@@ -20,8 +20,8 @@
   <xacro:arg name="use_internal_bus_gripper_comm" default="false" />
   <xacro:arg name="use_fake_hardware" default="true" />
   <xacro:arg name="fake_sensor_commands" default="true" />
-  <xacro:arg name="gazebo_sim" default="false" />
-  <xacro:arg name="ignition_sim" default="false" />
+  <xacro:arg name="sim_gazebo" default="false" />
+  <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="simulation_controllers" default="$(find kortex2_bringup)/config/kortex_controllers.yaml" />
 
 
@@ -48,12 +48,12 @@
     prefix="$(arg prefix)"
     use_fake_hardware="$(arg use_fake_hardware)"
     fake_sensor_commands="$(arg fake_sensor_commands)"
-    gazebo_sim="$(arg gazebo_sim)"
-    ignition_sim="$(arg ignition_sim)" >
+    sim_gazebo="$(arg sim_gazebo)"
+    sim_ignition="$(arg sim_ignition)" >
     <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
   </xacro:load_robot>
 
-  <xacro:if value="$(arg gazebo_sim)">
+  <xacro:if value="$(arg sim_gazebo)">
     <!-- Gazebo plugins -->
     <gazebo reference="world">
     </gazebo>
@@ -64,7 +64,7 @@
     </gazebo>
   </xacro:if>
 
-  <xacro:if value="$(arg ignition_sim)">
+  <xacro:if value="$(arg sim_ignition)">
     <!-- Gazebo plugins -->
     <gazebo reference="world">
     </gazebo>

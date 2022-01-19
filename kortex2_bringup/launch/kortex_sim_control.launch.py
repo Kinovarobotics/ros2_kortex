@@ -39,14 +39,14 @@ def generate_launch_description():
     # Simulation specific arguments
     declared_arguments.append(
         DeclareLaunchArgument(
-            "ignition_sim",
+            "sim_ignition",
             default_value="true",
             description="Use Ignition for simulation",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "gazebo_sim",
+            "sim_gazebo",
             default_value="false",
             description="Use Gazebo Classic for simulation",
         )
@@ -133,8 +133,8 @@ def generate_launch_description():
     )
 
     # Initialize Arguments
-    gazebo_sim = LaunchConfiguration("gazebo_sim")
-    ignition_sim = LaunchConfiguration("ignition_sim")
+    sim_gazebo = LaunchConfiguration("sim_gazebo")
+    sim_ignition = LaunchConfiguration("sim_ignition")
     robot_type = LaunchConfiguration("robot_type")
     # General arguments
     runtime_config_package = LaunchConfiguration("runtime_config_package")
@@ -175,11 +175,11 @@ def generate_launch_description():
             "prefix:=",
             prefix,
             " ",
-            "gazebo_sim:=",
-            gazebo_sim,
+            "sim_gazebo:=",
+            sim_gazebo,
             " ",
-            "ignition_sim:=",
-            ignition_sim,
+            "sim_ignition:=",
+            sim_ignition,
             " ",
             "simulation_controllers:=",
             robot_controllers,
@@ -244,14 +244,14 @@ def generate_launch_description():
     gzserver = ExecuteProcess(
         cmd=["gzserver", "-s", "libgazebo_ros_init.so", "-s", "libgazebo_ros_factory.so", ""],
         output="screen",
-        condition=IfCondition(gazebo_sim),
+        condition=IfCondition(sim_gazebo),
     )
 
     # Gazebo client
     gzclient = ExecuteProcess(
         cmd=["gzclient"],
         output="screen",
-        condition=IfCondition(gazebo_sim),
+        condition=IfCondition(sim_gazebo),
     )
 
     # gazebo = IncludeLaunchDescription(
@@ -268,7 +268,7 @@ def generate_launch_description():
         name="spawn_robot",
         arguments=["-entity", robot_name, "-topic", "robot_description"],
         output="screen",
-        condition=IfCondition(gazebo_sim),
+        condition=IfCondition(sim_gazebo),
     )
 
     ignition_spawn_entity = Node(
@@ -283,7 +283,7 @@ def generate_launch_description():
             "-allow_renaming",
             "true",
         ],
-        condition=IfCondition(ignition_sim),
+        condition=IfCondition(sim_ignition),
     )
 
     ignition_launch_description = IncludeLaunchDescription(
@@ -291,7 +291,7 @@ def generate_launch_description():
             [FindPackageShare("ros_ign_gazebo"), "/launch/ign_gazebo.launch.py"]
         ),
         launch_arguments={"ign_args": " -r -v 3 empty.sdf"}.items(),
-        condition=IfCondition(ignition_sim),
+        condition=IfCondition(sim_ignition),
     )
 
     nodes_to_start = [
