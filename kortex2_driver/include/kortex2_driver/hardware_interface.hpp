@@ -137,6 +137,7 @@ private:
   k_api::GripperCyclic::MotorCommand * gripper_motor_command_;
   double gripper_command_position_;
   double gripper_position_;
+  double gripper_velocity_;
 
   rclcpp::Time controller_switch_time_;
   std::atomic<bool> block_write = false;

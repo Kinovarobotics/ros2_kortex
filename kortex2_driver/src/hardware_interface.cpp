@@ -271,6 +271,8 @@ KortexMultiInterfaceHardware::export_state_interfaces()
     {
       state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
+      state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &gripper_velocity_));
     }
     else
     {
@@ -460,6 +462,12 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
         joint.name == gripper_joint_name_)
       {
         stop_modes_.push_back(StoppingInterface::STOP_GRIPPER);
+        continue;
+      }
+      if (
+        key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY &&
+        joint.name == gripper_joint_name_)
+      {
         continue;
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
@@ -714,8 +722,9 @@ return_type KortexMultiInterfaceHardware::read()
   if (first_pass_)
   {
     first_pass_ = false;
+    feedback_ = base_cyclic_.RefreshFeedback();
   }
-  feedback_ = base_cyclic_.RefreshFeedback();
+  //  feedback_ = base_cyclic_.RefreshFeedback();
 
   // get arm servoing mode
   //  arm_mode_ = base_.GetServoingMode().servoing_mode();
@@ -757,7 +766,7 @@ return_type KortexMultiInterfaceHardware::write()
 {
   if (block_write)
   {
-    //    feedback_ = base_cyclic_.RefreshFeedback();
+    feedback_ = base_cyclic_.RefreshFeedback();
     return return_type::OK;
   }
 
@@ -831,6 +840,13 @@ return_type KortexMultiInterfaceHardware::write()
       RCLCPP_DEBUG(LOGGER, "No controller active!");
     }
   }
+
+  // read after write if jtc is running
+  if (!joint_based_controller_running_)
+  {
+    feedback_ = base_cyclic_.RefreshFeedback();
+  }
+
   return return_type::OK;
 }
 

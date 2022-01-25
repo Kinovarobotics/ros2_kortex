@@ -123,6 +123,7 @@
       <joint name="${prefix}finger_joint">
         <command_interface name="position"/>
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
       </xacro:if>
     </ros2_control>
