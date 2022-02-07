@@ -50,16 +50,34 @@ ROS2 Distro | Branch | Build status
    source install/setup.bash
    ```
 
+5. To simulate the robot with ignition or gazebo make sure to pull and build additional packages:
+   ```
+   vcs import src --skip-existing --input src/ros2_kortex/simulation.repos
+   rosdep install --ignore-src --from-paths src -y -r
+   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+   source install/setup.bash
+   ```
+
 ## Usage
 To launch and view the robots URDF run:
 
         ros2 launch kortex_description view_robot.launch.py
 
-To simulate the robot and generate paths with MoveIt run the following:
+To simulate the robot with fake hardware and generate paths with MoveIt run the following:
 
         ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true launch_rviz:=false
 
         ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true
+
+To simulate the robot with gazebo run the following:
+   ```
+   ros2 launch kortex2_bringup kortex_sim_control.launch.py sim_gazebo:=true sim_ignition:=false
+   ```
+
+To simulate the robot with ignition run the following:
+   ```
+   ros2 launch kortex2_bringup kortex_sim_control.launch.py
+   ```
 
 To work with a physical robot and generate/execute paths with MoveIt run the following:
 
