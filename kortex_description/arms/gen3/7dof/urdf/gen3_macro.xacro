@@ -18,52 +18,58 @@
     port_realtime:=10001
     session_inactivity_timeout_ms:=6000
     connection_inactivity_timeout_ms:=2000
-    use_fake_hardware
-    fake_sensor_commands
-    use_internal_bus_gripper_comm:=false">
+    use_internal_bus_gripper_comm:=false
+    use_fake_hardware:=false
+    fake_sensor_commands:=false
+    sim_gazebo:=false
+    sim_ignition:=false
+    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0,joint_7=0.0)}" >
 
-      <!-- ros2 control include -->
-      <xacro:include filename="$(find kortex_description)/arms/gen3/${dof}dof/urdf/kortex.ros2_control.xacro" />
-      <xacro:kortex_ros2_control
-        name="KortexMultiInterfaceHardware" prefix="${prefix}"
-        use_fake_hardware="${use_fake_hardware}"
-        fake_sensor_commands="${fake_sensor_commands}"
-        tf_prefix=""
-        robot_ip="${robot_ip}"
-        username="${username}"
-        password="${password}"
-        port="${port}"
-        port_realtime="${port_realtime}"
-        session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
-        connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
-        use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
+    <!-- ros2 control include -->
+    <xacro:include filename="$(find kortex_description)/arms/gen3/${dof}dof/urdf/kortex.ros2_control.xacro" />
+    <xacro:kortex_ros2_control
+      name="${prefix}KortexMultiInterfaceHardware" prefix="${prefix}"
+      use_fake_hardware="${use_fake_hardware}"
+      fake_sensor_commands="${fake_sensor_commands}"
+      sim_gazebo="${sim_gazebo}"
+      sim_ignition="${sim_ignition}"
+      tf_prefix=""
+      initial_positions="${initial_positions}"
+      robot_ip="${robot_ip}"
+      username="${username}"
+      password="${password}"
+      port="${port}"
+      port_realtime="${port_realtime}"
+      session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
+      connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
+      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}" />
 
-      <joint name="${prefix}base_joint" type="fixed">
-        <xacro:insert_block name="origin" />
-        <parent link="${parent}"/>
-        <child link="${prefix}base_link" />
-      </joint>
-      <link name="${prefix}base_link">
-        <inertial>
-          <origin xyz="-0.000648 -0.000166 0.084487" rpy="0 0 0" />
-          <mass value="1.697" />
-          <inertia ixx="0.004622" ixy="9E-06" ixz="6E-05" iyy="0.004495" iyz="9E-06" izz="0.002079" />
-        </inertial>
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/base_link.STL" />
-          </geometry>
-          <material name="">
-            <color rgba="0.75294 0.75294 0.75294 1" />
-          </material>
-        </visual>
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/base_link.STL" />
-          </geometry>
-        </collision>
+    <joint name="${prefix}base_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="${prefix}base_link" />
+    </joint>
+    <link name="${prefix}base_link">
+      <inertial>
+        <origin xyz="-0.000648 -0.000166 0.084487" rpy="0 0 0" />
+        <mass value="1.697" />
+        <inertia ixx="0.004622" ixy="9E-06" ixz="6E-05" iyy="0.004495" iyz="9E-06" izz="0.002079" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/base_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.75294 0.75294 0.75294 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/base_link.STL" />
+        </geometry>
+      </collision>
     </link>
     <link name="${prefix}shoulder_link">
       <inertial>
@@ -74,7 +80,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/shoulder_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/shoulder_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -83,7 +89,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/shoulder_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/shoulder_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -110,7 +116,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/half_arm_1_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/half_arm_1_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -119,7 +125,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/half_arm_1_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/half_arm_1_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -144,7 +150,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/half_arm_2_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/half_arm_2_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -153,7 +159,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/half_arm_2_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/half_arm_2_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -180,7 +186,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/forearm_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/forearm_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -189,7 +195,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/forearm_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/forearm_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -214,7 +220,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/spherical_wrist_1_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/spherical_wrist_1_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -223,7 +229,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/spherical_wrist_1_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/spherical_wrist_1_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -250,7 +256,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/spherical_wrist_2_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/spherical_wrist_2_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -259,7 +265,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/spherical_wrist_2_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/spherical_wrist_2_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -285,7 +291,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/bracelet_with_vision_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bracelet_with_vision_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -294,7 +300,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/bracelet_with_vision_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bracelet_with_vision_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -309,7 +315,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/bracelet_no_vision_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bracelet_no_vision_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.75294 0.75294 0.75294 1" />
@@ -318,7 +324,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/arms/gen3/${dof}dof/meshes/bracelet_no_vision_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bracelet_no_vision_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -349,6 +355,7 @@
       <axis
         xyz="0 0 0" />
     </joint>
+    <!-- TODO(destogl) this probably collides with camera URDF -->
     <xacro:if value="${vision}">
       <link name="${prefix}camera_link" />
       <joint name="${prefix}camera_module" type="fixed">
