@@ -145,7 +145,7 @@ def generate_launch_description():
     prefix = LaunchConfiguration("prefix")
     robot_traj_controller = LaunchConfiguration("robot_controller")
     robot_pos_controller = LaunchConfiguration("robot_pos_controller")
-    robot_hand_controller = LaunchConfiguration("robot_hand_controller")
+    # robot_hand_controller = LaunchConfiguration("robot_hand_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
 
     robot_controllers = PathJoinSubstitution(
@@ -234,11 +234,11 @@ def generate_launch_description():
         arguments=[robot_pos_controller, "--stopped", "-c", "/controller_manager"],
     )
 
-    robot_hand_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[robot_hand_controller, "-c", "/controller_manager"],
-    )
+    # robot_hand_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=[robot_hand_controller, "-c", "/controller_manager"],
+    # )
 
     # Gazebo nodes
     gzserver = ExecuteProcess(
