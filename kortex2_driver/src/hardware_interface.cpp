@@ -976,6 +976,10 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   {
     RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
   }
+  catch (std::exception & ex_std)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
+  }
 }
 
 void KortexMultiInterfaceHardware::incrementId()
