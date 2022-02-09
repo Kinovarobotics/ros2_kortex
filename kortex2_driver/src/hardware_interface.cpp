@@ -56,7 +56,9 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   base_cyclic_{&router_udp_realtime_},
   servoing_mode_hw_(k_api::Base::ServoingModeInformation()),
   joint_based_controller_running_(false),
+  joint_based_controller_running_tmp_(false),
   twist_controller_running_(false),
+  twist_controller_running_tmp_(false),
   gripper_controller_running_(false),
   fault_controller_running_(false),
   first_pass_(true),
@@ -366,6 +368,10 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
 {
   hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
 
+  // remember state of the two possible robot controllers
+  joint_based_controller_running_tmp_ = joint_based_controller_running_;
+  twist_controller_running_tmp_ = twist_controller_running_;
+
   // sleep to ensure all outgoing write commands have finished
   block_write = true;
   std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -551,12 +557,15 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
 {
   hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
 
+  // reset one shots
+  joint_based_controller_stopped_ons_ = twist_controller_stopped_ons_ = false;
+
   if (
     !stop_modes_.empty() &&
     std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) !=
       stop_modes_.end())
   {
-    joint_based_controller_running_ = false;
+    joint_based_controller_stopped_ons_ = true;
     arm_commands_positions_ = arm_positions_;
     arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
   }
@@ -565,7 +574,7 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_TWIST) !=
       stop_modes_.end())
   {
-    twist_controller_running_ = false;
+    twist_controller_stopped_ons_ = true;
     twist_commands_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
   }
   else if (
@@ -591,6 +600,11 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) !=
      start_modes_.end()))
   {
+    if (twist_controller_running_ && !twist_controller_stopped_ons_)
+    {
+      RCLCPP_ERROR(LOGGER, "Can't start joint based controller while twist controller is running!");
+      return hardware_interface::return_type::ERROR;
+    }
     servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
     base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
@@ -606,6 +620,11 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) !=
       start_modes_.end())
   {
+    if (joint_based_controller_running_ && !joint_based_controller_stopped_ons_)
+    {
+      RCLCPP_ERROR(LOGGER, "Can't start twist controller while joint based controller is running!");
+      return hardware_interface::return_type::ERROR;
+    }
     servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
     base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
