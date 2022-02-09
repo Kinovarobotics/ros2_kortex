@@ -61,8 +61,18 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   fault_controller_running_(false),
   first_pass_(true),
   gripper_joint_name_(""),
-  use_internal_bus_gripper_comm_(false)
+  use_internal_bus_gripper_comm_(false),
+  finger_(nullptr),
+  k_api_twist_(nullptr),
+  gripper_motor_command_(nullptr)
 {
+  RCLCPP_INFO(LOGGER, "Setting severity threshold to DEBUG");
+  auto ret = rcutils_logging_set_logger_level(LOGGER.get_name(), RCUTILS_LOG_SEVERITY_DEBUG);
+  if (ret != RCUTILS_RET_OK)
+  {
+    RCLCPP_ERROR(LOGGER, "Error setting severity: %s", rcutils_get_error_string().str);
+    rcutils_reset_error();
+  }
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::HardwareInfo & info)
@@ -712,6 +722,11 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   router_udp_realtime_.SetActivationStatus(false);
   transport_udp_realtime_.disconnect();
 
+  // memory handling
+  delete finger_;
+  delete k_api_twist_;
+  delete gripper_motor_command_;
+
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully deactivated!");
 
   return CallbackReturn::SUCCESS;
@@ -724,10 +739,6 @@ return_type KortexMultiInterfaceHardware::read()
     first_pass_ = false;
     feedback_ = base_cyclic_.RefreshFeedback();
   }
-  //  feedback_ = base_cyclic_.RefreshFeedback();
-
-  // get arm servoing mode
-  //  arm_mode_ = base_.GetServoingMode().servoing_mode();
 
   // read if robot is faulted
   in_fault_ = (feedback_.base().active_state() == Kinova::Api::Common::ArmState::ARMSTATE_IN_FAULT);
@@ -812,6 +823,11 @@ return_type KortexMultiInterfaceHardware::write()
         // twist control
         sendTwistCommand();
       }
+      else
+      {
+        // Keep alive mode - no controller active
+        RCLCPP_DEBUG(LOGGER, "No controller active in SINGLE_LEVEL_SERVOING mode!");
+      }
 
       // gripper control
       sendGripperCommand(arm_mode_, gripper_command_position_);
@@ -830,18 +846,20 @@ return_type KortexMultiInterfaceHardware::write()
         // send commands to the joints
         sendJointCommands();
       }
+      else
+      {
+        // Keep alive mode - no controller active
+        RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
+      }
     }
-    else if (
-      (!joint_based_controller_running_ && !twist_controller_running_) ||
-      arm_mode_ != k_api::Base::ServoingMode::LOW_LEVEL_SERVOING ||
-      feedback_.base().active_state() != k_api::Common::ARMSTATE_SERVOING_LOW_LEVEL)
+    else
     {
       // Keep alive mode - no controller active
-      RCLCPP_DEBUG(LOGGER, "No controller active!");
+      RCLCPP_DEBUG(LOGGER, "arm_mode is set to unsupported mode!");
     }
   }
 
-  // read after write if jtc is running
+  // read after write if jtc is not running
   if (!joint_based_controller_running_)
   {
     feedback_ = base_cyclic_.RefreshFeedback();
@@ -885,13 +903,6 @@ void KortexMultiInterfaceHardware::sendJointCommands()
     RCLCPP_ERROR_STREAM(
       LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                 k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
-
-    // attempt to clear any robot faults
-    base_.ClearFaults();
-    feedback_ = base_cyclic_.RefreshFeedback();
-    RCLCPP_WARN(
-      LOGGER, "Attempting to clear faults. [base_active_state: %u]",
-      feedback_.base().active_state());
   }
 }
 
@@ -913,9 +924,9 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
       {
         k_api::Base::GripperCommand gripper_command;
         gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
-        auto finger = gripper_command.mutable_gripper()->add_finger();
-        finger->set_finger_identifier(1);
-        finger->set_value(
+        finger_ = gripper_command.mutable_gripper()->add_finger();
+        finger_->set_finger_identifier(1);
+        finger_->set_value(
           static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
         base_.SendGripperCommand(gripper_command);
       }
@@ -943,21 +954,20 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
 
 void KortexMultiInterfaceHardware::sendTwistCommand()
 {
-  auto command = k_api::Base::TwistCommand();
-  command.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
+  k_api_twist_command_.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
   // command.set_duration = execute time (milliseconds) according to the api ->
   // (not implemented yet)
   // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
-  command.set_duration(0);
+  k_api_twist_command_.set_duration(0);
 
-  auto twist = command.mutable_twist();
-  twist->set_linear_x(static_cast<float>(twist_commands_[0]));
-  twist->set_linear_y(static_cast<float>(twist_commands_[1]));
-  twist->set_linear_z(static_cast<float>(twist_commands_[2]));
-  twist->set_angular_x(static_cast<float>(twist_commands_[3]));
-  twist->set_angular_y(static_cast<float>(twist_commands_[4]));
-  twist->set_angular_z(static_cast<float>(twist_commands_[5]));
-  base_.SendTwistCommand(command);
+  k_api_twist_ = k_api_twist_command_.mutable_twist();
+  k_api_twist_->set_linear_x(static_cast<float>(twist_commands_[0]));
+  k_api_twist_->set_linear_y(static_cast<float>(twist_commands_[1]));
+  k_api_twist_->set_linear_z(static_cast<float>(twist_commands_[2]));
+  k_api_twist_->set_angular_x(static_cast<float>(twist_commands_[3]));
+  k_api_twist_->set_angular_y(static_cast<float>(twist_commands_[4]));
+  k_api_twist_->set_angular_z(static_cast<float>(twist_commands_[5]));
+  base_.SendTwistCommand(k_api_twist_command_);
 }
 
 }  // namespace kortex2_driver
