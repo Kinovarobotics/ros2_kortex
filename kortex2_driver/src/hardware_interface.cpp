@@ -598,6 +598,8 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     arm_commands_positions_ = arm_positions_;
     arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     joint_based_controller_running_ = true;
+    // refresh feedback
+    feedback_ = base_cyclic_.RefreshFeedback();
   }
   else if (
     !start_modes_.empty() &&
