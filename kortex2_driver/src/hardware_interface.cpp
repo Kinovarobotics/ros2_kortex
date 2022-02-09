@@ -968,6 +968,10 @@ void KortexMultiInterfaceHardware::sendJointCommands()
       LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                 k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
   }
+  catch (std::runtime_error & ex2)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex2.what());
+  }
 }
 
 void KortexMultiInterfaceHardware::incrementId()
