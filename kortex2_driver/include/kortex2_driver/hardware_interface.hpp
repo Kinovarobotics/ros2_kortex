@@ -166,9 +166,7 @@ private:
   k_api::Base::ServoingModeInformation servoing_mode_hw_;
   // what controller is running
   bool joint_based_controller_running_;
-  bool joint_based_controller_stopped_ons_;
   bool twist_controller_running_;
-  bool twist_controller_stopped_ons_;
   bool gripper_controller_running_;
   bool fault_controller_running_;
   // switching auxiliary vars
