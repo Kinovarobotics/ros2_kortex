@@ -120,9 +120,6 @@ private:
   Kinova::Api::Base::Twist * k_api_twist_;
   k_api::Base::TwistCommand k_api_twist_command_;
 
-  // gripper temporary finger
-  Kinova::Api::Base::Finger * finger_;
-
   // Control of the robot arm itself
   k_api::Base::BaseClient base_;
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;

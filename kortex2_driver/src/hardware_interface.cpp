@@ -70,7 +70,6 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   first_pass_(true),
   gripper_joint_name_(""),
   use_internal_bus_gripper_comm_(false),
-  finger_(nullptr),
   k_api_twist_(nullptr),
   gripper_motor_command_(nullptr)
 {
@@ -218,6 +217,16 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
     arm_mode_ = Kinova::Api::Base::LOW_LEVEL_SERVOING;
     base_.SetServoingMode(servoing_mode_hw_);
+  }
+
+  // initialize kortex api twist commandd
+  {
+    k_api_twist_command_.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
+    // command.set_duration = execute time (milliseconds) according to the api ->
+    // (not implemented yet)
+    // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
+    k_api_twist_command_.set_duration(0);
+    k_api_twist_ = k_api_twist_command_.mutable_twist();
   }
 
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -793,7 +802,6 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   transport_udp_realtime_.disconnect();
 
   // memory handling
-  delete finger_;
   delete k_api_twist_;
   delete gripper_motor_command_;
 
@@ -1006,9 +1014,9 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
       {
         k_api::Base::GripperCommand gripper_command;
         gripper_command.set_mode(k_api::Base::GRIPPER_POSITION);
-        finger_ = gripper_command.mutable_gripper()->add_finger();
-        finger_->set_finger_identifier(1);
-        finger_->set_value(
+        auto finger = gripper_command.mutable_gripper()->add_finger();
+        finger->set_finger_identifier(1);
+        finger->set_value(
           static_cast<float>(position / 0.81));  // This values needs to be between 0 and 1
         base_.SendGripperCommand(gripper_command);
       }
@@ -1036,13 +1044,6 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
 
 void KortexMultiInterfaceHardware::sendTwistCommand()
 {
-  k_api_twist_command_.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
-  // command.set_duration = execute time (milliseconds) according to the api ->
-  // (not implemented yet)
-  // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
-  k_api_twist_command_.set_duration(0);
-
-  k_api_twist_ = k_api_twist_command_.mutable_twist();
   k_api_twist_->set_linear_x(static_cast<float>(twist_commands_[0]));
   k_api_twist_->set_linear_y(static_cast<float>(twist_commands_[1]));
   k_api_twist_->set_linear_z(static_cast<float>(twist_commands_[2]));
