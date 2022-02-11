@@ -116,6 +116,10 @@ private:
   k_api::RouterClient router_udp_realtime_;
   k_api::SessionManager session_manager_real_time_;
 
+  // twist temporary command
+  Kinova::Api::Base::Twist * k_api_twist_;
+  k_api::Base::TwistCommand k_api_twist_command_;
+
   // Control of the robot arm itself
   k_api::Base::BaseClient base_;
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
@@ -165,7 +169,17 @@ private:
   // switching auxiliary vars
   std::vector<StoppingInterface> stop_modes_;
   std::vector<std::string> start_modes_;
+  // switching auxiliary booleans
+  bool stop_joint_based_controller_;
+  bool stop_twist_controller_;
+  bool stop_gripper_controller_;
+  bool stop_fault_controller_;
+  bool start_joint_based_controller_;
+  bool start_twist_controller_;
+  bool start_gripper_controller_;
+  bool start_fault_controller_;
 
+  // first pass flag
   bool first_pass_;
 
   // gripper stuff
@@ -182,9 +196,6 @@ private:
   double reset_fault_async_success_;
   double in_fault_;
   static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
-  bool twist_controller_running_tmp_ = false;
-  bool joint_based_controller_running_tmp_ = false;
-  bool gripper_controller_running_tmp_ = false;
 
   void sendTwistCommand();
   void incrementId();
