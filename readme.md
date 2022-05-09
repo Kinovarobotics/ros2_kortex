@@ -85,21 +85,14 @@ To work with a physical robot and generate/execute paths with MoveIt run the fol
 
         ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false
 
-Gripper is currently on a command topic:
+If you are using the `kortex_controllers.yaml` file the Gripper will be available on the Action topic:
 
-        /hand_controller/commands
+        /robotiq_gripper_controller/gripper_cmd
 
-You can test the gripper with the following but replace <> with value as a percentage of open (`0.0=open`, `100.0=close`)
+You can test the gripper by calling the Action server with the following command and setting the desired `position` of thr gripper (`0.0=open`, `0.8=close`)
 
 ```bash
-ros2 topic pub /hand_controller/commands std_msgs/msg/Float64MultiArray "layout:
-  dim:
-  - label: ''
-    size: 0
-    stride: 0
-  data_offset: 0
-data:
-- 0"
+ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
 ```
 
 

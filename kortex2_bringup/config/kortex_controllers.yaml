@@ -11,9 +11,6 @@ controller_manager:
     streaming_controller:
       type: kortex2_controllers/TwistController
 
-    # The gripper controller just relays position commands
-    # hand_controller:
-    #  type: forward_command_controller/ForwardCommandController
     robotiq_gripper_controller:
       type: position_controllers/GripperActionController
 
@@ -54,13 +51,8 @@ streaming_controller:
       - twist.angular.y
       - twist.angular.z
 
-#hand_controller:
-#  ros__parameters:
-#    joints:
-#      - finger_joint
-#    interface_name: position
-
 robotiq_gripper_controller:
   ros__parameters:
     default: true
     joint: finger_joint
+    interface_name: position

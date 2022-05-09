@@ -124,7 +124,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_hand_controller",
-            default_value="hand_controller",
+            default_value="robotiq_gripper_controller",
             description="Robot hand controller to start.",
         )
     )
