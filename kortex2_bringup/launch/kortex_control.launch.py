@@ -163,7 +163,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_hand_controller",
-            default_value="hand_controller",
+            default_value="robotiq_gripper_controller",
             description="Robot hand controller to start.",
         )
     )
@@ -319,16 +319,6 @@ def generate_launch_description():
         arguments=[fault_controller, "-c", "/controller_manager"],
     )
 
-    robotiq_gripper_server = Node(
-        package="kortex2_robotiq_gripper_driver",
-        executable="robotiq_gripper_driver_85_action_server",
-        condition=IfCondition(use_internal_bus_gripper_comm),
-        output={
-            "stdout": "screen",
-            "stderr": "screen",
-        },
-    )
-
     nodes_to_start = [
         control_node,
         robot_state_publisher_node,
@@ -337,7 +327,6 @@ def generate_launch_description():
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
-        robotiq_gripper_server,
         fault_controller_spawner,
     ]
 
