@@ -58,6 +58,7 @@ constexpr char HW_IF_FAULT[] = "fault";
 }  // namespace hardware_interface
 
 using hardware_interface::return_type;
+using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 namespace k_api = Kinova::Api;
 

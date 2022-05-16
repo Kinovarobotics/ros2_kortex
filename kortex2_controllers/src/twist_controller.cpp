@@ -80,7 +80,7 @@ CallbackReturn TwistController::on_init()
 
 CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  joint_name_ = node_->get_parameter("joint").as_string();
+  joint_name_ = get_node()->get_parameter("joint").as_string();
 
   if (joint_name_.empty())
   {
@@ -91,7 +91,7 @@ CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State & /*p
   // Specialized, child controllers set interfaces before calling configure function.
   if (interface_names_.empty())
   {
-    interface_names_ = node_->get_parameter("interface_names").as_string_array();
+    interface_names_ = get_node()->get_parameter("interface_names").as_string_array();
   }
 
   if (interface_names_.empty())
@@ -136,7 +136,7 @@ controller_interface::return_type TwistController::update(
   if (command_interfaces_.size() != 6)
   {
     RCLCPP_ERROR_THROTTLE(
-      get_node()->get_logger(), *node_->get_clock(), 1000,
+      get_node()->get_logger(), *get_node()->get_clock(), 1000,
       "Twist controller needs does not match number of interfaces needed 6, given (%zu) interfaces",
       command_interfaces_.size());
     return controller_interface::return_type::ERROR;
