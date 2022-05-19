@@ -5,7 +5,50 @@
   <!-- Propagate last link name information because it is the gripper's parent link -->
   <xacro:property name="last_arm_link" value="dummy_link"/>
 
-  <xacro:macro name="load_arm" params="parent:='' dof vision prefix *origin">
+  <xacro:macro name="load_arm" params="
+    parent
+    dof
+    vision
+    prefix
+    *origin
+    robot_ip
+    username:=admin
+    password:=admin
+    port:=10000
+    port_realtime:=10001
+    session_inactivity_timeout_ms:=6000
+    connection_inactivity_timeout_ms:=2000
+    use_internal_bus_gripper_comm:=false
+    use_fake_hardware:=false
+    fake_sensor_commands:=false
+    sim_gazebo:=false
+    sim_ignition:=false
+    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}" >
+
+    <!-- ros2 control include -->
+    <xacro:include filename="$(find kortex_description)/arms/gen3_lite/${dof}dof/urdf/kortex.ros2_control.xacro" />
+    <xacro:kortex_ros2_control
+      name="${prefix}KortexMultiInterfaceHardware" prefix="${prefix}"
+      use_fake_hardware="${use_fake_hardware}"
+      fake_sensor_commands="${fake_sensor_commands}"
+      sim_gazebo="${sim_gazebo}"
+      sim_ignition="${sim_ignition}"
+      tf_prefix=""
+      initial_positions="${initial_positions}"
+      robot_ip="${robot_ip}"
+      username="${username}"
+      password="${password}"
+      port="${port}"
+      port_realtime="${port_realtime}"
+      session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
+      connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
+      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}" />
+
+    <joint name="${prefix}base_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="${prefix}base_link" />
+    </joint>
     <link name="${prefix}base_link">
       <inertial>
         <origin xyz="0.00244324 0.00015573 0.08616742" rpy="0 0 0" />
