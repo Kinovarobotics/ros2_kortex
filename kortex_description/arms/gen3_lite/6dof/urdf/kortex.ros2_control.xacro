@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="kortex_ros2_control" params="
+    name
+    prefix
+    use_fake_hardware:=false
+    fake_sensor_commands:=false
+    sim_gazebo:=false
+    sim_ignition:=false
+    use_internal_bus_gripper_comm:=false
+    tf_prefix
+    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}
+    robot_ip
+    username
+    password
+    port
+    port_realtime
+    session_inactivity_timeout_ms
+    connection_inactivity_timeout_ms">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <xacro:if value="${sim_gazebo}">
+          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </xacro:if>
+        <xacro:if value="${sim_ignition}">
+          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </xacro:if>
+        <xacro:if value="${use_fake_hardware}">
+          <plugin>fake_components/GenericSystem</plugin>
+          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="state_following_offset">0.0</param>
+        </xacro:if>
+        <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition}">
+          <plugin>kortex2_driver/KortexMultiInterfaceHardware</plugin>
+          <param name="robot_ip">${robot_ip}</param>
+          <param name="username">${username}</param>
+          <param name="password">${password}</param>
+          <param name="port">${port}</param>
+          <param name="port_realtime">${port_realtime}</param>
+          <param name="session_inactivity_timeout_ms">${session_inactivity_timeout_ms}</param>
+          <param name="connection_inactivity_timeout_ms">${connection_inactivity_timeout_ms}</param>
+          <param name="tf_prefix">"${tf_prefix}"</param>
+          <param name="use_internal_bus_gripper_comm">${use_internal_bus_gripper_comm}</param>
+          <param name="gripper_joint_name">finger_joint</param>
+        </xacro:unless>
+      </hardware>
+      <joint name="${prefix}joint_1">
+        <command_interface name="position">
+          <param name="min">-2.69</param>
+          <param name="max">2.68</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-1.6</param>
+          <param name="max">1.6</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_1']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_2">
+        <command_interface name="position">
+          <param name="min">-2.69</param>
+          <param name="max">2.69</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-1.6</param>
+          <param name="max">1.6</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_2']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_3">
+        <command_interface name="position">
+          <param name="min">-2.69</param>
+          <param name="max">2.69</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-1.6</param>
+          <param name="max">1.6</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_3']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_4">
+        <command_interface name="position">
+          <param name="min">-2.59</param>
+          <param name="max">2.59</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-1.6</param>
+          <param name="max">1.6</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_4']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_5">
+        <command_interface name="position">
+          <param name="min">-2.57</param>
+          <param name="max">2.57</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-1.6</param>
+          <param name="max">1.6</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_5']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="${prefix}joint_6">
+        <command_interface name="position">
+          <param name="min">-2.59</param>
+          <param name="max">2.59</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-3.2</param>
+          <param name="max">3.2</param>
+        </command_interface>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['joint_6']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <xacro:if value="${use_internal_bus_gripper_comm}">
+      <joint name="${prefix}right_finger_bottom_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      </xacro:if>
+    </ros2_control>
+  </xacro:macro>
+
+</robot>
