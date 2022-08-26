@@ -810,7 +810,8 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   return CallbackReturn::SUCCESS;
 }
 
-return_type KortexMultiInterfaceHardware::read(const rclcpp::Time & time, const rclcpp::Duration & period)
+return_type KortexMultiInterfaceHardware::read(
+  const rclcpp::Time & time, const rclcpp::Duration & period)
 {
   if (first_pass_)
   {
@@ -851,7 +852,8 @@ void KortexMultiInterfaceHardware::readGripperPosition()
   }
 }
 
-return_type KortexMultiInterfaceHardware::write(const rclcpp::Time & time, const rclcpp::Duration & period)
+return_type KortexMultiInterfaceHardware::write(
+  const rclcpp::Time & time, const rclcpp::Duration & period)
 {
   if (block_write)
   {
