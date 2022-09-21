@@ -58,6 +58,7 @@ constexpr char HW_IF_FAULT[] = "fault";
 }  // namespace hardware_interface
 
 using hardware_interface::return_type;
+using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 namespace k_api = Kinova::Api;
 
@@ -103,10 +104,10 @@ public:
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) final;
 
   KORTEX2_DRIVER_PUBLIC
-  return_type read() final;
+  return_type read(const rclcpp::Time & time, const rclcpp::Duration & period) final;
 
   KORTEX2_DRIVER_PUBLIC
-  return_type write() final;
+  return_type write(const rclcpp::Time & time, const rclcpp::Duration & period) final;
 
 private:
   k_api::TransportClientTcp transport_tcp_;

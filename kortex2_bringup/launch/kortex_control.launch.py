@@ -315,7 +315,7 @@ def generate_launch_description():
 
     fault_controller_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=[fault_controller, "-c", "/controller_manager"],
     )
 

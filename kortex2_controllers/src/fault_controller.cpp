@@ -82,7 +82,7 @@ CallbackReturn FaultController::on_activate(const rclcpp_lifecycle::State & /*pr
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(NO_CMD);
   try
   {
-    fault_pub_ = node_->create_publisher<FbkType>("~/internal_fault", 1);
+    fault_pub_ = get_node()->create_publisher<FbkType>("~/internal_fault", 1);
     realtime_publisher_ = std::make_unique<StatePublisher>(fault_pub_);
   }
   catch (const std::exception & e)
@@ -92,7 +92,7 @@ CallbackReturn FaultController::on_activate(const rclcpp_lifecycle::State & /*pr
       e.what());
     return CallbackReturn::ERROR;
   }
-  trigger_command_srv_ = node_->create_service<example_interfaces::srv::Trigger>(
+  trigger_command_srv_ = get_node()->create_service<example_interfaces::srv::Trigger>(
     "~/reset_fault",
     std::bind(&FaultController::resetFault, this, std::placeholders::_1, std::placeholders::_2));
 
@@ -114,7 +114,7 @@ bool FaultController::resetFault(
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(ASYNC_WAITING);
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(ISSUE_CMD);
 
-  RCLCPP_INFO(node_->get_logger(), "Trying to reset faults on kinova controller.");
+  RCLCPP_INFO(get_node()->get_logger(), "Trying to reset faults on kinova controller.");
 
   while (command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_value() ==
          ASYNC_WAITING)
@@ -126,7 +126,7 @@ bool FaultController::resetFault(
     command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_value());
 
   RCLCPP_INFO(
-    node_->get_logger(), "Resetting fault on kinova controller '%s'!",
+    get_node()->get_logger(), "Resetting fault on kinova controller '%s'!",
     resp->success ? "succeeded" : "failed");
 
   return resp->success;
