@@ -30,6 +30,9 @@
     <xacro:if value="${sim_ignition or sim_gazebo}">
       <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
     </xacro:if>
+     <xacro:if value="${use_fake_hardware}">
+      <xacro:property name="ros2_control_name" value="GenericSystem"/>
+    </xacro:if>
     <xacro:unless value="${use_fake_hardware or sim_ignition or sim_gazebo}">
       <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
     </xacro:unless>

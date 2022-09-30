@@ -38,6 +38,11 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "dof", description="DoF of robot."
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "robot_ip", description="IP address by which the robot can be reached."
         )
     )
@@ -188,6 +193,7 @@ def generate_launch_description():
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
     robot_ip = LaunchConfiguration("robot_ip")
+    dof = LaunchConfiguration("dof")
     # General arguments
     runtime_config_package = LaunchConfiguration("runtime_config_package")
     controllers_file = LaunchConfiguration("controllers_file")
@@ -222,6 +228,9 @@ def generate_launch_description():
             "arm:=",
             robot_type,
             " ",
+            "dof:=",
+            dof,
+            " ",
             "prefix:=",
             prefix,
             " ",
@@ -253,10 +262,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[robot_description, robot_controllers],
-        output={
-            "stdout": "screen",
-            "stderr": "screen",
-        },
+        output="both",
     )
 
     robot_state_publisher_node = Node(
