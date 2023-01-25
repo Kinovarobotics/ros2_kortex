@@ -822,51 +822,6 @@ return_type KortexMultiInterfaceHardware::read(
   // read if robot is faulted
   in_fault_ = (feedback_.base().active_state() == Kinova::Api::Common::ArmState::ARMSTATE_IN_FAULT);
 
-    switch (feedback_.base().active_state()){
-
-        case Kinova::Api::Common::ArmState::ARMSTATE_UNSPECIFIED:
-            std::cerr<<"ARMSTATE_UNSPECIFIED \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_BASE_INITIALIZATION:
-            std::cerr<<"ARMSTATE_BASE_INITIALIZATION \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_IDLE:
-            std::cerr<<"ARMSTATE_IDLE \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_INITIALIZATION:
-            std::cerr<<"ARMSTATE_INITIALIZATION \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_IN_FAULT:
-            std::cerr<<"ARMSTATE_IN_FAULT \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_MAINTENANCE:
-            std::cerr<<"ARMSTATE_MAINTENANCE \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_SERVOING_LOW_LEVEL:
-            std::cerr<<"ARMSTATE_SERVOING_LOW_LEVEL \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_SERVOING_READY:
-            std::cerr<<"ARMSTATE_SERVOING_READY \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_SERVOING_PLAYING_SEQUENCE:
-            std::cerr<<"ARMSTATE_SERVOING_PLAYING_SEQUENCE \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_SERVOING_MANUALLY_CONTROLLED:
-            std::cerr<<"ARMSTATE_SERVOING_MANUALLY_CONTROLLED \n";
-            break;
-        case Kinova::Api::Common::ArmState::ARMSTATE_RESERVED:
-            std::cerr<<"ARMSTATE_RESERVED \n";
-            break;
-        case Kinova::Api::Common::ArmState::ArmState_INT_MIN_SENTINEL_DO_NOT_USE_:
-            std::cerr<<"ArmState_INT_MIN_SENTINEL_DO_NOT_USE_ \n";
-            break;
-        case Kinova::Api::Common::ArmState::ArmState_INT_MAX_SENTINEL_DO_NOT_USE_:
-            std::cerr<<"ArmState_INT_MAX_SENTINEL_DO_NOT_USE_ \n";
-            break;
-        default:
-            std::cerr<<"default";
-    }
-
   // read gripper state
   readGripperPosition();
 
@@ -956,6 +911,8 @@ return_type KortexMultiInterfaceHardware::write(
 
       // gripper control
       sendGripperCommand(arm_mode_, gripper_command_position_);
+      // read after write in twist mode
+      feedback_ = base_cyclic_.RefreshFeedback();
     }
     else if (
       (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
@@ -974,21 +931,22 @@ return_type KortexMultiInterfaceHardware::write(
       else
       {
         // Keep alive mode - no controller active
-        RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
+          feedback_ = base_cyclic_.RefreshFeedback();
+          RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
       }
     }
     else
     {
       // Keep alive mode - no controller active
-      RCLCPP_DEBUG(LOGGER, "arm_mode is set to unsupported mode!");
+        feedback_ = base_cyclic_.RefreshFeedback();
+        RCLCPP_DEBUG(LOGGER, "arm_mode is set to unsupported mode!");
     }
+  }else {
+      // this is needed when the robot was faulted
+      // so we can internally conclude it is not faulted anymore
+      feedback_ = base_cyclic_.RefreshFeedback();
   }
 
-  // read after write if jtc is not running
-  if (!joint_based_controller_running_)
-  {
-    feedback_ = base_cyclic_.RefreshFeedback();
-  }
 
   return return_type::OK;
 }
@@ -1023,6 +981,7 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (k_api::KDetailedException & ex)
   {
+      feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
 
     RCLCPP_ERROR_STREAM(
@@ -1031,15 +990,18 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (std::runtime_error & ex_runtime)
   {
-    RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex_runtime.what());
+      feedback_ = base_cyclic_.RefreshFeedback();
+      RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex_runtime.what());
   }
   catch (std::future_error & ex_future)
   {
-    RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
+      feedback_ = base_cyclic_.RefreshFeedback();
+      RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
   }
   catch (std::exception & ex_std)
   {
-    RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
+      feedback_ = base_cyclic_.RefreshFeedback();
+      RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
   }
 }
 
