@@ -53,6 +53,10 @@ class PublisherJointTrajectory(Node):
             )
         )
 
+        self.joint_state_sub = self.create_subscription(
+            JointState, "joint_states", self.joint_state_callback, 10
+        )
+
         self.publisher_ = self.create_publisher(JointTrajectory, publish_topic, 1)
         self.timer = self.create_timer(wait_sec_between_publish, self.timer_callback)
         self.i = 0
@@ -61,6 +65,7 @@ class PublisherJointTrajectory(Node):
 
         if self.joint_state_msg_received and not self.command_sent:
 
+            self.get_logger().info("Publishing command...")
             traj = JointTrajectory()
             traj.joint_names = self.joints
             point = JointTrajectoryPoint()
