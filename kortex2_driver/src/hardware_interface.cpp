@@ -763,7 +763,19 @@ return_type KortexMultiInterfaceHardware::read(
     arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
       KortexMathUtil::toRad(feedback_.actuators(i).position()),
       num_turns_tmp_);  // rad
+
+    in_fault_ +=
+      (feedback_.actuators(i).fault_bank_a() + feedback_.actuators(i).fault_bank_b() +
+       feedback_.actuators(i).warning_bank_a() + feedback_.actuators(i).warning_bank_b());
   }
+
+  // add all base's faults and warnings into series
+  in_fault_ +=
+    (feedback_.base().fault_bank_a() + feedback_.base().fault_bank_b() +
+     feedback_.base().warning_bank_a() + feedback_.base().warning_bank_b());
+
+  // add mode that can't be easily reached
+  in_fault_ += (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_READY);
 
   return return_type::OK;
 }
@@ -792,10 +804,12 @@ return_type KortexMultiInterfaceHardware::write(
   {
     try
     {
-      //      RCLCPP_INFO(LOGGER, "Fault controller check try...");
       // change servoing mode first
       servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
       base_.SetServoingMode(servoing_mode_hw_);
+      // apply emergency stop
+      base_.ApplyEmergencyStop(0, {false, 0, 100});
+      base_.ApplyEmergencyStop(0, {false, 0, 100});
       // clear faults
       base_.ClearFaults();
       // back to original servoing mode
@@ -815,6 +829,10 @@ return_type KortexMultiInterfaceHardware::write(
       RCLCPP_ERROR_STREAM(
         LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                   k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+      reset_fault_async_success_ = 0.0;
+    }
+    catch (...)
+    {
       reset_fault_async_success_ = 0.0;
     }
     reset_fault_cmd_ = NO_CMD;
@@ -866,7 +884,10 @@ return_type KortexMultiInterfaceHardware::write(
     {
       // Keep alive mode - no controller active
       feedback_ = base_cyclic_.RefreshFeedback();
-      RCLCPP_DEBUG(LOGGER, "arm_mode is set to unsupported mode!");
+      RCLCPP_DEBUG(
+        LOGGER,
+        "Fault was not recognized on the robot but combination of Control Mode and Active State "
+        "are not supported!");
     }
   }
   else
