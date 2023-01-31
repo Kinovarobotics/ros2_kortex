@@ -30,7 +30,7 @@ class PublisherJointTrajectory(Node):
         self.declare_parameter("controller_name", "joint_trajectory_controller")
         self.declare_parameter("wait_sec_between_publish", 3)
         self.declare_parameter("goal_offset", [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
-        self.declare_parameter("joints")
+        self.declare_parameter("joints", rclpy.Parameter.Type.STRING_ARRAY)
 
         # Read parameters
         controller_name = self.get_parameter("controller_name").value
