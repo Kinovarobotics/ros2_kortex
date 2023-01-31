@@ -4,7 +4,7 @@ test_huge_joint_space_jump:
     controller_name: "joint_trajectory_controller"
     wait_sec_between_publish: 3
 
-    goal_offset: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5]
+    goal_offset: [0.5, 0.5, 0.0, 0.0, 0.0, 0.5]
 
     joints:
       - joint_1
@@ -13,4 +13,3 @@ test_huge_joint_space_jump:
       - joint_4
       - joint_5
       - joint_6
-      - joint_7
