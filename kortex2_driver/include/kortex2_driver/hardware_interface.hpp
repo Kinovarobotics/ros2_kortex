@@ -201,6 +201,8 @@ private:
   double reset_fault_async_success_;
   double in_fault_;
   static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
+  std::shared_ptr<std::thread> fault_reset_thread_;
+  std::atomic<bool> shutdown_fault_reset_thread_ = false;
 
   void sendTwistCommand();
   void incrementId();

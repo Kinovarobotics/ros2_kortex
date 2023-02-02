@@ -704,6 +704,58 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
     arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;
   }
 
+  fault_reset_thread_ = std::make_shared<std::thread>([&]() {
+    while (!shutdown_fault_reset_thread_ && rclcpp::ok())
+    {
+      if (!std::isnan(reset_fault_cmd_) && fault_controller_running_ && !first_pass_)
+      {
+        // sleep to ensure all outgoing write commands have finished
+        block_write = true;
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+        try
+        {
+          // change servoing mode first
+          servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
+          base_.SetServoingMode(servoing_mode_hw_);
+          // apply emergency stop
+          base_.ApplyEmergencyStop(0, {false, 0, 100});
+          base_.ApplyEmergencyStop(0, {false, 0, 100});
+          // clear faults
+          base_.ClearFaults();
+          // back to original servoing mode
+          if (
+            arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING ||
+            arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+          {
+            servoing_mode_hw_.set_servoing_mode(arm_mode_);
+            base_.SetServoingMode(servoing_mode_hw_);
+          }
+          reset_fault_async_success_ = 1.0;
+        }
+        catch (k_api::KDetailedException & ex)
+        {
+          RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
+
+          RCLCPP_ERROR_STREAM(
+            LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                      k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+          reset_fault_async_success_ = 0.0;
+        }
+        catch (...)
+        {
+          reset_fault_async_success_ = 0.0;
+        }
+        reset_fault_cmd_ = NO_CMD;
+        block_write = false;
+      }
+      else
+      {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+      }
+    }
+  });
+
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully activated!");
   return CallbackReturn::SUCCESS;
 }
@@ -717,6 +769,10 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   // Set back the servoing mode to Single Level Servoing
   servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
   base_.SetServoingMode(servoing_mode);
+
+  shutdown_fault_reset_thread_ = true;
+  fault_reset_thread_->join();
+  fault_reset_thread_.reset();
 
   // Close API session
   session_manager_.CloseSession();
@@ -798,44 +854,6 @@ return_type KortexMultiInterfaceHardware::write(
   {
     feedback_ = base_cyclic_.RefreshFeedback();
     return return_type::OK;
-  }
-
-  if (!std::isnan(reset_fault_cmd_) && fault_controller_running_)
-  {
-    try
-    {
-      // change servoing mode first
-      servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-      base_.SetServoingMode(servoing_mode_hw_);
-      // apply emergency stop
-      base_.ApplyEmergencyStop(0, {false, 0, 100});
-      base_.ApplyEmergencyStop(0, {false, 0, 100});
-      // clear faults
-      base_.ClearFaults();
-      // back to original servoing mode
-      if (
-        arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING ||
-        arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
-      {
-        servoing_mode_hw_.set_servoing_mode(arm_mode_);
-        base_.SetServoingMode(servoing_mode_hw_);
-      }
-      reset_fault_async_success_ = 1.0;
-    }
-    catch (k_api::KDetailedException & ex)
-    {
-      RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
-
-      RCLCPP_ERROR_STREAM(
-        LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
-                  k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
-      reset_fault_async_success_ = 0.0;
-    }
-    catch (...)
-    {
-      reset_fault_async_success_ = 0.0;
-    }
-    reset_fault_cmd_ = NO_CMD;
   }
 
   if (in_fault_ == 0.0)
