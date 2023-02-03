@@ -2,7 +2,7 @@ test_huge_joint_space_jump:
   ros__parameters:
 
     controller_name: "joint_trajectory_controller"
-    wait_sec_between_publish: 3
+    wait_sec_to_publish: 3
 
     goal_offset: [0.5, 0.5, 0.0, 0.0, 0.0, 0.5]
 

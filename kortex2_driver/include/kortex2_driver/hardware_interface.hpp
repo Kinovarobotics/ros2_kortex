@@ -172,6 +172,8 @@ private:
   bool gripper_controller_running_;
   bool fault_controller_running_;
   // switching auxiliary vars - keeping track of which controller is active so appropriate control mode can be adjusted
+  // controller manager sends array of interfaces that should be stopped/started and this is the way to internally collect information
+  // on which controller should be stopped and started (different controllers claim different interfaces)
   std::vector<StopStartInterface> stop_modes_;
   std::vector<StopStartInterface> start_modes_;
   // switching auxiliary booleans

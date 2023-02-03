@@ -15,6 +15,11 @@
 # limitations under the License.
 # Author: Lovro Ivanov
 
+# Description: After a robot has been loaded, this will joint
+# trajectory message once that includes huge jumps
+# in joint space from the current state.
+# The goal is to fault the robot.
+
 import rclpy
 from rclpy.node import Node
 from builtin_interfaces.msg import Duration
@@ -27,9 +32,17 @@ class PublisherJointTrajectory(Node):
     def __init__(self):
         super().__init__("test_huge_joint_space_jump")
         # Declare all parameters
+
+        # name of the controller to publish to
         self.declare_parameter("controller_name", "joint_trajectory_controller")
-        self.declare_parameter("wait_sec_between_publish", 3)
+
+        # seconds to wait until message is published
+        self.declare_parameter("wait_sec_to_publish", 3)
+
+        # how big is the jump in the joint space from the current state
         self.declare_parameter("goal_offset", [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+
+        # name of the joints that should be included in the command
         self.declare_parameter("joints", rclpy.Parameter.Type.STRING_ARRAY)
 
         # Read parameters
