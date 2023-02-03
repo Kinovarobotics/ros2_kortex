@@ -43,13 +43,13 @@
           <param name="connection_inactivity_timeout_ms">${connection_inactivity_timeout_ms}</param>
           <param name="tf_prefix">"${tf_prefix}"</param>
           <param name="use_internal_bus_gripper_comm">${use_internal_bus_gripper_comm}</param>
-          <param name="gripper_joint_name">finger_joint</param>
+          <param name="gripper_joint_name">${prefix}right_finger_bottom_joint</param>
         </xacro:unless>
       </hardware>
       <joint name="${prefix}joint_1">
         <command_interface name="position">
           <param name="min">-2.69</param>
-          <param name="max">2.68</param>
+          <param name="max">2.69</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-1.6</param>
@@ -64,7 +64,7 @@
       <joint name="${prefix}joint_2">
         <command_interface name="position">
           <param name="min">-2.69</param>
-          <param name="max">2.69</param>
+          <param name="max">2.36</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-1.6</param>

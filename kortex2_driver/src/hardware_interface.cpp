@@ -406,7 +406,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
         key == joint.name + "/" + hardware_interface::HW_IF_POSITION &&
         joint.name == gripper_joint_name_)
       {
-        stop_modes_.push_back(StoppingInterface::STOP_GRIPPER);
+        stop_modes_.emplace_back(StopStartInterface::STOP_GRIPPER);
         continue;
       }
       if (
@@ -417,11 +417,11 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
       {
-        stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
+        stop_modes_.emplace_back(StopStartInterface::STOP_POS_VEL);
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
       {
-        stop_modes_.push_back(StoppingInterface::STOP_POS_VEL);
+        stop_modes_.emplace_back(StopStartInterface::STOP_POS_VEL);
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
       {
@@ -439,43 +439,12 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       (key == "tcp/twist.linear.z") || (key == "tcp/twist.angular.x") ||
       (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
     {
-      stop_modes_.push_back(StoppingInterface::STOP_TWIST);
+      stop_modes_.emplace_back(StopStartInterface::STOP_TWIST);
     }
     if ((key == "reset_fault/command") || (key == "reset_fault/async_success"))
     {
-      stop_modes_.push_back(StoppingInterface::STOP_FAULT_CTRL);
+      stop_modes_.emplace_back(StopStartInterface::STOP_FAULT_CTRL);
     }
-  }
-
-  // check if pos-vel based controller is stopping
-  if (
-    !stop_modes_.empty() && (stop_modes_.size() == 2 * actuator_count_) &&
-    (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) !=
-     static_cast<int64_t>(2 * actuator_count_)))
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-
-  // check if twist controller is stopping
-  if (
-    !stop_modes_.empty() && (stop_modes_.size() == 6) &&
-    (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_TWIST) != 6))
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-  // check if hand controller is stopping
-  if (
-    !stop_modes_.empty() && (stop_modes_.size() == 1) &&
-    (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_GRIPPER) != 1))
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-  // check if fault controller is stopping
-  if (
-    !stop_modes_.empty() && (stop_modes_.size() == 2) &&
-    (std::count(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_FAULT_CTRL) != 2))
-  {
-    return hardware_interface::return_type::ERROR;
   }
 
   // Starting interfaces
@@ -484,19 +453,30 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
   {
     for (auto & joint : info_.joints)
     {
+      if (
+        key == joint.name + "/" + hardware_interface::HW_IF_POSITION &&
+        joint.name == gripper_joint_name_)
+      {
+        start_modes_.emplace_back(StopStartInterface::START_GRIPPER);
+        continue;
+      }
+      if (
+        key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY &&
+        joint.name == gripper_joint_name_)
+      {
+        continue;
+      }
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
       {
-        start_modes_.emplace_back(hardware_interface::HW_IF_POSITION);
+        start_modes_.emplace_back(StopStartInterface::START_POS_VEL);
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
       {
-        start_modes_.emplace_back(hardware_interface::HW_IF_VELOCITY);
+        start_modes_.emplace_back(StopStartInterface::START_POS_VEL);
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
       {
         continue;
-        // not supporting effort command interface
-        //              start_modes_.emplace_back(hardware_interface::HW_IF_EFFORT);
         RCLCPP_ERROR(
           LOGGER,
           "KortexMultiInterfaceHardware does not support effort command "
@@ -508,90 +488,39 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       (key == "tcp/twist.linear.z") || (key == "tcp/twist.angular.x") ||
       (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
     {
-      start_modes_.emplace_back(hardware_interface::HW_IF_TWIST);
+      start_modes_.emplace_back(StopStartInterface::START_TWIST);
     }
     if ((key == "reset_fault/command") || (key == "reset_fault/async_success"))
     {
-      start_modes_.emplace_back(hardware_interface::HW_IF_FAULT);
+      start_modes_.emplace_back(StopStartInterface::START_FAULT_CTRL);
     }
-  }
-  // pos-vel based controller requires (2 x actuator) interfaces
-  // twist controller requires 6 interfaces
-  // hand controller requires 1 interface
-  if (
-    !start_modes_.empty() && (start_modes_.size() != actuator_count_ * 2) &&
-    (start_modes_.size() != 6) && (start_modes_.size() != 1) && (start_modes_.size() != 2))
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-
-  // check for pos-vel based controller
-  if (
-    (start_modes_.size() == 2 * actuator_count_) &&
-    ((static_cast<size_t>(
-        std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION)) !=
-      actuator_count_) ||
-     (static_cast<size_t>(
-        std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY)) !=
-      actuator_count_)))
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-
-  // check for twist controller
-  if (
-    (start_modes_.size() == 6) &&
-    (std::count(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) != 6))
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-
-  // check for hand controller
-  auto it = std::find_if(
-    start_interfaces.begin(), start_interfaces.end(),
-    [this](const std::string & s) { return s.find(gripper_joint_name_) != std::string::npos; });
-
-  if ((start_modes_.size() == 1) && (it == start_interfaces.end()))
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-
-  // check for fault controller
-  // TODO(livanov93) parametrize
-  it = std::find_if(
-    start_interfaces.begin(), start_interfaces.end(),
-    [this](const std::string & s) { return s.find("reset_fault") != std::string::npos; });
-  if ((start_modes_.size() == 2) && (it == start_interfaces.end()))
-  {
-    return hardware_interface::return_type::ERROR;
   }
 
   // prepare flags for performing the switch
-
   if (
     !stop_modes_.empty() &&
-    std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_POS_VEL) !=
+    std::find(stop_modes_.begin(), stop_modes_.end(), StopStartInterface::STOP_POS_VEL) !=
       stop_modes_.end())
   {
     stop_joint_based_controller_ = true;
   }
   if (
     !stop_modes_.empty() &&
-    std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_TWIST) !=
+    std::find(stop_modes_.begin(), stop_modes_.end(), StopStartInterface::STOP_TWIST) !=
       stop_modes_.end())
   {
     stop_twist_controller_ = true;
   }
   if (
     !stop_modes_.empty() &&
-    std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_GRIPPER) !=
+    std::find(stop_modes_.begin(), stop_modes_.end(), StopStartInterface::STOP_GRIPPER) !=
       stop_modes_.end())
   {
     stop_gripper_controller_ = true;
   }
   if (
     !stop_modes_.empty() &&
-    std::find(stop_modes_.begin(), stop_modes_.end(), StoppingInterface::STOP_FAULT_CTRL) !=
+    std::find(stop_modes_.begin(), stop_modes_.end(), StopStartInterface::STOP_FAULT_CTRL) !=
       stop_modes_.end())
   {
     stop_fault_controller_ = true;
@@ -599,30 +528,28 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
 
   if (
     !start_modes_.empty() &&
-    (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) !=
-     start_modes_.end()) &&
-    (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_VELOCITY) !=
+    (std::find(start_modes_.begin(), start_modes_.end(), StopStartInterface::START_POS_VEL) !=
      start_modes_.end()))
   {
     start_joint_based_controller_ = true;
   }
   if (
     !start_modes_.empty() &&
-    std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_TWIST) !=
+    std::find(start_modes_.begin(), start_modes_.end(), StopStartInterface::START_TWIST) !=
       start_modes_.end())
   {
     start_twist_controller_ = true;
   }
   if (
-    !start_modes_.empty() && (start_modes_.size() == 1) &&
-    (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_POSITION) !=
+    !start_modes_.empty() &&
+    (std::find(start_modes_.begin(), start_modes_.end(), StopStartInterface::START_GRIPPER) !=
      start_modes_.end()))
   {
     start_gripper_controller_ = true;
   }
   if (
-    !start_modes_.empty() && (start_modes_.size() == 2) &&
-    (std::find(start_modes_.begin(), start_modes_.end(), hardware_interface::HW_IF_FAULT) !=
+    !start_modes_.empty() &&
+    (std::find(start_modes_.begin(), start_modes_.end(), StopStartInterface::START_FAULT_CTRL) !=
      start_modes_.end()))
   {
     start_fault_controller_ = true;
@@ -836,7 +763,19 @@ return_type KortexMultiInterfaceHardware::read(
     arm_positions_[i] = KortexMathUtil::wrapRadiansFromMinusPiToPi(
       KortexMathUtil::toRad(feedback_.actuators(i).position()),
       num_turns_tmp_);  // rad
+
+    in_fault_ +=
+      (feedback_.actuators(i).fault_bank_a() + feedback_.actuators(i).fault_bank_b() +
+       feedback_.actuators(i).warning_bank_a() + feedback_.actuators(i).warning_bank_b());
   }
+
+  // add all base's faults and warnings into series
+  in_fault_ +=
+    (feedback_.base().fault_bank_a() + feedback_.base().fault_bank_b() +
+     feedback_.base().warning_bank_a() + feedback_.base().warning_bank_b());
+
+  // add mode that can't be easily reached
+  in_fault_ += (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_READY);
 
   return return_type::OK;
 }
@@ -865,10 +804,12 @@ return_type KortexMultiInterfaceHardware::write(
   {
     try
     {
-      //      RCLCPP_INFO(LOGGER, "Fault controller check try...");
       // change servoing mode first
       servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
       base_.SetServoingMode(servoing_mode_hw_);
+      // apply emergency stop - twice to make it sure as calling it once appeared to be unreliable (detected by testing)
+      base_.ApplyEmergencyStop(0, {false, 0, 100});
+      base_.ApplyEmergencyStop(0, {false, 0, 100});
       // clear faults
       base_.ClearFaults();
       // back to original servoing mode
@@ -888,6 +829,10 @@ return_type KortexMultiInterfaceHardware::write(
       RCLCPP_ERROR_STREAM(
         LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                   k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+      reset_fault_async_success_ = 0.0;
+    }
+    catch (...)
+    {
       reset_fault_async_success_ = 0.0;
     }
     reset_fault_cmd_ = NO_CMD;
@@ -911,6 +856,8 @@ return_type KortexMultiInterfaceHardware::write(
 
       // gripper control
       sendGripperCommand(arm_mode_, gripper_command_position_);
+      // read after write in twist mode
+      feedback_ = base_cyclic_.RefreshFeedback();
     }
     else if (
       (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
@@ -929,19 +876,24 @@ return_type KortexMultiInterfaceHardware::write(
       else
       {
         // Keep alive mode - no controller active
+        feedback_ = base_cyclic_.RefreshFeedback();
         RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
       }
     }
     else
     {
       // Keep alive mode - no controller active
-      RCLCPP_DEBUG(LOGGER, "arm_mode is set to unsupported mode!");
+      feedback_ = base_cyclic_.RefreshFeedback();
+      RCLCPP_DEBUG(
+        LOGGER,
+        "Fault was not recognized on the robot but combination of Control Mode and Active State "
+        "are not supported!");
     }
   }
-
-  // read after write if jtc is not running
-  if (!joint_based_controller_running_)
+  else
   {
+    // this is needed when the robot was faulted
+    // so we can internally conclude it is not faulted anymore
     feedback_ = base_cyclic_.RefreshFeedback();
   }
 
@@ -978,6 +930,7 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (k_api::KDetailedException & ex)
   {
+    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
 
     RCLCPP_ERROR_STREAM(
@@ -986,14 +939,17 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (std::runtime_error & ex_runtime)
   {
+    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex_runtime.what());
   }
   catch (std::future_error & ex_future)
   {
+    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
   }
   catch (std::exception & ex_std)
   {
+    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
   }
 }

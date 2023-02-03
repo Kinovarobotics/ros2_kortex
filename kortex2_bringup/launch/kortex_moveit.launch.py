@@ -52,6 +52,11 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "dof", description="DoF of robot."
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "robot_ip", description="IP address by which the robot can be reached."
         )
     )
@@ -131,6 +136,7 @@ def generate_launch_description():
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
     robot_ip = LaunchConfiguration("robot_ip")
+    dof = LaunchConfiguration("dof")
     # General arguments
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
@@ -160,6 +166,9 @@ def generate_launch_description():
             "arm:=",
             robot_type,
             " ",
+            "dof:=",
+            dof,
+            " ", 
             "prefix:=",
             prefix,
             " ",
@@ -182,7 +191,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(moveit_config_package), "config", "7dof", moveit_config_file]
+                [FindPackageShare(moveit_config_package), "config", dof + "dof", moveit_config_file]
             ),
             " ",
             "name:=",
@@ -225,7 +234,7 @@ def generate_launch_description():
 
     # Trajectory Execution Configuration
     # TODO(destogl): check how to use ros2_control's controllers-yaml
-    controllers_yaml = load_yaml("gen3_move_it_config", "config/7dof/controllers.yaml")
+    controllers_yaml = load_yaml("gen3_move_it_config", "config/" + dof + "dof/controllers.yaml")
     moveit_controllers = {
         "moveit_simple_controller_manager": controllers_yaml,
         "moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager",
