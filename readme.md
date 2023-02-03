@@ -192,5 +192,8 @@ This package contains files to simulate the Kinova Gen3 and Gen3 lite robots in 
 ### kortex_move_it_config
 This metapackage contains the auto-generated MoveIt! files to use the Kinova Gen3 and Gen3 lite arms with the MoveIt! motion planning framework. For more details, please consult the [README](kortex_move_it_config/readme.md) from the package subdirectory.
 
+### kortex2_controllers
+Custom `ros2_control` based controllers for kinova arms. More information can be found [here](kortex2_controllers/README.md).
+
 ### third_party
 This folder contains the third-party packages we use with the ROS Kortex packages. Currently, it consists of two packages used for the simulation of the Robotiq Gripper in Gazebo. We use [gazebo-pkgs](third_party/gazebo-pkgs/README.md) for grasping support in Gazebo and [roboticsgroup_gazebo_plugins](third_party/roboticsgroup_gazebo_plugins/README.md) to mimic joint support in Gazebo.
