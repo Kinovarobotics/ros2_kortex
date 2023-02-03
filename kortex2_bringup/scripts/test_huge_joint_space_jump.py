@@ -15,10 +15,11 @@
 # limitations under the License.
 # Author: Lovro Ivanov
 
-# Description: After a robot has been loaded, this will joint
-# trajectory message once that includes huge jumps
-# in joint space from the current state.
-# The goal is to fault the robot.
+# Description: After a robot has been loaded, this will generate and send a
+# joint trajectory message to the robot one time that includes a large jump
+# in joint space from the current state. The delta in command sent to the arm can 
+# be specified by the ros parameter "goal_offset".
+# The purpose of this node is to fault the robot so the developer can test clearing faults.
 
 import rclpy
 from rclpy.node import Node
