@@ -171,7 +171,7 @@ private:
   bool twist_controller_running_;
   bool gripper_controller_running_;
   bool fault_controller_running_;
-  // switching auxiliary vars
+  // switching auxiliary vars - keeping track of which controller is active so appropriate control mode can be adjusted
   std::vector<StopStartInterface> stop_modes_;
   std::vector<StopStartInterface> start_modes_;
   // switching auxiliary booleans

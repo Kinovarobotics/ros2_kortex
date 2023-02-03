@@ -406,7 +406,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
         key == joint.name + "/" + hardware_interface::HW_IF_POSITION &&
         joint.name == gripper_joint_name_)
       {
-        stop_modes_.push_back(StopStartInterface::STOP_GRIPPER);
+        stop_modes_.emplace_back(StopStartInterface::STOP_GRIPPER);
         continue;
       }
       if (
@@ -417,11 +417,11 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
       {
-        stop_modes_.push_back(StopStartInterface::STOP_POS_VEL);
+        stop_modes_.emplace_back(StopStartInterface::STOP_POS_VEL);
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
       {
-        stop_modes_.push_back(StopStartInterface::STOP_POS_VEL);
+        stop_modes_.emplace_back(StopStartInterface::STOP_POS_VEL);
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
       {
@@ -439,11 +439,11 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       (key == "tcp/twist.linear.z") || (key == "tcp/twist.angular.x") ||
       (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
     {
-      stop_modes_.push_back(StopStartInterface::STOP_TWIST);
+      stop_modes_.emplace_back(StopStartInterface::STOP_TWIST);
     }
     if ((key == "reset_fault/command") || (key == "reset_fault/async_success"))
     {
-      stop_modes_.push_back(StopStartInterface::STOP_FAULT_CTRL);
+      stop_modes_.emplace_back(StopStartInterface::STOP_FAULT_CTRL);
     }
   }
 
@@ -457,7 +457,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
         key == joint.name + "/" + hardware_interface::HW_IF_POSITION &&
         joint.name == gripper_joint_name_)
       {
-        start_modes_.push_back(StopStartInterface::START_GRIPPER);
+        start_modes_.emplace_back(StopStartInterface::START_GRIPPER);
         continue;
       }
       if (
