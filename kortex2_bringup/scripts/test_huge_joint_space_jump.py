@@ -48,7 +48,7 @@ class PublisherJointTrajectory(Node):
 
         # Read parameters
         controller_name = self.get_parameter("controller_name").value
-        wait_sec_between_publish = self.get_parameter("wait_sec_between_publish").value
+        wait_sec_between_publish = self.get_parameter("wait_sec_to_publish").value
         self.goal_offset = self.get_parameter("goal_offset").value
         self.joints = self.get_parameter("joints").value
         self.joint_state_fbk = JointState()
