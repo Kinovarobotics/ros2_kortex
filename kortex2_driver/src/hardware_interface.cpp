@@ -764,15 +764,17 @@ return_type KortexMultiInterfaceHardware::read(
       KortexMathUtil::toRad(feedback_.actuators(i).position()),
       num_turns_tmp_);  // rad
 
-    in_fault_ +=
-      (feedback_.actuators(i).fault_bank_a() + feedback_.actuators(i).fault_bank_b() +
-       feedback_.actuators(i).warning_bank_a() + feedback_.actuators(i).warning_bank_b());
+    in_fault_ += (feedback_.actuators(i).fault_bank_a() + feedback_.actuators(i).fault_bank_b());
+
+    // TODO(livanov93): separate warnings into another variable to expose it via fault controller
+    //       feedback_.actuators(i).warning_bank_a() + feedback_.actuators(i).warning_bank_b());
   }
 
   // add all base's faults and warnings into series
-  in_fault_ +=
-    (feedback_.base().fault_bank_a() + feedback_.base().fault_bank_b() +
-     feedback_.base().warning_bank_a() + feedback_.base().warning_bank_b());
+  in_fault_ += (feedback_.base().fault_bank_a() + feedback_.base().fault_bank_b());
+
+  // TODO(livanov93): separate warnings into another variable to expose it via fault controller
+  //     + feedback_.base().warning_bank_a() + feedback_.base().warning_bank_b());
 
   // add mode that can't be easily reached
   in_fault_ += (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_READY);
