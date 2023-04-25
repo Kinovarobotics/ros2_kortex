@@ -280,18 +280,6 @@ def generate_launch_description():
         ],
     )
 
-    # Warehouse mongodb server
-    mongodb_server_node = Node(
-        package="warehouse_ros_mongo",
-        executable="mongo_wrapper_ros.py",
-        parameters=[
-            {"warehouse_port": 33829},
-            {"warehouse_host": "localhost"},
-            {"warehouse_plugin": "warehouse_ros_mongo::MongoDatabaseConnection"},
-        ],
-        output="screen",
-    )
-
     # rviz with moveit configuration
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(moveit_config_package), "rviz", "moveit.rviz"]
@@ -313,7 +301,6 @@ def generate_launch_description():
 
     nodes_to_start = [
         move_group_node,
-        mongodb_server_node,
         rviz_node,
     ]
 
