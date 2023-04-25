@@ -809,7 +809,8 @@ return_type KortexMultiInterfaceHardware::write(
       // change servoing mode first
       servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
       base_.SetServoingMode(servoing_mode_hw_);
-      // apply emergency stop - twice to make it sure as calling it once appeared to be unreliable (detected by testing)
+      // apply emergency stop - twice to make it sure as calling it once appeared to be unreliable
+      // (detected by testing)
       base_.ApplyEmergencyStop(0, {false, 0, 100});
       base_.ApplyEmergencyStop(0, {false, 0, 100});
       // clear faults

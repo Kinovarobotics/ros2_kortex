@@ -9,17 +9,17 @@ on:
 
 jobs:
   rolling_source:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
     env:
       ROS_DISTRO: rolling
     steps:
-      - uses: ros-tooling/setup-ros@v0.2
+      - uses: ros-tooling/setup-ros@v0.6
         with:
           required-ros-distributions: ${{ env.ROS_DISTRO }}
-      - uses: actions/checkout@v2
-      - uses: ros-tooling/action-ros-ci@v0.2
+      - uses: actions/checkout@v3
+      - uses: ros-tooling/action-ros-ci@v0.3
         with:
           target-ros2-distro: ${{ env.ROS_DISTRO }}
           # build all packages listed in the meta package
