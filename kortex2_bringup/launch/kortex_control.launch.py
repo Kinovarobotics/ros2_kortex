@@ -36,11 +36,7 @@ def generate_launch_description():
             "robot_type", description="Type/series of robot.", choices=["gen3", "gen3_lite"]
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "dof", description="DoF of robot."
-        )
-    )
+    declared_arguments.append(DeclareLaunchArgument("dof", description="DoF of robot."))
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_ip", description="IP address by which the robot can be reached."

@@ -17,7 +17,7 @@
 
 # Description: After a robot has been loaded, this will generate and send a
 # joint trajectory message to the robot one time that includes a large jump
-# in joint space from the current state. The delta in command sent to the arm can 
+# in joint space from the current state. The delta in command sent to the arm can
 # be specified by the ros parameter "goal_offset".
 # The purpose of this node is to fault the robot so the developer can test clearing faults.
 

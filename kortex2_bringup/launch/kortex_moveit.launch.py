@@ -50,11 +50,7 @@ def generate_launch_description():
             "robot_type", description="Type/series of robot.", choices=["gen3", "gen3_lite"]
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "dof", description="DoF of robot."
-        )
-    )
+    declared_arguments.append(DeclareLaunchArgument("dof", description="DoF of robot."))
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_ip", description="IP address by which the robot can be reached."
@@ -168,7 +164,7 @@ def generate_launch_description():
             " ",
             "dof:=",
             dof,
-            " ", 
+            " ",
             "prefix:=",
             prefix,
             " ",
@@ -191,7 +187,12 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(moveit_config_package), "config", dof + "dof", moveit_config_file]
+                [
+                    FindPackageShare(moveit_config_package),
+                    "config",
+                    dof + "dof",
+                    moveit_config_file,
+                ]
             ),
             " ",
             "name:=",
