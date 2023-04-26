@@ -24,8 +24,6 @@
   <depend>joint_state_publisher</depend>
   <depend>robot_state_publisher</depend>
   <depend>xacro</depend>
-  <!-- This package is referenced in the warehouse launch files, but does not build out of the box at the moment. Commented the dependency until this works. -->
-  <!-- <run_depend>warehouse_ros_mongo</run_depend> -->
   <depend>kortex_description</depend>
 
   <export>
