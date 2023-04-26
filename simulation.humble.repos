@@ -3,7 +3,7 @@ repositories:
   gazebo_ros2_control:
     type: git
     url: https://github.com/ros-simulation/gazebo_ros2_control.git
-    version: humble 
+    version: humble
 
   gz_ros2_control:
     type: git
