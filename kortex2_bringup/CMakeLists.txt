@@ -3,7 +3,6 @@ project(kortex2_bringup)
 
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
-find_package(rclpy REQUIRED)
 
 # Install Python executables
 install(PROGRAMS
