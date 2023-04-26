@@ -1,0 +1,21 @@
+repositories:
+
+  gazebo_ros2_control:
+    type: git
+    url: https://github.com/ros-simulation/gazebo_ros2_control.git
+    version: humble
+
+  gz_ros2_control:
+    type: git
+    url: https://github.com/ros-controls/gz_ros2_control.git
+    version: humble
+
+  ros_gz:
+    type: git
+    url: https://github.com/gazebosim/ros_gz.git
+    version: humble
+
+  ros2_control_demos:
+    type: git
+    url: https://github.com/ros-controls/ros2_control_demos.git
+    version: master
