@@ -75,7 +75,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_package",
-            default_value="gen3_move_it_config",
+            default_value="gen3_moveit_config",
             description="MoveIt configuration package for the robot. Usually the argument \
         is not set, it enables use of a custom config package.",
         )
@@ -205,21 +205,9 @@ def generate_launch_description():
     )
     robot_description_semantic = {"robot_description_semantic": robot_description_semantic_content}
 
-    # TODO: why is this not working properly
-    # kinematics_yaml = (
-    # PathJoinSubstitution(
-    # [FindPackageShare(moveit_config_package), "config", "kinematics.yaml"]
-    # ),
-    # )
-    # kinematics_yaml = load_yaml("gen3_move_it_config", "config/kinematics.yaml")
-    # robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
-    robot_description_kinematics = {
-        "robot_description_kinematics": {
-            "kinematics_solver": "kdl_kinematics_plugin/KDLKinematicsPlugin",
-            "kinematics_solver_search_resolution": 0.005,
-            "kinematics_solver_timeout": 0.005,
-        }
-    }
+    kinematics_yaml = load_yaml(moveit_config_package, "config/kinematics.yaml")
+    robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
+
 
     # Planning Configuration
     ompl_planning_pipeline_config = {
@@ -229,13 +217,13 @@ def generate_launch_description():
             "start_state_max_bounds_error": 0.1,
         }
     }
-    # TODO(destogl): change this hard-coded name to "moveit_config_package"
-    ompl_planning_yaml = load_yaml("gen3_move_it_config", "config/ompl_planning.yaml")
+
+    ompl_planning_yaml = load_yaml(moveit_config_package, "config/ompl_planning.yaml")
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 
     # Trajectory Execution Configuration
     # TODO(destogl): check how to use ros2_control's controllers-yaml
-    controllers_yaml = load_yaml("gen3_move_it_config", "config/" + dof + "dof/controllers.yaml")
+    controllers_yaml = load_yaml(moveit_config_package, "config/" + dof + "dof/controllers.yaml")
     moveit_controllers = {
         "moveit_simple_controller_manager": controllers_yaml,
         "moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager",
