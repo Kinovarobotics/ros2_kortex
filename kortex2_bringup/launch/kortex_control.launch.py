@@ -87,10 +87,12 @@ def generate_launch_description():
         Usually the argument is not set, it enables use of a custom setup.',
         )
     )
+    
+    dof_str = str(dof) + "dof_"
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="kortex_controllers.yaml",
+            default_value=robot_type+"_"+dof_str+"controllers.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
