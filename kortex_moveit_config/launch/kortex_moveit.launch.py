@@ -208,7 +208,6 @@ def generate_launch_description():
     kinematics_yaml = load_yaml(moveit_config_package, "config/kinematics.yaml")
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
-
     # Planning Configuration
     ompl_planning_pipeline_config = {
         "move_group": {

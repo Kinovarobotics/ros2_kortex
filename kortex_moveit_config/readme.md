@@ -19,4 +19,3 @@ See the `kortex_description/arms` folder for a list of supported Kinova Kortex r
 
 The packages that use a gripper are named `ARM_GRIPPER_move_it_config`, where "ARM" is the name of the arm you are using and "GRIPPER" is the name of the gripper you are using.
 See the `kortex_description/grippers` folder for a list of supported Kinova Kortex grippers.
-
