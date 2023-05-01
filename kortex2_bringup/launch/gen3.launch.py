@@ -29,6 +29,7 @@ def generate_launch_description():
             description="IP address by which the robot can be reached.",
         )
     )
+    declared_arguments.append(DeclareLaunchArgument("dof", description="DoF of robot."))
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
@@ -71,6 +72,7 @@ def generate_launch_description():
 
     # Initialize Arguments
     robot_ip = LaunchConfiguration("robot_ip")
+    dof = LaunchConfiguration("dof")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
@@ -83,12 +85,14 @@ def generate_launch_description():
         launch_arguments={
             "robot_type": "gen3",
             "robot_ip": robot_ip,
+            "dof": dof,
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "launch_rviz": launch_rviz,
+            "controllers_file": "gen3_7dof_controllers.yaml",
         }.items(),
     )
 
