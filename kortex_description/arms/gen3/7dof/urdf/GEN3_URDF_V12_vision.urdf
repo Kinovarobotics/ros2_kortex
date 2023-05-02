@@ -204,7 +204,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/braclet_with_vision_link.STL" />
+        <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/bracelet_with_vision_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -213,7 +213,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/braclet_with_vision_link.STL" />
+        <mesh filename="package://kortex_description/arms/gen3/7dof/meshes/bracelet_with_vision_link.STL" />
       </geometry>
     </collision>
   </link>
