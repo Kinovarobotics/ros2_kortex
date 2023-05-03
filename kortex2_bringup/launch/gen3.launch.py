@@ -29,7 +29,9 @@ def generate_launch_description():
             description="IP address by which the robot can be reached.",
         )
     )
-    declared_arguments.append(DeclareLaunchArgument("dof", description="DoF of robot."))
+    declared_arguments.append(
+        DeclareLaunchArgument("dof", default_value="7", description="DoF of robot.")
+    )
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
@@ -54,8 +56,15 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "controllers_file",
+            default_value="gen3_7dof_controllers.yaml",
+            description="Robot controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "gripper",
-            default_value='""',
+            default_value='"robotiq_2f_85"',
             description="Name of the gripper attached to the arm",
         )
     )
@@ -79,6 +88,7 @@ def generate_launch_description():
     gripper = LaunchConfiguration("gripper")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     launch_rviz = LaunchConfiguration("launch_rviz")
+    controllers_file = LaunchConfiguration("controllers_file")
 
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
@@ -92,7 +102,7 @@ def generate_launch_description():
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "launch_rviz": launch_rviz,
-            "controllers_file": "gen3_7dof_controllers.yaml",
+            "controllers_file": controllers_file,
         }.items(),
     )
 
