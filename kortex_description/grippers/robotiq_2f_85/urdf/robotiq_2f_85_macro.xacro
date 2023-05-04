@@ -7,7 +7,9 @@
     fake_sensor_commands:=false 
     sim_ignition:=false
     sim_isaac:=false">
-    <xacro:include filename="$(find robotiq_description)/urdf/robotiq_gripper_macro.urdf.xacro" />
+    <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
+
+    <!-- Hardware talks directly to the gripper so we don't need ros2_control unless we are simulating -->
     <xacro:property name="include_ros2_control" value="false"/>
     <xacro:if value="${sim_ignition or sim_isaac or use_fake_hardware}">
       <xacro:property name="include_ros2_control" value="true"/>
@@ -16,7 +18,7 @@
         name="RobotiqGripperHardwareInterface" 
         prefix="${prefix}" 
         parent="${parent}"
-        include_ros2_control="${not include_ros2_control}"
+        include_ros2_control="${include_ros2_control}"
         use_fake_hardware="$(arg use_fake_hardware)"
         fake_sensor_commands="$(arg fake_sensor_commands)"
         sim_ignition="$(arg sim_ignition)"
