@@ -2,10 +2,13 @@ name: Humble Binary Build
 on:
   pull_request:
     branches:
-      - master
+      # try to keep humble and rolling(main) in sync
+      - humble
+      - main
   push:
     branches:
-      - master
+      - humble
+      - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '13 4 * * *'

@@ -2,7 +2,7 @@ name: Rolling Source Build
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '43 1 * * *'
