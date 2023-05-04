@@ -29,10 +29,9 @@ jobs:
           package-name:
             kortex2_bringup
             kortex2_driver
-          import-token: ${{ secrets.REPO_TOKEN }}
           vcs-repo-file-url: |
             https://raw.githubusercontent.com/ros2/ros2/master/ros2.repos
-            https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/ros2_kortex.repos?token=${{ secrets.REPO_TOKEN }}
+            file://${{ github.workspace }}/ros2_kortex.repos
           colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
       - uses: actions/upload-artifact@v1
         with:
