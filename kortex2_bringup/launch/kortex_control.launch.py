@@ -305,7 +305,7 @@ def generate_launch_description():
     robot_pos_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_pos_controller, "--stopped", "-c", "/controller_manager"],
+        arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
     )
 
     robot_hand_controller_spawner = Node(
