@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  development:
+    build:
+      args:
+        UID: 1000
+        GID: 1000
+        USER: ${USER}
+        REPO: ${REPO:-ros2_kortex}
+        ROS_DISTRO: ${ROS_DISTRO:-rolling}
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "source /opt/upstream/install/setup.sh &&
+                      bash"
+    container_name: ${USER}-${REPO}-dev
+    pull_policy: never
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - ROS_DOMAIN_ID=0
+      - TERM=xterm-256color
+    extra_hosts:
+      - ${REPO}-dev:127.0.0.1
+    hostname: ${REPO}-dev
+    image: ${REPO}-dev:latest
+    network_mode: host
+    privileged: true
+    volumes:
+      - /dev:/dev
+      - ~/.ssh:${HOME}/.ssh:ro
+      - ~/.gitconfig:${HOME}/.gitconfig:ro
+      - ${PWD}:${HOME}/ws/src/${REPO}
+      - ~/.${REPO}/ccache:${HOME}/.ccache
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+    working_dir: ${HOME}/ws
