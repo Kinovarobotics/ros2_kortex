@@ -16,7 +16,7 @@
     <xacro:arg name="gripper" default="" />
     <xacro:arg name="sim_gazebo" default="false" />
     <xacro:arg name="sim_ignition" default="false" />
-    <xacro:arg name="sim_issac" default="false" />
+    <xacro:arg name="sim_isaac" default="false" />
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="use_fake_hardware" default="true" />
     <xacro:arg name="fake_sensor_commands" default="true" />
@@ -43,7 +43,7 @@
         fake_sensor_commands="$(arg fake_sensor_commands)"
         sim_gazebo="$(arg sim_gazebo)"
         sim_ignition="$(arg sim_ignition)"
-        sim_issac="$(arg sim_isaac)" >
+        sim_isaac="$(arg sim_isaac)" >
         <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
     </xacro:load_robot>
 
