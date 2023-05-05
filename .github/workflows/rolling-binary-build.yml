@@ -2,10 +2,10 @@ name: Rolling Binary Build
 on:
   pull_request:
     branches:
-      - master
+      - main
   push:
     branches:
-      - master
+      - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '13 4 * * *'
