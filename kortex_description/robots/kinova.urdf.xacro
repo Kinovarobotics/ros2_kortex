@@ -8,7 +8,7 @@
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="arm" default="NO_ARM_TYPE_DEFINED" />
   <xacro:arg name="dof" default="7" />
-  <xacro:arg name="vision" default="true" />
+  <xacro:arg name="vision" default="false" />
   <xacro:arg name="robot_ip" default="192.168.11.11" />
   <xacro:arg name="username" default="admin" />
   <xacro:arg name="password" default="admin" />
@@ -22,7 +22,8 @@
   <xacro:arg name="fake_sensor_commands" default="true" />
   <xacro:arg name="sim_gazebo" default="false" />
   <xacro:arg name="sim_ignition" default="false" />
-  <xacro:arg name="simulation_controllers" default="$(find kortex2_bringup)/config/kortex_controllers.yaml" />
+  <xacro:arg name="sim_isaac" default="false" />
+  <xacro:arg name="simulation_controllers" default="$(find kortex_description)/arms/$(arg arm)/$(arg dof)dof/config/$(arg arm)_controllers.yaml" />
 
 
   <!-- import main macro -->
@@ -49,8 +50,9 @@
     use_fake_hardware="$(arg use_fake_hardware)"
     fake_sensor_commands="$(arg fake_sensor_commands)"
     sim_gazebo="$(arg sim_gazebo)"
-    sim_ignition="$(arg sim_ignition)" >
-    <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
+    sim_ignition="$(arg sim_ignition)"
+    sim_isaac="$(arg sim_isaac)" >
+    <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
   </xacro:load_robot>
 
   <xacro:if value="$(arg sim_gazebo)">
