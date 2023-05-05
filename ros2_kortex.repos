@@ -15,7 +15,7 @@ repositories:
     type: git
     url: https://github.com/ros-controls/ros2_controllers.git
     version: master
-  ros2_robotiq_gripper
+  ros2_robotiq_gripper:
     type: git
     url: https://github.com/picknikrobotics/ros2_robotiq_gripper.git
     version: main
