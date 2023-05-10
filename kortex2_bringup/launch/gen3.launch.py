@@ -30,6 +30,9 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
+        DeclareLaunchArgument("dof", default_value="7", description="DoF of robot.")
+    )
+    declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
             default_value="false",
@@ -51,21 +54,55 @@ def generate_launch_description():
             description="Robot controller to start.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "controllers_file",
+            default_value="gen3_7dof_controllers.yaml",
+            description="Robot controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper",
+            default_value='"robotiq_2f_85"',
+            description="Name of the gripper attached to the arm",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_internal_bus_gripper_comm",
+            default_value="true",
+            description="Use internal bus for gripper communication?",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument("launch_rviz", default_value="false", description="Launch RViz?")
+    )
 
     # Initialize Arguments
     robot_ip = LaunchConfiguration("robot_ip")
+    dof = LaunchConfiguration("dof")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
+    gripper = LaunchConfiguration("gripper")
+    use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
+    launch_rviz = LaunchConfiguration("launch_rviz")
+    controllers_file = LaunchConfiguration("controllers_file")
 
     base_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/ur_control.launch.py"]),
+        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
         launch_arguments={
-            "ur_type": "gen3",
+            "robot_type": "gen3",
             "robot_ip": robot_ip,
+            "dof": dof,
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,
+            "gripper": gripper,
+            "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
+            "launch_rviz": launch_rviz,
+            "controllers_file": controllers_file,
         }.items(),
     )
 

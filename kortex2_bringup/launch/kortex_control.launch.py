@@ -87,6 +87,7 @@ def generate_launch_description():
         Usually the argument is not set, it enables use of a custom setup.',
         )
     )
+
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",

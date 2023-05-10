@@ -81,7 +81,8 @@ repos:
         name: ament_cppcheck
         description: Static code analysis of C/C++ files.
         stages: [commit]
-        entry: ament_cppcheck
+        # enable slow version of cpp check: https://github.com/ament/ament_lint/pull/345
+        entry: env AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS=1 ament_cppcheck
         language: system
         files: \.(h\+\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\+\+|cxx|tpp|txx)$
         exclude: kortex_api/
