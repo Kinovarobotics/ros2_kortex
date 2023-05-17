@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: kortex_description
+    relative_path: robots/gen3.xacro
+    xacro_args: gripper:=robotiq_2f_85 dof:=6
+  srdf:
+    relative_path: config/gen3.srdf
+  package_settings:
+    author_name: Anthony Baker
+    author_email: abake48@gmail.com
+    generated_timestamp: 1684357852
