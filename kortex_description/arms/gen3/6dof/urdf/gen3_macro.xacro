@@ -95,36 +95,36 @@
         </geometry>
       </collision>
     </link>
-    <joint 
-      name="${prefix}joint_1" 
+    <joint
+      name="${prefix}joint_1"
       type="continuous">
-      <origin 
-        xyz="0 0 0.15643" 
+      <origin
+        xyz="0 0 0.15643"
         rpy="-3.1416 0.0 0.0" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}shoulder_link" />
       <axis xyz="0 0 1" />
-      <limit 
-        effort="39" 
+      <limit
+        effort="39"
         velocity="1.3963" />
     </joint>
     <link name="${prefix}bicep_link">
       <inertial>
-        <origin 
-          xyz="3.5E-05 -0.208207 -0.01889" 
+        <origin
+          xyz="3.5E-05 -0.208207 -0.01889"
           rpy="0 0 0" />
         <mass value="1.262" />
-        <inertia 
-          ixx="0.046752" 
-          ixy="-9E-06" 
-          ixz="0" 
-          iyy="0.00085" 
-          iyz="-9.8E-05" 
+        <inertia
+          ixx="0.046752"
+          ixy="-9E-06"
+          ixz="0"
+          iyy="0.00085"
+          iyz="-9.8E-05"
           izz="0.047188" />
       </inertial>
       <visual>
-        <origin 
-          xyz="0 0 0" 
+        <origin
+          xyz="0 0 0"
           rpy="0 0 0" />
         <geometry>
           <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bicep_link.STL" />
@@ -134,8 +134,8 @@
         </material>
       </visual>
       <collision>
-        <origin 
-          xyz="0 0 0" 
+        <origin
+          xyz="0 0 0"
           rpy="0 0 0" />
         <geometry>
           <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bicep_link.STL" />
