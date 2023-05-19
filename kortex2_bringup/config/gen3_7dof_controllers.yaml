@@ -54,5 +54,5 @@ streaming_controller:
 robotiq_gripper_controller:
   ros__parameters:
     default: true
-    joint: finger_joint
+    joint: robotiq_85_left_knuckle_joint
     interface_name: position
