@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from launch import LaunchDescription
+from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument
 from moveit_configs_utils import MoveItConfigsBuilder
 from moveit_configs_utils.launches import generate_demo_launch
@@ -49,16 +49,15 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
 
-
     launch_arguments = {
-        "robot_ip":robot_ip,
-        "use_fake_hardware":use_fake_hardware,
-        "fake_sensor_commands":fake_sensor_commands,
+        "robot_ip": robot_ip,
+        "use_fake_hardware": use_fake_hardware,
+        "fake_sensor_commands": fake_sensor_commands,
     }
 
-    moveit_config = MoveItConfigsBuilder(
-        "gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config"
+    moveit_config = (
+        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
+        .robot_description(launch_arguments)
+        .to_moveit_configs()
     )
-    .robot_description(None, launch_arguments)
-    .to_moveit_configs()
     return generate_demo_launch(moveit_config)
