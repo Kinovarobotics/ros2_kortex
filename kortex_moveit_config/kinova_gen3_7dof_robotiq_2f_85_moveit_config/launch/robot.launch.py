@@ -35,24 +35,14 @@ def generate_launch_description():
             description="Start robot with fake hardware mirroring command to its states.",
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "fake_sensor_commands",
-            default_value="false",
-            description="Enable fake command interfaces for sensors used for simple simulations. \
-            Used only if 'use_fake_hardware' parameter is true.",
-        )
-    )
 
     # Initialize Arguments
     robot_ip = LaunchConfiguration("robot_ip")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
-    fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
 
     launch_arguments = {
         "robot_ip": robot_ip,
         "use_fake_hardware": use_fake_hardware,
-        "fake_sensor_commands": fake_sensor_commands,
     }
 
     moveit_config = (
