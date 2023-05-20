@@ -38,7 +38,7 @@ find_package(ament_cmake REQUIRED)
 ament_export_libraries(${kinova_binary_api_SOURCE_DIR}/lib/release/libKortexApiCpp.a)
 link_libraries(pthread)
 
-ament_export_include_directories(${kinova_binary_api_SOURCE_DIR}/include)
+ament_export_include_directories(include)
 
 install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client/ DESTINATION include)
 install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/common/ DESTINATION include)
