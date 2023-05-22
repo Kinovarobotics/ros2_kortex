@@ -16,10 +16,10 @@
   <xacro:arg name="port_realtime" default="10001" />
   <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
   <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
-  <xacro:arg name="gripper" default="" />
+  <xacro:arg name="gripper" default="robotiq_2f_85" />
   <xacro:arg name="use_internal_bus_gripper_comm" default="false" />
-  <xacro:arg name="use_fake_hardware" default="true" />
-  <xacro:arg name="fake_sensor_commands" default="true" />
+  <xacro:arg name="use_fake_hardware" default="false" />
+  <xacro:arg name="fake_sensor_commands" default="false" />
   <xacro:arg name="sim_gazebo" default="false" />
   <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="sim_isaac" default="false" />
