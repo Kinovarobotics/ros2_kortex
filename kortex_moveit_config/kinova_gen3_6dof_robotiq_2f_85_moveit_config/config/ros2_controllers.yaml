@@ -1,18 +1,21 @@
-# This config file is used by ros2_control
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 1000  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
 
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
+    streaming_controller:
+      type: kortex2_controllers/TwistController
 
     robotiq_gripper_controller:
       type: position_controllers/GripperActionController
 
-
-    joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcaster
+    fault_controller:
+      type: kortex2_controllers/FaultController
 
 joint_trajectory_controller:
   ros__parameters:
@@ -25,9 +28,30 @@ joint_trajectory_controller:
       - joint_6
     command_interfaces:
       - position
+      - velocity
     state_interfaces:
       - position
       - velocity
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.0
+      goal_time: 0.0
+
+streaming_controller:
+  ros__parameters:
+    joint: tcp
+    interface_names:
+      - twist.linear.x
+      - twist.linear.y
+      - twist.linear.z
+      - twist.angular.x
+      - twist.angular.y
+      - twist.angular.z
+
 robotiq_gripper_controller:
   ros__parameters:
+    default: true
     joint: robotiq_85_left_knuckle_joint
+    interface_name: position

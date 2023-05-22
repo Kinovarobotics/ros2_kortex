@@ -4,7 +4,7 @@
 
     <!-- Arguments -->
     <xacro:arg name="arm" default="gen3" />
-    <xacro:arg name="dof" default="7" />
+    <xacro:arg name="dof" default="" />
     <xacro:arg name="vision" default="false" />
     <xacro:arg name="robot_ip" default="192.168.11.11" />
     <xacro:arg name="username" default="admin" />
@@ -18,8 +18,8 @@
     <xacro:arg name="sim_ignition" default="false" />
     <xacro:arg name="sim_isaac" default="false" />
     <xacro:arg name="prefix" default="" />
-    <xacro:arg name="use_fake_hardware" default="true" />
-    <xacro:arg name="fake_sensor_commands" default="true" />
+    <xacro:arg name="use_fake_hardware" default="false" />
+    <xacro:arg name="fake_sensor_commands" default="false" />
     <xacro:arg name="use_internal_bus_gripper_comm" default="false" />
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
