@@ -63,11 +63,13 @@ To launch and view the robots URDF run:
 
         ros2 launch kortex_description view_robot.launch.py
 
-To simulate the robot with fake hardware and generate paths with MoveIt run the following:
+To simulate the 7 DoF Kinova Gen3 robot arm with mock hardware:
 
-        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true launch_rviz:=false
+        ros2 launch kortex2_bringup gen3.launch.py robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true
 
-        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true
+To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm with mock hardware:
+
+        ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true
 
 To simulate the robot with gazebo run the following:
    ```
@@ -81,11 +83,11 @@ To simulate the robot with ignition run the following:
 
 To work with a physical robot and generate/execute paths with MoveIt run the following:
 
-        ros2 launch kortex2_bringup kortex_control.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false launch_rviz:=false
+        ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py robot_ip:=192.168.1.10
 
-        ros2 launch kortex2_bringup kortex_moveit.launch.py robot_type:=gen3 robot_ip:=192.168.1.10 use_fake_hardware:=false
+**Note: If you have reassigned your physical arm's robot IP address, then you will need to assign that ip address to `robot_ip`**
 
-If you are using the `kortex_controllers.yaml` file the Gripper will be available on the Action topic:
+The Robotiq 2f 85 Gripper will be available on the Action topic:
 
         /robotiq_gripper_controller/gripper_cmd
 
