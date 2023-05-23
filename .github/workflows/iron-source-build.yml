@@ -1,0 +1,39 @@
+name: Iron Source Build
+on:
+  push:
+    branches:
+      # try to keep iron and rolling(main) in sync
+      - iron
+      - main
+  schedule:
+    # Run every morning to detect flakiness and broken dependencies
+    - cron: '43 1 * * *'
+
+jobs:
+  iron_source:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+    env:
+      ROS_DISTRO: iron
+    steps:
+      - uses: ros-tooling/setup-ros@v0.6
+        with:
+          required-ros-distributions: ${{ env.ROS_DISTRO }}
+      - uses: actions/checkout@v3
+      - uses: ros-tooling/action-ros-ci@v0.3
+        with:
+          target-ros2-distro: ${{ env.ROS_DISTRO }}
+          import-token: ${{ secrets.GITHUB_TOKEN }}
+          # build all packages listed in the meta package
+          package-name:
+            kortex2_bringup
+            kortex2_driver
+          vcs-repo-file-url: |
+            https://raw.githubusercontent.com/ros2/ros2/master/ros2.repos
+            file://${{ github.workspace }}/ros2_kortex.${{ env.ROS_DISTRO }}.repos
+          colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
+      - uses: actions/upload-artifact@v1
+        with:
+          name: colcon-logs-${{ matrix.os }}
+          path: ros_ws/log

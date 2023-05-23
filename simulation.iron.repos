@@ -1,0 +1,26 @@
+repositories:
+
+  gazebo_ros2_control:
+    type: git
+    url: https://github.com/ros-simulation/gazebo_ros2_control.git
+    version: master
+
+  ign_ros2_control:
+    type: git
+    url: https://github.com/ignitionrobotics/ign_ros2_control.git
+    version: master
+
+  ros_ign:
+    type: git
+    url: https://github.com/ignitionrobotics/ros_ign.git
+    version: ros2
+
+  ros2_control_demos:
+    type: git
+    url: https://github.com/ros-controls/ros2_control_demos.git
+    version: master
+
+  ros_ign:
+    type: git
+    url: https://github.com/ignitionrobotics/ros_ign.git
+    version: ros2
