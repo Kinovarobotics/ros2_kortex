@@ -240,6 +240,14 @@ def generate_launch_description():
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
     )
 
+    # Bridge
+    bridge = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=["/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock"],
+        output="screen",
+    )
+
     # Gazebo nodes
     gzserver = ExecuteProcess(
         cmd=["gzserver", "-s", "libgazebo_ros_init.so", "-s", "libgazebo_ros_factory.so", ""],
@@ -272,7 +280,7 @@ def generate_launch_description():
     )
 
     ignition_spawn_entity = Node(
-        package="ros_ign_gazebo",
+        package="ros_gz_sim",
         executable="create",
         output="screen",
         arguments=[
@@ -282,19 +290,32 @@ def generate_launch_description():
             robot_name,
             "-allow_renaming",
             "true",
+            "-x",
+            "0.0",
+            "-y",
+            "0.0",
+            "-z",
+            "0.3",
+            "-R",
+            "0.0",
+            "-P",
+            "0.0",
+            "-Y",
+            "0.0",
         ],
         condition=IfCondition(sim_ignition),
     )
 
     ignition_launch_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [FindPackageShare("ros_ign_gazebo"), "/launch/ign_gazebo.launch.py"]
+            [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
         ),
         launch_arguments={"ign_args": " -r -v 3 empty.sdf"}.items(),
         condition=IfCondition(sim_ignition),
     )
 
     nodes_to_start = [
+        bridge,
         robot_state_publisher_node,
         joint_state_broadcaster_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
