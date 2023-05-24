@@ -57,7 +57,6 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="gen3_7dof_controllers.yaml",
             description="Robot controller to start.",
         )
     )
@@ -76,7 +75,7 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument("launch_rviz", default_value="false", description="Launch RViz?")
+        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
     )
 
     # Initialize Arguments

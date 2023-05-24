@@ -44,11 +44,11 @@ def generate_launch_description():
         "robot_ip": robot_ip,
         "use_fake_hardware": use_fake_hardware,
         "gripper": "robotiq_2f_85",
-        "dof": "7",
+        "dof": "6",
     }
 
     moveit_config = (
-        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
+        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_6dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=launch_arguments)
         .to_moveit_configs()
     )
