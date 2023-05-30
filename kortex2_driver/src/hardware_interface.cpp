@@ -243,7 +243,11 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   arm_joints_control_level_.resize(
     actuator_count_, integration_lvl_t::UNDEFINED);  // start in undefined
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
+  gripper_command_velocity_ = 100.0;
+  gripper_command_force_ = 100.0;
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
+  gripper_velocity_ = 100.0;
+  gripper_force_ = 100.0;
 
   // set size of the twist interface
   twist_commands_.resize(6, 0.0);
@@ -300,6 +304,8 @@ KortexMultiInterfaceHardware::export_state_interfaces()
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
       state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &gripper_velocity_));
+      state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &gripper_force_));
     }
     else
     {
@@ -336,6 +342,10 @@ KortexMultiInterfaceHardware::export_command_interfaces()
     {
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_command_position_));
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &gripper_command_velocity_));
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &gripper_command_force_));
     }
     else
     {
@@ -661,6 +671,8 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
 
   // to radians
   gripper_command_position_ = gripper_initial_position / 100.0 * 0.81;
+  gripper_command_velocity_ = 100.0;
+  gripper_command_force_ = 100.0;
 
   // Initialize interconnect command to current gripper position.
   base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
@@ -858,7 +870,7 @@ return_type KortexMultiInterfaceHardware::write(
       }
 
       // gripper control
-      sendGripperCommand(arm_mode_, gripper_command_position_);
+      sendGripperCommand(arm_mode_, gripper_command_position_, gripper_command_velocity_, gripper_command_force_);
       // read after write in twist mode
       feedback_ = base_cyclic_.RefreshFeedback();
     }
@@ -869,7 +881,7 @@ return_type KortexMultiInterfaceHardware::write(
       // Per joint controller active
 
       // gripper control
-      sendGripperCommand(arm_mode_, gripper_command_position_);
+      sendGripperCommand(arm_mode_, gripper_command_position_, gripper_command_velocity_, gripper_command_force_);
 
       if (joint_based_controller_running_)
       {
