@@ -63,16 +63,8 @@ def generate_launch_description():
     # General arguments
     declared_arguments.append(
         DeclareLaunchArgument(
-            "runtime_config_package",
-            default_value="kortex2_bringup",
-            description='Package with the controller\'s configuration in "config" folder. \
-        Usually the argument is not set, it enables use of a custom setup.',
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "controllers_file",
-            default_value="gen3_7dof_controllers.yaml",
+            default_value="ros2_controllers.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
@@ -137,7 +129,6 @@ def generate_launch_description():
     sim_ignition = LaunchConfiguration("sim_ignition")
     robot_type = LaunchConfiguration("robot_type")
     # General arguments
-    runtime_config_package = LaunchConfiguration("runtime_config_package")
     controllers_file = LaunchConfiguration("controllers_file")
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
@@ -149,7 +140,9 @@ def generate_launch_description():
     launch_rviz = LaunchConfiguration("launch_rviz")
 
     robot_controllers = PathJoinSubstitution(
-        [FindPackageShare(runtime_config_package), "config", controllers_file]
+        # TODO(abake48 or moriarty): When the sim config for the 6dof arm is created,
+        # we need to extend this launch file to handle launching either robot config
+        [FindPackageShare(description_package), "arms/gen3/7dof/config", controllers_file]
     )
 
     rviz_config_file = PathJoinSubstitution(

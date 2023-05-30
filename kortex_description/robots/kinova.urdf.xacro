@@ -23,7 +23,7 @@
   <xacro:arg name="sim_gazebo" default="false" />
   <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="sim_isaac" default="false" />
-  <xacro:arg name="simulation_controllers" default="$(find kortex_bringup)/config/$(arg arm)_$(arg dof)dof_controllers.yaml" />
+  <xacro:arg name="simulation_controllers" default="$(find kortex_description)/arm/$(arg arm)/$(arg dof)dof/config/ros2_controllers.yaml" />
 
 
   <!-- import main macro -->

@@ -91,7 +91,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="kortex_controllers.yaml",
+            default_value="ros2_controllers.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
@@ -248,7 +248,11 @@ def generate_launch_description():
     robot_description = {"robot_description": robot_description_content}
 
     robot_controllers = PathJoinSubstitution(
-        [FindPackageShare(runtime_config_package), "config", controllers_file]
+        [
+            FindPackageShare(description_package),
+            "arms/gen3/" + str(dof) + "dof/config",
+            controllers_file,
+        ]
     )
 
     rviz_config_file = PathJoinSubstitution(
