@@ -243,6 +243,8 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   arm_joints_control_level_.resize(
     actuator_count_, integration_lvl_t::UNDEFINED);  // start in undefined
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
+  gripper_command_velocity_ = 100.0;
+  gripper_command_force_ = 100.0;
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
 
   // set size of the twist interface
@@ -381,7 +383,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
   const std::vector<std::string> & start_interfaces,
   const std::vector<std::string> & stop_interfaces)
 {
-  hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
+  const hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
 
   // reset auxiliary switching booleans
   stop_joint_based_controller_ = stop_twist_controller_ = stop_fault_controller_ =
@@ -532,6 +534,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
      start_modes_.end()))
   {
     start_joint_based_controller_ = true;
+    stop_twist_controller_ = true;
   }
   if (
     !start_modes_.empty() &&
@@ -539,6 +542,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       start_modes_.end())
   {
     start_twist_controller_ = true;
+    stop_joint_based_controller_ = true;
   }
   if (
     !start_modes_.empty() &&
@@ -556,16 +560,16 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
   }
 
   // handle exclusiveness between twist and joint based controller
-  if (twist_controller_running_ && start_joint_based_controller_ && !stop_twist_controller_)
-  {
-    RCLCPP_ERROR(LOGGER, "Can't start joint based controller while twist controller is running!");
-    return hardware_interface::return_type::ERROR;
-  }
-  if (joint_based_controller_running_ && start_twist_controller_ && !stop_joint_based_controller_)
-  {
-    RCLCPP_ERROR(LOGGER, "Can't start twist controller while joint based controller is running!");
-    return hardware_interface::return_type::ERROR;
-  }
+  // if (twist_controller_running_ && start_joint_based_controller_ && !stop_twist_controller_)
+  // {
+  //   RCLCPP_ERROR(LOGGER, "Can't start joint based controller while twist controller is running!");
+  //   return hardware_interface::return_type::ERROR;
+  // }
+  // if (joint_based_controller_running_ && start_twist_controller_ && !stop_joint_based_controller_)
+  // {
+  //   RCLCPP_ERROR(LOGGER, "Can't start twist controller while joint based controller is running!");
+  //   return hardware_interface::return_type::ERROR;
+  // }
 
   return ret_val;
 }
@@ -601,7 +605,7 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
     base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
-    twist_controller_running_ = false;
+    // twist_controller_running_ = false;
     arm_commands_positions_ = arm_positions_;
     arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     joint_based_controller_running_ = true;
@@ -613,9 +617,11 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
     base_.SetServoingMode(servoing_mode_hw_);
     arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
-    joint_based_controller_running_ = false;
+    // joint_based_controller_running_ = false;
     twist_commands_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     twist_controller_running_ = true;
+    // refresh feedback
+    feedback_ = base_cyclic_.RefreshFeedback();
   }
   if (start_gripper_controller_)
   {
@@ -851,6 +857,11 @@ return_type KortexMultiInterfaceHardware::write(
         // twist control
         sendTwistCommand();
       }
+      else if(joint_based_controller_running_)
+      {
+        // send commands to the joints
+        sendJointCommands();
+      }
       else
       {
         // Keep alive mode - no controller active
@@ -858,7 +869,7 @@ return_type KortexMultiInterfaceHardware::write(
       }
 
       // gripper control
-      sendGripperCommand(arm_mode_, gripper_command_position_);
+      sendGripperCommand(arm_mode_, gripper_command_position_, gripper_command_velocity_, gripper_command_force_);
       // read after write in twist mode
       feedback_ = base_cyclic_.RefreshFeedback();
     }
@@ -869,7 +880,7 @@ return_type KortexMultiInterfaceHardware::write(
       // Per joint controller active
 
       // gripper control
-      sendGripperCommand(arm_mode_, gripper_command_position_);
+      sendGripperCommand(arm_mode_, gripper_command_position_, gripper_command_velocity_, gripper_command_force_);
 
       if (joint_based_controller_running_)
       {

@@ -25,7 +25,6 @@ add_library(
   ${PROJECT_NAME}
   SHARED
   src/hardware_interface.cpp
-  src/kortex_math_util.cpp
 )
 target_include_directories(
   ${PROJECT_NAME}
