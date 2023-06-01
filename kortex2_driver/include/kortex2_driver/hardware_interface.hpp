@@ -153,9 +153,19 @@ private:
   rclcpp::Time controller_switch_time_;
   std::atomic<bool> block_write = false;
   k_api::Base::ServoingMode arm_mode_;
+  double requested_servo_mode_;
+
+  // Enum to dictate accepted control commands
+  enum class CommandMode : std::uint8_t
+  {
+    CARTESIAN = 0,
+    TWIST = 1,
+  }
+  CommandMode arm_command_mode_;
+  double requested_command_mode_;
 
   // Enum defining at which control level we are
-  // Dumb way of maintaining the command_interface type per joint.
+  // a way of maintaining the command_interface type per joint.
   enum class integration_lvl_t : std::uint8_t
   {
     UNDEFINED = 0,

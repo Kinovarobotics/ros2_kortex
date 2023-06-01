@@ -219,7 +219,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     base_.SetServoingMode(servoing_mode_hw_);
   }
 
-  // initialize kortex api twist commandd
+  // initialize kortex api twist command
   {
     k_api_twist_command_.set_reference_frame(k_api::Common::CARTESIAN_REFERENCE_FRAME_TOOL);
     // command.set_duration = execute time (milliseconds) according to the api ->
@@ -319,6 +319,12 @@ KortexMultiInterfaceHardware::export_state_interfaces()
       arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
   }
 
+  // state interface which reports Kortex API's Servo mode
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("kortex_command_mode", "internal_servo_mode", &arm_mode_));
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("kortex_command", "internal_command_mode", &arm_command_mode_));
+
   // state interface which reports if robot is faulted
   state_interfaces.emplace_back(
     hardware_interface::StateInterface("reset_fault", "internal_fault", &in_fault_));
@@ -369,6 +375,11 @@ KortexMultiInterfaceHardware::export_command_interfaces()
     hardware_interface::CommandInterface("tcp", "twist.angular.y", &twist_commands_[4]));
   command_interfaces.emplace_back(
     hardware_interface::CommandInterface("tcp", "twist.angular.z", &twist_commands_[5]));
+
+  command_interfaces.emplace_back(
+    hardware_interface::CommandInterface("kortex_command", "servo_mode", &requested_servo_mode_));
+  command_interfaces.emplace_back(
+    hardware_interface::CommandInterface("kortex_command", "command_mode", &requested_command_mode_));
 
   command_interfaces.emplace_back(
     hardware_interface::CommandInterface("reset_fault", "command", &reset_fault_cmd_));
@@ -534,7 +545,6 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
      start_modes_.end()))
   {
     start_joint_based_controller_ = true;
-    stop_twist_controller_ = true;
   }
   if (
     !start_modes_.empty() &&
@@ -542,7 +552,6 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       start_modes_.end())
   {
     start_twist_controller_ = true;
-    stop_joint_based_controller_ = true;
   }
   if (
     !start_modes_.empty() &&
@@ -604,8 +613,6 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
   {
     servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::LOW_LEVEL_SERVOING);
     base_.SetServoingMode(servoing_mode_hw_);
-    arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
-    // twist_controller_running_ = false;
     arm_commands_positions_ = arm_positions_;
     arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     joint_based_controller_running_ = true;
@@ -616,8 +623,6 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
   {
     servoing_mode_hw_.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
     base_.SetServoingMode(servoing_mode_hw_);
-    arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
-    // joint_based_controller_running_ = false;
     twist_commands_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     twist_controller_running_ = true;
     // refresh feedback
@@ -709,6 +714,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
     }
     arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;
   }
+
+  arm_mode_ = base.GetServoingModeInformation().servoing_mode();
+  arm_command_mode_ = CommandMode::CARTESIAN;
 
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully activated!");
   return CallbackReturn::SUCCESS;
@@ -808,6 +816,10 @@ return_type KortexMultiInterfaceHardware::write(
     return return_type::OK;
   }
 
+  // always update command mode if not blocked
+  arm_command_mode_ = requested_command_mode_;
+
+  // if in fault state
   if (!std::isnan(reset_fault_cmd_) && fault_controller_running_)
   {
     try
@@ -822,11 +834,9 @@ return_type KortexMultiInterfaceHardware::write(
       // clear faults
       base_.ClearFaults();
       // back to original servoing mode
-      if (
-        arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING ||
-        arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING)
+      if (requested_servo_mode_ != servoing_mode_hw_.servoing_mode())
       {
-        servoing_mode_hw_.set_servoing_mode(arm_mode_);
+        servoing_mode_hw_.set_servoing_mode(requested_servo_mode_);
         base_.SetServoingMode(servoing_mode_hw_);
       }
       reset_fault_async_success_ = 1.0;
@@ -847,17 +857,23 @@ return_type KortexMultiInterfaceHardware::write(
     reset_fault_cmd_ = NO_CMD;
   }
 
+  // if no longer in fault
   if (in_fault_ == 0.0)
   {
-    if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
+    if (arm_mode_ != requested_servo_mode_)
+    {
+        servoing_mode_hw_.set_servoing_mode(requested_servo_mode_);
+        base_.SetServoingMode(servoing_mode_hw_);
+    }
+    else if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
     {
       // Twist controller active
-      if (twist_controller_running_)
+      if (arm_command_mode_ == CommandMode::TWIST)
       {
         // twist control
         sendTwistCommand();
       }
-      else if(joint_based_controller_running_)
+      else if(arm_command_mode_ == CommandMode::CARTESIAN)
       {
         // send commands to the joints
         sendJointCommands();
