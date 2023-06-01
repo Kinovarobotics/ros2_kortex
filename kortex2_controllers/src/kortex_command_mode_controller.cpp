@@ -33,7 +33,7 @@ controller_interface::InterfaceConfiguration KortexCommandModeController::comman
   config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
 
   config.names.emplace_back("kortex_command/servo_mode");
-  config.names.emplace_back("kortex_command/command_mode")
+  config.names.emplace_back("kortex_command/command_mode");
 
   return config;
 }
@@ -56,13 +56,13 @@ controller_interface::return_type KortexCommandModeController::update(
 {
   if (rt_servo_mode_publisher_ && rt_servo_mode_publisher_->trylock())
   {
-    servo_state_.data = static_cast<uint32_t>(state_interfaces_[StateInterfaces::SERVOING_MODE].get_value());
+    servo_state_.data = static_cast<uint32_t>(state_interfaces_[StateInterfaces::ARM_SERVOING_MODE].get_value());
     rt_servo_mode_publisher_->msg_.data = servo_state_.data;
     rt_servo_mode_publisher_->unlockAndPublish();
   }
   if (rt_cmd_mode_publisher_ && rt_cmd_mode_publisher_->trylock())
   {
-    command_state_.data = static_cast<uint8_t>(state_interfaces_[StateInterfaces::COMMAND_MODE].get_value());
+    command_state_.data = static_cast<uint8_t>(state_interfaces_[StateInterfaces::ARM_COMMAND_MODE].get_value());
     rt_cmd_mode_publisher_->msg_.data = command_state_.data;
     rt_cmd_mode_publisher_->unlockAndPublish();
   }

@@ -5,6 +5,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# this is needed by the kortex_api to tell it we are compiling for linux
+add_definitions(-D_OS_UNIX=1)
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_ros REQUIRED)
@@ -13,12 +16,14 @@ find_package(geometry_msgs REQUIRED)
 find_package(example_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(realtime_tools REQUIRED)
+find_package(kortex_api REQUIRED)
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   controller_interface
   geometry_msgs
   example_interfaces
   realtime_tools
+  kortex_api
 )
 
 include_directories(include)

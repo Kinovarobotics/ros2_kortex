@@ -153,15 +153,17 @@ private:
   rclcpp::Time controller_switch_time_;
   std::atomic<bool> block_write = false;
   k_api::Base::ServoingMode arm_mode_;
+  double arm_mode_status_;
   double requested_servo_mode_;
 
   // Enum to dictate accepted control commands
-  enum class CommandMode : std::uint8_t
+  enum class CommandMode : std::uint32_t
   {
     CARTESIAN = 0,
     TWIST = 1,
-  }
+  };
   CommandMode arm_command_mode_;
+  double arm_command_mode_status_;
   double requested_command_mode_;
 
   // Enum defining at which control level we are

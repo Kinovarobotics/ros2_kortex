@@ -321,9 +321,9 @@ KortexMultiInterfaceHardware::export_state_interfaces()
 
   // state interface which reports Kortex API's Servo mode
   state_interfaces.emplace_back(
-    hardware_interface::StateInterface("kortex_command_mode", "internal_servo_mode", &arm_mode_));
+    hardware_interface::StateInterface("kortex_command", "internal_servo_mode", &arm_mode_status_));
   state_interfaces.emplace_back(
-    hardware_interface::StateInterface("kortex_command", "internal_command_mode", &arm_command_mode_));
+    hardware_interface::StateInterface("kortex_command", "internal_command_mode", &arm_command_mode_status_));
 
   // state interface which reports if robot is faulted
   state_interfaces.emplace_back(
@@ -715,7 +715,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
     arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;
   }
 
-  arm_mode_ = base.GetServoingModeInformation().servoing_mode();
+  arm_mode_ = base_.GetServoingMode().servoing_mode();
   arm_command_mode_ = CommandMode::CARTESIAN;
 
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully activated!");
@@ -765,6 +765,9 @@ return_type KortexMultiInterfaceHardware::read(
 
   // read gripper state
   readGripperPosition();
+
+  arm_mode_status_ = static_cast<double>(arm_mode_);
+  arm_command_mode_status_ = static_cast<double>(arm_command_mode_);
 
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -817,7 +820,8 @@ return_type KortexMultiInterfaceHardware::write(
   }
 
   // always update command mode if not blocked
-  arm_command_mode_ = requested_command_mode_;
+  arm_command_mode_ = static_cast<KortexMultiInterfaceHardware::CommandMode>(requested_command_mode_);
+  const auto requested_servo_mode = static_cast<k_api::Base::ServoingMode>(requested_servo_mode_);
 
   // if in fault state
   if (!std::isnan(reset_fault_cmd_) && fault_controller_running_)
@@ -834,9 +838,9 @@ return_type KortexMultiInterfaceHardware::write(
       // clear faults
       base_.ClearFaults();
       // back to original servoing mode
-      if (requested_servo_mode_ != servoing_mode_hw_.servoing_mode())
+      if (requested_servo_mode != servoing_mode_hw_.servoing_mode())
       {
-        servoing_mode_hw_.set_servoing_mode(requested_servo_mode_);
+        servoing_mode_hw_.set_servoing_mode(requested_servo_mode);
         base_.SetServoingMode(servoing_mode_hw_);
       }
       reset_fault_async_success_ = 1.0;
@@ -860,9 +864,9 @@ return_type KortexMultiInterfaceHardware::write(
   // if no longer in fault
   if (in_fault_ == 0.0)
   {
-    if (arm_mode_ != requested_servo_mode_)
+    if (arm_mode_ != requested_servo_mode)
     {
-        servoing_mode_hw_.set_servoing_mode(requested_servo_mode_);
+        servoing_mode_hw_.set_servoing_mode(requested_servo_mode);
         base_.SetServoingMode(servoing_mode_hw_);
     }
     else if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)

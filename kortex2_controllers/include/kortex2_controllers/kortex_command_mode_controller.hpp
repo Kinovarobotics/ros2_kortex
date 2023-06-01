@@ -24,8 +24,13 @@
 #ifndef KORTEX2_CONTROLLERS__KORTEX_COMMAND_MODE_CONTROLLER_HPP_
 #define KORTEX2_CONTROLLERS__KORTEX_COMMAND_MODE_CONTROLLER_HPP_
 
+#include <memory>
+
 #include "controller_interface/controller_interface.hpp"
 #include "kortex2_controllers/visibility_control.h"
+#include "example_interfaces/msg/u_int32.hpp"
+#include "example_interfaces/msg/u_int8.hpp"
+#include "realtime_tools/realtime_publisher.h"
 
 // Include Kortex API for enum classes
 #include <BaseClientRpc.h>
@@ -39,12 +44,13 @@ enum CommandInterfaces
 };
 enum StateInterfaces
 {
-  SERVOING_MODE = 0u,
-  COMMAND_MODE = 1u,
+  ARM_SERVOING_MODE = 0u,
+  ARM_COMMAND_MODE = 1u,
 };
 
 using ServoMode = example_interfaces::msg::UInt32;
 using CommandMode = example_interfaces::msg::UInt8;
+using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 class KortexCommandModeController : public controller_interface::ControllerInterface
 {
@@ -76,8 +82,8 @@ private:
   using CommandModeStatePublisher = realtime_tools::RealtimePublisher<CommandMode>;
   rclcpp::Publisher<ServoMode>::SharedPtr servo_pub_;
   rclcpp::Publisher<CommandMode>::SharedPtr cmd_pub_;
-  std::unique_ptr<StatePublisher> rt_servo_mode_publisher_;
-  std::unique_ptr<CommandMode> rt_cmd_mode_publisher_;
+  std::unique_ptr<ServoModeStatePublisher> rt_servo_mode_publisher_;
+  std::unique_ptr<CommandModeStatePublisher> rt_cmd_mode_publisher_;
   ServoMode servo_state_;
   CommandMode command_state_;
 
