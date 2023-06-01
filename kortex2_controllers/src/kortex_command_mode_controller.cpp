@@ -99,7 +99,7 @@ CallbackReturn KortexCommandModeController::on_activate(const rclcpp_lifecycle::
 
 CallbackReturn KortexCommandModeController::on_deactivate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  command_interfaces_[CommandInterfaces::SERVOING_MODE].set_value(static_cast<double>(Kinova::Api::Base::UNSPECIFIED_SERVOING_MODE));
+  command_interfaces_[CommandInterfaces::SERVOING_MODE].set_value(static_cast<double>(Kinova::Api::Base::SINGLE_LEVEL_SERVOING));
   command_interfaces_[CommandInterfaces::COMMAND_MODE].set_value(static_cast<double>(CARTESIAN));
   return CallbackReturn::SUCCESS;
 }
