@@ -24,7 +24,8 @@ jobs:
       - uses: ros-tooling/action-ros-ci@0.3.2
         with:
           target-ros2-distro: ${{ env.ROS_DISTRO }}
-          ref: ${{ env.ROS_DISTRO }}
+          # Currently main is compatible with Humble
+          ref: main
           import-token: ${{ secrets.GITHUB_TOKEN }}
           # build all packages listed in the meta package
           package-name:
