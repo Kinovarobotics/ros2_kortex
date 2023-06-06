@@ -19,6 +19,7 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(kortex_api REQUIRED)
+find_package(kortex_msgs REQUIRED)
 
 ## COMPILE
 add_library(
@@ -37,6 +38,7 @@ ament_target_dependencies(
   kortex_api
   pluginlib
   rclcpp
+  kortex_msgs
 )
 
 pluginlib_export_plugin_description_file(hardware_interface hardware_interface_plugin.xml)

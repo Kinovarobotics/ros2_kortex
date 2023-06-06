@@ -43,6 +43,9 @@
 
 #include "kortex2_driver/visibility_control.h"
 
+#include "kortex_msgs/msg/servoing_mode.hpp"
+#include "kortex_msgs/msg/control_mode.hpp"
+
 #include <BaseClientRpc.h>
 #include <BaseCyclicClientRpc.h>
 #include <RouterClient.h>
@@ -58,6 +61,7 @@ constexpr char HW_IF_FAULT[] = "fault";
 }  // namespace hardware_interface
 
 using hardware_interface::return_type;
+using ControlMode = kortex_msgs::msg::ControlMode;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 namespace k_api = Kinova::Api;
@@ -153,18 +157,10 @@ private:
   rclcpp::Time controller_switch_time_;
   std::atomic<bool> block_write = false;
   k_api::Base::ServoingMode arm_mode_;
-  double arm_mode_status_;
   double requested_servo_mode_;
 
-  // Enum to dictate accepted control commands
-  enum class CommandMode : std::uint32_t
-  {
-    CARTESIAN = 0,
-    TWIST = 1,
-  };
-  CommandMode arm_command_mode_;
-  double arm_command_mode_status_;
-  double requested_command_mode_;
+  ControlMode arm_control_mode_;
+  double requested_control_mode_;
 
   // Enum defining at which control level we are
   // a way of maintaining the command_interface type per joint.

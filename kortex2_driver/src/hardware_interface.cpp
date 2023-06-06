@@ -319,12 +319,6 @@ KortexMultiInterfaceHardware::export_state_interfaces()
       arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
   }
 
-  // state interface which reports Kortex API's Servo mode
-  state_interfaces.emplace_back(
-    hardware_interface::StateInterface("kortex_command", "internal_servo_mode", &arm_mode_status_));
-  state_interfaces.emplace_back(
-    hardware_interface::StateInterface("kortex_command", "internal_command_mode", &arm_command_mode_status_));
-
   // state interface which reports if robot is faulted
   state_interfaces.emplace_back(
     hardware_interface::StateInterface("reset_fault", "internal_fault", &in_fault_));
@@ -379,7 +373,7 @@ KortexMultiInterfaceHardware::export_command_interfaces()
   command_interfaces.emplace_back(
     hardware_interface::CommandInterface("kortex_command", "servo_mode", &requested_servo_mode_));
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("kortex_command", "command_mode", &requested_command_mode_));
+    hardware_interface::CommandInterface("kortex_command", "command_mode", &requested_control_mode_));
 
   command_interfaces.emplace_back(
     hardware_interface::CommandInterface("reset_fault", "command", &reset_fault_cmd_));
@@ -716,7 +710,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   }
 
   arm_mode_ = base_.GetServoingMode().servoing_mode();
-  arm_command_mode_ = CommandMode::CARTESIAN;
+  arm_control_mode_.mode = ControlMode::JOINT;
 
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully activated!");
   return CallbackReturn::SUCCESS;
@@ -765,9 +759,6 @@ return_type KortexMultiInterfaceHardware::read(
 
   // read gripper state
   readGripperPosition();
-
-  arm_mode_status_ = static_cast<double>(arm_mode_);
-  arm_command_mode_status_ = static_cast<double>(arm_command_mode_);
 
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -820,7 +811,7 @@ return_type KortexMultiInterfaceHardware::write(
   }
 
   // always update command mode if not blocked
-  arm_command_mode_ = static_cast<KortexMultiInterfaceHardware::CommandMode>(requested_command_mode_);
+  arm_control_mode_.mode = static_cast<int8_t>(requested_control_mode_);
   const auto requested_servo_mode = static_cast<k_api::Base::ServoingMode>(requested_servo_mode_);
 
   // if in fault state
@@ -872,12 +863,12 @@ return_type KortexMultiInterfaceHardware::write(
     else if (arm_mode_ == k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING)
     {
       // Twist controller active
-      if (arm_command_mode_ == CommandMode::TWIST)
+      if (arm_control_mode_.mode == ControlMode::CARTESIAN)
       {
         // twist control
         sendTwistCommand();
       }
-      else if(arm_command_mode_ == CommandMode::CARTESIAN)
+      else if(arm_control_mode_.mode == ControlMode::JOINT)
       {
         // send commands to the joints
         sendJointCommands();
@@ -902,10 +893,16 @@ return_type KortexMultiInterfaceHardware::write(
       // gripper control
       sendGripperCommand(arm_mode_, gripper_command_position_, gripper_command_velocity_, gripper_command_force_);
 
-      if (joint_based_controller_running_)
+      if (arm_control_mode_.mode == ControlMode::JOINT)
       {
         // send commands to the joints
         sendJointCommands();
+      }
+      else if (arm_control_mode_.mode == ControlMode::CARTESIAN)
+      {
+        // Keep alive mode - no controller active
+        feedback_ = base_cyclic_.RefreshFeedback();
+        RCLCPP_DEBUG(LOGGER, "Cartesian control is unsupported in Low Level Servoing mode !");
       }
       else
       {

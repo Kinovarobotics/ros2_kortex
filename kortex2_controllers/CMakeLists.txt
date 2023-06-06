@@ -17,6 +17,7 @@ find_package(example_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(realtime_tools REQUIRED)
 find_package(kortex_api REQUIRED)
+find_package(kortex_msgs REQUIRED)
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   controller_interface
@@ -24,6 +25,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   example_interfaces
   realtime_tools
   kortex_api
+  kortex_msgs
 )
 
 include_directories(include)

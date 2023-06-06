@@ -5,7 +5,7 @@
   <version>0.0.0</version>
   <description>ROS2 driver package for the Kinova Robot Hardware.</description>
   <maintainer email="marq.rasmussen@picknik.ai">Marq Rasmussen</maintainer>
-  <license>Proprietary</license>
+  <license>BSD-3-Clause</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
@@ -13,6 +13,7 @@
   <depend>kortex_api</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
+  <depend>kortex_msgs</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

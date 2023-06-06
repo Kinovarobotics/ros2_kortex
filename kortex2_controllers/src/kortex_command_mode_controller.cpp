@@ -33,7 +33,7 @@ controller_interface::InterfaceConfiguration KortexCommandModeController::comman
   config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
 
   config.names.emplace_back("kortex_command/servo_mode");
-  config.names.emplace_back("kortex_command/command_mode");
+  config.names.emplace_back("kortex_command/control_mode");
 
   return config;
 }
@@ -41,67 +41,80 @@ controller_interface::InterfaceConfiguration KortexCommandModeController::comman
 controller_interface::InterfaceConfiguration KortexCommandModeController::state_interface_configuration() const
 {
   controller_interface::InterfaceConfiguration config;
-  config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
-
-  config.names.emplace_back("kortex_command/internal_servo_mode");
-  config.names.emplace_back("kortex_command/internal_command_mode");
+  config.type = controller_interface::interface_configuration_type::NONE;
 
   return config;
 }
 
 CallbackReturn KortexCommandModeController::on_init() { return CallbackReturn::SUCCESS; }
 
-controller_interface::return_type KortexCommandModeController::update(
-  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
-{
-  if (rt_servo_mode_publisher_ && rt_servo_mode_publisher_->trylock())
-  {
-    servo_state_.data = static_cast<uint32_t>(state_interfaces_[StateInterfaces::ARM_SERVOING_MODE].get_value());
-    rt_servo_mode_publisher_->msg_.data = servo_state_.data;
-    rt_servo_mode_publisher_->unlockAndPublish();
-  }
-  if (rt_cmd_mode_publisher_ && rt_cmd_mode_publisher_->trylock())
-  {
-    command_state_.data = static_cast<uint8_t>(state_interfaces_[StateInterfaces::ARM_COMMAND_MODE].get_value());
-    rt_cmd_mode_publisher_->msg_.data = command_state_.data;
-    rt_cmd_mode_publisher_->unlockAndPublish();
-  }
-
-  return controller_interface::return_type::OK;
-}
-
 CallbackReturn KortexCommandModeController::on_configure(const rclcpp_lifecycle::State & /*previous_state*/)
 {
+  servo_mode_command_subscriber_ = get_node()->create_subscription<ServoMode>(
+    "~/kortex_servo_mode", rclcpp::SystemDefaultsQoS(),
+    [this](const ServoMode::SharedPtr msg) { rt_servo_mode_ptr_.writeFromNonRT(msg); });
+
+  control_mode_command_subscriber_ = get_node()->create_subscription<ControlMode>(
+    "~/kortex_control_mode", rclcpp::SystemDefaultsQoS(),
+    [this](const ControlMode::SharedPtr msg) { rt_control_mode_ptr_.writeFromNonRT(msg); });
+
+  RCLCPP_INFO(get_node()->get_logger(), "configure successful");
+
   return CallbackReturn::SUCCESS;
 }
 
 CallbackReturn KortexCommandModeController::on_activate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  command_interfaces_[CommandInterfaces::SERVOING_MODE].set_value(static_cast<double>(Kinova::Api::Base::SINGLE_LEVEL_SERVOING));
-  command_interfaces_[CommandInterfaces::COMMAND_MODE].set_value(static_cast<double>(CARTESIAN));
-  try
-  {
-    servo_pub_ = get_node()->create_publisher<ServoMode>("~/arm_servo_mode", 1);
-    cmd_pub_ = get_node()->create_publisher<CommandMode>("~/arm_command_mode", 1);
-    rt_servo_mode_publisher_ = std::make_unique<ServoModeStatePublisher>(servo_pub_);
-    rt_cmd_mode_publisher_ = std::make_unique<CommandModeStatePublisher>(cmd_pub_);
-  }
-  catch (const std::exception & e)
-  {
-    fprintf(
-      stderr, "Exception thrown during publisher creation at configure stage with message : %s \n",
-      e.what());
-    return CallbackReturn::ERROR;
-  }
-
+  resetCommandInterfaces();
+    // Action interface
+  set_mode_command_srv_ = get_node()->create_service<SetModeCommand>(
+    "~/set_kortex_cmd_mode",
+    std::bind(
+      &KortexCommandModeController::updateCommandMode, this, std::placeholders::_1, std::placeholders::_2));
   return CallbackReturn::SUCCESS;
 }
 
 CallbackReturn KortexCommandModeController::on_deactivate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  command_interfaces_[CommandInterfaces::SERVOING_MODE].set_value(static_cast<double>(Kinova::Api::Base::SINGLE_LEVEL_SERVOING));
-  command_interfaces_[CommandInterfaces::COMMAND_MODE].set_value(static_cast<double>(CARTESIAN));
+  resetCommandInterfaces();
   return CallbackReturn::SUCCESS;
+}
+
+controller_interface::return_type KortexCommandModeController::update(
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
+{
+  const auto servo_mode = rt_servo_mode_ptr_.readFromRT();
+  const auto control_mode = rt_control_mode_ptr_.readFromRT();
+
+  command_interfaces_[CommandInterfaces::SERVOING_MODE].set_value(static_cast<double>((*servo_mode)->mode));
+  command_interfaces_[CommandInterfaces::CONTROL_MODE].set_value(static_cast<double>((*control_mode)->mode));
+
+  return controller_interface::return_type::OK;
+}
+
+void KortexCommandModeController::resetCommandInterfaces()
+{
+  // reset command buffer 
+  rt_servo_mode_ptr_ = ServoModeCommandPtr(nullptr);
+  rt_control_mode_ptr_ = ControlModeCommandPtr(nullptr);
+
+  command_interfaces_[CommandInterfaces::SERVOING_MODE].set_value(static_cast<double>(ServoMode::SINGLE_LEVEL_SERVOING));
+  command_interfaces_[CommandInterfaces::CONTROL_MODE].set_value(static_cast<double>(ControlMode::JOINT));
+}
+
+bool KortexCommandModeController::updateCommandMode(const SetModeCommand::Request::SharedPtr req, SetModeCommand::Response::SharedPtr resp){
+  RCLCPP_INFO(get_node()->get_logger(), "Updating control mode and kortex api servo level");
+
+  command_interfaces_[CommandInterfaces::SERVOING_MODE].set_value(static_cast<double>((req->target_servo_mode.mode)));
+  command_interfaces_[CommandInterfaces::CONTROL_MODE].set_value(static_cast<double>((req->target_control_mode.mode)));
+
+  // sleep to let hardware_interface set these values
+  std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+  resp->success = true;
+  resp->message = "Kortex command mode updated";
+
+  return resp->success;
 }
 
 }  // namespace kortex2_controllers

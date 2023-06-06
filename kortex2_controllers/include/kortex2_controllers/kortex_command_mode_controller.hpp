@@ -28,28 +28,23 @@
 
 #include "controller_interface/controller_interface.hpp"
 #include "kortex2_controllers/visibility_control.h"
-#include "example_interfaces/msg/u_int32.hpp"
-#include "example_interfaces/msg/u_int8.hpp"
-#include "realtime_tools/realtime_publisher.h"
-
-// Include Kortex API for enum classes
-#include <BaseClientRpc.h>
+#include "kortex_msgs/msg/control_mode.hpp"
+#include "kortex_msgs/msg/servoing_mode.hpp"
+#include "kortex_msgs/srv/set_mode.hpp"
+#include "rclcpp_action/create_server.hpp"
+#include "realtime_tools/realtime_buffer.h"
 
 namespace kortex2_controllers
 {
 enum CommandInterfaces
 {
   SERVOING_MODE = 0u,
-  COMMAND_MODE = 1u,
-};
-enum StateInterfaces
-{
-  ARM_SERVOING_MODE = 0u,
-  ARM_COMMAND_MODE = 1u,
+  CONTROL_MODE = 1u,
 };
 
-using ServoMode = example_interfaces::msg::UInt32;
-using CommandMode = example_interfaces::msg::UInt8;
+using ServoMode = kortex_msgs::msg::ServoingMode;
+using ControlMode = kortex_msgs::msg::ControlMode;
+using SetModeCommand = kortex_msgs::srv::SetMode;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 class KortexCommandModeController : public controller_interface::ControllerInterface
@@ -78,17 +73,19 @@ public:
     const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
 private:
-  using ServoModeStatePublisher = realtime_tools::RealtimePublisher<ServoMode>;
-  using CommandModeStatePublisher = realtime_tools::RealtimePublisher<CommandMode>;
-  rclcpp::Publisher<ServoMode>::SharedPtr servo_pub_;
-  rclcpp::Publisher<CommandMode>::SharedPtr cmd_pub_;
-  std::unique_ptr<ServoModeStatePublisher> rt_servo_mode_publisher_;
-  std::unique_ptr<CommandModeStatePublisher> rt_cmd_mode_publisher_;
-  ServoMode servo_state_;
-  CommandMode command_state_;
+  bool updateCommandMode(const SetModeCommand::Request::SharedPtr req, SetModeCommand::Response::SharedPtr resp);
 
-  static constexpr double CARTESIAN = 0;
-  static constexpr double TWIST = 1;
+  using ServoModeCommandPtr = realtime_tools::RealtimeBuffer<std::shared_ptr<ServoMode>>;
+  ServoModeCommandPtr rt_servo_mode_ptr_;
+  rclcpp::Subscription<ServoMode>::SharedPtr servo_mode_command_subscriber_;
+
+  using ControlModeCommandPtr = realtime_tools::RealtimeBuffer<std::shared_ptr<ControlMode>>;
+  ControlModeCommandPtr rt_control_mode_ptr_;
+  rclcpp::Subscription<ControlMode>::SharedPtr control_mode_command_subscriber_;
+
+  rclcpp::Service<SetModeCommand>::SharedPtr set_mode_command_srv_;
+
+  void resetCommandInterfaces();
 };
 
 }

@@ -1,0 +1,14 @@
+# This service is for setting the robot into a desired servoing mode (e.g. High level vs Low Level) 
+# and control mode (e.g. Cartesian or Joint control mode)
+
+# request
+
+ServoingMode target_servo_mode
+ControlMode target_control_mode
+
+---
+
+# response
+
+bool success
+string message
