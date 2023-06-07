@@ -145,6 +145,8 @@ private:
   // Gripper
   k_api::GripperCyclic::MotorCommand * gripper_motor_command_;
   double gripper_command_position_;
+  double gripper_command_max_velocity_;
+  double gripper_command_max_force_;
   double gripper_position_;
   double gripper_velocity_;
 
@@ -211,8 +213,8 @@ private:
   void sendJointCommands();
   void prepareCommands();
   void sendGripperCommand(
-    k_api::Base::ServoingMode arm_mode, double position, double velocity = 100.0,
-    double force = 100.0);
+    k_api::Base::ServoingMode arm_mode, double position, double velocity = gripper_command_max_velocity_,
+    double force = gripper_command_max_force_);
 
   void readGripperPosition();
 };

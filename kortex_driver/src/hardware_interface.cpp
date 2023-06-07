@@ -69,6 +69,8 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   start_fault_controller_(false),
   first_pass_(true),
   gripper_joint_name_(""),
+  gripper_command_max_velocity_(100.0),
+  gripper_command_max_force_(100.0),
   use_internal_bus_gripper_comm_(false),
   k_api_twist_(nullptr),
   gripper_motor_command_(nullptr)
@@ -173,6 +175,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   {
     RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
   }
+
+  gripper_command_max_velocity_ = info_.hardware_parameters["gripper_max_velocity"];
+  gripper_command_max_force_ = info_.hardware_parameters["gripper_max_force"];
 
   RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
 
@@ -666,9 +671,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
   gripper_motor_command_ =
     base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
-  gripper_motor_command_->set_position(gripper_initial_position);  // % position
-  gripper_motor_command_->set_velocity(100.0);                     // % speed
-  gripper_motor_command_->set_force(100.0);                        // % torque
+  gripper_motor_command_->set_position(gripper_initial_position);      // % position
+  gripper_motor_command_->set_velocity(gripper_command_max_velocity_); // % speed
+  gripper_motor_command_->set_force(gripper_command_max_force_);       // % torque
 
   // Send a first frame
   base_feedback = base_cyclic_.Refresh(base_command_);
@@ -985,9 +990,9 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
       {
         // % open/closed, this values needs to be between 0 and 100
         gripper_motor_command_->set_position(static_cast<float>(position / 0.81 * 100.0));
-        // % speed TODO read in as parameter from kortex_controllers.yaml
+        // % gripper speed between 0 and 100 percent
         gripper_motor_command_->set_velocity(static_cast<float>(velocity));
-        // % torque TODO read in as parameter from kortex_controllers.yaml
+        // % max force threshold, between 0 and 100
         gripper_motor_command_->set_force(static_cast<float>(force));
       }
     }
