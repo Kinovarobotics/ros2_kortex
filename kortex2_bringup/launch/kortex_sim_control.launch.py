@@ -19,6 +19,7 @@ from launch.actions import (
     DeclareLaunchArgument,
     ExecuteProcess,
     IncludeLaunchDescription,
+    OpaqueFunction,
     RegisterEventHandler,
 )
 from launch.event_handlers import OnProcessExit
@@ -34,100 +35,12 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
-def generate_launch_description():
-    declared_arguments = []
-    # Simulation specific arguments
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "sim_ignition",
-            default_value="true",
-            description="Use Ignition for simulation",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "sim_gazebo",
-            default_value="false",
-            description="Use Gazebo Classic for simulation",
-        )
-    )
-    # Robot specific arguments
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_type",
-            description="Type/series of robot.",
-            choices=["gen3", "gen3_lite"],
-            default_value="gen3",
-        )
-    )
-    # General arguments
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "controllers_file",
-            default_value="ros2_controllers.yaml",
-            description="YAML file with the controllers configuration.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "description_package",
-            default_value="kortex_description",
-            description="Description package with robot URDF/XACRO files. Usually the argument \
-        is not set, it enables use of a custom description.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "description_file",
-            default_value="kinova.urdf.xacro",
-            description="URDF/XACRO description file with the robot.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_name",
-            default_value="kinova",
-            description="Robot name.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "prefix",
-            default_value='""',
-            description="Prefix of the joint names, useful for \
-        multi-robot setup. If changed than also joint names in the controllers' configuration \
-        have to be updated.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_controller",
-            default_value="joint_trajectory_controller",
-            description="Robot controller to start.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_pos_controller",
-            default_value="streaming_controller",
-            description="Robot controller to start.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_hand_controller",
-            default_value="robotiq_gripper_controller",
-            description="Robot hand controller to start.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
-    )
-
+def launch_setup(context, *args, **kwargs):
     # Initialize Arguments
     sim_gazebo = LaunchConfiguration("sim_gazebo")
     sim_ignition = LaunchConfiguration("sim_ignition")
     robot_type = LaunchConfiguration("robot_type")
+    dof = LaunchConfiguration("dof")
     # General arguments
     controllers_file = LaunchConfiguration("controllers_file")
     description_package = LaunchConfiguration("description_package")
@@ -140,9 +53,12 @@ def generate_launch_description():
     launch_rviz = LaunchConfiguration("launch_rviz")
 
     robot_controllers = PathJoinSubstitution(
-        # TODO(abake48 or moriarty): When the sim config for the 6dof arm is created,
-        # we need to extend this launch file to handle launching either robot config
-        [FindPackageShare(description_package), "arms/gen3/7dof/config", controllers_file]
+        # https://answers.ros.org/question/397123/how-to-access-the-runtime-value-of-a-launchconfiguration-instance-within-custom-launch-code-injected-via-an-opaquefunction-in-ros2/
+        [
+            FindPackageShare(description_package),
+            "arms/gen3/" + dof.perform(context) + "dof/config",
+            controllers_file,
+        ]
     )
 
     rviz_config_file = PathJoinSubstitution(
@@ -164,6 +80,9 @@ def generate_launch_description():
             " ",
             "arm:=",
             robot_type,
+            " ",
+            "dof:=",
+            dof,
             " ",
             "prefix:=",
             prefix,
@@ -322,4 +241,105 @@ def generate_launch_description():
         ignition_spawn_entity,
     ]
 
-    return LaunchDescription(declared_arguments + nodes_to_start)
+    return nodes_to_start
+
+
+def generate_launch_description():
+    declared_arguments = []
+    # Simulation specific arguments
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "sim_ignition",
+            default_value="true",
+            description="Use Ignition for simulation",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "sim_gazebo",
+            default_value="false",
+            description="Use Gazebo Classic for simulation",
+        )
+    )
+    # Robot specific arguments
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_type",
+            description="Type/series of robot.",
+            choices=["gen3", "gen3_lite"],
+            default_value="gen3",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "dof",
+            description="DoF of robot.",
+            choices=["6", "7"],
+            default_value="7",
+        )
+    )
+    # General arguments
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "controllers_file",
+            default_value="ros2_controllers.yaml",
+            description="YAML file with the controllers configuration.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_package",
+            default_value="kortex_description",
+            description="Description package with robot URDF/XACRO files. Usually the argument \
+        is not set, it enables use of a custom description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_file",
+            default_value="kinova.urdf.xacro",
+            description="URDF/XACRO description file with the robot.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_name",
+            default_value="gen3",
+            description="Robot name.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "prefix",
+            default_value='""',
+            description="Prefix of the joint names, useful for \
+        multi-robot setup. If changed than also joint names in the controllers' configuration \
+        have to be updated.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_controller",
+            default_value="joint_trajectory_controller",
+            description="Robot controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_pos_controller",
+            default_value="streaming_controller",
+            description="Robot controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_hand_controller",
+            default_value="robotiq_gripper_controller",
+            description="Robot hand controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
+    )
+
+    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
