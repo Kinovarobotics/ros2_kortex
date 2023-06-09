@@ -1,32 +1,22 @@
-# ros2_kortex
-ROS2 Kortex is the official ROS2 package to interact with Kortex and its related products. It is built upon the Kortex API, documentation for which can be found in the [GitHub Kortex repository](https://github.com/Kinovarobotics/kortex).
+# ROS 2 Kortex
+> Kinova® Kortex™ is the common software platform behind all of the products in the Gen3 family (Gen3 and Gen3 lite). It unifies the inner workings of the various robots and their related external tools, like the API. <br />
+> https://www.kinovarobotics.com/product/gen3-robots
 
-**Warning** Currently the only packages ported to ROS2 are 'kortex_description`, 'kortex2_driver`, 'kortex2_bringup` and 'gen3_move_it_config`
+ROS2 Kortex is the official ROS2 package to interact with Kortex and its related products. It is built upon the Kortex API, documentation for which can be found in the [GitHub Kortex repository](https://github.com/Kinovarobotics/kortex).
 
 ## Build status
 
-ROS2 Distro | Branch | Build status
-:---------: | :----: | :----------:
-**Rolling** | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main) | [![Rolling Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml?branch=main) <br /> [![Rolling Semi-Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml?branch=main) <br /> [![Rolling Source Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-source-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-source-build.yml?branch=main)
-**Humble** | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main) | [![Humble Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml?branch=main) <br /> [![Humble Source Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-source-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-source-build.yml?branch=main)
 
-### Explanation of different build types
+ROS2 Distro | Humble | Iron | Rolling
+:---------: | :----: | :--: | :-----:
+| **Branch** | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main) | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main) | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main)
+| **Build Status** | [![Humble Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml?branch=main) <br /> [![Humble Source Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-source-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-source-build.yml?branch=main) | :construction: | [![Rolling Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml?branch=main) <br /> [![Rolling Semi-Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml?branch=main) <br /> [![Rolling Source Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-source-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-source-build.yml?branch=main)
 
-**NOTE**: There are three build stages checking current and future compatibility of the package.
-
-1. Binary builds - against released packages (main and testing) in ROS distributions. Shows that direct local build is possible.
-
-   Uses repos file: `src/$NAME$/$NAME$-not-released.<ros-distro>.repos`
-
-1. Semi-binary builds - against released core ROS packages (main and testing), but the immediate dependencies are pulled from source.
-   Shows that local build with dependencies is possible and if fails there we can expect that after the next package sync we will not be able to build.
-
-   Uses repos file: `src/$NAME$/$NAME$.repos`
-
-1. Source build - also core ROS packages are build from source. It shows potential issues in the mid future.
+**Note:** There are several CI jobs checking against future upstream changes see [detailed build status](.github/workflows/README.md) for more information.
 
 
 ## Getting started
+<!-- TODO(moriarty) update this when binary package is released getting most users should use binary release -->
 
 1. [Install ROS2 Rolling](https://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html)
 2. Make sure that `colcon`, its extensions and `vcs` are installed:
@@ -59,6 +49,8 @@ ROS2 Distro | Branch | Build status
    ```
 
 ## Usage
+<!-- TODO(moriarty) this section is an information overload -->
+
 To launch and view the robots URDF run:
 
         ros2 launch kortex_description view_robot.launch.py
@@ -104,78 +96,6 @@ You can test the gripper by calling the Action server with the following command
 ```bash
 ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
 ```
-
-
-## Download links
-
-You can refer to the [Kortex repository "Download links" section](https://github.com/Kinovarobotics/kortex#download-links) to download the firmware package and the release notes.
-
-### Accessing the color and depth streams
-
-To access the color and depth streams, you will need to clone and follow the instructions to install the [ros_kortex_vision repository ](https://github.com/Kinovarobotics/ros_kortex_vision).
-## Installation
-
-### Setup
-
-- [Robot Operating System (ROS)](http://wiki.ros.org) (middleware for robotics)
-
-This package has been tested under ROS Kinetic (Ubuntu 16.04) and ROS Melodic (Ubuntu 18.04).
-You can find the instructions to install ROS Kinetic [here](http://wiki.ros.org/kinetic/Installation/Ubuntu) and ROS Melodic [here](http://wiki.ros.org/melodic/Installation/Ubuntu).
-
-[Google Protocol Buffers](https://developers.google.com/protocol-buffers/) is used by Kinova to define the Kortex APIs and to automatically generate ROS messages, services and C++ classes from the Kortex API `.proto` files. The installation of Google Protocol Buffers is required by developers implementing new APIs with the robot. However, since we already provide all the necessary generated files on GitHub, this is not required for most end users of the robot.
-
-### Build
-
-These are the instructions to run in a terminal to create the workspace, clone the `ros_kortex` repository and install the necessary ROS dependencies:
-
-        sudo apt install python3 python3-pip
-        sudo python3 -m pip install conan
-        conan config set general.revisions_enabled=1
-        conan profile new default --detect > /dev/null
-        conan profile update settings.compiler.libcxx=libstdc++11 default
-        mkdir -p catkin_workspace/src
-        cd catkin_workspace/src
-        git clone https://github.com/Kinovarobotics/ros_kortex.git
-        cd ../
-        rosdep install --from-paths src --ignore-src -y
-
-Then, to build and source the workspace:
-
-        catkin_make
-        source devel/setup.bash
-
-You can also build against one of the ARMv8 builds of the Kortex API with Conan if you specify the `CONAN_TARGET_PLATFORM` CMake argument when using `catkin_make`. The following platforms are supported:
-
-- Artik 710:
-
-        catkin_make --cmake-args -DCONAN_TARGET_PLATFORM=artik710
-        source devel/setup.bash
-
-- IMX6:
-
-        catkin_make --cmake-args -DCONAN_TARGET_PLATFORM=imx6
-        source devel/setup.bash
-
-- NVidia Jetson:
-
-        catkin_make --cmake-args -DCONAN_TARGET_PLATFORM=jetson
-        source devel/setup.bash
-
-As you see, there are instructions to install the Conan package manager. You can learn more about why we use Conan or how to simply download the API and link against it [in this specific section of the kortex_driver readme](kortex_driver/readme.md#conan). You can also decide
-
-### pre-commit Formatting Checks
-
-In this repository we have a pre-commit check that runs in CI. You can use this locally and set it up to run automatically before you commit something. To install, use pip:
-
-    pip3 install pre-commit
-
-To run over all the files in the repo manually:
-
-    pre-commit run -a
-
-To run pre-commit automatically before committing in a local repo, install git hooks:
-
-    pre-commit install
 
 ## Contents
 

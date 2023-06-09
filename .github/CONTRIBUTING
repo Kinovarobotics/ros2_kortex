@@ -1,0 +1,36 @@
+# Contributing
+
+Contributions and pull requests are welcome.
+
+# Branches
+
+The main branch supports ROS 2 Rolling, however it also supports as many previous ROS 2 releases as possible.
+
+If compatibility is not possible then a branch is created for that version of ROS 2.
+
+New changes should first target the main branch, and then be backported, this helps maintainers ensure features and bug fixes are always in the latest release and avoids additional work maintaining both forward and back-ports.
+
+# Reporting Issues
+<!--TODO(moriarty)-->
+
+# Pull Requests
+<!--TODO(moriarty)-->
+
+## pre-commit Formatting Checks
+
+In this repository we have a pre-commit check that runs in CI. You can use this locally and set it up to run automatically before you commit something. To install, use pip:
+
+    pip3 install pre-commit
+
+To run over all the files in the repo manually:
+
+    pre-commit run -a
+
+To run pre-commit automatically before committing in a local repo, install git hooks:
+
+    pre-commit install
+
+# Licensing
+
+Any contribution that you make to this repository will
+be under the 3-Clause BSD License, as dictated by that [license](../LICENSE)
