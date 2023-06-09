@@ -60,5 +60,5 @@ def generate_launch_description():
         .to_moveit_configs()
     )
 
-    moveit_config.moveit_cpp.update({"use_sim_time": LaunchConfiguration("use_sim_time") })
+    moveit_config.moveit_cpp.update({"use_sim_time": LaunchConfiguration("use_sim_time")})
     return generate_demo_launch(moveit_config)

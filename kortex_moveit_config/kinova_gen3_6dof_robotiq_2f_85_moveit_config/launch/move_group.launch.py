@@ -17,6 +17,7 @@ from launch.actions import DeclareLaunchArgument
 from moveit_configs_utils import MoveItConfigsBuilder
 from moveit_configs_utils.launches import generate_move_group_launch
 
+
 def generate_launch_description():
     # Declare arguments
     declared_arguments = []
@@ -58,6 +59,6 @@ def generate_launch_description():
         .to_moveit_configs()
     )
 
-    moveit_config.moveit_cpp.update({"use_sim_time": LaunchConfiguration("use_sim_time") })
+    moveit_config.moveit_cpp.update({"use_sim_time": LaunchConfiguration("use_sim_time")})
 
     return generate_move_group_launch(moveit_config)
