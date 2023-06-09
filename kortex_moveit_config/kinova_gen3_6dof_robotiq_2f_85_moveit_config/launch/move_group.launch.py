@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from launch.substitutions import LaunchConfiguration
-from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.actions import DeclareLaunchArgument
 from moveit_configs_utils import MoveItConfigsBuilder
 from moveit_configs_utils.launches import generate_move_group_launch
 
