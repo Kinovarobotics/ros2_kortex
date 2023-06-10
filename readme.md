@@ -48,6 +48,18 @@ ROS2 Distro | Humble | Iron | Rolling
    source install/setup.bash
    ```
 
+**Note:** Due to mismatched protobuf version that ships system and used by Gazebo simulator compiling twice may be required.
+If errors are encounter you must clean your workspace and run colcon build in two steps:
+
+1. build everything except kortex related packages
+2. build the packages that where skipped
+
+```
+colcon clean workspace -y
+colcon build --packages-skip-regex '.*kortex.*' '.*gen3.*'
+colcon build --packages-select-regex '.*kortex.*' '.*gen3.*'
+```
+
 ## Usage
 <!-- TODO(moriarty) this section is an information overload -->
 
