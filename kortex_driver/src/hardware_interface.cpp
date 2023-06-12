@@ -863,7 +863,7 @@ return_type KortexMultiInterfaceHardware::write(
       }
 
       // gripper control
-      sendGripperCommand(arm_mode_, gripper_command_position_);
+      sendGripperCommand(arm_mode_, gripper_command_position_, gripper_command_max_velocity_, gripper_command_max_force_);
       // read after write in twist mode
       feedback_ = base_cyclic_.RefreshFeedback();
     }
@@ -874,7 +874,7 @@ return_type KortexMultiInterfaceHardware::write(
       // Per joint controller active
 
       // gripper control
-      sendGripperCommand(arm_mode_, gripper_command_position_);
+      sendGripperCommand(arm_mode_, gripper_command_position_, gripper_command_max_velocity_, gripper_command_max_force_);
 
       if (joint_based_controller_running_)
       {

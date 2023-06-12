@@ -213,8 +213,8 @@ private:
   void sendJointCommands();
   void prepareCommands();
   void sendGripperCommand(
-    k_api::Base::ServoingMode arm_mode, double position, double velocity = gripper_command_max_velocity_,
-    double force = gripper_command_max_force_);
+    k_api::Base::ServoingMode arm_mode, double position, double velocity,
+    double force);
 
   void readGripperPosition();
 };
