@@ -55,6 +55,7 @@ If errors are encounter you must clean your workspace and run colcon build in tw
 2. build the packages that where skipped
 
 ```
+sudo apt install python3-colcon-clean # if you don't have colcon-clean installed already
 colcon clean workspace -y
 colcon build --packages-skip-regex '.*kortex.*' '.*gen3.*'
 colcon build --packages-select-regex '.*kortex.*' '.*gen3.*'
