@@ -82,7 +82,7 @@ To simulate the 7dof Kinova Gen3 robot with ignition run the following:
    ```
 and to use MoveIt to command the robot:
    ```
-   ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py
+   ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py use_sim_time:=true
    ```
 
 To work with a physical robot and generate/execute paths with MoveIt run the following:
