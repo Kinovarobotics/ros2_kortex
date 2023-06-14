@@ -51,6 +51,7 @@ def launch_setup(context, *args, **kwargs):
     robot_pos_controller = LaunchConfiguration("robot_pos_controller")
     robot_hand_controller = LaunchConfiguration("robot_hand_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
+    use_sim_time = LaunchConfiguration("use_sim_time")
 
     robot_controllers = PathJoinSubstitution(
         # https://answers.ros.org/question/397123/how-to-access-the-runtime-value-of-a-launchconfiguration-instance-within-custom-launch-code-injected-via-an-opaquefunction-in-ros2/
@@ -96,15 +97,21 @@ def launch_setup(context, *args, **kwargs):
             "simulation_controllers:=",
             robot_controllers,
             " ",
+            "gripper:=",
+            "robotiq_2f_85",
+            " ",
         ]
     )
-    robot_description = {"robot_description": robot_description_content}
+    robot_description = {"robot_description": robot_description_content.perform(context)}
 
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
-        parameters=[robot_description],
+        parameters=[
+            robot_description,
+            {"use_sim_time": use_sim_time},
+        ],
     )
 
     rviz_node = Node(
@@ -336,6 +343,13 @@ def generate_launch_description():
             "robot_hand_controller",
             default_value="robotiq_gripper_controller",
             description="Robot hand controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="True",
+            description="Use simulated clock",
         )
     )
     declared_arguments.append(

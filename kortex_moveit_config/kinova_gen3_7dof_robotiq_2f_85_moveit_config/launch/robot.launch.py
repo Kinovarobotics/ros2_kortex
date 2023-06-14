@@ -55,7 +55,7 @@ def generate_launch_description():
     }
 
     moveit_config = (
-        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_6dof_robotiq_2f_85_moveit_config")
+        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=launch_arguments)
         .to_moveit_configs()
     )

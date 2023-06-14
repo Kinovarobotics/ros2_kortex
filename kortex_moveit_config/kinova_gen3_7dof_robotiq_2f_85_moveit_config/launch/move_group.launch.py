@@ -12,52 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+
 from moveit_configs_utils import MoveItConfigsBuilder
 from moveit_configs_utils.launches import generate_move_group_launch
 
 
 def generate_launch_description():
-    # Declare arguments
-    declared_arguments = []
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_ip",
-            description="IP address by which the robot can be reached.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "use_fake_hardware",
-            default_value="false",
-            description="Start robot with fake hardware mirroring command to its states.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "use_sim_time",
-            default_value="false",
-            description="Use simulated clock",
-        )
-    )
+    moveit_config = MoveItConfigsBuilder(
+        "gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config"
+    ).to_moveit_configs()
 
-    # Initialize Arguments
-    robot_ip = LaunchConfiguration("robot_ip")
-    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
-
-    launch_arguments = {
-        "robot_ip": robot_ip,
-        "use_fake_hardware": use_fake_hardware,
-        "gripper": "robotiq_2f_85",
-        "dof": "7",
-    }
-
-    moveit_config = (
-        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_6dof_robotiq_2f_85_moveit_config")
-        .robot_description(mappings=launch_arguments)
-        .to_moveit_configs()
-    )
-
-    moveit_config.moveit_cpp.update({"use_sim_time": LaunchConfiguration("use_sim_time")})
     return generate_move_group_launch(moveit_config)
