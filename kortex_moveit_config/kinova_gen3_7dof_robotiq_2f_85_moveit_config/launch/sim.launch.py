@@ -109,8 +109,8 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
 
     description_arguments = {
-        "robot_name" : robot_name,
-        "prefix" : prefix,
+        "robot_name": robot_name,
+        "prefix": prefix,
         "robot_ip": "xxx.yyy.zzz.www",
         "use_fake_hardware": "false",
         "gripper": "robotiq_2f_85",
