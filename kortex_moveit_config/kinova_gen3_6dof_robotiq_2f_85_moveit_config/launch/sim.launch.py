@@ -110,7 +110,7 @@ def generate_launch_description():
 
     description_arguments = {
         "robot_name" : robot_name,
-        "prefix" : prefix
+        "prefix" : prefix,
         "robot_ip": "xxx.yyy.zzz.www",
         "use_fake_hardware": "false",
         "gripper": "robotiq_2f_85",
