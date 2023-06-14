@@ -103,19 +103,18 @@ def generate_launch_description():
     )
 
     # Initialize Arguments
-
-    # sim_ignition = LaunchConfiguration("sim_ignition")
-    moveit_config_package = LaunchConfiguration("moveit_config_package")
-    # robot_name = LaunchConfiguration("robot_name")
-    # prefix = LaunchConfiguration("prefix")
+    robot_name = LaunchConfiguration("robot_name")
+    prefix = LaunchConfiguration("prefix")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
 
     description_arguments = {
+        "robot_name" : robot_name,
+        "prefix" : prefix
         "robot_ip": "xxx.yyy.zzz.www",
         "use_fake_hardware": "false",
         "gripper": "robotiq_2f_85",
-        "dof": "6",
+        "dof": "7",
         "sim_ignition": "True",
     }
 
