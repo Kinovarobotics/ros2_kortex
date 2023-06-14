@@ -47,7 +47,7 @@
       fake_sensor_commands="${fake_sensor_commands}"
       sim_gazebo="${sim_gazebo}"
       sim_ignition="${sim_ignition}"
-      sim_isaac="${sim_isaac}" 
+      sim_isaac="${sim_isaac}"
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}">
       <xacro:insert_block name="origin" />
