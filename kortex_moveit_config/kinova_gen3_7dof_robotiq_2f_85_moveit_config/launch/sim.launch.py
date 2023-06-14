@@ -37,60 +37,6 @@ def generate_launch_description():
             description="Use Ignition for simulation",
         )
     )
-    # General arguments
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "controllers_file",
-            default_value="ros2_controllers.yaml",
-            description="YAML file with the controllers configuration.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "description_package",
-            default_value="kortex_description",
-            description="Description package with robot URDF/XACRO files. Usually the argument \
-        is not set, it enables use of a custom description.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "description_file",
-            default_value="kinova.urdf.xacro",
-            description="URDF/XACRO description file with the robot.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "moveit_config_package",
-            default_value="kinova_gen3_7dof_robotiq_2f_85_moveit_config",
-            description="MoveIt configuration package for the robot. Usually the argument \
-        is not set, it enables use of a custom config package.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "moveit_config_file",
-            default_value="gen3.srdf",
-            description="MoveIt SRDF/XACRO description file with the robot.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_name",
-            default_value="gen3",
-            description="Robot name.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "prefix",
-            default_value='""',
-            description="Prefix of the joint names, useful for \
-        multi-robot setup. If changed than also joint names in the controllers' configuration \
-        have to be updated.",
-        )
-    )
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_sim_time",
@@ -103,19 +49,16 @@ def generate_launch_description():
     )
 
     # Initialize Arguments
-    robot_name = LaunchConfiguration("robot_name")
-    prefix = LaunchConfiguration("prefix")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
+    sim_ignition = LaunchConfiguration("sim_ignition")
 
     description_arguments = {
-        "robot_name": robot_name,
-        "prefix": prefix,
         "robot_ip": "xxx.yyy.zzz.www",
         "use_fake_hardware": "false",
         "gripper": "robotiq_2f_85",
         "dof": "7",
-        "sim_ignition": "True",
+        "sim_ignition": sim_ignition,
     }
 
     moveit_config = (
