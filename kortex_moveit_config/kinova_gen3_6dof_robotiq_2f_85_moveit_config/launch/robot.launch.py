@@ -35,6 +35,13 @@ def generate_launch_description():
             description="Start robot with fake hardware mirroring command to its states.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="Use simulated clock",
+        )
+    )
 
     # Initialize Arguments
     robot_ip = LaunchConfiguration("robot_ip")
@@ -52,4 +59,6 @@ def generate_launch_description():
         .robot_description(mappings=launch_arguments)
         .to_moveit_configs()
     )
+
+    moveit_config.moveit_cpp.update({"use_sim_time": LaunchConfiguration("use_sim_time")})
     return generate_demo_launch(moveit_config)

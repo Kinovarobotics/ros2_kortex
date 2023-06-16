@@ -89,9 +89,13 @@ To simulate the 7 DoF Kinova Gen3 robot with gazebo run the following:
    ros2 launch kortex2_bringup kortex_sim_control.launch.py sim_gazebo:=true sim_ignition:=false
    ```
 
-To simulate the robot with ignition run the following:
+To simulate the 7dof Kinova Gen3 robot with ignition run the following:
    ```
-   ros2 launch kortex2_bringup kortex_sim_control.launch.py
+   ros2 launch kortex2_bringup kortex_sim_control.launch.py dof:=7 use_sim_time:=true launch_rviz:=false
+   ```
+and to use MoveIt to command the robot:
+   ```
+   ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py use_sim_time:=true
    ```
 
 To work with a physical robot and generate/execute paths with MoveIt run the following:
