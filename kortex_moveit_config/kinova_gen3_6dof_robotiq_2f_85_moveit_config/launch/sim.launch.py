@@ -57,7 +57,7 @@ def generate_launch_description():
         "robot_ip": "xxx.yyy.zzz.www",
         "use_fake_hardware": "false",
         "gripper": "robotiq_2f_85",
-        "dof": "7",
+        "dof": "6",
         "sim_ignition": sim_ignition,
     }
 
