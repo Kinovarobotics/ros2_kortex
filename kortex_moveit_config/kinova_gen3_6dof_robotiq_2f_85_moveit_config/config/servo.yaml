@@ -1,0 +1,67 @@
+###############################################
+# Modify all parameters related to servoing here
+###############################################
+
+# Enable dynamic parameter updates
+enable_parameter_update: true
+
+## Properties of incoming commands
+command_in_type: "unitless" # "unitless"> in the range [-1:1], as if from joystick. "speed_units"> cmds are in m/s and rad/s
+scale:
+  # Scale parameters are only used if command_in_type=="unitless"
+  linear: 2.0  # Max linear velocity. Meters per publish_period. Unit is [m/s]. Only used for Cartesian commands.
+  rotational: 3.0 # Max angular velocity. Rads per publish_period. Unit is [rad/s]. Only used for Cartesian commands.
+  # Max joint angular/linear velocity. Rads or Meters per publish period. Only used for joint commands on joint_command_in_topic.
+  joint: 2.0
+
+# Default to driving the arm at 50% maximum speed.
+override_velocity_scaling_factor: 0.5
+
+## Properties of outgoing commands
+publish_period: 0.002  # 1/Nominal publish rate [seconds]
+low_latency_mode: false  # Set this to true to publish as soon as an incoming Twist command is received (publish_period is ignored)
+
+# What type of topic does your robot driver expect?
+# Currently supported are std_msgs/Float64MultiArray or trajectory_msgs/JointTrajectory
+command_out_type: std_msgs/Float64MultiArray
+
+# What to publish? Can save some bandwidth as most robots only require positions or velocities
+publish_joint_positions: true
+publish_joint_velocities: false
+publish_joint_accelerations: false
+
+## Plugins for smoothing outgoing commands
+smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
+
+## Incoming Joint State properties
+low_pass_filter_coeff: 1.5  # Larger --> trust the filtered data more, trust the measurements less.
+
+## MoveIt properties
+move_group_name: manipulator  # Often 'manipulator' or 'arm'
+planning_frame: base_link  # The MoveIt planning frame. Often 'base_link' or 'world'
+is_primary_planning_scene_monitor: false  # The MoveGroup node maintains the planning scene, so Servo needs to get its world info from there.
+
+## Other frames
+ee_frame_name: manual_grasp_link  # The name of the end effector link, used to return the EE pose
+robot_link_command_frame: base_link  # commands must be given in the frame of a robot link. Usually either the base or end effector
+
+## Stopping behaviour
+incoming_command_timeout: 0.1  # Stop servoing if X seconds elapse without a new command
+
+## Configure handling of singularities and joint limits
+lower_singularity_threshold: 30.0  # Start decelerating when the condition number hits this (close to singularity)
+hard_stop_singularity_threshold: 50.0 # Stop when the condition number hits this
+joint_limit_margin: 0.1 # added as a buffer to joint limits [radians]. If moving quickly, make this larger.
+
+## Topic names
+cartesian_command_in_topic: ~/delta_twist_cmds  # Topic for incoming Cartesian twist commands
+joint_command_in_topic: ~/delta_joint_cmds # Topic for incoming joint angle commands
+joint_topic: /joint_states
+status_topic: ~/status # Publish status to this topic
+command_out_topic: /streaming_controller/commands # Publish outgoing commands here
+
+## Collision checking for the entire robot body
+check_collisions: true # Check collisions?
+collision_check_rate: 10.0 # [Hz] Collision-checking can easily bog down a CPU if done too often.
+self_collision_proximity_threshold: 0.01 # Start decelerating when a self-collision is this far [m]
+scene_collision_proximity_threshold: 0.02 # Start decelerating when a scene collision is this far [m]

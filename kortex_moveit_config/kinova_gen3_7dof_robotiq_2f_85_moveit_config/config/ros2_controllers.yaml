@@ -9,6 +9,9 @@ controller_manager:
       type: joint_trajectory_controller/JointTrajectoryController
 
     streaming_controller:
+      type: position_controllers/JointGroupPositionController
+
+    cartesian_controller:
       type: kortex2_controllers/TwistController
 
     robotiq_gripper_controller:
@@ -41,6 +44,21 @@ joint_trajectory_controller:
       goal_time: 0.0
 
 streaming_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+
+cartesian_controller:
   ros__parameters:
     joint: tcp
     interface_names:
