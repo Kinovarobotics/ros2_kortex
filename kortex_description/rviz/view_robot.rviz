@@ -81,6 +81,10 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         end_effector_link:
           Alpha: 1
           Show Axes: false

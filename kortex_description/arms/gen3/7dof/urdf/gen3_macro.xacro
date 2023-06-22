@@ -296,7 +296,7 @@
           <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bracelet_with_vision_link.STL" />
         </geometry>
         <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1" />
+          <color rgba="0.75294 0 0 1" />
         </material>
       </visual>
       <collision>
@@ -361,19 +361,19 @@
     <xacro:if value="${vision}">
       <link name="${prefix}camera_link" />
       <joint name="${prefix}camera_module" type="fixed">
-        <origin xyz="0 0.05639 -0.00305" rpy="3.14159265358979 3.14159265358979 0" />
+        <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
         <parent link="${prefix}end_effector_link" />
         <child  link="${prefix}camera_link" />
       </joint>
       <link name="${prefix}camera_depth_frame" />
       <joint name="${prefix}depth_module" type="fixed">
-        <origin xyz="0.0275 0.066 -0.00305" rpy="3.14159265358979 3.14159265358979 0" />
+        <origin xyz="0.0275 0.066 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
         <parent link="${prefix}end_effector_link" />
         <child  link="${prefix}camera_depth_frame" />
       </joint>
       <link name="${prefix}camera_color_frame" />
       <joint name="${prefix}color_module" type="fixed">
-        <origin xyz="0 0.05639 -0.00305" rpy="3.14159265358979 3.14159265358979 0" />
+        <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
         <parent link="${prefix}end_effector_link" />
         <child  link="${prefix}camera_color_frame" />
       </joint>
