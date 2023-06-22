@@ -247,23 +247,7 @@ def launch_setup(context, *args, **kwargs):
             "/wrist_mounted_camera/depth_image@sensor_msgs/msg/Image[ignition.msgs.Image",
             "/wrist_mounted_camera/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked",
             "/wrist_mounted_camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo",
-            # "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
         ],
-        # remappings=[
-        #     ("/wrist_mounted_camera/image", "/wrist_mounted_camera/color/image_raw"),
-        #     (
-        #         "/wrist_mounted_camera/camera_info",
-        #         "/wrist_mounted_camera/color/camera_info",
-        #     ),
-        #     (
-        #         "/wrist_mounted_camera/depth_image",
-        #         "/wrist_mounted_camera/depth/image_rect_raw",
-        #     ),
-        #     (
-        #         "/wrist_mounted_camera/points",
-        #         "/wrist_mounted_camera/depth/color/points",
-        #     ),
-        # ],
         output="screen",
     )
 
