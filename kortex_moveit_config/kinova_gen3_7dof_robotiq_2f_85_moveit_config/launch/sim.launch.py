@@ -40,8 +40,15 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_sim_time",
-            default_value="False",
+            default_value="true",
             description="Use simulated clock",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "vision",
+            default_value="false",
+            description="Add vision module to URDF",
         )
     )
     declared_arguments.append(
@@ -52,6 +59,7 @@ def generate_launch_description():
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
     sim_ignition = LaunchConfiguration("sim_ignition")
+    vision = LaunchConfiguration("vision")
 
     description_arguments = {
         "robot_ip": "xxx.yyy.zzz.www",
@@ -59,12 +67,13 @@ def generate_launch_description():
         "gripper": "robotiq_2f_85",
         "dof": "7",
         "sim_ignition": sim_ignition,
+        "vision": vision,
     }
 
     moveit_config = (
         MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=description_arguments)
-        .planning_scene_monitor(publish_robot_description=True)
+        .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner", "stomp"])
         .to_moveit_configs()
     )
 

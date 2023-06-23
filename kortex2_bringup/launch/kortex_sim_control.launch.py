@@ -41,6 +41,7 @@ def launch_setup(context, *args, **kwargs):
     sim_ignition = LaunchConfiguration("sim_ignition")
     robot_type = LaunchConfiguration("robot_type")
     dof = LaunchConfiguration("dof")
+    vision = LaunchConfiguration("vision")
     # General arguments
     controllers_file = LaunchConfiguration("controllers_file")
     description_package = LaunchConfiguration("description_package")
@@ -84,6 +85,9 @@ def launch_setup(context, *args, **kwargs):
             " ",
             "dof:=",
             dof,
+            " ",
+            "vision:=",
+            vision,
             " ",
             "prefix:=",
             prefix,
@@ -233,6 +237,20 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(sim_ignition),
     )
 
+    # Bridge
+    gazebo_bridge = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        parameters=[{"use_sim_time": use_sim_time}],
+        arguments=[
+            "/wrist_mounted_camera/image@sensor_msgs/msg/Image[ignition.msgs.Image",
+            "/wrist_mounted_camera/depth_image@sensor_msgs/msg/Image[ignition.msgs.Image",
+            "/wrist_mounted_camera/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked",
+            "/wrist_mounted_camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo",
+        ],
+        output="screen",
+    )
+
     nodes_to_start = [
         bridge,
         robot_state_publisher_node,
@@ -246,6 +264,7 @@ def launch_setup(context, *args, **kwargs):
         gazebo_spawn_robot,
         ignition_launch_description,
         ignition_spawn_entity,
+        gazebo_bridge,
     ]
 
     return nodes_to_start
@@ -283,6 +302,14 @@ def generate_launch_description():
             description="DoF of robot.",
             choices=["6", "7"],
             default_value="7",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "vision",
+            description="Use arm mounted realsense",
+            choices=["true", "false"],
+            default_value="false",
         )
     )
     # General arguments
@@ -348,7 +375,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_sim_time",
-            default_value="True",
+            default_value="true",
             description="Use simulated clock",
         )
     )
