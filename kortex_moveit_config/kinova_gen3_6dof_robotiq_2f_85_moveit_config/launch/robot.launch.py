@@ -57,10 +57,6 @@ def generate_launch_description():
     moveit_config = (
         MoveItConfigsBuilder("gen3", package_name="kinova_gen3_6dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=launch_arguments)
-        .planning_scene_monitor(        
-            "publish_robot_description" = True,
-            "publish_robot_description_semantic": bool = True
-        )
         .to_moveit_configs()
     )
 

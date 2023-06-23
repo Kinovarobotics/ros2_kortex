@@ -211,7 +211,7 @@ def generate_launch_description():
     prefix = LaunchConfiguration("prefix")
     gripper = LaunchConfiguration("gripper")
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
-    gripper_max_force = LaunchConfiguration("gripper_max_force")    
+    gripper_max_force = LaunchConfiguration("gripper_max_force")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_traj_controller = LaunchConfiguration("robot_controller")
