@@ -37,6 +37,21 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "gripper_max_velocity",
+            default_value="100.0"
+            description="Max velocity for gripper commands",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_max_force",
+            default_value="100.0",
+            description="Max force for gripper commands",
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "use_sim_time",
             default_value="false",
             description="Use simulated clock",
@@ -46,12 +61,16 @@ def generate_launch_description():
     # Initialize Arguments
     robot_ip = LaunchConfiguration("robot_ip")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
+    gripper_max_force = LaunchConfiguration("gripper_max_force")
 
     launch_arguments = {
         "robot_ip": robot_ip,
         "use_fake_hardware": use_fake_hardware,
         "gripper": "robotiq_2f_85",
         "dof": "7",
+        "gripper_max_velocity": gripper_max_velocity,
+        "gripper_max_force": gripper_max_force,
     }
 
     moveit_config = (

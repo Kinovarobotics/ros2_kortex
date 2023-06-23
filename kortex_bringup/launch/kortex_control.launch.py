@@ -177,6 +177,27 @@ def generate_launch_description():
             description="Use internal bus for gripper communication?",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_max_velocity",
+            default_value="100.0"
+            description="Max velocity for gripper commands",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_max_force",
+            default_value="100.0",
+            description="Max force for gripper commands",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_joint_name",
+            default_value="finger_joint",
+            description="Max force for gripper commands",
+        )
+    )
 
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
@@ -189,6 +210,8 @@ def generate_launch_description():
     robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
     gripper = LaunchConfiguration("gripper")
+    gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
+    gripper_max_force = LaunchConfiguration("gripper_max_force")    
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_traj_controller = LaunchConfiguration("robot_controller")
@@ -197,6 +220,7 @@ def generate_launch_description():
     fault_controller = LaunchConfiguration("fault_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
+    gripper_joint_name = LaunchConfiguration("gripper_joint_name")
 
     robot_description_content = Command(
         [
@@ -232,6 +256,15 @@ def generate_launch_description():
             " ",
             "use_internal_bus_gripper_comm:=",
             use_internal_bus_gripper_comm,
+            " ",
+            "gripper_max_velocity:=",
+            gripper_max_velocity,
+            " ",
+            "gripper_max_force:=",
+            gripper_max_force,
+            " ",
+            "gripper_joint_name",
+            gripper_joint_name,
             " ",
         ]
     )

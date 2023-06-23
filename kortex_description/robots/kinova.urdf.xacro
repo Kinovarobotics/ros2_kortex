@@ -17,6 +17,9 @@
   <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
   <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
   <xacro:arg name="gripper" default="robotiq_2f_85" />
+  <xacro:arg name="gripper_joint_name" default="finger_joint" />
+  <xacro:arg name="gripper_max_velocity" default="100.0" />
+  <xacro:arg name="gripper_max_force" default="100.0" />
   <xacro:arg name="use_internal_bus_gripper_comm" default="false" />
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="fake_sensor_commands" default="false" />
@@ -40,6 +43,9 @@
     parent="world"
     arm="$(arg arm)"
     gripper="$(arg gripper)"
+    gripper_joint_name="$(arg gripper_joint_name)"
+    gripper_max_velocity="$(arg gripper_max_velocity)"
+    gripper_max_force="$(arg gripper_max_force)"
     dof="$(arg dof)"
     vision="$(arg vision)"
     robot_ip="$(arg robot_ip)"

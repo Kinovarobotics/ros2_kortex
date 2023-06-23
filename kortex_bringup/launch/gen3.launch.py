@@ -57,6 +57,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
+            default_value="ros2_controllers.yaml",
             description="Robot controller to start.",
         )
     )
@@ -69,9 +70,30 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "gripper_joint_name",
+            default_value='"finger_joint"',
+            description="Name of the gripper attached to the arm",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "use_internal_bus_gripper_comm",
             default_value="true",
             description="Use internal bus for gripper communication?",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_max_velocity",
+            default_value="100.0"
+            description="Max velocity for gripper commands",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_max_force",
+            default_value="100.0",
+            description="Max force for gripper commands",
         )
     )
     declared_arguments.append(
@@ -86,6 +108,9 @@ def generate_launch_description():
     robot_controller = LaunchConfiguration("robot_controller")
     gripper = LaunchConfiguration("gripper")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
+    gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
+    gripper_max_force = LaunchConfiguration("gripper_max_force")
+    gripper_joint_name = LaunchConfiguration("gripper_joint_name")
     launch_rviz = LaunchConfiguration("launch_rviz")
     controllers_file = LaunchConfiguration("controllers_file")
 
@@ -100,8 +125,12 @@ def generate_launch_description():
             "robot_controller": robot_controller,
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
+            "gripper_max_velocity": gripper_max_velocity,
+            "gripper_max_force": gripper_max_force,
+            "gripper_joint_name": gripper_joint_name,
             "launch_rviz": launch_rviz,
             "controllers_file": controllers_file,
+            "description_file": "gen3.xacro",
         }.items(),
     )
 
