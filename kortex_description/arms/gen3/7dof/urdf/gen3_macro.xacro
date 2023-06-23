@@ -359,24 +359,47 @@
     </joint>
     <!-- TODO(destogl) this probably collides with camera URDF -->
     <xacro:if value="${vision}">
-      <link name="${prefix}camera_link" />
-      <joint name="${prefix}camera_module" type="fixed">
-        <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
-        <parent link="${prefix}end_effector_link" />
-        <child  link="${prefix}camera_link" />
-      </joint>
-      <link name="${prefix}camera_depth_frame" />
-      <joint name="${prefix}depth_module" type="fixed">
-        <origin xyz="0.0275 0.066 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
-        <parent link="${prefix}end_effector_link" />
-        <child  link="${prefix}camera_depth_frame" />
-      </joint>
-      <link name="${prefix}camera_color_frame" />
-      <joint name="${prefix}color_module" type="fixed">
-        <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
-        <parent link="${prefix}end_effector_link" />
-        <child  link="${prefix}camera_color_frame" />
-      </joint>
+      <!-- sim camera needs to be rotated which might not apply to built in vision module -->
+      <xacro:if value="${sim_ignition}">
+        <link name="${prefix}camera_link" />
+        <joint name="${prefix}camera_module" type="fixed">
+          <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
+          <parent link="${prefix}end_effector_link" />
+          <child  link="${prefix}camera_link" />
+        </joint>
+        <link name="${prefix}camera_depth_frame" />
+        <joint name="${prefix}depth_module" type="fixed">
+          <origin xyz="0.0275 0.066 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
+          <parent link="${prefix}end_effector_link" />
+          <child  link="${prefix}camera_depth_frame" />
+        </joint>
+        <link name="${prefix}camera_color_frame" />
+        <joint name="${prefix}color_module" type="fixed">
+          <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
+          <parent link="${prefix}end_effector_link" />
+          <child  link="${prefix}camera_color_frame" />
+        </joint>
+      </xacro:if>
+      <xacro:unless value="${sim_ignition}">
+        <link name="${prefix}camera_link" />
+        <joint name="${prefix}camera_module" type="fixed">
+          <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
+          <parent link="${prefix}end_effector_link" />
+          <child  link="${prefix}camera_link" />
+        </joint>
+        <link name="${prefix}camera_depth_frame" />
+        <joint name="${prefix}depth_module" type="fixed">
+          <origin xyz="0.0275 0.066 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
+          <parent link="${prefix}end_effector_link" />
+          <child  link="${prefix}camera_depth_frame" />
+        </joint>
+        <link name="${prefix}camera_color_frame" />
+        <joint name="${prefix}color_module" type="fixed">
+          <origin xyz="0 0.05639 0.01305" rpy="0 -1.570796326794897 -1.570796326794897" />
+          <parent link="${prefix}end_effector_link" />
+          <child  link="${prefix}camera_color_frame" />
+        </joint>
+      </xacro:unless>
     </xacro:if>
   </xacro:macro>
 </robot>

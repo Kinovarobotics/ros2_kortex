@@ -24,8 +24,9 @@
   <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="sim_isaac" default="false" />
   <xacro:arg name="gazebo_renderer" default="ogre"/>
-  <xacro:arg name="gazebo_camera_fps" default="6"/>
-  <xacro:arg name="simulate_depth" default="true"/>
+  <xacro:arg name="camera_width" default="640"/>
+  <xacro:arg name="camera_height" default="480"/>
+  <xacro:arg name="camera_fps" default="6"/>
   <xacro:arg name="simulation_controllers" default="$(find kortex_description)/arm/$(arg arm)/$(arg dof)dof/config/ros2_controllers.yaml" />
 
 
@@ -70,13 +71,6 @@
   </xacro:if>
 
   <xacro:if value="$(arg sim_ignition)">
-    <!-- Configure simulated camera -->
-    <xacro:if value="$(arg simulate_depth)">
-      <xacro:property name="sim_sensor_type" value="rgbd_camera" />
-    </xacro:if>
-    <xacro:unless value="$(arg simulate_depth)">
-      <xacro:property name="sim_sensor_type" value="camera" />
-    </xacro:unless>
     <!-- Gazebo plugins -->
     <gazebo reference="world">
     </gazebo>
@@ -90,12 +84,12 @@
       </plugin>
     </gazebo>
     <gazebo reference="camera_color_frame">
-      <sensor name="camera_sensor" type="${sim_sensor_type}">
+      <sensor name="camera_sensor" type="rgbd_camera">
         <camera>
           <horizontal_fov>1.047</horizontal_fov>
           <image>
-            <width>640</width>
-            <height>480</height>
+            <width>$(arg camera_width)</width>
+            <height>$(arg camera_height)</height>
             <format>RGB_INT8</format>
           </image>
           <clip>
@@ -134,19 +128,17 @@
             <mean>0</mean>
             <stddev>0.00</stddev>
           </noise>
-          <xacro:if value="$(arg simulate_depth)">
-            <depth_camera>
-              <clip>
-                <near>0.25</near>
-                <far>5</far>
-              </clip>
-            </depth_camera>
-          </xacro:if>
+          <depth_camera>
+            <clip>
+              <near>0.25</near>
+              <far>5</far>
+            </clip>
+          </depth_camera>
           <optical_frame_id>color_optical_frame</optical_frame_id>
         </camera>
         <ignition_frame_id>camera_color_frame</ignition_frame_id>
         <always_on>1</always_on>
-        <update_rate>$(arg gazebo_camera_fps)</update_rate>
+        <update_rate>$(arg camera_fps)</update_rate>
         <visualize>true</visualize>
         <topic>wrist_mounted_camera</topic>
         <enable_metrics>false</enable_metrics>
