@@ -48,7 +48,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "vision",
             default_value="false",
-            description="Use simulated clock",
+            description="Add vision module to URDF",
         )
     )
     declared_arguments.append(
