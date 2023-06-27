@@ -3,11 +3,11 @@
   <xacro:macro name="load_gripper" params="
     parent
     prefix
-    gripper_joint_name:=finger_joint
     use_fake_hardware:=false
     fake_sensor_commands:=false
     sim_ignition:=false
-    sim_isaac:=false">
+    sim_isaac:=false
+    use_internal_bus_gripper_comm:=true">
     <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
 
     <!-- Hardware talks directly to the gripper so we don't need ros2_control unless we are simulating -->
@@ -26,14 +26,16 @@
         sim_isaac="$(arg sim_isaac)">
         <origin xyz="0 0 0" rpy="0 0 0" />
     </xacro:robotiq_gripper>
-    <xacro:if value="${not sim_ignition or sim_isaac or use_fake_hardware}">
-      <joint name="${prefix}$(gripper_joint_name)">
-        <command_interface name="position" />
-        <state_interface name="position">
+    <xacro:if value="${use_internal_bus_gripper_comm}">
+      <xacro:if value="${not include_ros2_control}">
+        <joint name="${prefix}robotiq_85_left_knuckle_joint">
+          <command_interface name="position" />
+          <state_interface name="position">
             <param name="initial_value">0.7929</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-      </joint>
+          </state_interface>
+          <state_interface name="velocity"/>
+        </joint>
+      </xacro:if>
     </xacro:if>
   </xacro:macro>
 </robot>

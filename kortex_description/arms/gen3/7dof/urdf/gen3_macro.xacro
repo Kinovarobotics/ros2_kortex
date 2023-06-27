@@ -364,7 +364,6 @@
       <axis
         xyz="0 0 0" />
     </joint>
-    <!-- TODO(destogl) this probably collides with camera URDF -->
     <xacro:if value="${vision}">
       <!-- sim camera needs to be rotated which might not apply to built in vision module -->
       <xacro:if value="${sim_ignition}">

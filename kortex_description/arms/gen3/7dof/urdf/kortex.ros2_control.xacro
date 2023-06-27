@@ -19,7 +19,7 @@
     port_realtime
     session_inactivity_timeout_ms
     connection_inactivity_timeout_ms
-    gripper_joint_name:=finger_joint
+    gripper_joint_name
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0">
 
@@ -148,21 +148,6 @@
         <state_interface name="effort"/>
       </joint>
       <joint name="${prefix}joint_7">
-        <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
-        </command_interface>
-        <state_interface name="position">
-          <param name="initial_value">${initial_positions['joint_7']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}${gripper_joint_name}">
         <command_interface name="position">
           <param name="min">{-2*pi}</param>
           <param name="max">{2*pi}</param>

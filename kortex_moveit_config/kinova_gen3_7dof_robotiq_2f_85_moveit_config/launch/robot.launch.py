@@ -38,7 +38,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_max_velocity",
-            default_value="100.0"
+            default_value="100.0",
             description="Max velocity for gripper commands",
         )
     )
@@ -68,6 +68,7 @@ def generate_launch_description():
         "robot_ip": robot_ip,
         "use_fake_hardware": use_fake_hardware,
         "gripper": "robotiq_2f_85",
+        "gripper_joint_name": "robotiq_85_left_knuckle_joint",
         "dof": "7",
         "gripper_max_velocity": gripper_max_velocity,
         "gripper_max_force": gripper_max_force,
