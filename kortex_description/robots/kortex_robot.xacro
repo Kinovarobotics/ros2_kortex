@@ -73,7 +73,6 @@
       <xacro:load_gripper
         parent="${prefix}${last_arm_link}"
         prefix="${prefix}"
-        gripper_joint_name="${gripper_joint_name}"
         use_fake_hardware="${use_fake_hardware}"
         fake_sensor_commands="${fake_sensor_commands}"
         sim_ignition="${sim_ignition}"
