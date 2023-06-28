@@ -20,22 +20,22 @@ ROS2 Distro | Humble | Iron | Rolling
 
 1. Install ROS 2.
 
-   If you're a developer we recommend Rolling to get the latest features and fixes.
+   If you're a developer, we recommend using Rolling to get the latest features and fixes.
 
    Rolling Release: [Install ROS2 Rolling](https://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html)<br/>
    Latest Release: [Install ROS2 Iron](https://docs.ros.org/en/iron/Installation/Ubuntu-Install-Debians.html)</br>
    Stable LTS Release: [Install ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-   After installing a version of ROS source the setup.bash which will set the `$ROS_DISTRO` environment variable.
+   After installing a version of ROS, source the setup.bash, which will set the `$ROS_DISTRO` environment variable.
 
 2. Optional: install Cyclone DDS
-   If you plan to use MoveIt, it is recommended to install and use Cyclone DDS
+   If you plan to use MoveIt, it is recommended to install and use Cyclone DDS.
    ```
    sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
    ```
 
-3. Make sure that `colcon`, its extensions and `vcs` are installed:
+3. Make sure that `colcon`, its extensions, and `vcs` are installed:
    ```
    sudo apt install python3-colcon-common-extensions python3-vcstool
    ```
