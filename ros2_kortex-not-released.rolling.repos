@@ -11,6 +11,10 @@ repositories:
     type: git
     url: https://github.com/ros-controls/ros2_controllers.git
     version: master
+  picknik_controllers:
+    type: git
+    url: https://github.com/picknikrobotics/picknik_controllers.git
+    version: main
   ros2_robotiq_gripper:
     type: git
     url: https://github.com/picknikrobotics/ros2_robotiq_gripper.git

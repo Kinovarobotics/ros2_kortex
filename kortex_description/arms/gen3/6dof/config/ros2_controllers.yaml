@@ -9,13 +9,13 @@ controller_manager:
       type: joint_trajectory_controller/JointTrajectoryController
 
     streaming_controller:
-      type: kortex2_controllers/TwistController
+      type: picknik_twist_controller/PicknikTwistController
 
     robotiq_gripper_controller:
       type: position_controllers/GripperActionController
 
     fault_controller:
-      type: kortex2_controllers/FaultController
+      type: picknik_reset_fault_controller/PicknikResetFaultController
 
 joint_trajectory_controller:
   ros__parameters:
