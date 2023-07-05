@@ -159,29 +159,11 @@ ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/actio
 
 The following is a description of the packages included in this repository.
 
-### kortex_control
-This package implements the simulation controllers that control the arm in Gazebo. For more details, please consult the [README](kortex_control/readme.md) from the package subdirectory.
-
-**Note** The `ros_control` controllers for the real arm are not yet implemented and will be in a future release of `ros_kortex`.
-
 ### kortex_description
 This package contains the URDF (Unified Robot Description Format), STL and configuration files for the Kortex-compatible robots. For more details, please consult the [README](kortex_description/readme.md) from the package subdirectory.
 
 ### kortex_driver
 This package implements a ROS node that allows communication between a node and a Kinova Gen3 or Gen3 lite robot. For more details, please consult the [README](kortex_driver/readme.md) from the package subdirectory.
 
-### kortex_examples
-This package holds all the examples needed to understand the basics of `ros_kortex`. Most of the examples are written in both C++ and Python. Only the MoveIt! example is available exclusively in Python for now.
-A more detailed [description](kortex_examples/readme.md) can be found in the package subdirectory.
-
-### kortex_gazebo
-This package contains files to simulate the Kinova Gen3 and Gen3 lite robots in Gazebo. For more details, please consult the [README](kortex_gazebo/readme.md) from the package subdirectory.
-
-### kortex_move_it_config
+### kortex_moveit_config
 This metapackage contains the auto-generated MoveIt! files to use the Kinova Gen3 and Gen3 lite arms with the MoveIt! motion planning framework. For more details, please consult the [README](kortex_move_it_config/readme.md) from the package subdirectory.
-
-### kortex2_controllers
-Custom `ros2_control` based controllers for kinova arms. More information can be found [here](kortex2_controllers/README.md).
-
-### third_party
-This folder contains the third-party packages we use with the ROS Kortex packages. Currently, it consists of two packages used for the simulation of the Robotiq Gripper in Gazebo. We use [gazebo-pkgs](third_party/gazebo-pkgs/README.md) for grasping support in Gazebo and [roboticsgroup_gazebo_plugins](third_party/roboticsgroup_gazebo_plugins/README.md) to mimic joint support in Gazebo.
