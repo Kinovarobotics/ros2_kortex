@@ -25,8 +25,8 @@ jobs:
           import-token: ${{ secrets.GITHUB_TOKEN }}
           # build all packages listed in the meta package
           package-name:
-            kortex2_bringup
-            kortex2_driver
+            kortex_bringup
+            kortex_driver
           vcs-repo-file-url: |
             https://raw.githubusercontent.com/ros2/ros2/master/ros2.repos
             file://${{ github.workspace }}/ros2_kortex.repos

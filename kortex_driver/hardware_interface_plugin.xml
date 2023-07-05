@@ -1,6 +1,6 @@
-<library path="kortex2_driver">
-  <class name="kortex2_driver/KortexMultiInterfaceHardware"
-         type="kortex2_driver::KortexMultiInterfaceHardware"
+<library path="kortex_driver">
+  <class name="kortex_driver/KortexMultiInterfaceHardware"
+         type="kortex_driver::KortexMultiInterfaceHardware"
          base_class_type="hardware_interface::SystemInterface">
     <description>
       The ROS2 Control for the Kinova Kortex robot protocol.

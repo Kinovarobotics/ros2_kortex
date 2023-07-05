@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
-#include "kortex2_driver/kortex_math_util.hpp"
+#include <kortex_driver/kortex_math_util.hpp>
 
 double KortexMathUtil::toRad(double degree) { return degree * M_PI / 180.0; }
 

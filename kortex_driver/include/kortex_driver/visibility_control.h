@@ -19,38 +19,38 @@
  * library cannot have, but the consuming code must have inorder to link.
  */
 
-#ifndef KORTEX2_DRIVER__VISIBILITY_CONTROL_H_
-#define KORTEX2_DRIVER__VISIBILITY_CONTROL_H_
+#ifndef KORTEX_DRIVER__VISIBILITY_CONTROL_H_
+#define KORTEX_DRIVER__VISIBILITY_CONTROL_H_
 
 // This logic was borrowed (then namespaced) from the examples on the gcc wiki:
 //     https://gcc.gnu.org/wiki/Visibility
 
 #if defined _WIN32 || defined __CYGWIN__
 #ifdef __GNUC__
-#define KORTEX2_DRIVER_EXPORT __attribute__((dllexport))
-#define KORTEX2_DRIVER_IMPORT __attribute__((dllimport))
+#define KORTEX_DRIVER_EXPORT __attribute__((dllexport))
+#define KORTEX_DRIVER_IMPORT __attribute__((dllimport))
 #else
-#define KORTEX2_DRIVER_EXPORT __declspec(dllexport)
-#define KORTEX2_DRIVER_IMPORT __declspec(dllimport)
+#define KORTEX_DRIVER_EXPORT __declspec(dllexport)
+#define KORTEX_DRIVER_IMPORT __declspec(dllimport)
 #endif
-#ifdef KORTEX2_DRIVER_BUILDING_DLL
-#define KORTEX2_DRIVER_PUBLIC KORTEX2_DRIVER_EXPORT
+#ifdef KORTEX_DRIVER_BUILDING_DLL
+#define KORTEX_DRIVER_PUBLIC KORTEX_DRIVER_EXPORT
 #else
-#define KORTEX2_DRIVER_PUBLIC KORTEX2_DRIVER_IMPORT
+#define KORTEX_DRIVER_PUBLIC KORTEX_DRIVER_IMPORT
 #endif
-#define KORTEX2_DRIVER_PUBLIC_TYPE KORTEX2_DRIVER_PUBLIC
-#define KORTEX2_DRIVER_LOCAL
+#define KORTEX_DRIVER_PUBLIC_TYPE KORTEX_DRIVER_PUBLIC
+#define KORTEX_DRIVER_LOCAL
 #else
-#define KORTEX2_DRIVER_EXPORT __attribute__((visibility("default")))
-#define KORTEX2_DRIVER_IMPORT
+#define KORTEX_DRIVER_EXPORT __attribute__((visibility("default")))
+#define KORTEX_DRIVER_IMPORT
 #if __GNUC__ >= 4
-#define KORTEX2_DRIVER_PUBLIC __attribute__((visibility("default")))
-#define KORTEX2_DRIVER_LOCAL __attribute__((visibility("hidden")))
+#define KORTEX_DRIVER_PUBLIC __attribute__((visibility("default")))
+#define KORTEX_DRIVER_LOCAL __attribute__((visibility("hidden")))
 #else
-#define KORTEX2_DRIVER_PUBLIC
-#define KORTEX2_DRIVER_LOCAL
+#define KORTEX_DRIVER_PUBLIC
+#define KORTEX_DRIVER_LOCAL
 #endif
-#define KORTEX2_DRIVER_PUBLIC_TYPE
+#define KORTEX_DRIVER_PUBLIC_TYPE
 #endif
 
-#endif  // KORTEX2_DRIVER__VISIBILITY_CONTROL_H_
+#endif  // KORTEX_DRIVER__VISIBILITY_CONTROL_H_
