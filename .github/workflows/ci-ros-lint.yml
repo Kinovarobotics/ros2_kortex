@@ -19,9 +19,7 @@ jobs:
         linter: ${{ matrix.linter }}
         package-name:
           kortex2_bringup
-          kortex2_controllers
           kortex2_driver
-          kortex2_robotiq_gripper_driver
 
 
   ament_lint_100:
@@ -41,6 +39,4 @@ jobs:
         arguments: "--linelength=100 --filter=-whitespace/newline"
         package-name:
           kortex2_bringup
-          kortex2_controllers
           kortex2_driver
-          kortex2_robotiq_gripper_driver
