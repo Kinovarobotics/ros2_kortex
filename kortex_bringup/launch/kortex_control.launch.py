@@ -197,6 +197,7 @@ def launch_setup(context, *args, **kwargs):
     return nodes_to_start
 
 
+
 def generate_launch_description():
     declared_arguments = []
     # Robot specific arguments
