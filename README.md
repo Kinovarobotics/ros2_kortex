@@ -89,7 +89,7 @@ ros2 launch kortex_description view_robot.launch.py
 To simulate the 7 DoF Kinova Gen3 robot arm with mock hardware:
 
 ```bash
-ros2 launch kortex2_bringup gen3.launch.py \
+ros2 launch kortex_bringup gen3.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
   use_fake_hardware:=true
 ```
@@ -105,7 +105,7 @@ ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
 Alternatively, if you wish to use the Kinova Gen3's 6 DoF variant:
 
 ```bash
-ros2 launch kortex2_bringup gen3.launch.py \
+ros2 launch kortex_bringup gen3.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
   use_fake_hardware:=true \
   dof:=6
@@ -122,7 +122,7 @@ ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
 To simulate the 7dof Kinova Gen3 robot with ignition run the following:
 
 ```bash
-ros2 launch kortex2_bringup kortex_sim_control.launch.py \
+ros2 launch kortex_bringup kortex_sim_control.launch.py \
   dof:=7 \
   use_sim_time:=true \
   launch_rviz:=false

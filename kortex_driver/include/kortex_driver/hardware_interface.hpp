@@ -21,8 +21,8 @@
  *
  */
 //----------------------------------------------------------------------
-#ifndef KORTEX2_DRIVER__HARDWARE_INTERFACE_HPP_
-#define KORTEX2_DRIVER__HARDWARE_INTERFACE_HPP_
+#ifndef KORTEX_DRIVER__HARDWARE_INTERFACE_HPP_
+#define KORTEX_DRIVER__HARDWARE_INTERFACE_HPP_
 
 #pragma once
 
@@ -41,7 +41,7 @@
 #include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
 
-#include "kortex2_driver/visibility_control.h"
+#include "kortex_driver/visibility_control.h"
 
 #include <BaseClientRpc.h>
 #include <BaseCyclicClientRpc.h>
@@ -62,7 +62,7 @@ using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface
 
 namespace k_api = Kinova::Api;
 
-namespace kortex2_driver
+namespace kortex_driver
 {
 enum class StopStartInterface
 {
@@ -83,34 +83,34 @@ public:
 
   RCLCPP_SHARED_PTR_DEFINITIONS(KortexMultiInterfaceHardware);
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   CallbackReturn on_init(const hardware_interface::HardwareInfo & info) final;
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() final;
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() final;
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   return_type prepare_command_mode_switch(
     const std::vector<std::string> & start_interfaces,
     const std::vector<std::string> & stop_interfaces) final;
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   return_type perform_command_mode_switch(
     const std::vector<std::string> & /*start_interfaces*/,
     const std::vector<std::string> & /*stop_interfaces*/) final;
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) final;
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) final;
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   return_type read(const rclcpp::Time & time, const rclcpp::Duration & period) final;
 
-  KORTEX2_DRIVER_PUBLIC
+  KORTEX_DRIVER_PUBLIC
   return_type write(const rclcpp::Time & time, const rclcpp::Duration & period) final;
 
 private:
@@ -217,6 +217,6 @@ private:
   void readGripperPosition();
 };
 
-}  // namespace kortex2_driver
+}  // namespace kortex_driver
 
-#endif  // KORTEX2_DRIVER__HARDWARE_INTERFACE_HPP_
+#endif  // KORTEX_DRIVER__HARDWARE_INTERFACE_HPP_

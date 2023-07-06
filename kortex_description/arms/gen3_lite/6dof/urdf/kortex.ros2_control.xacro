@@ -33,7 +33,7 @@
           <param name="state_following_offset">0.0</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition}">
-          <plugin>kortex2_driver/KortexMultiInterfaceHardware</plugin>
+          <plugin>kortex_driver/KortexMultiInterfaceHardware</plugin>
           <param name="robot_ip">${robot_ip}</param>
           <param name="username">${username}</param>
           <param name="password">${password}</param>

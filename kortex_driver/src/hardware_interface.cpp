@@ -30,8 +30,8 @@
 #include <string>
 #include <vector>
 
-#include "kortex2_driver/hardware_interface.hpp"
-#include "kortex2_driver/kortex_math_util.hpp"
+#include "kortex_driver/hardware_interface.hpp"
+#include "kortex_driver/kortex_math_util.hpp"
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
@@ -41,7 +41,7 @@ namespace
 const rclcpp::Logger LOGGER = rclcpp::get_logger("KortexMultiInterfaceHardware");
 }
 
-namespace kortex2_driver
+namespace kortex_driver
 {
 KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
 : router_tcp_{
@@ -1014,9 +1014,9 @@ void KortexMultiInterfaceHardware::sendTwistCommand()
   base_.SendTwistCommand(k_api_twist_command_);
 }
 
-}  // namespace kortex2_driver
+}  // namespace kortex_driver
 
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  kortex2_driver::KortexMultiInterfaceHardware, hardware_interface::SystemInterface)
+  kortex_driver::KortexMultiInterfaceHardware, hardware_interface::SystemInterface)

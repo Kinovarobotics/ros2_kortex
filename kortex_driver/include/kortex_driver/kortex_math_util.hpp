@@ -4,8 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
-#ifndef KORTEX2_DRIVER__KORTEX_MATH_UTIL_HPP_
-#define KORTEX2_DRIVER__KORTEX_MATH_UTIL_HPP_
+#ifndef KORTEX_DRIVER__KORTEX_MATH_UTIL_HPP_
+#define KORTEX_DRIVER__KORTEX_MATH_UTIL_HPP_
 
 #include <cmath>
 
@@ -28,4 +28,4 @@ public:
     double relative_position, double min_value, double max_value);
 };
 
-#endif  // KORTEX2_DRIVER__KORTEX_MATH_UTIL_HPP_
+#endif  // KORTEX_DRIVER__KORTEX_MATH_UTIL_HPP_

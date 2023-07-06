@@ -1,4 +1,4 @@
-# Copyright (c) 2021 PickNik, Inc.
+# Copyright (c) 2023 PickNik, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Author: Denis Stogl
+# Author: Lovro Ivanov
 #
 # Description: After a robot has been loaded, this will execute a series of trajectories.
 
@@ -24,21 +24,21 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    position_goals = PathJoinSubstitution(
+    test_params = PathJoinSubstitution(
         [
-            FindPackageShare("kortex2_bringup"),
+            FindPackageShare("kortex_bringup"),
             "config",
-            "test_trajectory_goal_publishers_config.yaml",
+            "test_huge_joint_space_jump_config.yaml",
         ]
     )
 
     return LaunchDescription(
         [
             Node(
-                package="ros2_control_test_nodes",
-                executable="publisher_joint_trajectory_controller",
-                name="publisher_joint_trajectory_controller",
-                parameters=[position_goals],
+                package="kortex_bringup",
+                executable="test_huge_joint_space_jump.py",
+                name="test_huge_joint_space_jump",
+                parameters=[test_params],
                 output={
                     "stdout": "screen",
                     "stderr": "screen",
