@@ -15,7 +15,7 @@ controller_manager:
       type: position_controllers/GripperActionController
 
     fault_controller:
-      type: picknik_reset_fault_controller/PicknikResetFaultController
+      type: picknik_reset_fault_controller/FaultController
 
 joint_trajectory_controller:
   ros__parameters:

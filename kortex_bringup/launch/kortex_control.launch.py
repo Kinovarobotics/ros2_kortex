@@ -15,7 +15,11 @@
 # Authors: Marq Rasmussen, Denis Stogl
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, RegisterEventHandler, OpaqueFunction
+from launch.actions import (
+    DeclareLaunchArgument,
+    OpaqueFunction,
+    RegisterEventHandler,
+)
 from launch.event_handlers import OnProcessExit
 from launch.conditions import IfCondition
 from launch.substitutions import (
