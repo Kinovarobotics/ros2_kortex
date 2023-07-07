@@ -192,6 +192,7 @@ def launch_setup(context, *args, **kwargs):
 
     return nodes_to_start
 
+
 def generate_launch_description():
     declared_arguments = []
     # Robot specific arguments
@@ -362,7 +363,5 @@ def generate_launch_description():
             description="Max force for gripper commands",
         )
     )
-
-
 
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
