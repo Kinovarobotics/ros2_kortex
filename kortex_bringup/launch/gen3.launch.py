@@ -71,7 +71,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_joint_name",
-            default_value='"finger_joint"',
+            default_value="robotiq_85_left_knuckle_joint",
             description="Name of the gripper attached to the arm",
         )
     )
@@ -85,7 +85,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_max_velocity",
-            default_value="100.0"
+            default_value="100.0",
             description="Max velocity for gripper commands",
         )
     )
