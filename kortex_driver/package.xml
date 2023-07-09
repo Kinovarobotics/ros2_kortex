@@ -4,8 +4,11 @@
   <name>kortex_driver</name>
   <version>0.0.0</version>
   <description>ROS2 driver package for the Kinova Robot Hardware.</description>
+  <maintainer email="alex.moriarty@picknik.ai">Alex Moriarty</maintainer>
+  <maintainer email="fmaisonneuve@kinova.ca">Felix Maisonneuve</maintainer>
+  <maintainer email="mleroux@kinova.ca">Martin Leroux</maintainer>
   <maintainer email="marq.rasmussen@picknik.ai">Marq Rasmussen</maintainer>
-  <license>Proprietary</license>
+  <license>BSD</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
