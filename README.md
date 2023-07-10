@@ -2,17 +2,53 @@
 > Kinova® Kortex™ is the common software platform behind all of the products in the Gen3 family (Gen3 and Gen3 lite). It unifies the inner workings of the various robots and their related external tools, like the API. <br />
 > https://www.kinovarobotics.com/product/gen3-robots
 
+<center><img src="doc/resources/kinova-gen3-7dof-robotiq-2f-85.jpg" alt="Kinova Gen3 7DoF manipulator with Intel RealSense 3D Vision Module and Robotiq 2F-85 2 Finger 85mm Adaptive Gripper" style="width: 50%"/></center>
+
 ROS2 Kortex is the official ROS2 package to interact with Kortex and its related products. It is built upon the Kortex API, documentation for which can be found in the [GitHub Kortex repository](https://github.com/Kinovarobotics/kortex).
 
 ## Build status
 
+<table width="100%">
+  <tr>
+    <th>ROS 2 Distro</th>
+    <th>Humble</th>
+    <th>Iron</th>
+    <th>Rolling</th>
+  </tr>
+  <tr>
+    <th>Branch</th>
+    <td><a href="https://github.com/PickNikRobotics/ros2_kortex/tree/main">main</a></td>
+    <td><a href="https://github.com/PickNikRobotics/ros2_kortex/tree/main">main</a></td>
+    <td><a href="https://github.com/PickNikRobotics/ros2_kortex/tree/main">main</a></td>
+  </tr>
+  <tr>
+    <th>Build Status</th>
+    <td>
+      <a href="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml">
+        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?event=push&branch=main" alt="Humble Binary Build"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/iron-binary-build.yml">
+        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/iron-binary-build.yml/badge.svg?event=push&branch=main" alt="Iron Binary Build"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml">
+        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?event=push&branch=main" alt="Rolling Binary Build"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <th>Release Status</th>
+    <td>coming soon<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
+    <td>coming soon<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
+    <td>coming soon<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
+  </tr>
+</table>
 
-ROS2 Distro | Humble | Iron | Rolling
-:---------: | :----: | :--: | :-----:
-| **Branch** | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main) | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main) | [`main`](https://github.com/PickNikRobotics/ros2_kortex/tree/main)
-| **Build Status** | [![Humble Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml?branch=main) | :construction: | [![Rolling Binary Build](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?branch=main)](https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml?branch=main)
 
-**Note:** There are several CI jobs checking against future upstream changes see [detailed build status](.github/workflows/README.md) for more information.
+**Note:** There are several CI jobs checking against future upstream changes see [detailed build status](.github/workflows/README.md) for a full list of CI jobs and for more information.
 
 
 ## Getting started
