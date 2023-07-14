@@ -15,7 +15,7 @@
 # Authors: Marq Rasmussen, Denis Stogl
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, RegisterEventHandler
+from launch.actions import DeclareLaunchArgument, RegisterEventHandler, OpaqueFunction
 from launch.event_handlers import OnProcessExit
 from launch.conditions import IfCondition
 from launch.substitutions import (
@@ -26,6 +26,171 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+
+
+def launch_setup(context, *args, **kwargs):
+    # Initialize Arguments
+    robot_type = LaunchConfiguration("robot_type")
+    robot_ip = LaunchConfiguration("robot_ip")
+    dof = LaunchConfiguration("dof")
+    # General arguments
+    controllers_file = LaunchConfiguration("controllers_file")
+    description_package = LaunchConfiguration("description_package")
+    description_file = LaunchConfiguration("description_file")
+    robot_name = LaunchConfiguration("robot_name")
+    prefix = LaunchConfiguration("prefix")
+    gripper = LaunchConfiguration("gripper")
+    gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
+    gripper_max_force = LaunchConfiguration("gripper_max_force")
+    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
+    robot_traj_controller = LaunchConfiguration("robot_controller")
+    robot_pos_controller = LaunchConfiguration("robot_pos_controller")
+    robot_hand_controller = LaunchConfiguration("robot_hand_controller")
+    fault_controller = LaunchConfiguration("fault_controller")
+    launch_rviz = LaunchConfiguration("launch_rviz")
+    use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
+    gripper_joint_name = LaunchConfiguration("gripper_joint_name")
+
+    robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            PathJoinSubstitution(
+                [FindPackageShare(description_package), "robots", description_file]
+            ),
+            " ",
+            "robot_ip:=",
+            robot_ip,
+            " ",
+            "name:=",
+            robot_name,
+            " ",
+            "arm:=",
+            robot_type,
+            " ",
+            "dof:=",
+            dof,
+            " ",
+            "prefix:=",
+            prefix,
+            " ",
+            "use_fake_hardware:=",
+            use_fake_hardware,
+            " ",
+            "fake_sensor_commands:=",
+            fake_sensor_commands,
+            " ",
+            "gripper:=",
+            gripper,
+            " ",
+            "use_internal_bus_gripper_comm:=",
+            use_internal_bus_gripper_comm,
+            " ",
+            "gripper_max_velocity:=",
+            gripper_max_velocity,
+            " ",
+            "gripper_max_force:=",
+            gripper_max_force,
+            " ",
+            "gripper_joint_name:=",
+            gripper_joint_name,
+            " ",
+        ]
+    )
+    robot_description = {"robot_description": robot_description_content}
+
+    robot_controllers = PathJoinSubstitution(
+        [
+            FindPackageShare(description_package),
+            "arms/gen3/" + dof.perform(context) + "dof/config",
+            controllers_file,
+        ]
+    )
+
+    rviz_config_file = PathJoinSubstitution(
+        [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
+    )
+
+    control_node = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[robot_description, robot_controllers],
+        output="both",
+    )
+
+    robot_state_publisher_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="both",
+        parameters=[robot_description],
+    )
+
+    rviz_node = Node(
+        package="rviz2",
+        condition=IfCondition(launch_rviz),
+        executable="rviz2",
+        name="rviz2",
+        output="log",
+        arguments=["-d", rviz_config_file],
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "joint_state_broadcaster",
+            "--controller-manager",
+            "/controller_manager",
+        ],
+    )
+
+    # Delay rviz start after `joint_state_broadcaster`
+    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[rviz_node],
+        ),
+        condition=IfCondition(launch_rviz),
+    )
+
+    robot_traj_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[robot_traj_controller, "-c", "/controller_manager"],
+    )
+
+    robot_pos_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
+    )
+
+    robot_hand_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        condition=IfCondition(use_internal_bus_gripper_comm),
+    )
+
+    fault_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[fault_controller, "-c", "/controller_manager"],
+    )
+
+    nodes_to_start = [
+        control_node,
+        robot_state_publisher_node,
+        joint_state_broadcaster_spawner,
+        delay_rviz_after_joint_state_broadcaster_spawner,
+        robot_traj_controller_spawner,
+        robot_pos_controller_spawner,
+        robot_hand_controller_spawner,
+        fault_controller_spawner,
+    ]
+
+    return nodes_to_start
 
 
 def generate_launch_description():
@@ -177,154 +342,26 @@ def generate_launch_description():
             description="Use internal bus for gripper communication?",
         )
     )
-
-    # Initialize Arguments
-    robot_type = LaunchConfiguration("robot_type")
-    robot_ip = LaunchConfiguration("robot_ip")
-    dof = LaunchConfiguration("dof")
-    # General arguments
-    controllers_file = LaunchConfiguration("controllers_file")
-    description_package = LaunchConfiguration("description_package")
-    description_file = LaunchConfiguration("description_file")
-    robot_name = LaunchConfiguration("robot_name")
-    prefix = LaunchConfiguration("prefix")
-    gripper = LaunchConfiguration("gripper")
-    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
-    fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
-    robot_traj_controller = LaunchConfiguration("robot_controller")
-    robot_pos_controller = LaunchConfiguration("robot_pos_controller")
-    robot_hand_controller = LaunchConfiguration("robot_hand_controller")
-    fault_controller = LaunchConfiguration("fault_controller")
-    launch_rviz = LaunchConfiguration("launch_rviz")
-    use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
-
-    robot_description_content = Command(
-        [
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            PathJoinSubstitution(
-                [FindPackageShare(description_package), "robots", description_file]
-            ),
-            " ",
-            "robot_ip:=",
-            robot_ip,
-            " ",
-            "name:=",
-            robot_name,
-            " ",
-            "arm:=",
-            robot_type,
-            " ",
-            "dof:=",
-            dof,
-            " ",
-            "prefix:=",
-            prefix,
-            " ",
-            "use_fake_hardware:=",
-            use_fake_hardware,
-            " ",
-            "fake_sensor_commands:=",
-            fake_sensor_commands,
-            " ",
-            "gripper:=",
-            gripper,
-            " ",
-            "use_internal_bus_gripper_comm:=",
-            use_internal_bus_gripper_comm,
-            " ",
-        ]
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_max_velocity",
+            default_value="100.0",
+            description="Max velocity for gripper commands",
+        )
     )
-    robot_description = {"robot_description": robot_description_content}
-
-    robot_controllers = PathJoinSubstitution(
-        [
-            FindPackageShare(description_package),
-            "arms/gen3/" + str(dof) + "dof/config",
-            controllers_file,
-        ]
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_max_force",
+            default_value="100.0",
+            description="Max force for gripper commands",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_joint_name",
+            default_value="finger_joint",
+            description="Max force for gripper commands",
+        )
     )
 
-    rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
-    )
-
-    control_node = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
-        output="both",
-    )
-
-    robot_state_publisher_node = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="both",
-        parameters=[robot_description],
-    )
-
-    rviz_node = Node(
-        package="rviz2",
-        condition=IfCondition(launch_rviz),
-        executable="rviz2",
-        name="rviz2",
-        output="log",
-        arguments=["-d", rviz_config_file],
-    )
-
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "joint_state_broadcaster",
-            "--controller-manager",
-            "/controller_manager",
-        ],
-    )
-
-    # Delay rviz start after `joint_state_broadcaster`
-    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[rviz_node],
-        ),
-        condition=IfCondition(launch_rviz),
-    )
-
-    robot_traj_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[robot_traj_controller, "-c", "/controller_manager"],
-    )
-
-    robot_pos_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
-    )
-
-    robot_hand_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[robot_hand_controller, "-c", "/controller_manager"],
-        condition=IfCondition(use_internal_bus_gripper_comm),
-    )
-
-    fault_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[fault_controller, "-c", "/controller_manager"],
-    )
-
-    nodes_to_start = [
-        control_node,
-        robot_state_publisher_node,
-        joint_state_broadcaster_spawner,
-        delay_rviz_after_joint_state_broadcaster_spawner,
-        robot_traj_controller_spawner,
-        robot_pos_controller_spawner,
-        robot_hand_controller_spawner,
-        fault_controller_spawner,
-    ]
-
-    return LaunchDescription(declared_arguments + nodes_to_start)
+    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])

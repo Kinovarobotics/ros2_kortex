@@ -6,7 +6,8 @@
     use_fake_hardware:=false
     fake_sensor_commands:=false
     sim_ignition:=false
-    sim_isaac:=false">
+    sim_isaac:=false
+    use_internal_bus_gripper_comm:=true">
     <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
 
     <!-- Hardware talks directly to the gripper so we don't need ros2_control unless we are simulating -->
