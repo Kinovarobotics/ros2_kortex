@@ -34,8 +34,8 @@ target_include_directories(
 )
 ament_target_dependencies(
   ${PROJECT_NAME}
+  SYSTEM kortex_api
   hardware_interface
-  kortex_api
   pluginlib
   rclcpp
 )

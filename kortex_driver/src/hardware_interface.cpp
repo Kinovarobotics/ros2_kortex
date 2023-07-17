@@ -52,8 +52,12 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
     &transport_udp_realtime_,
     [](k_api::KError err) { cout << "_________ callback error _________" << err.toString(); }},
   session_manager_real_time_{&router_udp_realtime_},
+  k_api_twist_(nullptr),
   base_{&router_tcp_},
   base_cyclic_{&router_udp_realtime_},
+  gripper_motor_command_(nullptr),
+  gripper_command_max_velocity_(100.0),
+  gripper_command_max_force_(100.0),
   servoing_mode_hw_(k_api::Base::ServoingModeInformation()),
   joint_based_controller_running_(false),
   twist_controller_running_(false),
@@ -69,11 +73,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   start_fault_controller_(false),
   first_pass_(true),
   gripper_joint_name_(""),
-  gripper_command_max_velocity_(100.0),
-  gripper_command_max_force_(100.0),
-  use_internal_bus_gripper_comm_(false),
-  k_api_twist_(nullptr),
-  gripper_motor_command_(nullptr)
+  use_internal_bus_gripper_comm_(false)
 {
   RCLCPP_INFO(LOGGER, "Setting severity threshold to DEBUG");
   auto ret = rcutils_logging_set_logger_level(LOGGER.get_name(), RCUTILS_LOG_SEVERITY_DEBUG);
@@ -743,7 +743,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
 }
 
 return_type KortexMultiInterfaceHardware::read(
-  const rclcpp::Time & time, const rclcpp::Duration & period)
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   if (first_pass_)
   {
@@ -799,7 +799,7 @@ void KortexMultiInterfaceHardware::readGripperPosition()
 }
 
 return_type KortexMultiInterfaceHardware::write(
-  const rclcpp::Time & time, const rclcpp::Duration & period)
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   if (block_write)
   {
