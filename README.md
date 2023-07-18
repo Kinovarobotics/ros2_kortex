@@ -100,7 +100,29 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
    source install/setup.bash
    ```
 
-**Note:** Due to mismatched protobuf version that ships system and used by Gazebo simulator compiling twice may be required.
+## Simulation Issues
+
+Please note, at this time there are two known issues you with simulation
+
+1. Gazebo + Mimic Joints for the Robotiq Gripper
+2. Protobuf version mismatch
+
+# Gazebo and Mimic Joints
+
+A pull request has been made to gz_ros2_control which is how this repository was tested in simulation.
+The pull request won't be merged as the fix should be done upstream in gz-sim.
+Once a fix is available ros2_robotiq_gripper will be re-released and an update should fix any workarounds.
+
+In the meantime if you need simulation checkout the upstream pull request link:
+
+- Upstream Issue: https://github.com/gazebosim/gz-sim/issues/1684
+- Upstream Pull Request: https://github.com/ros-controls/gz_ros2_control/pull/86
+- Tracking Issue: https://github.com/PickNikRobotics/ros2_robotiq_gripper/issues/7
+
+# Protobuf
+
+Due to mismatched protobuf version that ships system and used by Gazebo simulator compiling twice may be required.
+You will only run into this if you have certain other gazebo related code in your workspace while compiling this repository.
 If errors are encounter you must clean your workspace and run colcon build in two steps:
 
 1. build everything except kortex related packages
