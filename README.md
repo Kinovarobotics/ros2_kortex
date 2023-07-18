@@ -201,6 +201,60 @@ ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
 ```
 **Note: If you have reassigned your physical arm's robot IP address, then you will need to assign that ip address to `robot_ip`**
 
+You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller:
+```bash
+ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
+  joint_names: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, joint_7],
+  points: [
+    { positions: [0, 0, 0, 0, 0, 0, 0], time_from_start: { sec: 10 } },
+  ]
+}" -1
+```
+
+You can also command the arm using TwistStamped messages. Before doing so, you must active the `twist_controller` and deactivate the `joint_trajectory_controller`:
+```bash
+ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
+  activate_controllers: [twist_controller],
+  deactivate_controllers: [joint_trajectory_controller],
+  strictness: 1,
+  activate_asap: true,
+}"
+```
+
+Once the `twist_controller` is activated, You can publish TwistStamped messages on the `/twist_controller/commands` topic to command the arm.
+
+For example, you can jog the arm with the following command:
+```bash
+ros2 topic pub /twist_controller/commands geometry_msgs/TwistStamped "{
+  header: auto,
+  twist: {
+    linear: {x: .05, y: 0, z: 0},
+    angular: {x: 0,y: 0,z: 0},
+  }
+}" -1
+```
+
+Then stop it with the following command:
+```bash
+ros2 topic pub /twist_controller/commands geometry_msgs/TwistStamped "{
+  header: auto,
+  twist: {
+    linear: {x: 0, y: 0, z: 0},
+    angular: {x: 0,y: 0,z: 0},
+  }
+}" -1
+```
+
+If you wish to use the `joint_trajectory_controller` again to command the arm using JointTrajectory messages, run the following:
+```bash
+ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
+  activate_controllers: [joint_trajectory_controller],
+  deactivate_controllers: [twist_controller],
+  strictness: 1,
+  activate_asap: true,
+}"
+```
+
 The Robotiq 2f 85 Gripper will be available on the Action topic:
 
 ```bash
