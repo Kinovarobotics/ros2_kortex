@@ -2,8 +2,8 @@
 Changelog for package kortex_api
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2023-07-17)
+------------------
 * Initial Public ROS 2 Release of kortex_api
 * [kortex_api] use CMake FetchContent to get API (`#112 <https://github.com/PickNikRobotics/ros2_kortex/issues/112>`_)
   * Currently only Linux x86_64 is supported

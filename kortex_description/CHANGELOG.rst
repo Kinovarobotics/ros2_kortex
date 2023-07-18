@@ -2,8 +2,8 @@
 Changelog for package kortex_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2023-07-17)
+------------------
 * Initial Public ROS 2 release of kortex_description
 * Make Gripper velocity and force configurable through URDF (`#137 <https://github.com/PickNikRobotics/ros2_kortex/issues/137>`_)
 * rename kortex2 -> kortex (`#144 <https://github.com/PickNikRobotics/ros2_kortex/issues/144>`_)

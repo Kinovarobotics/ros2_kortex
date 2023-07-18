@@ -2,8 +2,8 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2023-07-17)
+------------------
 * Initial Public ROS 2 release of kortex_driver
 * cxx: fixup compiler warnings (`#148 <https://github.com/PickNikRobotics/ros2_kortex/issues/148>`_)
 * Make Gripper velocity and force configurable through URDF (`#137 <https://github.com/PickNikRobotics/ros2_kortex/issues/137>`_)
