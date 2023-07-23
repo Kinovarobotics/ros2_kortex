@@ -317,7 +317,7 @@
       </collision>
     </link>
     </xacro:unless>
-    <xacro:if value="${use_external_cable">
+    <xacro:if value="${use_external_cable}">
       <joint name="${prefix}joint_6" type="revolute">
         <origin xyz="0 0.10593 -0.00017505" rpy="1.5708 0.0 0.0" />
         <parent link="${prefix}spherical_wrist_2_link" />
@@ -326,7 +326,7 @@
         <limit lower="${-2*PI}" upper="${2*PI}" effort="9" velocity="1.2218" />
       </joint>
     </xacro:if>
-    <xacro:unless value="${use_external_cable">
+    <xacro:unless value="${use_external_cable}">
       <joint name="${prefix}joint_6" type="continuous">
         <origin xyz="0 0.10593 -0.00017505" rpy="1.5708 0.0 0.0" />
         <parent link="${prefix}spherical_wrist_2_link" />

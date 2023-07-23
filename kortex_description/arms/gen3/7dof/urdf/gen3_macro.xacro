@@ -301,7 +301,7 @@
           velocity="1.2218" />
       </joint>
     </xacro:if>
-    <xacro:unless value="${use_external_cable">
+    <xacro:unless value="${use_external_cable}">
       <joint
         name="${prefix}joint_5"
         type="continuous">
@@ -399,7 +399,7 @@
       </collision>
     </link>
     </xacro:unless>
-    <xacro:if value="${use_external_cable">
+    <xacro:if value="${use_external_cable}">
       <joint
         name="${prefix}joint_7"
         type="revolute">
@@ -417,7 +417,7 @@
           velocity="1.2218" />
       </joint>
     </xacro:if>
-    <xacro:unless value="${use_external_cable">
+    <xacro:unless value="${use_external_cable}">
       <joint
         name="${prefix}joint_7"
         type="continuous">
