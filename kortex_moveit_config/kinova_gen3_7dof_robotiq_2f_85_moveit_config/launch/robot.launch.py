@@ -52,6 +52,14 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
+            "use_external_cable",
+            default_value="false",
+            description="Max force for gripper commands",
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "use_sim_time",
             default_value="false",
             description="Use simulated clock",
@@ -63,6 +71,7 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
     gripper_max_force = LaunchConfiguration("gripper_max_force")
+    use_external_cable = LaunchConfiguration("use_external_cable")
 
     launch_arguments = {
         "robot_ip": robot_ip,
@@ -72,6 +81,7 @@ def generate_launch_description():
         "dof": "7",
         "gripper_max_velocity": gripper_max_velocity,
         "gripper_max_force": gripper_max_force,
+        "use_external_cable": use_external_cable,
     }
 
     moveit_config = (

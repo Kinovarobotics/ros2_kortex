@@ -24,6 +24,7 @@
     sim_gazebo:=false
     sim_ignition:=false
     sim_isaac:=false
+    use_external_cable:=false
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0">
 
@@ -51,7 +52,8 @@
       sim_isaac="${sim_isaac}"
       gripper_joint_name="${gripper_joint_name}"
       gripper_max_velocity="${gripper_max_velocity}"
-      gripper_max_force="${gripper_max_force}">
+      gripper_max_force="${gripper_max_force}"
+      use_external_cable="${use_external_cable}">
       <xacro:insert_block name="origin" />
     </xacro:load_arm>
 
