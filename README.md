@@ -211,7 +211,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 }" -1
 ```
 
-You can also command the arm using TwistStamped messages. Before doing so, you must active the `twist_controller` and deactivate the `joint_trajectory_controller`:
+You can also command the arm using Twist messages. Before doing so, you must active the `twist_controller` and deactivate the `joint_trajectory_controller`:
 ```bash
 ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
   activate_controllers: [twist_controller],
@@ -221,28 +221,14 @@ ros2 service call /controller_manager/switch_controller controller_manager_msgs/
 }"
 ```
 
-Once the `twist_controller` is activated, You can publish TwistStamped messages on the `/twist_controller/commands` topic to command the arm.
+Once the `twist_controller` is activated, You can publish Twist messages on the `/twist_controller/commands` topic to command the arm.
 
-For example, you can jog the arm with the following command:
-```bash
-ros2 topic pub /twist_controller/commands geometry_msgs/TwistStamped "{
-  header: auto,
-  twist: {
-    linear: {x: .05, y: 0, z: 0},
-    angular: {x: 0,y: 0,z: 0},
-  }
-}" -1
-```
+For example, you can jog the arm using [Teleop Twist Keyboard](https://index.ros.org/p/teleop_twist_keyboard/github-ros2-teleop_twist_keyboard/) with the following command:
 
-Then stop it with the following command:
+**WARNING: you are responsible for collision checking, including self collisions when in this mode.**
+
 ```bash
-ros2 topic pub /twist_controller/commands geometry_msgs/TwistStamped "{
-  header: auto,
-  twist: {
-    linear: {x: 0, y: 0, z: 0},
-    angular: {x: 0,y: 0,z: 0},
-  }
-}" -1
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/twist_controller/commands
 ```
 
 If you wish to use the `joint_trajectory_controller` again to command the arm using JointTrajectory messages, run the following:
