@@ -28,6 +28,7 @@
   <exec_depend>joint_state_broadcaster</exec_depend>
   <exec_depend>robotiq_description</exec_depend>
   <exec_depend>kortex_description</exec_depend>
+  <exec_depend>kortex_driver</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
