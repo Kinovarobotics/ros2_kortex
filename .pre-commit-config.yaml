@@ -110,7 +110,7 @@ repos:
         entry: ament_lint_cmake
         language: system
         files: CMakeLists\.txt$
-        exclude: kortex_api/
+        exclude: '(kortex_api|kortex_driver)/.*'
 
   # Copyright
   - repo: local
