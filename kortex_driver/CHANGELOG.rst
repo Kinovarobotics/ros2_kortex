@@ -2,6 +2,21 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Change kortex_api header and library install locations (`#156 <https://github.com/PickNikRobotics/ros2_kortex/issues/156>`_)
+  This commit does several two main things:
+  1) kortex_api now only installs the header files and they now do not pollute include
+  2) kortex_driver gets the binary libKortexApiCpp.a itself
+  kortex_driver gets the headers from kortex_api this avoids protobuf errors because
+  those header files and the libKortexApiCpp.a were generated using non-system protobuf
+  kortex_api cannot install the libKortexApiCpp.a because CMake does not allow installing library which was IMPORTED
+  This should fix the debian packages which are currently released
+* fix missing dependencies (`#152 <https://github.com/PickNikRobotics/ros2_kortex/issues/152>`_)
+  This fixes missing dependencies which were available from source build
+  but were missing from released binary
+* Contributors: Alex Moriarty
+
 0.2.0 (2023-07-17)
 ------------------
 * Initial Public ROS 2 release of kortex_driver

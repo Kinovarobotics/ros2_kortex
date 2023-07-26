@@ -2,6 +2,13 @@
 Changelog for package kortex_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix missing dependencies (`#152 <https://github.com/PickNikRobotics/ros2_kortex/issues/152>`_)
+  This fixes missing dependencies which were available from source build
+  but were missing from released binary
+* Contributors: Alex Moriarty
+
 0.2.0 (2023-07-17)
 ------------------
 * Initial Public ROS 2 release of kortex_description

@@ -2,6 +2,13 @@
 Changelog for package kinova_gen3_7dof_robotiq_2f_85_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* remove stomp for Humble from ros packages (`#153 <https://github.com/PickNikRobotics/ros2_kortex/issues/153>`_)
+  - STOMP is available if you build and use MoveIt from src but not
+  if you have MoveIt installed from the ros distro
+* Contributors: Alex Moriarty
+
 0.2.0 (2023-07-17)
 ------------------
 * Initial Public ROS 2 release of kinova_gen3_7dof_robotiq_2f_85_moveit_config
