@@ -64,6 +64,7 @@ ament_export_libraries(
 )
 ament_export_dependencies(
   hardware_interface
+  kortex_api
   pluginlib
   rclcpp
 )
