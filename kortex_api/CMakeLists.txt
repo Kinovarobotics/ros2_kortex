@@ -35,15 +35,12 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
-ament_export_libraries(${kinova_binary_api_SOURCE_DIR}/lib/release/libKortexApiCpp.a)
-link_libraries(pthread)
+ament_export_include_directories(include/kortex_api)
 
-ament_export_include_directories(include)
-
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client/ DESTINATION include)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/common/ DESTINATION include)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/messages/ DESTINATION include)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client_stubs/ DESTINATION include)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/google/protobuf DESTINATION include/google)
+install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client/ DESTINATION include/kortex_api)
+install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/common/ DESTINATION include/kortex_api)
+install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/messages/ DESTINATION include/kortex_api)
+install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client_stubs/ DESTINATION include/kortex_api)
+install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/google/protobuf DESTINATION include/kortex_api/google)
 
 ament_package()
