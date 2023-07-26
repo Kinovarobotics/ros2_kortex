@@ -2,8 +2,8 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.1 (2023-07-26)
+------------------
 * Change kortex_api header and library install locations (`#156 <https://github.com/PickNikRobotics/ros2_kortex/issues/156>`_)
   This commit does several two main things:
   1) kortex_api now only installs the header files and they now do not pollute include
