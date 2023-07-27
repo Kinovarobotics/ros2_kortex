@@ -149,7 +149,9 @@ To simulate the 7 DoF Kinova Gen3 robot arm with mock hardware:
 ```bash
 ros2 launch kortex_bringup gen3.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
+  use_fake_hardware:=true \
+  gripper_max_velocity:=100.0 \
+  gripper_max_force:=100.0
 ```
 
 To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm with mock hardware:
@@ -157,7 +159,9 @@ To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm
 ```bash
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
+  use_fake_hardware:=true \
+  gripper_max_velocity:=100.0 \
+  gripper_max_force:=100.0
 ```
 
 Alternatively, if you wish to use the Kinova Gen3's 6 DoF variant:
@@ -166,7 +170,9 @@ Alternatively, if you wish to use the Kinova Gen3's 6 DoF variant:
 ros2 launch kortex_bringup gen3.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
   use_fake_hardware:=true \
-  dof:=6
+  dof:=6 \
+  gripper_max_velocity:=100.0 \
+  gripper_max_force:=100.0
 ```
 
 and to bring up the Kinova Gen3 6 DoF with MoveIt:
@@ -174,7 +180,9 @@ and to bring up the Kinova Gen3 6 DoF with MoveIt:
 ```bash
 ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
+  use_fake_hardware:=true \
+  gripper_max_velocity:=100.0 \
+  gripper_max_force:=100.0
 ```
 
 To simulate the 7dof Kinova Gen3 robot with ignition run the following:
