@@ -205,7 +205,11 @@ To work with a physical robot and generate/execute paths with MoveIt run the fol
 
 ```bash
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
-  robot_ip:=192.168.1.10
+  robot_ip:=192.168.1.10 \
+  use_fake_hardware:=true \
+  gripper_max_velocity:=100.0 \
+  gripper_max_force:=100.0 \
+  use_internal_bus_gripper_comm:=true
 ```
 **Note: If you have reassigned your physical arm's robot IP address, then you will need to assign that ip address to `robot_ip`**
 
