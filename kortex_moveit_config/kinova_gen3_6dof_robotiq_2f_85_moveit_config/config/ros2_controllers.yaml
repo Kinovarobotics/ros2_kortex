@@ -8,7 +8,7 @@ controller_manager:
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
-    streaming_controller:
+    twist_controller:
       type: picknik_twist_controller/PicknikTwistController
 
     robotiq_gripper_controller:
@@ -39,7 +39,7 @@ joint_trajectory_controller:
       stopped_velocity_tolerance: 0.0
       goal_time: 0.0
 
-streaming_controller:
+twist_controller:
   ros__parameters:
     joint: tcp
     interface_names:
@@ -53,5 +53,5 @@ streaming_controller:
 robotiq_gripper_controller:
   ros__parameters:
     default: true
-    joint: finger_joint
+    joint: robotiq_85_left_knuckle_joint
     allow_stalling: true
