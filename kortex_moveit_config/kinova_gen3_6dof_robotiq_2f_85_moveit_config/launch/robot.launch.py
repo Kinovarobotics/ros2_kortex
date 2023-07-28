@@ -56,7 +56,7 @@ def launch_setup(context, *args, **kwargs):
         .to_moveit_configs()
     )
 
-    moveit_config.moveit_cpp.update({"use_sim_time": use_sim_time.perform(context)=="true" })
+    moveit_config.moveit_cpp.update({"use_sim_time": use_sim_time.perform(context) == "true"})
 
     move_group_node = Node(
         package="moveit_ros_move_group",
@@ -127,7 +127,8 @@ def launch_setup(context, *args, **kwargs):
 
     # rviz with moveit configuration
     rviz_config_file = (
-        get_package_share_directory("kinova_gen3_6dof_robotiq_2f_85_moveit_config") + "/config/moveit.rviz"
+        get_package_share_directory("kinova_gen3_6dof_robotiq_2f_85_moveit_config")
+        + "/config/moveit.rviz"
     )
     rviz_node = Node(
         package="rviz2",
@@ -177,6 +178,7 @@ def launch_setup(context, *args, **kwargs):
 
     return nodes_to_start
 
+
 def generate_launch_description():
     # Declare arguments
     declared_arguments = []
@@ -211,7 +213,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "use_internal_bus_gripper_comm",
             default_value="true",
-            description="Use arm's internall gripper connection",
+            description="Use arm's internal gripper connection",
         )
     )
 
@@ -222,13 +224,9 @@ def generate_launch_description():
             description="Use simulated clock",
         )
     )
-    
+
     declared_arguments.append(
-        DeclareLaunchArgument(
-            "launch_rviz",
-            default_value="true",
-            description="Launch RViz?"
-        )
+        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
     )
 
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
