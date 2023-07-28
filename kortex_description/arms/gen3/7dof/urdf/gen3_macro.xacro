@@ -28,6 +28,7 @@
     sim_gazebo:=false
     sim_ignition:=false
     sim_isaac:=false
+    use_external_cable:=false
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0,joint_7=0.0)}" >
 
     <!-- ros2 control include -->
@@ -102,20 +103,40 @@
         </geometry>
       </collision>
     </link>
-    <joint
+    <xacro:if value="${use_external_cable}">
+      <joint
       name="${prefix}joint_1"
-      type="continuous">
-      <origin xyz="0 0 0.15643" rpy="3.1416 2.7629E-18 -4.9305E-36" />
-      <parent
-        link="${prefix}base_link" />
-      <child
-        link="${prefix}shoulder_link" />
-      <axis
-        xyz="0 0 1" />
-      <limit
-        effort="39"
-        velocity="1.3963" />
-    </joint>
+      type="revolute">
+        <origin xyz="0 0 0.15643" rpy="3.1416 2.7629E-18 -4.9305E-36" />
+        <parent
+          link="${prefix}base_link" />
+        <child
+          link="${prefix}shoulder_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          lower="${-2*PI}"
+          upper="${2*PI}"
+          effort="39"
+          velocity="1.3963" />
+      </joint>
+    </xacro:if>
+    <xacro:unless value="${use_external_cable}">
+      <joint
+        name="${prefix}joint_1"
+        type="continuous">
+        <origin xyz="0 0 0.15643" rpy="3.1416 2.7629E-18 -4.9305E-36" />
+        <parent
+          link="${prefix}base_link" />
+        <child
+          link="${prefix}shoulder_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          effort="39"
+          velocity="1.3963" />
+      </joint>
+    </xacro:unless>
     <link name="${prefix}half_arm_1_link">
       <inertial>
         <origin xyz="-4.4E-05 -0.09958 -0.013278" rpy="0 0 0" />
@@ -172,20 +193,40 @@
         </geometry>
       </collision>
     </link>
-    <joint
-      name="${prefix}joint_3"
-      type="continuous">
-      <origin xyz="0 -0.21038 -0.006375" rpy="-1.5708 1.2326E-32 -2.9122E-16" />
-      <parent
-        link="${prefix}half_arm_1_link" />
-      <child
-        link="${prefix}half_arm_2_link" />
-      <axis
-        xyz="0 0 1" />
-      <limit
-        effort="39"
-        velocity="1.3963" />
-    </joint>
+    <xacro:if value="${use_external_cable}">
+      <joint
+        name="${prefix}joint_3"
+        type="revolute">
+        <origin xyz="0 -0.21038 -0.006375" rpy="-1.5708 1.2326E-32 -2.9122E-16" />
+        <parent
+          link="${prefix}half_arm_1_link" />
+        <child
+          link="${prefix}half_arm_2_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          lower="${-2*PI}"
+          upper="${2*PI}"
+          effort="39"
+          velocity="1.3963" />
+      </joint>
+    </xacro:if>
+    <xacro:unless value="${use_external_cable}">
+      <joint
+        name="${prefix}joint_3"
+        type="continuous">
+        <origin xyz="0 -0.21038 -0.006375" rpy="-1.5708 1.2326E-32 -2.9122E-16" />
+        <parent
+          link="${prefix}half_arm_1_link" />
+        <child
+          link="${prefix}half_arm_2_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          effort="39"
+          velocity="1.3963" />
+      </joint>
+    </xacro:unless>
     <link name="${prefix}forearm_link">
       <inertial>
         <origin xyz="-1.8E-05 -0.075478 -0.015006" rpy="0 0 0" />
@@ -242,20 +283,40 @@
         </geometry>
       </collision>
     </link>
-    <joint
-      name="${prefix}joint_5"
-      type="continuous">
-      <origin xyz="0 -0.20843 -0.006375" rpy="-1.5708 2.2204E-16 -6.373E-17" />
-      <parent
-        link="${prefix}forearm_link" />
-      <child
-        link="${prefix}spherical_wrist_1_link" />
-      <axis
-        xyz="0 0 1" />
-      <limit
-        effort="9"
-        velocity="1.2218" />
-    </joint>
+    <xacro:if value="${use_external_cable}">
+      <joint
+        name="${prefix}joint_5"
+        type="revolute">
+        <origin xyz="0 -0.20843 -0.006375" rpy="-1.5708 2.2204E-16 -6.373E-17" />
+        <parent
+          link="${prefix}forearm_link" />
+        <child
+          link="${prefix}spherical_wrist_1_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          lower="${-2*PI}"
+          upper="${2*PI}"
+          effort="9"
+          velocity="1.2218" />
+      </joint>
+    </xacro:if>
+    <xacro:unless value="${use_external_cable}">
+      <joint
+        name="${prefix}joint_5"
+        type="continuous">
+        <origin xyz="0 -0.20843 -0.006375" rpy="-1.5708 2.2204E-16 -6.373E-17" />
+        <parent
+          link="${prefix}forearm_link" />
+        <child
+          link="${prefix}spherical_wrist_1_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          effort="9"
+          velocity="1.2218" />
+      </joint>
+    </xacro:unless>
     <link name="${prefix}spherical_wrist_2_link">
       <inertial>
         <origin xyz="1E-06 -0.045483 -0.00965" rpy="0 0 0" />
@@ -338,20 +399,40 @@
       </collision>
     </link>
     </xacro:unless>
-    <joint
-      name="${prefix}joint_7"
-      type="continuous">
-      <origin xyz="0 -0.10593 -0.00017505" rpy="-1.5708 -5.5511E-17 9.6396E-17" />
-      <parent
-        link="${prefix}spherical_wrist_2_link" />
-      <child
-        link="${prefix}bracelet_link" />
-      <axis
-        xyz="0 0 1" />
-      <limit
-        effort="9"
-        velocity="1.2218" />
-    </joint>
+    <xacro:if value="${use_external_cable}">
+      <joint
+        name="${prefix}joint_7"
+        type="revolute">
+        <origin xyz="0 -0.10593 -0.00017505" rpy="-1.5708 -5.5511E-17 9.6396E-17" />
+        <parent
+          link="${prefix}spherical_wrist_2_link" />
+        <child
+          link="${prefix}bracelet_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          lower="${-2*PI}"
+          upper="${2*PI}"
+          effort="9"
+          velocity="1.2218" />
+      </joint>
+    </xacro:if>
+    <xacro:unless value="${use_external_cable}">
+      <joint
+        name="${prefix}joint_7"
+        type="continuous">
+        <origin xyz="0 -0.10593 -0.00017505" rpy="-1.5708 -5.5511E-17 9.6396E-17" />
+        <parent
+          link="${prefix}spherical_wrist_2_link" />
+        <child
+          link="${prefix}bracelet_link" />
+        <axis
+          xyz="0 0 1" />
+        <limit
+          effort="9"
+          velocity="1.2218" />
+      </joint>
+    </xacro:unless>
     <link name="${prefix}end_effector_link" />
     <joint
       name="${prefix}end_effector"
