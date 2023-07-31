@@ -10,10 +10,9 @@ double KortexMathUtil::toRad(double degree) { return degree * M_PI / 180.0; }
 
 double KortexMathUtil::toDeg(double rad) { return rad * 180.0 / M_PI; }
 
-int KortexMathUtil::getNumberOfTurns(double rad_not_wrapped)
+int KortexMathUtil::getNumberOfTurns(double /*rad_not_wrapped*/)
 {
   // it is between
-  rad_not_wrapped = 0;
   return 0;
 }
 
