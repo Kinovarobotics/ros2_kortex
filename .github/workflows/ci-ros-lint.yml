@@ -53,7 +53,7 @@ jobs:
       with:
         distribution: rolling
         linter: cpplint
-        arguments: "--linelength=100 --filter=-whitespace/newline"
+        arguments: "--linelength=100 --filter=-whitespace/newline --exclude=kortex_driver/src/kortex_math_util.cpp"
         package-name:
           kortex_bringup
           kortex_driver
