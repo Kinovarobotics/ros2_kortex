@@ -85,7 +85,7 @@ repos:
         entry: env AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS=1 ament_cppcheck
         language: system
         files: \.(h\+\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\+\+|cxx|tpp|txx)$
-        exclude: kortex_api/
+        exclude: 'kortex_api/.*'
 
   # Maybe use https://github.com/cpplint/cpplint instead
   - repo: local
@@ -98,7 +98,8 @@ repos:
         language: system
         files: \.(h\+\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\+\+|cxx|tpp|txx)$
         args: ["--linelength=100", "--filter=-whitespace/newline"]
-        exclude: kortex_api/
+        # https://github.com/cpplint/cpplint/issues/131 kortex_math_util false positive with unamed func parameter
+        exclude: 'kortex_api/.*|kortex_driver/src/kortex_math_util.cpp'
 
   # Cmake hooks
   - repo: local
