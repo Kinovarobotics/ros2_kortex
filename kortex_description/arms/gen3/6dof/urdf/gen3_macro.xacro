@@ -20,6 +20,9 @@
     session_inactivity_timeout_ms:=6000
     connection_inactivity_timeout_ms:=2000
     use_internal_bus_gripper_comm:=false
+    gripper_joint_name
+    gripper_max_velocity:=100.0
+    gripper_max_force:=100.0
     use_fake_hardware:=false
     fake_sensor_commands:=false
     sim_gazebo:=false
@@ -46,7 +49,10 @@
       port_realtime="${port_realtime}"
       session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
       connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
-      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}" />
+      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
+      gripper_max_velocity="${gripper_max_velocity}"
+      gripper_max_force="${gripper_max_force}"
+      gripper_joint_name="${gripper_joint_name}"/>
 
     <joint name="${prefix}base_joint" type="fixed">
       <xacro:insert_block name="origin" />
