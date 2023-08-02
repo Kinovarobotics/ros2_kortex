@@ -209,7 +209,6 @@ def generate_launch_description():
             description="Max force for gripper commands",
         )
     )
-
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_internal_bus_gripper_comm",
@@ -217,7 +216,13 @@ def generate_launch_description():
             description="Use arm's internal gripper connection",
         )
     )
-
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_external_cable",
+            default_value="false",
+            description="Max force for gripper commands",
+        )
+    )
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_sim_time",
@@ -225,7 +230,6 @@ def generate_launch_description():
             description="Use simulated clock",
         )
     )
-
     declared_arguments.append(
         DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
     )
