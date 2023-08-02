@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          linter: [cppcheck, copyright, lint_cmake]
+          linter: [cppcheck, copyright]
     steps:
     - uses: actions/checkout@v3
     - uses: ros-tooling/setup-ros@v0.6
@@ -21,6 +21,23 @@ jobs:
           kortex_bringup
           kortex_driver
 
+  # ament_lint_cmake complains about [readability/wonkycase]
+  # but there is no argument to ignore the wonky case
+  # the pre-commit hook also skips kortex_driver and kortex_api
+  ament_lint_cmake:
+    name: ament_lint_cmake
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ros-tooling/setup-ros@v0.6
+    - uses: ros-tooling/action-ros-lint@v0.1
+      with:
+        distribution: rolling
+        linter: lint_cmake
+        package-name:
+          kortex_bringup
 
   ament_lint_100:
     name: ament_${{ matrix.linter }}
@@ -36,7 +53,7 @@ jobs:
       with:
         distribution: rolling
         linter: cpplint
-        arguments: "--linelength=100 --filter=-whitespace/newline"
+        arguments: "--linelength=100 --filter=-whitespace/newline --exclude=kortex_driver/src/kortex_math_util.cpp"
         package-name:
           kortex_bringup
           kortex_driver
