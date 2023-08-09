@@ -2,8 +2,8 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.2 (2023-08-09)
+------------------
 * cxx: remove unused-but-set-parameter (`#164 <https://github.com/Kinovarobotics/ros2_kortex/issues/164>`_)
 * Contributors: Alex Moriarty
 
