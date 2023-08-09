@@ -2,6 +2,12 @@
 Changelog for package kinova_gen3_6dof_robotiq_2f_85_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* specify planning pipelines to use (`#157 <https://github.com/Kinovarobotics/ros2_kortex/issues/157>`_)
+* Refactor MoveIt Launch files (`#162 <https://github.com/Kinovarobotics/ros2_kortex/issues/162>`_)
+* Contributors: Anthony Baker
+
 0.2.1 (2023-07-26)
 ------------------
 

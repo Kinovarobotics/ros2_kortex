@@ -2,6 +2,12 @@
 Changelog for package kortex_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Refactor MoveIt Launch files (`#162 <https://github.com/Kinovarobotics/ros2_kortex/issues/162>`_)
+* Add use_external_cable parameter to URDF (`#155 <https://github.com/Kinovarobotics/ros2_kortex/issues/155>`_)
+* Contributors: Anthony Baker
+
 0.2.1 (2023-07-26)
 ------------------
 * fix missing dependencies (`#152 <https://github.com/PickNikRobotics/ros2_kortex/issues/152>`_)

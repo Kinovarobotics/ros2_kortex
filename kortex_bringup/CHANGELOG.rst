@@ -2,6 +2,9 @@
 Changelog for package kortex_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.2.1 (2023-07-26)
 ------------------
 * fix missing dependencies (`#152 <https://github.com/PickNikRobotics/ros2_kortex/issues/152>`_)

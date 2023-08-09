@@ -2,6 +2,11 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* cxx: remove unused-but-set-parameter (`#164 <https://github.com/Kinovarobotics/ros2_kortex/issues/164>`_)
+* Contributors: Alex Moriarty
+
 0.2.1 (2023-07-26)
 ------------------
 * Change kortex_api header and library install locations (`#156 <https://github.com/PickNikRobotics/ros2_kortex/issues/156>`_)
