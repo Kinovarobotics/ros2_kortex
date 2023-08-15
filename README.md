@@ -86,7 +86,6 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
    ```
    cd $COLCON_WS
    git clone https://github.com/PickNikRobotics/ros2_kortex.git src/ros2_kortex
-   vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex.repos
    rosdep install --ignore-src --from-paths src -y -r
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
    source install/setup.bash
