@@ -52,7 +52,6 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
 
 
 ## Getting started
-<!-- TODO(moriarty) update this when binary package is released getting most users should use binary release -->
 
 1. Install ROS 2.
 
@@ -64,25 +63,48 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
 
    After installing a version of ROS, source the setup.bash, which will set the `$ROS_DISTRO` environment variable.
 
-2. Optional: install Cyclone DDS
+2. Install this package from binary
+   ```
+   sudo apt install ros-$ROS_DISTRO-kortex-bringup
+   ```
+
+3. Optional: install MoveIt Configuration and Cyclone DDS
+
+   If you have a 7dof arm:
+   ```
+   sudo apt install ros-$ROS_DISTRO-kinova-gen3-7dof-robotiq-2f-85-moveit-config
+   ```
+   If you have a 6dof arm:
+   ```
+   sudo apt install ros-$ROS_DISTRO-kinova-gen3-6dof-robotiq-2f-85-moveit-config
+   ```
    If you plan to use MoveIt, it is recommended to install and use Cyclone DDS.
    ```
    sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
    ```
 
-3. Make sure that `colcon`, its extensions, and `vcs` are installed:
+4. Go to Usage section
+
+## Contributing to this repository or using building from source
+
+Note: if you want the latest version of this repository for testing latest fixes
+check out testing with pre-released binaries: https://docs.ros.org/en/rolling/Installation/Testing.html
+
+If the bug fix you need isn't in a released version or If you want to build this repository from source or contribute back to the repository read on.
+
+1. Make sure that `colcon`, its extensions, and `vcs` are installed:
    ```
    sudo apt install python3-colcon-common-extensions python3-vcstool
    ```
 
-4. Create a new ROS2 workspace:
+2. Create a new ROS2 workspace:
    ```
    export COLCON_WS=~/workspace/ros2_kortex_ws
    mkdir -p $COLCON_WS/src
    ```
 
-5. Pull relevant packages, install dependencies, compile, and source the workspace by using:
+3. Pull relevant packages, install dependencies, compile, and source the workspace by using:
    ```
    cd $COLCON_WS
    git clone https://github.com/PickNikRobotics/ros2_kortex.git src/ros2_kortex
@@ -91,7 +113,7 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
    source install/setup.bash
    ```
 
-6. To simulate the robot with ignition or gazebo make sure to pull and build additional packages:
+4. To simulate the robot with ignition or gazebo make sure to pull and build additional packages:
    ```
    vcs import src --skip-existing --input src/ros2_kortex/simulation.repos
    rosdep install --ignore-src --from-paths src -y -r
