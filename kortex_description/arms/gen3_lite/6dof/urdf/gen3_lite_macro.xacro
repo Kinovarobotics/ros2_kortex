@@ -57,7 +57,7 @@
       port_realtime="${port_realtime}"
       session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
       connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
-      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}" 
+      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
       gripper_joint_name="${gripper_joint_name}"
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}" />
