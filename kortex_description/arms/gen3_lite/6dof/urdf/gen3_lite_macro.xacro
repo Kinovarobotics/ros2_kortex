@@ -32,15 +32,6 @@
 
     <!-- ros2 control include -->
     <xacro:include filename="$(find kortex_description)/arms/gen3_lite/${dof}dof/urdf/kortex.ros2_control.xacro" />
-    <xacro:if value="${sim_ignition or sim_gazebo}">
-      <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
-    </xacro:if>
-     <xacro:if value="${use_fake_hardware}">
-      <xacro:property name="ros2_control_name" value="GenericSystem"/>
-    </xacro:if>
-    <xacro:unless value="${use_fake_hardware or sim_ignition or sim_gazebo}">
-      <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
-    </xacro:unless>
     <xacro:kortex_ros2_control
       name="${ros2_control_name}" prefix="${prefix}"
       use_fake_hardware="${use_fake_hardware}"
