@@ -33,7 +33,7 @@
     <!-- ros2 control include -->
     <xacro:include filename="$(find kortex_description)/arms/gen3_lite/${dof}dof/urdf/kortex.ros2_control.xacro" />
     <xacro:kortex_ros2_control
-      name="${ros2_control_name}" prefix="${prefix}"
+      name="${prefix}KortexMultiInterfaceHardware" prefix="${prefix}"
       use_fake_hardware="${use_fake_hardware}"
       fake_sensor_commands="${fake_sensor_commands}"
       sim_gazebo="${sim_gazebo}"
