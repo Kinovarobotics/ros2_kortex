@@ -9,6 +9,8 @@
     sim_gazebo:=false
     sim_ignition:=false
     sim_isaac:=false
+    isaac_joint_commands:=/isaac_joint_commands
+    isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=true
     tf_prefix
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0,joint_7=0.0)}
@@ -33,8 +35,8 @@
         </xacro:if>
         <xacro:if value="${sim_isaac}">
           <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
-          <param name="joint_commands_topic">/isaac_joint_commands</param>
-          <param name="joint_states_topic">/isaac_joint_states</param>
+          <param name="joint_commands_topic">${isaac_joint_commands}</param>
+          <param name="joint_states_topic">${isaac_joint_states}</param>
         </xacro:if>
         <xacro:if value="${use_fake_hardware}">
           <plugin>fake_components/GenericSystem</plugin>
@@ -62,10 +64,6 @@
           <param name="min">{-2*pi}</param>
           <param name="max">{2*pi}</param>
         </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.15</param>
-          <param name="max">3.15</param>
-        </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_1']}</param>
         </state_interface>
@@ -76,10 +74,6 @@
         <command_interface name="position">
           <param name="min">-2.41</param>
           <param name="max">2.41</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.15</param>
-          <param name="max">3.15</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_2']}</param>
@@ -92,10 +86,6 @@
           <param name="min">{-2*pi}</param>
           <param name="max">{2*pi}</param>
         </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.15</param>
-          <param name="max">3.15</param>
-        </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_3']}</param>
         </state_interface>
@@ -106,10 +96,6 @@
         <command_interface name="position">
           <param name="min">-2.66</param>
           <param name="max">2.66</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_4']}</param>
@@ -122,10 +108,6 @@
           <param name="min">{-2*pi}</param>
           <param name="max">{2*pi}</param>
         </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
-        </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_5']}</param>
         </state_interface>
@@ -137,10 +119,6 @@
           <param name="min">-2.23</param>
           <param name="max">2.23</param>
         </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
-        </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_6']}</param>
         </state_interface>
@@ -151,10 +129,6 @@
         <command_interface name="position">
           <param name="min">{-2*pi}</param>
           <param name="max">{2*pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_7']}</param>

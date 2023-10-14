@@ -1,7 +1,33 @@
 <?xml version="1.0"?>
-<robot name="robotiq_arg2f_140_model" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:macro name="load_gripper" params="parent prefix">
-    <xacro:include filename="$(find kortex_description)/grippers/robotiq_2f_140/urdf/robotiq_arg2f_140_model_macro.xacro" />
-    <xacro:robotiq_arg2f_140 parent="${parent}" prefix="${prefix}"/>
+<robot name="robotiq_2f_140_model" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="load_gripper" params="
+    parent
+    prefix
+    use_fake_hardware:=false
+    fake_sensor_commands:=false
+    sim_ignition:=false
+    sim_isaac:=false
+    isaac_joint_commands:=/isaac_joint_commands
+    isaac_joint_states:=/isaac_joint_states">
+    <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_140_macro.urdf.xacro" />
+
+    <!-- Hardware talks directly to the gripper so we don't need ros2_control unless we are simulating -->
+    <xacro:property name="include_ros2_control" value="false"/>
+    <xacro:if value="${sim_ignition or sim_isaac or use_fake_hardware}">
+      <xacro:property name="include_ros2_control" value="true"/>
+    </xacro:if>
+    <xacro:robotiq_gripper
+        name="RobotiqGripperHardwareInterface"
+        prefix="${prefix}"
+        parent="${parent}"
+        include_ros2_control="${include_ros2_control}"
+        use_fake_hardware="${use_fake_hardware}"
+        fake_sensor_commands="${fake_sensor_commands}"
+        sim_ignition="${sim_ignition}"
+        sim_isaac="${sim_isaac}"
+        isaac_joint_commands="${isaac_joint_commands}"
+        isaac_joint_states="${isaac_joint_states}">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:robotiq_gripper>
   </xacro:macro>
 </robot>

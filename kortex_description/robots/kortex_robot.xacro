@@ -24,6 +24,8 @@
     sim_gazebo:=false
     sim_ignition:=false
     sim_isaac:=false
+    isaac_joint_commands:=/isaac_joint_commands
+    isaac_joint_states:=/isaac_joint_states
     use_external_cable:=false
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0">
@@ -50,6 +52,8 @@
       sim_gazebo="${sim_gazebo}"
       sim_ignition="${sim_ignition}"
       sim_isaac="${sim_isaac}"
+      isaac_joint_commands="${isaac_joint_commands}"
+      isaac_joint_states="${isaac_joint_states}"
       gripper_joint_name="${gripper_joint_name}"
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}"
@@ -78,7 +82,9 @@
         use_fake_hardware="${use_fake_hardware}"
         fake_sensor_commands="${fake_sensor_commands}"
         sim_ignition="${sim_ignition}"
-        sim_isaac="${sim_isaac}"/>
+        sim_isaac="${sim_isaac}"
+        isaac_joint_commands="${isaac_joint_commands}"
+        isaac_joint_states="${isaac_joint_states}"/>
     </xacro:unless>
 
   </xacro:macro>

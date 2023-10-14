@@ -80,12 +80,6 @@ def generate_launch_description():
         parameters=[robot_description],
     )
 
-    joint_state_publisher = Node(
-        package="joint_state_publisher",
-        executable="joint_state_publisher",
-        output="screen",
-    )
-
     joint_state_publisher_gui = Node(
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
@@ -102,7 +96,6 @@ def generate_launch_description():
 
     nodes_to_start = [
         robot_state_publisher,
-        joint_state_publisher,
         joint_state_publisher_gui,
         rviz,
     ]
