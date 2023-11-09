@@ -6,5 +6,6 @@ request_adapters:
   - default_planning_request_adapters/FixWorkspaceBounds
   - default_planning_request_adapters/FixStartStateBounds
   - default_planning_request_adapters/FixStartStateCollision
+  - default_planning_request_adapters/FixStartStatePathConstraints
 response_adapters:
   - default_planner_response_adapters/AddTimeOptimalParameterization
