@@ -9,7 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY arms grippers launch multiple_robots robots rviz
+  DIRECTORY arms grippers launch multiple_robots robots rviz config
   DESTINATION share/${PROJECT_NAME}
 )
 
