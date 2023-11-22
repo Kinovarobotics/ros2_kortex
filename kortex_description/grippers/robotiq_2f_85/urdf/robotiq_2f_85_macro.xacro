@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="robotiq_arg2f_85_model" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="robotiq_2f_85_model" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="load_gripper" params="
     parent
     prefix
@@ -7,6 +7,8 @@
     fake_sensor_commands:=false
     sim_ignition:=false
     sim_isaac:=false
+    isaac_joint_commands:=/isaac_joint_commands
+    isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=true">
     <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
 
@@ -20,10 +22,12 @@
         prefix="${prefix}"
         parent="${parent}"
         include_ros2_control="${include_ros2_control}"
-        use_fake_hardware="$(arg use_fake_hardware)"
-        fake_sensor_commands="$(arg fake_sensor_commands)"
-        sim_ignition="$(arg sim_ignition)"
-        sim_isaac="$(arg sim_isaac)">
+        use_fake_hardware="${use_fake_hardware}"
+        fake_sensor_commands="${fake_sensor_commands}"
+        sim_ignition="${sim_ignition}"
+        sim_isaac="${sim_isaac}"
+        isaac_joint_commands="${isaac_joint_commands}"
+        isaac_joint_states="${isaac_joint_states}">
         <origin xyz="0 0 0" rpy="0 0 0" />
     </xacro:robotiq_gripper>
   </xacro:macro>
