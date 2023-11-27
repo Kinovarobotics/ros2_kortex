@@ -27,6 +27,10 @@
     <xacro:arg name="use_external_cable" default="false" />
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
+    <!-- initial position for simulations (Mock Hardware, Gazebo, Ignition) -->
+    <xacro:arg name="initial_positions_file" default="$(find kortex_description)/config/initial_positions.yaml"/>
+    <!-- convert to property to use substitution in function -->
+    <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
     <link name="world" />
     <xacro:load_robot
         parent="world"
@@ -51,7 +55,8 @@
         sim_gazebo="$(arg sim_gazebo)"
         sim_ignition="$(arg sim_ignition)"
         sim_isaac="$(arg sim_isaac)"
-        use_external_cable="$(arg use_external_cable)" >
+        use_external_cable="$(arg use_external_cable)"
+        initial_positions="${xacro.load_yaml(initial_positions_file)}" >
         <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
     </xacro:load_robot>
 
