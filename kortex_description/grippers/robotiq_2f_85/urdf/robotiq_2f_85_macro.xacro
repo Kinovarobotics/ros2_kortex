@@ -7,6 +7,8 @@
     fake_sensor_commands:=false
     sim_ignition:=false
     sim_isaac:=false
+    isaac_joint_commands:=/isaac_joint_commands
+    isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=true">
     <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
 
@@ -23,7 +25,9 @@
         use_fake_hardware="${use_fake_hardware}"
         fake_sensor_commands="${fake_sensor_commands}"
         sim_ignition="${sim_ignition}"
-        sim_isaac="${sim_isaac}">
+        sim_isaac="${sim_isaac}"
+        isaac_joint_commands="${isaac_joint_commands}"
+        isaac_joint_states="${isaac_joint_states}">
         <origin xyz="0 0 0" rpy="0 0 0" />
     </xacro:robotiq_gripper>
   </xacro:macro>
