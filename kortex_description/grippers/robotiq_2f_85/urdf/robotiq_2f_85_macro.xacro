@@ -29,14 +29,6 @@
         isaac_joint_commands="${isaac_joint_commands}"
         isaac_joint_states="${isaac_joint_states}">
         <origin xyz="0 0 0" rpy="0 0 0" />
-    </xacro:robotiq_gripper>
-    <!-- When running hardware we need to set the ros2_control command and state interfaces for the gripper -->
-    <xacro:if value="${use_internal_bus_gripper_comm}">
-        <joint name="${prefix}robotiq_85_left_knuckle_joint">
-          <command_interface name="position" />
-          <state_interface name="position"/>
-          <state_interface name="velocity"/>
-        </joint>
-      </xacro:if>
+    </xacro:robotiq_gripper>    
   </xacro:macro>
 </robot>
