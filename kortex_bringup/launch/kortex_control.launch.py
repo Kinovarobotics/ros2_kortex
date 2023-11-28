@@ -56,6 +56,10 @@ def launch_setup(context, *args, **kwargs):
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     gripper_joint_name = LaunchConfiguration("gripper_joint_name")
 
+    # if we are using fake hardware then we can't use the internal gripper communications of the hardware
+    if use_fake_hardware.parse:
+        use_internal_bus_gripper_comm = "false"
+
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -107,7 +111,7 @@ def launch_setup(context, *args, **kwargs):
     robot_controllers = PathJoinSubstitution(
         [
             FindPackageShare(description_package),
-            "arms/gen3/" + dof.perform(context) + "dof/config",
+            "arms/" + robot_type.perform(context) + "/" + dof.perform(context) + "dof/config",
             controllers_file,
         ]
     )
@@ -174,13 +178,14 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
-        condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
+    # only start the fault controller if we are using hardware
     fault_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[fault_controller, "-c", "/controller_manager"],
+        condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
     nodes_to_start = [

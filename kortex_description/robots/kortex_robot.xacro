@@ -86,7 +86,8 @@
         sim_ignition="${sim_ignition}"
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
-        isaac_joint_states="${isaac_joint_states}"/>
+        isaac_joint_states="${isaac_joint_states}"
+        use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
     </xacro:unless>
 
   </xacro:macro>

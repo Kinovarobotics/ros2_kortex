@@ -25,6 +25,14 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
+            "robot_type",
+            default_value="gen3",
+            description="Type/series of robot.",
+            choices=["gen3", "gen3_lite"],
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "robot_ip",
             description="IP address by which the robot can be reached.",
         )
@@ -64,8 +72,9 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper",
-            default_value='"robotiq_2f_85"',
+            default_value="robotiq_2f_85",
             description="Name of the gripper attached to the arm",
+            choices=["robotiq_2f_85", "gen3_lite_2f"],
         )
     )
     declared_arguments.append(
@@ -101,6 +110,7 @@ def generate_launch_description():
     )
 
     # Initialize Arguments
+    robot_type = LaunchConfiguration("robot_type")
     robot_ip = LaunchConfiguration("robot_ip")
     dof = LaunchConfiguration("dof")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -117,7 +127,7 @@ def generate_launch_description():
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
         launch_arguments={
-            "robot_type": "gen3",
+            "robot_type": robot_type,
             "robot_ip": robot_ip,
             "dof": dof,
             "use_fake_hardware": use_fake_hardware,
