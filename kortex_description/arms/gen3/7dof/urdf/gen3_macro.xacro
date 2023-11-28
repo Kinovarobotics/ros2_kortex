@@ -374,7 +374,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bracelet_with_vision_link.STL" />
+          <mesh filename="file://$(find kortex_description)/arms/gen3/${dof}dof/meshes/bracelet_with_vision_link.dae" />
         </geometry>
       </collision>
     </link>
