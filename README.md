@@ -199,6 +199,17 @@ ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
   use_fake_hardware:=true
 ```
 
+Alternatively, if you wish to use the Kinova Gen3_lite's 6 DoF variant:
+
+```bash
+ros2 launch kortex_bringup gen3.launch.py \
+  robot_ip:=yyy.yyy.yyy.yyy \
+  use_fake_hardware:=true \
+  robot_type:=gen3_lite \
+  gripper:=gen3_lite_2f \
+  dof:=6
+```
+
 To simulate the 7dof Kinova Gen3 robot with ignition run the following:
 
 ```bash

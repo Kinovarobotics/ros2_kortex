@@ -8,7 +8,8 @@
     sim_ignition:=false
     sim_isaac:=false
     isaac_joint_commands:=/isaac_joint_commands
-    isaac_joint_states:=/isaac_joint_states">
+    isaac_joint_states:=/isaac_joint_states
+    use_internal_bus_gripper_comm:=false">
     <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_140_macro.urdf.xacro" />
 
     <!-- Hardware talks directly to the gripper so we don't need ros2_control unless we are simulating -->

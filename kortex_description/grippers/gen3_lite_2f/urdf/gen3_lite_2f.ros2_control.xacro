@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="gripper_ros2_control" params="
+        prefix
+        use_fake_hardware:=false
+        fake_sensor_commands:=false
+        sim_ignition:=false
+        sim_isaac:=false
+        isaac_joint_commands:=/isaac_joint_commands
+        isaac_joint_states:=/isaac_joint_states
+        use_internal_bus_gripper_comm:=false">
+
+        <ros2_control name="GripperHardwareInterface" type="system">
+            <hardware>
+                <xacro:if value="${sim_isaac}">
+                    <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+                    <param name="joint_commands_topic">${isaac_joint_commands}</param>
+                    <param name="joint_states_topic">${isaac_joint_states}</param>
+                    <param name="trigger_joint_command_threshold">0.02</param>
+                </xacro:if>
+                <xacro:if value="${sim_ignition}">
+                    <plugin>ign_ros2_control/IgnitionSystem</plugin>
+                </xacro:if>
+                <xacro:if value="${use_fake_hardware}">
+                    <plugin>mock_components/GenericSystem</plugin>
+                    <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+                    <param name="state_following_offset">0.0</param>
+                </xacro:if>
+            </hardware>
+
+            <!-- Joint interfaces -->
+            <!-- With Ignition or Hardware, they handle mimic joints, so we only need this command interface activated -->
+            <joint name="${prefix}right_finger_bottom_joint">
+                <command_interface name="position" />
+                <state_interface name="position">
+                    <param name="initial_value">0.85</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <!-- When simulating we need to include the rest of the gripper joints -->
+            <xacro:if value="${use_fake_hardware or sim_isaac or sim_ignition}">
+                <joint name="${prefix}right_finger_tip_joint">
+                    <param name="mimic">${prefix}right_finger_bottom_joint</param>
+                    <param name="multiplier">-1</param>
+                    <xacro:unless value="${sim_ignition}">
+                        <command_interface name="position"/>
+                        <state_interface name="position"/>
+                        <state_interface name="velocity"/>
+                    </xacro:unless>
+                </joint>
+                <joint name="${prefix}left_finger_bottom_joint">
+                    <param name="mimic">${prefix}right_finger_bottom_joint</param>
+                    <param name="multiplier">1</param>
+                    <xacro:unless value="${sim_ignition}">
+                        <command_interface name="position"/>
+                        <state_interface name="position"/>
+                        <state_interface name="velocity"/>
+                    </xacro:unless>
+                </joint>
+                <joint name="${prefix}left_finger_tip_joint">
+                    <param name="mimic">${prefix}right_finger_bottom_joint</param>
+                    <param name="multiplier">-1</param>
+                    <xacro:unless value="${sim_ignition}">
+                        <command_interface name="position"/>
+                        <state_interface name="position"/>
+                        <state_interface name="velocity"/>
+                    </xacro:unless>
+                </joint>
+            </xacro:if>
+        </ros2_control>
+    </xacro:macro>
+
+</robot>
