@@ -29,6 +29,6 @@
         isaac_joint_commands="${isaac_joint_commands}"
         isaac_joint_states="${isaac_joint_states}">
         <origin xyz="0 0 0" rpy="0 0 0" />
-    </xacro:robotiq_gripper>    
+    </xacro:robotiq_gripper>
   </xacro:macro>
 </robot>
