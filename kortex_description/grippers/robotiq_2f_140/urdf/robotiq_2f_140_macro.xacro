@@ -39,5 +39,4 @@
         </joint>
       </xacro:if>
   </xacro:macro>
-  </xacro:macro>
 </robot>
