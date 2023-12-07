@@ -211,7 +211,7 @@ def generate_launch_description():
     # Planning Configuration
     ompl_planning_pipeline_config = {
         "move_group": {
-            "planning_plugin": "ompl_interface/OMPLPlanner",
+            "planning_plugins": ["ompl_interface/OMPLPlanner"],
             "request_adapters": [
                 "default_planning_request_adapters/ResolveConstraintFrames",
                 "default_planning_request_adapters/ValidateWorkspaceBounds",
