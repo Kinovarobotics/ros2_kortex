@@ -158,8 +158,6 @@
           <state_interface name="velocity">
             <param name="initial_value">0.0</param>
           </state_interface>
-          <param name="initial_value">0.0</param>
-        </state_interface>
         </joint>
       </xacro:if>
     </ros2_control>
