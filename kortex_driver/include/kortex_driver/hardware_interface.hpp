@@ -149,6 +149,8 @@ private:
   double gripper_command_max_force_;
   double gripper_position_;
   double gripper_velocity_;
+  double gripper_force_command_;
+  double gripper_speed_command_;
 
   rclcpp::Time controller_switch_time_;
   std::atomic<bool> block_write = false;
