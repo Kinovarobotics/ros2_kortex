@@ -89,7 +89,6 @@
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
         isaac_joint_states="${isaac_joint_states}"
-        use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
         include_ros2_control="${gripper_include_ros2_control}"
         com_port="${gripper_com_port}"/>
     </xacro:unless>
