@@ -52,7 +52,7 @@ Param | Description | Default |
 `port_realtime` | Realtime port for Kortex hardware driver | - |
 `session_inactivity_timeout_ms` | The duration after which the robot will clean the client session if the client hangs up the connection brutally (should not happen with the ROS driver). | - |
 `connection_inactivity_timeout_ms` | The duration after which a connection is destroyed by the robot if no communication is detected between the client and the robot. | - |
-`use_internal_bus_gripper_comm` | Boolean value to indicate if your gripper will be communicated with through the internal Kinova communication interface. | false |
+`use_internal_bus_gripper_comm` | Boolean value to indicate if your gripper will be communicated with through the internal Kinova communication interface. Set to true if the gripper is directly plugged into the kinova arm. Set to false if running in simulation or if gripper is connected to PC via USB. Setting to false will create a ros2_control instance for the gripper. | false |
 `use_fake_hardware` | Boolean value to indicate whether or not the hardware components will be mocked. If true the hardware params will be ignored and the hardware components will be mocked. | false |
 `fake_sensor_commands` | Boolean value. If set to true will create fake command interfaces for faking sensor measurements with an external command. | false |
 `sim_gazebo` | Boolean value to indicate whether or not the gazebo_ros2_control/GazeboSystem plugin will be loaded. | false |
@@ -64,8 +64,7 @@ Param | Description | Default |
 `initial_positions` | Dictionary of initial joint positions. | {joint_1: 0.0, joint_2: 0.0, joint_3: 0.0, joint_4: 0.0, joint_5: 0.0, joint_6: 0.0, joint_7: 0.0} |
 `gripper_max_velocity` | Desired velocity in percentage (0.0-100.0%) with which the position will be set. | 100.0 |
 `gripper_max_force` | Desired force in percentage (0.0-100.0%) with which the position will be set. NOTE: deprecated according to the [Kortex repo](https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/GripperCyclic/MotorCommand.md). | 100.0 |
-`gripper_include_ros2_control` | Boolean value that will launch a ros2_controller instance for the gripper if true. Should be set to true if communicating directly to the gripper from the PC running ROS via USB or if running in simulation. | true |
-`gripper_com_port` | Specifies the USB port that the gripper is plugged in on. | /dev/ttyUSB0 |
+`gripper_com_port` | Specifies the USB port that the gripper is plugged in on. This will only be used if `use_internal_bus_gripper_comm` is false. | /dev/ttyUSB0 |
 
 ### Example Usage
 #### Kinova gen3 with robotiq_2f_85 end effector connected via the internal Kinova communication interface
@@ -96,7 +95,6 @@ Param | Description | Default |
     initial_positions="${initial_positions}"
     use_external_cable="true"
     fake_sensor_commands="false"
-    gripper_include_ros2_control="false"
     gripper_com_port="">
     <origin xyz="0 0 0.0" rpy="0 0 0" />
   </xacro:load_robot>
