@@ -26,6 +26,6 @@
       use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
       gripper_include_ros2_control="$(arg gripper_include_ros2_control)"
       gripper_com_port="$(arg gripper_com_port)">
-    </xacro:robotiq_gripper>
+    </xacro:load_robot>
 
 </robot>
