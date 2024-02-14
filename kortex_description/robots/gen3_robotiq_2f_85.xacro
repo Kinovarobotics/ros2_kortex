@@ -8,11 +8,22 @@
     <xacro:arg name="vision" default="true" />
 
     <xacro:arg name="gripper" default="robotiq_2f_85" />
+    <xacro:arg name="use_internal_bus_gripper_comm" default="false" />
+    <xacro:arg name="gripper_com_port" default="/dev/ttyUSB0" />
 
     <xacro:arg name="sim" default="false" />
     <xacro:arg name="prefix" default="" />
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
-    <xacro:load_robot arm="$(arg arm)" gripper="$(arg gripper)" dof="$(arg dof)" vision="$(arg vision)" sim="$(arg sim)" prefix="$(arg prefix)" />
+    <xacro:load_robot
+      arm="$(arg arm)"
+      gripper="$(arg gripper)"
+      dof="$(arg dof)"
+      vision="$(arg vision)"
+      sim="$(arg sim)"
+      prefix="$(arg prefix)"
+      use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
+      gripper_com_port="$(arg gripper_com_port)">
+    </xacro:load_robot>
 
 </robot>

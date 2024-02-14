@@ -29,7 +29,8 @@
     use_external_cable:=false
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0,joint_7=0.0)}
     gripper_max_velocity:=100.0
-    gripper_max_force:=100.0">
+    gripper_max_force:=100.0
+    gripper_com_port:=/dev/ttyUSB0">
 
     <!-- Include and load arm macro files -->
     <xacro:include filename="$(find kortex_description)/arms/${arm}/${dof}dof/urdf/${arm}_macro.xacro" />
@@ -87,7 +88,8 @@
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
         isaac_joint_states="${isaac_joint_states}"
-        use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
+        use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
+        com_port="${gripper_com_port}"/>
     </xacro:unless>
 
   </xacro:macro>
