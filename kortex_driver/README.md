@@ -7,7 +7,6 @@ Additionally, twist interfaces are exported for the end effector for operational
 Several additional interfaces are exported, including `set_gripper_max_velocity`, `set_gripper_max_effort` for the gripper joint,
 `reset_fault/command`, and `reset_fault/async_success` for fault management.
 
-
 ### State interfaces
 This driver exports position and velocity state interfaces for joint defined in the URDF.
 
