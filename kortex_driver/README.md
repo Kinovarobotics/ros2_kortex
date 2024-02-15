@@ -10,4 +10,5 @@ Several additional interfaces are exported, including `set_gripper_max_velocity`
 
 ### State interfaces
 This driver exports position and velocity state interfaces for joint defined in the URDF.
-Additionally, one state interface `reset_fault/internal_fault` is is used for determining the robot's fault state.
+
+Additionally, one state interface `reset_fault/internal_fault` is used for determining the robot's fault state.
