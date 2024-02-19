@@ -54,5 +54,3 @@ robotiq_gripper_controller:
     default: true
     joint: right_finger_bottom_joint
     allow_stalling: true
-    use_effort_interface: true
-    use_velocity_interface: true
