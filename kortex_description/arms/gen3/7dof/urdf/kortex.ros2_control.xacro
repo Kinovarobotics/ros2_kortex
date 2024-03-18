@@ -148,4 +148,25 @@
     </ros2_control>
   </xacro:macro>
 
+<!-- Robotiq FTS args -->
+  <xacro:arg name="name" default="robotiq_ft_sensor"/> 
+  <xacro:arg name="use_fake_mode" default="true"/>
+  <xacro:arg name="use_add_fts_wrench" default="true"/>
+  <xacro:arg name="add_fts_wrench_topic" default="add_fts_wrench"/>
+  <xacro:arg name="max_retries" default="100"/>
+  <xacro:arg name="ftdi_id" default=""/>
+  <xacro:arg name="tf_prefix" default=""/>
+
+<!-- Import Robotiq FTS ros2 control macro -->
+  <xacro:include filename="$(find robotiq_ft_sensor_description)/urdf/robotiq_fts.ros2_control.xacro" />
+
+<!-- Robotiq sensor hardware -->
+  <xacro:robotiq_fts_ros2_control
+      name="$(arg name)"
+      use_fake_mode="$(arg use_fake_mode)"
+      use_add_fts_wrench="$(arg use_add_fts_wrench)"
+      add_fts_wrench_topic="$(arg add_fts_wrench_topic)"
+      max_retries="$(arg max_retries)"
+      ftdi_id="$(arg ftdi_id)"
+      tf_prefix="$(arg tf_prefix)"/>
 </robot>
