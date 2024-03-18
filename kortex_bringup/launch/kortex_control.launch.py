@@ -13,6 +13,7 @@
 # limitations under the License.
 #
 # Authors: Marq Rasmussen, Denis Stogl
+# Edited: Emmanuel Akita
 
 from launch import LaunchDescription
 from launch.actions import (
@@ -55,7 +56,15 @@ def launch_setup(context, *args, **kwargs):
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     gripper_joint_name = LaunchConfiguration("gripper_joint_name")
+    force_torque_sensor_broadcaster = LaunchConfiguration("force_torque_sensor_broadcaster")
 
+    #Robotiq FTS args
+    use_fake_mode=LaunchConfiguration("use_fake_mode")
+    use_add_fts_wrench=LaunchConfiguration("use_add_fts_wrench")
+    add_fts_wrench_topic=LaunchConfiguration("add_fts_wrench_topic")
+    max_retries=LaunchConfiguration("max_retries")
+    ftdi_id=LaunchConfiguration("ftdi_id")
+    tf_prefix = LaunchConfiguration("tf_prefix")
     # if we are using fake hardware then we can't use the internal gripper communications of the hardware
     if use_fake_hardware.parse:
         use_internal_bus_gripper_comm = "false"
@@ -103,6 +112,24 @@ def launch_setup(context, *args, **kwargs):
             " ",
             "gripper_joint_name:=",
             gripper_joint_name,
+            " ",
+            "use_fake_mode:=",
+            use_fake_mode,
+            " ",
+            "use_add_fts_wrench:=",
+            use_add_fts_wrench,
+            " ",
+            "add_fts_wrench_topic:=",
+            add_fts_wrench_topic,
+            " ",
+            "max_retries:=",
+            max_retries,
+            " ",
+            "ftdi_id:=",
+            ftdi_id,
+            " ",
+            "tf_prefix:=",
+            tf_prefix,
             " ",
         ]
     )
@@ -188,6 +215,12 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
+    force_torque_sensor_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[force_torque_sensor_broadcaster,"-c", "/controller_manager"],
+    )
+
     nodes_to_start = [
         control_node,
         robot_state_publisher_node,
@@ -197,6 +230,7 @@ def launch_setup(context, *args, **kwargs):
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
         fault_controller_spawner,
+        force_torque_sensor_broadcaster_spawner,
     ]
 
     return nodes_to_start
@@ -372,5 +406,54 @@ def generate_launch_description():
             description="Max force for gripper commands",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_fake_mode",
+            default_value="true",
+            description="Use fake mode for robotiq gripper",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_add_fts_wrench",
+            default_value="true",
+            description="Use additional force torque sensor wrench",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "add_fts_wrench_topic",
+            default_value="force_torque_sensor",
+            description="Additional force torque sensor wrench topic",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "max_retries",
+            default_value="100",
+            description="Maximum number of retries for robotiq FTS",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "ftdi_id",
+            default_value="",
+            description="FTDI ID for robotiq FTS",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "tf_prefix",
+            default_value="",
+            description="TF prefix for robotiq FTS",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "force_torque_sensor_broadcaster",
+            default_value="force_torque_sensor_broadcaster",
+            description="Name of the force_torque_sensor_broadcaster.",
+        )
+    )    
 
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
