@@ -341,6 +341,13 @@ KortexMultiInterfaceHardware::export_command_interfaces()
     {
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_command_position_));
+
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        info_.joints[i].name, "set_gripper_max_velocity", &gripper_speed_command_));
+      gripper_speed_command_ = gripper_command_max_velocity_;
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        info_.joints[i].name, "set_gripper_max_effort", &gripper_force_command_));
+      gripper_force_command_ = gripper_command_max_force_;
     }
     else
     {
@@ -671,9 +678,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
   gripper_motor_command_ =
     base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
-  gripper_motor_command_->set_position(gripper_initial_position);       // % position
-  gripper_motor_command_->set_velocity(gripper_command_max_velocity_);  // % speed
-  gripper_motor_command_->set_force(gripper_command_max_force_);        // % torque
+  gripper_motor_command_->set_position(gripper_initial_position);  // % position
+  gripper_motor_command_->set_velocity(gripper_speed_command_);    // % speed
+  gripper_motor_command_->set_force(gripper_force_command_);       // % force
 
   // Send a first frame
   base_feedback = base_cyclic_.Refresh(base_command_);
@@ -864,8 +871,7 @@ return_type KortexMultiInterfaceHardware::write(
 
       // gripper control
       sendGripperCommand(
-        arm_mode_, gripper_command_position_, gripper_command_max_velocity_,
-        gripper_command_max_force_);
+        arm_mode_, gripper_command_position_, gripper_speed_command_, gripper_force_command_);
       // read after write in twist mode
       feedback_ = base_cyclic_.RefreshFeedback();
     }
@@ -877,8 +883,7 @@ return_type KortexMultiInterfaceHardware::write(
 
       // gripper control
       sendGripperCommand(
-        arm_mode_, gripper_command_position_, gripper_command_max_velocity_,
-        gripper_command_max_force_);
+        arm_mode_, gripper_command_position_, gripper_speed_command_, gripper_force_command_);
 
       if (joint_based_controller_running_)
       {
