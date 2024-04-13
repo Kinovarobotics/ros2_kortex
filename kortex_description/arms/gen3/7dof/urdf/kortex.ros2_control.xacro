@@ -150,7 +150,7 @@
 
 <!-- Robotiq FTS args -->
   <xacro:arg name="name" default="robotiq_ft_sensor"/> 
-  <xacro:arg name="use_fake_mode" default="true"/>
+  <xacro:arg name="use_fake_mode" default="false"/>
   <xacro:arg name="use_add_fts_wrench" default="true"/>
   <xacro:arg name="add_fts_wrench_topic" default="add_fts_wrench"/>
   <xacro:arg name="max_retries" default="100"/>
