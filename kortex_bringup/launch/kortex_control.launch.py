@@ -409,8 +409,8 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_mode",
-            default_value="true",
-            description="Use fake mode for robotiq gripper",
+            default_value="false",
+            description="Use fake mode for robotiq fts",
         )
     )
     declared_arguments.append(
