@@ -254,6 +254,8 @@ ros2 service call /controller_manager/switch_controller controller_manager_msgs/
 }"
 ```
 
+**Note: the required interface for the `twist_controller` does not currently exist in the gazebo or mock hardware simulation setups. So the `twist_controller` is currently only functional on Kinova hardware.**
+
 Once the `twist_controller` is activated, You can publish Twist messages on the `/twist_controller/commands` topic to command the arm.
 
 For example, you can jog the arm using [Teleop Twist Keyboard](https://index.ros.org/p/teleop_twist_keyboard/github-ros2-teleop_twist_keyboard/) with the following command:
