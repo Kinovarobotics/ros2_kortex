@@ -105,18 +105,28 @@ If the bug fix you need isn't in a released version or If you want to build this
    mkdir -p $COLCON_WS/src
    ```
 
-3. Pull relevant packages, install dependencies, compile, and source the workspace by using:
+3. Pull relevant packages:
    ```
    cd $COLCON_WS
    git clone https://github.com/PickNikRobotics/ros2_kortex.git src/ros2_kortex
-   rosdep install --ignore-src --from-paths src -y -r
-   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-   source install/setup.bash
+   vcs import src --skip-existing --input ros2_kortex-not-released.$ROS_DISTRO.repos
+   vcs import src --skip-existing --input ros2_kortex.$ROS_DISTRO.repos
    ```
 
-4. To simulate the robot with ignition or gazebo make sure to pull and build additional packages:
+   If you plan on simulating the robot with ignition or gazebo, make sure to pull the additional simulation packages. If you're on    ROS2 Humble, run
    ```
-   vcs import src --skip-existing --input src/ros2_kortex/simulation.repos
+   vcs import src --skip-existing --input simulation.humble.repos
+   ```
+
+   otherwise
+   ```
+   vcs import --skip-existing --input src simulation.repos
+   ```
+
+   If you plan on using MoveIt, you must make sure that you have it already [installed](https://moveit.ros.org/install-moveit2/binary/) either from binaries or by building it from source.
+
+4. Install dependencies, compile, and source the workspace:
+   ```
    rosdep install --ignore-src --from-paths src -y -r
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
    source install/setup.bash
