@@ -16,6 +16,7 @@
 
 import os
 
+import yaml
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
@@ -30,6 +31,11 @@ from moveit_configs_utils import MoveItConfigsBuilder
 def generate_launch_description():
     declared_arguments = []
     # Simulation specific arguments
+
+
+    moveit_config_package = "kinova_gen3_7dof_robotiq_2f_85_moveit_config"
+
+
     declared_arguments.append(
         DeclareLaunchArgument(
             "sim_ignition",
@@ -70,19 +76,40 @@ def generate_launch_description():
         "vision": vision,
     }
 
+    # Setup planning pipeline
+    planning_pipeline = {
+        "planning_pipelines": ["ompl"],
+        "default_planning_pipeline": "ompl",
+        "ompl": {
+            "planning_plugin": "ompl_interface/OMPLPlanner",
+            # TODO: Re-enable `default_planner_request_adapters/AddRuckigTrajectorySmoothing` once its issues are resolved
+            "request_adapters": "default_planner_request_adapters/AddTimeOptimalParameterization default_planner_request_adapters/ResolveConstraintFrames default_planner_request_adapters/FixWorkspaceBounds default_planner_request_adapters/FixStartStateBounds default_planner_request_adapters/FixStartStateCollision default_planner_request_adapters/FixStartStatePathConstraints",
+            # TODO: Reduce start_state_max_bounds_error once spawning with specific joint configuration is enabled
+            "start_state_max_bounds_error": 0.31416,
+        },
+    }
+
+    _ompl_yaml = load_yaml(
+        moveit_config_package, os.path.join("config", "ompl_planning.yaml")
+    )
+
+    planning_pipeline["ompl"].update(_ompl_yaml)
+
     moveit_config = (
         MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=description_arguments)
-        .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner"])
         .to_moveit_configs()
     )
+    
 
     # Start the actual move_group node/action server
     move_group_node = Node(
         package="moveit_ros_move_group",
         executable="move_group",
         output="log",
-        parameters=[moveit_config.to_dict(), {"use_sim_time": use_sim_time}],
+        parameters=[moveit_config.to_dict(),
+                    {"use_sim_time": use_sim_time}, 
+                    planning_pipeline, ],
         arguments=[
             "--ros-args",
             "--log-level",
@@ -106,7 +133,6 @@ def generate_launch_description():
         parameters=[
             moveit_config.robot_description,
             moveit_config.robot_description_semantic,
-            moveit_config.planning_pipelines,
             moveit_config.robot_description_kinematics,
             moveit_config.joint_limits,
             {"use_sim_time": use_sim_time},
@@ -115,3 +141,24 @@ def generate_launch_description():
     )
 
     return LaunchDescription(declared_arguments + [move_group_node, rviz_node])
+
+
+def load_yaml(package_name: str, file_path: str):
+    """
+    Load yaml configuration based on package name and file path relative to its share.
+    """
+
+    package_path = get_package_share_directory(package_name)
+    absolute_file_path = os.path.join(package_path, file_path)
+    return parse_yaml(absolute_file_path)
+
+def parse_yaml(absolute_file_path: str):
+    """
+    Parse yaml from file, given its absolute file path.
+    """
+
+    try:
+        with open(absolute_file_path, "r") as file:
+            return yaml.safe_load(file)
+    except EnvironmentError:
+        return None

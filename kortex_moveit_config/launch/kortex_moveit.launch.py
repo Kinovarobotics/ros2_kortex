@@ -208,26 +208,24 @@ def generate_launch_description():
     kinematics_yaml = load_yaml(moveit_config_package, "config/kinematics.yaml")
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
-    # Planning Configuration
-    ompl_planning_pipeline_config = {
-        "move_group": {
-            "planning_plugins": ["ompl_interface/OMPLPlanner"],
-            "request_adapters": [
-                "default_planning_request_adapters/ResolveConstraintFrames",
-                "default_planning_request_adapters/ValidateWorkspaceBounds",
-                "default_planning_request_adapters/CheckStartStateBounds",
-                "default_planning_request_adapters/CheckStartStateCollision",
-            ],
-            "response_adapters": [
-                "default_planning_response_adapters/AddTimeOptimalParameterization",
-                "default_planning_response_adapters/ValidateSolution",
-                "default_planning_response_adapters/DisplayMotionPath",
-            ],
-        }
+    # Planning pipeline
+    planning_pipeline = {
+        "planning_pipelines": ["ompl"],
+        "default_planning_pipeline": "ompl",
+        "ompl": {
+            "planning_plugin": "ompl_interface/OMPLPlanner",
+            # TODO: Re-enable `default_planner_request_adapters/AddRuckigTrajectorySmoothing` once its issues are resolved
+            "request_adapters": "default_planner_request_adapters/AddTimeOptimalParameterization default_planner_request_adapters/ResolveConstraintFrames default_planner_request_adapters/FixWorkspaceBounds default_planner_request_adapters/FixStartStateBounds default_planner_request_adapters/FixStartStateCollision default_planner_request_adapters/FixStartStatePathConstraints",
+            # TODO: Reduce start_state_max_bounds_error once spawning with specific joint configuration is enabled
+            "start_state_max_bounds_error": 0.31416,
+        },
     }
 
-    ompl_planning_yaml = load_yaml(moveit_config_package, "config/ompl_planning.yaml")
-    ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
+    _ompl_yaml = load_yaml(
+        moveit_config_package, path.join("config", "ompl_planning.yaml")
+    )
+
+    planning_pipeline["ompl"].update(_ompl_yaml)
 
     # Trajectory Execution Configuration
     # TODO(destogl): check how to use ros2_control's controllers-yaml
@@ -269,7 +267,7 @@ def generate_launch_description():
             robot_description,
             robot_description_semantic,
             robot_description_kinematics,
-            ompl_planning_pipeline_config,
+            planning_pipeline,
             trajectory_execution,
             moveit_controllers,
             planning_scene_monitor_parameters,

@@ -3,7 +3,6 @@
 #  - ompl_interface/OMPLPlanner
 # To optionally use Ruckig for jerk-limited smoothing, add this line to the request adapters below
 # default_planning_request_adapters/AddRuckigTrajectorySmoothing
-request_adapters: default_planning_response_adapters/AddTimeOptimalParameterization
 planner_configs:
   APSConfigDefault:
     type: geometric::AnytimePathShortening
