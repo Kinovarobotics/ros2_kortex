@@ -173,21 +173,151 @@ colcon build --packages-select-regex '.*kortex.*' '.*gen3.*'
 ```
 
 ## Usage
-<!-- TODO(moriarty) this section is an information overload -->
-
-To launch and view the robots URDF run:
+To launch and view any of the robot's URDF run:
 
 ```bash
 ros2 launch kortex_description view_robot.launch.py
 ```
 
-To simulate the 7 DoF Kinova Gen3 robot arm with mock hardware:
+The accepted arguments are:
+
+* `robot_type` : Your robot model. Possible values are either `gen3` or `gen3_lite`, the default is `gen3`.
+
+* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85` or `robotiq_2f_140`. For the Gen3 Lite, the only option is `gen3_lite_2f`. Default value is an empty string, which will display the arm without a gripper.
+
+* `dof` : Degrees of freedom of the arm. Possible values for the Gen3 are either `6` or `7`. For the Gen3 Lite, the only option is `6`. Default value is `7`.
+
+### Gen 3 Robots
+
+The `gen3.launch.py` launch file is designed to be used for Gen3 arms. The typical use case to bringup and visualize the 7 DoF Kinova Gen3 robot arm (default) with mock hardware on Rviz:
 
 ```bash
 ros2 launch kortex_bringup gen3.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
   use_fake_hardware:=true
 ```
+
+Alternatively, for a physical robot:
+
+```bash
+ros2 launch kortex_bringup gen3.launch.py \
+  robot_ip:=192.168.1.10 \
+```
+You can specify the following arguments if you wish to change your arm configuration:
+
+* `robot_type`: Your robot model. Default value (and only one) is `gen3`.
+
+* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
+
+* `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value is `robotiq_85_left_knuckle_joint`.
+
+* `use_internal_bus_gripper_comm` : Use internal bus for gripper communication. Default value is `true`.
+
+* `gripper_max_velocity` : Max velocity for gripper commands. Default value is `100.0`.
+
+* `gripper_max_force` : Max force for gripper commands. Default value is `100.0`.
+
+* `dof` : Degrees of freedom of the arm. Possible values are either `6` or `7`.Default value is `7`.
+
+* `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address.
+
+* `use_fake_hardware` : Start robot with fake hardware mirroring command to its states. Default value is `false`.
+
+* `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
+
+* `robot_controller` : Robot controller to start. Default value is `joint_trajectory_controller`.
+
+* `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
+
+* `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
+
+#### Robotiq gripper
+
+The Robotiq 2f 85 (or 2f 140) Gripper will be available on the Action topic:
+
+```bash
+/robotiq_gripper_controller/gripper_cmd
+```
+
+You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`)
+
+```bash
+ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
+```
+
+### Gen 3 Lite Robot
+
+The `gen3_lite.launch.py` launch file is designed to be used for Gen3 Lite arms. The typical use case to bringup the robot arm with mock hardware:
+
+```bash
+ros2 launch kortex_bringup gen3_lite.launch.py \
+  robot_ip:=yyy.yyy.yyy.yyy \
+  use_fake_hardware:=true 
+```
+Alternatively, if you wish to use the physical robot:
+
+```bash
+ros2 launch kortex_bringup gen3_lite.launch.py \
+  robot_ip:=192.168.1.10 \
+```
+
+You can specify the following arguments if you wish to change your arm configuration:
+
+* `robot_type`: Your robot model. Default value (and only one) is `gen3_lite`.
+
+* `gripper` : Gripper to use. Default value (and only one) is `gen3_lite_2f`.
+
+* `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value (and only one) is `right_finger_bottom_joint`.
+
+* `use_internal_bus_gripper_comm` : Use internal bus for gripper communication. Default value is `true`.
+
+* `gripper_max_velocity` : Max velocity for gripper commands. Default value is `100.0`.
+
+* `gripper_max_force` : Max force for gripper commands. Default value is `100.0`.
+
+* `dof` : Degrees of freedom of the arm. Default value (and only one) is `6`.
+
+* `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address.
+
+* `use_fake_hardware` : Start robot with fake hardware mirroring command to its states. Default value is `false`.
+
+* `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
+
+* `robot_controller` : Robot controller to start. Default value is `joint_trajectory_controller`.
+
+* `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
+
+* `description_file` : URDF/XACRO description file with the robot. Default value is `gen3_lite_gen3_lite_2f.xacro`.
+
+* `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
+
+
+## Simulation
+The `kortex_sim_control.launch.py` launch file is designed to simulate all of our arm models, you just need to specify your configuration through the arguments. By default, the Gen3 7 dof configuration is used :
+
+```bash
+ros2 launch kortex_bringup kortex_sim_control.launch.py \
+  use_sim_time:=true \
+  launch_rviz:=false
+```
+
+* `sim_ignition` : Use Ignition for simulation. Default value is `true`.
+* `sim_gazebo` : Use Gazebo Classic for simulation. Default value is `false`.
+* `robot_type` : Your robot model. Possible values are either `gen3` or `gen3_lite`.Default is `gen3`.
+* `robot_name` : Name you would like your robot to have. Default value is `gen3`.
+* `dof` : Degrees of freedom of the arm. Possible values are either `6` or `7`.Default value is `7`.
+* `vision` : Use arm mounted realsens. Possible values are either `true` or `false`. Default value is `false`. This option does not generate simulated images, it only loads up the robot's URDF that includes the vision link.
+* `robot_controller` : Robot joint controller to start. Default value is `joint_trajectory_controller`.
+* `robot_pos_controller` : Robot position controller to start. Default value is `twist_controller`.
+* `robot_hand_controller` : Robot gripper controller to start. Default value is `robotiq_gripper_controller`.
+* `controllers_file` :  Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
+* `description_package` : Description package with robot URDF/XACRO files. Default value is `kortex_description`.
+* `description_file` : URDF/XACRO description file with the robot. Default value is `kinova.urdf.xacro`.
+* `prefix` : Prefix of the joint names, useful for multi-robot setup. If changed, then also joint names in the controllers' configuration have to be updated. Default value is `""` (none).
+* `use_sim_time` : Use simulated clock. Default value is `true`.
+* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
+
+#### MoveIt2
 
 To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm with mock hardware:
 
@@ -195,15 +325,6 @@ To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
   use_fake_hardware:=true
-```
-
-Alternatively, if you wish to use the Kinova Gen3's 6 DoF variant:
-
-```bash
-ros2 launch kortex_bringup gen3.launch.py \
-  robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true \
-  dof:=6
 ```
 
 and to bring up the Kinova Gen3 6 DoF with MoveIt:
@@ -214,27 +335,7 @@ ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
   use_fake_hardware:=true
 ```
 
-Alternatively, if you wish to use the Kinova Gen3_lite's 6 DoF variant:
-
-```bash
-ros2 launch kortex_bringup gen3.launch.py \
-  robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true \
-  robot_type:=gen3_lite \
-  gripper:=gen3_lite_2f \
-  dof:=6
-```
-
-To simulate the 7dof Kinova Gen3 robot with ignition run the following:
-
-```bash
-ros2 launch kortex_bringup kortex_sim_control.launch.py \
-  dof:=7 \
-  use_sim_time:=true \
-  launch_rviz:=false
-```
-
-and to use MoveIt to command the robot:
+To generate motion plans and execute them with an ignition simulated 7 DoF Kinova Gen3 arm (previously launched with the command at the [simulation](#simulation) section):
 
 ```bash
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py \
@@ -247,14 +348,29 @@ To work with a physical robot and generate/execute paths with MoveIt run the fol
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=192.168.1.10
 ```
-**Note: If you have reassigned your physical arm's robot IP address, then you will need to assign that ip address to `robot_ip`**
 
+**Note: Currently, MoveIt configs are only provided for Gen3 6 and 7 dof configurations. If you wish to use the Gen3 Lite with MoveIt, you can generate it with MoveIt's setup assisstant.** 
+
+
+## Commanding the arm (physically and in simulation)
 You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller:
+
 ```bash
 ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
   joint_names: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, joint_7],
   points: [
     { positions: [0, 0, 0, 0, 0, 0, 0], time_from_start: { sec: 10 } },
+  ]
+}" -1
+```
+
+Depending on your robot type and its DoF, you will need to adapt the `joint_names` and `positions` properties accordingly. For the Gen3 Lite arm, the integrated gripper is considered as a joint, so to command it, it must be included in the `joint_names` array. (`0.0=open`, `1.0=close`):  
+
+```bash
+ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
+  joint_names: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, right_finger_bottom_joint],
+  points: [
+    { positions: [0, 0, 0, 0, 0, 0, 1], time_from_start: { sec: 10 } },
   ]
 }" -1
 ```
@@ -289,18 +405,6 @@ ros2 service call /controller_manager/switch_controller controller_manager_msgs/
   strictness: 1,
   activate_asap: true,
 }"
-```
-
-The Robotiq 2f 85 Gripper will be available on the Action topic:
-
-```bash
-/robotiq_gripper_controller/gripper_cmd
-```
-
-You can test the gripper by calling the Action server with the following command and setting the desired `position` of thr gripper (`0.0=open`, `0.8=close`)
-
-```bash
-ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
 ```
 
 ## Contents
