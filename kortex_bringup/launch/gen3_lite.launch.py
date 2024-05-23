@@ -37,9 +37,6 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument("dof", default_value="6", description="DoF of robot.")
-    )
-    declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
             default_value="false",
@@ -119,7 +116,6 @@ def generate_launch_description():
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
     robot_ip = LaunchConfiguration("robot_ip")
-    dof = LaunchConfiguration("dof")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
@@ -137,7 +133,7 @@ def generate_launch_description():
         launch_arguments={
             "robot_type": robot_type,
             "robot_ip": robot_ip,
-            "dof": dof,
+            "dof": "6",
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,

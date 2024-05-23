@@ -225,7 +225,7 @@ You can specify the following arguments if you wish to change your arm configura
 
 * `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
 
-* `robot_controller` : Robot controller to start. Default value is `joint_trajectory_controller`.
+* `robot_controller` : Robot controller to start. Possible values are `twist_controller` and `joint_trajectory_controller`.Default value is `joint_trajectory_controller`.
 
 * `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
 
@@ -275,15 +275,13 @@ You can specify the following arguments if you wish to change your arm configura
 
 * `gripper_max_force` : Max force for gripper commands. Default value is `100.0`.
 
-* `dof` : Degrees of freedom of the arm. Default value (and only one) is `6`.
-
-* `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address.
+* `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address. If you're using an USB to Ethernet interface to connect your robot to your machine instead of USB via RNDIS, the ip address will be `192.168.2.10`.
 
 * `use_fake_hardware` : Start robot with fake hardware mirroring command to its states. Default value is `false`.
 
 * `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
 
-* `robot_controller` : Robot controller to start. Default value is `joint_trajectory_controller`.
+* `robot_controller` : Robot controller to start. Possible values are `twist_controller` and `joint_trajectory_controller`.Default value is `joint_trajectory_controller`.
 
 * `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
 
