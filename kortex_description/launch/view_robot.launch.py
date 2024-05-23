@@ -46,7 +46,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "dof",
-            default_value='7',
+            default_value="7",
             description="Robot's dof",
         )
     )
@@ -75,7 +75,7 @@ def generate_launch_description():
             " ",
             "dof:=",
             dof,
-            " "
+            " ",
         ]
     )
     robot_description = {"robot_description": robot_description_content}

@@ -50,17 +50,13 @@ def launch_setup(context, *args, **kwargs):
     }
 
     moveit_config = (
-        MoveItConfigsBuilder(
-            "gen3", package_name="kinova_gen3_6dof_robotiq_2f_85_moveit_config"
-        )
+        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_6dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=launch_arguments)
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_scene_monitor(
             publish_robot_description=True, publish_robot_description_semantic=True
         )
-        .planning_pipelines(
-            pipelines=["ompl", "pilz_industrial_motion_planner"]
-        )
+        .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner"])
         .to_moveit_configs()
     )
 
@@ -105,9 +101,7 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[ros2_controllers_path],
-        remappings=[
-            ("/controller_manager/robot_description", "/robot_description")
-        ],
+        remappings=[("/controller_manager/robot_description", "/robot_description")],
         output="both",
     )
 

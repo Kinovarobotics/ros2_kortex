@@ -252,7 +252,7 @@ The `gen3_lite.launch.py` launch file is designed to be used for Gen3 Lite arms.
 ```bash
 ros2 launch kortex_bringup gen3_lite.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true 
+  use_fake_hardware:=true
 ```
 Alternatively, if you wish to use the physical robot:
 
@@ -349,7 +349,7 @@ ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=192.168.1.10
 ```
 
-**Note: Currently, MoveIt configs are only provided for Gen3 6 and 7 dof configurations. If you wish to use the Gen3 Lite with MoveIt, you can generate it with MoveIt's setup assisstant.** 
+**Note: Currently, MoveIt configs are only provided for Gen3 6 and 7 dof configurations. If you wish to use the Gen3 Lite with MoveIt, you can generate it with MoveIt's setup assisstant.**
 
 
 ## Commanding the arm (physically and in simulation)
@@ -364,7 +364,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 }" -1
 ```
 
-Depending on your robot type and its DoF, you will need to adapt the `joint_names` and `positions` properties accordingly. For the Gen3 Lite arm, the integrated gripper is considered as a joint, so to command it, it must be included in the `joint_names` array. (`0.0=open`, `1.0=close`):  
+Depending on your robot type and its DoF, you will need to adapt the `joint_names` and `positions` properties accordingly. For the Gen3 Lite arm, the integrated gripper is considered as a joint, so to command it, it must be included in the `joint_names` array. (`0.0=open`, `1.0=close`):
 
 ```bash
 ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{

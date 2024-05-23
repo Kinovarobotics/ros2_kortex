@@ -60,7 +60,7 @@ def launch_setup(context, *args, **kwargs):
     use_fake_hardware_value = use_fake_hardware.perform(context)
     if use_fake_hardware_value == "true":
         use_internal_bus_gripper_comm = "false"
-    
+
     robot_model = robot_type.perform(context)
     is_gen3_lite = "false"
     if robot_model == "gen3_lite":
@@ -187,7 +187,7 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
-        condition=UnlessCondition(is_gen3_lite)
+        condition=UnlessCondition(is_gen3_lite),
     )
 
     # only start the fault controller if we are using hardware

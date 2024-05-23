@@ -108,7 +108,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "description_file",
             default_value="gen3_lite_gen3_lite_2f.xacro",
-            description="URDF file to use"
+            description="URDF file to use",
         )
     )
 

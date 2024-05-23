@@ -59,7 +59,7 @@ def launch_setup(context, *args, **kwargs):
         # https://answers.ros.org/question/397123/how-to-access-the-runtime-value-of-a-launchconfiguration-instance-within-custom-launch-code-injected-via-an-opaquefunction-in-ros2/
         [
             FindPackageShare(description_package),
-            "arms/" + robot_type.perform(context) +"/" + dof.perform(context) + "dof/config",
+            "arms/" + robot_type.perform(context) + "/" + dof.perform(context) + "dof/config",
             controllers_file,
         ]
     )
@@ -167,7 +167,7 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
-        condition=UnlessCondition(is_gen3_lite)
+        condition=UnlessCondition(is_gen3_lite),
     )
 
     # Bridge
