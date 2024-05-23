@@ -4,6 +4,7 @@
   <xacro:macro name="load_gripper" params="
     parent
     prefix
+    com_port
     use_fake_hardware:=false
     fake_sensor_commands:=false
     sim_ignition:=false
@@ -12,16 +13,6 @@
     isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=true">
 
-    <xacro:include filename="$(find kortex_description)/grippers/gen3_lite_2f/urdf/gen3_lite_2f.ros2_control.xacro" />
-    <xacro:gripper_ros2_control
-      prefix="${prefix}"
-      use_fake_hardware="${use_fake_hardware}"
-      fake_sensor_commands="${fake_sensor_commands}"
-      sim_ignition="${sim_ignition}"
-      sim_isaac="${sim_isaac}"
-      isaac_joint_commands="${isaac_joint_commands}"
-      isaac_joint_states="${isaac_joint_states}"
-      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
 
     <!-- Tool frame used by the arm -->
     <link name="${prefix}tool_frame"/>
@@ -49,7 +40,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/gripper_base_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/gripper_base_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.803 0.824 0.820 1" />
@@ -58,7 +49,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/gripper_base_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/gripper_base_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -75,7 +66,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL" />
+        <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL" />
       </geometry>
       <material name="">
           <color rgba="0.803 0.824 0.820 1" />
@@ -84,7 +75,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL" />
+        <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL" />
       </geometry>
     </collision>
     </link>
@@ -97,7 +88,7 @@
       <parent link="${prefix}gripper_base_link" />
       <child link="${prefix}right_finger_prox_link" />
       <axis xyz="0 0 -1" />
-      <limit lower="0.0" upper="0.85" effort="1000" velocity="0.6" />
+      <limit lower="0.0" upper="0.85" effort="50" velocity="0.6" />
     </joint>
     <link name="${prefix}right_finger_dist_link">
       <inertial>
@@ -108,7 +99,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0 0.055 0.525 1" />
@@ -117,7 +108,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -142,7 +133,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0.803 0.824 0.820 1" />
@@ -151,7 +142,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL" />
         </geometry>
       </collision>
     </link>
@@ -175,7 +166,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL" />
         </geometry>
         <material name="">
           <color rgba="0 0.055 0.525 1" />
@@ -184,7 +175,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL" />
+          <mesh filename="file://$(find kortex_description)/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL" />
         </geometry>
       </collision>
     </link>

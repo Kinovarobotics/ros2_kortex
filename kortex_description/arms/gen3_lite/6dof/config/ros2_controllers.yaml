@@ -11,9 +11,6 @@ controller_manager:
     twist_controller:
       type: picknik_twist_controller/PicknikTwistController
 
-    robotiq_gripper_controller:
-      type: position_controllers/GripperActionController
-
     fault_controller:
       type: picknik_reset_fault_controller/PicknikResetFaultController
 
@@ -26,6 +23,7 @@ joint_trajectory_controller:
       - joint_4
       - joint_5
       - joint_6
+      - right_finger_bottom_joint
     command_interfaces:
       - position
     state_interfaces:
@@ -48,9 +46,3 @@ twist_controller:
       - twist.angular.x
       - twist.angular.y
       - twist.angular.z
-
-robotiq_gripper_controller:
-  ros__parameters:
-    default: true
-    joint: right_finger_bottom_joint
-    allow_stalling: true
