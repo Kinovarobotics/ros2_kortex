@@ -30,7 +30,7 @@
     <group_state name="Close" group="gripper">
         <joint name="robotiq_85_left_knuckle_joint" value="0.8"/>
     </group_state>
-        <group_state name="home" group="manipulator">
+        <group_state name="Home" group="manipulator">
         <joint name="joint_1" value="0" />
         <joint name="joint_2" value="0.26" />
         <joint name="joint_3" value="3.14" />
@@ -39,7 +39,7 @@
         <joint name="joint_6" value="0.96" />
         <joint name="joint_7" value="1.57" />
     </group_state>
-    <group_state name="retract" group="manipulator">
+    <group_state name="Retract" group="manipulator">
         <joint name="joint_1" value="0" />
         <joint name="joint_2" value="-0.35" />
         <joint name="joint_3" value="3.14" />
@@ -48,7 +48,7 @@
         <joint name="joint_6" value="-0.87" />
         <joint name="joint_7" value="1.57" />
     </group_state>
-    <group_state name="vertical" group="manipulator">
+    <group_state name="Vertical" group="manipulator">
         <joint name="joint_1" value="0" />
         <joint name="joint_2" value="0" />
         <joint name="joint_3" value="0" />

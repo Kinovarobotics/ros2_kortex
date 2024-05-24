@@ -43,9 +43,17 @@ def generate_launch_description():
             description="Name of the gripper attached to the arm",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "dof",
+            default_value="7",
+            description="Robot's dof",
+        )
+    )
 
     robot_type = LaunchConfiguration("robot_type")
     gripper = LaunchConfiguration("gripper")
+    dof = LaunchConfiguration("dof")
 
     robot_description_content = Command(
         [
@@ -64,6 +72,9 @@ def generate_launch_description():
             " ",
             "gripper:=",
             gripper,
+            " ",
+            "dof:=",
+            dof,
             " ",
         ]
     )

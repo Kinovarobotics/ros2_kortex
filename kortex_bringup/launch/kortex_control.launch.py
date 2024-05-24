@@ -21,7 +21,7 @@ from launch.actions import (
     RegisterEventHandler,
 )
 from launch.event_handlers import OnProcessExit
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
@@ -57,8 +57,14 @@ def launch_setup(context, *args, **kwargs):
     gripper_joint_name = LaunchConfiguration("gripper_joint_name")
 
     # if we are using fake hardware then we can't use the internal gripper communications of the hardware
-    if use_fake_hardware.parse:
+    use_fake_hardware_value = use_fake_hardware.perform(context)
+    if use_fake_hardware_value == "true":
         use_internal_bus_gripper_comm = "false"
+
+    robot_model = robot_type.perform(context)
+    is_gen3_lite = "false"
+    if robot_model == "gen3_lite":
+        is_gen3_lite = "true"
 
     robot_description_content = Command(
         [
@@ -123,7 +129,10 @@ def launch_setup(context, *args, **kwargs):
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
+        parameters=[robot_controllers],
+        remappings=[
+            ("~/robot_description", "/robot_description"),
+        ],
         output="both",
     )
 
@@ -178,6 +187,7 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        condition=UnlessCondition(is_gen3_lite),
     )
 
     # only start the fault controller if we are using hardware
@@ -372,5 +382,4 @@ def generate_launch_description():
             description="Max force for gripper commands",
         )
     )
-
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])

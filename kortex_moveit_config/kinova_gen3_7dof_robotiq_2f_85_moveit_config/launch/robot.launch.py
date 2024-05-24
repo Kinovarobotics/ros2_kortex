@@ -22,7 +22,7 @@ from launch.actions import (
     RegisterEventHandler,
 )
 from launch.event_handlers import OnProcessExit
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
@@ -52,7 +52,11 @@ def launch_setup(context, *args, **kwargs):
     moveit_config = (
         MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=launch_arguments)
-        .planning_pipelines(pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"])
+        .trajectory_execution(file_path="config/moveit_controllers.yaml")
+        .planning_scene_monitor(
+            publish_robot_description=True, publish_robot_description_semantic=True
+        )
+        .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner"])
         .to_moveit_configs()
     )
 
@@ -73,7 +77,7 @@ def launch_setup(context, *args, **kwargs):
         executable="static_transform_publisher",
         name="static_transform_publisher",
         output="log",
-        arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "world", "base_link"],
+        arguments=["--frame-id", "world", "--child-frame-id", "base_link"],
     )
 
     # Publish TF
@@ -96,7 +100,10 @@ def launch_setup(context, *args, **kwargs):
     ros2_control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[moveit_config.to_dict(), ros2_controllers_path],
+        parameters=[ros2_controllers_path],
+        remappings=[
+            ("/controller_manager/robot_description", "/robot_description"),
+        ],
         output="both",
     )
 
@@ -116,13 +123,13 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=["robotiq_gripper_controller", "-c", "/controller_manager"],
-        # condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
     fault_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["fault_controller", "-c", "/controller_manager"],
+        condition=UnlessCondition(use_fake_hardware),
     )
 
     # rviz with moveit configuration
@@ -141,6 +148,8 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.robot_description,
             moveit_config.robot_description_semantic,
             moveit_config.robot_description_kinematics,
+            moveit_config.planning_pipelines,
+            moveit_config.joint_limits,
         ],
     )
 

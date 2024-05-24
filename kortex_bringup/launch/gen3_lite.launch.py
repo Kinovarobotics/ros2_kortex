@@ -26,7 +26,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_type",
-            default_value="gen3",
+            default_value="gen3_lite",
             description="Type/series of robot.",
         )
     )
@@ -35,9 +35,6 @@ def generate_launch_description():
             "robot_ip",
             description="IP address by which the robot can be reached.",
         )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument("dof", default_value="7", description="DoF of robot.")
     )
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -71,15 +68,14 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper",
-            default_value="robotiq_2f_85",
+            default_value="gen3_lite_2f",
             description="Name of the gripper attached to the arm",
-            choices=["robotiq_2f_85", "robotiq_2f_140"],
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_joint_name",
-            default_value="robotiq_85_left_knuckle_joint",
+            default_value="right_finger_bottom_joint",
             description="Name of the gripper attached to the arm",
         )
     )
@@ -104,6 +100,15 @@ def generate_launch_description():
             description="Max force for gripper commands",
         )
     )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_file",
+            default_value="gen3_lite_gen3_lite_2f.xacro",
+            description="URDF file to use",
+        )
+    )
+
     declared_arguments.append(
         DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
     )
@@ -111,7 +116,6 @@ def generate_launch_description():
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
     robot_ip = LaunchConfiguration("robot_ip")
-    dof = LaunchConfiguration("dof")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
@@ -122,13 +126,14 @@ def generate_launch_description():
     gripper_joint_name = LaunchConfiguration("gripper_joint_name")
     launch_rviz = LaunchConfiguration("launch_rviz")
     controllers_file = LaunchConfiguration("controllers_file")
+    description_file = LaunchConfiguration("description_file")
 
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
         launch_arguments={
             "robot_type": robot_type,
             "robot_ip": robot_ip,
-            "dof": dof,
+            "dof": "6",
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,
@@ -139,7 +144,7 @@ def generate_launch_description():
             "gripper_joint_name": gripper_joint_name,
             "launch_rviz": launch_rviz,
             "controllers_file": controllers_file,
-            "description_file": "gen3.xacro",
+            "description_file": description_file,
         }.items(),
     )
 
