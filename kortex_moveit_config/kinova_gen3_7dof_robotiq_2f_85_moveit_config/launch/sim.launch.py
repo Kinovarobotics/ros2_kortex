@@ -102,6 +102,10 @@ def generate_launch_description():
     )
     
 
+    publish_robot_description_semantic = {"publish_robot_description_semantic": True}
+    publish_robot_description = {"publish_robot_description": True}
+    publish_robot_description_kinematics = {"publish_robot_description_kinematics": True} 
+
     # Start the actual move_group node/action server
     move_group_node = Node(
         package="moveit_ros_move_group",
@@ -109,6 +113,9 @@ def generate_launch_description():
         output="log",
         parameters=[moveit_config.to_dict(),
                     {"use_sim_time": use_sim_time}, 
+                    publish_robot_description, 
+                    publish_robot_description_kinematics, 
+                    publish_robot_description_semantic,                     
                     planning_pipeline, ],
         arguments=[
             "--ros-args",
