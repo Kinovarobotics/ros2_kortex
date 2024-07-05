@@ -1,21 +1,18 @@
 repositories:
 
-  gazebo_ros2_control:
+  gz_ros2_control:
     type: git
-    url: https://github.com/ros-simulation/gazebo_ros2_control.git
+    url: https://github.com/ros-simulation/gz_ros2_control.git
     version: master
 
-  ign_ros2_control:
+  ros_gz:
     type: git
-    url: https://github.com/ignitionrobotics/ign_ros2_control.git
+    url: https://github.com/gazebosim/ros_gz.git
+    version: ros2
+
+  # NOTE: Can remove when this PR is available from binaries:
+  # https://github.com/ros-controls/ros2_control/pull/1354
+  ros2_control:
+    type: git
+    url: https://github.com/ros-controls/ros2_control.git
     version: master
-
-  ros_ign:
-    type: git
-    url: https://github.com/ignitionrobotics/ros_ign.git
-    version: ros2
-
-  ros_ign:
-    type: git
-    url: https://github.com/ignitionrobotics/ros_ign.git
-    version: ros2

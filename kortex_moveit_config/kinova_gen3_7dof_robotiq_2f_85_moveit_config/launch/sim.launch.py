@@ -32,9 +32,9 @@ def generate_launch_description():
     # Simulation specific arguments
     declared_arguments.append(
         DeclareLaunchArgument(
-            "sim_ignition",
+            "sim_gazebo",
             default_value="true",
-            description="Use Ignition for simulation",
+            description="Use Gazebo for simulation",
         )
     )
     declared_arguments.append(
@@ -58,7 +58,7 @@ def generate_launch_description():
     # Initialize Arguments
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
-    sim_ignition = LaunchConfiguration("sim_ignition")
+    sim_gazebo = LaunchConfiguration("sim_gazebo")
     vision = LaunchConfiguration("vision")
 
     description_arguments = {
@@ -66,7 +66,7 @@ def generate_launch_description():
         "use_fake_hardware": "false",
         "gripper": "robotiq_2f_85",
         "dof": "7",
-        "sim_ignition": sim_ignition,
+        "sim_gazebo": sim_gazebo,
         "vision": vision,
     }
 
