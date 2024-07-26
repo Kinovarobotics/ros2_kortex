@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: kortex_description
+    relative_path: robots/gen3_lite.urdf
+  srdf:
+    relative_path: config/gen3_lite.srdf
+  package_settings:
+    author_name: Abed Al Rahman Al Mrad
+    author_email: aalmrad@kinova.ca
+    generated_timestamp: 1722014102
