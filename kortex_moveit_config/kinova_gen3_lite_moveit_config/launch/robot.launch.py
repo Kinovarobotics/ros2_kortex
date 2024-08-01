@@ -133,8 +133,7 @@ def launch_setup(context, *args, **kwargs):
 
     # rviz with moveit configuration
     rviz_config_file = (
-        get_package_share_directory("kinova_gen3_lite_moveit_config")
-        + "/config/moveit.rviz"
+        get_package_share_directory("kinova_gen3_lite_moveit_config") + "/config/moveit.rviz"
     )
     rviz_node = Node(
         package="rviz2",

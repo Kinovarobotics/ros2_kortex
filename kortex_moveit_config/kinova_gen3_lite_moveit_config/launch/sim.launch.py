@@ -58,7 +58,7 @@ def generate_launch_description():
         "use_fake_hardware": "false",
         "gripper": "gen3_lite_2f",
         "dof": "6",
-        "sim_ignition": sim_ignition
+        "sim_ignition": sim_ignition,
     }
 
     moveit_config = (
