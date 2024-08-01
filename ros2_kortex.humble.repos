@@ -15,3 +15,7 @@ repositories:
     type: git
     url: https://github.com/picknikrobotics/ros2_robotiq_gripper.git
     version: humble
+  warehouse_ros_mongo:
+    type: git
+    url: https://github.com/ros-planning/warehouse_ros_mongo.git
+    version: ros2
