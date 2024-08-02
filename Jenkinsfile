@@ -8,10 +8,19 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Kinovarobotics/ros2_kortex.git'
             }
         }
+
+        stage('List Files') {
+            steps {
+                script {
+                    sh 'ls -la'  // List all files in the current directory
+                }
+            }
+        }
+
         stage('Validate YAML') {
             steps {
                 // Running YAML linting on the specified YAML file
-                sh 'yamllint -c .yamllint .github/workflows/ci-format.yml'
+                sh 'yamllint -c ${WORKSPACE}/.yamllint .github/workflows/ci-format.yml'
             }
         }
     }
