@@ -15,3 +15,4 @@ repositories:
     type: git
     url: https://github.com/picknikrobotics/ros2_robotiq_gripper.git
     version: humble
+    
