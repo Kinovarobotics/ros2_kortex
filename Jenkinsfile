@@ -11,7 +11,7 @@ pipeline {
         stage('Validate YAML') {
             steps {
                 // Running YAML linting on the specified YAML file
-                sh 'yamllint .github/workflows/ci-format.yml'
+                sh 'yamllint -c .yamllint .github/workflows/ci-format.yml'
             }
         }
     }
