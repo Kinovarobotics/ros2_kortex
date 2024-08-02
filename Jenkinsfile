@@ -1,44 +1,30 @@
 pipeline {
-    agent any
+    agent { label 'ubuntu' }
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                // Cloning the GitHub repository
-                git branch: 'main', url: 'https://github.com/Kinovarobotics/ros2_kortex.git'
+                git branch: 'development-moveit-gen3-lite', url: 'https://github.com/your-repo.git'
             }
         }
-
-        stage('List Files') {
+        stage('Setup Python') {
             steps {
-                script {
-                    sh 'ls -la'  // List all files in the current directory
-                }
+                sh 'sudo apt-get update'
+                sh 'sudo apt-get install -y python3.10 python3-pip'
+                sh 'python3.10 -m venv venv'
+                sh '. venv/bin/activate'
             }
         }
-
-        stage('Validate YAML') {
+        stage('Install System Hooks') {
             steps {
-                // Running YAML linting on the specified YAML file
-                sh 'yamllint -c ${WORKSPACE}/.yamllint .github/workflows/ci-format.yml'
+                sh 'sudo apt-get install -y clang-format-14 cppcheck'
             }
         }
-    }
-
-    post {
-        always {
-            echo 'Performing cleanup and final steps...'
-            // If you have test results, they will be archived and published here
-            archiveArtifacts artifacts: '**/test_results/*.xml', allowEmptyArchive: true
-            junit 'test_results/*.xml'
-        }
-        success {
-            echo 'Pipeline completed successfully!'
-            // Additional actions on success can be added here
-        }
-        failure {
-            echo 'Pipeline failed! Check the logs for more details.'
-            // Additional failure handling can be added here, such as notifications
+        stage('Run Pre-commit') {
+            steps {
+                sh 'pip install pre-commit'
+                sh 'pre-commit run --all-files --hook-stage manual'
+            }
         }
     }
 }
