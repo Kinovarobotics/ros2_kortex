@@ -40,4 +40,3 @@ fault_controller:
   ros__parameters:
     joints:
       []
-      

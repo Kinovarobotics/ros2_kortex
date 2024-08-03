@@ -206,4 +206,3 @@ gen3_lite_gripper:
     - SPARSkConfigDefault
     - SPARStwokConfigDefault
     - TrajOptDefault
-       

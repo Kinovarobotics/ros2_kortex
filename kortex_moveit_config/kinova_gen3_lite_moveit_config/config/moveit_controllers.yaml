@@ -18,4 +18,3 @@ moveit_simple_controller_manager:
       - joint_5
       - joint_6
       - right_finger_bottom_joint
-      

@@ -1,4 +1,4 @@
-# Copyright (c) 2023 PickNik, Inc.
+# Copyright (c) 2024 PickNik, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,7 +45,6 @@ def launch_setup(context, *args, **kwargs):
         "dof": "6",
         "gripper_max_velocity": gripper_max_velocity,
         "gripper_max_force": gripper_max_force,
-
     }
 
     moveit_config = (
