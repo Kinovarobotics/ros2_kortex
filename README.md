@@ -245,6 +245,21 @@ You can test the gripper by calling the Action server with the following command
 ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
 ```
 
+#### Vision Module
+
+In order to access the Kinova Vision module's depth and color streams for the camera-equipped Gen3 arm models, please refer to the following github repository for detailed instructions: [ros2_kortex_vision](https://github.com/PickNikRobotics/ros2_kortex_vision)
+
+While following the instructions, please take note of the following points:
+1. There is no need to install the `rgbd_launch` ROS package
+2. Establishing a connection between the computer and the camera may require several attempts, so please be patient. Sometimes you may need to restart both the robot and the connected computer to successfully establish the connection.
+3. Before setting the `depth_registration` argument to `true` in the `kinova_vision.launch.py` file, make sure to install the `image_proc` ROS package on your system using the following command: 
+
+```bash
+sudo apt install ros-$ROS_DISTRO-depth-image-proc
+```
+
+4. After starting the `kinova_vision.launch.py` file, open RViz and add the desired camera topics to visualize the captured scene.
+
 ### Gen 3 Lite Robot
 
 The `gen3_lite.launch.py` launch file is designed to be used for Gen3 Lite arms. The typical use case to bringup the robot arm with mock hardware:
