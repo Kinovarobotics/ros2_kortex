@@ -252,7 +252,7 @@ In order to access the Kinova Vision module's depth and color streams for the ca
 While following the instructions, please take note of the following points:
 1. There is no need to install the `rgbd_launch` ROS package
 2. Establishing a connection between the computer and the camera may require several attempts, so please be patient. Sometimes you may need to restart both the robot and the connected computer to successfully establish the connection.
-3. Before setting the `depth_registration` argument to `true` in the `kinova_vision.launch.py` file, make sure to install the `image_proc` ROS package on your system using the following command: 
+3. Before setting the `depth_registration` argument to `true` in the `kinova_vision.launch.py` file, make sure to install the `image_proc` ROS package on your system using the following command:
 
 ```bash
 sudo apt install ros-$ROS_DISTRO-depth-image-proc
