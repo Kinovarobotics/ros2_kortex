@@ -19,9 +19,3 @@ repositories:
     type: git
     url: https://github.com/ros-simulation/gz_ros2_control.git
     version: master
-  # NOTE: Can remove when this PR is available from binaries:
-  # https://github.com/ros-controls/ros2_control/pull/1354
-  ros2_control:
-    type: git
-    url: https://github.com/ros-controls/ros2_control.git
-    version: master

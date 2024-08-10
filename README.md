@@ -342,12 +342,20 @@ ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py \
 
 To work with a physical robot and generate/execute paths with MoveIt run the following:
 
+For Gen3:
+
 ```bash
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=192.168.1.10
 ```
 
-**Note: Currently, MoveIt configs are only provided for Gen3 6 and 7 dof configurations. If you wish to use the Gen3 Lite with MoveIt, you can generate it with MoveIt's setup assisstant.**
+For Gen3-Lite:
+
+```bash
+ros2 launch kinova_gen3_lite_moveit_config robot.launch.py \
+  robot_ip:=192.168.1.10
+```
+
 
 
 ## Commanding the arm (physically and in simulation)
