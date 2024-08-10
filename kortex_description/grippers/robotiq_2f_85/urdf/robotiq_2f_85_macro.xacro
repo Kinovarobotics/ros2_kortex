@@ -26,7 +26,7 @@
         include_ros2_control="${include_ros2_control}"
         com_port="${com_port}"
         use_fake_hardware="${use_fake_hardware}"
-        fake_sensor_commands="${fake_sensor_commands}"
+        mock_sensor_commands="${fake_sensor_commands}"
         sim_gazebo="${sim_gazebo}"
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
