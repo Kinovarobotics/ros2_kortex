@@ -9,4 +9,4 @@ Instructions to command the robot in simulation:
 - "s": Move the mobile platform backward
 - "a": Move the mobile platform to the left
 - "d": Move the mobile platform to the right
-- "r": Reset the grasping box and the robot 
+- "r": Reset the grasping box and the robot

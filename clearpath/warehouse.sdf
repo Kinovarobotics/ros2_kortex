@@ -13,7 +13,7 @@
     </plugin>
     <plugin name="ignition::gazebo::systems::Imu" filename="libignition-gazebo-imu-system.so"/>
     <plugin name="ignition::gazebo::systems::NavSat" filename="libignition-gazebo-navsat-system.so"/>
-    
+
     <scene>
       <ambient>1 1 1 1</ambient>
       <background>0.3 0.7 0.9 1</background>
@@ -278,7 +278,7 @@
 
 
     <!-- Base -->
-    
+
     <include>
       <uri>
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/Warehouse
@@ -348,7 +348,7 @@
       <name>shelf_6</name>
       <pose>13.5 -15 0 0 -0 0</pose>
     </include>
-    
+
     <include>
       <uri>
         https://fuel.gazebosim.org/1.0/MovAi/models/shelf
@@ -475,7 +475,7 @@
       </uri>
       <name>Person 0 - Sitting</name>
       <pose>14.65 -10 0 0 0 -1.57</pose>
-    </include> 
+    </include>
 
     <include>
       <uri>

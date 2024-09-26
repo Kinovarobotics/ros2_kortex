@@ -53,7 +53,7 @@ ros2 launch clearpath_gz simulation.launch.py
 
 ## Real-life Setup to establish a sim-to-real robotic arm & gripper synchronization
 
-1. Follow the [instructions](https://github.com/Kinovarobotics/Kinova-kortex2_Gen3_G3L/tree/master/api_python/examples) to prepare the setup for the python kortex-api 
+1. Follow the [instructions](https://github.com/Kinovarobotics/Kinova-kortex2_Gen3_G3L/tree/master/api_python/examples) to prepare the setup for the python kortex-api
 2. If you are using Python >=3.10 (it will probably be the case), replace `import collections` by `import collections.abc as collections` in the following files: `~/.local/lib/python3.10/site-packages/google/protobuf/internal/containers.py` and `~/.local/lib/python3.10/site-packages/google/protobuf/internal/well_known_types.py` so that you will be able to use the python kortex-api included in the `commanding_script.py`
 
 3. Import the `~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath/Gen3_Husky_Initial_Position.xml` file to the webapp actions.
@@ -70,7 +70,7 @@ sudo apt install ros-humble-control-msgs
 
 2. Open a new terminal in the following directory:`~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath`
 
-3. Run the following command to launch the entire system: 
+3. Run the following command to launch the entire system:
 ```
 ./gen3_husky.sh
 ```
