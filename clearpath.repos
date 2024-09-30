@@ -5,8 +5,8 @@ repositories:
     version: humble
   clearpath_config:
     type: git
-    url: https://github.com/aalmrad/clearpath_config.git
-    version: main
+    url: https://github.com/clearpathrobotics/clearpath_config.git
+    version: e08cf33f53575e21e541706159e1ca1391faed6b
   clearpath_msgs:
     type: git
     url: https://github.com/clearpathrobotics/clearpath_msgs.git
