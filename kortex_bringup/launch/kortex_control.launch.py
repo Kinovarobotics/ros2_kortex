@@ -21,7 +21,7 @@ from launch.actions import (
     RegisterEventHandler,
 )
 from launch.event_handlers import OnProcessExit
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
@@ -189,9 +189,7 @@ def launch_setup(context, *args, **kwargs):
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
         condition=IfCondition(
-            PythonExpression([
-                "'", gripper, "' != '' and '", is_gen3_lite, "' == 'false'"
-            ])
+            PythonExpression(["'", gripper, "' != '' and '", is_gen3_lite, "' == 'false'"])
         ),
     )
 
@@ -212,9 +210,7 @@ def launch_setup(context, *args, **kwargs):
         robot_pos_controller_spawner,
         fault_controller_spawner,
     ]
-    start_robot_hand_controller = (
-        gripper.perform(context) != "" and is_gen3_lite != "true"
-    )
+    start_robot_hand_controller = gripper.perform(context) != "" and is_gen3_lite != "true"
     # Conditionally add robot_hand_controller_spawner
     if start_robot_hand_controller:
         nodes_to_start.append(robot_hand_controller_spawner)
