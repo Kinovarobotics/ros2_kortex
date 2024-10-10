@@ -1,0 +1,111 @@
+serial_number: a200-0000
+version: 0
+system:
+  username: administrator
+  hosts:
+    - hostname: cpr-a200-0000
+      ip: 192.168.131.1
+    - hostname: offboard-computer
+      ip: 192.168.131.5
+  ros2:
+    namespace: a200_0000
+    domain_id: 0
+    middleware:
+      implementation: rmw_cyclonedds_cpp
+      discovery: simple
+
+platform:
+#  attachments:
+#    - name: front_bumper
+#      type: a200.bumper
+#      model: default
+#      parent: front_bumper_mount
+#      xyz: [0.0, 0.0, 0.0]
+#      rpy: [0.0, 0.0, 0.0]
+#      enabled: true
+#      extension: 0.0
+
+  battery:
+    model: ES20_12C
+    configuration: S2P1
+  controller: ps4 # or logitech
+
+
+links:
+  box:
+  - name: user_bay_cover
+    parent: default_mount
+    xyz: [0.0, 0.0, 0.0075]
+    rpy: [0.0, 0.0, 0.0]
+    size: [0.4, 0.4, 0.002]
+#mounts:
+#  bracket:
+#  - parent: top_plate_mount_d1
+#    xyz: [0.0, 0.0, 0.0]
+#    rpy: [0.0, 0.0, 0.0]
+#    model: horizontal
+#  fath_pivot:
+#  - parent: sensor_arch_mount
+#   xyz: [0.0, 0.0, -0.021]
+#   rpy: [3.1415, 0.0, 0.0]
+#   angle: 0.0
+#sensors:
+#  camera:
+# - model: intel_realsense
+#    urdf_enabled: true
+#    launch_enabled: true
+#    parent: fath_pivot_0_mount
+#    xyz: [0.0, 0.0, 0.0]
+#    rpy: [0.0, 0.0, 0.0]
+#    ros_parameters:
+#      intel_realsense:
+#        camera_name: camera_0
+#        device_type: d435
+#        serial_no: '0'
+#        enable_color: true
+#        rgb_camera.profile: 640,480,30
+#        enable_depth: true
+#        depth_module.profile: 640,480,30
+#        pointcloud.enable: true
+#  lidar2d:
+#  - model: hokuyo_ust
+#    urdf_enabled: true
+#    launch_enabled: true
+#    parent: bracket_0_mount
+#    xyz: [0.0, 0.0, 0.0]
+#    rpy: [0.0, 0.0, 0.0]
+#    ros_parameters:
+#      urg_node:
+#        laser_frame_id: lidar2d_0_laser
+#        ip_address: 192.168.131.20
+#        ip_port: 10940
+#        angle_min: -3.141592653589793
+#        angle_max: 3.141592653589793
+#  lidar3d:
+#  - model: velodyne_lidar
+#    urdf_enabled: true
+#    launch_enabled: true
+#    parent: sensor_arch_mount
+#    xyz: [0.0, 0.0, 0.0]
+#    rpy: [0.0, 0.0, 0.0]
+#    ros_parameters:
+#      velodyne_driver_node:
+#        frame_id: lidar3d_0_laser
+#        device_ip: 192.168.131.25
+#        port: 2368
+#        model: VLP16
+#      velodyne_transform_node:
+#        model: VLP16
+#        fixed_frame: lidar3d_0_laser
+#        target_frame: lidar3d_0_laser
+manipulators:
+  arms:
+  - model: kinova_gen3_7dof
+    parent: default_mount
+    xyz: [0.0, 0.0, 0.0075]
+    rpy: [0.0, 0.0, 0.0]
+    ros_parameters:
+      kinova_driver:
+        joint_names: ["arm_0_joint_1", "arm_0_joint_2", "arm_0_joint_3", "arm_0_joint_4", "arm_0_joint_5", "arm_0_joint_6", "arm_0_joint_7"]
+    controller_manager:
+      update_rate: 1000.0  # Example parameter, adjust as needed
