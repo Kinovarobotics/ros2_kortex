@@ -11,7 +11,7 @@ system:
     namespace: a200_0000
     domain_id: 0
     middleware:
-      implementation: rmw_fastrtps_cpp
+      implementation: rmw_cyclonedds_cpp
       discovery: simple
 
 platform:

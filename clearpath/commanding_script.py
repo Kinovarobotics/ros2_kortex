@@ -248,8 +248,8 @@ class ArmControl(Node):
         traj.points.append(point)
         self.arm_pub.publish(traj)
 
-        # Wait for the arm to complete the movement
-        self.wait_for_trajectory_completion(positions)
+        # Wait for the arm to complete the movement (optional)
+        #self.wait_for_trajectory_completion(positions)
 
     def wait_for_trajectory_completion(self, positions):
         """Block execution until the arm reaches the target trajectory."""

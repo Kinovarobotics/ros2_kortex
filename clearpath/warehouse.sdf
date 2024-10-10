@@ -78,7 +78,6 @@
 
 
         <!-- USED TABLE -->
-
 <model name="Table">
     <pose>3 0 0 0 0 1.57</pose> <!-- Model position in the world -->
     <static>true</static>
@@ -88,7 +87,7 @@
             <pose>0 0 0.425 0 0 0</pose> <!-- Tabletop at 0.425 meters height -->
             <geometry>
                 <box>
-                    <size>1.0 0.6 0.03</size> <!-- Table size: length 0.9m, width 0.6m, thickness 0.03m -->
+                    <size>2.0 0.6 0.03</size> <!-- Reverted table width: length 2.0m, width 0.6m, thickness 0.03m -->
                 </box>
             </geometry>
             <surface>
@@ -104,7 +103,7 @@
             <pose>0 0 0.425 0 0 0</pose> <!-- Visual of the tabletop at 0.425m height -->
             <geometry>
                 <box>
-                    <size>1.0 0.6 0.03</size>
+                    <size>2.0 0.6 0.03</size> <!-- Reverted table width: length 2.0m, width 0.6m, thickness 0.03m -->
                 </box>
             </geometry>
             <material>
@@ -121,18 +120,18 @@
             </material>
         </visual>
 
-        <!-- Adjusted leg positions and sizes for the new dimensions -->
+        <!-- Adjusted leg positions for reverted table width and increased length -->
         <collision name="front_left_leg">
-            <pose>0.45 0.28 0.205 0 0 0</pose> <!-- Adjusted leg height to position tabletop at 0.425 meters -->
+            <pose>0.9 0.28 0.205 0 0 0</pose> <!-- Adjusted leg height and reverted width position -->
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
-                    <length>0.41</length> <!-- Leg length is 0.41 meters (0.425m minus half the tabletop thickness) -->
+                    <length>0.41</length> <!-- Leg length remains 0.41 meters -->
                 </cylinder>
             </geometry>
         </collision>
         <visual name="front_left_leg">
-            <pose>0.45 0.28 0.205 0 0 0</pose>
+            <pose>0.9 0.28 0.205 0 0 0</pose>
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
@@ -149,16 +148,16 @@
         </visual>
 
         <collision name="front_right_leg">
-            <pose>0.45 -0.28 0.205 0 0 0</pose> <!-- Adjusted leg position and height -->
+            <pose>0.9 -0.28 0.205 0 0 0</pose> <!-- Reverted leg width position -->
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
-                    <length>0.41</length> <!-- Leg length is 0.41 meters -->
+                    <length>0.41</length>
                 </cylinder>
             </geometry>
         </collision>
         <visual name="front_right_leg">
-            <pose>0.45 -0.28 0.205 0 0 0</pose>
+            <pose>0.9 -0.28 0.205 0 0 0</pose>
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
@@ -175,16 +174,16 @@
         </visual>
 
         <collision name="back_right_leg">
-            <pose>-0.45 -0.28 0.205 0 0 0</pose> <!-- Adjusted leg position and height -->
+            <pose>-0.9 -0.28 0.205 0 0 0</pose> <!-- Reverted leg width position -->
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
-                    <length>0.41</length> <!-- Leg length is 0.41 meters -->
+                    <length>0.41</length>
                 </cylinder>
             </geometry>
         </collision>
         <visual name="back_right_leg">
-            <pose>-0.45 -0.28 0.205 0 0 0</pose>
+            <pose>-0.9 -0.28 0.205 0 0 0</pose>
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
@@ -201,16 +200,16 @@
         </visual>
 
         <collision name="back_left_leg">
-            <pose>-0.45 0.28 0.205 0 0 0</pose> <!-- Adjusted leg position and height -->
+            <pose>-0.9 0.28 0.205 0 0 0</pose> <!-- Reverted leg width position -->
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
-                    <length>0.41</length> <!-- Leg length is 0.41 meters -->
+                    <length>0.41</length>
                 </cylinder>
             </geometry>
         </collision>
         <visual name="back_left_leg">
-            <pose>-0.45 0.28 0.205 0 0 0</pose>
+            <pose>-0.9 0.28 0.205 0 0 0</pose>
             <geometry>
                 <cylinder>
                     <radius>0.02</radius>
@@ -227,9 +226,6 @@
         </visual>
     </link>
 </model>
-
-
-
 
 
 <model name="grip_box">
@@ -348,7 +344,7 @@
       <name>shelf_6</name>
       <pose>13.5 -15 0 0 -0 0</pose>
     </include>
-
+    -->
     <include>
       <uri>
         https://fuel.gazebosim.org/1.0/MovAi/models/shelf
@@ -356,7 +352,7 @@
       <name>shelf_7</name>
       <pose>0.4 -2 0 0 -0 0</pose>
     </include>
-    -->
+    
     <!-- Navigation Challenge section -->
     <!--
     <include>

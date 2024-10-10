@@ -27,36 +27,6 @@ from kortex_api.autogen.client_stubs.DeviceManagerClientRpc import DeviceManager
 TIMEOUT_DURATION = 20
 
 
-def disable_joint_safety(device_config, device_manager):
-    safety_handle = Common_pb2.SafetyHandle()
-    """
-    safety_handle.identifier = 4 # Disabling joint high limit
-    safety_enable = device_config.GetSafetyEnable(safety_handle)
-    safety_enable.enable = False
-    # Extraction of the joints IDs
-    all_devices_info = device_manager.ReadAllDevices()
-    for dev in all_devices_info.device_handle:
-        if dev.device_type == 3 or dev.device_type == 4: #If the device is big or medium actuator (the only actuator types used in Gen3)
-            device_config.SetSafetyEnable(safety_enable,dev.device_identifier)
-            print("Joint high limit safety activation: ", device_config.GetSafetyEnable(safety_handle, dev.device_identifier).enable)
-    """
-    safety_handle.identifier = 8  # Disabling joint low limit
-    safety_enable = device_config.GetSafetyEnable(safety_handle)
-    safety_enable.enable = False
-    # Extraction of the joints IDs
-    all_devices_info = device_manager.ReadAllDevices()
-    for dev in all_devices_info.device_handle:
-        if (
-            dev.device_type == 3 or dev.device_type == 4
-        ):  # If the device is big or medium actuator (the only actuator types used in Gen3)
-            device_config.SetSafetyEnable(safety_enable, dev.device_identifier)
-            print(
-                "Joint low limit safety activation: ",
-                device_config.GetSafetyEnable(safety_handle, dev.device_identifier).enable,
-            )
-    return True
-
-
 # Create closure to set an event after an END or an ABORT
 def check_for_end_or_abort(e):
     """
@@ -136,7 +106,6 @@ def main():
         # Example core
         success = False
         success &= example_move_to_initial_position(base)
-        success &= disable_joint_safety(device_conf, device_manager)
 
         return 0 if success else 1
 
