@@ -25,7 +25,6 @@
     use_fake_hardware:=false
     fake_sensor_commands:=false
     sim_gazebo:=false
-    sim_ignition:=false
     sim_isaac:=false
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
@@ -34,13 +33,13 @@
 
     <!-- ros2 control include -->
     <xacro:include filename="$(find kortex_description)/arms/gen3_lite/${dof}dof/urdf/kortex.ros2_control.xacro" />
-    <xacro:if value="${sim_ignition or sim_gazebo}">
-      <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
+    <xacro:if value="${sim_gazebo}">
+      <xacro:property name="ros2_control_name" value="GazeboSimSystem"/>
     </xacro:if>
      <xacro:if value="${use_fake_hardware}">
       <xacro:property name="ros2_control_name" value="GenericSystem"/>
     </xacro:if>
-    <xacro:unless value="${use_fake_hardware or sim_ignition or sim_gazebo}">
+    <xacro:unless value="${use_fake_hardware or sim_gazebo}">
       <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
     </xacro:unless>
     <xacro:kortex_ros2_control
@@ -48,7 +47,6 @@
       use_fake_hardware="${use_fake_hardware}"
       fake_sensor_commands="${fake_sensor_commands}"
       sim_gazebo="${sim_gazebo}"
-      sim_ignition="${sim_ignition}"
       sim_isaac="${sim_isaac}"
       isaac_joint_commands="${isaac_joint_commands}"
       isaac_joint_states="${isaac_joint_states}"
