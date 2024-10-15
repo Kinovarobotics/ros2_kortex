@@ -2,6 +2,3 @@
 __pycache__/
 *.pyc
 *.py.bak
-log/
-build/
-install/
