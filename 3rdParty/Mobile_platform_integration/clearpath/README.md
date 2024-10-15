@@ -21,7 +21,7 @@ sudo apt-get install ros-humble-clearpath-simulator
 ```
 mkdir ~/clearpath
 cd ~/clearpath
-cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath/robot.yaml ~/clearpath/robot.yaml
+cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_integration/clearpath/robot.yaml ~/clearpath/robot.yaml
 ```
 
 4. Generate the `setup.bash` file
@@ -35,7 +35,7 @@ echo 'source ~/clearpath/setup.bash' >> ~/.bashrc
 ```
 6. Modify the `gz_sim.launch.py` using the following command:
 ```
-sudo cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath/gz_sim.launch.py /opt/ros/humble/share/clearpath_gz/launch/gz_sim.launch.py
+sudo cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_integration/clearpath/gz_sim.launch.py /opt/ros/humble/share/clearpath_gz/launch/gz_sim.launch.py
 ```
 This will lead to the following modifications:
 
@@ -45,7 +45,7 @@ This will lead to the following modifications:
 
 7. Modify the simulation world using the following command:
 ```
-sudo cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath/warehouse.sdf /opt/ros/humble/share/clearpath_gz/worlds/warehouse.sdf
+sudo cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_integration/clearpath/warehouse.sdf /opt/ros/humble/share/clearpath_gz/worlds/warehouse.sdf
 ```
 This will lead to the following modifications:
 
@@ -57,24 +57,35 @@ This will lead to the following modifications:
 
 8. Modify the simulation configuration using the following command:
 ```
-sudo cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath/gui.config /opt/ros/humble/share/clearpath_gz/config/gui.config
+sudo cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_integration/clearpath/gui.config /opt/ros/humble/share/clearpath_gz/config/gui.config
 ```
 This will change the default topic name in the teleop plugin panel in the simulation window
 
-9. Run the following command in **NEW** terminal window:
+9. Modify the file `/opt/ros/humble/lib/python3.10/site-packages/clearpath_config/common/types/rmw_implementation.py` to add `Cyclone DDS` to the list of supported DDS by changing the following line:
+
+ALL_SUPPORTED = [FAST_RTPS] --> ALL_SUPPORTED = [FAST_RTPS, CYCLONE_DDS]
+
+10. Run the following command in **NEW** terminal window:
 ```
 ros2 launch clearpath_gz simulation.launch.py
 ```
 
 ## Real-life Setup to establish a sim-to-real robotic arm & gripper synchronization
 
-1. Follow the [instructions](https://github.com/Kinovarobotics/Kinova-kortex2_Gen3_G3L/tree/master/api_python/examples) to prepare the setup for the python kortex-api
+1. Follow the [instructions](https://github.com/Kinovarobotics/Kinova-kortex2_Gen3_G3L/tree/master/api_python/examples) to prepare the setup for the python kortex-api. **P.S.** Instead of directly installing the .whl file, please make sure to use the following commands:
+```
+pip install protobuf==3.20 deprecated==1.2.7
+pip install <file.whl> --no-deps
+```
 
-2. If you are using Python >=3.10 (it will probably be the case), replace `import collections` by `import collections.abc as collections` in the following files: `~/.local/lib/python3.10/site-packages/google/protobuf/internal/containers.py` and `~/.local/lib/python3.10/site-packages/google/protobuf/internal/well_known_types.py` so that you will be able to use the python kortex-api included in the `commanding_script.py`
+2. Import the `~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_integration/clearpath/Gen3_Husky_Initial_Position.xml` file to the webapp actions.
 
-3. Import the `~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath/Gen3_Husky_Initial_Position.xml` file to the webapp actions.
+3. It is recommended to use CycloneDDS for a more reliable communication at a high frequency. To use this DDS, make sure to use the following command:
+```
+echo 'export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp' >> ~/.bashrc
+```
 
-4. Install control_msgs package using the following command:
+4. Install control_msgs package if not already installed using the following command:
 
 ```
 sudo apt install ros-humble-control-msgs
@@ -87,11 +98,13 @@ sudo apt install ros-humble-control-msgs
 killall ruby
 ```
 
-2. Open a new terminal in the following directory:`~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath`
+2. Open a new terminal in the following directory:`~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_integration/clearpath`
 
 3. Run the following command to launch the entire system and follow closely the step by step instructions:
 ```
 ./gen3_husky.sh
 ```
 
-4. Once the entire system is up and running, in the simulation window switch to the keyboard tab in the teleop panel on the right side, then command the robot using the keyboard. Please refer to the instructions included in `~/workspace/ros2_kortex_ws/src/ros2_kortex/clearpath/instructions.txt` for more details about the available keyboard commands.
+4. Once the entire system is up and running, in the simulation window switch to the keyboard tab in the teleop panel on the right side, then command the robot using the keyboard. Please refer to the instructions included in `~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_integration/clearpath/instructions.txt` for more details about the available keyboard commands.
+
+5. If the communication between the simulation and the real-life robot is lost, please restart the entire code.
