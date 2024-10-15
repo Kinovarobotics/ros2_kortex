@@ -125,16 +125,24 @@ If the bug fix you need isn't in a released version or If you want to build this
 
    If you plan on using MoveIt, you must make sure that you have it already [installed](https://moveit.ros.org/install-moveit2/binary/) either from binaries or by building it from source.
 
+   If you plan on simulating the Gen3 7Dof robot mounted on the Husky mobile robot from clearpath, make sure to pull the additional related packages. On ROS2 Humble, run
+   ```
+   vcs import src --skip-existing --input src/ros2_kortex/clearpath.repos
+   ```
+
 4. Install dependencies, compile, and source the workspace:
    ```
    rosdep install --ignore-src --from-paths src -y -r
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-   source install/setup.bash
    ```
 
    By default, colcon will use as much resources as possible to build the ROS2 workspace. This can temporarily freeze or even crash your machine. You can limit the number of threads used to avoid this issue, we found a good tradeoff between build time and resource utilisation by setting it to 3 :
    ```
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --parallel-workers 3
+   ```
+5. Source the previously built workspace using the following command:
+   ```
+   echo 'source ~/workspace/ros2_kortex_ws/install/setup.bash' >> ~/.bashrc
    ```
 
 ## Simulation Issues
