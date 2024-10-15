@@ -20,8 +20,6 @@ import os
 import threading
 from kortex_api.autogen.client_stubs.BaseClientRpc import BaseClient
 from kortex_api.autogen.messages import Base_pb2
-from kortex_api.autogen.client_stubs.DeviceConfigClientRpc import DeviceConfigClient
-from kortex_api.autogen.client_stubs.DeviceManagerClientRpc import DeviceManagerClient
 
 # Maximum allowed waiting time during actions (in seconds)
 TIMEOUT_DURATION = 20
