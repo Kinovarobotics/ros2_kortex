@@ -19,7 +19,7 @@ import sys
 import os
 import threading
 from kortex_api.autogen.client_stubs.BaseClientRpc import BaseClient
-from kortex_api.autogen.messages import Base_pb2, Common_pb2
+from kortex_api.autogen.messages import Base_pb2
 from kortex_api.autogen.client_stubs.DeviceConfigClientRpc import DeviceConfigClient
 from kortex_api.autogen.client_stubs.DeviceManagerClientRpc import DeviceManagerClient
 
@@ -100,8 +100,6 @@ def main():
 
         # Create required services
         base = BaseClient(router)
-        device_conf = DeviceConfigClient(router)
-        device_manager = DeviceManagerClient(router)
 
         # Example core
         success = False

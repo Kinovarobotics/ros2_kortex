@@ -78,4 +78,3 @@ gnome-terminal -- bash -c "ros2 run clearpath_manipulators gazebo_to_real_grippe
 read -p "Wait until the entire system is up and running then press Enter to activate the Keyboard control"
 
 gnome-terminal -- bash -c "python3 commanding_script.py; exec bash"
-
