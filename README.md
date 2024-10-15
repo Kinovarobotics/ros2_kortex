@@ -125,11 +125,6 @@ If the bug fix you need isn't in a released version or If you want to build this
 
    If you plan on using MoveIt, you must make sure that you have it already [installed](https://moveit.ros.org/install-moveit2/binary/) either from binaries or by building it from source.
 
-   If you plan on simulating the Gen3 7Dof robot mounted on the Husky mobile robot from clearpath, make sure to pull the additional related packages. On ROS2 Humble, run
-   ```
-   vcs import src --skip-existing --input src/ros2_kortex/clearpath.repos
-   ```
-
 4. Install dependencies, compile, and source the workspace:
    ```
    rosdep install --ignore-src --from-paths src -y -r
