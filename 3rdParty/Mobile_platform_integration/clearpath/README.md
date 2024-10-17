@@ -61,11 +61,7 @@ sudo cp ~/workspace/ros2_kortex_ws/src/ros2_kortex/3rdParty/Mobile_platform_inte
 ```
 This will change the default topic name in the teleop plugin panel in the simulation window
 
-9. Modify the file `/opt/ros/humble/lib/python3.10/site-packages/clearpath_config/common/types/rmw_implementation.py` to add `Cyclone DDS` to the list of supported DDS by changing the following line:
-
-ALL_SUPPORTED = [FAST_RTPS] --> ALL_SUPPORTED = [FAST_RTPS, CYCLONE_DDS]
-
-10. Run the following command in **NEW** terminal window:
+9. Run the following command in **NEW** terminal window:
 ```
 ros2 launch clearpath_gz simulation.launch.py
 ```
