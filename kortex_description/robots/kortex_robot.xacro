@@ -27,6 +27,7 @@
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
     use_external_cable:=false
+    include_ros2_control:=true
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0,joint_7=0.0)}
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0
@@ -60,6 +61,7 @@
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}"
       use_external_cable="${use_external_cable}"
+      include_ros2_control="${include_ros2_control}"
       initial_positions="${initial_positions}">
       <xacro:insert_block name="origin" />
     </xacro:load_arm>
@@ -88,6 +90,7 @@
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
         isaac_joint_states="${isaac_joint_states}"
+        include_ros2_control="${include_ros2_control}"
         com_port="${gripper_com_port}"
         use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"/>
     </xacro:unless>

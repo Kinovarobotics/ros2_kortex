@@ -30,41 +30,44 @@
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
     use_external_cable:=false
+    include_ros2_control:=true
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}" >
 
-    <!-- ros2 control include -->
-    <xacro:include filename="$(find kortex_description)/arms/gen3_lite/${dof}dof/urdf/kortex.ros2_control.xacro" />
-    <xacro:if value="${sim_ignition or sim_gazebo}">
-      <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
+    <xacro:if value="${include_ros2_control}">
+      <!-- ros2 control include -->
+      <xacro:include filename="$(find kortex_description)/arms/gen3_lite/${dof}dof/urdf/kortex.ros2_control.xacro" />
+      <xacro:if value="${sim_ignition or sim_gazebo}">
+        <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
+      </xacro:if>
+       <xacro:if value="${use_fake_hardware}">
+        <xacro:property name="ros2_control_name" value="GenericSystem"/>
+      </xacro:if>
+      <xacro:unless value="${use_fake_hardware or sim_ignition or sim_gazebo}">
+        <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
+      </xacro:unless>
+      <xacro:kortex_ros2_control
+        name="${ros2_control_name}" prefix="${prefix}"
+        use_fake_hardware="${use_fake_hardware}"
+        fake_sensor_commands="${fake_sensor_commands}"
+        sim_gazebo="${sim_gazebo}"
+        sim_ignition="${sim_ignition}"
+        sim_isaac="${sim_isaac}"
+        isaac_joint_commands="${isaac_joint_commands}"
+        isaac_joint_states="${isaac_joint_states}"
+        tf_prefix=""
+        initial_positions="${initial_positions}"
+        robot_ip="${robot_ip}"
+        username="${username}"
+        password="${password}"
+        port="${port}"
+        port_realtime="${port_realtime}"
+        session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
+        connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
+        use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
+        gripper_max_velocity="${gripper_max_velocity}"
+        gripper_max_force="${gripper_max_force}"
+        gripper_joint_name="${gripper_joint_name}"/>
     </xacro:if>
-     <xacro:if value="${use_fake_hardware}">
-      <xacro:property name="ros2_control_name" value="GenericSystem"/>
-    </xacro:if>
-    <xacro:unless value="${use_fake_hardware or sim_ignition or sim_gazebo}">
-      <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
-    </xacro:unless>
-    <xacro:kortex_ros2_control
-      name="${ros2_control_name}" prefix="${prefix}"
-      use_fake_hardware="${use_fake_hardware}"
-      fake_sensor_commands="${fake_sensor_commands}"
-      sim_gazebo="${sim_gazebo}"
-      sim_ignition="${sim_ignition}"
-      sim_isaac="${sim_isaac}"
-      isaac_joint_commands="${isaac_joint_commands}"
-      isaac_joint_states="${isaac_joint_states}"
-      tf_prefix=""
-      initial_positions="${initial_positions}"
-      robot_ip="${robot_ip}"
-      username="${username}"
-      password="${password}"
-      port="${port}"
-      port_realtime="${port_realtime}"
-      session_inactivity_timeout_ms="${session_inactivity_timeout_ms}"
-      connection_inactivity_timeout_ms="${connection_inactivity_timeout_ms}"
-      use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
-      gripper_max_velocity="${gripper_max_velocity}"
-      gripper_max_force="${gripper_max_force}"
-      gripper_joint_name="${gripper_joint_name}"/>
 
     <joint name="${prefix}base_joint" type="fixed">
       <xacro:insert_block name="origin" />
