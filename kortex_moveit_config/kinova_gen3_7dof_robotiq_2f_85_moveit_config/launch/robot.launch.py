@@ -58,12 +58,19 @@ def launch_setup(context, *args, **kwargs):
 
     moveit_config.moveit_cpp.update({"use_sim_time": use_sim_time.perform(context) == "true"})
 
+    publish_robot_description_semantic = {"publish_robot_description_semantic": True}
+    publish_robot_description = {"publish_robot_description": True}
+    publish_robot_description_kinematics = {"publish_robot_description_kinematics": True} 
+
     move_group_node = Node(
         package="moveit_ros_move_group",
         executable="move_group",
         output="screen",
         parameters=[
             moveit_config.to_dict(),
+            publish_robot_description,
+            publish_robot_description_semantic,
+            publish_robot_description_kinematics,
         ],
     )
 

@@ -93,6 +93,10 @@ def generate_launch_description():
         moveit_config_package, os.path.join("config", "ompl_planning.yaml")
     )
 
+    _kinematics_yaml = load_yaml(
+        moveit_config_package, os.path.join("config", "kinematics.yaml")
+    )
+
     planning_pipeline["ompl"].update(_ompl_yaml)
 
     moveit_config = (
@@ -116,7 +120,8 @@ def generate_launch_description():
                     publish_robot_description, 
                     publish_robot_description_kinematics, 
                     publish_robot_description_semantic,                     
-                    planning_pipeline, ],
+                    planning_pipeline, 
+                    _kinematics_yaml],
         arguments=[
             "--ros-args",
             "--log-level",
