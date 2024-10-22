@@ -315,3 +315,9 @@ This package implements a ROS node that allows communication between a node and 
 
 ### kortex_moveit_config
 This metapackage contains the auto-generated MoveIt! files to use the Kinova Gen3 and Gen3 lite arms with the MoveIt! motion planning framework. For more details, please consult the [README](kortex_moveit_config/readme.md) from the package subdirectory.
+
+## TODO: 
+- [ ] Write clear instructions 
+- [ ] Test servoing 
+- [ ] Integrate real robot with simulation 
+- [ ] Test joint and cartesian control for the arm 
