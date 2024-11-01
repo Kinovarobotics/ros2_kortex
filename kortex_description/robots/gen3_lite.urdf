@@ -300,178 +300,179 @@
     <axis xyz="0 0 1"/>
     <limit effort="0" lower="0" upper="0" velocity="0"/>
   </joint>
-  <!-- Tool frame used by the arm -->
-  <link name="tool_frame"/>
-  <joint name="tool_frame_joint" type="fixed">
-    <origin rpy="0 0 1.57079632679" xyz="0 0 0.130"/>
-    <parent link="dummy_link"/>
-    <child link="tool_frame"/>
-    <axis xyz="0 0 0"/>
-  </joint>
-  <!-- Gripper description -->
-  <joint name="gripper_base_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="dummy_link"/>
-    <child link="gripper_base_link"/>
-    <axis xyz="0 0 0"/>
-  </joint>
-  <link name="gripper_base_link">
+<!-- Tool frame used by the arm -->
+    <link name="tool_frame"/>
+    <joint name="tool_frame_joint" type="fixed">
+        <origin xyz="0 0 0.130" rpy="0 0 1.57079632679" />
+        <parent link="dummy_link" />
+        <child link="tool_frame" />
+        <axis xyz="0 0 0" />
+    </joint>
+
+    <!-- Gripper description -->
+    <joint name="gripper_base_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="dummy_link" />
+      <child link="gripper_base_link" />
+      <axis xyz="0 0 0" />
+    </joint>
+
+    <link name="gripper_base_link">
+      <inertial>
+        <origin xyz="4.03E-06 1.08E-05 0.041397" rpy="0 0 0" />
+        <mass value="0.1395" />
+        <inertia ixx="0.00011614" ixy="1E-08" ixz="4E-08" iyy="0.00010327" iyz="0" izz="9.707E-05" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/gripper_base_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.803 0.824 0.820 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/gripper_base_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="gripper_base_link">
+      <material>Kortex/Gray</material>
+    </gazebo>
+
+    <link name="right_finger_prox_link">
     <inertial>
-      <origin rpy="0 0 0" xyz="4.03E-06 1.08E-05 0.041397"/>
-      <mass value="0.1395"/>
-      <inertia ixx="0.00011614" ixy="1E-08" ixz="4E-08" iyy="0.00010327" iyz="0" izz="9.707E-05"/>
+      <origin xyz="0.020257 0.0063483 6.991E-05" rpy="0 0 0" />
+      <mass value="0.018385" />
+      <inertia ixx="2.29E-06" ixy="1.43E-06" ixz="0" iyy="4.56E-06" iyz="0" izz="4.77E-06" />
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/gripper_base_link.STL"/>
+        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL" />
       </geometry>
       <material name="">
-        <color rgba="0.803 0.824 0.820 1"/>
+          <color rgba="0.803 0.824 0.820 1" />
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/gripper_base_link.STL"/>
+        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL" />
       </geometry>
     </collision>
-  </link>
-  <gazebo reference="gripper_base_link">
-    <material>Kortex/Gray</material>
-  </gazebo>
-  <link name="right_finger_prox_link">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.020257 0.0063483 6.991E-05"/>
-      <mass value="0.018385"/>
-      <inertia ixx="2.29E-06" ixy="1.43E-06" ixz="0" iyy="4.56E-06" iyz="0" izz="4.77E-06"/>
-    </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL"/>
-      </geometry>
-      <material name="">
-        <color rgba="0.803 0.824 0.820 1"/>
-      </material>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_prox_link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <gazebo reference="right_finger_prox_link">
-    <material>Kortex/Gray</material>
-  </gazebo>
-  <!-- TODO(MarqRazz) look into why the joint and limits needed to be flipped and modified -->
-  <joint name="right_finger_bottom_joint" type="revolute">
-    <origin rpy="1.571 0.611 1.571" xyz="0 -0.030501 0.070003"/>
-    <parent link="gripper_base_link"/>
-    <child link="right_finger_prox_link"/>
-    <axis xyz="0 0 -1"/>
-    <limit effort="50" lower="0.0" upper="0.85" velocity="0.6"/>
-  </joint>
-  <link name="right_finger_dist_link">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.018488 0.0011091 0"/>
-      <mass value="0.010748"/>
-      <inertia ixx="6.3E-07" ixy="3.2E-07" ixz="0" iyy="1.83E-06" iyz="0" izz="1.61E-06"/>
-    </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL"/>
-      </geometry>
-      <material name="">
-        <color rgba="0 0.055 0.525 1"/>
-      </material>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <gazebo reference="right_finger_dist_link">
-    <material>Kortex/Blue</material>
-  </gazebo>
-  <joint name="right_finger_tip_joint" type="revolute">
-    <origin rpy="0 0 0" xyz="-0.045636 0.020423 0"/>
-    <parent link="right_finger_prox_link"/>
-    <child link="right_finger_dist_link"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000" lower="-0.50" upper="0.21" velocity="1000"/>
-    <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
-    <mimic joint="right_finger_bottom_joint" multiplier="-0.676" offset="0.149"/>
-  </joint>
-  <link name="left_finger_prox_link">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.020257 0.0063483 6.99E-05"/>
-      <mass value="0.018385"/>
-      <inertia ixx="2.29E-06" ixy="1.43E-06" ixz="0" iyy="4.56E-06" iyz="0" izz="4.77E-06"/>
-    </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL"/>
-      </geometry>
-      <material name="">
-        <color rgba="0.803 0.824 0.820 1"/>
-      </material>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <gazebo reference="left_finger_prox_link">
-    <material>Kortex/Gray</material>
-  </gazebo>
-  <joint name="left_finger_bottom_joint" type="revolute">
-    <origin rpy="-1.571 0.611 -1.571" xyz="0 0.0305 0.070003"/>
-    <parent link="gripper_base_link"/>
-    <child link="left_finger_prox_link"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1000" lower="0.0" upper="0.85" velocity="1000"/>
-    <mimic joint="right_finger_bottom_joint" multiplier="1.0" offset="0.0"/>
-  </joint>
-  <link name="left_finger_dist_link">
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.018488 0.0011091 0"/>
-      <mass value="0.010748"/>
-      <inertia ixx="6.3E-07" ixy="3.2E-07" ixz="0" iyy="1.83E-06" iyz="0" izz="1.61E-06"/>
-    </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL"/>
-      </geometry>
-      <material name="">
-        <color rgba="0 0.055 0.525 1"/>
-      </material>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL"/>
-      </geometry>
-    </collision>
-  </link>
-  <gazebo reference="left_finger_dist_link">
-    <material>Kortex/Blue</material>
-  </gazebo>
-  <joint name="left_finger_tip_joint" type="revolute">
-    <origin rpy="0 0 0" xyz="-0.045636 -0.020423 6.9901E-05"/>
-    <parent link="left_finger_prox_link"/>
-    <child link="left_finger_dist_link"/>
-    <axis xyz="0 0 -1"/>
-    <limit effort="1000" lower="-0.50" upper="0.21" velocity="1000"/>
-    <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
-    <mimic joint="right_finger_bottom_joint" multiplier="-0.676" offset="0.149"/>
-  </joint>
+    </link>
+    <gazebo reference="right_finger_prox_link">
+      <material>Kortex/Gray</material>
+    </gazebo>
+    <joint name="right_finger_bottom_joint" type="revolute">
+      <origin xyz="0 -0.030501 0.070003" rpy="0 1.5708 0" />
+      <parent link="gripper_base_link" />
+      <child link="right_finger_prox_link" />
+      <axis xyz="0 0 1" />
+      <limit lower="0.0" upper="0.96" effort="1000" velocity="0.6" />
+    </joint>
+    <link name="right_finger_dist_link">
+      <inertial>
+        <origin xyz="0.018488 0.0011091 0" rpy="0 0 0" />
+        <mass value="0.010748" />
+        <inertia ixx="6.3E-07" ixy="3.2E-07" ixz="0" iyy="1.83E-06" iyz="0" izz="1.61E-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0 0.055 0.525 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/right_finger_dist_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="right_finger_dist_link">
+      <material>Kortex/Blue</material>
+    </gazebo>
+    <joint name="right_finger_tip_joint" type="revolute">
+      <origin xyz="-0.045636 0.020423 0" rpy="0 0 0" />
+      <parent link="right_finger_prox_link" />
+      <child link="right_finger_dist_link" />
+      <axis xyz="0 0 1" />
+      <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
+      <mimic joint="right_finger_bottom_joint" multiplier="-0.676" offset="0.149" />
+    </joint>
+
+    <link name="left_finger_prox_link">
+      <inertial>
+        <origin xyz="0.020257 0.0063483 6.99E-05" rpy="0 0 0" />
+        <mass value="0.018385" />
+        <inertia ixx="2.29E-06" ixy="1.43E-06" ixz="0" iyy="4.56E-06" iyz="0" izz="4.77E-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.803 0.824 0.820 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_prox_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="left_finger_prox_link">
+      <material>Kortex/Gray</material>
+    </gazebo>
+    <joint name="left_finger_bottom_joint" type="revolute">
+      <origin xyz="0 0.0305 0.070003" rpy="0 1.5708 0" />
+      <parent link="gripper_base_link" />
+      <child link="left_finger_prox_link" />
+      <axis xyz="0 0 1" />
+      <limit lower="-0.96" upper="0.0" effort="1000" velocity="1000" />
+      <mimic joint="right_finger_bottom_joint" multiplier="-1.0" offset="0.0" />
+    </joint>
+    <link name="left_finger_dist_link">
+      <inertial>
+        <origin xyz="-0.018488 0.0011091 0" rpy="0 0 0" />
+        <mass value="0.010748" />
+        <inertia ixx="6.3E-07" ixy="3.2E-07" ixz="0" iyy="1.83E-06" iyz="0" izz="1.61E-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0 0.055 0.525 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://kortex_description/grippers/gen3_lite_2f/meshes/left_finger_dist_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="left_finger_dist_link">
+      <material>Kortex/Blue</material>
+    </gazebo>
+    <joint name="left_finger_tip_joint" type="revolute">
+      <origin xyz="-0.045636 -0.020423 6.9901E-05" rpy="0 0 0" />
+      <parent link="left_finger_prox_link" />
+      <child link="left_finger_dist_link" />
+      <axis xyz="0 0 -1" />
+      <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
+      <mimic joint="right_finger_bottom_joint" multiplier="-0.676" offset="0.149" />
+    </joint>
 </robot>

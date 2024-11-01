@@ -12,9 +12,29 @@
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=true">
+  <!-- ros2 control include -->
+    <xacro:include filename="$(find kortex_description)/grippers/gen3_lite_2f/urdf/gen3_lite_2f.ros2_control.xacro" />
+    <xacro:if value="${sim_ignition or sim_gazebo}">
+      <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
+    </xacro:if>
+     <xacro:if value="${use_fake_hardware}">
+      <xacro:property name="ros2_control_name" value="GenericSystem"/>
+    </xacro:if>
+    <xacro:unless value="${use_fake_hardware or sim_ignition or sim_gazebo}">
+      <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
+    </xacro:unless>
 
+    <xacro:gripper_ros2_control
+      prefix="${prefix}"
+      use_fake_hardware="${use_fake_hardware}"
+      fake_sensor_commands="${fake_sensor_commands}"
+      sim_ignition="${sim_ignition}"
+      sim_isaac="${sim_isaac}"
+      isaac_joint_commands="${isaac_joint_commands}"
+      isaac_joint_states="${isaac_joint_states}"
+      tf_prefix=""/>
 
-    <!-- Tool frame used by the arm -->
+<!-- Tool frame used by the arm -->
     <link name="${prefix}tool_frame"/>
     <joint name="${prefix}tool_frame_joint" type="fixed">
         <origin xyz="0 0 0.130" rpy="0 0 1.57079632679" />
@@ -82,13 +102,12 @@
     <gazebo reference="${prefix}right_finger_prox_link">
       <material>Kortex/Gray</material>
     </gazebo>
-    <!-- TODO(MarqRazz) look into why the joint and limits needed to be flipped and modified -->
     <joint name="${prefix}right_finger_bottom_joint" type="revolute">
-      <origin xyz="0 -0.030501 0.070003" rpy="1.571 0.611 1.571" />
+      <origin xyz="0 -0.030501 0.070003" rpy="0 1.5708 0" />
       <parent link="${prefix}gripper_base_link" />
       <child link="${prefix}right_finger_prox_link" />
-      <axis xyz="0 0 -1" />
-      <limit lower="0.0" upper="0.85" effort="50" velocity="0.6" />
+      <axis xyz="0 0 1" />
+      <limit lower="-0.09" upper="0.96" effort="1000" velocity="0.6" />
     </joint>
     <link name="${prefix}right_finger_dist_link">
       <inertial>
@@ -121,7 +140,6 @@
       <child link="${prefix}right_finger_dist_link" />
       <axis xyz="0 0 1" />
       <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
-      <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.676" offset="0.149" />
     </joint>
 
     <link name="${prefix}left_finger_prox_link">
@@ -150,12 +168,11 @@
       <material>Kortex/Gray</material>
     </gazebo>
     <joint name="${prefix}left_finger_bottom_joint" type="revolute">
-      <origin xyz="0 0.0305 0.070003" rpy="-1.571 0.611 -1.571" />
+      <origin xyz="0 0.0305 0.070003" rpy="0 1.5708 0" />
       <parent link="${prefix}gripper_base_link" />
       <child link="${prefix}left_finger_prox_link" />
       <axis xyz="0 0 1" />
-      <limit lower="0.0" upper="0.85" effort="1000" velocity="1000" />
-      <mimic joint="${prefix}right_finger_bottom_joint" multiplier="1.0" offset="0.0" />
+      <limit lower="-0.96" upper="0.09" effort="1000" velocity="1000" />
     </joint>
     <link name="${prefix}left_finger_dist_link">
       <inertial>
@@ -188,7 +205,6 @@
       <child link="${prefix}left_finger_dist_link" />
       <axis xyz="0 0 -1" />
       <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
-      <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.676" offset="0.149" />
     </joint>
   </xacro:macro>
 </robot>
