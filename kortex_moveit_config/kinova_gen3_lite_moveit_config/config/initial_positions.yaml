@@ -1,4 +1,4 @@
-# Default initial positions for gen3_lite's ros2_control fake system
+# Default initial positions for gen3_lite_gen3_lite_2f's ros2_control fake system
 
 initial_positions:
   joint_1: 0

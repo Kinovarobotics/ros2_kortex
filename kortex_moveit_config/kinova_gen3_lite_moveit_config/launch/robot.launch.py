@@ -48,7 +48,7 @@ def launch_setup(context, *args, **kwargs):
     }
 
     moveit_config = (
-        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_lite_moveit_config")
+        MoveItConfigsBuilder("gen3_lite_gen3_lite_2f", package_name="kinova_gen3_lite_moveit_config")
         .robot_description(mappings=launch_arguments)
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_scene_monitor(
