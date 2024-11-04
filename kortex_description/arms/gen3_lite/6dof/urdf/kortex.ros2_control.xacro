@@ -125,13 +125,13 @@
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
       </joint>
-      <!--
-      <joint name="${prefix}right_finger_bottom_joint">
-        <command_interface name="position"/>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-      -->
+      <xacro:unless value="${use_fake_hardware or sim_isaac or sim_ignition}">
+        <joint name="${prefix}right_finger_bottom_joint">
+          <command_interface name="position"/>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+        </joint>
+      </xacro:unless>
     </ros2_control>
   </xacro:macro>
 
