@@ -104,13 +104,11 @@ def launch_setup(context, *args, **kwargs):
         ],
         output="both",
     )
-
     robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_trajectory_controller", "-c", "/controller_manager"],
     )
-
     robot_pos_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -120,7 +118,7 @@ def launch_setup(context, *args, **kwargs):
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["robotiq_gripper_controller", "-c", "/controller_manager"],
+        arguments=["gen3_lite_2f_gripper_controller", "-c", "/controller_manager"],
     )
 
     fault_controller_spawner = Node(
@@ -170,14 +168,15 @@ def launch_setup(context, *args, **kwargs):
     )
 
     nodes_to_start = [
-        ros2_control_node,
-        robot_state_publisher,
-        joint_state_broadcaster_spawner,
-        delay_rviz_after_joint_state_broadcaster_spawner,
-        robot_traj_controller_spawner,
-        robot_pos_controller_spawner,
-        robot_hand_controller_spawner,
-        fault_controller_spawner,
+        #ros2_control_node,
+        #robot_state_publisher,
+        #joint_state_broadcaster_spawner,
+        #delay_rviz_after_joint_state_broadcaster_spawner,
+        rviz_node,
+        #robot_traj_controller_spawner,
+        #robot_pos_controller_spawner,
+        #robot_hand_controller_spawner,
+        #fault_controller_spawner,
         move_group_node,
         static_tf,
     ]
