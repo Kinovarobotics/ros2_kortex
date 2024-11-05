@@ -23,27 +23,53 @@
     connection_inactivity_timeout_ms
     gripper_joint_name
     gripper_max_velocity:=100.0
-    gripper_max_force:=100.0">
+    gripper_max_force:=100.0
+    moveit_active">
 
     <ros2_control name="${name}" type="system">
       <hardware>
         <xacro:if value="${sim_gazebo}">
-          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+          <xacro:unless value="${moveit_active}">
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+          </xacro:unless>
         </xacro:if>
         <xacro:if value="${sim_ignition}">
-          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+          <xacro:unless value="${moveit_active}">
+            <plugin>ign_ros2_control/IgnitionSystem</plugin>
+          </xacro:unless>
         </xacro:if>
         <xacro:if value="${sim_isaac}">
-          <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
-          <param name="joint_commands_topic">${isaac_joint_commands}</param>
-          <param name="joint_states_topic">${isaac_joint_states}</param>
+          <xacro:unless value="${moveit_active}">
+            <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+            <param name="joint_commands_topic">${isaac_joint_commands}</param>
+            <param name="joint_states_topic">${isaac_joint_states}</param>
+          </xacro:unless>
         </xacro:if>
         <xacro:if value="${use_fake_hardware}">
-          <plugin>mock_components/GenericSystem</plugin>
-          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
-          <param name="state_following_offset">0.0</param>
+          <xacro:unless value="${moveit_active}">
+            <plugin>mock_components/GenericSystem</plugin>
+            <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+            <param name="state_following_offset">0.0</param>
+          </xacro:unless>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition or sim_isaac}">
+          <xacro:unless value="${moveit_active}">
+            <plugin>kortex_driver/KortexMultiInterfaceHardware</plugin>
+            <param name="robot_ip">${robot_ip}</param>
+            <param name="username">${username}</param>
+            <param name="password">${password}</param>
+            <param name="port">${port}</param>
+            <param name="port_realtime">${port_realtime}</param>
+            <param name="session_inactivity_timeout_ms">${session_inactivity_timeout_ms}</param>
+            <param name="connection_inactivity_timeout_ms">${connection_inactivity_timeout_ms}</param>
+            <param name="tf_prefix">"${tf_prefix}"</param>
+            <param name="use_internal_bus_gripper_comm">${use_internal_bus_gripper_comm}</param>
+            <param name="gripper_joint_name">${gripper_joint_name}</param>
+            <param name="gripper_max_velocity">${gripper_max_velocity}</param>
+            <param name="gripper_max_force">${gripper_max_force}</param>
+          </xacro:unless>
+        </xacro:unless>
+        <xacro:if value="${moveit_active}">
           <plugin>kortex_driver/KortexMultiInterfaceHardware</plugin>
           <param name="robot_ip">${robot_ip}</param>
           <param name="username">${username}</param>
@@ -57,7 +83,7 @@
           <param name="gripper_joint_name">${gripper_joint_name}</param>
           <param name="gripper_max_velocity">${gripper_max_velocity}</param>
           <param name="gripper_max_force">${gripper_max_force}</param>
-        </xacro:unless>
+        </xacro:if>
       </hardware>
       <joint name="${prefix}joint_1">
         <command_interface name="position">
@@ -126,12 +152,21 @@
         <state_interface name="effort"/>
       </joint>
       <xacro:unless value="${use_fake_hardware or sim_isaac or sim_ignition}">
+        <xacro:unless value="${moveit_active}">
+          <joint name="${prefix}right_finger_bottom_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+          </joint>
+        </xacro:unless>
+      </xacro:unless>
+      <xacro:if value="${moveit_active}">
         <joint name="${prefix}right_finger_bottom_joint">
           <command_interface name="position"/>
           <state_interface name="position"/>
           <state_interface name="velocity"/>
         </joint>
-      </xacro:unless>
+      </xacro:if>
     </ros2_control>
   </xacro:macro>
 

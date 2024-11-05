@@ -32,6 +32,13 @@ def generate_launch_description():
     # Simulation specific arguments
     declared_arguments.append(
         DeclareLaunchArgument(
+            "moveit_active",
+            default_value="true",
+            description="Moveit activation for simulation control",
+        )
+    )    
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "sim_ignition",
             default_value="true",
             description="Use Ignition for simulation",
@@ -52,6 +59,7 @@ def generate_launch_description():
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
     sim_ignition = LaunchConfiguration("sim_ignition")
+    moveit_active = LaunchConfiguration("moveit_active")
 
     description_arguments = {
         "robot_ip": "xxx.yyy.zzz.www",
@@ -59,6 +67,7 @@ def generate_launch_description():
         "gripper": "gen3_lite_2f",
         "dof": "6",
         "sim_ignition": sim_ignition,
+        "moveit_active": moveit_active,
     }
 
     moveit_config = (
