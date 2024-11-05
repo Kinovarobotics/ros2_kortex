@@ -324,7 +324,7 @@
         <child link="${prefix}right_finger_dist_link" />
         <axis xyz="0 0 1" />
         <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
-        <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.676" offset="0.149" />
+        <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.276" offset="-0.1" />
       </joint>
 
       <link name="${prefix}left_finger_prox_link">
@@ -391,7 +391,7 @@
         <child link="${prefix}left_finger_dist_link" />
         <axis xyz="0 0 -1" />
         <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
-        <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.676" offset="0.149" />
+        <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.276" offset="-0.1" />
       </joint>
     </xacro:unless>
   </xacro:unless>
