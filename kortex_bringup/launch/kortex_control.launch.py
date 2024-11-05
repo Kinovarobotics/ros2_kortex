@@ -27,6 +27,8 @@ from launch.substitutions import (
     FindExecutable,
     LaunchConfiguration,
     PathJoinSubstitution,
+    PythonExpression,
+
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -187,6 +189,9 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        condition=IfCondition(
+            PythonExpression(["'", gripper, "' != ''"])
+        ),
     )
 
     # only start the fault controller if we are using hardware
