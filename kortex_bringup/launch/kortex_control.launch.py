@@ -187,7 +187,6 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
-        condition=UnlessCondition(is_gen3_lite),
     )
 
     # only start the fault controller if we are using hardware
