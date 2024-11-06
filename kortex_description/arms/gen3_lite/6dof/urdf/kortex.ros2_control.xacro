@@ -24,7 +24,7 @@
     gripper_joint_name
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0
-    moveit_active">
+    moveit_active:=false">
 
     <ros2_control name="${name}" type="system">
       <hardware>

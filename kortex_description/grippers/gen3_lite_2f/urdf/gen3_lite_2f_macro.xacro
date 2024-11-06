@@ -12,7 +12,7 @@
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=true
-    moveit_active">
+    moveit_active:=false">
 
   <xacro:if value="${use_fake_hardware or sim_isaac or sim_ignition}">
     <xacro:unless value="${moveit_active}">
