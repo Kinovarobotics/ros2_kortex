@@ -32,6 +32,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "robot_hand_controller",
+            default_value="gen3_lite_2f_gripper_controller",
+            description="Gripper controller for the Gen3 Lite",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "robot_ip",
             description="IP address by which the robot can be reached.",
         )
@@ -54,7 +61,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_controller",
-            default_value="joint_trajectory_controller",
+            default_value="gen3_lite_joint_trajectory_controller",
             description="Robot controller to start.",
         )
     )
@@ -119,6 +126,7 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
+    robot_hand_controller = LaunchConfiguration("robot_hand_controller")
     gripper = LaunchConfiguration("gripper")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
@@ -137,6 +145,7 @@ def generate_launch_description():
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,
+            "robot_hand_controller": robot_hand_controller,
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
