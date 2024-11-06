@@ -12,17 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import (
     DeclareLaunchArgument,
     OpaqueFunction,
-    RegisterEventHandler,
 )
-from launch.event_handlers import OnProcessExit
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
@@ -48,7 +44,9 @@ def launch_setup(context, *args, **kwargs):
     }
 
     moveit_config = (
-        MoveItConfigsBuilder("gen3", package_name="kinova_gen3_lite_moveit_config")
+        MoveItConfigsBuilder(
+            "gen3_lite_gen3_lite_2f", package_name="kinova_gen3_lite_moveit_config"
+        )
         .robot_description(mappings=launch_arguments)
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_scene_monitor(
@@ -79,6 +77,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # Publish TF
+    """
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
@@ -88,7 +87,6 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.robot_description,
         ],
     )
-
     # ros2_control using FakeSystem as hardware
     ros2_controllers_path = os.path.join(
         get_package_share_directory("kinova_gen3_lite_moveit_config"),
@@ -104,13 +102,11 @@ def launch_setup(context, *args, **kwargs):
         ],
         output="both",
     )
-
     robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_trajectory_controller", "-c", "/controller_manager"],
     )
-
     robot_pos_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -120,7 +116,7 @@ def launch_setup(context, *args, **kwargs):
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["robotiq_gripper_controller", "-c", "/controller_manager"],
+        arguments=["gen3_lite_2f_gripper_controller", "-c", "/controller_manager"],
     )
 
     fault_controller_spawner = Node(
@@ -129,7 +125,7 @@ def launch_setup(context, *args, **kwargs):
         arguments=["fault_controller", "-c", "/controller_manager"],
         condition=UnlessCondition(use_fake_hardware),
     )
-
+    """
     # rviz with moveit configuration
     rviz_config_file = (
         get_package_share_directory("kinova_gen3_lite_moveit_config") + "/config/moveit.rviz"
@@ -149,7 +145,7 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.joint_limits,
         ],
     )
-
+    """
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -159,8 +155,9 @@ def launch_setup(context, *args, **kwargs):
             "/controller_manager",
         ],
     )
-
+    """
     # Delay rviz start after `joint_state_broadcaster`
+    """
     delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
@@ -168,16 +165,17 @@ def launch_setup(context, *args, **kwargs):
         ),
         condition=IfCondition(launch_rviz),
     )
-
+    """
     nodes_to_start = [
-        ros2_control_node,
-        robot_state_publisher,
-        joint_state_broadcaster_spawner,
-        delay_rviz_after_joint_state_broadcaster_spawner,
-        robot_traj_controller_spawner,
-        robot_pos_controller_spawner,
-        robot_hand_controller_spawner,
-        fault_controller_spawner,
+        # ros2_control_node,
+        # robot_state_publisher,
+        # joint_state_broadcaster_spawner,
+        # delay_rviz_after_joint_state_broadcaster_spawner,
+        rviz_node,
+        # robot_traj_controller_spawner,
+        # robot_pos_controller_spawner,
+        # robot_hand_controller_spawner,
+        # fault_controller_spawner,
         move_group_node,
         static_tf,
     ]
