@@ -11,7 +11,8 @@
     isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=false
     include_ros2_control:=true
-    com_port:=/dev/ttyUSB0">
+    com_port:=/dev/ttyUSB0
+    moveit_active:=false">
     <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_140_macro.urdf.xacro" />
 
     <xacro:robotiq_gripper

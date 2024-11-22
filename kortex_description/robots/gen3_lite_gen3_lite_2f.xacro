@@ -25,6 +25,7 @@
     <xacro:arg name="fake_sensor_commands" default="false" />
     <xacro:arg name="use_internal_bus_gripper_comm" default="true" />
     <xacro:arg name="use_external_cable" default="false" />
+    <xacro:arg name="moveit_active" default="false" />
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
 
@@ -52,7 +53,8 @@
         sim_gazebo="$(arg sim_gazebo)"
         sim_ignition="$(arg sim_ignition)"
         sim_isaac="$(arg sim_isaac)"
-        use_external_cable="$(arg use_external_cable)" >
+        use_external_cable="$(arg use_external_cable)"
+        moveit_active = "$(arg moveit_active)" >
         <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
     </xacro:load_robot>
 
