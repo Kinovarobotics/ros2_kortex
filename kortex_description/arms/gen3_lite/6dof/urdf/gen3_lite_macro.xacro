@@ -23,7 +23,7 @@
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0
     use_fake_hardware:=false
-    fake_sensor_commands:=false
+    mock_sensor_commands:=false
     sim_gazebo:=false
     sim_ignition:=false
     sim_isaac:=false
@@ -46,7 +46,7 @@
     <xacro:kortex_ros2_control
       name="${ros2_control_name}" prefix="${prefix}"
       use_fake_hardware="${use_fake_hardware}"
-      fake_sensor_commands="${fake_sensor_commands}"
+      mock_sensor_commands="${mock_sensor_commands}"
       sim_gazebo="${sim_gazebo}"
       sim_ignition="${sim_ignition}"
       sim_isaac="${sim_isaac}"

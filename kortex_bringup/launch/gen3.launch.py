@@ -49,7 +49,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "fake_sensor_commands",
+            "mock_sensor_commands",
             default_value="false",
             description="Enable fake command interfaces for sensors used for simple simulations. \
             Used only if 'use_fake_hardware' parameter is true.",
@@ -114,7 +114,7 @@ def generate_launch_description():
     robot_ip = LaunchConfiguration("robot_ip")
     dof = LaunchConfiguration("dof")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
-    fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
+    mock_sensor_commands = LaunchConfiguration("mock_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
     gripper = LaunchConfiguration("gripper")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
@@ -131,7 +131,7 @@ def generate_launch_description():
             "robot_ip": robot_ip,
             "dof": dof,
             "use_fake_hardware": use_fake_hardware,
-            "fake_sensor_commands": fake_sensor_commands,
+            "mock_sensor_commands": mock_sensor_commands,
             "robot_controller": robot_controller,
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,

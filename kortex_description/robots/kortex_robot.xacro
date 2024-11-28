@@ -20,7 +20,7 @@
     connection_inactivity_timeout_ms
     use_internal_bus_gripper_comm:=false
     use_fake_hardware:=false
-    fake_sensor_commands:=false
+    mock_sensor_commands:=false
     sim_gazebo:=false
     sim_ignition:=false
     sim_isaac:=false
@@ -50,7 +50,7 @@
       prefix="${prefix}"
       use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
       use_fake_hardware="${use_fake_hardware}"
-      fake_sensor_commands="${fake_sensor_commands}"
+      mock_sensor_commands="${mock_sensor_commands}"
       sim_gazebo="${sim_gazebo}"
       sim_ignition="${sim_ignition}"
       sim_isaac="${sim_isaac}"
@@ -83,7 +83,7 @@
         parent="${prefix}${last_arm_link}"
         prefix="${prefix}"
         use_fake_hardware="${use_fake_hardware}"
-        fake_sensor_commands="${fake_sensor_commands}"
+        mock_sensor_commands="${mock_sensor_commands}"
         sim_ignition="${sim_ignition}"
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
