@@ -1,0 +1,12 @@
+Instructions to command the robot in simulation:
+
+- "i": Put the arm in the initial configuration
+- "v" : Put the arm in vertical configuration to grasp the object
+- "h" : Put the arm in horizontal configuration to grasp the object
+- "o": Open the gripper
+- "c": Close the gripper
+- "w": Move the mobile platform forward
+- "s": Move the mobile platform backward
+- "a": Move the mobile platform to the left
+- "d": Move the mobile platform to the right
+- "r": Reset the grasping box and the robot

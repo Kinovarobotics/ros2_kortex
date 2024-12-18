@@ -49,6 +49,7 @@ def launch_setup(context, *args, **kwargs):
     robot_traj_controller = LaunchConfiguration("robot_controller")
     robot_pos_controller = LaunchConfiguration("robot_pos_controller")
     robot_hand_controller = LaunchConfiguration("robot_hand_controller")
+    robot_lite_hand_controller = LaunchConfiguration("robot_lite_hand_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
     gripper = LaunchConfiguration("gripper")
@@ -163,6 +164,13 @@ def launch_setup(context, *args, **kwargs):
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
         condition=UnlessCondition(is_gen3_lite),
+    )
+
+    robot_hand_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[robot_lite_hand_controller, "-c", "/controller_manager"],
+        condition=IfCondition(is_gen3_lite),
     )
 
     # Bridge
@@ -315,7 +323,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_controller",
-            default_value="joint_trajectory_controller",
+            default_value="gen3_lite_joint_trajectory_controller",
             description="Robot controller to start.",
         )
     )
@@ -331,6 +339,13 @@ def generate_launch_description():
             "robot_hand_controller",
             default_value="robotiq_gripper_controller",
             description="Robot hand controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_lite_hand_controller",
+            default_value="gen3_lite_2f_gripper_controller",
+            description="Robot hand controller to start for Gen3_Lite.",
         )
     )
     declared_arguments.append(

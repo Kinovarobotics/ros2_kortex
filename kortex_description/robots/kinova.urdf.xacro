@@ -30,7 +30,7 @@
   <xacro:arg name="camera_height" default="480"/>
   <xacro:arg name="camera_fps" default="6"/>
   <xacro:arg name="simulation_controllers" default="$(find kortex_description)/arm/$(arg arm)/$(arg dof)dof/config/ros2_controllers.yaml" />
-
+  <xacro:arg name="moveit_active" default="false"/>
 
   <!-- import main macro -->
   <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
@@ -66,7 +66,8 @@
     fake_sensor_commands="$(arg fake_sensor_commands)"
     sim_gazebo="$(arg sim_gazebo)"
     sim_isaac="$(arg sim_isaac)"
-    initial_positions="${xacro.load_yaml(initial_positions_file)}" >
+    initial_positions="${xacro.load_yaml(initial_positions_file)}"
+    moveit_active="$(arg moveit_active)">
     <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
   </xacro:load_robot>
 

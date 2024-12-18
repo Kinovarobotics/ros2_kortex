@@ -10,7 +10,8 @@
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
     use_internal_bus_gripper_comm:=false
-    com_port:=/dev/ttyUSB0">
+    com_port:=/dev/ttyUSB0
+    moveit_active:=false">
     <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
 
     <!-- Hardware talks directly to the gripper so we don't need ros2_control unless we are simulating -->

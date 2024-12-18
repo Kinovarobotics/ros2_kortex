@@ -21,12 +21,13 @@ from launch.actions import (
     RegisterEventHandler,
 )
 from launch.event_handlers import OnProcessExit
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
     LaunchConfiguration,
     PathJoinSubstitution,
+    PythonExpression,
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -60,11 +61,6 @@ def launch_setup(context, *args, **kwargs):
     use_fake_hardware_value = use_fake_hardware.perform(context)
     if use_fake_hardware_value == "true":
         use_internal_bus_gripper_comm = "false"
-
-    robot_model = robot_type.perform(context)
-    is_gen3_lite = "false"
-    if robot_model == "gen3_lite":
-        is_gen3_lite = "true"
 
     robot_description_content = Command(
         [
@@ -187,7 +183,7 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
-        condition=UnlessCondition(is_gen3_lite),
+        condition=IfCondition(PythonExpression(["'", gripper, "' != ''"])),
     )
 
     # only start the fault controller if we are using hardware
@@ -205,9 +201,12 @@ def launch_setup(context, *args, **kwargs):
         delay_rviz_after_joint_state_broadcaster_spawner,
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
-        robot_hand_controller_spawner,
         fault_controller_spawner,
     ]
+    start_robot_hand_controller = gripper.perform(context) != ""
+    # Conditionally add robot_hand_controller_spawner
+    if start_robot_hand_controller:
+        nodes_to_start.append(robot_hand_controller_spawner)
 
     return nodes_to_start
 
@@ -304,7 +303,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper",
-            default_value='""',
+            default_value="",
             description="Name of the gripper attached to the arm",
         )
     )
