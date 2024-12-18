@@ -14,17 +14,17 @@
     use_internal_bus_gripper_comm:=true
     moveit_active:=false">
 
-  <xacro:if value="${use_fake_hardware or sim_isaac or sim_ignition}">
+  <xacro:if value="${use_fake_hardware or sim_isaac or sim_gazebo}">
     <xacro:unless value="${moveit_active}">
     <!-- ros2 control include -->
       <xacro:include filename="$(find kortex_description)/grippers/gen3_lite_2f/urdf/gen3_lite_2f.ros2_control.xacro" />
-      <xacro:if value="${sim_ignition or sim_gazebo}">
-        <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
+      <xacro:if value="${sim_gazebo}">
+        <xacro:property name="ros2_control_name" value="GazeboSimSystem"/>
       </xacro:if>
       <xacro:if value="${use_fake_hardware}">
         <xacro:property name="ros2_control_name" value="GenericSystem"/>
       </xacro:if>
-      <xacro:unless value="${use_fake_hardware or sim_ignition or sim_gazebo}">
+      <xacro:unless value="${use_fake_hardware or sim_gazebo}">
         <xacro:property name="ros2_control_name" value="${prefix}KortexMultiInterfaceHardware"/>
       </xacro:unless>
 
@@ -32,7 +32,7 @@
         prefix="${prefix}"
         use_fake_hardware="${use_fake_hardware}"
         fake_sensor_commands="${fake_sensor_commands}"
-        sim_ignition="${sim_ignition}"
+        sim_gazebo="${sim_gazebo}"
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
         isaac_joint_states="${isaac_joint_states}"
@@ -215,7 +215,7 @@
     </xacro:unless>
   </xacro:if>
 
-  <xacro:unless value="${use_fake_hardware or sim_isaac or sim_ignition}">
+  <xacro:unless value="${use_fake_hardware or sim_isaac or sim_gazebo}">
     <xacro:unless value="${moveit_active}">
         <!-- Tool frame used by the arm -->
       <link name="${prefix}tool_frame"/>

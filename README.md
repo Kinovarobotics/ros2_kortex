@@ -113,7 +113,8 @@ If the bug fix you need isn't in a released version or If you want to build this
    vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex-not-released.$ROS_DISTRO.repos
    ```
 
-   If you plan on simulating the robot with ignition or gazebo, make sure to pull the additional simulation packages. If you're on    ROS2 Humble, run
+   If you plan on simulating the robot with Gazebo, make sure to pull the additional simulation packages.
+   If you're on ROS 2 Humble, run
    ```
    vcs import src --skip-existing --input src/ros2_kortex/simulation.humble.repos
    ```
@@ -311,8 +312,7 @@ ros2 launch kortex_bringup kortex_sim_control.launch.py \
   launch_rviz:=false
 ```
 
-* `sim_ignition` : Use Ignition for simulation. Default value is `true`.
-* `sim_gazebo` : Use Gazebo Classic for simulation. Default value is `false`.
+* `sim_gazebo` : Use Gazebo for simulation. Default value is `false`.
 * `robot_type` : Your robot model. Possible values are either `gen3` or `gen3_lite`.Default is `gen3`.
 * `robot_name` : Name you would like your robot to have. Default value is `gen3`.
 * `dof` : Degrees of freedom of the arm. Possible values are either `6` or `7`.Default value is `7`.
@@ -345,7 +345,7 @@ ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
   use_fake_hardware:=true
 ```
 
-To generate motion plans and execute them with an ignition simulated 7 DoF Kinova Gen3 arm (previously launched with the command at the [simulation](#simulation) section):
+To generate motion plans and execute them with a Gazebo simulated 7 DoF Kinova Gen3 arm (previously launched with the command at the [simulation](#simulation) section):
 
 ```bash
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py \
