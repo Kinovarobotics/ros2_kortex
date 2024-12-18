@@ -327,7 +327,7 @@ ros2 launch kortex_bringup kortex_sim_control.launch.py \
 * `use_sim_time` : Use simulated clock. Default value is `true`.
 * `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
 
-#### MoveIt2
+#### MoveIt 2
 
 To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm with mock hardware:
 
