@@ -14,8 +14,11 @@
 #
 # Author: Marq Rasmussen
 
+import os
+from ament_index_python.packages import get_package_prefix
 from launch import LaunchDescription
 from launch.actions import (
+    AppendEnvironmentVariable,
     DeclareLaunchArgument,
     IncludeLaunchDescription,
     OpaqueFunction,
@@ -181,6 +184,11 @@ def launch_setup(context, *args, **kwargs):
         output="screen",
     )
 
+    robotiq_description_prefix = get_package_prefix("robotiq_description")
+    gz_robotiq_env_var_resource_path = AppendEnvironmentVariable(
+        "GZ_SIM_RESOURCE_PATH", os.path.join(robotiq_description_prefix, "share")
+    )
+
     gz_spawn_entity = Node(
         package="ros_gz_sim",
         executable="create",
@@ -238,6 +246,7 @@ def launch_setup(context, *args, **kwargs):
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
+        gz_robotiq_env_var_resource_path,
         gz_launch_description,
         gz_spawn_entity,
         gazebo_bridge,
