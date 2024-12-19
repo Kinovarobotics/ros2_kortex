@@ -5,7 +5,7 @@
     prefix
     use_fake_hardware:=false
     fake_sensor_commands:=false
-    sim_ignition:=false
+    sim_gazebo:=false
     sim_isaac:=false
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
@@ -16,7 +16,7 @@
 
     <!-- Hardware talks directly to the gripper so we don't need ros2_control unless we are simulating -->
     <xacro:property name="include_ros2_control" value="false"/>
-    <xacro:if value="${sim_ignition or sim_isaac or use_fake_hardware or not use_internal_bus_gripper_comm}">
+    <xacro:if value="${sim_gazebo or sim_isaac or use_fake_hardware or not use_internal_bus_gripper_comm}">
       <xacro:property name="include_ros2_control" value="true"/>
     </xacro:if>
 
@@ -27,8 +27,8 @@
         include_ros2_control="${include_ros2_control}"
         com_port="${com_port}"
         use_fake_hardware="${use_fake_hardware}"
-        fake_sensor_commands="${fake_sensor_commands}"
-        sim_ignition="${sim_ignition}"
+        mock_sensor_commands="${fake_sensor_commands}"
+        sim_gazebo="${sim_gazebo}"
         sim_isaac="${sim_isaac}"
         isaac_joint_commands="${isaac_joint_commands}"
         isaac_joint_states="${isaac_joint_states}">

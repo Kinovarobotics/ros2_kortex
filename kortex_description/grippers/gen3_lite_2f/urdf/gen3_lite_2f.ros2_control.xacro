@@ -5,7 +5,7 @@
         prefix
         use_fake_hardware:=false
         fake_sensor_commands:=false
-        sim_ignition:=false
+        sim_gazebo:=false
         sim_isaac:=false
         isaac_joint_commands:=/isaac_joint_commands
         isaac_joint_states:=/isaac_joint_states
@@ -30,15 +30,15 @@
                     <param name="joint_states_topic">${isaac_joint_states}</param>
                     <param name="trigger_joint_command_threshold">0.02</param>
                 </xacro:if>
-                <xacro:if value="${sim_ignition}">
-                    <plugin>ign_ros2_control/IgnitionSystem</plugin>
+                <xacro:if value="${sim_gazebo}">
+                    <plugin>gz_ros2_control/GzSimSystem</plugin>
                 </xacro:if>
                 <xacro:if value="${use_fake_hardware}">
                     <plugin>mock_components/GenericSystem</plugin>
                     <param name="mock_sensor_commands">${fake_sensor_commands}</param>
                     <param name="state_following_offset">0.0</param>
                 </xacro:if>
-                <xacro:unless value="${sim_isaac or sim_ignition or use_fake_hardware}">
+                <xacro:unless value="${sim_isaac or sim_gazebo or use_fake_hardware}">
                     <plugin>kortex_driver/KortexMultiInterfaceHardware</plugin>
                     <param name="robot_ip">${robot_ip}</param>
                     <param name="username">${username}</param>
@@ -56,7 +56,7 @@
             </hardware>
 
             <!-- Joint interfaces -->
-            <!-- With Ignition or Hardware, they handle mimic joints, so we only need this command interface activated -->
+            <!-- With Gazebo or Hardware, they handle mimic joints, so we only need this command interface activated -->
             <joint name="${prefix}right_finger_bottom_joint">
                 <command_interface name="position" />
                 <state_interface name="position">
@@ -67,11 +67,11 @@
                 </state_interface>
             </joint>
             <!-- When simulating we need to include the rest of the gripper joints -->
-            <xacro:if value="${use_fake_hardware or sim_isaac or sim_ignition}">
+            <xacro:if value="${use_fake_hardware or sim_isaac or sim_gazebo}">
                 <joint name="${prefix}right_finger_tip_joint">
                     <param name="mimic">${prefix}right_finger_bottom_joint</param>
                     <param name="multiplier">-1</param>
-                    <xacro:unless value="${sim_ignition}">
+                    <xacro:unless value="${sim_gazebo}">
                         <command_interface name="position"/>
                         <state_interface name="position"/>
                         <state_interface name="velocity"/>
@@ -80,7 +80,7 @@
                 <joint name="${prefix}left_finger_bottom_joint">
                     <param name="mimic">${prefix}right_finger_bottom_joint</param>
                     <param name="multiplier">-1</param>
-                    <xacro:unless value="${sim_ignition}">
+                    <xacro:unless value="${sim_gazebo}">
                         <command_interface name="position"/>
                         <state_interface name="position"/>
                         <state_interface name="velocity"/>
@@ -89,7 +89,7 @@
                 <joint name="${prefix}left_finger_tip_joint">
                     <param name="mimic">${prefix}right_finger_bottom_joint</param>
                     <param name="multiplier">-1</param>
-                    <xacro:unless value="${sim_ignition}">
+                    <xacro:unless value="${sim_gazebo}">
                         <command_interface name="position"/>
                         <state_interface name="position"/>
                         <state_interface name="velocity"/>

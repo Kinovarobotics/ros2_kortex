@@ -1,12 +1,4 @@
 repositories:
-  ros2_control:
-    type: git
-    url: https://github.com/ros-controls/ros2_control.git
-    version: master
-  ros2_controllers:
-    type: git
-    url: https://github.com/ros-controls/ros2_controllers.git
-    version: master
   picknik_controllers:
     type: git
     url: https://github.com/picknikrobotics/picknik_controllers.git
