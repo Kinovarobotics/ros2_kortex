@@ -309,7 +309,8 @@ The `kortex_sim_control.launch.py` launch file is designed to simulate all of ou
 ```bash
 ros2 launch kortex_bringup kortex_sim_control.launch.py \
   use_sim_time:=true \
-  launch_rviz:=false
+  launch_rviz:=false \
+  robot_controller:=joint_trajectory_controller
 ```
 
 * `sim_gazebo` : Use Gazebo for simulation. Default value is `false`.
