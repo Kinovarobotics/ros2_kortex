@@ -215,7 +215,7 @@ You can specify the following arguments if you wish to change your arm configura
 
 * `robot_type`: Your robot model. Default value (and only one) is `gen3`.
 
-* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
+* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `""`. An empty string will not initialise any gripper.
 
 * `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value is `robotiq_85_left_knuckle_joint`.
 
@@ -325,7 +325,7 @@ ros2 launch kortex_bringup kortex_sim_control.launch.py \
 * `description_file` : URDF/XACRO description file with the robot. Default value is `kinova.urdf.xacro`.
 * `prefix` : Prefix of the joint names, useful for multi-robot setup. If changed, then also joint names in the controllers' configuration have to be updated. Default value is `""` (none).
 * `use_sim_time` : Use simulated clock. Default value is `true`.
-* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
+* `gripper` : Gripper to use. Possible values for the Gen3 are: `robotiq_2f_85`, `robotiq_2f_140`, `""` and `gen3_lite_2f`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
 
 #### MoveIt2
 
