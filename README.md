@@ -116,7 +116,7 @@ If the bug fix you need isn't in a released version or If you want to build this
    If you plan on simulating the robot with Gazebo, make sure to pull the additional simulation packages.
    If you're on ROS 2 Humble, run
    ```
-   vcs import src --skip-existing --input src/ros2_kortex/simulation.humble.repos
+   vcs import src --skip-existing --input src/ros2_kortex/simulation.jazzy.repos
    ```
 
    otherwise
@@ -125,13 +125,11 @@ If the bug fix you need isn't in a released version or If you want to build this
    ```
 
    If you plan on using MoveIt, you must make sure that you have it already [installed](https://moveit.ros.org/install-moveit2/binary/) either from binaries or by building it from source.
+   
 
-   If you plan on simulating the Gen3 7Dof robot mounted on the Husky mobile robot from clearpath, make sure to pull the additional related packages. On ROS2 Humble, run
-   ```
-   vcs import src --skip-existing --input src/ros2_kortex/clearpath.repos
-   ```
+4. Follow the instructions to install [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/)
 
-4. Install dependencies, compile, and source the workspace:
+5. Install dependencies, compile, and source the workspace:
    ```
    rosdep install --ignore-src --from-paths src -y -r
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
@@ -141,7 +139,7 @@ If the bug fix you need isn't in a released version or If you want to build this
    ```
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --parallel-workers 3
    ```
-5. Source the previously built workspace using the following command:
+6. Source the previously built workspace using the following command:
    ```
    echo 'source ~/workspace/ros2_kortex_ws/install/setup.bash' >> ~/.bashrc
    ```
@@ -216,7 +214,7 @@ You can specify the following arguments if you wish to change your arm configura
 
 * `robot_type`: Your robot model. Default value (and only one) is `gen3`.
 
-* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
+* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `""`. An empty string will not initialise any gripper.
 
 * `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value is `robotiq_85_left_knuckle_joint`.
 
@@ -326,7 +324,7 @@ ros2 launch kortex_bringup kortex_sim_control.launch.py \
 * `description_file` : URDF/XACRO description file with the robot. Default value is `kinova.urdf.xacro`.
 * `prefix` : Prefix of the joint names, useful for multi-robot setup. If changed, then also joint names in the controllers' configuration have to be updated. Default value is `""` (none).
 * `use_sim_time` : Use simulated clock. Default value is `true`.
-* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
+* `gripper` : Gripper to use. Possible values for the Gen3 are: `robotiq_2f_85`, `robotiq_2f_140`, `""` and `gen3_lite_2f`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
 
 #### MoveIt 2
 

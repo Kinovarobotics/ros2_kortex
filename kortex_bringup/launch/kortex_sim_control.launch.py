@@ -332,7 +332,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_controller",
-            default_value="gen3_lite_joint_trajectory_controller",
+            default_value="joint_trajectory_controller",
             description="Robot controller to start.",
         )
     )
@@ -367,8 +367,8 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper",
-            default_value="robotiq_2f_85",
-            choices=["robotiq_2f_85", "robotiq_2f_140", "gen3_lite_2f"],
+            default_value="",
+            choices=["robotiq_2f_85", "robotiq_2f_140", "gen3_lite_2f", ""],
             description="Gripper to use",
         )
     )
