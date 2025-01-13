@@ -220,7 +220,9 @@ def launch_setup(context, *args, **kwargs):
         PythonLaunchDescriptionSource(
             [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
         ),
-        launch_arguments={"gz_args": " -r -v 3 empty.sdf --physics-engine gz-physics-bullet-featherstone-plugin"}.items(),
+        launch_arguments={
+            "gz_args": " -r -v 3 empty.sdf --physics-engine gz-physics-bullet-featherstone-plugin"
+        }.items(),
         condition=IfCondition(sim_gazebo),
     )
 

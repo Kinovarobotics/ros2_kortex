@@ -125,7 +125,7 @@ If the bug fix you need isn't in a released version or If you want to build this
    ```
 
    If you plan on using MoveIt, you must make sure that you have it already [installed](https://moveit.ros.org/install-moveit2/binary/) either from binaries or by building it from source.
-   
+
 
 4. Follow the instructions to install [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/)
 
