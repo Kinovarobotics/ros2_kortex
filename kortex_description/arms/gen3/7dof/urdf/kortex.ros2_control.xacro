@@ -7,7 +7,6 @@
     use_fake_hardware:=false
     fake_sensor_commands:=false
     sim_gazebo:=false
-    sim_ignition:=false
     sim_isaac:=false
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
@@ -29,10 +28,7 @@
     <ros2_control name="${name}" type="system">
       <hardware>
         <xacro:if value="${sim_gazebo}">
-          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-        </xacro:if>
-        <xacro:if value="${sim_ignition}">
-          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </xacro:if>
         <xacro:if value="${sim_isaac}">
           <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
@@ -44,7 +40,7 @@
           <param name="fake_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
-        <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition or sim_isaac}">
+        <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_isaac}">
           <plugin>kortex_driver/KortexMultiInterfaceHardware</plugin>
           <param name="robot_ip">${robot_ip}</param>
           <param name="username">${username}</param>
@@ -137,7 +133,7 @@
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
       </joint>
-      <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition or sim_isaac}">
+      <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_isaac}">
         <xacro:if value="${use_internal_bus_gripper_comm}">
           <joint name="${prefix}${gripper_joint_name}">
             <command_interface name="position" />
