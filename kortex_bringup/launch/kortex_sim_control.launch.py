@@ -169,7 +169,7 @@ def launch_setup(context, *args, **kwargs):
         condition=UnlessCondition(is_gen3_lite),
     )
 
-    robot_hand_controller_spawner = Node(
+    robot_hand_lite_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[robot_lite_hand_controller, "-c", "/controller_manager"],
@@ -220,7 +220,7 @@ def launch_setup(context, *args, **kwargs):
         PythonLaunchDescriptionSource(
             [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
         ),
-        launch_arguments={"gz_args": " -r -v 3 empty.sdf"}.items(),
+        launch_arguments={"gz_args": " -r -v 3 empty.sdf --physics-engine gz-physics-bullet-featherstone-plugin"}.items(),
         condition=IfCondition(sim_gazebo),
     )
 
@@ -246,6 +246,7 @@ def launch_setup(context, *args, **kwargs):
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
+        robot_hand_lite_controller_spawner,
         gz_robotiq_env_var_resource_path,
         gz_launch_description,
         gz_spawn_entity,
