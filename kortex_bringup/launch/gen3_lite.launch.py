@@ -61,7 +61,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "robot_controller",
-            default_value="gen3_lite_joint_trajectory_controller",
+            default_value="joint_trajectory_controller",
             description="Robot controller to start.",
         )
     )
