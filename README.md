@@ -58,10 +58,12 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
    If you're a developer, we recommend using Rolling to get the latest features and fixes.
 
    Rolling Release: [Install ROS2 Rolling](https://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html)<br/>
-   Latest Release: [Install ROS2 Iron](https://docs.ros.org/en/iron/Installation/Ubuntu-Install-Debians.html)</br>
-   Stable LTS Release: [Install ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+   Latest LTS Release: [Install ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)</br>
+   Previous Stable LTS Release: [Install ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
    After installing a version of ROS, source the setup.bash, which will set the `$ROS_DISTRO` environment variable.
+
+**NOTE** Please use the `Humble_Gazebo_Classic_Support` branch for ROS2 Humble and the `main` branch for ROS2 Jazzy
 
 2. Install this package from binary
    ```
