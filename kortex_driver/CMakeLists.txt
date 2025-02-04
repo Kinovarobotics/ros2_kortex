@@ -27,6 +27,9 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(kortex_api REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(geometry_msgs REQUIRED)
+
 
 #Current: only support Linux x86_64
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
@@ -50,20 +53,20 @@ add_dependencies(KortexApiCpp kortex_api)
 
 ## COMPILE
 add_library(
-  ${PROJECT_NAME}
+  ${PROJECT_NAME}_lib
   SHARED
   src/hardware_interface.cpp
   src/kortex_math_util.cpp
 )
-target_link_libraries(${PROJECT_NAME} KortexApiCpp)
+target_link_libraries(${PROJECT_NAME}_lib KortexApiCpp)
 target_include_directories(
-  ${PROJECT_NAME}
+  ${PROJECT_NAME}_lib
   PRIVATE
   include
 )
 # kortex_api is the headers for the Kortex API
 ament_target_dependencies(
-  ${PROJECT_NAME}
+  ${PROJECT_NAME}_lib
   SYSTEM kortex_api
   hardware_interface
   pluginlib
@@ -74,7 +77,7 @@ pluginlib_export_plugin_description_file(hardware_interface hardware_interface_p
 
 # INSTALL
 install(
-  TARGETS ${PROJECT_NAME}
+  TARGETS ${PROJECT_NAME}_lib
   DESTINATION lib
 )
 install(
@@ -85,12 +88,18 @@ install(
 if(BUILD_TESTING)
 endif()
 
+# Generate ROS 2 message interfaces
+rosidl_generate_interfaces(kortex_driver
+  "msg/JointAngle.msg"
+  DEPENDENCIES geometry_msgs
+)
+
 ## EXPORTS
 ament_export_include_directories(
   include
 )
 ament_export_libraries(
-  ${PROJECT_NAME}
+  ${PROJECT_NAME}_lib
 )
 ament_export_dependencies(
   hardware_interface

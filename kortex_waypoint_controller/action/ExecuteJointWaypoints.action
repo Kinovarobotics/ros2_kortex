@@ -1,0 +1,13 @@
+# Goal
+
+kortex_driver/JointAngle[] waypoints
+float32[] durations
+---
+# Result
+
+bool success
+string message
+---
+# Feedback
+
+int32 waypoint_index

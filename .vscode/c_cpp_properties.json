@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang-14",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        },
+        {
+            "name": "ROS2",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/ros/humble/include/**",
+                "/home/aalmrad/workspace/ros2_kortex_ws/install/**",  // Include installed packages
+                "/home/aalmrad/workspace/ros2_kortex_ws/build/**",    // Include build-generated headers
+                "/home/aalmrad/workspace/ros2_kortex_ws/src/**"       // Include source files
+            ]
+        }
+
+    ],
+    "version": 4
+}
