@@ -5,7 +5,7 @@ on:
 jobs:
   ament_lint:
     name: ament_${{ matrix.linter }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04  # Updated version
     strategy:
       fail-fast: false
       matrix:
@@ -13,6 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: ros-tooling/setup-ros@v0.6
+    - name: Install older cppcheck version
+      run: |
+        sudo apt-get remove -y cppcheck
+        sudo apt-get install -y cppcheck=2.6.3
+        cppcheck --version  # Verify the installed version
     - uses: ros-tooling/action-ros-lint@v0.1
       with:
         distribution: rolling
@@ -41,7 +46,7 @@ jobs:
 
   ament_lint_100:
     name: ament_${{ matrix.linter }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
