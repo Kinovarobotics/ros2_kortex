@@ -2,8 +2,8 @@
 Changelog for package kortex_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2025-02-27)
+------------------
 * Separated the arm and gripper control for Gen3_Lite + Fixed bugs (`#252 <https://github.com/Kinovarobotics/ros2_kortex/issues/252>`_)
   * Separated the arm and gripper controllers for Gen3_Lite in Kortex_bringup
 * Added the empty gripper option for gen3.launch.py (`#242 <https://github.com/Kinovarobotics/ros2_kortex/issues/242>`_)

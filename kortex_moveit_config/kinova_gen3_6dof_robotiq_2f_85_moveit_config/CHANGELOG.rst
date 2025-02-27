@@ -2,8 +2,8 @@
 Changelog for package kinova_gen3_6dof_robotiq_2f_85_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2025-02-27)
+------------------
 * Repo update (`#220 <https://github.com/Kinovarobotics/ros2_kortex/issues/220>`_)
   * Updating MoveIt configurations
   * Updating and restructuring instructions

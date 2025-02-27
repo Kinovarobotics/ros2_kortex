@@ -2,8 +2,8 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2025-02-27)
+------------------
 * Add force and velocity hardware interfaces (`#204 <https://github.com/Kinovarobotics/ros2_kortex/issues/204>`_)
   Co-authored-by: Ashton Larkin <42042756+adlarkin@users.noreply.github.com>
 * Contributors: Paul Gesel

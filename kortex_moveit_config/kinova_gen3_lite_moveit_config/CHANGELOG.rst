@@ -2,8 +2,8 @@
 Changelog for package kinova_gen3_lite_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2025-02-27)
+------------------
 * Fixed the Gazebo Fortress Simulation + Separated the arm and gripper control for Gen3_Lite + Fixed bugs (`#252 <https://github.com/Kinovarobotics/ros2_kortex/issues/252>`_)
   * Modified the Gen3_Lite Moveit Package for arm-gripper control separation
 * Added a Moveit2 package for Gen3-Lite (`#231 <https://github.com/Kinovarobotics/ros2_kortex/issues/231>`_)

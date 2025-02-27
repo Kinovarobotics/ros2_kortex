@@ -2,8 +2,8 @@
 Changelog for package kortex_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2025-02-27)
+------------------
 * Added a missing robot description argument: "moveit_active" (`#253 <https://github.com/Kinovarobotics/ros2_kortex/issues/253>`_)
 * Added the empty gripper option for gen3.launch.py (`#242 <https://github.com/Kinovarobotics/ros2_kortex/issues/242>`_)
 * Modified the joint limits of Gen3 and Gen3 Lite robots as per the values in the User Guides (`#241 <https://github.com/Kinovarobotics/ros2_kortex/issues/241>`_)
