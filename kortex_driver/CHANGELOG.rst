@@ -2,6 +2,12 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add force and velocity hardware interfaces (`#204 <https://github.com/Kinovarobotics/ros2_kortex/issues/204>`_)
+  Co-authored-by: Ashton Larkin <42042756+adlarkin@users.noreply.github.com>
+* Contributors: Paul Gesel
+
 0.2.2 (2023-08-09)
 ------------------
 * cxx: remove unused-but-set-parameter (`#164 <https://github.com/Kinovarobotics/ros2_kortex/issues/164>`_)

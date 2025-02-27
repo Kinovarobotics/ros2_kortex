@@ -2,6 +2,15 @@
 Changelog for package kortex_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Separated the arm and gripper control for Gen3_Lite + Fixed bugs (`#252 <https://github.com/Kinovarobotics/ros2_kortex/issues/252>`_)
+  * Separated the arm and gripper controllers for Gen3_Lite in Kortex_bringup
+* Added the empty gripper option for gen3.launch.py (`#242 <https://github.com/Kinovarobotics/ros2_kortex/issues/242>`_)
+* Fix mock_hardware and enable simulating gen3_lite (`#196 <https://github.com/Kinovarobotics/ros2_kortex/issues/196>`_)
+  * Add additional guards if user sets use_fake_hardware and use_internal_bus_gripper_comm true
+* Contributors: Marq Rasmussen, aalmrad, smoya23
+
 0.2.2 (2023-08-09)
 ------------------
 

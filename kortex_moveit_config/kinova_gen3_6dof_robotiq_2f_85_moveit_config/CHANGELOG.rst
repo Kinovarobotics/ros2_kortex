@@ -2,6 +2,17 @@
 Changelog for package kinova_gen3_6dof_robotiq_2f_85_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Repo update (`#220 <https://github.com/Kinovarobotics/ros2_kortex/issues/220>`_)
+  * Updating MoveIt configurations
+  * Updating and restructuring instructions
+* Update planner_plugin parameters (`#199 <https://github.com/Kinovarobotics/ros2_kortex/issues/199>`_)
+* Remove outdated config artifacts (`#198 <https://github.com/Kinovarobotics/ros2_kortex/issues/198>`_)
+* Cleanup robots for visualization & sim (`#180 <https://github.com/Kinovarobotics/ros2_kortex/issues/180>`_)
+* Update planning pipeline configurations (`#187 <https://github.com/Kinovarobotics/ros2_kortex/issues/187>`_)
+* Contributors: Marq Rasmussen, Sebastian Castro, Sebastian Jahr, smoya23
+
 0.2.2 (2023-08-09)
 ------------------
 * specify planning pipelines to use (`#157 <https://github.com/Kinovarobotics/ros2_kortex/issues/157>`_)
