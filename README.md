@@ -113,7 +113,14 @@ If the bug fix you need isn't in a released version or If you want to build this
    vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex-not-released.$ROS_DISTRO.repos
    ```
 
-   If you plan on simulating the robot with ignition or gazebo, first install the simulator by following the instructions [here](https://github.com/Kinovarobotics/ros2_kortex/tree/Humble_Gazebo_Classic_Support/3rdParty/Mobile_platform_integration/clearpath#:~:text=Install%20Gazebo%20Fortress) , then make sure to pull the additional simulation packages. If you're on    ROS2 Humble, run
+   If you plan on simulating the robot with ignition or gazebo, first install the simulator using the following commands:
+  ```
+  sudo apt-get update && sudo apt-get install wget
+  sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+  wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+  sudo apt-get update && sudo apt-get install ignition-fortress
+  ```
+  Then make sure to pull the additional simulation packages. If you're on ROS2 Humble, run:
    ```
    vcs import src --skip-existing --input src/ros2_kortex/simulation.humble.repos
    ```
