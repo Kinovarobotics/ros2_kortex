@@ -4,17 +4,56 @@
 
     <!-- Arguments -->
     <xacro:arg name="arm" default="gen3_lite" />
-
-    <!-- Those arguments are ignored for now on Gen3 lite because there is only one supported configuration -->
     <xacro:arg name="dof" default="6" />
     <xacro:arg name="vision" default="false" />
-
+    <xacro:arg name="robot_ip" default="192.168.1.10" />
+    <xacro:arg name="username" default="admin" />
+    <xacro:arg name="password" default="admin" />
+    <xacro:arg name="port" default="10000" />
+    <xacro:arg name="port_realtime" default="10001" />
+    <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
+    <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
     <xacro:arg name="gripper" default="gen3_lite_2f" />
-
-    <xacro:arg name="sim" default="false" />
+    <xacro:arg name="gripper_joint_name" default="right_finger_bottom_joint" />
+    <xacro:arg name="gripper_max_velocity" default="100.0" />
+    <xacro:arg name="gripper_max_force" default="100.0" />
+    <xacro:arg name="sim_gazebo" default="false" />
+    <xacro:arg name="sim_isaac" default="false" />
     <xacro:arg name="prefix" default="" />
+    <xacro:arg name="use_fake_hardware" default="false" />
+    <xacro:arg name="fake_sensor_commands" default="false" />
+    <xacro:arg name="use_internal_bus_gripper_comm" default="true" />
+    <xacro:arg name="use_external_cable" default="false" />
+    <xacro:arg name="moveit_active" default="false" />
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
-    <xacro:load_robot arm="$(arg arm)" gripper="$(arg gripper)" dof="$(arg dof)" vision="false" sim="$(arg sim)"  prefix="$(arg prefix)" />
+
+    <link name="world" />
+    <xacro:load_robot
+        parent="world"
+        arm="$(arg arm)"
+        gripper="$(arg gripper)"
+        gripper_joint_name="$(arg gripper_joint_name)"
+        gripper_max_velocity="$(arg gripper_max_velocity)"
+        gripper_max_force="$(arg gripper_max_force)"
+        dof="$(arg dof)"
+        vision="$(arg vision)"
+        robot_ip="$(arg robot_ip)"
+        username="$(arg username)"
+        password="$(arg password)"
+        port="$(arg port)"
+        port_realtime="$(arg port_realtime)"
+        session_inactivity_timeout_ms="$(arg session_inactivity_timeout_ms)"
+        connection_inactivity_timeout_ms="$(arg connection_inactivity_timeout_ms)"
+        use_internal_bus_gripper_comm="$(arg use_internal_bus_gripper_comm)"
+        prefix="$(arg prefix)"
+        use_fake_hardware="$(arg use_fake_hardware)"
+        fake_sensor_commands="$(arg fake_sensor_commands)"
+        sim_gazebo="$(arg sim_gazebo)"
+        sim_isaac="$(arg sim_isaac)"
+        use_external_cable="$(arg use_external_cable)"
+        moveit_active = "$(arg moveit_active)" >
+        <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
+    </xacro:load_robot>
 
 </robot>

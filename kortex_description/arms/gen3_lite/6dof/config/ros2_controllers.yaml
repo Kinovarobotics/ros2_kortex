@@ -11,11 +11,11 @@ controller_manager:
     twist_controller:
       type: picknik_twist_controller/PicknikTwistController
 
-    robotiq_gripper_controller:
-      type: position_controllers/GripperActionController
-
     fault_controller:
       type: picknik_reset_fault_controller/PicknikResetFaultController
+
+    gen3_lite_2f_gripper_controller:
+      type: position_controllers/GripperActionController
 
 joint_trajectory_controller:
   ros__parameters:
@@ -49,7 +49,7 @@ twist_controller:
       - twist.angular.y
       - twist.angular.z
 
-robotiq_gripper_controller:
+gen3_lite_2f_gripper_controller:
   ros__parameters:
     default: true
     joint: right_finger_bottom_joint

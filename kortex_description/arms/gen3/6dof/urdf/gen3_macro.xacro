@@ -26,12 +26,12 @@
     use_fake_hardware:=false
     mock_sensor_commands:=false
     sim_gazebo:=false
-    sim_ignition:=false
     sim_isaac:=false
     isaac_joint_commands:=/isaac_joint_commands
     isaac_joint_states:=/isaac_joint_states
     use_external_cable:=false
-    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}" >
+    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}
+    moveit_active:=false">
 
     <!-- ros2 control include -->
     <xacro:include filename="$(find kortex_description)/arms/gen3/${dof}dof/urdf/kortex.ros2_control.xacro" />
@@ -40,7 +40,6 @@
       use_fake_hardware="${use_fake_hardware}"
       mock_sensor_commands="${mock_sensor_commands}"
       sim_gazebo="${sim_gazebo}"
-      sim_ignition="${sim_ignition}"
       sim_isaac="${sim_isaac}"
       isaac_joint_commands="${isaac_joint_commands}"
       isaac_joint_states="${isaac_joint_states}"
@@ -179,7 +178,7 @@
       <parent link="${prefix}shoulder_link" />
       <child link="${prefix}bicep_link" />
       <axis xyz="0 0 1" />
-      <limit lower="-2.41" upper="2.41" effort="39" velocity="1.3963" />
+      <limit lower="-2.24" upper="2.24" effort="39" velocity="1.3963" />
     </joint>
     <link name="${prefix}forearm_link">
       <inertial>
@@ -208,7 +207,7 @@
       <parent link="${prefix}bicep_link" />
       <child link="${prefix}forearm_link" />
       <axis xyz="0 0 1" />
-      <limit lower="-2.66" upper="2.66" effort="39" velocity="1.3963" />
+      <limit lower="-2.57" upper="2.57" effort="39" velocity="1.3963" />
     </joint>
     <link name="${prefix}spherical_wrist_1_link">
       <inertial>
@@ -277,7 +276,7 @@
       <parent link="${prefix}spherical_wrist_1_link" />
       <child link="${prefix}spherical_wrist_2_link" />
       <axis xyz="0 0 1" />
-      <limit lower="-2.23" upper="2.23" effort="9" velocity="1.2218" />
+      <limit lower="-2.09" upper="2.09" effort="9" velocity="1.2218" />
     </joint>
     <xacro:if value="${vision}">
     <link name="${prefix}bracelet_link">

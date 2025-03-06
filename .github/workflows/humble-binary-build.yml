@@ -24,6 +24,7 @@ jobs:
           - {ROS_DISTRO: humble, ROS_REPO: testing}
     env:
       UPSTREAM_WORKSPACE: ros2_kortex-not-released.${{ matrix.env.ROS_DISTRO }}.repos
+      ROSDEP_SKIP_KEYS: gz_ros2_control
       CCACHE_DIR: ${{ github.workspace }}/.ccache
       BASEDIR: ${{ github.workspace }}/.work
       CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}

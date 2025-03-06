@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>kortex_description</name>
-  <version>0.2.2</version>
+  <version>0.2.3</version>
   <description>
     <p>URDF and xacro description package for Kortex robots</p>
     <p>This package contains configuration data, 3D models and launch files
@@ -15,6 +15,7 @@ for Kortex arms and supported grippers</p>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <exec_depend>gz_ros2_control</exec_depend>
   <exec_depend>joint_state_publisher_gui</exec_depend>
   <exec_depend>joint_state_publisher</exec_depend>
   <exec_depend>joint_trajectory_controller</exec_depend>

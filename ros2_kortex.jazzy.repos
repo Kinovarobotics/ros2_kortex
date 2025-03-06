@@ -2,16 +2,20 @@ repositories:
   control_msgs:
     type: git
     url: https://github.com/ros-controls/control_msgs.git
-    version: humble
+    version: master
   ros2_control:
     type: git
     url: https://github.com/ros-controls/ros2_control.git
-    version: humble
+    version: master
   ros2_controllers:
     type: git
     url: https://github.com/ros-controls/ros2_controllers.git
-    version: humble
+    version: master
   ros2_robotiq_gripper:
     type: git
     url: https://github.com/picknikrobotics/ros2_robotiq_gripper.git
     version: main
+  gz_ros2_control:
+    type: git
+    url: https://github.com/ros-controls/gz_ros2_control.git
+    version: jazzy

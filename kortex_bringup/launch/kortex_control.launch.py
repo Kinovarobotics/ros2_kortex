@@ -27,6 +27,7 @@ from launch.substitutions import (
     FindExecutable,
     LaunchConfiguration,
     PathJoinSubstitution,
+    PythonExpression,
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -57,7 +58,8 @@ def launch_setup(context, *args, **kwargs):
     gripper_joint_name = LaunchConfiguration("gripper_joint_name")
 
     # if we are using fake hardware then we can't use the internal gripper communications of the hardware
-    if use_fake_hardware.parse:
+    use_fake_hardware_value = use_fake_hardware.perform(context)
+    if use_fake_hardware_value == "true":
         use_internal_bus_gripper_comm = "false"
 
     robot_description_content = Command(
@@ -123,7 +125,10 @@ def launch_setup(context, *args, **kwargs):
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
+        parameters=[robot_controllers],
+        remappings=[
+            ("~/robot_description", "/robot_description"),
+        ],
         output="both",
     )
 
@@ -178,6 +183,7 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        condition=IfCondition(PythonExpression(["'", gripper, "' != ''"])),
     )
 
     # only start the fault controller if we are using hardware
@@ -195,9 +201,12 @@ def launch_setup(context, *args, **kwargs):
         delay_rviz_after_joint_state_broadcaster_spawner,
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
-        robot_hand_controller_spawner,
         fault_controller_spawner,
     ]
+    start_robot_hand_controller = gripper.perform(context) != ""
+    # Conditionally add robot_hand_controller_spawner
+    if start_robot_hand_controller:
+        nodes_to_start.append(robot_hand_controller_spawner)
 
     return nodes_to_start
 
@@ -294,7 +303,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper",
-            default_value='""',
+            default_value="",
             description="Name of the gripper attached to the arm",
         )
     )
@@ -372,5 +381,4 @@ def generate_launch_description():
             description="Max force for gripper commands",
         )
     )
-
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])

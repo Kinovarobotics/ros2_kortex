@@ -38,9 +38,9 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
-            "sim_ignition",
+            "sim_gazebo",
             default_value="true",
-            description="Use Ignition for simulation",
+            description="Use Gazebo for simulation",
         )
     )
     declared_arguments.append(
@@ -64,7 +64,7 @@ def generate_launch_description():
     # Initialize Arguments
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
-    sim_ignition = LaunchConfiguration("sim_ignition")
+    sim_gazebo = LaunchConfiguration("sim_gazebo")
     vision = LaunchConfiguration("vision")
 
     description_arguments = {
@@ -72,7 +72,7 @@ def generate_launch_description():
         "use_fake_hardware": "false",
         "gripper": "robotiq_2f_85",
         "dof": "7",
-        "sim_ignition": sim_ignition,
+        "sim_gazebo": sim_gazebo,
         "vision": vision,
     }
 
@@ -102,6 +102,11 @@ def generate_launch_description():
     moveit_config = (
         MoveItConfigsBuilder("gen3", package_name="kinova_gen3_7dof_robotiq_2f_85_moveit_config")
         .robot_description(mappings=description_arguments)
+        .trajectory_execution(file_path="config/moveit_controllers.yaml")
+        .planning_scene_monitor(
+            publish_robot_description=True, publish_robot_description_semantic=True
+        )
+        .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner"])
         .to_moveit_configs()
     )
     

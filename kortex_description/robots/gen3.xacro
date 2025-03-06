@@ -13,12 +13,11 @@
     <xacro:arg name="port_realtime" default="10001" />
     <xacro:arg name="session_inactivity_timeout_ms" default="60000" />
     <xacro:arg name="connection_inactivity_timeout_ms" default="2000" />
-    <xacro:arg name="gripper" default="robotiq_2f_85" />
+    <xacro:arg name="gripper" default="" />
     <xacro:arg name="gripper_joint_name" default="finger_joint" />
     <xacro:arg name="gripper_max_velocity" default="100.0" />
     <xacro:arg name="gripper_max_force" default="100.0" />
     <xacro:arg name="sim_gazebo" default="false" />
-    <xacro:arg name="sim_ignition" default="false" />
     <xacro:arg name="sim_isaac" default="false" />
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="use_fake_hardware" default="false" />
@@ -27,7 +26,7 @@
     <xacro:arg name="use_external_cable" default="false" />
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
-    <!-- initial position for simulations (Mock Hardware, Gazebo, Ignition) -->
+    <!-- initial position for simulations (Mock Hardware, Gazebo) -->
     <xacro:arg name="initial_positions_file" default="$(find kortex_description)/config/initial_positions.yaml"/>
     <!-- convert to property to use substitution in function -->
     <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
@@ -53,7 +52,6 @@
         use_fake_hardware="$(arg use_fake_hardware)"
         mock_sensor_commands="$(arg mock_sensor_commands)"
         sim_gazebo="$(arg sim_gazebo)"
-        sim_ignition="$(arg sim_ignition)"
         sim_isaac="$(arg sim_isaac)"
         use_external_cable="$(arg use_external_cable)"
         initial_positions="${xacro.load_yaml(initial_positions_file)}" >

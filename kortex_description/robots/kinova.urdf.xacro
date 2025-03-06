@@ -24,19 +24,18 @@
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="mock_sensor_commands" default="false" />
   <xacro:arg name="sim_gazebo" default="false" />
-  <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="sim_isaac" default="false" />
   <xacro:arg name="gazebo_renderer" default="ogre"/>
   <xacro:arg name="camera_width" default="640"/>
   <xacro:arg name="camera_height" default="480"/>
   <xacro:arg name="camera_fps" default="6"/>
   <xacro:arg name="simulation_controllers" default="$(find kortex_description)/arm/$(arg arm)/$(arg dof)dof/config/ros2_controllers.yaml" />
-
+  <xacro:arg name="moveit_active" default="false"/>
 
   <!-- import main macro -->
   <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
 
-  <!-- initial position for simulations (Mock Hardware, Gazebo, Ignition) -->
+  <!-- initial position for simulations (Mock Hardware, Gazebo) -->
   <xacro:arg name="initial_positions_file" default="$(find kortex_description)/config/initial_positions.yaml"/>
 
   <!-- convert to property to use substitution in function -->
@@ -66,9 +65,9 @@
     use_fake_hardware="$(arg use_fake_hardware)"
     mock_sensor_commands="$(arg mock_sensor_commands)"
     sim_gazebo="$(arg sim_gazebo)"
-    sim_ignition="$(arg sim_ignition)"
     sim_isaac="$(arg sim_isaac)"
-    initial_positions="${xacro.load_yaml(initial_positions_file)}" >
+    initial_positions="${xacro.load_yaml(initial_positions_file)}"
+    moveit_active="$(arg moveit_active)">
     <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
   </xacro:load_robot>
 
@@ -77,22 +76,11 @@
     <gazebo reference="world">
     </gazebo>
     <gazebo>
-      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-        <parameters>$(arg simulation_controllers)</parameters>
-      </plugin>
-    </gazebo>
-  </xacro:if>
-
-  <xacro:if value="$(arg sim_ignition)">
-    <!-- Gazebo plugins -->
-    <gazebo reference="world">
-    </gazebo>
-    <gazebo>
-      <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+      <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
         <parameters>$(arg simulation_controllers)</parameters>
         <controller_manager_node_name>$(arg prefix)controller_manager</controller_manager_node_name>
       </plugin>
-      <plugin filename="libignition-gazebo-sensors-system.so" name="ignition::gazebo::systems::Sensors">
+      <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
         <render_engine>$(arg gazebo_renderer)</render_engine>
       </plugin>
     </gazebo>
@@ -126,7 +114,7 @@
               <s>0</s>
             </intrinsics>
             <!-- These need to match the intrinsics above or
-            Ignition will default to different default values -->
+            Gazebo will default to different default values -->
             <projection>
               <p_fx>554.25469</p_fx>
               <p_fy>554.25469</p_fy>
@@ -149,7 +137,7 @@
           </depth_camera>
           <optical_frame_id>color_optical_frame</optical_frame_id>
         </camera>
-        <ignition_frame_id>camera_color_frame</ignition_frame_id>
+        <gz_frame_id>camera_color_frame</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>$(arg camera_fps)</update_rate>
         <visualize>true</visualize>

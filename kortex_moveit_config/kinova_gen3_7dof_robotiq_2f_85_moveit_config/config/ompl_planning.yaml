@@ -1,6 +1,5 @@
-
-#planning_plugins:
-#  - ompl_interface/OMPLPlanner
+planning_plugins:
+  - ompl_interface/OMPLPlanner
 # To optionally use Ruckig for jerk-limited smoothing, add this line to the request adapters below
 # default_planning_request_adapters/AddRuckigTrajectorySmoothing
 planner_configs:
@@ -163,10 +162,11 @@ manipulator:
     - SPARStwokConfigDefault
     - TrajOptDefault
   longest_valid_segment_fraction: 0.005
-
 gripper:
   planner_configs:
     - APSConfigDefault
+gripper:
+  planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
     - LBKPIECEkConfigDefault
