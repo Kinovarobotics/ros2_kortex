@@ -379,7 +379,7 @@ ros2 launch kinova_gen3_lite_moveit_config sim.launch.py \
 ```
 
 ## Commanding the arm (physically and in simulation)
-You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller:
+You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller with joint positions are in **radians**:
 
 ```bash
 ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
