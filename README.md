@@ -246,20 +246,6 @@ You can specify the following arguments if you wish to change your arm configura
 
 * `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
 
-#### Robotiq gripper
-
-The Robotiq 2f 85 (or 2f 140) Gripper will be available on the Action topic:
-
-```bash
-/robotiq_gripper_controller/gripper_cmd
-```
-
-You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`)
-
-```bash
-ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
-```
-
 #### Vision Module
 
 In order to access the Kinova Vision module's depth and color streams for the camera-equipped Gen3 arm models, please refer to the following github repository for detailed instructions: [ros2_kortex_vision](https://github.com/Kinovarobotics/ros2_kortex_vision)
@@ -449,6 +435,20 @@ ros2 service call /controller_manager/switch_controller controller_manager_msgs/
   strictness: 1,
   activate_asap: true,
 }"
+```
+
+#### Robotiq gripper
+
+The Robotiq 2f 85 (or 2f 140) Gripper will be available on the Action topic:
+
+```bash
+/robotiq_gripper_controller/gripper_cmd
+```
+
+You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`)
+
+```bash
+ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
 ```
 
 ## Contents
