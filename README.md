@@ -336,15 +336,9 @@ ros2 launch kortex_bringup kortex_sim_control.launch.py \
 
 #### MoveIt2
 
-To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm with mock hardware:
+To generate motion plans and execute them with virtual arm hardware:
 
-```bash
-ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
-  robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
-```
-
-and to bring up the Kinova Gen3 6 DoF with MoveIt:
+1. For a 6 DoF Kinova Gen3 arm, run the following:
 
 ```bash
 ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
@@ -352,30 +346,55 @@ ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
   use_fake_hardware:=true
 ```
 
-To generate motion plans and execute them with an ignition simulated 7 DoF Kinova Gen3 arm (previously launched with the command at the [simulation](#simulation) section):
+2. For a 7 DoF Kinova Gen3 arm, run the following:
 
 ```bash
-ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py \
-  use_sim_time:=true
+ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
+  robot_ip:=yyy.yyy.yyy.yyy \
+  use_fake_hardware:=true
 ```
 
-To work with a physical robot and generate/execute paths with MoveIt run the following:
+To generate motion plans and execute them with real-life hardware:
 
-For Gen3:
+1. For a 6 DoF Kinova Gen3 arm with default IP address, run the following:
+
+```bash
+ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
+  robot_ip:=192.168.1.10
+```
+
+2. For a 7 DoF Kinova Gen3 arm with default IP address, run the following:
 
 ```bash
 ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=192.168.1.10
 ```
 
-For Gen3-Lite:
+3. For a Gen3-Lite arm with default IP address and connected through USB, run the following:
 
 ```bash
 ros2 launch kinova_gen3_lite_moveit_config robot.launch.py \
-  robot_ip:=192.168.1.10
+  robot_ip:=192.168.2.10
 ```
 
+To generate motion plans and execute them in simulation, make sure to first start the simulated robot with the command at the [simulation](#simulation) section, then:
 
+1. For a 6 DoF Kinova Gen3 arm, run the following:
+```bash
+ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config sim.launch.py \
+  use_sim_time:=true
+```
+2. For a 7 DoF Kinova Gen3 arm, run the following:
+```bash
+ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py \
+  use_sim_time:=true
+```
+
+3. For a Gen3-Lite arm, run the following:
+```bash
+ros2 launch kinova_gen3_lite_moveit_config sim.launch.py \
+  use_sim_time:=true
+```
 
 ## Commanding the arm (physically and in simulation)
 You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller:
