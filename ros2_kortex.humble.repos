@@ -17,5 +17,5 @@ repositories:
     version: b6136bdc866a929bfb096890ca61dde1335ffd30
   realtime_tools:
     type: git
-    url: https://github.com/ros-controls/realtime_tools/tree/humble
+    url: https://github.com/ros-controls/realtime_tools.git
     version: humble
