@@ -246,10 +246,6 @@ You can specify the following arguments if you wish to change your arm configura
 
 * `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
 
-#### Vision Module
-
-In order to access the Kinova Vision module's depth and color streams for the camera-equipped Gen3 arm models, please refer to the following github repository for detailed instructions: [ros2_kortex_vision](https://github.com/Kinovarobotics/ros2_kortex_vision)
-
 ### Gen 3 Lite Robot
 
 The `gen3_lite.launch.py` launch file is designed to be used for Gen3 Lite arms. The typical use case to bringup the robot arm with mock hardware:
@@ -450,6 +446,11 @@ You can test the gripper by calling the Action server with the following command
 ```bash
 ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
 ```
+
+#### Vision Module
+
+In order to access the Kinova Vision module's depth and color streams for the camera-equipped Gen3 arm models, please refer to the following github repository for detailed instructions: [ros2_kortex_vision](https://github.com/Kinovarobotics/ros2_kortex_vision)
+
 
 ## Contents
 
