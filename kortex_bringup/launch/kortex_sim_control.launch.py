@@ -171,7 +171,7 @@ def launch_setup(context, *args, **kwargs):
         condition=UnlessCondition(is_gen3_lite),
     )
 
-    robot_hand_controller_spawner = Node(
+    lite_robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[robot_lite_hand_controller, "-c", "/controller_manager"],
@@ -274,6 +274,7 @@ def launch_setup(context, *args, **kwargs):
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
+        lite_robot_hand_controller_spawner,
         gzserver,
         gzclient,
         gazebo_spawn_robot,
