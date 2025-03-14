@@ -441,7 +441,7 @@ The Robotiq 2f 85 (or 2f 140) Gripper will be available on the Action topic:
 /robotiq_gripper_controller/gripper_cmd
 ```
 
-You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`)
+You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.1=open`, `0.7=close`)
 
 ```bash
 ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
