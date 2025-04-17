@@ -65,29 +65,11 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
 
 **NOTE** Please use the `Humble_Gazebo_Classic_Support` branch for ROS2 Humble and the `main` branch for ROS2 Jazzy
 
-2. Install this package from binary
-   ```
-   sudo apt install ros-$ROS_DISTRO-kortex-bringup
-   ```
-
-3. Optional: install MoveIt Configuration and Cyclone DDS
-
-   If you have a 7dof arm:
-   ```
-   sudo apt install ros-$ROS_DISTRO-kinova-gen3-7dof-robotiq-2f-85-moveit-config
-   ```
-   If you have a 6dof arm:
-   ```
-   sudo apt install ros-$ROS_DISTRO-kinova-gen3-6dof-robotiq-2f-85-moveit-config
-   ```
-   If you plan to use MoveIt, it is recommended to install and use Cyclone DDS.
+2. If you plan to use MoveIt, it is recommended to install and use Cyclone DDS.
    ```
    sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
    ```
-
-4. Go to Usage section
-
 ## Contributing to this repository or building from source
 
 Note: It is recommended to use a released binary version of this package and apt install it.
