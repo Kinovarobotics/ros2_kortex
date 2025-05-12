@@ -72,11 +72,7 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
    ```
 ## Contributing to this repository or building from source
 
-Note: It is recommended to use a released binary version of this package and apt install it.
-If you want the latest version of this repository for testing latest fixes
-check out testing with pre-released binaries: https://docs.ros.org/en/rolling/Installation/Testing.html
-
-If the bug fix you need isn't in a released version or If you want to build this repository from source or contribute back to the repository read on.
+To build this repository from source or contribute back to the repository read on.
 
 1. Make sure that `colcon`, its extensions, and `vcs` are installed:
    ```
