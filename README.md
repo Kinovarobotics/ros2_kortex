@@ -100,7 +100,7 @@ If the bug fix you need isn't in a released version or If you want to build this
 3. Pull relevant packages:
    ```
    cd $COLCON_WS
-   git clone -b Humble_Gazebo_Classic_Support --single-branch https://github.com/Kinovarobotics/ros2_kortex.git src/ros2_kortex
+   git clone -b humble --single-branch https://github.com/Kinovarobotics/ros2_kortex.git src/ros2_kortex
    vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex.$ROS_DISTRO.repos
    vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex-not-released.$ROS_DISTRO.repos
    ```
