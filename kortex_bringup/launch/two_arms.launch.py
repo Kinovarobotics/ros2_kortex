@@ -64,13 +64,6 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "robot_controller",
-            default_value="joint_trajectory_controller",
-            description="Robot controller to start.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "controllers_file_1",
             default_value="arm_1_ros2_controllers.yaml",
             description="Robot controller to start.",
@@ -136,6 +129,28 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument("prefix_2", default_value="arm_2_", description="Prefix to differentiate arms")
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_controller",
+            default_value="joint_trajectory_controller",
+            description="Robot controller to start.",
+        )
+    )
+    DeclareLaunchArgument(
+        "robot_pos_controller",
+        default_value="twist_controller",  # Updated
+        description="Robot controller to start.",
+    )
+    DeclareLaunchArgument(
+        "robot_hand_controller",
+        default_value="robotiq_gripper_controller",  # Updated
+        description="Robot hand controller to start.",
+    )
+    DeclareLaunchArgument(
+        "fault_controller",
+        default_value="fault_controller",  # Updated
+        description="Name of the fault controller.",
+    )
 
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
@@ -144,7 +159,6 @@ def generate_launch_description():
     dof = LaunchConfiguration("dof")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
-    robot_controller = LaunchConfiguration("robot_controller")
     gripper_1 = LaunchConfiguration("gripper_1")
     gripper_2 = LaunchConfiguration("gripper_2")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
@@ -156,16 +170,20 @@ def generate_launch_description():
     controllers_file_2 = LaunchConfiguration("controllers_file_2")
     prefix_1 = LaunchConfiguration("prefix_1")
     prefix_2 = LaunchConfiguration("prefix_2")
-
+    robot_controller = LaunchConfiguration("robot_controller")
+    robot_pos_controller = LaunchConfiguration("robot_pos_controller")
+    robot_hand_controller = LaunchConfiguration("robot_hand_controller")
+    fault_controller = LaunchConfiguration("fault_controller")
+    
     base_launch_1 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
         launch_arguments={
+            "namespace": "arm_1_",
             "robot_type": robot_type,
             "robot_ip": robot_ip_1,
             "dof": dof,
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
-            "robot_controller": robot_controller,
             "gripper": gripper_1,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
@@ -175,18 +193,18 @@ def generate_launch_description():
             "controllers_file": controllers_file_1,
             "description_file": "gen3.xacro",
             "prefix": prefix_1,
-        }.items(),
+    }.items(),
     )
 
     base_launch_2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
+        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/2_kortex_control.launch.py"]),
         launch_arguments={
+            "namespace": "arm_2_",
             "robot_type": robot_type,
             "robot_ip": robot_ip_2,
             "dof": dof,
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
-            "robot_controller": robot_controller,
             "gripper": gripper_2,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
@@ -196,7 +214,9 @@ def generate_launch_description():
             "controllers_file": controllers_file_2,
             "description_file": "gen3.xacro",
             "prefix": prefix_2,
-        }.items(),
+    }.items(),
     )
 
-    return LaunchDescription(declared_arguments + [base_launch_1] + [base_launch_2])
+    launch_files = [base_launch_1, base_launch_2]
+
+    return LaunchDescription(declared_arguments + launch_files)
