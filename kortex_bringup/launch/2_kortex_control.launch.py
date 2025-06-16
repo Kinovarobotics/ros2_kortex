@@ -296,7 +296,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "prefix",
-            default_value='""',
+            default_value="arm_2_",
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",
@@ -386,7 +386,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'namespace', 
-            default_value='arm_2_',  # or specify a default namespace if needed
+            default_value='arm_2_',
             description='Namespace for the robot'
         )
     )

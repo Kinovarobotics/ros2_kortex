@@ -73,7 +73,8 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   start_fault_controller_(false),
   first_pass_(true),
   gripper_joint_name_(""),
-  use_internal_bus_gripper_comm_(false)
+  use_internal_bus_gripper_comm_(false),
+  joints_prefix_("")
 {
   RCLCPP_INFO(LOGGER, "Setting severity threshold to DEBUG");
   auto ret = rcutils_logging_set_logger_level(LOGGER.get_name(), RCUTILS_LOG_SEVERITY_DEBUG);
@@ -175,13 +176,14 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
   {
     RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
   }
+  RCLCPP_INFO(LOGGER, "Listing all keys in hardware_parameters:");
 
-  if (gripper_joint_name_ == "robotiq_85_left_knuckle_joint") {
-    gripper_joint_name_ = "arm_1_robotiq_85_left_knuckle_joint";
-  }
-  if (gripper_joint_name_ == "robotiq_140_left_knuckle_joint") {
-    gripper_joint_name_ = "arm_2_robotiq_140_left_knuckle_joint";
-  }
+  joints_prefix_ = info_.hardware_parameters["prefix"];
+  RCLCPP_INFO(LOGGER, "Prefix is %s", joints_prefix_.c_str());
+
+  // append prefix to gripper joint name
+  gripper_joint_name_ = joints_prefix_ + gripper_joint_name_;
+  RCLCPP_INFO(LOGGER, "updated gripper joint name is %s", gripper_joint_name_.c_str());
 
   gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
   gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
@@ -906,7 +908,7 @@ return_type KortexMultiInterfaceHardware::write(
       {
         // Keep alive mode - no controller active
         feedback_ = base_cyclic_.RefreshFeedback();
-        // RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
+        RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
       }
     }
     else
