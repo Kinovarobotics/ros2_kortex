@@ -53,4 +53,5 @@
 /arm_1_/robotiq_gripper_controller:
   ros__parameters:
     default: true
-    joint: arm_1_robotiq_85_left_knuckle
+    joint: arm_1_robotiq_85_left_knuckle_joint
+    allow_stalling: true

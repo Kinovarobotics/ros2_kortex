@@ -176,6 +176,13 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
   }
 
+  if (gripper_joint_name_ == "robotiq_85_left_knuckle_joint") {
+    gripper_joint_name_ = "arm_1_robotiq_85_left_knuckle_joint";
+  }
+  if (gripper_joint_name_ == "robotiq_140_left_knuckle_joint") {
+    gripper_joint_name_ = "arm_2_robotiq_140_left_knuckle_joint";
+  }
+
   gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
   gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
 
@@ -301,6 +308,7 @@ KortexMultiInterfaceHardware::export_state_interfaces()
     RCLCPP_DEBUG(LOGGER, "export_state_interfaces for joint: %s", info_.joints[i].name.c_str());
     if (info_.joints[i].name == gripper_joint_name_)
     {
+      
       state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
       state_interfaces.emplace_back(hardware_interface::StateInterface(
@@ -308,6 +316,7 @@ KortexMultiInterfaceHardware::export_state_interfaces()
     }
     else
     {
+      
       arm_joint_names.emplace_back(info_.joints[i].name);
     }
   }
@@ -348,6 +357,7 @@ KortexMultiInterfaceHardware::export_command_interfaces()
       command_interfaces.emplace_back(hardware_interface::CommandInterface(
         info_.joints[i].name, "set_gripper_max_effort", &gripper_force_command_));
       gripper_force_command_ = gripper_command_max_force_;
+      RCLCPP_INFO(LOGGER, "Gripper max vel and effort configured");
     }
     else
     {
@@ -681,6 +691,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   gripper_motor_command_->set_position(gripper_initial_position);  // % position
   gripper_motor_command_->set_velocity(gripper_speed_command_);    // % speed
   gripper_motor_command_->set_force(gripper_force_command_);       // % force
+  RCLCPP_INFO(LOGGER, "Initialize interconnect command to current gripper position");
 
   // Send a first frame
   base_feedback = base_cyclic_.Refresh(base_command_);
@@ -802,6 +813,7 @@ void KortexMultiInterfaceHardware::readGripperPosition()
   {
     gripper_position_ =
       feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
+      // DEBUGGING: this function seems to return the correct gripper posi, so issue is not here
   }
 }
 

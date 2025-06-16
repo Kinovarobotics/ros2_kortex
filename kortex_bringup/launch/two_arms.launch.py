@@ -79,7 +79,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_1",
-            default_value="",
+            default_value="robotiq_2f_85",
             description="Name of the gripper attached to the arm",
             choices=["", "robotiq_2f_85", "robotiq_2f_140"],
         )
@@ -87,15 +87,22 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_2",
-            default_value="",
+            default_value="robotiq_2f_140",
             description="Name of the gripper attached to the arm",
             choices=["", "robotiq_2f_85", "robotiq_2f_140"],
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "gripper_joint_name",
-            default_value="robotiq_85_left_knuckle_joint",
+            "gripper_joint_name_1",
+            default_value="robotiq_85_left_knuckle_joint", # Adding prefix here breaks things
+            description="Name of the gripper attached to the arm",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_joint_name_2",
+            default_value="robotiq_140_left_knuckle_joint", # Adding prefix here breaks things
             description="Name of the gripper attached to the arm",
         )
     )
@@ -129,28 +136,6 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument("prefix_2", default_value="arm_2_", description="Prefix to differentiate arms")
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_controller",
-            default_value="joint_trajectory_controller",
-            description="Robot controller to start.",
-        )
-    )
-    DeclareLaunchArgument(
-        "robot_pos_controller",
-        default_value="twist_controller",  # Updated
-        description="Robot controller to start.",
-    )
-    DeclareLaunchArgument(
-        "robot_hand_controller",
-        default_value="robotiq_gripper_controller",  # Updated
-        description="Robot hand controller to start.",
-    )
-    DeclareLaunchArgument(
-        "fault_controller",
-        default_value="fault_controller",  # Updated
-        description="Name of the fault controller.",
-    )
 
     # Initialize Arguments
     robot_type = LaunchConfiguration("robot_type")
@@ -164,19 +149,16 @@ def generate_launch_description():
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
     gripper_max_force = LaunchConfiguration("gripper_max_force")
-    gripper_joint_name = LaunchConfiguration("gripper_joint_name")
+    gripper_joint_name_1 = LaunchConfiguration("gripper_joint_name_1")
+    gripper_joint_name_2 = LaunchConfiguration("gripper_joint_name_2")
     launch_rviz = LaunchConfiguration("launch_rviz")
     controllers_file_1 = LaunchConfiguration("controllers_file_1")
     controllers_file_2 = LaunchConfiguration("controllers_file_2")
     prefix_1 = LaunchConfiguration("prefix_1")
     prefix_2 = LaunchConfiguration("prefix_2")
-    robot_controller = LaunchConfiguration("robot_controller")
-    robot_pos_controller = LaunchConfiguration("robot_pos_controller")
-    robot_hand_controller = LaunchConfiguration("robot_hand_controller")
-    fault_controller = LaunchConfiguration("fault_controller")
     
     base_launch_1 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
+        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/1_kortex_control.launch.py"]),
         launch_arguments={
             "namespace": "arm_1_",
             "robot_type": robot_type,
@@ -188,7 +170,7 @@ def generate_launch_description():
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
             "gripper_max_force": gripper_max_force,
-            "gripper_joint_name": gripper_joint_name,
+            "gripper_joint_name": gripper_joint_name_1,
             "launch_rviz": launch_rviz,
             "controllers_file": controllers_file_1,
             "description_file": "gen3.xacro",
@@ -209,7 +191,7 @@ def generate_launch_description():
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
             "gripper_max_force": gripper_max_force,
-            "gripper_joint_name": gripper_joint_name,
+            "gripper_joint_name": gripper_joint_name_2,
             "launch_rviz": launch_rviz,
             "controllers_file": controllers_file_2,
             "description_file": "gen3.xacro",

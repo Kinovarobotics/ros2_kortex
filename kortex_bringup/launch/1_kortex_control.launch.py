@@ -13,7 +13,6 @@
 # limitations under the License.
 #
 # Authors: Marq Rasmussen, Denis Stogl
-
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
@@ -56,6 +55,7 @@ def launch_setup(context, *args, **kwargs):
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     gripper_joint_name = LaunchConfiguration("gripper_joint_name")
+    namespace = LaunchConfiguration("namespace")
 
     # if we are using fake hardware then we can't use the internal gripper communications of the hardware
     use_fake_hardware_value = use_fake_hardware.perform(context)
@@ -121,13 +121,15 @@ def launch_setup(context, *args, **kwargs):
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
     )
+    
 
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[robot_controllers],
+        namespace="/arm_1_",
         remappings=[
-            ("~/robot_description", "/robot_description"),
+            ("~/robot_description", ["/arm_1_/robot_description"]),
         ],
         output="both",
     )
@@ -136,6 +138,7 @@ def launch_setup(context, *args, **kwargs):
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
+        namespace="/arm_1_",
         parameters=[robot_description],
     )
 
@@ -153,8 +156,7 @@ def launch_setup(context, *args, **kwargs):
         executable="spawner",
         arguments=[
             "joint_state_broadcaster",
-            "--controller-manager",
-            "/controller_manager",
+            "--controller-manager", "/arm_1_/controller_manager",
         ],
     )
 
@@ -170,19 +172,19 @@ def launch_setup(context, *args, **kwargs):
     robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_traj_controller, "-c", "/controller_manager"],
+        arguments=[robot_traj_controller, "-c", ["/arm_1_/controller_manager"]],
     )
 
     robot_pos_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
+        arguments=[robot_pos_controller, "--inactive", "-c", ["/arm_1_/controller_manager"]],
     )
 
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        arguments=[robot_hand_controller, "-c", ["/arm_1_/controller_manager"]],
         condition=IfCondition(PythonExpression(["'", gripper, "' != ''"])),
     )
 
@@ -190,7 +192,7 @@ def launch_setup(context, *args, **kwargs):
     fault_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[fault_controller, "-c", "/controller_manager"],
+        arguments=[fault_controller, "-c", ["/arm_1_/controller_manager"]],
         condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
@@ -379,6 +381,13 @@ def generate_launch_description():
             "gripper_joint_name",
             default_value="finger_joint",
             description="Max force for gripper commands",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'namespace', 
+            default_value='arm_1_', 
+            description='Namespace for the robot'
         )
     )
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
