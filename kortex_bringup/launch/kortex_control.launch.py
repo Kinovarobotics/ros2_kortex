@@ -122,12 +122,17 @@ def launch_setup(context, *args, **kwargs):
         [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
     )
 
+    prefix_value = prefix.perform(context)
+    remapped_robot_description = (
+    "/" + prefix_value + "/robot_description" if prefix_value else "/robot_description"
+    )
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[robot_controllers],
+        namespace= prefix_value,
         remappings=[
-            ("~/robot_description", "/robot_description"),
+            ("~/robot_description", remapped_robot_description),
         ],
         output="both",
     )
@@ -136,6 +141,7 @@ def launch_setup(context, *args, **kwargs):
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
+        namespace= prefix_value,
         parameters=[robot_description],
     )
 
@@ -148,13 +154,16 @@ def launch_setup(context, *args, **kwargs):
         arguments=["-d", rviz_config_file],
     )
 
+    controller_manager_name = (
+    "/" + prefix_value + "/controller_manager" if prefix_value else "/controller_manager"
+    )
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[
             "joint_state_broadcaster",
             "--controller-manager",
-            "/controller_manager",
+            controller_manager_name,
         ],
     )
 
@@ -170,19 +179,19 @@ def launch_setup(context, *args, **kwargs):
     robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_traj_controller, "-c", "/controller_manager"],
+        arguments=[robot_traj_controller, "-c", controller_manager_name],
     )
 
     robot_pos_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
+        arguments=[robot_pos_controller, "--inactive", "-c", controller_manager_name],
     )
 
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        arguments=[robot_hand_controller, "-c", controller_manager_name],
         condition=IfCondition(PythonExpression(["'", gripper, "' != ''"])),
     )
 
@@ -190,7 +199,7 @@ def launch_setup(context, *args, **kwargs):
     fault_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[fault_controller, "-c", "/controller_manager"],
+        arguments=[fault_controller, "-c", controller_manager_name],
         condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
@@ -294,7 +303,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "prefix",
-            default_value='""',
+            default_value='',
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",

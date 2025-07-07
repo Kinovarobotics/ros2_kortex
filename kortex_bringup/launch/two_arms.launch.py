@@ -19,7 +19,6 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 
-
 def generate_launch_description():
     # Declare arguments
     declared_arguments = []
@@ -158,9 +157,8 @@ def generate_launch_description():
     prefix_2 = LaunchConfiguration("prefix_2")
     
     base_launch_1 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/1_kortex_control.launch.py"]),
+        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
         launch_arguments={
-            "namespace": "arm_1_",
             "robot_type": robot_type,
             "robot_ip": robot_ip_1,
             "dof": dof,
@@ -179,9 +177,8 @@ def generate_launch_description():
     )
 
     base_launch_2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/2_kortex_control.launch.py"]),
+        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
         launch_arguments={
-            "namespace": "arm_2_",
             "robot_type": robot_type,
             "robot_ip": robot_ip_2,
             "dof": dof,
