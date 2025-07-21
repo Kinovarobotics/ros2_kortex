@@ -12,87 +12,56 @@ ROS2 Kortex is the official ROS2 package to interact with Kortex and its related
   <tr>
     <th>ROS 2 Distro</th>
     <th>Humble</th>
-    <th>Iron</th>
-    <th>Rolling</th>
+    <th>Jazzy</th>
   </tr>
   <tr>
     <th>Branch</th>
-    <td><a href="https://github.com/PickNikRobotics/ros2_kortex/tree/main">main</a></td>
-    <td><a href="https://github.com/PickNikRobotics/ros2_kortex/tree/main">main</a></td>
-    <td><a href="https://github.com/PickNikRobotics/ros2_kortex/tree/main">main</a></td>
+    <td><a href="https://github.com/Kinovarobotics/ros2_kortex/tree/humble">humble</a></td>
+    <td><a href="https://github.com/Kinovarobotics/ros2_kortex/tree/main">main</a></td>
   </tr>
   <tr>
     <th>Build Status</th>
     <td>
-      <a href="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml">
+      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/humble-binary-build.yml">
         <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?event=push&branch=main" alt="Humble Binary Build"/>
       </a>
     </td>
     <td>
-      <a href="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/iron-binary-build.yml">
-        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/iron-binary-build.yml/badge.svg?event=push&branch=main" alt="Iron Binary Build"/>
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml">
+      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml">
         <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?event=push&branch=main" alt="Rolling Binary Build"/>
       </a>
     </td>
   </tr>
   <tr>
     <th>Release Status</th>
-    <td>coming soon<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
-    <td>coming soon<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
-    <td>coming soon<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
+    <td>Stable (binary available — may lag behind source)<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
+    <td>Stable (source only)<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
   </tr>
 </table>
 
 
 **Note:** There are several CI jobs checking against future upstream changes see [detailed build status](.github/workflows/README.md) for a full list of CI jobs and for more information.
 
+**Note:** Gazebo classic support was removed from the `main` branch of this repository
 
 ## Getting started
 
 1. Install ROS 2.
 
-   If you're a developer, we recommend using Rolling to get the latest features and fixes.
+  For this branch, ROS2 Jazzy has to be installed on Ubuntu 24.04.
 
-   Rolling Release: [Install ROS2 Rolling](https://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html)<br/>
-   Latest Release: [Install ROS2 Iron](https://docs.ros.org/en/iron/Installation/Ubuntu-Install-Debians.html)</br>
-   Stable LTS Release: [Install ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+   Latest LTS Release: [Install ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)</br>
 
-   After installing a version of ROS, source the setup.bash, which will set the `$ROS_DISTRO` environment variable.
+   After installing ROS2, source the setup.bash, which will set the `$ROS_DISTRO` environment variable.
 
-2. Install this package from binary
-   ```
-   sudo apt install ros-$ROS_DISTRO-kortex-bringup
-   ```
-
-3. Optional: install MoveIt Configuration and Cyclone DDS
-
-   If you have a 7dof arm:
-   ```
-   sudo apt install ros-$ROS_DISTRO-kinova-gen3-7dof-robotiq-2f-85-moveit-config
-   ```
-   If you have a 6dof arm:
-   ```
-   sudo apt install ros-$ROS_DISTRO-kinova-gen3-6dof-robotiq-2f-85-moveit-config
-   ```
-   If you plan to use MoveIt, it is recommended to install and use Cyclone DDS.
+2. If you plan to use MoveIt, it is recommended to install and use Cyclone DDS.
    ```
    sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
    ```
-
-4. Go to Usage section
-
 ## Contributing to this repository or building from source
 
-Note: It is recommended to use a released binary version of this package and apt install it.
-If you want the latest version of this repository for testing latest fixes
-check out testing with pre-released binaries: https://docs.ros.org/en/rolling/Installation/Testing.html
-
-If the bug fix you need isn't in a released version or If you want to build this repository from source or contribute back to the repository read on.
+To build this repository from source or contribute back to the repository read on.
 
 1. Make sure that `colcon`, its extensions, and `vcs` are installed:
    ```

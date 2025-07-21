@@ -2,10 +2,9 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>kortex_driver</name>
-  <version>0.2.2</version>
+  <version>0.2.3</version>
   <description>ROS2 driver package for the Kinova Robot Hardware.</description>
   <maintainer email="alex.moriarty@picknik.ai">Alex Moriarty</maintainer>
-  <maintainer email="fmaisonneuve@kinova.ca">Felix Maisonneuve</maintainer>
   <maintainer email="mleroux@kinova.ca">Martin Leroux</maintainer>
   <maintainer email="marq.rasmussen@picknik.ai">Marq Rasmussen</maintainer>
   <license>BSD</license>
