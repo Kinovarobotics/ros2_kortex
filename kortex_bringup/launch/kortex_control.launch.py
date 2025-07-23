@@ -32,6 +32,28 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
+import yaml
+import os
+
+def load_and_apply_prefix(yaml_path, prefix):
+    with open(yaml_path, 'r') as f:
+        text = f.read()
+    # Replace ${prefix} placeholders in the text
+    text = text.replace('${prefix}', prefix)
+    data = yaml.safe_load(text)
+    # Save the resolved YAML to a new file
+    dir_name = os.path.dirname(os.path.abspath(yaml_path))
+    resolved_name = f"{prefix}ros2_controllers.yaml"
+    debug_file = os.path.join(dir_name, resolved_name)
+    try:
+        with open(debug_file, 'w') as out:
+            yaml.dump(data, out, default_flow_style=False)
+        print(f"[DEBUG] Saved resolved YAML to: {debug_file}")
+    except Exception as e:
+        print(f"[WARN] Could not save resolved YAML: {e}")
+    
+    return PathJoinSubstitution([dir_name, resolved_name])
+
 
 def launch_setup(context, *args, **kwargs):
     # Initialize Arguments
@@ -118,16 +140,23 @@ def launch_setup(context, *args, **kwargs):
         ]
     )
 
+    robot_controllers_str = robot_controllers.perform(context)
+
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
     )
 
+    prefix_str = prefix.perform(context)
+    remapped_robot_description = (
+    "/" + prefix_str + "/robot_description" if prefix_str else "/robot_description"
+    )
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_controllers],
+        parameters=[load_and_apply_prefix(robot_controllers_str,prefix_str)],
+        namespace= prefix_str,
         remappings=[
-            ("~/robot_description", "/robot_description"),
+            ("~/robot_description", remapped_robot_description),
         ],
         output="both",
     )
@@ -136,6 +165,7 @@ def launch_setup(context, *args, **kwargs):
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
+        namespace= prefix_str,
         parameters=[robot_description],
     )
 
@@ -148,13 +178,16 @@ def launch_setup(context, *args, **kwargs):
         arguments=["-d", rviz_config_file],
     )
 
+    controller_manager_name = (
+    "/" + prefix_str + "/controller_manager" if prefix_str else "/controller_manager"
+    )
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[
             "joint_state_broadcaster",
             "--controller-manager",
-            "/controller_manager",
+            controller_manager_name,
         ],
     )
 
@@ -170,19 +203,19 @@ def launch_setup(context, *args, **kwargs):
     robot_traj_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_traj_controller, "-c", "/controller_manager"],
+        arguments=[robot_traj_controller, "-c", controller_manager_name],
     )
 
     robot_pos_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
+        arguments=[robot_pos_controller, "--inactive", "-c", controller_manager_name],
     )
 
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[robot_hand_controller, "-c", "/controller_manager"],
+        arguments=[robot_hand_controller, "-c", controller_manager_name],
         condition=IfCondition(PythonExpression(["'", gripper, "' != ''"])),
     )
 
@@ -190,7 +223,7 @@ def launch_setup(context, *args, **kwargs):
     fault_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[fault_controller, "-c", "/controller_manager"],
+        arguments=[fault_controller, "-c", controller_manager_name],
         condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
@@ -265,7 +298,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="ros2_controllers.yaml",
+            default_value="ros2_controllers_dual_arm_test.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
@@ -294,7 +327,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "prefix",
-            default_value='""',
+            default_value='',
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",

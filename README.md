@@ -456,3 +456,75 @@ This package implements a ROS node that allows communication between a node and 
 
 ### kortex_moveit_config
 This metapackage contains the auto-generated MoveIt! files to use the Kinova Gen3 and Gen3 lite arms with the MoveIt! motion planning framework. For more details, please consult the [README](kortex_moveit_config/readme.md) from the package subdirectory.
+
+# Dual Control (2 Gen3 7DoF or 6DoF)
+
+1. Make sure to connect each robotic arm via an Ethernet connection, and assign each arm to a different IP subnet (for example, one at 192.168.1.10 and the other at 192.168.2.10).
+
+2. Start the dual control launch file using the following command: 
+
+```
+ros2 launch kortex_bringup gen3_dual.launch.py robot_ip_1:=192.168.1.10 robot_ip_2:=192.168.2.10
+```
+
+You can specify the following arguments if you wish to change your arms configurations:
+
+* `robot_ip_1` : IP address by which the first robot can be reached. The default is empty, this is a required argument. All arms are shipped with address `192.168.1.10`by default, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address.
+
+* `robot_ip_2` : IP address by which the second robot can be reached. The default is empty, this is a required argument. All arms are shipped with address `192.168.1.10`by default, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address.
+
+* `gripper_1` : Gripper to use with the first arm. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `""`. An empty string will not initialise any gripper.
+
+* `gripper_2` : Gripper to use with the second arm. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `""`. An empty string will not initialise any gripper.
+
+* `dof_1` : Degrees of freedom of the first arm. Possible values are either `6` or `7`.Default value is `7`.
+
+* `dof_2` : Degrees of freedom of the first arm. Possible values are either `6` or `7`.Default value is `7`.
+
+3. Use the following command to control the first arm's joints positions:
+
+**6DoF**
+
+```
+ros2 topic pub /arm_1_/joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
+  joint_names: [arm_1_joint_1, arm_1_joint_2, arm_1_joint_3, arm_1_joint_4, arm_1_joint_5, arm_1_joint_6],
+  points: [
+    { positions: [0, 0, 0, 0, 0, 0], time_from_start: { sec: 10 } },
+  ]
+}" -1
+```
+
+**7DoF**
+
+```
+ros2 topic pub /arm_1_/joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
+  joint_names: [arm_1_joint_1, arm_1_joint_2, arm_1_joint_3, arm_1_joint_4, arm_1_joint_5, arm_1_joint_6, arm_1_joint_7],
+  points: [
+    { positions: [0, 0, 0, 0, 0, 0, 0], time_from_start: { sec: 10 } },
+  ]
+}" -1
+```
+
+4. Use the following command to control the second arm's joints positions:
+
+**6DoF**
+
+```
+ros2 topic pub /arm_2_/joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
+  joint_names: [arm_2_joint_1, arm_2_joint_2, arm_2_joint_3, arm_2_joint_4, arm_2_joint_5, arm_2_joint_6],
+  points: [
+    { positions: [0, 0, 0, 0, 0, 0], time_from_start: { sec: 10 } },
+  ]
+}" -1
+```
+
+**7DoF**
+
+```
+ros2 topic pub /arm_2_/joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
+  joint_names: [arm_2_joint_1, arm_2_joint_2, arm_2_joint_3, arm_2_joint_4, arm_2_joint_5, arm_2_joint_6, arm_2_joint_7],
+  points: [
+    { positions: [0, 0, 0, 0, 0, 0, 0], time_from_start: { sec: 10 } },
+  ]
+}" -1
+```

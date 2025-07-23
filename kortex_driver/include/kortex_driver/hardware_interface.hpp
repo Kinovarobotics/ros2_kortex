@@ -199,6 +199,9 @@ private:
   std::string gripper_joint_name_;
   bool use_internal_bus_gripper_comm_;
 
+  // joint prefix
+  std::string joints_prefix_;
+
   // temp variables to use in update loop
   float cmd_degrees_tmp_;
   float cmd_vel_tmp_;
