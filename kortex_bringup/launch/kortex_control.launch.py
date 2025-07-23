@@ -32,6 +32,16 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
+import yaml
+
+def load_and_apply_prefix(yaml_path, prefix):
+    with open(yaml_path, 'r') as f:
+        text = f.read()
+    # Replace ${prefix} placeholders in the text
+    text = text.replace('${prefix}', prefix)
+    # Load YAML as a Python dict
+    return yaml.safe_load(text)
+
 
 def launch_setup(context, *args, **kwargs):
     # Initialize Arguments
@@ -129,7 +139,7 @@ def launch_setup(context, *args, **kwargs):
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_controllers],
+        parameters=[load_and_apply_prefix(robot_controllers,prefix)],
         namespace= prefix_value,
         remappings=[
             ("~/robot_description", remapped_robot_description),
@@ -274,7 +284,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="ros2_controllers.yaml",
+            default_value="ros2_controllers_dual_arm_test.yaml",
             description="YAML file with the controllers configuration.",
         )
     )

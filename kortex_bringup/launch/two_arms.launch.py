@@ -15,9 +15,77 @@
 # Author: Denis Stogl
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch_ros.substitutions import FindPackageShare
+
+
+def launch_setup(context, *args, **kwargs):
+    # Initialize Arguments
+    robot_type = LaunchConfiguration("robot_type")
+    robot_ip_1 = LaunchConfiguration("robot_ip_1")
+    robot_ip_2 = LaunchConfiguration("robot_ip_2")
+    dof_1 = LaunchConfiguration("dof_1")
+    dof_2 = LaunchConfiguration("dof_2")
+    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
+    gripper_1 = LaunchConfiguration("gripper_1")
+    gripper_2 = LaunchConfiguration("gripper_2")
+    use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
+    gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
+    gripper_max_force = LaunchConfiguration("gripper_max_force")
+    gripper_joint_name_1 = LaunchConfiguration("gripper_joint_name_1")
+    gripper_joint_name_2 = LaunchConfiguration("gripper_joint_name_2")
+    launch_rviz = LaunchConfiguration("launch_rviz")
+    controllers_file_1 = LaunchConfiguration("controllers_file_1")
+    controllers_file_2 = LaunchConfiguration("controllers_file_2")
+    prefix_1 = LaunchConfiguration("prefix_1")
+    prefix_2 = LaunchConfiguration("prefix_2")
+    
+    base_launch_1 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource('/home/aalmrad/dual_arm_control_leonel/ros2_kortex_ws/install/kortex_bringup/share/kortex_bringup/launch/kortex_control.launch.py'),
+        launch_arguments={
+            "robot_type": robot_type,
+            "robot_ip": robot_ip_1,
+            "dof": dof_1,
+            "use_fake_hardware": use_fake_hardware,
+            "fake_sensor_commands": fake_sensor_commands,
+            "gripper": gripper_1,
+            "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
+            "gripper_max_velocity": gripper_max_velocity,
+            "gripper_max_force": gripper_max_force,
+            "gripper_joint_name": gripper_joint_name_1,
+            "launch_rviz": launch_rviz,
+            "controllers_file": controllers_file_1,
+            "description_file": "gen3.xacro",
+            "prefix": prefix_1,
+    }.items(),
+    )
+
+    base_launch_2 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource('/home/aalmrad/dual_arm_control_leonel/ros2_kortex_ws/install/kortex_bringup/share/kortex_bringup/launch/kortex_control.launch.py'),
+        launch_arguments={
+            "robot_type": robot_type,
+            "robot_ip": robot_ip_2,
+            "dof": dof_2,
+            "use_fake_hardware": use_fake_hardware,
+            "fake_sensor_commands": fake_sensor_commands,
+            "gripper": gripper_2,
+            "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
+            "gripper_max_velocity": gripper_max_velocity,
+            "gripper_max_force": gripper_max_force,
+            "gripper_joint_name": gripper_joint_name_2,
+            "launch_rviz": launch_rviz,
+            "controllers_file": controllers_file_2,
+            "description_file": "gen3.xacro",
+            "prefix": prefix_2,
+    }.items(),
+    )
+
+    launch_files = [base_launch_1, base_launch_2]
+
+    return launch_files
 
 def generate_launch_description():
     # Declare arguments
@@ -44,7 +112,10 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument("dof", default_value="7", description="DoF of robot.")
+        DeclareLaunchArgument("dof_1", default_value="7", description="DoF of the first robotic arm")
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument("dof_2", default_value="7", description="DoF of the second robotic arm")
     )
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -64,14 +135,14 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file_1",
-            default_value="arm_1_ros2_controllers.yaml",
+            default_value="ros2_controllers_dual_arm_test.yaml",
             description="Robot controller to start.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file_2",
-            default_value="arm_2_ros2_controllers.yaml",
+            default_value="ros2_controllers_dual_arm_test.yaml",
             description="Robot controller to start.",
         )
     )
@@ -135,67 +206,4 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument("prefix_2", default_value="arm_2_", description="Prefix to differentiate arms")
     )
-
-    # Initialize Arguments
-    robot_type = LaunchConfiguration("robot_type")
-    robot_ip_1 = LaunchConfiguration("robot_ip_1")
-    robot_ip_2 = LaunchConfiguration("robot_ip_2")
-    dof = LaunchConfiguration("dof")
-    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
-    fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
-    gripper_1 = LaunchConfiguration("gripper_1")
-    gripper_2 = LaunchConfiguration("gripper_2")
-    use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
-    gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
-    gripper_max_force = LaunchConfiguration("gripper_max_force")
-    gripper_joint_name_1 = LaunchConfiguration("gripper_joint_name_1")
-    gripper_joint_name_2 = LaunchConfiguration("gripper_joint_name_2")
-    launch_rviz = LaunchConfiguration("launch_rviz")
-    controllers_file_1 = LaunchConfiguration("controllers_file_1")
-    controllers_file_2 = LaunchConfiguration("controllers_file_2")
-    prefix_1 = LaunchConfiguration("prefix_1")
-    prefix_2 = LaunchConfiguration("prefix_2")
-    
-    base_launch_1 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
-        launch_arguments={
-            "robot_type": robot_type,
-            "robot_ip": robot_ip_1,
-            "dof": dof,
-            "use_fake_hardware": use_fake_hardware,
-            "fake_sensor_commands": fake_sensor_commands,
-            "gripper": gripper_1,
-            "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
-            "gripper_max_velocity": gripper_max_velocity,
-            "gripper_max_force": gripper_max_force,
-            "gripper_joint_name": gripper_joint_name_1,
-            "launch_rviz": launch_rviz,
-            "controllers_file": controllers_file_1,
-            "description_file": "gen3.xacro",
-            "prefix": prefix_1,
-    }.items(),
-    )
-
-    base_launch_2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/kortex_control.launch.py"]),
-        launch_arguments={
-            "robot_type": robot_type,
-            "robot_ip": robot_ip_2,
-            "dof": dof,
-            "use_fake_hardware": use_fake_hardware,
-            "fake_sensor_commands": fake_sensor_commands,
-            "gripper": gripper_2,
-            "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
-            "gripper_max_velocity": gripper_max_velocity,
-            "gripper_max_force": gripper_max_force,
-            "gripper_joint_name": gripper_joint_name_2,
-            "launch_rviz": launch_rviz,
-            "controllers_file": controllers_file_2,
-            "description_file": "gen3.xacro",
-            "prefix": prefix_2,
-    }.items(),
-    )
-
-    launch_files = [base_launch_1, base_launch_2]
-
-    return LaunchDescription(declared_arguments + launch_files)
+    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
