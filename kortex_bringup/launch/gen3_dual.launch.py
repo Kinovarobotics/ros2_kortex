@@ -45,7 +45,13 @@ def launch_setup(context, *args, **kwargs):
     prefix_2 = LaunchConfiguration("prefix_2")
     
     base_launch_1 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource('/home/aalmrad/dual_arm_control_leonel/ros2_kortex_ws/install/kortex_bringup/share/kortex_bringup/launch/kortex_control.launch.py'),
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("kortex_bringup"),
+                "launch",
+                "kortex_control.launch.py"
+            ])
+        ]),
         launch_arguments={
             "robot_type": robot_type,
             "robot_ip": robot_ip_1,
@@ -65,7 +71,13 @@ def launch_setup(context, *args, **kwargs):
     )
 
     base_launch_2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource('/home/aalmrad/dual_arm_control_leonel/ros2_kortex_ws/install/kortex_bringup/share/kortex_bringup/launch/kortex_control.launch.py'),
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("kortex_bringup"),
+                "launch",
+                "kortex_control.launch.py"
+            ])
+        ]),
         launch_arguments={
             "robot_type": robot_type,
             "robot_ip": robot_ip_2,
