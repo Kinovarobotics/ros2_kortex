@@ -19,6 +19,7 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, Opaq
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.actions import Node
 
 
 def launch_setup(context, *args, **kwargs):
@@ -83,6 +84,21 @@ def launch_setup(context, *args, **kwargs):
     }.items(),
     )
 
+    # After both arms are set up, create one RViz node
+    rviz_config_file = PathJoinSubstitution([
+        FindPackageShare("kortex_description"),
+        "rviz",
+        "view_robot.rviz"
+    ])
+
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="log",
+        arguments=["-d", rviz_config_file]
+    )
+
     launch_files = [base_launch_1, base_launch_2]
 
     return launch_files
@@ -135,14 +151,14 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file_1",
-            default_value="ros2_controllers_dual_arm_test.yaml",
+            default_value="ros2_controllers_parametric.yaml",
             description="Robot controller to start.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file_2",
-            default_value="ros2_controllers_dual_arm_test.yaml",
+            default_value="ros2_controllers_parametric.yaml",
             description="Robot controller to start.",
         )
     )

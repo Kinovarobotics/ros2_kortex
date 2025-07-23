@@ -33,14 +33,26 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 import yaml
+import os
 
 def load_and_apply_prefix(yaml_path, prefix):
     with open(yaml_path, 'r') as f:
         text = f.read()
     # Replace ${prefix} placeholders in the text
     text = text.replace('${prefix}', prefix)
-    # Load YAML as a Python dict
-    return yaml.safe_load(text)
+    data = yaml.safe_load(text)
+    # Save the resolved YAML to a new file
+    dir_name = os.path.dirname(os.path.abspath(yaml_path))
+    resolved_name = f"{prefix}ros2_controllers.yaml"
+    debug_file = os.path.join(dir_name, resolved_name)
+    try:
+        with open(debug_file, 'w') as out:
+            yaml.dump(data, out, default_flow_style=False)
+        print(f"[DEBUG] Saved resolved YAML to: {debug_file}")
+    except Exception as e:
+        print(f"[WARN] Could not save resolved YAML: {e}")
+    
+    return PathJoinSubstitution([dir_name, resolved_name])
 
 
 def launch_setup(context, *args, **kwargs):
@@ -128,19 +140,21 @@ def launch_setup(context, *args, **kwargs):
         ]
     )
 
+    robot_controllers_str = robot_controllers.perform(context)
+
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
     )
 
-    prefix_value = prefix.perform(context)
+    prefix_str = prefix.perform(context)
     remapped_robot_description = (
-    "/" + prefix_value + "/robot_description" if prefix_value else "/robot_description"
+    "/" + prefix_str + "/robot_description" if prefix_str else "/robot_description"
     )
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[load_and_apply_prefix(robot_controllers,prefix)],
-        namespace= prefix_value,
+        parameters=[load_and_apply_prefix(robot_controllers_str,prefix_str)],
+        namespace= prefix_str,
         remappings=[
             ("~/robot_description", remapped_robot_description),
         ],
@@ -151,7 +165,7 @@ def launch_setup(context, *args, **kwargs):
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
-        namespace= prefix_value,
+        namespace= prefix_str,
         parameters=[robot_description],
     )
 
@@ -165,7 +179,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     controller_manager_name = (
-    "/" + prefix_value + "/controller_manager" if prefix_value else "/controller_manager"
+    "/" + prefix_str + "/controller_manager" if prefix_str else "/controller_manager"
     )
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",

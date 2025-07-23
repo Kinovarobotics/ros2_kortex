@@ -1,6 +1,6 @@
-/arm_1_/controller_manager:
+${prefix}/controller_manager:
   ros__parameters:
-    update_rate: 1000  # Hz
+    update_rate: 1000
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -17,16 +17,16 @@
     fault_controller:
       type: picknik_reset_fault_controller/PicknikResetFaultController
 
-/arm_1_/joint_trajectory_controller:
+${prefix}/joint_trajectory_controller:
   ros__parameters:
     joints:
-      - arm_1_joint_1
-      - arm_1_joint_2
-      - arm_1_joint_3
-      - arm_1_joint_4
-      - arm_1_joint_5
-      - arm_1_joint_6
-      - arm_1_joint_7
+      - ${prefix}joint_1
+      - ${prefix}joint_2
+      - ${prefix}joint_3
+      - ${prefix}joint_4
+      - ${prefix}joint_5
+      - ${prefix}joint_6
+      - ${prefix}joint_7
     command_interfaces:
       - position
     state_interfaces:
@@ -39,9 +39,9 @@
       stopped_velocity_tolerance: 0.0
       goal_time: 0.0
 
-/arm_1_/twist_controller:
+${prefix}/twist_controller:
   ros__parameters:
-    joint: arm_1_tcp  
+    joint: ${prefix}tcp
     interface_names:
       - twist.linear.x
       - twist.linear.y
@@ -50,8 +50,8 @@
       - twist.angular.y
       - twist.angular.z
 
-/arm_1_/robotiq_gripper_controller:
+${prefix}/robotiq_gripper_controller:
   ros__parameters:
     default: true
-    joint: arm_1_robotiq_85_left_knuckle_joint
+    joint: ${prefix}robotiq_85_left_knuckle_joint
     allow_stalling: true
