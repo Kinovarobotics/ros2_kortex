@@ -308,7 +308,9 @@ ros2 launch kortex_bringup kortex_sim_control.launch.py \
 * `use_sim_time` : Use simulated clock. Default value is `true`.
 * `gripper` : Gripper to use. Possible values for the Gen3 are: `robotiq_2f_85`, `robotiq_2f_140`, `""` and `gen3_lite_2f` and the default value is `""` which will not initialise any gripper.
 
-#### MoveIt2
+## MoveIt2
+
+#### Virtual Hardware
 
 To generate motion plans and execute them with virtual arm hardware:
 
@@ -327,6 +329,8 @@ ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
   use_fake_hardware:=true
 ```
+
+#### Real-Life Hardware
 
 To generate motion plans and execute them with real-life hardware:
 
@@ -350,6 +354,8 @@ ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
 ros2 launch kinova_gen3_lite_moveit_config robot.launch.py \
   robot_ip:=192.168.2.10
 ```
+
+#### Simulated Robot
 
 To generate motion plans and execute them in simulation, make sure to first start the simulated robot with the command at the [simulation](#simulation) section, then:
 
