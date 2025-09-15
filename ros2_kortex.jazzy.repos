@@ -30,19 +30,7 @@ repositories:
     type: git
     url: https://github.com/picknikrobotics/ros2_robotiq_gripper.git
     version: main
-  test_interface_files:
-    type: git
-    url: https://github.com/ros2/test_interface_files.git
-    version: jazzy
-  rcl_interfaces:
-    type: git
-    url: https://github.com/ros2/rcl_interfaces.git
-    version: jazzy
   gz_ros2_control:
     type: git
     url: https://github.com/ros-controls/gz_ros2_control.git
-    version: jazzy
-  ros-controls/realtime_tools:
-    type: git
-    url: https://github.com/ros-controls/realtime_tools.git
     version: jazzy
