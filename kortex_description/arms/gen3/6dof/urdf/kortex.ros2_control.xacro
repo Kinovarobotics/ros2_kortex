@@ -58,8 +58,8 @@
       </hardware>
       <joint name="${prefix}joint_1">
         <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
+          <param name="min">${-2*pi}</param>
+          <param name="max">${2*pi}</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_1']}</param>
@@ -91,8 +91,8 @@
       </joint>
       <joint name="${prefix}joint_4">
         <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
+          <param name="min">${-2*pi}</param>
+          <param name="max">${2*pi}</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_4']}</param>
@@ -113,8 +113,8 @@
       </joint>
       <joint name="${prefix}joint_6">
         <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
+          <param name="min">${-2*pi}</param>
+          <param name="max">${2*pi}</param>
         </command_interface>
         <state_interface name="position">
           <param name="initial_value">${initial_positions['joint_6']}</param>
