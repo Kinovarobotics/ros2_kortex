@@ -467,7 +467,7 @@ This metapackage contains the auto-generated MoveIt! files to use the Kinova Gen
 
 1. Make sure to connect each robotic arm via an Ethernet connection, and assign each arm to a different IP subnet (for example, one at 192.168.1.10 and the other at 192.168.2.10).
 
-2. Start the dual control launch file using the following command: 
+2. Start the dual control launch file using the following command:
 
 ```
 ros2 launch kortex_bringup gen3_dual.launch.py robot_ip_1:=192.168.1.10 robot_ip_2:=192.168.2.10

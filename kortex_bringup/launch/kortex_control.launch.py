@@ -35,23 +35,24 @@ from launch_ros.substitutions import FindPackageShare
 import yaml
 import os
 
+
 def load_and_apply_prefix(yaml_path, prefix):
-    with open(yaml_path, 'r') as f:
+    with open(yaml_path) as f:
         text = f.read()
     # Replace ${prefix} placeholders in the text
-    text = text.replace('${prefix}', prefix)
+    text = text.replace("${prefix}", prefix)
     data = yaml.safe_load(text)
     # Save the resolved YAML to a new file
     dir_name = os.path.dirname(os.path.abspath(yaml_path))
     resolved_name = f"{prefix}ros2_controllers.yaml"
     debug_file = os.path.join(dir_name, resolved_name)
     try:
-        with open(debug_file, 'w') as out:
+        with open(debug_file, "w") as out:
             yaml.dump(data, out, default_flow_style=False)
         print(f"[DEBUG] Saved resolved YAML to: {debug_file}")
     except Exception as e:
         print(f"[WARN] Could not save resolved YAML: {e}")
-    
+
     return PathJoinSubstitution([dir_name, resolved_name])
 
 
@@ -148,13 +149,13 @@ def launch_setup(context, *args, **kwargs):
 
     prefix_str = prefix.perform(context)
     remapped_robot_description = (
-    "/" + prefix_str + "/robot_description" if prefix_str else "/robot_description"
+        "/" + prefix_str + "/robot_description" if prefix_str else "/robot_description"
     )
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[load_and_apply_prefix(robot_controllers_str,prefix_str)],
-        namespace= prefix_str,
+        parameters=[load_and_apply_prefix(robot_controllers_str, prefix_str)],
+        namespace=prefix_str,
         remappings=[
             ("~/robot_description", remapped_robot_description),
         ],
@@ -165,7 +166,7 @@ def launch_setup(context, *args, **kwargs):
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
-        namespace= prefix_str,
+        namespace=prefix_str,
         parameters=[robot_description],
     )
 
@@ -179,7 +180,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     controller_manager_name = (
-    "/" + prefix_str + "/controller_manager" if prefix_str else "/controller_manager"
+        "/" + prefix_str + "/controller_manager" if prefix_str else "/controller_manager"
     )
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
@@ -327,7 +328,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "prefix",
-            default_value='',
+            default_value="",
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",
