@@ -1,5 +1,5 @@
-# ROS 2 Kortex Driver
-The ROS 2 Kortex driver implements the `ros2_control` hardware interface for a `SystemInterface`.
+# ROS 2 KINOVA KORTEX™ Driver
+The ROS 2 KINOVA KORTEX™ driver implements the `ros2_control` hardware interface for a `SystemInterface`.
 
 ### Command interfaces
 This driver exports commands interfaces for position, velocity, and effort interfaces for each joint defined in the URDF.
