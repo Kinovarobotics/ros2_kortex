@@ -19,7 +19,6 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, Opaq
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
-from launch_ros.actions import Node
 
 
 def launch_setup(context, *args, **kwargs):
@@ -43,15 +42,15 @@ def launch_setup(context, *args, **kwargs):
     controllers_file_2 = LaunchConfiguration("controllers_file_2")
     prefix_1 = LaunchConfiguration("prefix_1")
     prefix_2 = LaunchConfiguration("prefix_2")
-    
+
     base_launch_1 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare("kortex_bringup"),
-                "launch",
-                "kortex_control.launch.py"
-            ])
-        ]),
+        PythonLaunchDescriptionSource(
+            [
+                PathJoinSubstitution(
+                    [FindPackageShare("kortex_bringup"), "launch", "kortex_control.launch.py"]
+                )
+            ]
+        ),
         launch_arguments={
             "robot_type": robot_type,
             "robot_ip": robot_ip_1,
@@ -67,17 +66,17 @@ def launch_setup(context, *args, **kwargs):
             "controllers_file": controllers_file_1,
             "description_file": "gen3.xacro",
             "prefix": prefix_1,
-    }.items(),
+        }.items(),
     )
 
     base_launch_2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare("kortex_bringup"),
-                "launch",
-                "kortex_control.launch.py"
-            ])
-        ]),
+        PythonLaunchDescriptionSource(
+            [
+                PathJoinSubstitution(
+                    [FindPackageShare("kortex_bringup"), "launch", "kortex_control.launch.py"]
+                )
+            ]
+        ),
         launch_arguments={
             "robot_type": robot_type,
             "robot_ip": robot_ip_2,
@@ -93,27 +92,13 @@ def launch_setup(context, *args, **kwargs):
             "controllers_file": controllers_file_2,
             "description_file": "gen3.xacro",
             "prefix": prefix_2,
-    }.items(),
-    )
-
-    # After both arms are set up, create one RViz node
-    rviz_config_file = PathJoinSubstitution([
-        FindPackageShare("kortex_description"),
-        "rviz",
-        "view_robot.rviz"
-    ])
-
-    rviz_node = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        output="log",
-        arguments=["-d", rviz_config_file]
+        }.items(),
     )
 
     launch_files = [base_launch_1, base_launch_2]
 
     return launch_files
+
 
 def generate_launch_description():
     # Declare arguments
@@ -140,10 +125,14 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument("dof_1", default_value="7", description="DoF of the first robotic arm")
+        DeclareLaunchArgument(
+            "dof_1", default_value="7", description="DoF of the first robotic arm"
+        )
     )
     declared_arguments.append(
-        DeclareLaunchArgument("dof_2", default_value="7", description="DoF of the second robotic arm")
+        DeclareLaunchArgument(
+            "dof_2", default_value="7", description="DoF of the second robotic arm"
+        )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -193,14 +182,14 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_joint_name_1",
-            default_value="robotiq_85_left_knuckle_joint", # Adding prefix here breaks things
+            default_value="robotiq_85_left_knuckle_joint",  # Adding prefix here breaks things
             description="Name of the gripper attached to the arm",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_joint_name_2",
-            default_value="robotiq_85_left_knuckle_joint", # Adding prefix here breaks things
+            default_value="robotiq_85_left_knuckle_joint",  # Adding prefix here breaks things
             description="Name of the gripper attached to the arm",
         )
     )
@@ -229,9 +218,13 @@ def generate_launch_description():
         DeclareLaunchArgument("launch_rviz", default_value="false", description="Launch RViz?")
     )
     declared_arguments.append(
-        DeclareLaunchArgument("prefix_1", default_value="arm_1_", description="Prefix to differentiate arms")
+        DeclareLaunchArgument(
+            "prefix_1", default_value="arm_1_", description="Prefix to differentiate arms"
+        )
     )
     declared_arguments.append(
-        DeclareLaunchArgument("prefix_2", default_value="arm_2_", description="Prefix to differentiate arms")
+        DeclareLaunchArgument(
+            "prefix_2", default_value="arm_2_", description="Prefix to differentiate arms"
+        )
     )
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])

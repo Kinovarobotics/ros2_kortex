@@ -3,7 +3,7 @@
 <package format="3">
   <name>kortex_driver</name>
   <version>0.2.3</version>
-  <description>ROS2 driver package for the Kinova Robot Hardware.</description>
+  <description>ROS2 driver package for the Kinova KINOVA KORTEX™ Robot Hardware.</description>
   <maintainer email="alex.moriarty@picknik.ai">Alex Moriarty</maintainer>
   <maintainer email="mleroux@kinova.ca">Martin Leroux</maintainer>
   <maintainer email="marq.rasmussen@picknik.ai">Marq Rasmussen</maintainer>

@@ -3,7 +3,7 @@
 <package format="3">
   <name>kortex_bringup</name>
   <version>0.2.3</version>
-  <description>Launch file and run-time configurations, e.g. controllers.</description>
+  <description>Launch file and run-time configurations for KINOVA KORTEX™, e.g. controllers.</description>
 
   <author>Marq Rasmussen</author>
 

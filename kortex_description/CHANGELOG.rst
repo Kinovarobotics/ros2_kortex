@@ -106,7 +106,7 @@ Changelog for package kortex_description
   * add robotiq driver
   * Fix hand controller
   * remove hand_controller from gen3_move_it_config
-  * Combined launch file for kortex\_(moveit/control)
+  * Combined launch file for KINOVA KORTEX™\_(moveit/control)
   * Fix joint value for left_inner_finger_joint
   * Run pre-commit
   * Revert "Merge pull request `#1 <https://github.com/PickNikRobotics/ros2_kortex/issues/1>`_ from PickNikRobotics/pr-robotiq_driver"

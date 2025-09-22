@@ -4,7 +4,7 @@
   <name>kinova_gen3_6dof_robotiq_2f_85_moveit_config</name>
   <version>0.2.3</version>
   <description>
-     An automatically generated package with all the configuration and launch files for using the gen3 with the MoveIt Motion Planning Framework
+     An automatically generated package with all the configuration and launch files for using the KINOVA KORTEX™ gen3 with the MoveIt Motion Planning Framework
   </description>
   <maintainer email="aalmrad@kinova.ca">Abed Al Rahman Al Mrad</maintainer>
   <license>BSD-3-Clause</license>
