@@ -10,8 +10,8 @@
 *
 * -->
 
-# Kortex Description
-This package contains the URDF (Unified Robot Description Format), STL and configuration files for the Kortex-compatible robots.
+# KINOVA KORTEX™ Description
+This package contains the URDF (Unified Robot Description Format), STL and configuration files for the KINOVA KORTEX™-compatible robots.
 
 ## Usage
 
@@ -62,7 +62,7 @@ Param | Description | Default |
 `use_external_cable` | Boolean value that sets joint limits to avoid wrapping of external cables if true. | false |
 `initial_positions` | Dictionary of initial joint positions. | {joint_1: 0.0, joint_2: 0.0, joint_3: 0.0, joint_4: 0.0, joint_5: 0.0, joint_6: 0.0, joint_7: 0.0} |
 `gripper_max_velocity` | Desired velocity in percentage (0.0-100.0%) with which the position will be set. | 100.0 |
-`gripper_max_force` | Desired force in percentage (0.0-100.0%) with which the position will be set. NOTE: deprecated according to the [Kortex repo](https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/GripperCyclic/MotorCommand.md). | 100.0 |
+`gripper_max_force` | Desired force in percentage (0.0-100.0%) with which the position will be set. NOTE: deprecated according to the [KINOVA KORTEX™ repo](https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/GripperCyclic/MotorCommand.md). | 100.0 |
 `gripper_com_port` | Specifies the USB port that the gripper is plugged in on. This will only be used if `use_internal_bus_gripper_comm` is false. | /dev/ttyUSB0 |
 
 ### Example Usage
