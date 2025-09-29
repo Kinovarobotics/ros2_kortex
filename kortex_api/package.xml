@@ -2,7 +2,7 @@
 <package format="2">
   <name>kortex_api</name>
   <version>0.2.3</version>
-  <description>kortex_api</description>
+  <description>KINOVA KORTEX™ API</description>
 
   <maintainer email="marq.rasmussen@picknik.ai">Marq Rasmussen</maintainer>
 
