@@ -310,7 +310,6 @@ KortexMultiInterfaceHardware::export_state_interfaces()
     RCLCPP_DEBUG(LOGGER, "export_state_interfaces for joint: %s", info_.joints[i].name.c_str());
     if (info_.joints[i].name == gripper_joint_name_)
     {
-      
       state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
       state_interfaces.emplace_back(hardware_interface::StateInterface(
@@ -318,7 +317,6 @@ KortexMultiInterfaceHardware::export_state_interfaces()
     }
     else
     {
-      
       arm_joint_names.emplace_back(info_.joints[i].name);
     }
   }
@@ -815,7 +813,7 @@ void KortexMultiInterfaceHardware::readGripperPosition()
   {
     gripper_position_ =
       feedback_.interconnect().gripper_feedback().motor()[0].position() / 100.0 * 0.81;  // rad
-      // DEBUGGING: this function seems to return the correct gripper posi, so issue is not here
+    // DEBUGGING: this function seems to return the correct gripper posi, so issue is not here
   }
 }
 

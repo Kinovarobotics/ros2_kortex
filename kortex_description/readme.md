@@ -1,5 +1,5 @@
 <!--
-* KINOVA (R) KORTEX (TM)
+* KINOVA (R) KINOVA KORTEX™ (TM)
 *
 * Copyright (c) 2018 Kinova inc. All rights reserved.
 *
@@ -10,8 +10,8 @@
 *
 * -->
 
-# Kortex Description
-This package contains the URDF (Unified Robot Description Format), STL and configuration files for the Kortex-compatible robots.
+# KINOVA KORTEX™ Description
+This package contains the URDF (Unified Robot Description Format), STL and configuration files for the KINOVA KORTEX™-compatible robots.
 
 ## Usage
 
@@ -48,8 +48,8 @@ Param | Description | Default |
 `robot_ip` | The IP address of the robot you're connection to. | - |
 `username` | The username for the robot connection. | - |
 `password` | The password for the robot connection. | - |
-`port` | Port for Kortex hardware driver | - |
-`port_realtime` | Realtime port for Kortex hardware driver | - |
+`port` | Port for KINOVA KORTEX™ hardware driver | - |
+`port_realtime` | Realtime port for KINOVA KORTEX™ hardware driver | - |
 `session_inactivity_timeout_ms` | The duration after which the robot will clean the client session if the client hangs up the connection brutally (should not happen with the ROS driver). | - |
 `connection_inactivity_timeout_ms` | The duration after which a connection is destroyed by the robot if no communication is detected between the client and the robot. | - |
 `use_internal_bus_gripper_comm` | Boolean value to indicate if your gripper will be communicated with through the internal Kinova communication interface. Set to true if the gripper is directly plugged into the kinova arm. Set to false if running in simulation or if gripper is connected to PC via USB. Setting to false will create a ros2_control instance for the gripper. | false |
@@ -63,7 +63,7 @@ Param | Description | Default |
 `use_external_cable` | Boolean value that sets joint limits to avoid wrapping of external cables if true. | false |
 `initial_positions` | Dictionary of initial joint positions. | {joint_1: 0.0, joint_2: 0.0, joint_3: 0.0, joint_4: 0.0, joint_5: 0.0, joint_6: 0.0, joint_7: 0.0} |
 `gripper_max_velocity` | Desired velocity in percentage (0.0-100.0%) with which the position will be set. | 100.0 |
-`gripper_max_force` | Desired force in percentage (0.0-100.0%) with which the position will be set. NOTE: deprecated according to the [Kortex repo](https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/GripperCyclic/MotorCommand.md). | 100.0 |
+`gripper_max_force` | Desired force in percentage (0.0-100.0%) with which the position will be set. NOTE: deprecated according to the [KINOVA KORTEX™ repo](https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/GripperCyclic/MotorCommand.md). | 100.0 |
 `gripper_com_port` | Specifies the USB port that the gripper is plugged in on. This will only be used if `use_internal_bus_gripper_comm` is false. | /dev/ttyUSB0 |
 
 ### Example Usage
