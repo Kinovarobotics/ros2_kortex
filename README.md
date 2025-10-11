@@ -1,6 +1,7 @@
 # ROS 2 KINOVA KORTEX™
-> Kinova® KINOVA KORTEX™ is the common software platform behind all of the products in the Gen3 family (Gen3 and Gen3 lite). It unifies the inner workings of the various robots and their related external tools, like the API. <br />
-> https://www.kinovarobotics.com/product/gen3-robots
+
+> Kinova® KINOVA KORTEX™ is the common software platform behind all of the products in the Gen3 family (Gen3 and Gen3 lite). It unifies the inner workings of the various robots and their related external tools, like the API. `<br />`
+> https://www.kinovarobotics.com/product/gen3-robots 
 
 <center><img src="doc/resources/kinova-gen3-7dof-robotiq-2f-85.jpg" alt="Kinova Gen3 7DoF manipulator with Intel RealSense 3D Vision Module and Robotiq 2F-85 2 Finger 85mm Adaptive Gripper" style="width: 50%"/></center>
 
@@ -39,7 +40,6 @@ ROS2 Kortex is the official ROS2 package to interact with KINOVA KORTEX™ and i
   </tr>
 </table>
 
-
 **Note:** There are several CI jobs checking against future upstream changes see [detailed build status](.github/workflows/README.md) for a full list of CI jobs and for more information.
 
 **Note:** Gazebo classic support was removed from the `main` branch of this repository
@@ -50,7 +50,7 @@ ROS2 Kortex is the official ROS2 package to interact with KINOVA KORTEX™ and i
 
   For this branch, ROS2 Jazzy has to be installed on Ubuntu 24.04.
 
-   Latest LTS Release: [Install ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)</br>
+   Latest LTS Release: [Install ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)`</br>`
 
    After installing ROS2, source the setup.bash, which will set the `$ROS_DISTRO` environment variable.
 
@@ -59,22 +59,24 @@ ROS2 Kortex is the official ROS2 package to interact with KINOVA KORTEX™ and i
    sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
    ```
+
 ## Contributing to this repository or building from source
 
 To build this repository from source or contribute back to the repository read on.
 
 1. Make sure that `colcon`, its extensions, and `vcs` are installed:
+
    ```
    sudo apt install python3-colcon-common-extensions python3-vcstool
    ```
-
 2. Create a new ROS2 workspace:
+
    ```
    export COLCON_WS=~/workspace/ros2_kortex_ws
    mkdir -p $COLCON_WS/src
    ```
-
 3. Pull relevant packages:
+
    ```
    cd $COLCON_WS
    git clone https://github.com/Kinovarobotics/ros2_kortex.git src/ros2_kortex
@@ -84,31 +86,33 @@ To build this repository from source or contribute back to the repository read o
 
    If you plan on simulating the robot with Gazebo, make sure to pull the additional simulation packages.
    If you're on ROS 2 Humble, run
+
    ```
    vcs import src --skip-existing --input src/ros2_kortex/simulation.jazzy.repos
    ```
 
    otherwise
+
    ```
    vcs import --skip-existing --input src/ros2_kortex/simulation.repos
    ```
 
    If you plan on using MoveIt, you must make sure that you have it already [installed](https://moveit.ros.org/install-moveit2/binary/) either from binaries or by building it from source.
-
-
 4. Follow the instructions to install [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/)
-
 5. Install dependencies, compile, and source the workspace:
+
    ```
    rosdep install --ignore-src --from-paths src -y -r
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
    ```
 
    By default, colcon will use as much resources as possible to build the ROS2 workspace. This can temporarily freeze or even crash your machine. You can limit the number of threads used to avoid this issue, we found a good tradeoff between build time and resource utilisation by setting it to 3 :
+
    ```
    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --parallel-workers 3
    ```
 6. Source the previously built workspace using the following command:
+
    ```
    echo 'source ~/workspace/ros2_kortex_ws/install/setup.bash' >> ~/.bashrc
    ```
@@ -149,6 +153,7 @@ colcon build --packages-select-regex '.*kortex.*' '.*gen3.*'
 ```
 
 ## Usage
+
 To launch and view any of the robot's URDF run:
 
 ```bash
@@ -158,9 +163,7 @@ ros2 launch kortex_description view_robot.launch.py
 The accepted arguments are:
 
 * `robot_type` : Your robot model. Possible values are either `gen3` or `gen3_lite`, the default is `gen3`.
-
 * `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85` or `robotiq_2f_140`. For the Gen3 Lite, the only option is `gen3_lite_2f`. Default value is an empty string, which will display the arm without a gripper.
-
 * `dof` : Degrees of freedom of the arm. Possible values for the Gen3 are either `6` or `7`. For the Gen3 Lite, the only option is `6`. Default value is `7`.
 
 ### Gen 3 Robots
@@ -179,32 +182,21 @@ Alternatively, for a physical robot:
 ros2 launch kortex_bringup gen3.launch.py \
   robot_ip:=192.168.1.10 \
 ```
+
 You can specify the following arguments if you wish to change your arm configuration:
 
 * `robot_type`: Your robot model. Default value (and only one) is `gen3`.
-
 * `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `""`. An empty string will not initialise any gripper.
-
 * `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value is `robotiq_85_left_knuckle_joint`.
-
 * `use_internal_bus_gripper_comm` : Use internal bus for gripper communication. Default value is `true`.
-
 * `gripper_max_velocity` : Max velocity for gripper commands. Default value is `100.0`.
-
 * `gripper_max_force` : Max force for gripper commands. Default value is `100.0`.
-
 * `dof` : Degrees of freedom of the arm. Possible values are either `6` or `7`.Default value is `7`.
-
 * `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address.
-
 * `use_fake_hardware` : Start robot with fake hardware mirroring command to its states. Default value is `false`.
-
 * `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
-
 * `robot_controller` : Robot controller to start. Possible values are `twist_controller` and `joint_trajectory_controller`.Default value is `joint_trajectory_controller`.
-
 * `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
-
 * `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
 
 #### Robotiq gripper
@@ -234,6 +226,7 @@ ros2 launch kortex_bringup gen3_lite.launch.py \
   robot_ip:=yyy.yyy.yyy.yyy \
   use_fake_hardware:=true
 ```
+
 Alternatively, if you wish to use the physical robot:
 
 ```bash
@@ -244,33 +237,21 @@ ros2 launch kortex_bringup gen3_lite.launch.py \
 You can specify the following arguments if you wish to change your arm configuration:
 
 * `robot_type`: Your robot model. Default value (and only one) is `gen3_lite`.
-
 * `gripper` : Gripper to use. Default value (and only one) is `gen3_lite_2f`.
-
 * `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value (and only one) is `right_finger_bottom_joint`.
-
 * `use_internal_bus_gripper_comm` : Use internal bus for gripper communication. Default value is `true`.
-
 * `gripper_max_velocity` : Max velocity for gripper commands. Default value is `100.0`.
-
 * `gripper_max_force` : Max force for gripper commands. Default value is `100.0`.
-
 * `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address. If you're using an USB to Ethernet interface to connect your robot to your machine instead of USB via RNDIS, the ip address will be `192.168.2.10`.
-
 * `use_fake_hardware` : Start robot with fake hardware mirroring command to its states. Default value is `false`.
-
 * `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
-
 * `robot_controller` : Robot controller to start. Possible values are `twist_controller` and `joint_trajectory_controller`.Default value is `joint_trajectory_controller`.
-
 * `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
-
 * `description_file` : URDF/XACRO description file with the robot. Default value is `gen3_lite_gen3_lite_2f.xacro`.
-
 * `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
 
-
 ## Simulation
+
 The `kortex_sim_control.launch.py` launch file is designed to simulate all of our arm models, you just need to specify your configuration through the arguments. By default, the Gen3 7 dof configuration is used :
 
 ```bash
@@ -336,9 +317,8 @@ ros2 launch kinova_gen3_lite_moveit_config robot.launch.py \
   robot_ip:=192.168.1.10
 ```
 
-
-
 ## Commanding the arm (physically and in simulation)
+
 You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller:
 
 ```bash
@@ -362,6 +342,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 ```
 
 You can also command the arm using Twist messages. Before doing so, you must active the `twist_controller` and deactivate the `joint_trajectory_controller`:
+
 ```bash
 ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
   activate_controllers: [twist_controller],
@@ -384,6 +365,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel
 ```
 
 If you wish to use the `joint_trajectory_controller` again to command the arm using JointTrajectory messages, run the following:
+
 ```bash
 ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
   activate_controllers: [joint_trajectory_controller],
@@ -398,10 +380,13 @@ ros2 service call /controller_manager/switch_controller controller_manager_msgs/
 The following is a description of the packages included in this repository.
 
 ### kortex_description
+
 This package contains the URDF (Unified Robot Description Format), STL and configuration files for the Kortex-compatible robots. For more details, please consult the [README](kortex_description/readme.md) from the package subdirectory.
 
 ### kortex_driver
+
 This package implements a ROS node that allows communication between a node and a Kinova Gen3 or Gen3 lite robot. For more details, please consult the [README](kortex_driver/readme.md) from the package subdirectory.
 
 ### kortex_moveit_config
+
 This metapackage contains the auto-generated MoveIt! files to use the Kinova Gen3 and Gen3 lite arms with the MoveIt! motion planning framework. For more details, please consult the [README](kortex_moveit_config/readme.md) from the package subdirectory.
