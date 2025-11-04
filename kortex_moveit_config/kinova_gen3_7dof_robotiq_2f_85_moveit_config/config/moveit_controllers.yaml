@@ -20,7 +20,7 @@ moveit_simple_controller_manager:
     action_ns: follow_joint_trajectory
     default: true
   robotiq_gripper_controller:
-    type: GripperCommand
+    type: ParallelGripperCommand
     joints:
       - robotiq_85_left_knuckle_joint
     action_ns: gripper_cmd
