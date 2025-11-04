@@ -85,15 +85,15 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
 }
 
 CallbackReturn KortexMultiInterfaceHardware::on_init(
-  const hardware_interface::HardwareComponentInterfaceParams & params)
+  const hardware_interface::HardwareInfo & info)
 {
   RCLCPP_INFO(LOGGER, "Configuring Hardware Interface");
-  if (hardware_interface::SystemInterface::on_init(params) != CallbackReturn::SUCCESS)
+  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
   {
     return CallbackReturn::ERROR;
   }
 
-  info_ = params.hardware_info;
+  info_ = info;
   // The robot's IP address.
   std::string robot_ip = info_.hardware_parameters["robot_ip"];
   if (robot_ip.empty())

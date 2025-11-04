@@ -176,21 +176,6 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(is_gen3_lite),
     )
 
-    # Delay gripper controller spawning after trajectory controller
-    delay_hand_controller_after_traj_controller = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=robot_traj_controller_spawner,
-            on_exit=[robot_hand_controller_spawner],
-        )
-    )
-
-    delay_hand_lite_controller_after_traj_controller = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=robot_traj_controller_spawner,
-            on_exit=[robot_hand_lite_controller_spawner],
-        )
-    )
-
     # Bridge
     bridge = Node(
         package="ros_gz_bridge",
@@ -262,8 +247,8 @@ def launch_setup(context, *args, **kwargs):
         delay_rviz_after_joint_state_broadcaster_spawner,
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
-        delay_hand_controller_after_traj_controller,
-        delay_hand_lite_controller_after_traj_controller,
+        robot_hand_controller_spawner,
+        robot_hand_lite_controller_spawner,
         gz_robotiq_env_var_resource_path,
         gz_launch_description,
         gz_spawn_entity,
