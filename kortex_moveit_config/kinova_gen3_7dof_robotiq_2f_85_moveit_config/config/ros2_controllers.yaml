@@ -57,4 +57,3 @@ robotiq_gripper_controller:
     allow_stalling: true
     max_gap: 0.085
     max_effort: 100.0
-
