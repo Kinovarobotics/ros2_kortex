@@ -82,7 +82,7 @@ def generate_launch_description():
             publish_planning_scene=True,
             publish_geometry_updates=True,
             publish_state_updates=True,
-            publish_transforms_updates=True
+            publish_transforms_updates=True,
         )
         .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner"])
         .to_moveit_configs()
