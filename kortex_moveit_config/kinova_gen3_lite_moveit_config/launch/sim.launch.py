@@ -77,7 +77,12 @@ def generate_launch_description():
         .robot_description(mappings=description_arguments)
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_scene_monitor(
-            publish_robot_description=True, publish_robot_description_semantic=True
+            publish_robot_description=True,
+            publish_robot_description_semantic=True,
+            publish_planning_scene=True,
+            publish_geometry_updates=True,
+            publish_state_updates=True,
+            publish_transforms_updates=True,
         )
         .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner"])
         .to_moveit_configs()
@@ -88,12 +93,22 @@ def generate_launch_description():
         package="moveit_ros_move_group",
         executable="move_group",
         output="log",
-        parameters=[moveit_config.to_dict(), {"use_sim_time": use_sim_time}],
+        parameters=[
+            moveit_config.to_dict(),
+            {
+                "use_sim_time": use_sim_time,
+                "publish_robot_description_semantic": True,
+                "allow_trajectory_execution": True,
+                "capabilities": "",
+                "disable_capabilities": "",
+                "monitor_dynamics": False,
+            },
+        ],
         arguments=[
             "--ros-args",
             "--log-level",
-            "fatal",
-        ],  # MoveIt is spamming the log because of unknown '*_mimic' joints
+            "info",
+        ],
         condition=IfCondition(launch_rviz),
     )
 
