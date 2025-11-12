@@ -1,9 +1,9 @@
 moveit_simple_controller_manager:
   controller_names:
-    - gen3_lite_joint_trajectory_controller
+    - joint_trajectory_controller
     - gen3_lite_2f_gripper_controller
 
-  gen3_lite_joint_trajectory_controller:
+  joint_trajectory_controller:
     type: FollowJointTrajectory
     joints:
       - joint_1
