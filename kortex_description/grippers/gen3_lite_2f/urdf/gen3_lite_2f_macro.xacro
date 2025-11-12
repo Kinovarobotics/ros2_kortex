@@ -145,6 +145,7 @@
         <child link="${prefix}right_finger_dist_link" />
         <axis xyz="0 0 1" />
         <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
+        <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.276" offset="-0.1" />
       </joint>
 
       <link name="${prefix}left_finger_prox_link">
@@ -179,6 +180,7 @@
         <axis xyz="0 0 1" />
         <limit lower="-0.96" upper="0.09" effort="10" velocity="0.6" />
         <dynamics damping="0.1" friction="1"/>
+        <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-1.0" offset="0.0" />
       </joint>
       <link name="${prefix}left_finger_dist_link">
         <inertial>
@@ -211,6 +213,7 @@
         <child link="${prefix}left_finger_dist_link" />
         <axis xyz="0 0 -1" />
         <limit lower="-0.50" upper="0.21" effort="1000" velocity="1000" /> <!--limit lower="-1.03" upper="0.21" effort="1000" velocity="1000" /-->
+        <mimic joint="${prefix}right_finger_bottom_joint" multiplier="-0.276" offset="-0.1" />
       </joint>
     </xacro:unless>
   </xacro:if>
