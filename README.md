@@ -83,7 +83,7 @@ To build this repository from source or contribute back to the repository read o
    ```
 
    If you plan on simulating the robot with Gazebo, make sure to pull the additional simulation packages.
-   If you're on ROS 2 Humble, run
+   If you're on ROS 2 Jazzy, run
    ```
    vcs import src --skip-existing --input src/ros2_kortex/simulation.jazzy.repos
    ```
