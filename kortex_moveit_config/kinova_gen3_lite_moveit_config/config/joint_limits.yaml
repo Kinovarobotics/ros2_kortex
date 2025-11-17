@@ -38,19 +38,8 @@ joint_limits:
     max_velocity: 3.2000000000000002
     has_acceleration_limits: true
     max_acceleration: 8.6
-  left_finger_bottom_joint:
-    has_velocity_limits: true
-    max_velocity: 0.6
-    has_acceleration_limits: true
-    max_acceleration: 1.0
-    has_position_limits: true
-    min_position: -0.96
-    max_position: 0.09
   right_finger_bottom_joint:
     has_velocity_limits: true
     max_velocity: 0.6
     has_acceleration_limits: true
     max_acceleration: 1.0
-    has_position_limits: true
-    min_position: -0.09
-    max_position: 0.96
