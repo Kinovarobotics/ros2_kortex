@@ -229,7 +229,7 @@ The Gen3_lite gripper will be available on the Action topic:
 /gen3_lite_2f_gripper_controller/gripper_cmd
 ```
 
-You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`) 
+You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`)
 
 ```bash
 ros2 action send_goal /gen3_lite_2f_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
