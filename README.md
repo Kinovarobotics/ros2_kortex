@@ -221,6 +221,20 @@ You can test the gripper by calling the Action server with the following command
 ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
 ```
 
+#### Gen3_lite gripper
+
+The Gen3_lite gripper will be available on the Action topic:
+
+```bash
+/gen3_lite_2f_gripper_controller/gripper_cmd
+```
+
+You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`) 
+
+```bash
+ros2 action send_goal /gen3_lite_2f_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
+```
+
 #### Vision Module
 
 In order to access the Kinova Vision module's depth and color streams for the camera-equipped Gen3 arm models, please refer to the following github repository for detailed instructions: [ros2_kortex_vision](https://github.com/Kinovarobotics/ros2_kortex_vision)
@@ -349,16 +363,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 }" -1
 ```
 
-Depending on your robot type and its DoF, you will need to adapt the `joint_names` and `positions` properties accordingly. For the Gen3 Lite arm, the integrated gripper is considered as a joint, so to command it, it must be included in the `joint_names` array. (`0.0=open`, `1.0=close`):
-
-```bash
-ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
-  joint_names: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, right_finger_bottom_joint],
-  points: [
-    { positions: [0, 0, 0, 0, 0, 0, 1], time_from_start: { sec: 10 } },
-  ]
-}" -1
-```
+Depending on your robot type and its DoF, you will need to adapt the `joint_names` and `positions` properties accordingly.
 
 You can also command the arm using Twist messages. Before doing so, you must active the `twist_controller` and deactivate the `joint_trajectory_controller`:
 ```bash
