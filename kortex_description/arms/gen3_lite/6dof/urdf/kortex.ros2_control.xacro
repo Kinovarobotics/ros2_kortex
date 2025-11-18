@@ -163,7 +163,7 @@
           <state_interface name="position"/>
           <state_interface name="velocity"/>
         </joint>
-      </xacro:unless>  
+      </xacro:unless>
       <!--</xacro:if>-->
     </ros2_control>
   </xacro:macro>
