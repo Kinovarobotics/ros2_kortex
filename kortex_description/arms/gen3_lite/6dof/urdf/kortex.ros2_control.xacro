@@ -157,11 +157,13 @@
        <!-- </xacro:unless> -->
       <!-- </xacro:unless> -->
       <!--<xacro:if value="${moveit_active}">-->
+      <xacro:unless value="${use_fake_hardware}">
         <joint name="${prefix}right_finger_bottom_joint">
           <command_interface name="position"/>
           <state_interface name="position"/>
           <state_interface name="velocity"/>
         </joint>
+      </xacro:unless>
       <!--</xacro:if>-->
     </ros2_control>
   </xacro:macro>
