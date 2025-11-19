@@ -19,6 +19,7 @@
     session_inactivity_timeout_ms:=6000
     connection_inactivity_timeout_ms:=2000
     use_internal_bus_gripper_comm:=false
+    gripper
     gripper_joint_name
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0
@@ -54,7 +55,8 @@
       use_internal_bus_gripper_comm="${use_internal_bus_gripper_comm}"
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}"
-      gripper_joint_name="${gripper_joint_name}"/>
+      gripper_joint_name="${gripper_joint_name}"
+      gripper="${gripper}"/>
 
     <joint name="${prefix}base_joint" type="fixed">
       <xacro:insert_block name="origin" />
