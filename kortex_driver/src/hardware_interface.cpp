@@ -93,7 +93,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
     return CallbackReturn::ERROR;
   }
 
-  info_ = info;
+  info_ = params.hardware_info;
   // The robot's IP address.
   std::string robot_ip = info_.hardware_parameters["robot_ip"];
   if (robot_ip.empty())
