@@ -55,6 +55,7 @@
       sim_isaac="${sim_isaac}"
       isaac_joint_commands="${isaac_joint_commands}"
       isaac_joint_states="${isaac_joint_states}"
+      gripper="${gripper}"
       gripper_joint_name="${gripper_joint_name}"
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}"
