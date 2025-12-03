@@ -72,7 +72,6 @@
                     <param name="mimic">${prefix}right_finger_bottom_joint</param>
                     <param name="multiplier">-1</param>
                     <xacro:unless value="${sim_gazebo}">
-                        <command_interface name="position"/>
                         <state_interface name="position"/>
                         <state_interface name="velocity"/>
                     </xacro:unless>
@@ -81,7 +80,6 @@
                     <param name="mimic">${prefix}right_finger_bottom_joint</param>
                     <param name="multiplier">-1</param>
                     <xacro:unless value="${sim_gazebo}">
-                        <command_interface name="position"/>
                         <state_interface name="position"/>
                         <state_interface name="velocity"/>
                     </xacro:unless>
@@ -90,7 +88,6 @@
                     <param name="mimic">${prefix}right_finger_bottom_joint</param>
                     <param name="multiplier">-1</param>
                     <xacro:unless value="${sim_gazebo}">
-                        <command_interface name="position"/>
                         <state_interface name="position"/>
                         <state_interface name="velocity"/>
                     </xacro:unless>

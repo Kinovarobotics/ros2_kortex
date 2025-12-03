@@ -1,33 +1,14 @@
-###################################### NOTE #############################################
-#
-# This is the Humble version of this file. On other ROS2 distributions (such as Rolling),
-# you might encounter errors with MoveIt regarding the syntax of the request_adpters
-# section, such as:
-#
-# what(): parameter 'ompl.request_adapters' has invalid type: expected [string] got [string_array]
-#
-# This is because on Humble, MoveIt is expecting a simple string for the request adapters,
-# while some distributions expect it as an array of strings instead. If it's the case for you,
-# You just need to remove the folded style block (>-) and replace it by a list of strings :
-#
-# request_adapters:
-#  - default_planner_request_adapters/AddTimeOptimalParameterization
-#  - default_planner_request_adapters/ResolveConstraintFrames
-#  - default_planner_request_adapters/FixWorkspaceBounds
-#  - default_planner_request_adapters/FixStartStateBounds
-#  - default_planner_request_adapters/FixStartStateCollision
-#  - default_planner_request_adapters/FixStartStatePathConstraints
-#
-###################################### NOTE #############################################
-
-planning_plugin: ompl_interface/OMPLPlanner
-request_adapters: >-
-  default_planner_request_adapters/AddTimeOptimalParameterization
-  default_planner_request_adapters/ResolveConstraintFrames
-  default_planner_request_adapters/FixWorkspaceBounds
-  default_planner_request_adapters/FixStartStateBounds
-  default_planner_request_adapters/FixStartStateCollision
-  default_planner_request_adapters/FixStartStatePathConstraints
+planning_plugins:
+  - ompl_interface/OMPLPlanner
+request_adapters:
+  - default_planning_request_adapters/ResolveConstraintFrames
+  - default_planning_request_adapters/ValidateWorkspaceBounds
+  - default_planning_request_adapters/CheckStartStateBounds
+  - default_planning_request_adapters/CheckStartStateCollision
+response_adapters:
+  - default_planning_response_adapters/AddTimeOptimalParameterization
+  - default_planning_response_adapters/ValidateSolution
+  - default_planning_response_adapters/DisplayMotionPath
 start_state_max_bounds_error: 0.1
 planner_configs:
   SBLkConfigDefault:
