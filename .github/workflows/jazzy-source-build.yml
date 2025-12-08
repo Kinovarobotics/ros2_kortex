@@ -35,7 +35,7 @@ jobs:
             https://raw.githubusercontent.com/ros2/ros2/${{ env.ROS_DISTRO }}/ros2.repos
             file://${{ github.workspace }}/ros2_kortex.${{ env.ROS_DISTRO }}.repos
           colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
-          name: colcon-logs-${{ matrix.os }}
+          name: colcon-logs
           path: ros_ws/log
