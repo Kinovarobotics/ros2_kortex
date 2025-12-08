@@ -1,30 +1,29 @@
-name: Humble Binary Build
+name: Jazzy Semi Binary Build
 on:
   pull_request:
     branches:
-      # try to keep humble and rolling(main) in sync
-      - humble
+      - jazzy
       - main
   push:
     branches:
-      - humble
+      - jazzy
       - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '13 4 * * *'
 
 jobs:
-  humble_binary:
-    name: humble binary build
+  jazzy_semi_binary:
+    name: jazzy semi-binary build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         env:
-          - {ROS_DISTRO: humble, ROS_REPO: main}
-          - {ROS_DISTRO: humble, ROS_REPO: testing}
+          - {ROS_DISTRO: jazzy, ROS_REPO: main}
+          - {ROS_DISTRO: jazzy, ROS_REPO: testing}
     env:
-      UPSTREAM_WORKSPACE: ros2_kortex-not-released.${{ matrix.env.ROS_DISTRO }}.repos
-      ROSDEP_SKIP_KEYS: gz_ros2_control
+      UPSTREAM_WORKSPACE: ros2_kortex.${{ matrix.env.ROS_DISTRO }}.repos
+      ROSDEP_SKIP_KEYS: robotiq_description
       CCACHE_DIR: ${{ github.workspace }}/.ccache
       BASEDIR: ${{ github.workspace }}/.work
       CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
