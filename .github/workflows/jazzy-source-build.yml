@@ -1,5 +1,10 @@
 name: Jazzy Source Build
 on:
+  pull_request:
+    branches:
+      # try to keep jazzy and rolling(main) in sync
+      - jazzy
+      - main
   push:
     branches:
       # try to keep jazzy and rolling(main) in sync
