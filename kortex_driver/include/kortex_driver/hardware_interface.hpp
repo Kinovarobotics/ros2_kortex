@@ -84,7 +84,7 @@ public:
   RCLCPP_SHARED_PTR_DEFINITIONS(KortexMultiInterfaceHardware);
 
   KORTEX_DRIVER_PUBLIC
-  CallbackReturn on_init(const hardware_interface::HardwareInfo & info) final;
+  CallbackReturn on_init(const hardware_interface::HardwareComponentInterfaceParams & params) final;
 
   KORTEX_DRIVER_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() final;
