@@ -13,22 +13,45 @@ ROS2 Kortex is the official ROS2 package to interact with KINOVA KORTEX™ and i
     <th>ROS 2 Distro</th>
     <th>Humble</th>
     <th>Jazzy</th>
+    <th>Rolling</th>
   </tr>
   <tr>
     <th>Branch</th>
     <td><a href="https://github.com/Kinovarobotics/ros2_kortex/tree/humble">humble</a></td>
+    <td><a href="https://github.com/Kinovarobotics/ros2_kortex/tree/jazzy">jazzy</a></td>
     <td><a href="https://github.com/Kinovarobotics/ros2_kortex/tree/main">main</a></td>
   </tr>
   <tr>
     <th>Build Status</th>
     <td>
       <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/humble-binary-build.yml">
-        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?event=push&branch=main" alt="Humble Binary Build"/>
+        <img src="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?event=push&branch=humble" alt="Humble Binary Build"/>
+      </a>
+      <br/>
+      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/humble-source-build.yml">
+        <img src="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/humble-source-build.yml/badge.svg?event=push&branch=humble" alt="Humble Source Build"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-binary-build.yml">
+        <img src="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-binary-build.yml/badge.svg?event=push&branch=jazzy" alt="Jazzy Binary Build"/>
+      </a>
+      <br/>
+      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-source-build.yml">
+        <img src="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-source-build.yml/badge.svg?event=push&branch=jazzy" alt="Jazzy Source Build"/>
       </a>
     </td>
     <td>
       <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml">
-        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?event=push&branch=main" alt="Rolling Binary Build"/>
+        <img src="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?event=push&branch=main" alt="Rolling Binary Build"/>
+      </a>
+      <br/>
+      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml">
+        <img src="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml/badge.svg?event=push&branch=main" alt="Rolling Semi-Binary Build"/>
+      </a>
+      <br/>
+      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-source-build.yml">
+        <img src="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-source-build.yml/badge.svg?event=push&branch=main" alt="Rolling Source Build"/>
       </a>
     </td>
   </tr>
@@ -36,6 +59,7 @@ ROS2 Kortex is the official ROS2 package to interact with KINOVA KORTEX™ and i
     <th>Release Status</th>
     <td>Stable (binary available — may lag behind source)<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
     <td>Stable (source only)<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
+    <td>Unstable (source only)</td>
   </tr>
 </table>
 
