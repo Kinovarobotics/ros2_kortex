@@ -6,10 +6,10 @@ A RED job might not mean that this package is currently broken but that an depen
 
 To avoid overloading users viewing the main README page a full list of build statues can be kept here for package maintainers
 
-ROS2 Distro | Jazzy | Rolling
-:---------: | :---: | :-----:
-| **Branch** | [`jazzy`](https://github.com/Kinovarobotics/ros2_kortex/tree/jazzy) | [`main`](https://github.com/Kinovarobotics/ros2_kortex/tree/main)
-| **Build Status** | [![Jazzy Binary Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-binary-build.yml/badge.svg?branch=jazzy)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-binary-build.yml?branch=jazzy) <br /> [![Jazzy Semi-Binary Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-semi-binary-build.yml/badge.svg?branch=jazzy)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-semi-binary-build.yml?branch=jazzy) <br /> [![Jazzy Source Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-source-build.yml/badge.svg?branch=jazzy)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-source-build.yml?branch=jazzy) | [![Rolling Binary Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?branch=main)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml?branch=main) <br /> [![Rolling Semi-Binary Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml/badge.svg?branch=main)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-semi-binary-build.yml?branch=main) <br /> [![Rolling Source Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-source-build.yml/badge.svg?branch=main)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-source-build.yml?branch=main)
+ROS2 Distro | Jazzy
+:---------: | :---:
+| **Branch** | [`jazzy`](https://github.com/Kinovarobotics/ros2_kortex/tree/jazzy)
+| **Build Status** | [![Jazzy Binary Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-binary-build.yml/badge.svg?branch=jazzy)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-binary-build.yml?branch=jazzy) <br /> [![Jazzy Source Build](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-source-build.yml/badge.svg?branch=jazzy)](https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/jazzy-source-build.yml?branch=jazzy)
 
 ### Explanation of different build types
 
