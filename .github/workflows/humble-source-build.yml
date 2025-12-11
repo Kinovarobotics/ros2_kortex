@@ -2,7 +2,6 @@ name: Humble Source Build
 on:
   push:
     branches:
-      # try to keep humble and rolling(main) in sync
       - humble
   schedule:
     # Run every morning to detect flakiness and broken dependencies
@@ -23,8 +22,6 @@ jobs:
       - uses: ros-tooling/action-ros-ci@0.3.13
         with:
           target-ros2-distro: ${{ env.ROS_DISTRO }}
-          # Currently main is compatible with Humble
-          ref: main
           import-token: ${{ secrets.GITHUB_TOKEN }}
           # build all packages listed in the meta package
           package-name:
