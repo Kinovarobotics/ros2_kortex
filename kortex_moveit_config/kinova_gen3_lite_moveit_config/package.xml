@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>kinova_gen3_lite_moveit_config</name>
-  <version>0.2.3</version>
+  <version>0.2.4</version>
   <description>
      An automatically generated package with all the configuration and launch files for using the gen3_lite with the MoveIt Motion Planning Framework
   </description>
