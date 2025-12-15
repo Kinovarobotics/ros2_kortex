@@ -2,6 +2,21 @@
 Changelog for package kinova_gen3_7dof_robotiq_2f_85_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.2.4 (2025-12-15)
+------------------
+* fixed gen3_lite moveit issues (`#318 <https://github.com/Kinovarobotics/ros2_kortex/issues/318>`_)
+* Remove Gazebo Classic support and Update for MoveIt Jazzy/Rolling (`#228 <https://github.com/Kinovarobotics/ros2_kortex/issues/228>`_)
+* Contributors: Abed Al Rahman Al Mrad
+
+0.2.3 (2025-02-27)
+------------------
+* Update planner_plugin parameters (`#199 <https://github.com/Kinovarobotics/ros2_kortex/issues/199>`_)
+* Remove outdated config artifacts (`#198 <https://github.com/Kinovarobotics/ros2_kortex/issues/198>`_)
+* Cleanup robots for visualization & sim (`#180 <https://github.com/Kinovarobotics/ros2_kortex/issues/180>`_)
+* Update planning pipeline configurations (`#187 <https://github.com/Kinovarobotics/ros2_kortex/issues/187>`_)
+* Changing the list of packages maintainers
+* Contributors: Abed Al Rahman Al Mrad
+
 0.2.2 (2023-08-09)
 ------------------
 * specify planning pipelines to use (`#157 <https://github.com/Kinovarobotics/ros2_kortex/issues/157>`_)
