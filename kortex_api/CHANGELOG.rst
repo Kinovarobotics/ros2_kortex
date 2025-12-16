@@ -2,7 +2,7 @@
 Changelog for package kortex_api
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.2.4 (2025-12-16)
+0.2.5 (2025-12-16)
 ------------------
 * No changes for this version
 * Contributors: Abed Al Rahman Al Mrad

@@ -2,7 +2,7 @@
 Changelog for package kortex_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.2.4 (2025-12-16)
+0.2.5 (2025-12-16)
 ------------------
 * added parallel gripper controller (`#329 <https://github.com/Kinovarobotics/ros2_kortex/issues/329>`_)
 * Contributors: Abed Al Rahman Al Mrad

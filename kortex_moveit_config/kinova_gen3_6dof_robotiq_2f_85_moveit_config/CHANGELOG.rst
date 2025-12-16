@@ -2,7 +2,7 @@
 Changelog for package kinova_gen3_6dof_robotiq_2f_85_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.2.4 (2025-12-16)
+0.2.5 (2025-12-16)
 ------------------
 * No changes for this version
 * Contributors: Abed Al Rahman Al Mrad

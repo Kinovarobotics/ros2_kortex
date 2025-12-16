@@ -2,7 +2,7 @@
 Changelog for package kinova_gen3_lite_moveit_config
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.2.4 (2025-12-16)
+0.2.5 (2025-12-16)
 ------------------
 * fixed gen3_lite moveit issues (`#318 <https://github.com/Kinovarobotics/ros2_kortex/issues/318>`_)
 * Modifications to fix moveit issues while controlling Gen3_lite (`#316 <https://github.com/Kinovarobotics/ros2_kortex/issues/316>`_)

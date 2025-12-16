@@ -2,7 +2,7 @@
 Changelog for package kortex_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.2.4 (2025-12-16)
+0.2.5 (2025-12-16)
 ------------------
 * added parallel gripper controller (`#329 <https://github.com/Kinovarobotics/ros2_kortex/issues/329>`_)
 * fixed bringing up the Gen3 wo gripper issue (`#321 <https://github.com/Kinovarobotics/ros2_kortex/issues/321>`_)
