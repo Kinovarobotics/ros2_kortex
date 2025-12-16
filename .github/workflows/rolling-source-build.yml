@@ -19,6 +19,14 @@ jobs:
         with:
           required-ros-distributions: ${{ env.ROS_DISTRO }}
       - uses: actions/checkout@v3
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo apt-get clean
+          df -h
       - uses: ros-tooling/action-ros-ci@0.4.5
         with:
           target-ros2-distro: ${{ env.ROS_DISTRO }}
