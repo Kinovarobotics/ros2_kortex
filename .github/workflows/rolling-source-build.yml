@@ -29,7 +29,7 @@ jobs:
             kortex_driver
           vcs-repo-file-url: |
             https://raw.githubusercontent.com/ros2/ros2/master/ros2.repos
-            file://${{ github.workspace }}/ros2_kortex.repos
+            file://${{ github.workspace }}/ros2_kortex.rolling.repos
           colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
       - uses: actions/upload-artifact@v4
         with:
