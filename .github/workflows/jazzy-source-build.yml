@@ -1,30 +1,30 @@
-name: Humble Source Build
+name: Jazzy Source Build
 on:
   push:
     branches:
-      # try to keep humble and rolling(main) in sync
-      - humble
+      # try to keep jazzy and rolling(main) in sync
+      - jazzy
       - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '43 1 * * *'
 
 jobs:
-  humble_source:
-    runs-on: ubuntu-22.04
+  jazzy_source:
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
     env:
-      ROS_DISTRO: humble
+      ROS_DISTRO: jazzy
     steps:
-      - uses: ros-tooling/setup-ros@v0.6
+      - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: ${{ env.ROS_DISTRO }}
       - uses: actions/checkout@v3
-      - uses: ros-tooling/action-ros-ci@0.3.2
+      - uses: ros-tooling/action-ros-ci@v0.4
         with:
           target-ros2-distro: ${{ env.ROS_DISTRO }}
-          # Currently main is compatible with Humble
+          # Currently main is compatible with Jazzy
           ref: main
           import-token: ${{ secrets.GITHUB_TOKEN }}
           # build all packages listed in the meta package
@@ -35,7 +35,7 @@ jobs:
             https://raw.githubusercontent.com/ros2/ros2/${{ env.ROS_DISTRO }}/ros2.repos
             file://${{ github.workspace }}/ros2_kortex.${{ env.ROS_DISTRO }}.repos
           colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
-          name: colcon-logs-${{ matrix.os }}
+          name: colcon-logs
           path: ros_ws/log

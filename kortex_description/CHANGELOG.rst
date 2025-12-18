@@ -2,6 +2,32 @@
 Changelog for package kortex_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.2.5 (2025-12-16)
+------------------
+* added parallel gripper controller (`#329 <https://github.com/Kinovarobotics/ros2_kortex/issues/329>`_)
+* fixed bringing up the Gen3 wo gripper issue (`#321 <https://github.com/Kinovarobotics/ros2_kortex/issues/321>`_)
+* fixed the gen3_lite fake_hardware issue (`#319 <https://github.com/Kinovarobotics/ros2_kortex/issues/319>`_)
+* fixed gen3_lite moveit issues (`#318 <https://github.com/Kinovarobotics/ros2_kortex/issues/318>`_)
+* Modifications to fix moveit issues while controlling Gen3_lite (`#316 <https://github.com/Kinovarobotics/ros2_kortex/issues/316>`_)
+* Contributors: Abed Al Rahman Al Mrad
+
+0.2.3 (2025-02-27)
+------------------
+* modified the kortex trademark name (`#305 <https://github.com/Kinovarobotics/ros2_kortex/issues/305>`_)
+* Fixed pi issue #295 (`#296 <https://github.com/Kinovarobotics/ros2_kortex/issues/296>`_)
+* Replaced file:// with package:// + Added temporary repositories as dependencies (`#275 <https://github.com/Kinovarobotics/ros2_kortex/issues/275>`_)
+* Remove Gazebo Classic support and Update for MoveIt Jazzy/Rolling (`#228 <https://github.com/Kinovarobotics/ros2_kortex/issues/228>`_)
+* Fixed the Gazebo Fortress Simulation + Separated the arm and gripper control for Gen3_Lite + Fixed bugs (`#252 <https://github.com/Kinovarobotics/ros2_kortex/issues/252>`_)
+* Added the empty gripper option for gen3.launch.py (`#242 <https://github.com/Kinovarobotics/ros2_kortex/issues/242>`_)
+* Modified the joint limits of Gen3 and Gen3 Lite robots as per the values in the User Guides (`#241 <https://github.com/Kinovarobotics/ros2_kortex/issues/241>`_)
+* Added .STL files for the Gen3 7dof meshes (`#235 <https://github.com/Kinovarobotics/ros2_kortex/issues/235>`_)
+* Added a Moveit2 package for Gen3-Lite (`#231 <https://github.com/Kinovarobotics/ros2_kortex/issues/231>`_)
+* Update gripper descriptions for use on HW (`#206 <https://github.com/Kinovarobotics/ros2_kortex/issues/206>`_)
+* Update gen3 lite and gripper macros (`#191 <https://github.com/Kinovarobotics/ros2_kortex/issues/191>`_)
+* Enable initial position param in kinova xacros (`#190 <https://github.com/Kinovarobotics/ros2_kortex/issues/190>`_)
+* Cleanup robots for visualization & sim (`#180 <https://github.com/Kinovarobotics/ros2_kortex/issues/180>`_)
+* Contributors: Abed Al Rahman Al Mrad
+
 0.2.2 (2023-08-09)
 ------------------
 * Refactor MoveIt Launch files (`#162 <https://github.com/Kinovarobotics/ros2_kortex/issues/162>`_)
