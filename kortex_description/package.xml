@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>kortex_description</name>
-  <version>0.2.3</version>
+  <version>0.2.5</version>
   <description>
     <p>URDF and xacro description package for KINOVA KORTEX™ robots</p>
     <p>This package contains configuration data, 3D models and launch files
@@ -21,6 +21,7 @@ for KINOVA KORTEX™ arms and supported grippers</p>
   <exec_depend>joint_trajectory_controller</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>robotiq_description</exec_depend>
+  <exec_depend>parallel_gripper_controller</exec_depend>
   <exec_depend>picknik_reset_fault_controller</exec_depend>
   <exec_depend>picknik_twist_controller</exec_depend>
   <exec_depend>rviz2</exec_depend>
