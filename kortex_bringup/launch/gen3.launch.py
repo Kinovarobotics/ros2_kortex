@@ -63,6 +63,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "vision",
+            default_value="false",
+            description="Is vision module (camera) present on the robot?",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "controllers_file",
             default_value="ros2_controllers.yaml",
             description="Robot controller to start.",
@@ -115,6 +122,7 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
+    vision = LaunchConfiguration("vision")
     gripper = LaunchConfiguration("gripper")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
@@ -132,6 +140,7 @@ def generate_launch_description():
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,
+            "vision": vision,
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
