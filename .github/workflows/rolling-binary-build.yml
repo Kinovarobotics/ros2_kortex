@@ -18,7 +18,6 @@ jobs:
       matrix:
         env:
           - {ROS_DISTRO: rolling, ROS_REPO: main}
-          - {ROS_DISTRO: rolling, ROS_REPO: ros2_dev}
     env:
       UPSTREAM_WORKSPACE: ros2_kortex-not-released.${{ matrix.env.ROS_DISTRO }}.repos
       CCACHE_DIR: ${{ github.workspace }}/.ccache
