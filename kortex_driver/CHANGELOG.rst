@@ -2,6 +2,11 @@
 Changelog for package kortex_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.2.6 (2026-01-07)
+------------------
+* Package version updates
+* Contributors: Abed Al Rahman Al Mrad
+
 0.2.4 (2025-12-15)
 ------------------
 * fix deprecated hardware_interface API (`#327 <https://github.com/Kinovarobotics/ros2_kortex/issues/327>`_)

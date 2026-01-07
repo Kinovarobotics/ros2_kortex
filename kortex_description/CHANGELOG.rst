@@ -2,6 +2,11 @@
 Changelog for package kortex_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.2.6 (2026-01-07)
+------------------
+* Package version updates
+* Contributors: Abed Al Rahman Al Mrad
+
 0.2.4 (2025-12-15)
 ------------------
 * Update to parallel_gripper_controller (`#324 <https://github.com/Kinovarobotics/ros2_kortex/issues/324>`_)
