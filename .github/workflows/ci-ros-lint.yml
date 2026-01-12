@@ -12,7 +12,7 @@ jobs:
           linter: [cppcheck, copyright]
     steps:
     - uses: actions/checkout@v3
-    - uses: ros-tooling/setup-ros@v0.6
+    - uses: ros-tooling/setup-ros@v0.7
     - name: Set environment variable for cppcheck 2.7
       run: echo "AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS=1" >> $GITHUB_ENV
     - uses: ros-tooling/action-ros-lint@v0.1
@@ -33,7 +33,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v3
-    - uses: ros-tooling/setup-ros@v0.6
+    - uses: ros-tooling/setup-ros@v0.7
     - uses: ros-tooling/action-ros-lint@v0.1
       with:
         distribution: rolling
@@ -50,7 +50,7 @@ jobs:
           linter: [cpplint]
     steps:
     - uses: actions/checkout@v3
-    - uses: ros-tooling/setup-ros@v0.6
+    - uses: ros-tooling/setup-ros@v0.7
     - uses: ros-tooling/action-ros-lint@v0.1
       with:
         distribution: rolling
