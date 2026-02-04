@@ -239,7 +239,6 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(const hardware_interface::H
     // command.set_duration = execute time (milliseconds) according to the api ->
     // (not implemented yet)
     // see: https://github.com/Kinovarobotics/kortex/blob/master/api_cpp/doc/markdown/messages/Base/TwistCommand.md
-    k_api_twist_command_.set_duration(0);
     k_api_twist_ = k_api_twist_command_.mutable_twist();
   }
 
