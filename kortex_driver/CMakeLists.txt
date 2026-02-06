@@ -6,7 +6,7 @@ include(FetchContent)
 # Select correct Kinova Binary API zip based on platform
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
-  set(API_URL "https://artifactory.kinovaapps.com:443/artifactory/generic-public/kortex/API/2.5.0/linux_x86-64_x86_gcc.zip")
+  set(API_URL "https://artifactory.kinovaapps.com:443/artifactory/generic-public/kortex/API/2.7.0/linux_x86-64_gcc_5.4.zip")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
   set(API_URL "https://artifactory.kinovaapps.com:443/artifactory/generic-local-public/kortex/API/2.7.0/linux_aarch64_gcc_7.4.zip")
 else()
