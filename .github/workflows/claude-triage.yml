@@ -30,3 +30,9 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           claude "Read all open GitHub issues. Identify likely bugs vs feature requests. Suggest labels and assign a level of complexity for each on a scale from 1 to 10" > triage_report.md
+
+      - name: Upload triage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: triage-report
+          path: triage_report.md
