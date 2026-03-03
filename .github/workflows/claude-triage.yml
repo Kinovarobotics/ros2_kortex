@@ -42,31 +42,29 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          ISSUES=$(cat issues.json)
-
-          claude "
-          You are performing automated GitHub issue triage.
-
-          Here is a JSON list of open issues:
-
-          $ISSUES
-
-          For each issue:
-          - Classify as 'Bug', 'Feature Request', or 'Other'
-          - Suggest appropriate labels
-          - Assign a complexity score from 1 (very easy) to 10 (very complex)
-
-          Output clean markdown with sections:
-          ## Bugs
-          ## Feature Requests
-          ## Other
-
-          For each issue include:
-          - Title
-          - URL
-          - Suggested labels
-          - Complexity score
-          " > triage_report.md
+          (
+            echo 'You are performing automated GitHub issue triage.'
+            echo ''
+            echo 'Here is a JSON list of open issues:'
+            echo ''
+            cat issues.json
+            echo ''
+            echo 'For each issue:'
+            echo "- Classify as 'Bug', 'Feature Request', or 'Other'"
+            echo '- Suggest appropriate labels'
+            echo '- Assign a complexity score from 1 (very easy) to 10 (very complex)'
+            echo ''
+            echo 'Output clean markdown with sections:'
+            echo '## Bugs'
+            echo '## Feature Requests'
+            echo '## Other'
+            echo ''
+            echo 'For each issue include:'
+            echo '- Title'
+            echo '- URL'
+            echo '- Suggested labels'
+            echo '- Complexity score'
+          ) | claude --print > triage_report.md
 
       - name: Upload triage report
         uses: actions/upload-artifact@v4
