@@ -68,7 +68,7 @@ jobs:
           - Suggested labels
           - Complexity score
           " > triage_report.md
-          
+
       - name: Upload triage report
         uses: actions/upload-artifact@v4
         with:
