@@ -28,10 +28,9 @@ jobs:
       - name: Install GitHub CLI
         run: sudo apt-get update && sudo apt-get install -y gh
 
-      - name: Authenticate GitHub CLI
-        run: echo "${{ secrets.TOKEN }}" | gh auth login --with-token
-
       - name: Fetch open issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh issue list \
             --state open \
