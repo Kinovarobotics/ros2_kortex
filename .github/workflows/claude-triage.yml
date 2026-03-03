@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      issues: write
+      issues: read
       contents: read
 
     steps:
@@ -25,11 +25,49 @@ jobs:
       - name: Install Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code
 
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install -y gh
+
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.TOKEN }}" | gh auth login --with-token
+
+      - name: Fetch open issues
+        run: |
+          gh issue list \
+            --state open \
+            --limit 100 \
+            --json number,title,body,labels,url \
+            > issues.json
+
       - name: Run Claude triage
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          claude "Read all open GitHub issues. Identify likely bugs vs feature requests. Suggest labels and assign a level of complexity for each on a scale from 1 to 10" > triage_report.md
+          ISSUES=$(cat issues.json)
+
+          claude "
+          You are performing automated GitHub issue triage.
+
+          Here is a JSON list of open issues:
+
+          $ISSUES
+
+          For each issue:
+          - Classify as 'Bug', 'Feature Request', or 'Other'
+          - Suggest appropriate labels
+          - Assign a complexity score from 1 (very easy) to 10 (very complex)
+
+          Output clean markdown with sections:
+          ## Bugs
+          ## Feature Requests
+          ## Other
+
+          For each issue include:
+          - Title
+          - URL
+          - Suggested labels
+          - Complexity score
+          " > triage_report.md
 
       - name: Upload triage report
         uses: actions/upload-artifact@v4
