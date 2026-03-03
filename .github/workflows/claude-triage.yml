@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      issues: write
+      issues: read
       contents: read
 
     steps:
