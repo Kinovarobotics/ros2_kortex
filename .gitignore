@@ -1,3 +1,7 @@
+.secrets
+issue.json
+test-claude-fix.sh
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
