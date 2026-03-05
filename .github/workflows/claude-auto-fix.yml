@@ -1,0 +1,194 @@
+name: Claude Auto-Fix Issue
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to attempt to fix'
+        required: true
+        type: string
+
+jobs:
+  auto-fix:
+    # Only run when the 'claude-fix' label is applied, or triggered manually
+    if: github.event.label.name == 'claude-fix' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install -y gh jq
+
+      - name: Resolve issue number
+        id: issue
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "number=${{ github.event.inputs.issue_number }}" >> $GITHUB_OUTPUT
+          else
+            echo "number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fetch issue details
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue view ${{ steps.issue.outputs.number }} \
+            --json number,title,body,labels,url \
+            > issue.json
+          echo "--- Issue details ---"
+          cat issue.json
+
+      - name: Configure git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+      - name: Create fix branch
+        run: |
+          git checkout -b claude-fix/issue-${{ steps.issue.outputs.number }}
+
+      - name: Post starting comment on issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ steps.issue.outputs.number }} \
+            --body "Claude is analyzing this issue and will attempt an automated fix. A pull request will be opened if changes are made."
+
+      - name: Run Claude to analyze and fix issue
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ISSUE_CONTENT=$(cat issue.json)
+          WORKDIR=$(pwd)
+          # claude --dangerously-skip-permissions requires a non-root user
+          if [ "$(id -u)" = "0" ]; then
+            CLAUDE_BIN=$(which claude)
+            useradd -m -s /bin/bash claude-runner 2>/dev/null || true
+            chown -R claude-runner "$WORKDIR"
+            # Allow traversal of ancestor directories owned by root
+            chmod o+x /root $(dirname "$WORKDIR") $(dirname "$(dirname "$WORKDIR")") 2>/dev/null || true
+            sudo -u claude-runner \
+              env PATH="$PATH" \
+              ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
+              HOME="/home/claude-runner" \
+              bash -c "cd '$WORKDIR' && '$CLAUDE_BIN' --dangerously-skip-permissions -p \
+          \"You are an expert ROS2 software engineer working on the ros2_kortex package, \
+          which provides ROS2 support for Kinova Gen3 and Gen3 Lite robotic arms.
+
+          Your task is to analyze the following GitHub issue and implement a fix directly \
+          in the codebase.
+
+          Issue details:
+          $ISSUE_CONTENT
+
+          Instructions:
+          1. Read and understand the issue carefully.
+          2. Explore the relevant source files to understand the current implementation.
+          3. Implement a minimal, focused fix that addresses the root cause.
+          4. Do not refactor unrelated code or add unnecessary changes.
+          5. Ensure the fix does not break existing functionality.
+
+          Go ahead and implement the fix now.\""
+          else
+            claude --dangerously-skip-permissions -p \
+          "You are an expert ROS2 software engineer working on the ros2_kortex package, \
+          which provides ROS2 support for Kinova Gen3 and Gen3 Lite robotic arms.
+
+          Your task is to analyze the following GitHub issue and implement a fix directly \
+          in the codebase.
+
+          Issue details:
+          $ISSUE_CONTENT
+
+          Instructions:
+          1. Read and understand the issue carefully.
+          2. Explore the relevant source files to understand the current implementation.
+          3. Implement a minimal, focused fix that addresses the root cause.
+          4. Do not refactor unrelated code or add unnecessary changes.
+          5. Ensure the fix does not break existing functionality.
+
+          Go ahead and implement the fix now."
+          fi
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit changes
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git commit -m "fix: automated fix attempt for issue #${{ steps.issue.outputs.number }}"
+
+      - name: Push branch
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin claude-fix/issue-${{ steps.issue.outputs.number }}
+
+      - name: Create pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_TITLE=$(jq -r '.title' issue.json)
+          gh pr create \
+            --title "fix(claude): resolve issue #${{ steps.issue.outputs.number }} - $ISSUE_TITLE" \
+            --body "## Automated Fix Attempt
+
+          This PR was automatically generated by Claude to address issue #${{ steps.issue.outputs.number }}.
+
+          **Issue:** $ISSUE_TITLE
+
+          > **Warning:** This is an automated fix. Please review all changes carefully before merging.
+
+          Closes #${{ steps.issue.outputs.number }}" \
+            --base main \
+            --head claude-fix/issue-${{ steps.issue.outputs.number }}
+
+      - name: Comment on issue - fix submitted
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_URL=$(gh pr view claude-fix/issue-${{ steps.issue.outputs.number }} --json url -q '.url')
+          gh issue comment ${{ steps.issue.outputs.number }} \
+            --body "Claude has submitted a fix attempt: $PR_URL
+
+          Please review the changes before merging."
+
+      - name: Comment on issue - no fix found
+        if: steps.changes.outputs.changed == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ steps.issue.outputs.number }} \
+            --body "Claude analyzed this issue but was unable to determine an automated fix. Manual intervention is required."
