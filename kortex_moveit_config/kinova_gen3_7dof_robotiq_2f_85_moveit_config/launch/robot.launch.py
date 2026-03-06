@@ -47,6 +47,8 @@ def launch_setup(context, *args, **kwargs):
         "gripper_max_velocity": gripper_max_velocity,
         "gripper_max_force": gripper_max_force,
         "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
+        "isaac_joint_commands": "/isaac_joint_commands",
+        "isaac_joint_states": "/isaac_joint_states",
     }
 
     moveit_config = (
