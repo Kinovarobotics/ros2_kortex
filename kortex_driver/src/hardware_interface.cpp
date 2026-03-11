@@ -287,6 +287,10 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
     RCLCPP_INFO(LOGGER, "Using internal bus communication for gripper!");
   }
 
+  // Set prefix for non-joint interfaces to support multiple robots
+  interface_prefix_ = info_.name;
+  RCLCPP_INFO(LOGGER, "Interface prefix is '%s'", interface_prefix_.c_str());
+
   RCLCPP_INFO(LOGGER, "Hardware Interface successfully configured");
   return CallbackReturn::SUCCESS;
 }
@@ -325,7 +329,7 @@ KortexMultiInterfaceHardware::export_state_interfaces()
 
   // state interface which reports if robot is faulted
   state_interfaces.emplace_back(
-    hardware_interface::StateInterface("reset_fault", "internal_fault", &in_fault_));
+    hardware_interface::StateInterface(interface_prefix_ + "/reset_fault", "internal_fault", &in_fault_));
 
   return state_interfaces;
 }
@@ -367,25 +371,27 @@ KortexMultiInterfaceHardware::export_command_interfaces()
     }
   }
 
-  // register twist command interfaces
+  // register twist command interfaces (prefixed for multi-robot support)
+  std::string tcp_name = interface_prefix_ + "/tcp";
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.linear.x", &twist_commands_[0]));
+    hardware_interface::CommandInterface(tcp_name, "twist.linear.x", &twist_commands_[0]));
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.linear.y", &twist_commands_[1]));
+    hardware_interface::CommandInterface(tcp_name, "twist.linear.y", &twist_commands_[1]));
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.linear.z", &twist_commands_[2]));
+    hardware_interface::CommandInterface(tcp_name, "twist.linear.z", &twist_commands_[2]));
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.angular.x", &twist_commands_[3]));
+    hardware_interface::CommandInterface(tcp_name, "twist.angular.x", &twist_commands_[3]));
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.angular.y", &twist_commands_[4]));
+    hardware_interface::CommandInterface(tcp_name, "twist.angular.y", &twist_commands_[4]));
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.angular.z", &twist_commands_[5]));
+    hardware_interface::CommandInterface(tcp_name, "twist.angular.z", &twist_commands_[5]));
 
+  std::string reset_fault_name = interface_prefix_ + "/reset_fault";
   command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("reset_fault", "command", &reset_fault_cmd_));
+    hardware_interface::CommandInterface(reset_fault_name, "command", &reset_fault_cmd_));
 
   command_interfaces.emplace_back(hardware_interface::CommandInterface(
-    "reset_fault", "async_success", &reset_fault_async_success_));
+    reset_fault_name, "async_success", &reset_fault_async_success_));
 
   return command_interfaces;
 }
@@ -447,14 +453,21 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
           "interface!");
       }
     }
+    // Match prefixed tcp/twist interfaces
     if (
-      (key == "tcp/twist.linear.x") || (key == "tcp/twist.linear.y") ||
-      (key == "tcp/twist.linear.z") || (key == "tcp/twist.angular.x") ||
-      (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
+      (key == interface_prefix_ + "/tcp/twist.linear.x") ||
+      (key == interface_prefix_ + "/tcp/twist.linear.y") ||
+      (key == interface_prefix_ + "/tcp/twist.linear.z") ||
+      (key == interface_prefix_ + "/tcp/twist.angular.x") ||
+      (key == interface_prefix_ + "/tcp/twist.angular.y") ||
+      (key == interface_prefix_ + "/tcp/twist.angular.z"))
     {
       stop_modes_.emplace_back(StopStartInterface::STOP_TWIST);
     }
-    if ((key == "reset_fault/command") || (key == "reset_fault/async_success"))
+    // Match prefixed reset_fault interfaces
+    if (
+      (key == interface_prefix_ + "/reset_fault/command") ||
+      (key == interface_prefix_ + "/reset_fault/async_success"))
     {
       stop_modes_.emplace_back(StopStartInterface::STOP_FAULT_CTRL);
     }
@@ -496,14 +509,21 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
           "interface!");
       }
     }
+    // Match prefixed tcp/twist interfaces
     if (
-      (key == "tcp/twist.linear.x") || (key == "tcp/twist.linear.y") ||
-      (key == "tcp/twist.linear.z") || (key == "tcp/twist.angular.x") ||
-      (key == "tcp/twist.angular.y") || (key == "tcp/twist.angular.z"))
+      (key == interface_prefix_ + "/tcp/twist.linear.x") ||
+      (key == interface_prefix_ + "/tcp/twist.linear.y") ||
+      (key == interface_prefix_ + "/tcp/twist.linear.z") ||
+      (key == interface_prefix_ + "/tcp/twist.angular.x") ||
+      (key == interface_prefix_ + "/tcp/twist.angular.y") ||
+      (key == interface_prefix_ + "/tcp/twist.angular.z"))
     {
       start_modes_.emplace_back(StopStartInterface::START_TWIST);
     }
-    if ((key == "reset_fault/command") || (key == "reset_fault/async_success"))
+    // Match prefixed reset_fault interfaces
+    if (
+      (key == interface_prefix_ + "/reset_fault/command") ||
+      (key == interface_prefix_ + "/reset_fault/async_success"))
     {
       start_modes_.emplace_back(StopStartInterface::START_FAULT_CTRL);
     }
