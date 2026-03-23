@@ -152,6 +152,14 @@ private:
   double gripper_force_command_ = 0.0;
   double gripper_speed_command_ = 0.0;
 
+  // end-effector wrench state (tool_external_wrench from BaseCyclic feedback)
+  double ft_force_x_ = 0.0;
+  double ft_force_y_ = 0.0;
+  double ft_force_z_ = 0.0;
+  double ft_torque_x_ = 0.0;
+  double ft_torque_y_ = 0.0;
+  double ft_torque_z_ = 0.0;
+
   rclcpp::Time controller_switch_time_;
   std::atomic<bool> block_write = false;
   k_api::Base::ServoingMode arm_mode_;

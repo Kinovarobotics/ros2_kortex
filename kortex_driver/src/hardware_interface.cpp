@@ -327,6 +327,20 @@ KortexMultiInterfaceHardware::export_state_interfaces()
   state_interfaces.emplace_back(
     hardware_interface::StateInterface("reset_fault", "internal_fault", &in_fault_));
 
+  // end-effector wrench state interfaces
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("tcp_fts_sensor", "force.x", &ft_force_x_));
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("tcp_fts_sensor", "force.y", &ft_force_y_));
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("tcp_fts_sensor", "force.z", &ft_force_z_));
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("tcp_fts_sensor", "torque.x", &ft_torque_x_));
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("tcp_fts_sensor", "torque.y", &ft_torque_y_));
+  state_interfaces.emplace_back(
+    hardware_interface::StateInterface("tcp_fts_sensor", "torque.z", &ft_torque_z_));
+
   return state_interfaces;
 }
 
@@ -782,6 +796,14 @@ return_type KortexMultiInterfaceHardware::read(
     // TODO(livanov93): separate warnings into another variable to expose it via fault controller
     //       feedback_.actuators(i).warning_bank_a() + feedback_.actuators(i).warning_bank_b());
   }
+
+  // read end-effector wrench (forces in N, torques in N*m, expressed in tool frame)
+  ft_force_x_ = feedback_.base().tool_external_wrench_force_x();
+  ft_force_y_ = feedback_.base().tool_external_wrench_force_y();
+  ft_force_z_ = feedback_.base().tool_external_wrench_force_z();
+  ft_torque_x_ = feedback_.base().tool_external_wrench_torque_x();
+  ft_torque_y_ = feedback_.base().tool_external_wrench_torque_y();
+  ft_torque_z_ = feedback_.base().tool_external_wrench_torque_z();
 
   // add all base's faults and warnings into series
   in_fault_ += (feedback_.base().fault_bank_a() + feedback_.base().fault_bank_b());
