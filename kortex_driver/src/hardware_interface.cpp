@@ -811,7 +811,18 @@ return_type KortexMultiInterfaceHardware::write(
 {
   if (block_write)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::runtime_error & ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Transient timeout during feedback refresh (block_write): " << ex.what());
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Exception during feedback refresh (block_write): " << ex.what());
+    }
     return return_type::OK;
   }
 
@@ -874,7 +885,18 @@ return_type KortexMultiInterfaceHardware::write(
       sendGripperCommand(
         arm_mode_, gripper_command_position_, gripper_speed_command_, gripper_force_command_);
       // read after write in twist mode
-      feedback_ = base_cyclic_.RefreshFeedback();
+      try
+      {
+        feedback_ = base_cyclic_.RefreshFeedback();
+      }
+      catch (std::runtime_error & ex)
+      {
+        RCLCPP_WARN_STREAM(LOGGER, "Transient timeout during feedback refresh (twist mode): " << ex.what());
+      }
+      catch (std::exception & ex)
+      {
+        RCLCPP_WARN_STREAM(LOGGER, "Exception during feedback refresh (twist mode): " << ex.what());
+      }
     }
     else if (
       (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
@@ -894,14 +916,36 @@ return_type KortexMultiInterfaceHardware::write(
       else
       {
         // Keep alive mode - no controller active
-        feedback_ = base_cyclic_.RefreshFeedback();
+        try
+        {
+          feedback_ = base_cyclic_.RefreshFeedback();
+        }
+        catch (std::runtime_error & ex)
+        {
+          RCLCPP_WARN_STREAM(LOGGER, "Transient timeout during feedback refresh (low-level keep-alive): " << ex.what());
+        }
+        catch (std::exception & ex)
+        {
+          RCLCPP_WARN_STREAM(LOGGER, "Exception during feedback refresh (low-level keep-alive): " << ex.what());
+        }
         // RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
       }
     }
     else
     {
       // Keep alive mode - no controller active
-      feedback_ = base_cyclic_.RefreshFeedback();
+      try
+      {
+        feedback_ = base_cyclic_.RefreshFeedback();
+      }
+      catch (std::runtime_error & ex)
+      {
+        RCLCPP_WARN_STREAM(LOGGER, "Transient timeout during feedback refresh (unsupported mode): " << ex.what());
+      }
+      catch (std::exception & ex)
+      {
+        RCLCPP_WARN_STREAM(LOGGER, "Exception during feedback refresh (unsupported mode): " << ex.what());
+      }
       RCLCPP_DEBUG(
         LOGGER,
         "Fault was not recognized on the robot but combination of Control Mode and Active State "
@@ -912,7 +956,18 @@ return_type KortexMultiInterfaceHardware::write(
   {
     // this is needed when the robot was faulted
     // so we can internally conclude it is not faulted anymore
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::runtime_error & ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Transient timeout during feedback refresh (fault recovery): " << ex.what());
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Exception during feedback refresh (fault recovery): " << ex.what());
+    }
   }
 
   return return_type::OK;
@@ -948,27 +1003,49 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (k_api::KDetailedException & ex)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
 
     RCLCPP_ERROR_STREAM(
       LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                 k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & refresh_ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Could not refresh feedback after Kortex exception: " << refresh_ex.what());
+    }
   }
   catch (std::runtime_error & ex_runtime)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
-    RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex_runtime.what());
+    // std::runtime_error with "timeout detected" is thrown when network is congested (e.g. camera
+    // pointcloud stream). Logging as WARN to avoid controller deactivation on transient timeouts.
+    RCLCPP_WARN_STREAM(LOGGER, "Runtime error during joint command send: " << ex_runtime.what());
   }
   catch (std::future_error & ex_future)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & refresh_ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Could not refresh feedback after future error: " << refresh_ex.what());
+    }
   }
   catch (std::exception & ex_std)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & refresh_ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Could not refresh feedback after exception: " << refresh_ex.what());
+    }
   }
 }
 
