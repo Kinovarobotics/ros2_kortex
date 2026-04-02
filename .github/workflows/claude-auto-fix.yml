@@ -71,9 +71,28 @@ jobs:
             echo "--- Issue #${ISSUE_NUMBER} details ---"
             cat issue.json
 
-            # Reset to main before creating a new branch
-            git checkout main 2>/dev/null || git checkout -f HEAD
-            git pull origin main --rebase 2>/dev/null || true
+            # Detect target branch from issue labels, then title/body, then default to main
+            TARGET_BRANCH="main"
+            for DISTRO in humble jazzy; do
+              if jq -e --arg d "$DISTRO" '.labels[].name | ascii_downcase | contains($d)' issue.json > /dev/null 2>&1; then
+                TARGET_BRANCH="$DISTRO"
+                break
+              fi
+            done
+            if [ "$TARGET_BRANCH" = "main" ]; then
+              ISSUE_TEXT=$(jq -r '.title + " " + (.body // "")' issue.json | tr '[:upper:]' '[:lower:]')
+              for DISTRO in humble jazzy; do
+                if echo "$ISSUE_TEXT" | grep -q "$DISTRO"; then
+                  TARGET_BRANCH="$DISTRO"
+                  break
+                fi
+              done
+            fi
+            echo "Target branch: $TARGET_BRANCH"
+
+            # Reset to target branch before creating a new branch
+            git checkout "$TARGET_BRANCH" 2>/dev/null || git checkout -f HEAD
+            git pull origin "$TARGET_BRANCH" --rebase 2>/dev/null || true
 
             # Create fix branch
             BRANCH_NAME="claude-fix/issue-${ISSUE_NUMBER}"
@@ -150,7 +169,7 @@ jobs:
               > **Warning:** This is an automated fix. All changes will be carefully reviewed by a member of Kinova's team before merging.
 
               Closes #${ISSUE_NUMBER}" \
-                --base main \
+                --base "$TARGET_BRANCH" \
                 --head "$BRANCH_NAME"
 
               PR_URL=$(gh pr view "$BRANCH_NAME" --json url -q '.url')
@@ -241,9 +260,28 @@ jobs:
             echo "--- Issue #${ISSUE_NUMBER} details ---"
             cat issue.json
 
-            # Reset to main before creating a new branch
-            git checkout main 2>/dev/null || git checkout -f HEAD
-            git pull origin main --rebase 2>/dev/null || true
+            # Detect target branch from issue labels, then title/body, then default to main
+            TARGET_BRANCH="main"
+            for DISTRO in humble jazzy; do
+              if jq -e --arg d "$DISTRO" '.labels[].name | ascii_downcase | contains($d)' issue.json > /dev/null 2>&1; then
+                TARGET_BRANCH="$DISTRO"
+                break
+              fi
+            done
+            if [ "$TARGET_BRANCH" = "main" ]; then
+              ISSUE_TEXT=$(jq -r '.title + " " + (.body // "")' issue.json | tr '[:upper:]' '[:lower:]')
+              for DISTRO in humble jazzy; do
+                if echo "$ISSUE_TEXT" | grep -q "$DISTRO"; then
+                  TARGET_BRANCH="$DISTRO"
+                  break
+                fi
+              done
+            fi
+            echo "Target branch: $TARGET_BRANCH"
+
+            # Reset to target branch before creating a new branch
+            git checkout "$TARGET_BRANCH" 2>/dev/null || git checkout -f HEAD
+            git pull origin "$TARGET_BRANCH" --rebase 2>/dev/null || true
 
             # Create fix branch
             BRANCH_NAME="claude-fix/issue-${ISSUE_NUMBER}"
@@ -320,7 +358,7 @@ jobs:
               > **Warning:** This is an automated fix. All changes will be carefully reviewed by a member of Kinova's team before merging.
 
               Closes #${ISSUE_NUMBER}" \
-                --base main \
+                --base "$TARGET_BRANCH" \
                 --head "$BRANCH_NAME"
 
               PR_URL=$(gh pr view "$BRANCH_NAME" --json url -q '.url')
