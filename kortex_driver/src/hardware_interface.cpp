@@ -661,7 +661,8 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   // first read
   auto base_feedback = base_cyclic_.RefreshFeedback();
 
-  // Add each actuator to the base_command_ and set the command to its current position
+  // Clear and re-populate actuators to avoid accumulation on repeated activations
+  base_command_.clear_actuators();
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
     base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
@@ -677,6 +678,8 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
 
   // Initialize interconnect command to current gripper position.
   base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
+  // Clear existing motor commands to avoid accumulation on repeated activations
+  base_command_.mutable_interconnect()->mutable_gripper_command()->clear_motor_cmd();
   gripper_motor_command_ =
     base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
   gripper_motor_command_->set_position(gripper_initial_position);  // % position
@@ -740,6 +743,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   transport_tcp_.disconnect();
   router_udp_realtime_.SetActivationStatus(false);
   transport_udp_realtime_.disconnect();
+
+  // Reset pointer; the protobuf message owns this memory and will free it
+  gripper_motor_command_ = nullptr;
 
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully deactivated!");
 
