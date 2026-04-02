@@ -200,7 +200,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   session_manager_real_time_.CreateSession(create_session_info);
   RCLCPP_INFO(LOGGER, "Session created");
 
-  // reset faults on activation, go back to low level servoing after
+  // Reset faults in single level servoing mode. Stay in single level servoing by default so that
+  // admittance mode (if enabled on the robot) is preserved. The joint_trajectory_controller will
+  // switch to low level servoing when activated.
   {
     servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::SINGLE_LEVEL_SERVOING);
     base_.SetServoingMode(servoing_mode_hw_);
@@ -218,11 +220,6 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
         LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                   k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
     }
-
-    // low level servoing on startup
-    servoing_mode_hw_.set_servoing_mode(Kinova::Api::Base::LOW_LEVEL_SERVOING);
-    arm_mode_ = Kinova::Api::Base::LOW_LEVEL_SERVOING;
-    base_.SetServoingMode(servoing_mode_hw_);
   }
 
   // initialize kortex api twist commandd
