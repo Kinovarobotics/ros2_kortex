@@ -21,7 +21,7 @@ from launch.actions import (
     RegisterEventHandler,
 )
 from launch.event_handlers import OnProcessExit
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
@@ -194,6 +194,13 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(use_internal_bus_gripper_comm),
     )
 
+    force_torque_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["force_torque_sensor_broadcaster", "-c", "/controller_manager"],
+        condition=UnlessCondition(use_fake_hardware),
+    )
+
     nodes_to_start = [
         control_node,
         robot_state_publisher_node,
@@ -202,6 +209,7 @@ def launch_setup(context, *args, **kwargs):
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
         fault_controller_spawner,
+        force_torque_broadcaster_spawner,
     ]
     start_robot_hand_controller = gripper.perform(context) != ""
     # Conditionally add robot_hand_controller_spawner
