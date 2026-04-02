@@ -15,7 +15,7 @@ controller_manager:
       type: picknik_reset_fault_controller/PicknikResetFaultController
 
     gen3_lite_2f_gripper_controller:
-      type: position_controllers/GripperActionController
+      type: parallel_gripper_action_controller/GripperActionController
 
 joint_trajectory_controller:
   ros__parameters:
@@ -51,6 +51,5 @@ twist_controller:
 
 gen3_lite_2f_gripper_controller:
   ros__parameters:
-    default: true
     joint: right_finger_bottom_joint
     allow_stalling: true
