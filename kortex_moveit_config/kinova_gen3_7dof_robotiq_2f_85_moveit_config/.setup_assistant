@@ -5,6 +5,8 @@ moveit_setup_assistant_config:
     xacro_args:
       gripper:=robotiq_2f_85
       dof:=7
+      isaac_joint_commands:=/isaac_joint_commands
+      isaac_joint_states:=/isaac_joint_states
   srdf:
     relative_path: config/gen3.srdf
   package_settings:
