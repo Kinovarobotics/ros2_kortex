@@ -174,9 +174,34 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   }
   else
   {
-    RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
-    gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
-    gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
+    // Validate the gripper joint actually exists in the declared joints.
+    // If not, the hardware was likely configured without a gripper (e.g. custom
+    // end-effector) and the gripper_joint_name parameter is just a stale default.
+    bool gripper_joint_found = false;
+    for (const auto & joint : info_.joints)
+    {
+      if (joint.name == gripper_joint_name_)
+      {
+        gripper_joint_found = true;
+        break;
+      }
+    }
+    if (!gripper_joint_found)
+    {
+      RCLCPP_WARN(
+        LOGGER,
+        "Gripper joint '%s' not found in the configured joints. "
+        "No gripper will be used. If you intended to use a gripper, "
+        "ensure the gripper joint is declared in the ros2_control section.",
+        gripper_joint_name_.c_str());
+      gripper_joint_name_ = "";
+    }
+    else
+    {
+      RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
+      gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
+      gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
+    }
   }
 
   RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
