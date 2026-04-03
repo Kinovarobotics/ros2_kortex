@@ -631,9 +631,9 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     {
       feedback_ = base_cyclic_.RefreshFeedback();
     }
-    catch (std::runtime_error & ex)
+    catch (std::exception & ex)
     {
-      RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex.what());
+      RCLCPP_ERROR_STREAM(LOGGER, "Error refreshing feedback during mode switch: " << ex.what());
       return return_type::ERROR;
     }
   }
@@ -680,9 +680,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   {
     base_feedback = base_cyclic_.RefreshFeedback();
   }
-  catch (std::runtime_error & ex)
+  catch (std::exception & ex)
   {
-    RCLCPP_ERROR_STREAM(LOGGER, "Runtime error on activation feedback read: " << ex.what());
+    RCLCPP_ERROR_STREAM(LOGGER, "Error on activation feedback read: " << ex.what());
     return CallbackReturn::ERROR;
   }
 
@@ -714,9 +714,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   {
     base_feedback = base_cyclic_.Refresh(base_command_);
   }
-  catch (std::runtime_error & ex)
+  catch (std::exception & ex)
   {
-    RCLCPP_ERROR_STREAM(LOGGER, "Runtime error on activation first refresh: " << ex.what());
+    RCLCPP_ERROR_STREAM(LOGGER, "Error on activation first refresh: " << ex.what());
     return CallbackReturn::ERROR;
   }
   // Set some default values
@@ -794,9 +794,9 @@ return_type KortexMultiInterfaceHardware::read(
     {
       feedback_ = base_cyclic_.RefreshFeedback();
     }
-    catch (std::runtime_error & ex)
+    catch (std::exception & ex)
     {
-      RCLCPP_ERROR_STREAM(LOGGER, "Runtime error on first feedback read: " << ex.what());
+      RCLCPP_ERROR_STREAM(LOGGER, "Error on first feedback read: " << ex.what());
       return return_type::ERROR;
     }
   }
@@ -858,9 +858,9 @@ return_type KortexMultiInterfaceHardware::write(
     {
       feedback_ = base_cyclic_.RefreshFeedback();
     }
-    catch (std::runtime_error & ex)
+    catch (std::exception & ex)
     {
-      RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex.what());
+      RCLCPP_ERROR_STREAM(LOGGER, "Error during block_write feedback refresh: " << ex.what());
       return return_type::ERROR;
     }
     return return_type::OK;
@@ -929,9 +929,9 @@ return_type KortexMultiInterfaceHardware::write(
       {
         feedback_ = base_cyclic_.RefreshFeedback();
       }
-      catch (std::runtime_error & ex)
+      catch (std::exception & ex)
       {
-        RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex.what());
+        RCLCPP_ERROR_STREAM(LOGGER, "Error refreshing feedback after twist command: " << ex.what());
         return return_type::ERROR;
       }
     }
@@ -957,9 +957,9 @@ return_type KortexMultiInterfaceHardware::write(
         {
           feedback_ = base_cyclic_.RefreshFeedback();
         }
-        catch (std::runtime_error & ex)
+        catch (std::exception & ex)
         {
-          RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex.what());
+          RCLCPP_ERROR_STREAM(LOGGER, "Error during keep-alive feedback refresh: " << ex.what());
           return return_type::ERROR;
         }
         RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
@@ -972,9 +972,9 @@ return_type KortexMultiInterfaceHardware::write(
       {
         feedback_ = base_cyclic_.RefreshFeedback();
       }
-      catch (std::runtime_error & ex)
+      catch (std::exception & ex)
       {
-        RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex.what());
+        RCLCPP_ERROR_STREAM(LOGGER, "Error during keep-alive feedback refresh: " << ex.what());
         return return_type::ERROR;
       }
       RCLCPP_DEBUG(
@@ -991,9 +991,9 @@ return_type KortexMultiInterfaceHardware::write(
     {
       feedback_ = base_cyclic_.RefreshFeedback();
     }
-    catch (std::runtime_error & ex)
+    catch (std::exception & ex)
     {
-      RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex.what());
+      RCLCPP_ERROR_STREAM(LOGGER, "Error refreshing feedback in fault state: " << ex.what());
       return return_type::ERROR;
     }
   }
@@ -1125,6 +1125,10 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
         LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                   k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
     }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Error sending gripper command: " << ex.what());
+    }
   }
 }
 
@@ -1136,7 +1140,18 @@ void KortexMultiInterfaceHardware::sendTwistCommand()
   k_api_twist_->set_angular_x(static_cast<float>(twist_commands_[3]));
   k_api_twist_->set_angular_y(static_cast<float>(twist_commands_[4]));
   k_api_twist_->set_angular_z(static_cast<float>(twist_commands_[5]));
-  base_.SendTwistCommand(k_api_twist_command_);
+  try
+  {
+    base_.SendTwistCommand(k_api_twist_command_);
+  }
+  catch (k_api::KDetailedException & ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception sending twist command: " << ex.what());
+  }
+  catch (std::exception & ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Error sending twist command: " << ex.what());
+  }
 }
 
 }  // namespace kortex_driver
