@@ -35,6 +35,9 @@ joint_trajectory_controller:
     state_publish_rate: 100.0
     action_monitor_rate: 20.0
     allow_partial_joints_goal: false
+    # Allow the controller to integrate velocity+position waypoints from MoveIt Servo,
+    # which improves smoothness and prevents gravity-induced droop during servo operations.
+    allow_integration_in_goal_trajectories: true
     constraints:
       stopped_velocity_tolerance: 0.0
       goal_time: 0.0
