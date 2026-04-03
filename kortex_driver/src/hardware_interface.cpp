@@ -279,8 +279,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   }
 
   if (
-    (info_.hardware_parameters["use_internal_bus_gripper_comm"] == "true") ||
-    (info_.hardware_parameters["use_internal_bus_gripper_comm"] == "True"))
+    !gripper_joint_name_.empty() &&
+    ((info_.hardware_parameters["use_internal_bus_gripper_comm"] == "true") ||
+     (info_.hardware_parameters["use_internal_bus_gripper_comm"] == "True")))
   {
     use_internal_bus_gripper_comm_ = true;
     RCLCPP_INFO(LOGGER, "Using internal bus communication for gripper!");
