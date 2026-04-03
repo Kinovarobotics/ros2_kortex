@@ -243,6 +243,7 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   arm_positions_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
   arm_velocities_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
   arm_efforts_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  std::fill(std::begin(tool_contact_wrench_), std::end(tool_contact_wrench_), 0.0);
   arm_commands_positions_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
   arm_commands_velocities_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
   arm_commands_efforts_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
@@ -326,6 +327,20 @@ KortexMultiInterfaceHardware::export_state_interfaces()
   // state interface which reports if robot is faulted
   state_interfaces.emplace_back(
     hardware_interface::StateInterface("reset_fault", "internal_fault", &in_fault_));
+
+  // end-effector wrench state interfaces (tool_contact_wrench sensor)
+  state_interfaces.emplace_back(hardware_interface::StateInterface(
+    "tcp_fts_sensor", "force.x", &tool_contact_wrench_[0]));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(
+    "tcp_fts_sensor", "force.y", &tool_contact_wrench_[1]));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(
+    "tcp_fts_sensor", "force.z", &tool_contact_wrench_[2]));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(
+    "tcp_fts_sensor", "torque.x", &tool_contact_wrench_[3]));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(
+    "tcp_fts_sensor", "torque.y", &tool_contact_wrench_[4]));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(
+    "tcp_fts_sensor", "torque.z", &tool_contact_wrench_[5]));
 
   return state_interfaces;
 }
@@ -782,6 +797,14 @@ return_type KortexMultiInterfaceHardware::read(
     // TODO(livanov93): separate warnings into another variable to expose it via fault controller
     //       feedback_.actuators(i).warning_bank_a() + feedback_.actuators(i).warning_bank_b());
   }
+
+  // read end-effector wrench from base feedback (expressed in tool frame)
+  tool_contact_wrench_[0] = feedback_.base().tool_external_wrench_force_x();
+  tool_contact_wrench_[1] = feedback_.base().tool_external_wrench_force_y();
+  tool_contact_wrench_[2] = feedback_.base().tool_external_wrench_force_z();
+  tool_contact_wrench_[3] = feedback_.base().tool_external_wrench_torque_x();
+  tool_contact_wrench_[4] = feedback_.base().tool_external_wrench_torque_y();
+  tool_contact_wrench_[5] = feedback_.base().tool_external_wrench_torque_z();
 
   // add all base's faults and warnings into series
   in_fault_ += (feedback_.base().fault_bank_a() + feedback_.base().fault_bank_b());
