@@ -139,6 +139,9 @@ private:
   std::vector<double> arm_velocities_;
   std::vector<double> arm_efforts_;
 
+  // End-effector wrench (force: x,y,z; torque: x,y,z) in tool frame
+  double tool_contact_wrench_[6];
+
   // twist command interfaces
   std::vector<double> twist_commands_;
 

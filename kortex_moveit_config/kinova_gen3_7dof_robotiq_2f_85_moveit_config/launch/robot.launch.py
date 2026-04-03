@@ -132,6 +132,13 @@ def launch_setup(context, *args, **kwargs):
         condition=UnlessCondition(use_fake_hardware),
     )
 
+    force_torque_sensor_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["force_torque_sensor_broadcaster", "-c", "/controller_manager"],
+        condition=UnlessCondition(use_fake_hardware),
+    )
+
     # rviz with moveit configuration
     rviz_config_file = (
         get_package_share_directory("kinova_gen3_7dof_robotiq_2f_85_moveit_config")
@@ -181,6 +188,7 @@ def launch_setup(context, *args, **kwargs):
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
         fault_controller_spawner,
+        force_torque_sensor_broadcaster_spawner,
         move_group_node,
         static_tf,
     ]

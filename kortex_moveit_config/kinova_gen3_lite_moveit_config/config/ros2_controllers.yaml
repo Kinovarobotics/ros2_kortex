@@ -14,6 +14,9 @@ controller_manager:
     fault_controller:
       type: picknik_reset_fault_controller/PicknikResetFaultController
 
+    force_torque_sensor_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+
     gen3_lite_2f_gripper_controller:
       type: position_controllers/GripperActionController
 
@@ -48,6 +51,11 @@ twist_controller:
       - twist.angular.x
       - twist.angular.y
       - twist.angular.z
+
+force_torque_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: tcp_fts_sensor
+    frame_id: end_effector_link
 
 gen3_lite_2f_gripper_controller:
   ros__parameters:
