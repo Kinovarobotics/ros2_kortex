@@ -20,6 +20,8 @@
     <xacro:arg name="sim_gazebo" default="false" />
     <xacro:arg name="sim_ignition" default="false" />
     <xacro:arg name="sim_isaac" default="false" />
+    <xacro:arg name="isaac_joint_commands" default="/isaac_joint_commands" />
+    <xacro:arg name="isaac_joint_states" default="/isaac_joint_states" />
     <xacro:arg name="prefix" default="" />
     <xacro:arg name="use_fake_hardware" default="false" />
     <xacro:arg name="fake_sensor_commands" default="false" />
@@ -55,6 +57,8 @@
         sim_gazebo="$(arg sim_gazebo)"
         sim_ignition="$(arg sim_ignition)"
         sim_isaac="$(arg sim_isaac)"
+        isaac_joint_commands="$(arg isaac_joint_commands)"
+        isaac_joint_states="$(arg isaac_joint_states)"
         use_external_cable="$(arg use_external_cable)"
         initial_positions="${xacro.load_yaml(initial_positions_file)}" >
         <origin xyz="0 0 0" rpy="0 0 0" />  <!-- position robot in the world -->
