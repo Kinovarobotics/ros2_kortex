@@ -811,7 +811,14 @@ return_type KortexMultiInterfaceHardware::write(
 {
   if (block_write)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback (block_write): " << ex.what());
+    }
     return return_type::OK;
   }
 
@@ -874,7 +881,14 @@ return_type KortexMultiInterfaceHardware::write(
       sendGripperCommand(
         arm_mode_, gripper_command_position_, gripper_speed_command_, gripper_force_command_);
       // read after write in twist mode
-      feedback_ = base_cyclic_.RefreshFeedback();
+      try
+      {
+        feedback_ = base_cyclic_.RefreshFeedback();
+      }
+      catch (std::exception & ex)
+      {
+        RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after twist command: " << ex.what());
+      }
     }
     else if (
       (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
@@ -894,14 +908,28 @@ return_type KortexMultiInterfaceHardware::write(
       else
       {
         // Keep alive mode - no controller active
-        feedback_ = base_cyclic_.RefreshFeedback();
+        try
+        {
+          feedback_ = base_cyclic_.RefreshFeedback();
+        }
+        catch (std::exception & ex)
+        {
+          RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback (keep-alive): " << ex.what());
+        }
         // RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
       }
     }
     else
     {
       // Keep alive mode - no controller active
-      feedback_ = base_cyclic_.RefreshFeedback();
+      try
+      {
+        feedback_ = base_cyclic_.RefreshFeedback();
+      }
+      catch (std::exception & ex)
+      {
+        RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback (unsupported mode): " << ex.what());
+      }
       RCLCPP_DEBUG(
         LOGGER,
         "Fault was not recognized on the robot but combination of Control Mode and Active State "
@@ -912,7 +940,14 @@ return_type KortexMultiInterfaceHardware::write(
   {
     // this is needed when the robot was faulted
     // so we can internally conclude it is not faulted anymore
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback (fault recovery): " << ex.what());
+    }
   }
 
   return return_type::OK;
@@ -948,27 +983,54 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (k_api::KDetailedException & ex)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
-
     RCLCPP_ERROR_STREAM(
       LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                 k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex_refresh)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after Kortex exception: " << ex_refresh.what());
+    }
   }
   catch (std::runtime_error & ex_runtime)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex_runtime.what());
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex_refresh)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after runtime error: " << ex_refresh.what());
+    }
   }
   catch (std::future_error & ex_future)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex_refresh)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after future error: " << ex_refresh.what());
+    }
   }
   catch (std::exception & ex_std)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
     RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex_refresh)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after standard exception: " << ex_refresh.what());
+    }
   }
 }
 
