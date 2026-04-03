@@ -170,15 +170,14 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   gripper_joint_name_ = info_.hardware_parameters["gripper_joint_name"];
   if (gripper_joint_name_.empty())
   {
-    RCLCPP_ERROR(LOGGER, "Gripper joint name is empty!");
+    RCLCPP_INFO(LOGGER, "No gripper joint name provided, gripper control will be disabled.");
   }
   else
   {
     RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
+    gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
+    gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
   }
-
-  gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
-  gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
 
   RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
 
