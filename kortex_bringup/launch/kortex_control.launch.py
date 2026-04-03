@@ -378,7 +378,8 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "gripper_joint_name",
             default_value="finger_joint",
-            description="Max force for gripper commands",
+            description="Joint name of the gripper to be controlled via the Kortex internal bus. "
+            "Only used when gripper is non-empty and use_internal_bus_gripper_comm is true.",
         )
     )
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
