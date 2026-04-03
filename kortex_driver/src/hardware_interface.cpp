@@ -741,10 +741,6 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   router_udp_realtime_.SetActivationStatus(false);
   transport_udp_realtime_.disconnect();
 
-  // memory handling
-  delete k_api_twist_;
-  delete gripper_motor_command_;
-
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully deactivated!");
 
   return CallbackReturn::SUCCESS;
