@@ -619,7 +619,20 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     joint_based_controller_running_ = true;
     // refresh feedback
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::runtime_error & ex)
+    {
+      RCLCPP_WARN_STREAM(
+        LOGGER, "Transient timeout during feedback refresh (mode switch): " << ex.what());
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_WARN_STREAM(
+        LOGGER, "Exception during feedback refresh (mode switch): " << ex.what());
+    }
   }
   if (start_twist_controller_)
   {
@@ -756,7 +769,20 @@ return_type KortexMultiInterfaceHardware::read(
   if (first_pass_)
   {
     first_pass_ = false;
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::runtime_error & ex)
+    {
+      RCLCPP_WARN_STREAM(
+        LOGGER, "Transient timeout during initial feedback refresh (read): " << ex.what());
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_WARN_STREAM(
+        LOGGER, "Exception during initial feedback refresh (read): " << ex.what());
+    }
   }
 
   // read if robot is faulted
