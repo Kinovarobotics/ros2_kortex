@@ -4,11 +4,13 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_6
   FetchContent_Declare(
     kinova_binary_api
     URL https://artifactory.kinovaapps.com:443/artifactory/generic-public/kortex/API/2.7.0/linux_x86-64_gcc_5.4.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND (CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64" OR CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64"))
   FetchContent_Declare(
     kinova_binary_api
     URL https://artifactory.kinovaapps.com:443/artifactory/generic-local-public/kortex/API/2.7.0/linux_aarch64_gcc_7.4.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
   )
 else()
   message(FATAL_ERROR "Unsupported System: currently support is for Linux x86_64 and Linux aarch64. Detected ${CMAKE_SYSTEM_NAME} and ${CMAKE_SYSTEM_PROCESSOR}")
