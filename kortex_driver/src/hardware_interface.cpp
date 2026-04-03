@@ -1118,6 +1118,14 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
         LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                   k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
     }
+    catch (std::runtime_error & ex)
+    {
+      RCLCPP_WARN_STREAM(LOGGER, "Transient timeout during gripper command: " << ex.what());
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Exception during gripper command: " << ex.what());
+    }
   }
 }
 
@@ -1129,7 +1137,25 @@ void KortexMultiInterfaceHardware::sendTwistCommand()
   k_api_twist_->set_angular_x(static_cast<float>(twist_commands_[3]));
   k_api_twist_->set_angular_y(static_cast<float>(twist_commands_[4]));
   k_api_twist_->set_angular_z(static_cast<float>(twist_commands_[5]));
-  base_.SendTwistCommand(k_api_twist_command_);
+  try
+  {
+    base_.SendTwistCommand(k_api_twist_command_);
+  }
+  catch (k_api::KDetailedException & ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception during twist command: " << ex.what());
+    RCLCPP_ERROR_STREAM(
+      LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+  }
+  catch (std::runtime_error & ex)
+  {
+    RCLCPP_WARN_STREAM(LOGGER, "Transient timeout during twist command: " << ex.what());
+  }
+  catch (std::exception & ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Exception during twist command: " << ex.what());
+  }
 }
 
 }  // namespace kortex_driver
