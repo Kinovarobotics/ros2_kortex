@@ -377,8 +377,8 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_joint_name",
-            default_value="finger_joint",
-            description="Max force for gripper commands",
+            default_value="",
+            description="Name of the gripper joint. Leave empty if no gripper is used.",
         )
     )
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
