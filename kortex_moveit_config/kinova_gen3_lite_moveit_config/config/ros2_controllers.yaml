@@ -51,6 +51,5 @@ twist_controller:
 
 gen3_lite_2f_gripper_controller:
   ros__parameters:
-    default: true
     joint: right_finger_bottom_joint
     allow_stalling: true
