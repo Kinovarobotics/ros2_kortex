@@ -11,33 +11,35 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_6
     URL_HASH MD5=64bd86e7ab8bda90ef1fc7d6a356e080
     DOWNLOAD_EXTRACT_TIMESTAMP TRUE
   )
+  set(KORTEX_API_SUPPORTED TRUE)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND (CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64" OR CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64"))
   FetchContent_Declare(
     kinova_binary_api
     URL https://artifactory.kinovaapps.com:443/artifactory/generic-public/kortex/API/2.7.0/linux_aarch64_gcc_7.4.zip
     DOWNLOAD_EXTRACT_TIMESTAMP TRUE
   )
+  set(KORTEX_API_SUPPORTED TRUE)
 else()
-  message(FATAL_ERROR "Unsupported System: currently support is for Linux x86_64 and Linux aarch64. Detected ${CMAKE_SYSTEM_NAME} and ${CMAKE_SYSTEM_PROCESSOR}")
+  set(KORTEX_API_SUPPORTED FALSE)
+  message(WARNING
+    "kortex_api: Unsupported platform (${CMAKE_SYSTEM_NAME} ${CMAKE_SYSTEM_PROCESSOR}). "
+    "The Kortex hardware interface will not be built. "
+    "Supported platforms: Linux x86_64, Linux aarch64."
+  )
 endif()
-
-FetchContent_MakeAvailable(kinova_binary_api)
-
-#ExternalProject_Add(kinova_binary_api
-#  URL ${API_URL}
-#  CONFIGURE_COMMAND ""
-#  BUILD_COMMAND ""
-#  INSTALL_COMMAND ""
-#)
 
 find_package(ament_cmake REQUIRED)
 
-ament_export_include_directories(include/kortex_api)
+if(KORTEX_API_SUPPORTED)
+  FetchContent_MakeAvailable(kinova_binary_api)
 
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/common/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/messages/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client_stubs/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/google/protobuf DESTINATION include/kortex_api/google)
+  ament_export_include_directories(include/kortex_api)
+
+  install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client/ DESTINATION include/kortex_api)
+  install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/common/ DESTINATION include/kortex_api)
+  install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/messages/ DESTINATION include/kortex_api)
+  install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client_stubs/ DESTINATION include/kortex_api)
+  install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/google/protobuf DESTINATION include/kortex_api/google)
+endif()
 
 ament_package()
