@@ -40,6 +40,7 @@ from launch_ros.substitutions import FindPackageShare
 def launch_setup(context, *args, **kwargs):
     # Initialize Arguments
     sim_gazebo = LaunchConfiguration("sim_gazebo")
+    use_ignition = LaunchConfiguration("use_ignition")
     robot_type = LaunchConfiguration("robot_type")
     dof = LaunchConfiguration("dof")
     vision = LaunchConfiguration("vision")
@@ -56,6 +57,13 @@ def launch_setup(context, *args, **kwargs):
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
     gripper = LaunchConfiguration("gripper")
+
+    use_ignition_val = use_ignition.perform(context)
+    sim_gazebo_val = sim_gazebo.perform(context)
+    # When using Ignition, disable sim_gazebo in xacro to avoid loading conflicting plugins
+    xacro_sim_gazebo = "false" if use_ignition_val == "true" else sim_gazebo_val
+    # True when any Gazebo-based simulator is used
+    use_gz_sim = use_ignition_val == "true" or sim_gazebo_val == "true"
 
     robot_controllers = PathJoinSubstitution(
         # https://answers.ros.org/question/397123/how-to-access-the-runtime-value-of-a-launchconfiguration-instance-within-custom-launch-code-injected-via-an-opaquefunction-in-ros2/
@@ -96,7 +104,10 @@ def launch_setup(context, *args, **kwargs):
             prefix,
             " ",
             "sim_gazebo:=",
-            sim_gazebo,
+            xacro_sim_gazebo,
+            " ",
+            "sim_ignition:=",
+            use_ignition_val,
             " ",
             "simulation_controllers:=",
             robot_controllers,
@@ -213,7 +224,6 @@ def launch_setup(context, *args, **kwargs):
             "-Y",
             "0.0",
         ],
-        condition=IfCondition(sim_gazebo),
     )
 
     gz_launch_description = IncludeLaunchDescription(
@@ -223,7 +233,6 @@ def launch_setup(context, *args, **kwargs):
         launch_arguments={
             "gz_args": " -r -v 3 empty.sdf --physics-engine gz-physics-bullet-featherstone-plugin"
         }.items(),
-        condition=IfCondition(sim_gazebo),
     )
 
     # Bridge
@@ -249,11 +258,15 @@ def launch_setup(context, *args, **kwargs):
         robot_pos_controller_spawner,
         robot_hand_controller_spawner,
         robot_hand_lite_controller_spawner,
-        gz_robotiq_env_var_resource_path,
-        gz_launch_description,
-        gz_spawn_entity,
-        gazebo_bridge,
     ]
+
+    if use_gz_sim:
+        nodes_to_start += [
+            gz_robotiq_env_var_resource_path,
+            gz_launch_description,
+            gz_spawn_entity,
+            gazebo_bridge,
+        ]
 
     return nodes_to_start
 
@@ -265,7 +278,15 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "sim_gazebo",
             default_value="true",
-            description="Use Gazebo for simulation",
+            description="Use Gazebo Sim (Garden+) for simulation",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_ignition",
+            default_value="false",
+            description="Use Ignition Gazebo (Fortress) for simulation. "
+            "When true, sim_gazebo is automatically disabled.",
         )
     )
     # Robot specific arguments

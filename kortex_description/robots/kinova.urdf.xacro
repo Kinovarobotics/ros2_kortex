@@ -24,6 +24,7 @@
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="fake_sensor_commands" default="false" />
   <xacro:arg name="sim_gazebo" default="false" />
+  <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="sim_isaac" default="false" />
   <xacro:arg name="gazebo_renderer" default="ogre"/>
   <xacro:arg name="camera_width" default="640"/>
@@ -65,6 +66,7 @@
     use_fake_hardware="$(arg use_fake_hardware)"
     fake_sensor_commands="$(arg fake_sensor_commands)"
     sim_gazebo="$(arg sim_gazebo)"
+    sim_ignition="$(arg sim_ignition)"
     sim_isaac="$(arg sim_isaac)"
     initial_positions="${xacro.load_yaml(initial_positions_file)}"
     moveit_active="$(arg moveit_active)">
@@ -84,6 +86,24 @@
         <render_engine>$(arg gazebo_renderer)</render_engine>
       </plugin>
     </gazebo>
+  </xacro:if>
+
+  <xacro:if value="$(arg sim_ignition)">
+    <!-- Ignition Gazebo plugins -->
+    <gazebo reference="world">
+    </gazebo>
+    <gazebo>
+      <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+        <parameters>$(arg simulation_controllers)</parameters>
+        <controller_manager_node_name>$(arg prefix)controller_manager</controller_manager_node_name>
+      </plugin>
+      <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+        <render_engine>$(arg gazebo_renderer)</render_engine>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+
+  <xacro:if value="$(arg sim_gazebo)">
     <gazebo reference="camera_color_frame">
       <sensor name="camera_sensor" type="rgbd_camera">
         <camera>
