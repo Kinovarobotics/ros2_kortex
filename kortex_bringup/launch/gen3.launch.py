@@ -72,8 +72,11 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "gripper",
             default_value="",
-            description="Name of the gripper attached to the arm",
-            choices=["", "robotiq_2f_85", "robotiq_2f_140"],
+            description="Name of the gripper attached to the arm. Use '' for no gripper, "
+            "'robotiq_2f_85', 'robotiq_2f_140' for Robotiq grippers, or any custom name "
+            "for a custom end-effector. When using a custom end-effector, also set "
+            "gripper_joint_name to the joint name that should be controlled via "
+            "the internal bus, or leave it empty if no such joint exists.",
         )
     )
     declared_arguments.append(

@@ -107,7 +107,17 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "gripper",
             default_value='""',
-            description="Name of the gripper attached to the arm",
+            description="Name of the gripper attached to the arm. Use '' for no gripper or a "
+            "custom end-effector name.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gripper_joint_name",
+            default_value="",
+            description="Joint name of the gripper to be controlled via the internal bus. "
+            "Leave empty when not using a gripper or when using a custom end-effector "
+            "without an internal-bus-controlled joint.",
         )
     )
     declared_arguments.append(
@@ -141,6 +151,7 @@ def generate_launch_description():
     robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
     gripper = LaunchConfiguration("gripper")
+    gripper_joint_name = LaunchConfiguration("gripper_joint_name")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     launch_rviz = LaunchConfiguration("launch_rviz")
@@ -176,6 +187,9 @@ def generate_launch_description():
             " ",
             "gripper:=",
             gripper,
+            " ",
+            "gripper_joint_name:=",
+            gripper_joint_name,
             " ",
         ]
     )

@@ -19,8 +19,8 @@
     session_inactivity_timeout_ms:=6000
     connection_inactivity_timeout_ms:=2000
     use_internal_bus_gripper_comm:=false
-    gripper
-    gripper_joint_name
+    gripper:=''
+    gripper_joint_name:=''
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0
     use_fake_hardware:=false
