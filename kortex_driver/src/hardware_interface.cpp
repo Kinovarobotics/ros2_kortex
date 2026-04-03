@@ -170,15 +170,14 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   gripper_joint_name_ = info_.hardware_parameters["gripper_joint_name"];
   if (gripper_joint_name_.empty())
   {
-    RCLCPP_ERROR(LOGGER, "Gripper joint name is empty!");
+    RCLCPP_INFO(LOGGER, "No gripper joint name provided, gripper control will be disabled.");
   }
   else
   {
     RCLCPP_INFO(LOGGER, "Gripper joint name is '%s'", gripper_joint_name_.c_str());
+    gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
+    gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
   }
-
-  gripper_command_max_velocity_ = std::stod(info_.hardware_parameters["gripper_max_velocity"]);
-  gripper_command_max_force_ = std::stod(info_.hardware_parameters["gripper_max_force"]);
 
   RCLCPP_INFO_STREAM(LOGGER, "Connecting to robot at " << robot_ip);
 
@@ -667,21 +666,24 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
     base_command_.add_actuators()->set_position(base_feedback.actuators(i).position());
   }
 
-  // Initialize gripper
-  float gripper_initial_position =
-    base_feedback.interconnect().gripper_feedback().motor()[0].position();
-  RCLCPP_INFO(LOGGER, "Gripper initial position is '%f'.", gripper_initial_position);
+  // Initialize gripper if internal bus communication is enabled
+  if (use_internal_bus_gripper_comm_)
+  {
+    float gripper_initial_position =
+      base_feedback.interconnect().gripper_feedback().motor()[0].position();
+    RCLCPP_INFO(LOGGER, "Gripper initial position is '%f'.", gripper_initial_position);
 
-  // to radians
-  gripper_command_position_ = gripper_initial_position / 100.0 * 0.81;
+    // to radians
+    gripper_command_position_ = gripper_initial_position / 100.0 * 0.81;
 
-  // Initialize interconnect command to current gripper position.
-  base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
-  gripper_motor_command_ =
-    base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
-  gripper_motor_command_->set_position(gripper_initial_position);  // % position
-  gripper_motor_command_->set_velocity(gripper_speed_command_);    // % speed
-  gripper_motor_command_->set_force(gripper_force_command_);       // % force
+    // Initialize interconnect command to current gripper position.
+    base_command_.mutable_interconnect()->mutable_command_id()->set_identifier(0);
+    gripper_motor_command_ =
+      base_command_.mutable_interconnect()->mutable_gripper_command()->add_motor_cmd();
+    gripper_motor_command_->set_position(gripper_initial_position);  // % position
+    gripper_motor_command_->set_velocity(gripper_speed_command_);    // % speed
+    gripper_motor_command_->set_force(gripper_force_command_);       // % force
+  }
 
   // Send a first frame
   base_feedback = base_cyclic_.Refresh(base_command_);
