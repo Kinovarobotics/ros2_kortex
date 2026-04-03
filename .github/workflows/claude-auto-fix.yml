@@ -176,7 +176,7 @@
                   --body "Claude has submitted a fix attempt: ${PR_URL}
 
                 Please review the proposed modifications and test them on your end, then provide feedback here.
-                A member of Kinova's team will follow up on this issue and take the appropriate next steps.
+                A member of Kinova's team will follow up on this issue and take the appropriate next steps."
 
                 PR_NUMBER=$(gh pr view "$BRANCH_NAME" --json number -q '.number')
                 ISSUE_AUTHOR=$(jq -r '.author.login' issue.json)
@@ -364,7 +364,7 @@
                   --body "Claude has submitted a fix attempt: ${PR_URL}
 
                 Please review the proposed modifications and test them on your end, then provide feedback.
-                A member of Kinova's team will follow up on this issue and take the appropriate next steps.
+                A member of Kinova's team will follow up on this issue and take the appropriate next steps."
 
                 PR_NUMBER=$(gh pr view "$BRANCH_NAME" --json number -q '.number')
                 ISSUE_AUTHOR=$(jq -r '.author.login' issue.json)
