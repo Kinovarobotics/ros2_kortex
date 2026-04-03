@@ -70,20 +70,34 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "description_package",
+            default_value="kortex_description",
+            description="Description package with robot URDF/XACRO files. Usually the argument "
+            "is not set, it enables use of a custom description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_file",
+            default_value="gen3.xacro",
+            description="URDF/XACRO description file with the robot.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "gripper",
             default_value="",
-            description="Name of the gripper attached to the arm. Use '' for no gripper, "
-            "'robotiq_2f_85', 'robotiq_2f_140' for Robotiq grippers, or any custom name "
-            "for a custom end-effector. When using a custom end-effector, also set "
-            "gripper_joint_name to the joint name that should be controlled via "
-            "the internal bus, or leave it empty if no such joint exists.",
+            description="Name of the gripper attached to the arm. Use '' for no gripper or "
+            "when using a custom end-effector defined in your own description_package. "
+            "Use 'robotiq_2f_85' or 'robotiq_2f_140' for Robotiq grippers.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "gripper_joint_name",
             default_value="robotiq_85_left_knuckle_joint",
-            description="Name of the gripper attached to the arm",
+            description="Joint name of the gripper to be controlled via the Kortex internal bus. "
+            "Only used when gripper is non-empty and use_internal_bus_gripper_comm is true.",
         )
     )
     declared_arguments.append(
@@ -118,6 +132,8 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_controller = LaunchConfiguration("robot_controller")
+    description_package = LaunchConfiguration("description_package")
+    description_file = LaunchConfiguration("description_file")
     gripper = LaunchConfiguration("gripper")
     use_internal_bus_gripper_comm = LaunchConfiguration("use_internal_bus_gripper_comm")
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
@@ -135,6 +151,8 @@ def generate_launch_description():
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,
+            "description_package": description_package,
+            "description_file": description_file,
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
@@ -142,7 +160,6 @@ def generate_launch_description():
             "gripper_joint_name": gripper_joint_name,
             "launch_rviz": launch_rviz,
             "controllers_file": controllers_file,
-            "description_file": "gen3.xacro",
         }.items(),
     )
 

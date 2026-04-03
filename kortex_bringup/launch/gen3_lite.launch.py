@@ -110,9 +110,17 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
+            "description_package",
+            default_value="kortex_description",
+            description="Description package with robot URDF/XACRO files. Usually the argument "
+            "is not set, it enables use of a custom description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "description_file",
             default_value="gen3_lite_gen3_lite_2f.xacro",
-            description="URDF file to use",
+            description="URDF/XACRO description file with the robot.",
         )
     )
 
@@ -134,6 +142,7 @@ def generate_launch_description():
     gripper_joint_name = LaunchConfiguration("gripper_joint_name")
     launch_rviz = LaunchConfiguration("launch_rviz")
     controllers_file = LaunchConfiguration("controllers_file")
+    description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
 
     base_launch = IncludeLaunchDescription(
@@ -146,6 +155,8 @@ def generate_launch_description():
             "fake_sensor_commands": fake_sensor_commands,
             "robot_controller": robot_controller,
             "robot_hand_controller": robot_hand_controller,
+            "description_package": description_package,
+            "description_file": description_file,
             "gripper": gripper,
             "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm,
             "gripper_max_velocity": gripper_max_velocity,
@@ -153,7 +164,6 @@ def generate_launch_description():
             "gripper_joint_name": gripper_joint_name,
             "launch_rviz": launch_rviz,
             "controllers_file": controllers_file,
-            "description_file": description_file,
         }.items(),
     )
 
