@@ -84,6 +84,7 @@ jobs:
         run: |
           ISSUE_CONTENT=$(cat issue.json)
           WORKDIR=$(pwd)
+<<<<<<< Updated upstream
           # Write prompt to a file to avoid shell quoting issues with JSON content
           PROMPT_FILE=$(mktemp /tmp/claude-prompt-XXXXXX.txt)
           cat > "$PROMPT_FILE" << 'PROMPT_EOF'
@@ -135,6 +136,101 @@ jobs:
           else
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
+=======
+          ISSUES="${{ github.event.inputs.issue_number }}"
+
+          for ISSUE_NUMBER in $ISSUES; do
+            echo "=============================="
+            echo "Processing issue #${ISSUE_NUMBER}"
+            echo "=============================="
+
+            # Skip if a fix PR already exists for this issue
+            EXISTING_PR=$(gh pr list --head "claude-fix/issue-${ISSUE_NUMBER}" --state open --json number -q '.[0].number' 2>/dev/null || true)
+            if [ -n "$EXISTING_PR" ]; then
+              echo "Open PR already exists for issue #${ISSUE_NUMBER} (PR #${EXISTING_PR}), skipping."
+              continue
+            fi
+
+            # Fetch issue details
+            gh issue view "$ISSUE_NUMBER" \
+              --json number,title,body,labels,url,author \
+              > issue.json
+            echo "--- Issue #${ISSUE_NUMBER} details ---"
+            cat issue.json
+
+            # Detect target branch from issue labels, then title/body, then default to main
+            TARGET_BRANCH="main"
+            for DISTRO in humble jazzy; do
+              if jq -e --arg d "$DISTRO" '.labels[].name | ascii_downcase | contains($d)' issue.json > /dev/null 2>&1; then
+                TARGET_BRANCH="$DISTRO"
+                break
+              fi
+            done
+            if [ "$TARGET_BRANCH" = "main" ]; then
+              ISSUE_TEXT=$(jq -r '.title + " " + (.body // "")' issue.json | tr '[:upper:]' '[:lower:]')
+              for DISTRO in humble jazzy; do
+                if echo "$ISSUE_TEXT" | grep -q "$DISTRO"; then
+                  TARGET_BRANCH="$DISTRO"
+                  break
+                fi
+              done
+            fi
+            echo "Target branch: $TARGET_BRANCH"
+
+            # Reset to target branch before creating a new branch
+            git checkout "$TARGET_BRANCH" 2>/dev/null || git checkout -f HEAD
+            git pull origin "$TARGET_BRANCH" --rebase 2>/dev/null || git rebase --abort 2>/dev/null || true
+
+            # Create fix branch
+            BRANCH_NAME="claude-fix/issue-${ISSUE_NUMBER}"
+            git checkout -b "$BRANCH_NAME" 2>/dev/null || git checkout "$BRANCH_NAME"
+
+            # Post starting comment
+            gh issue comment "$ISSUE_NUMBER" \
+              --body "As part of Kinova’s beta testing: Claude is analyzing this issue and will attempt an automated fix. A pull request will be opened if changes are made."
+
+            # Write prompt to temp file
+            PROMPT_FILE=$(mktemp /tmp/claude-prompt-XXXXXX.txt)
+            {
+              printf ‘%s\n’ \
+                "You are an expert ROS2 software engineer working on the ros2_kortex package," \
+                "which provides ROS2 support for Kinova Gen3 and Gen3 Lite robotic arms." \
+                "" \
+                "Your task is to analyze the following GitHub issue and implement a fix directly" \
+                "in the codebase." \
+                "" \
+                "Issue details:"
+              cat issue.json
+              printf ‘%s\n’ \
+                "" \
+                "Instructions:" \
+                "1. Read and understand the issue carefully." \
+                "2. Explore the relevant source files to understand the current implementation." \
+                "3. Implement a minimal, focused fix that addresses the root cause." \
+                "4. Do not refactor unrelated code or add unnecessary changes." \
+                "5. Ensure the fix does not break existing functionality." \
+                "" \
+                "Go ahead and implement the fix now."
+            } > "$PROMPT_FILE"
+
+            # Run Claude (handle root user restriction)
+            if [ "$(id -u)" = "0" ]; then
+              CLAUDE_BIN=$(which claude)
+              useradd -m -s /bin/bash claude-runner 2>/dev/null || true
+              chown -R claude-runner "$WORKDIR"
+              chmod o+rx "$PROMPT_FILE" 2>/dev/null || true
+              chmod o+x /root $(dirname "$WORKDIR") $(dirname "$(dirname "$WORKDIR")") 2>/dev/null || true
+              sudo -u claude-runner \
+                env PATH="$PATH" \
+                ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
+                HOME="/home/claude-runner" \
+                bash -c "cd ‘$WORKDIR’ && ‘$CLAUDE_BIN’ --dangerously-skip-permissions -p \"\$(cat ‘$PROMPT_FILE’)\""
+              chown -R root "$WORKDIR"
+            else
+              claude --dangerously-skip-permissions -p "$(cat "$PROMPT_FILE")"
+            fi
+            rm -f "$PROMPT_FILE"
+>>>>>>> Stashed changes
 
       - name: Commit changes
         if: steps.changes.outputs.changed == 'true'
@@ -148,6 +244,7 @@ jobs:
         run: |
           git push origin claude-fix/issue-${{ steps.issue.outputs.number }}
 
+<<<<<<< Updated upstream
       - name: Create pull request
         if: steps.changes.outputs.changed == 'true'
         env:
@@ -157,17 +254,28 @@ jobs:
           gh pr create \
             --title "fix(claude): resolve issue #${{ steps.issue.outputs.number }} - $ISSUE_TITLE" \
             --body "## Automated Fix Attempt
+=======
+              ISSUE_TITLE=$(jq -r ‘.title’ issue.json)
+              gh pr create \
+                --title "fix(claude): resolve issue #${ISSUE_NUMBER} - ${ISSUE_TITLE}" \
+                --body "## Automated Fix Attempt
+>>>>>>> Stashed changes
 
           This PR was automatically generated by Claude to address issue #${{ steps.issue.outputs.number }}.
 
           **Issue:** $ISSUE_TITLE
 
+<<<<<<< Updated upstream
           > **Warning:** This is an automated fix. Please review all changes carefully before merging.
+=======
+              > **Warning:** This is an automated fix. All changes will be carefully reviewed by a member of Kinova’s team before merging.
+>>>>>>> Stashed changes
 
           Closes #${{ steps.issue.outputs.number }}" \
             --base main \
             --head claude-fix/issue-${{ steps.issue.outputs.number }}
 
+<<<<<<< Updated upstream
       - name: Comment on issue - fix submitted
         if: steps.changes.outputs.changed == 'true'
         env:
@@ -188,6 +296,26 @@ jobs:
           ISSUE_AUTHOR=$(jq -r '.author.login' issue.json)
           gh pr comment "$PR_NUMBER" \
             --body "Hi @${ISSUE_AUTHOR}! An automated fix has been proposed for your issue. Could you please test this PR on your end and reply here with your results? Your feedback will help us decide the next steps."
+=======
+              PR_URL=$(gh pr view "$BRANCH_NAME" --json url -q ‘.url’)
+              gh issue comment "$ISSUE_NUMBER" \
+                --body "Claude has submitted a fix attempt: ${PR_URL}
+
+              Please review the proposed modifications and test them on your end, then provide feedback here.
+              A member of Kinova’s team will follow up on this issue and take the appropriate next steps."
+
+              PR_NUMBER=$(gh pr view "$BRANCH_NAME" --json number -q ‘.number’)
+              ISSUE_AUTHOR=$(jq -r ‘.author.login’ issue.json)
+              gh pr comment "$PR_NUMBER" \
+                --body "Hi @${ISSUE_AUTHOR}! An automated fix has been proposed for your issue. Could you please test this PR on your end and reply here with your results? Your feedback will help us decide the next steps."
+            else
+              gh issue comment "$ISSUE_NUMBER" \
+                --body "Claude analyzed this issue but was unable to determine an automated fix. Manual intervention is required."
+              # Clean up the unused branch
+              git checkout main 2>/dev/null || true
+              git branch -D "$BRANCH_NAME" 2>/dev/null || true
+            fi
+>>>>>>> Stashed changes
 
       - name: Comment on issue - no fix found
         if: steps.changes.outputs.changed == 'false'
@@ -264,9 +392,34 @@ jobs:
             echo "--- Issue #${ISSUE_NUMBER} details ---"
             cat issue.json
 
+<<<<<<< Updated upstream
             # Reset to main before creating a new branch
             git checkout main 2>/dev/null || git checkout -f HEAD
             git pull origin main --rebase 2>/dev/null || true
+=======
+            # Detect target branch from issue labels, then title/body, then default to main
+            TARGET_BRANCH="main"
+            for DISTRO in humble jazzy; do
+              if jq -e --arg d "$DISTRO" '.labels[].name | ascii_downcase | contains($d)' issue.json > /dev/null 2>&1; then
+                TARGET_BRANCH="$DISTRO"
+                break
+              fi
+            done
+            if [ "$TARGET_BRANCH" = "main" ]; then
+              ISSUE_TEXT=$(jq -r '.title + " " + (.body // "")' issue.json | tr '[:upper:]' '[:lower:]')
+              for DISTRO in humble jazzy; do
+                if echo "$ISSUE_TEXT" | grep -q "$DISTRO"; then
+                  TARGET_BRANCH="$DISTRO"
+                  break
+                fi
+              done
+            fi
+            echo "Target branch: $TARGET_BRANCH"
+
+            # Reset to target branch before creating a new branch
+            git checkout "$TARGET_BRANCH" 2>/dev/null || git checkout -f HEAD
+            git pull origin "$TARGET_BRANCH" --rebase 2>/dev/null || git rebase --abort 2>/dev/null || true
+>>>>>>> Stashed changes
 
             # Create fix branch
             BRANCH_NAME="claude-fix/issue-${ISSUE_NUMBER}"
@@ -277,36 +430,35 @@ jobs:
               --body "Claude is analyzing this issue and will attempt an automated fix. A pull request will be opened if changes are made."
 
             # Write prompt to temp file
-            ISSUE_CONTENT=$(cat issue.json)
             PROMPT_FILE=$(mktemp /tmp/claude-prompt-XXXXXX.txt)
-            cat > "$PROMPT_FILE" << 'PROMPT_EOF'
-            You are an expert ROS2 software engineer working on the ros2_kortex package,
-            which provides ROS2 support for Kinova Gen3 and Gen3 Lite robotic arms.
-
-            Your task is to analyze the following GitHub issue and implement a fix directly
-            in the codebase.
-
-            Issue details:
-            PROMPT_EOF
-            echo "$ISSUE_CONTENT" >> "$PROMPT_FILE"
-            cat >> "$PROMPT_FILE" << 'PROMPT_EOF'
-
-            Instructions:
-            1. Read and understand the issue carefully.
-            2. Explore the relevant source files to understand the current implementation.
-            3. Implement a minimal, focused fix that addresses the root cause.
-            4. Do not refactor unrelated code or add unnecessary changes.
-            5. Ensure the fix does not break existing functionality.
-
-            Go ahead and implement the fix now.
-            PROMPT_EOF
+            {
+              printf '%s\n' \
+                "You are an expert ROS2 software engineer working on the ros2_kortex package," \
+                "which provides ROS2 support for Kinova Gen3 and Gen3 Lite robotic arms." \
+                "" \
+                "Your task is to analyze the following GitHub issue and implement a fix directly" \
+                "in the codebase." \
+                "" \
+                "Issue details:"
+              cat issue.json
+              printf '%s\n' \
+                "" \
+                "Instructions:" \
+                "1. Read and understand the issue carefully." \
+                "2. Explore the relevant source files to understand the current implementation." \
+                "3. Implement a minimal, focused fix that addresses the root cause." \
+                "4. Do not refactor unrelated code or add unnecessary changes." \
+                "5. Ensure the fix does not break existing functionality." \
+                "" \
+                "Go ahead and implement the fix now."
+            } > "$PROMPT_FILE"
 
             # Run Claude (handle root user restriction)
             if [ "$(id -u)" = "0" ]; then
               CLAUDE_BIN=$(which claude)
               useradd -m -s /bin/bash claude-runner 2>/dev/null || true
               chown -R claude-runner "$WORKDIR"
-              chmod o+rx /tmp/issue_local.json "$PROMPT_FILE" 2>/dev/null || true
+              chmod o+rx "$PROMPT_FILE" 2>/dev/null || true
               chmod o+x /root $(dirname "$WORKDIR") $(dirname "$(dirname "$WORKDIR")") 2>/dev/null || true
               sudo -u claude-runner \
                 env PATH="$PATH" \
