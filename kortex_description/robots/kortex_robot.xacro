@@ -36,6 +36,8 @@
     <xacro:include filename="$(find kortex_description)/arms/${arm}/${dof}dof/urdf/${arm}_macro.xacro" />
 
     <!-- Load the arm -->
+    <!-- When no gripper is configured, ensure gripper_joint_name is empty so the hardware
+         interface does not attempt to use a stale default joint name. -->
     <xacro:load_arm
       parent="${parent}"
       dof="${dof}"
@@ -56,7 +58,7 @@
       isaac_joint_commands="${isaac_joint_commands}"
       isaac_joint_states="${isaac_joint_states}"
       gripper="${gripper}"
-      gripper_joint_name="${gripper_joint_name}"
+      gripper_joint_name="${'' if not gripper else gripper_joint_name}"
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}"
       use_external_cable="${use_external_cable}"
