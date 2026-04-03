@@ -96,7 +96,7 @@
 
               # Create fix branch
               BRANCH_NAME="claude-fix/issue-${ISSUE_NUMBER}"
-              git checkout -b "$BRANCH_NAME" 2>/dev/null || git checkout "$BRANCH_NAME"
+              git checkout -B "$BRANCH_NAME"
 
               # Post starting comment
               gh issue comment "$ISSUE_NUMBER" \
@@ -154,7 +154,7 @@
 
               if [ "$CHANGED" = "true" ]; then
                 git commit -m "fix: automated fix attempt for issue #${ISSUE_NUMBER}"
-                git push origin "$BRANCH_NAME"
+                git push --force origin "$BRANCH_NAME"
 
                 ISSUE_TITLE=$(jq -r '.title' issue.json)
                 gh pr create \
@@ -284,7 +284,7 @@
 
               # Create fix branch
               BRANCH_NAME="claude-fix/issue-${ISSUE_NUMBER}"
-              git checkout -b "$BRANCH_NAME" 2>/dev/null || git checkout "$BRANCH_NAME"
+              git checkout -B "$BRANCH_NAME"
 
               # Post starting comment
               gh issue comment "$ISSUE_NUMBER" \
@@ -342,7 +342,7 @@
 
               if [ "$CHANGED" = "true" ]; then
                 git commit -m "fix: automated fix attempt for issue #${ISSUE_NUMBER}"
-                git push origin "$BRANCH_NAME"
+                git push --force origin "$BRANCH_NAME"
 
                 ISSUE_TITLE=$(jq -r '.title' issue.json)
                 gh pr create \
