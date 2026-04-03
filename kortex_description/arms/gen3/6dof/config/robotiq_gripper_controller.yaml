@@ -1,0 +1,9 @@
+controller_manager:
+  ros__parameters:
+    robotiq_gripper_controller:
+      type: parallel_gripper_action_controller/GripperActionController
+
+robotiq_gripper_controller:
+  ros__parameters:
+    joint: robotiq_85_left_knuckle_joint
+    allow_stalling: true

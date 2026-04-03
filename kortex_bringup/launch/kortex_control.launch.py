@@ -14,6 +14,9 @@
 #
 # Authors: Marq Rasmussen, Denis Stogl
 
+import os
+
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
@@ -110,13 +113,28 @@ def launch_setup(context, *args, **kwargs):
     )
     robot_description = {"robot_description": robot_description_content}
 
-    robot_controllers = PathJoinSubstitution(
-        [
-            FindPackageShare(description_package),
-            "arms/" + robot_type.perform(context) + "/" + dof.perform(context) + "dof/config",
-            controllers_file,
-        ]
+    description_package_share = get_package_share_directory(description_package.perform(context))
+    controllers_config_dir = os.path.join(
+        description_package_share,
+        "arms",
+        robot_type.perform(context),
+        dof.perform(context) + "dof",
+        "config",
     )
+
+    robot_controllers = os.path.join(controllers_config_dir, controllers_file.perform(context))
+
+    control_node_parameters = [robot_controllers]
+
+    # Only load the gripper controller config when a gripper is present, to avoid
+    # the controller manager trying to validate a gripper joint that does not exist
+    # in the URDF (see https://github.com/Kinovarobotics/ros2_kortex/issues/264).
+    if gripper.perform(context) != "":
+        gripper_controllers_file = os.path.join(
+            controllers_config_dir, "robotiq_gripper_controller.yaml"
+        )
+        if os.path.isfile(gripper_controllers_file):
+            control_node_parameters.append(gripper_controllers_file)
 
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
@@ -125,7 +143,7 @@ def launch_setup(context, *args, **kwargs):
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_controllers],
+        parameters=control_node_parameters,
         remappings=[
             ("~/robot_description", "/robot_description"),
         ],
