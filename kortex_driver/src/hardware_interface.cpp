@@ -763,17 +763,38 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   auto servoing_mode = k_api::Base::ServoingModeInformation();
   // Set back the servoing mode to Single Level Servoing
   servoing_mode.set_servoing_mode(k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING);
-  base_.SetServoingMode(servoing_mode);
+  try
+  {
+    base_.SetServoingMode(servoing_mode);
+  }
+  catch (std::exception & ex)
+  {
+    RCLCPP_WARN_STREAM(LOGGER, "Error setting servoing mode during deactivation: " << ex.what());
+  }
 
   // Close API session
-  session_manager_.CloseSession();
-  session_manager_real_time_.CloseSession();
+  try
+  {
+    session_manager_.CloseSession();
+    session_manager_real_time_.CloseSession();
+  }
+  catch (std::exception & ex)
+  {
+    RCLCPP_WARN_STREAM(LOGGER, "Error closing sessions during deactivation: " << ex.what());
+  }
 
   // Deactivate the router and cleanly disconnect from the transport object
-  router_tcp_.SetActivationStatus(false);
-  transport_tcp_.disconnect();
-  router_udp_realtime_.SetActivationStatus(false);
-  transport_udp_realtime_.disconnect();
+  try
+  {
+    router_tcp_.SetActivationStatus(false);
+    transport_tcp_.disconnect();
+    router_udp_realtime_.SetActivationStatus(false);
+    transport_udp_realtime_.disconnect();
+  }
+  catch (std::exception & ex)
+  {
+    RCLCPP_WARN_STREAM(LOGGER, "Error disconnecting transport during deactivation: " << ex.what());
+  }
 
   // memory handling
   delete k_api_twist_;
@@ -948,7 +969,10 @@ return_type KortexMultiInterfaceHardware::write(
       if (joint_based_controller_running_)
       {
         // send commands to the joints
-        sendJointCommands();
+        if (!sendJointCommands())
+        {
+          return return_type::ERROR;
+        }
       }
       else
       {
@@ -1017,7 +1041,7 @@ void KortexMultiInterfaceHardware::prepareCommands()
   }
 }
 
-void KortexMultiInterfaceHardware::sendJointCommands()
+bool KortexMultiInterfaceHardware::sendJointCommands()
 {
   // identifier++
   incrementId();
@@ -1028,6 +1052,7 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   try
   {
     feedback_ = base_cyclic_.Refresh(base_command_);
+    return true;
   }
   catch (k_api::KDetailedException & ex)
   {
@@ -1035,51 +1060,20 @@ void KortexMultiInterfaceHardware::sendJointCommands()
     RCLCPP_ERROR_STREAM(
       LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                 k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
-    try
-    {
-      feedback_ = base_cyclic_.RefreshFeedback();
-    }
-    catch (std::exception & ex_inner)
-    {
-      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after Kortex exception: " << ex_inner.what());
-    }
   }
   catch (std::runtime_error & ex_runtime)
   {
     RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex_runtime.what());
-    try
-    {
-      feedback_ = base_cyclic_.RefreshFeedback();
-    }
-    catch (std::exception & ex_inner)
-    {
-      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after runtime error: " << ex_inner.what());
-    }
   }
   catch (std::future_error & ex_future)
   {
     RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
-    try
-    {
-      feedback_ = base_cyclic_.RefreshFeedback();
-    }
-    catch (std::exception & ex_inner)
-    {
-      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after future error: " << ex_inner.what());
-    }
   }
   catch (std::exception & ex_std)
   {
     RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
-    try
-    {
-      feedback_ = base_cyclic_.RefreshFeedback();
-    }
-    catch (std::exception & ex_inner)
-    {
-      RCLCPP_ERROR_STREAM(LOGGER, "Failed to refresh feedback after standard exception: " << ex_inner.what());
-    }
   }
+  return false;
 }
 
 void KortexMultiInterfaceHardware::incrementId()
