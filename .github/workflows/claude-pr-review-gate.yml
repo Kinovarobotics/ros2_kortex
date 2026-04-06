@@ -1,6 +1,8 @@
 name: Claude PR Review Gate
 
 on:
+  schedule:
+    - cron: '0 14 * * 1'  # Every Monday at 9:00 AM EST (UTC-5 = 14:00 UTC)
   issue_comment:
     types: [created]
 
@@ -70,3 +72,78 @@ jobs:
 
           gh pr comment "$PR_NUMBER" \
             --body "@aalmrad — @${COMMENTER} has replied to this PR (see ${COMMENT_URL}). Your review is requested to decide the next steps."
+
+  scheduled-review-sweep:
+    # Run every Monday morning to catch any claude-fix PRs where the issue reporter has commented
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      issues: read
+
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gh jq
+
+      - name: Sweep open claude-fix PRs for reporter comments
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # List all open PRs whose branch starts with claude-fix/issue-
+          PRS=$(gh pr list --state open --json number,headRefName,reviewRequests \
+            -q '.[] | select(.headRefName | startswith("claude-fix/issue-")) | .number')
+
+          if [ -z "$PRS" ]; then
+            echo "No open claude-fix PRs found."
+            exit 0
+          fi
+
+          for PR_NUMBER in $PRS; do
+            echo "=============================="
+            echo "Checking PR #${PR_NUMBER}"
+            echo "=============================="
+
+            # Skip if aalmrad is already a requested reviewer
+            ALREADY_REQUESTED=$(gh pr view "$PR_NUMBER" --json reviewRequests \
+              -q '.reviewRequests[].login' | grep -x "aalmrad" || true)
+            if [ -n "$ALREADY_REQUESTED" ]; then
+              echo "aalmrad already requested on PR #${PR_NUMBER}, skipping."
+              continue
+            fi
+
+            # Extract linked issue number from PR body
+            PR_BODY=$(gh pr view "$PR_NUMBER" --json body -q '.body')
+            ISSUE_NUMBER=$(echo "$PR_BODY" | grep -oP 'Closes #\K[0-9]+' || true)
+
+            if [ -z "$ISSUE_NUMBER" ]; then
+              echo "No linked issue found in PR #${PR_NUMBER}, skipping."
+              continue
+            fi
+
+            # Get the original issue author
+            ISSUE_AUTHOR=$(gh issue view "$ISSUE_NUMBER" --json author -q '.author.login')
+
+            # Check if the issue author has commented on this PR
+            REPORTER_COMMENT=$(gh pr view "$PR_NUMBER" --json comments \
+              -q --argjson author "\"$ISSUE_AUTHOR\"" \
+              '.comments[] | select(.author.login == $author) | .url' 2>/dev/null | head -1 || true)
+
+            # Fallback: use jq without --argjson if above fails
+            if [ -z "$REPORTER_COMMENT" ]; then
+              REPORTER_COMMENT=$(gh pr view "$PR_NUMBER" --json comments \
+                -q ".comments[] | select(.author.login == \"$ISSUE_AUTHOR\") | .url" 2>/dev/null | head -1 || true)
+            fi
+
+            if [ -z "$REPORTER_COMMENT" ]; then
+              echo "No comment from issue reporter (@${ISSUE_AUTHOR}) on PR #${PR_NUMBER}, skipping."
+              continue
+            fi
+
+            echo "Issue reporter @${ISSUE_AUTHOR} has commented on PR #${PR_NUMBER}. Requesting review from aalmrad."
+
+            gh pr edit "$PR_NUMBER" --add-reviewer aalmrad
+
+            gh pr comment "$PR_NUMBER" \
+              --body "@aalmrad — @${ISSUE_AUTHOR} (the issue reporter) has replied to this PR (see ${REPORTER_COMMENT}). Your review is requested to decide the next steps."
+          done
