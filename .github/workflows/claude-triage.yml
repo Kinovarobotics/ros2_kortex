@@ -1,0 +1,73 @@
+name: Claude Daily Issue Triage
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"   # runs daily at 09:00 EST
+  workflow_dispatch:      # allows manual trigger
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install -y gh
+
+      - name: Fetch open issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list \
+            --state open \
+            --limit 100 \
+            --json number,title,body,labels,url \
+            > issues.json
+
+      - name: Run Claude triage
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          (
+            echo 'You are performing automated GitHub issue triage.'
+            echo ''
+            echo 'Here is a JSON list of open issues:'
+            echo ''
+            cat issues.json
+            echo ''
+            echo 'For each issue:'
+            echo "- Classify as 'Bug', 'Feature Request', or 'Other'"
+            echo '- Suggest appropriate labels'
+            echo '- Assign a complexity score from 1 (very easy) to 10 (very complex)'
+            echo ''
+            echo 'Output clean markdown with sections:'
+            echo '## Bugs'
+            echo '## Feature Requests'
+            echo '## Other'
+            echo ''
+            echo 'For each issue include:'
+            echo '- Title'
+            echo '- URL'
+            echo '- Suggested labels'
+            echo '- Complexity score'
+          ) | claude --print > triage_report.md
+
+      - name: Upload triage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: triage-report
+          path: triage_report.md
