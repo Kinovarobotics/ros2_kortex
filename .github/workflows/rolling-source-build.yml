@@ -15,10 +15,10 @@ jobs:
     env:
       ROS_DISTRO: rolling
     steps:
-      - uses: ros-tooling/setup-ros@v0.7
+      - uses: ros-tooling/setup-ros@main
         with:
           required-ros-distributions: ${{ env.ROS_DISTRO }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Free up disk space
         run: |
           sudo rm -rf /usr/share/dotnet
@@ -27,7 +27,7 @@ jobs:
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           sudo apt-get clean
           df -h
-      - uses: ros-tooling/action-ros-ci@0.4.5
+      - uses: ros-tooling/action-ros-ci@main
         with:
           target-ros2-distro: ${{ env.ROS_DISTRO }}
           import-token: ${{ secrets.GITHUB_TOKEN }}
