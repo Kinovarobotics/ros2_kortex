@@ -55,20 +55,22 @@ add_library(
   src/hardware_interface.cpp
   src/kortex_math_util.cpp
 )
-target_link_libraries(${PROJECT_NAME} KortexApiCpp)
+
 target_include_directories(
   ${PROJECT_NAME}
   PRIVATE
   include
+  ${kinova_binary_api_SOURCE_DIR}/include/client
+  ${kinova_binary_api_SOURCE_DIR}/include/client_stubs
+  ${kinova_binary_api_SOURCE_DIR}/include/common
+  ${kinova_binary_api_SOURCE_DIR}/include/messages
+  ${kinova_binary_api_SOURCE_DIR}/include
 )
-# kortex_api is the headers for the Kortex API
-ament_target_dependencies(
-  ${PROJECT_NAME}
-  SYSTEM kortex_api
-  hardware_interface
-  pluginlib
-  rclcpp
-)
+
+target_link_libraries(${PROJECT_NAME} KortexApiCpp
+  hardware_interface::hardware_interface
+  pluginlib::pluginlib
+  rclcpp::rclcpp)
 
 pluginlib_export_plugin_description_file(hardware_interface hardware_interface_plugin.xml)
 
