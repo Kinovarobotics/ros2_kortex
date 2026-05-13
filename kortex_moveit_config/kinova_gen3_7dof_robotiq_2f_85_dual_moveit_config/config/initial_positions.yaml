@@ -1,0 +1,13 @@
+# Default initial positions for the dual-arm ros2_control fake system.
+# Keys must match the unprefixed joint names expected by kortex_robot.xacro's
+# initial_positions dict; the kortex_ros2_control macro applies the prefix.
+
+initial_positions:
+  joint_1: 0
+  joint_2: 0
+  joint_3: 0
+  joint_4: 0
+  joint_5: 0
+  joint_6: 0
+  joint_7: 0
+  robotiq_85_left_knuckle_joint: 0

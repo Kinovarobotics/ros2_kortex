@@ -558,3 +558,18 @@ ros2 topic pub /arm_2_/joint_trajectory_controller/joint_trajectory trajectory_m
   ]
 }" -1
 ```
+
+# Dual Control with Moveit (2 Gen3 7DoF)
+
+Run the following to command:
+
+```
+  ros2 launch kinova_gen3_7dof_robotiq_2f_85_dual_moveit_config robot.launch.py \
+    use_fake_hardware:=false \
+    use_internal_bus_gripper_comm:=true \
+    left_robot_ip:=192.168.1.10 \
+    right_robot_ip:=192.168.2.10
+
+```
+
+This will activate the controllers for both robotic arms and an rviz scene will appear where the motion of both arms can be planned simultaneously while avoiding inter-collision scenarios.

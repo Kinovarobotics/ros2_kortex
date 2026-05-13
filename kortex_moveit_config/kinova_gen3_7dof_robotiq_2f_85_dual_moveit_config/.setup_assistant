@@ -1,0 +1,16 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: kortex_description
+    relative_path: multiple_robots/kortex_dual_robots.xacro
+    xacro_args:
+      left_arm:=gen3
+      left_dof:=7
+      left_gripper:=robotiq_2f_85
+      right_arm:=gen3
+      right_dof:=7
+      right_gripper:=robotiq_2f_85
+  srdf:
+    relative_path: config/dual_gen3.srdf
+  package_settings:
+    author_name: Abed Al Rahman Al Mrad
+    author_email: aalmrad@kinova.ca
