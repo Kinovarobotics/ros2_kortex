@@ -62,6 +62,7 @@ def launch_setup(context, *args, **kwargs):
     srdf_mappings = {
         "left_prefix": left_prefix.perform(context),
         "right_prefix": right_prefix.perform(context),
+        "struct_name": "dual_arm_structure",
     }
 
     moveit_config = (

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Macro: load_dual_arm_structure
+       Creates a parametric box body (visual + collision) fixed to 'parent'.
+       Arm bases attach to ${name}_link at +/-(length/2) on the X axis.
+       Params: parent, *origin, name (default: dual_arm_structure),
+               length/width/height in metres (defaults: 0.30 / 0.20 / 0.40). -->
+  <xacro:macro name="load_dual_arm_structure" params="
+      parent
+      *origin
+      name:=dual_arm_structure
+      length:=0.30
+      width:=0.20
+      height:=0.40">
+
+    <link name="${name}_link">
+      <visual>
+        <geometry><box size="${length} ${width} ${height}"/></geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <material name="structure_grey"><color rgba="0.5 0.5 0.5 1.0"/></material>
+      </visual>
+      <collision>
+        <geometry><box size="${length} ${width} ${height}"/></geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </collision>
+    </link>
+
+    <joint name="${name}_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>

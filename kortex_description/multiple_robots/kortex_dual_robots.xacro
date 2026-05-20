@@ -18,8 +18,8 @@
     <xacro:arg name="left_port_realtime" default="10001"/>
     <xacro:arg name="left_session_inactivity_timeout_ms" default="60000"/>
     <xacro:arg name="left_connection_inactivity_timeout_ms" default="2000"/>
-    <xacro:arg name="left_xyz" default="-0.25 0 0"/>
-    <xacro:arg name="left_rpy" default="0 0 0"/>
+    <xacro:arg name="left_xyz" default="0.0565 0 0.1395"/>
+    <xacro:arg name="left_rpy" default="1.5708 0  1.5708"/>
 
     <!-- ============================================================== -->
     <!-- RIGHT ARM arguments                                             -->
@@ -37,8 +37,8 @@
     <xacro:arg name="right_port_realtime" default="10001"/>
     <xacro:arg name="right_session_inactivity_timeout_ms" default="60000"/>
     <xacro:arg name="right_connection_inactivity_timeout_ms" default="2000"/>
-    <xacro:arg name="right_xyz" default="0.25 0 0"/>
-    <xacro:arg name="right_rpy" default="0 0 0"/>
+    <xacro:arg name="right_xyz" default="-0.0565 0 0.1395"/>
+    <xacro:arg name="right_rpy" default="-1.5708 0 1.5708"/>
 
     <!-- ============================================================== -->
     <!-- Shared arguments                                                -->
@@ -53,7 +53,21 @@
     <xacro:arg name="gripper_max_velocity" default="100.0"/>
     <xacro:arg name="gripper_max_force" default="100.0"/>
 
+    <!-- ============================================================== -->
+    <!-- Structure arguments                                            -->
+    <!-- ============================================================== -->
+    <xacro:arg name="struct_name"   default="dual_arm_structure"/>
+    <xacro:arg name="struct_length" default="0.113"/>
+    <xacro:arg name="struct_width"  default="0.225"/>
+    <xacro:arg name="struct_height" default="0.585"/>
+    <xacro:arg name="struct_xyz"    default="0 0 0.2925"/>
+    <xacro:arg name="struct_rpy"    default="0 0 0"/>
+
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro"/>
+    <xacro:include filename="$(find kortex_description)/multiple_robots/dual_arm_structure.xacro"/>
+
+    <!-- Convert struct_name arg to property for string interpolation in parent= attributes -->
+    <xacro:property name="struct_name_prop" value="$(arg struct_name)"/>
 
     <xacro:arg name="initial_positions_file"
                default="$(find kortex_description)/config/initial_positions.yaml"/>
@@ -61,8 +75,17 @@
 
     <link name="world"/>
 
-    <xacro:load_robot
+    <xacro:load_dual_arm_structure
         parent="world"
+        name="$(arg struct_name)"
+        length="$(arg struct_length)"
+        width="$(arg struct_width)"
+        height="$(arg struct_height)">
+        <origin xyz="$(arg struct_xyz)" rpy="$(arg struct_rpy)"/>
+    </xacro:load_dual_arm_structure>
+
+    <xacro:load_robot
+        parent="${struct_name_prop}_link"
         arm="$(arg left_arm)"
         gripper="$(arg left_gripper)"
         gripper_joint_name="$(arg left_gripper_joint_name)"
@@ -90,7 +113,7 @@
     </xacro:load_robot>
 
     <xacro:load_robot
-        parent="world"
+        parent="${struct_name_prop}_link"
         arm="$(arg right_arm)"
         gripper="$(arg right_gripper)"
         gripper_joint_name="$(arg right_gripper_joint_name)"
