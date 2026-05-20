@@ -6,8 +6,9 @@
 -->
 <robot name="dual_gen3" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:arg name="left_prefix" default="left_"/>
+  <xacro:arg name="left_prefix"  default="left_"/>
   <xacro:arg name="right_prefix" default="right_"/>
+  <xacro:arg name="struct_name"  default="dual_arm_structure"/>
 
   <xacro:macro name="gen3_2f85_arm_srdf" params="prefix arm_group_name gripper_group_name ee_name">
 
@@ -219,5 +220,10 @@
     <joint name="$(arg right_prefix)joint_6" value="-0.87"/>
     <joint name="$(arg right_prefix)joint_7" value="1.57"/>
   </group_state>
+
+
+  <!-- Structure body is adjacent to both arm bases -->
+  <disable_collisions link1="$(arg struct_name)_link" link2="$(arg left_prefix)base_link"  reason="Adjacent"/>
+  <disable_collisions link1="$(arg struct_name)_link" link2="$(arg right_prefix)base_link" reason="Adjacent"/>
 
 </robot>
