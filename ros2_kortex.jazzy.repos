@@ -11,7 +11,7 @@ repositories:
   ros2_control_cmake:
     type: git
     url: https://github.com/ros-controls/ros2_control_cmake.git
-    version: master
+    version: jazzy
   # Temporarily added this clone waiting for Jazzy sync that allows rosdep to find it
   generate_parameter_library:
     type: git
