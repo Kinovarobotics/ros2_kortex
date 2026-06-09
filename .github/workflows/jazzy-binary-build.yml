@@ -18,6 +18,7 @@ jobs:
     name: jazzy binary build
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         env:
           - {ROS_DISTRO: jazzy, ROS_REPO: main}
