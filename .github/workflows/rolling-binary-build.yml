@@ -15,29 +15,47 @@ jobs:
     name: rolling binary build
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         env:
-          - {ROS_DISTRO: rolling, ROS_REPO: main}
-          - {ROS_DISTRO: rolling, ROS_REPO: testing}
+          # Rolling binaries are currently published for Ubuntu 24.04 (noble).
+          # Pin OS_CODE_NAME so industrial_ci doesn't default rolling to a newer
+          # Ubuntu (e.g. resolute/26.04) that has no ros-rolling-* debs yet.
+          - {ROS_DISTRO: rolling, ROS_REPO: main, OS_CODE_NAME: noble}
+          - {ROS_DISTRO: rolling, ROS_REPO: testing, OS_CODE_NAME: noble}
     env:
       UPSTREAM_WORKSPACE: ros2_kortex-not-released.${{ matrix.env.ROS_DISTRO }}.repos
+      # Core MoveIt runtime packages are not currently published as rolling debs
+      # while Rolling migrates to Ubuntu 26.04 (missing on both frozen-noble and
+      # the not-yet-populated resolute repo). They are exec_depend-only deps of
+      # the pure ament_cmake moveit_config packages, so skipping their rosdep
+      # resolution lets the binary build proceed. Remove once Rolling debs are
+      # republished for the new platform.
+      ROSDEP_SKIP_KEYS: >-
+        moveit_kinematics
+        moveit_planners
+        moveit_ros_move_group
+        moveit_ros_visualization
+        moveit_ros_warehouse
+        moveit_setup_assistant
+        moveit_simple_controller_manager
       CCACHE_DIR: ${{ github.workspace }}/.ccache
       BASEDIR: ${{ github.workspace }}/.work
       CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       # The target directory cache doesn't include the source directory because
       # that comes from the checkout.  See "prepare target_ws for cache" task below
-      - name: cache target_ws
+      - name: restore target_ws cache
         if: ${{ ! matrix.env.CCOV }}
-        uses: pat-s/always-upload-cache@v2.1.5
+        uses: actions/cache/restore@v5
         with:
           path: ${{ env.BASEDIR }}/target_ws
           key: target_ws-${{ env.CACHE_PREFIX }}-${{ hashFiles('**/CMakeLists.txt', '**/package.xml') }}-${{ github.run_id }}
           restore-keys: |
             target_ws-${{ env.CACHE_PREFIX }}-${{ hashFiles('**/CMakeLists.txt', '**/package.xml') }}
-      - name: cache ccache
-        uses: pat-s/always-upload-cache@v2.1.5
+      - name: restore ccache cache
+        uses: actions/cache/restore@v5
         with:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ env.CACHE_PREFIX }}-${{ github.sha }}-${{ github.run_id }}
@@ -54,3 +72,17 @@ jobs:
           sudo find ${{ env.BASEDIR }}/target_ws -wholename '*/test_results/*' -delete
           sudo rm -rf ${{ env.BASEDIR }}/target_ws/src
           du -sh ${{ env.BASEDIR }}/target_ws
+      # Save caches at the end so they are always uploaded, even when the build
+      # fails (replacement for the now-deprecated pat-s/always-upload-cache).
+      - name: save target_ws cache
+        if: ${{ always() && ! matrix.env.CCOV }}
+        uses: actions/cache/save@v5
+        with:
+          path: ${{ env.BASEDIR }}/target_ws
+          key: target_ws-${{ env.CACHE_PREFIX }}-${{ hashFiles('**/CMakeLists.txt', '**/package.xml') }}-${{ github.run_id }}
+      - name: save ccache cache
+        if: ${{ always() }}
+        uses: actions/cache/save@v5
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ env.CACHE_PREFIX }}-${{ github.sha }}-${{ github.run_id }}

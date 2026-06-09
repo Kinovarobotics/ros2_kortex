@@ -61,13 +61,20 @@ target_include_directories(
   PRIVATE
   include
 )
-# kortex_api is the headers for the Kortex API
-ament_target_dependencies(
+# ament_target_dependencies() was removed in Rolling; link the modern
+# namespaced CMake targets directly instead.
+target_link_libraries(
   ${PROJECT_NAME}
-  SYSTEM kortex_api
-  hardware_interface
-  pluginlib
-  rclcpp
+  hardware_interface::hardware_interface
+  pluginlib::pluginlib
+  rclcpp::rclcpp
+)
+# kortex_api is a header-only ament package (no exported CMake target), so its
+# headers are added as SYSTEM includes the way "SYSTEM kortex_api" used to.
+target_include_directories(
+  ${PROJECT_NAME}
+  SYSTEM PUBLIC
+  ${kortex_api_INCLUDE_DIRS}
 )
 
 pluginlib_export_plugin_description_file(hardware_interface hardware_interface_plugin.xml)
