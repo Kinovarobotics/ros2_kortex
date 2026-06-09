@@ -15,6 +15,7 @@ jobs:
     name: rolling binary build
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         env:
           # Rolling binaries are currently published for Ubuntu 24.04 (noble).
