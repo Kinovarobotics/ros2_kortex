@@ -25,7 +25,11 @@ jobs:
           - {ROS_DISTRO: jazzy, ROS_REPO: testing}
     env:
       UPSTREAM_WORKSPACE: ros2_kortex-not-released.${{ matrix.env.ROS_DISTRO }}.repos
-      ROSDEP_SKIP_KEYS: gz_ros2_control
+      # pilz_industrial_motion_planner temporarily skipped: the MoveIt 2.12.4
+      # stack is mid-resync on the build farm and the binary isn't published
+      # yet. It's a runtime-only dep (used by sim.launch.py), so skipping its
+      # install doesn't affect the build/tests. Remove once the farm catches up.
+      ROSDEP_SKIP_KEYS: gz_ros2_control pilz_industrial_motion_planner
       CCACHE_DIR: ${{ github.workspace }}/.ccache
       BASEDIR: ${{ github.workspace }}/.work
       CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
