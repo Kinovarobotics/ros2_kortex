@@ -593,7 +593,8 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
   if (start_joint_position_control_ && start_joint_velocity_control_)
   {
     RCLCPP_ERROR(
-      LOGGER, "Can't start a joint based controller claiming both position and velocity interfaces!");
+      LOGGER,
+      "Can't start a joint based controller claiming both position and velocity interfaces!");
     return hardware_interface::return_type::ERROR;
   }
   if (
