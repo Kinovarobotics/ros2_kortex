@@ -51,6 +51,7 @@ def launch_setup(context, *args, **kwargs):
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     robot_traj_controller = LaunchConfiguration("robot_controller")
     robot_pos_controller = LaunchConfiguration("robot_pos_controller")
+    robot_vel_controller = LaunchConfiguration("robot_vel_controller")
     robot_hand_controller = LaunchConfiguration("robot_hand_controller")
     fault_controller = LaunchConfiguration("fault_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
@@ -179,6 +180,13 @@ def launch_setup(context, *args, **kwargs):
         arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
     )
 
+    # started inactive; switch with the joint_trajectory_controller to command joint velocities
+    robot_vel_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[robot_vel_controller, "--inactive", "-c", "/controller_manager"],
+    )
+
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -201,6 +209,7 @@ def launch_setup(context, *args, **kwargs):
         delay_rviz_after_joint_state_broadcaster_spawner,
         robot_traj_controller_spawner,
         robot_pos_controller_spawner,
+        robot_vel_controller_spawner,
         fault_controller_spawner,
     ]
     start_robot_hand_controller = gripper.perform(context) != ""
@@ -334,6 +343,13 @@ def generate_launch_description():
             "robot_pos_controller",
             default_value="twist_controller",
             description="Robot controller to start.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_vel_controller",
+            default_value="joint_group_velocity_controller",
+            description="Joint velocity controller to start (inactive by default).",
         )
     )
     declared_arguments.append(

@@ -352,6 +352,8 @@ ros2 launch kinova_gen3_lite_moveit_config robot.launch.py \
 
 
 ## Commanding the arm (physically and in simulation)
+
+### Joint trajectory control
 You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller:
 
 ```bash
@@ -365,6 +367,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 
 Depending on your robot type and its DoF, you will need to adapt the `joint_names` and `positions` properties accordingly.
 
+### Joint twist control
 You can also command the arm using Twist messages. Before doing so, you must active the `twist_controller` and deactivate the `joint_trajectory_controller`:
 ```bash
 ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
@@ -395,6 +398,29 @@ ros2 service call /controller_manager/switch_controller controller_manager_msgs/
   strictness: 1,
   activate_asap: true,
 }"
+```
+### Joint velocity control
+You can command joint velocities directly as well by first activating the `joint_group_velocity_controller` using the following command:
+```bash
+# switch from trajectory (position) control to velocity control
+ros2 control switch_controllers \
+  --deactivate joint_trajectory_controller \
+  --activate joint_group_velocity_controller
+```
+Then use the following command example to move the arm (velocities are in **rad/s**):
+```bash
+# command 0.3 rad/s on the last joint of a 7 DoF gen3 (zeros elsewhere)
+ros2 topic pub --once /joint_group_velocity_controller/commands std_msgs/msg/Float64MultiArray \
+  "{data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3]}"
+
+# stop motion before switching back
+ros2 topic pub --once /joint_group_velocity_controller/commands std_msgs/msg/Float64MultiArray \
+  "{data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}"
+
+# switch back to joint trajectory controller if needed
+ros2 control switch_controllers \
+  --deactivate joint_group_velocity_controller \
+  --activate joint_trajectory_controller
 ```
 
 ## Contents
