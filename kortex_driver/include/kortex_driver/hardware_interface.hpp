@@ -43,6 +43,7 @@
 
 #include "kortex_driver/visibility_control.h"
 
+#include "ActuatorConfigClientRpc.h"
 #include "BaseClientRpc.h"
 #include "BaseCyclicClientRpc.h"
 #include "RouterClient.h"
@@ -128,6 +129,8 @@ private:
   // Control of the robot arm itself
   k_api::Base::BaseClient base_;
   k_api::BaseCyclic::BaseCyclicClient base_cyclic_;
+  // Used to switch individual actuators between POSITION and VELOCITY control mode
+  k_api::ActuatorConfig::ActuatorConfigClient actuator_config_;
   k_api::BaseCyclic::Command base_command_;
   std::size_t actuator_count_;
   // To minimize bandwidth we synchronize feedback with the robot only when write() is called
@@ -191,6 +194,13 @@ private:
   bool start_twist_controller_;
   bool start_gripper_controller_;
   bool start_fault_controller_;
+  // Distinguishes whether the starting joint based controller claims the position or the
+  // velocity command interface. Both flow to start_joint_based_controller_ but require a
+  // different actuator control mode on the robot.
+  bool start_joint_velocity_control_;
+  bool start_joint_position_control_;
+  // True while the active joint based controller commands joint velocities instead of positions.
+  bool use_velocity_command_;
 
   // first pass flag
   bool first_pass_;
@@ -214,6 +224,8 @@ private:
   void incrementId();
   void sendJointCommands();
   void prepareCommands();
+  // Set every arm actuator into the given control mode (POSITION or VELOCITY).
+  void setActuatorsControlMode(k_api::ActuatorConfig::ControlMode control_mode);
   void sendGripperCommand(
     k_api::Base::ServoingMode arm_mode, double position, double velocity, double force);
 

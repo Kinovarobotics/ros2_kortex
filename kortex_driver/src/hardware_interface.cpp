@@ -22,6 +22,7 @@
  */
 //----------------------------------------------------------------------
 
+#include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <exception>
@@ -55,6 +56,7 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   k_api_twist_(nullptr),
   base_{&router_tcp_},
   base_cyclic_{&router_udp_realtime_},
+  actuator_config_{&router_tcp_},
   gripper_motor_command_(nullptr),
   gripper_command_max_velocity_(100.0),
   gripper_command_max_force_(100.0),
@@ -71,6 +73,9 @@ KortexMultiInterfaceHardware::KortexMultiInterfaceHardware()
   start_twist_controller_(false),
   start_gripper_controller_(false),
   start_fault_controller_(false),
+  start_joint_velocity_control_(false),
+  start_joint_position_control_(false),
+  use_velocity_command_(false),
   first_pass_(true),
   gripper_joint_name_(""),
   use_internal_bus_gripper_comm_(false)
@@ -401,6 +406,7 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
     stop_gripper_controller_ = false;
   start_joint_based_controller_ = start_twist_controller_ = start_fault_controller_ =
     start_gripper_controller_ = false;
+  start_joint_velocity_control_ = start_joint_position_control_ = false;
 
   // sleep to ensure all outgoing write commands have finished
   block_write = true;
@@ -482,10 +488,12 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
       {
         start_modes_.emplace_back(StopStartInterface::START_POS_VEL);
+        start_joint_position_control_ = true;
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
       {
         start_modes_.emplace_back(StopStartInterface::START_POS_VEL);
+        start_joint_velocity_control_ = true;
       }
       if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
       {
@@ -580,6 +588,26 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
     return hardware_interface::return_type::ERROR;
   }
 
+  // position and velocity joint command interfaces drive the same actuators with conflicting
+  // control modes, so only one joint based controller (position OR velocity) may run at a time
+  if (start_joint_position_control_ && start_joint_velocity_control_)
+  {
+    RCLCPP_ERROR(
+      LOGGER, "Can't start a joint based controller claiming both position and velocity interfaces!");
+    return hardware_interface::return_type::ERROR;
+  }
+  if (
+    joint_based_controller_running_ && !stop_joint_based_controller_ &&
+    ((start_joint_velocity_control_ && !use_velocity_command_) ||
+     (start_joint_position_control_ && use_velocity_command_)))
+  {
+    RCLCPP_ERROR(
+      LOGGER,
+      "Can't start a velocity (position) joint controller while a position (velocity) joint "
+      "controller is running! Deactivate the running controller first.");
+    return hardware_interface::return_type::ERROR;
+  }
+
   return ret_val;
 }
 
@@ -591,8 +619,15 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
   if (stop_joint_based_controller_)
   {
     joint_based_controller_running_ = false;
+    // if the stopped controller was commanding velocities, put the actuators back into the
+    // default position control mode so a following position command does not surprise the user
+    if (use_velocity_command_)
+    {
+      setActuatorsControlMode(k_api::ActuatorConfig::ControlMode::POSITION);
+      use_velocity_command_ = false;
+    }
     arm_commands_positions_ = arm_positions_;
-    arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    std::fill(arm_commands_velocities_.begin(), arm_commands_velocities_.end(), 0.0);
   }
   if (stop_twist_controller_)
   {
@@ -616,7 +651,18 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
     twist_controller_running_ = false;
     arm_commands_positions_ = arm_positions_;
-    arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    std::fill(arm_commands_velocities_.begin(), arm_commands_velocities_.end(), 0.0);
+    // select the actuator control mode matching the claimed command interface
+    if (start_joint_velocity_control_)
+    {
+      setActuatorsControlMode(k_api::ActuatorConfig::ControlMode::VELOCITY);
+      use_velocity_command_ = true;
+    }
+    else
+    {
+      setActuatorsControlMode(k_api::ActuatorConfig::ControlMode::POSITION);
+      use_velocity_command_ = false;
+    }
     joint_based_controller_running_ = true;
     // refresh feedback
     feedback_ = base_cyclic_.RefreshFeedback();
@@ -645,6 +691,7 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     stop_gripper_controller_ = false;
   start_joint_based_controller_ = start_twist_controller_ = start_fault_controller_ =
     start_gripper_controller_ = false;
+  start_joint_velocity_control_ = start_joint_position_control_ = false;
 
   start_modes_.clear();
   stop_modes_.clear();
@@ -725,6 +772,13 @@ CallbackReturn KortexMultiInterfaceHardware::on_deactivate(
   const rclcpp_lifecycle::State & /* previous_state */)
 {
   RCLCPP_INFO(LOGGER, "Deactivating KortexMultiInterfaceHardware...");
+
+  // make sure the actuators are left in the default position control mode
+  if (use_velocity_command_)
+  {
+    setActuatorsControlMode(k_api::ActuatorConfig::ControlMode::POSITION);
+    use_velocity_command_ = false;
+  }
 
   auto servoing_mode = k_api::Base::ServoingModeInformation();
   // Set back the servoing mode to Single Level Servoing
@@ -927,10 +981,49 @@ void KortexMultiInterfaceHardware::prepareCommands()
       KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i])));
     cmd_vel_tmp_ = static_cast<float>(KortexMathUtil::toDeg(arm_commands_velocities_[i]));
 
-    base_command_.mutable_actuators(static_cast<int>(i))->set_position(cmd_degrees_tmp_);
-    // Velocity command interface not implemented properly in the kortex api
-    // base_command_.mutable_actuators(i)->set_velocity(cmd_vel_tmp_);
+    if (use_velocity_command_)
+    {
+      // In VELOCITY control mode the actuator tracks the velocity command (deg/s). The position
+      // field is kept synced to the latest measured position so that the following error does not
+      // trigger and the joint holds when the control mode switches back to position.
+      base_command_.mutable_actuators(static_cast<int>(i))
+        ->set_position(feedback_.actuators(static_cast<int>(i)).position());
+      base_command_.mutable_actuators(static_cast<int>(i))->set_velocity(cmd_vel_tmp_);
+    }
+    else
+    {
+      base_command_.mutable_actuators(static_cast<int>(i))->set_position(cmd_degrees_tmp_);
+    }
     base_command_.mutable_actuators(static_cast<int>(i))->set_command_id(base_command_.frame_id());
+  }
+}
+
+void KortexMultiInterfaceHardware::setActuatorsControlMode(
+  k_api::ActuatorConfig::ControlMode control_mode)
+{
+  auto control_mode_message = k_api::ActuatorConfig::ControlModeInformation();
+  control_mode_message.set_control_mode(control_mode);
+  try
+  {
+    // Device IDs are 1-based, so actuator i maps to device id i + 1.
+    for (std::size_t i = 0; i < actuator_count_; i++)
+    {
+      actuator_config_.SetControlMode(control_mode_message, static_cast<uint32_t>(i + 1));
+    }
+    RCLCPP_INFO(
+      LOGGER, "Set all actuators to %s control mode",
+      control_mode == k_api::ActuatorConfig::ControlMode::VELOCITY ? "VELOCITY" : "POSITION");
+  }
+  catch (k_api::KDetailedException & ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception while setting control mode: " << ex.what());
+    RCLCPP_ERROR_STREAM(
+      LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
+                k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+  }
+  catch (std::exception & ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Exception while setting control mode: " << ex.what());
   }
 }
 
