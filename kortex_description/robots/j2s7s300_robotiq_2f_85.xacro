@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+  Top-level robot xacro: j2s7s300 arm + Robotiq 2F-85 gripper (serial).
+
+  Adapted from kortex_description/robots/kortex_robot.xacro
+  Original: Kinovarobotics/ros2_kortex (Apache 2.0)
+  Modifications: AABL Lab
+    - j2s7s300 arm instead of Gen3
+    - No robot_ip / Kortex API params
+    - gripper_com_port arg for robot-specific /dev/robotiq vs /dev/tty_gripper
+    - use_internal_bus_gripper_comm always false (serial Robotiq)
+-->
+<robot name="j2s7s300" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="use_fake_hardware" default="false"/>
+  <xacro:arg name="fake_sensor_commands" default="false"/>
+  <xacro:arg name="sim_gazebo" default="false"/>
+  <xacro:arg name="sim_isaac" default="false"/>
+  <xacro:arg name="isaac_joint_commands" default="/isaac_joint_commands"/>
+  <xacro:arg name="isaac_joint_states" default="/isaac_joint_states"/>
+  <xacro:arg name="prefix" default=""/>
+  <!-- Serial port for the Robotiq gripper.
+       beep/boop robots use /dev/tty_gripper; others use /dev/robotiq -->
+  <xacro:arg name="gripper_com_port" default="/dev/robotiq"/>
+
+  <xacro:include filename="$(find kortex_description)/arms/j2s7s300/7dof/urdf/j2s7s300_macro.xacro"/>
+
+  <link name="world"/>
+
+  <xacro:load_j2s7s300
+    parent="world"
+    prefix="$(arg prefix)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    fake_sensor_commands="$(arg fake_sensor_commands)"
+    sim_gazebo="$(arg sim_gazebo)"
+    sim_isaac="$(arg sim_isaac)"
+    isaac_joint_commands="$(arg isaac_joint_commands)"
+    isaac_joint_states="$(arg isaac_joint_states)"
+    gripper="robotiq_2f_85"
+    gripper_com_port="$(arg gripper_com_port)">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:load_j2s7s300>
+
+</robot>

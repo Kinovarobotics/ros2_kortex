@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<!--
+  j2s7s300 arm macro for ros2_control / ros2_kortex_gen2_port.
+
+  Kinematic parameters (joint origins, RPY, limits, inertials) are taken
+  directly from Kinovarobotics/kinova-ros (noetic-devel):
+    kinova_description/urdf/j2s7s300.xacro
+    kinova_description/urdf/kinova_common.xacro
+  Original license: BSD
+
+  Structural pattern follows kortex_description/arms/gen3/7dof/urdf/gen3_macro.xacro
+  from Kinovarobotics/ros2_kortex (Apache 2.0).
+
+  Modifications: AABL Lab
+    - Self-contained (no kinova_description package dependency)
+    - ros2_control block via j2s7s300.ros2_control.xacro
+    - Joint names follow Gen3 convention: ${prefix}joint_N (no underscore separator)
+    - Kinova finger set removed - Robotiq 2F-85 is attached by kortex_robot.xacro
+-->
+<robot name="j2s7s300_arm" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="last_arm_link" value="end_effector_link"/>
+
+  <xacro:macro name="load_j2s7s300" params="
+    parent
+    prefix
+    *origin
+    use_fake_hardware:=false
+    fake_sensor_commands:=false
+    sim_gazebo:=false
+    sim_isaac:=false
+    isaac_joint_commands:=/isaac_joint_commands
+    isaac_joint_states:=/isaac_joint_states
+    gripper:=robotiq_2f_85
+    gripper_com_port:=/dev/robotiq
+    initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0,joint_7=0.0)}
+    api_lib_path:=Kinova.API.USBCommandLayerUbuntu.so">
+
+    <!-- ros2_control block -->
+    <xacro:include filename="$(find kortex_description)/arms/j2s7s300/7dof/urdf/j2s7s300.ros2_control.xacro"/>
+    <xacro:j2s7s300_ros2_control
+      name="${prefix}Gen2HardwareInterface"
+      prefix="${prefix}"
+      use_fake_hardware="${use_fake_hardware}"
+      fake_sensor_commands="${fake_sensor_commands}"
+      sim_gazebo="${sim_gazebo}"
+      sim_isaac="${sim_isaac}"
+      isaac_joint_commands="${isaac_joint_commands}"
+      isaac_joint_states="${isaac_joint_states}"
+      initial_positions="${initial_positions}"
+      api_lib_path="${api_lib_path}"/>
+
+    <!-- Base joint attaching arm to parent link -->
+    <joint name="${prefix}base_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}link_base"/>
+    </joint>
+
+    <!--  Links -->
+
+    <link name="${prefix}link_base">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=0 (base) -->
+        <origin xyz="0 0 0.1255" rpy="0 0 0"/>
+        <mass value="0.4693"/>
+        <inertia ixx="0.000951" ixy="0" ixz="0"
+                 iyy="0.000951" iyz="0"
+                 izz="0.000603"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/base.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/base.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}link_1">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=1 (shoulder) -->
+        <origin xyz="0 0.002 -0.0605" rpy="0 0 0"/>
+        <mass value="0.7477"/>
+        <inertia ixx="0.00152" ixy="0" ixz="0"
+                 iyy="0.00152" iyz="0"
+                 izz="0.000603"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/shoulder.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/shoulder.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}link_2">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=6 (arm_half_1, 7dof) -->
+        <origin xyz="0 -0.1022 0" rpy="0 0 0"/>
+        <mass value="0.5625"/>
+        <inertia ixx="0.00326" ixy="0" ixz="0"
+                 iyy="0.000317" iyz="0"
+                 izz="0.00326"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/arm_half_1.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/arm_half_1.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}link_3">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=7 (arm_half_2, 7dof) -->
+        <origin xyz="0 -0.1022 0" rpy="0 0 0"/>
+        <mass value="0.5625"/>
+        <inertia ixx="0.00326" ixy="0" ixz="0"
+                 iyy="0.000317" iyz="0"
+                 izz="0.00326"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/arm_half_2.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/arm_half_2.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}link_4">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=3 (forearm) -->
+        <origin xyz="0 -0.0879 -0.0114" rpy="0 0 0"/>
+        <mass value="0.5290"/>
+        <inertia ixx="0.00242" ixy="0" ixz="0"
+                 iyy="0.000148" iyz="0"
+                 izz="0.00242"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/forearm.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/forearm.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}link_5">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=8 (wrist_spherical_1) -->
+        <origin xyz="0 -0.0362 -0.0114" rpy="0 0 0"/>
+        <mass value="0.2723"/>
+        <inertia ixx="0.000348" ixy="0" ixz="0"
+                 iyy="0.000218" iyz="0"
+                 izz="0.000218"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/wrist_spherical_1.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/wrist_spherical_1.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}link_6">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=9 (wrist_spherical_2) -->
+        <origin xyz="0 0 -0.0571" rpy="0 0 0"/>
+        <mass value="0.2723"/>
+        <inertia ixx="0.000348" ixy="0" ixz="0"
+                 iyy="0.000218" iyz="0"
+                 izz="0.000218"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/wrist_spherical_2.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/wrist_spherical_2.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}link_7">
+      <inertial>
+        <!-- Source: kinova_common.xacro mesh_no=55 (hand_3finger) -->
+        <origin xyz="0 0 -0.0666" rpy="0 0 0"/>
+        <mass value="0.5820"/>
+        <inertia ixx="0.000587" ixy="0" ixz="0"
+                 iyy="0.000587" iyz="0"
+                 izz="0.000369"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/hand_3finger.dae"/>
+        </geometry>
+        <material name=""><color rgba="0.75294 0.75294 0.75294 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://kortex_description/arms/j2s7s300/7dof/meshes/hand_3finger.dae"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <!--  Joints -->
+    <!--
+      All kinematic values from kinova-ros j2s7s300.xacro (noetic-devel).
+      J_PI in kinova-ros = pi, so we use ${pi} directly.
+      Velocity limits converted: 36 deg/s = 0.6283 rad/s, 48 deg/s = 0.8378 rad/s
+      Joint 2 limits: 47..313 deg → converted to radians and shifted to [-pi, pi]:
+        lower = 47/180*pi - 2*pi ≈ -5.46  →  kinova reports [47°,313°] in [0,360) space
+        We keep raw radian equivalents: lower=0.8203, upper=5.4629
+        NOTE: the Gen2 API reports all joints in [0,360). The hardware interface
+        wraps to [-180,180] for ROS convention. Joint limits here are set to
+        continuous (2*pi) to avoid ros2_control rejecting valid commands - the
+        actual physical limits are enforced by the arm firmware.
+    -->
+
+    <joint name="${prefix}joint_1" type="continuous">
+      <!-- origin from kinova-ros: xyz="0 0 0.15675" rpy="0 pi 0" -->
+      <origin xyz="0 0 0.15675" rpy="0 ${pi} 0"/>
+      <parent link="${prefix}link_base"/>
+      <child link="${prefix}link_1"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="40" velocity="0.6283"/>
+    </joint>
+
+    <joint name="${prefix}joint_2" type="continuous">
+      <!-- origin from kinova-ros: xyz="0 0.0016 -0.11875" rpy="-pi/2 0 pi" -->
+      <origin xyz="0 0.0016 -0.11875" rpy="${-pi/2} 0 ${pi}"/>
+      <parent link="${prefix}link_1"/>
+      <child link="${prefix}link_2"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="80" velocity="0.6283"/>
+    </joint>
+
+    <joint name="${prefix}joint_3" type="continuous">
+      <!-- origin from kinova-ros: xyz="0 -0.205 0" rpy="-pi/2 0 0" -->
+      <origin xyz="0 -0.205 0" rpy="${-pi/2} 0 0"/>
+      <parent link="${prefix}link_2"/>
+      <child link="${prefix}link_3"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="40" velocity="0.6283"/>
+    </joint>
+
+    <joint name="${prefix}joint_4" type="continuous">
+      <!-- origin from kinova-ros: xyz="0 0 -0.205" rpy="pi/2 0 pi" -->
+      <origin xyz="0 0 -0.205" rpy="${pi/2} 0 ${pi}"/>
+      <parent link="${prefix}link_3"/>
+      <child link="${prefix}link_4"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="40" velocity="0.6283"/>
+    </joint>
+
+    <joint name="${prefix}joint_5" type="continuous">
+      <!-- origin from kinova-ros: xyz="0 0.2073 -0.0114" rpy="-pi/2 0 pi" -->
+      <origin xyz="0 0.2073 -0.0114" rpy="${-pi/2} 0 ${pi}"/>
+      <parent link="${prefix}link_4"/>
+      <child link="${prefix}link_5"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="20" velocity="0.8378"/>
+    </joint>
+
+    <joint name="${prefix}joint_6" type="continuous">
+      <!-- origin from kinova-ros: xyz="0 0 -0.10375" rpy="pi/2 0 pi" -->
+      <origin xyz="0 0 -0.10375" rpy="${pi/2} 0 ${pi}"/>
+      <parent link="${prefix}link_5"/>
+      <child link="${prefix}link_6"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="20" velocity="0.8378"/>
+    </joint>
+
+    <joint name="${prefix}joint_7" type="continuous">
+      <!-- origin from kinova-ros: xyz="0 0.10375 0" rpy="-pi/2 0 pi" -->
+      <origin xyz="0 0.10375 0" rpy="${-pi/2} 0 ${pi}"/>
+      <parent link="${prefix}link_6"/>
+      <child link="${prefix}link_7"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="20" velocity="0.8378"/>
+    </joint>
+
+    <!-- End effector frame - gripper parent link -->
+    <!-- origin from kinova-ros: xyz="0 0 -0.1600" rpy="pi 0 pi/2" -->
+    <link name="${prefix}end_effector_link"/>
+    <joint name="${prefix}end_effector" type="fixed">
+      <origin xyz="0 0 -0.1600" rpy="${pi} 0 ${pi/2}"/>
+      <parent link="${prefix}link_7"/>
+      <child link="${prefix}end_effector_link"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>

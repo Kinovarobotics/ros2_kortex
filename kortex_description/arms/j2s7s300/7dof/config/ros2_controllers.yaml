@@ -1,0 +1,47 @@
+# ros2_control controller configuration for j2s7s300 + Robotiq 2F-85 (serial)
+#
+# Key differences from Gen3 config:
+#   - update_rate: 100 Hz — Gen2 USB API max reliable poll rate
+#   - No twist_controller — Gen2 USB API does not support Cartesian twist commands
+#   - No fault_controller — Gen2 has no equivalent Kortex fault/reset API
+#   - robotiq_gripper_controller — serial Robotiq, not internal bus
+#
+# Joint names do NOT include prefix here; the prefix is prepended by the
+# launch file via the controller_manager remapping / robot_description param.
+
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    robotiq_gripper_controller:
+      type: parallel_gripper_action_controller/GripperActionController
+
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+      - joint_7
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.0
+      goal_time: 0.0
+
+robotiq_gripper_controller:
+  ros__parameters:
+    joint: robotiq_85_left_knuckle_joint
+    allow_stalling: true
