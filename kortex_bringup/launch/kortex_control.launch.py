@@ -31,7 +31,7 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
+from launch_ros.parameter_descriptions import ParameterValue
 
 def launch_setup(context, *args, **kwargs):
     # Initialize Arguments
@@ -108,7 +108,7 @@ def launch_setup(context, *args, **kwargs):
             " ",
         ]
     )
-    robot_description = {"robot_description": robot_description_content}
+    robot_description = {"robot_description": ParameterValue(robot_description_content, value_type=str)}
 
     robot_controllers = PathJoinSubstitution(
         [
@@ -177,8 +177,10 @@ def launch_setup(context, *args, **kwargs):
         package="controller_manager",
         executable="spawner",
         arguments=[robot_pos_controller, "--inactive", "-c", "/controller_manager"],
+        condition=IfCondition(
+            PythonExpression(["'", robot_pos_controller.perform(context), "' not in ['', 'none']"])
+        ),
     )
-
     robot_hand_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -216,7 +218,7 @@ def generate_launch_description():
     # Robot specific arguments
     declared_arguments.append(
         DeclareLaunchArgument(
-            "robot_type", description="Type/series of robot.", choices=["gen3", "gen3_lite"]
+            "robot_type", description="Type/series of robot.", choices=["gen3", "gen3_lite", "j2s7s300"]
         )
     )
     declared_arguments.append(DeclareLaunchArgument("dof", description="DoF of robot."))

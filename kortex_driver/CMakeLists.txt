@@ -54,7 +54,15 @@ add_library(
   SHARED
   src/hardware_interface.cpp
   src/kortex_math_util.cpp
+  src/gen2_hardware_interface.cpp
 )
+
+target_link_directories(
+  ${PROJECT_NAME}
+  PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/kinova_gen2_api
+)
+
 target_link_libraries(${PROJECT_NAME} KortexApiCpp)
 target_include_directories(
   ${PROJECT_NAME}
@@ -68,6 +76,7 @@ target_link_libraries(
   hardware_interface::hardware_interface
   pluginlib::pluginlib
   rclcpp::rclcpp
+  dl
 )
 # kortex_api is a header-only ament package (no exported CMake target), so its
 # headers are added as SYSTEM includes the way "SYSTEM kortex_api" used to.
@@ -75,6 +84,7 @@ target_include_directories(
   ${PROJECT_NAME}
   SYSTEM PUBLIC
   ${kortex_api_INCLUDE_DIRS}
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/kinova_gen2_api
 )
 
 pluginlib_export_plugin_description_file(hardware_interface hardware_interface_plugin.xml)
@@ -87,6 +97,12 @@ install(
 install(
   DIRECTORY include/
   DESTINATION include
+)
+install(
+  FILES
+    lib/kinova_gen2_api/Kinova.API.USBCommandLayerUbuntu.so
+    lib/kinova_gen2_api/Kinova.API.CommLayerUbuntu.so
+  DESTINATION lib
 )
 
 if(BUILD_TESTING)

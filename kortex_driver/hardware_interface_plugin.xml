@@ -1,9 +1,16 @@
 <library path="kortex_driver">
+  <!-- Gen3 plugin -->
   <class name="kortex_driver/KortexMultiInterfaceHardware"
          type="kortex_driver::KortexMultiInterfaceHardware"
          base_class_type="hardware_interface::SystemInterface">
     <description>
       The ROS2 Control for the Kinova Kortex robot protocol.
     </description>
+  </class>
+  <!-- Gen2 plugin -->
+  <class name="kortex_driver/Gen2HardwareInterface"
+         type="kortex_driver::Gen2HardwareInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>ROS2 Control for Kinova Gen2 (Jaco2/Mico) USB API.</description>
   </class>
 </library>
