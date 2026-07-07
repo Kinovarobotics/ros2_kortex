@@ -28,6 +28,7 @@
 #include <limits>
 #include <memory>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "kortex_driver/hardware_interface.hpp"
@@ -639,7 +640,14 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     joint_based_controller_running_ = true;
     // refresh feedback
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "RefreshFeedback error (mode switch): " << ex.what());
+    }
   }
   if (start_twist_controller_)
   {
@@ -678,8 +686,31 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   const rclcpp_lifecycle::State & /* previous_state */)
 {
   RCLCPP_INFO(LOGGER, "Activating KortexMultiInterfaceHardware...");
-  // first read
-  auto base_feedback = base_cyclic_.RefreshFeedback();
+  // first read — retry up to 5 times to tolerate transient connection delays
+  k_api::BaseCyclic::Feedback base_feedback;
+  bool feedback_ok = false;
+  for (int attempt = 1; attempt <= 5 && !feedback_ok; ++attempt)
+  {
+    try
+    {
+      base_feedback = base_cyclic_.RefreshFeedback();
+      feedback_ok = true;
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_WARN_STREAM(
+        LOGGER, "RefreshFeedback attempt " << attempt << " failed: " << ex.what());
+      if (attempt < 5)
+      {
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+      }
+    }
+  }
+  if (!feedback_ok)
+  {
+    RCLCPP_ERROR(LOGGER, "Failed to get initial feedback after 5 attempts — aborting activation.");
+    return CallbackReturn::FAILURE;
+  }
 
   // Add each actuator to the base_command_ and set the command to its current position
   for (std::size_t i = 0; i < actuator_count_; i++)
@@ -704,7 +735,15 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
   gripper_motor_command_->set_force(gripper_force_command_);       // % force
 
   // Send a first frame
-  base_feedback = base_cyclic_.Refresh(base_command_);
+  try
+  {
+    base_feedback = base_cyclic_.Refresh(base_command_);
+  }
+  catch (std::exception & ex)
+  {
+    RCLCPP_WARN_STREAM(LOGGER, "Initial Refresh failed: " << ex.what() << " — using feedback values.");
+    base_feedback = base_cyclic_.RefreshFeedback();
+  }
   // Set some default values
   for (std::size_t i = 0; i < actuator_count_; i++)
   {
@@ -776,7 +815,14 @@ return_type KortexMultiInterfaceHardware::read(
   if (first_pass_)
   {
     first_pass_ = false;
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "RefreshFeedback error (first read): " << ex.what());
+    }
   }
 
   // read if robot is faulted
@@ -831,9 +877,19 @@ return_type KortexMultiInterfaceHardware::write(
 {
   if (block_write)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "RefreshFeedback error (block_write): " << ex.what());
+    }
     return return_type::OK;
   }
+
+  try
+  {
 
   if (!std::isnan(reset_fault_cmd_) && fault_controller_running_)
   {
@@ -894,7 +950,14 @@ return_type KortexMultiInterfaceHardware::write(
       sendGripperCommand(
         arm_mode_, gripper_command_position_, gripper_speed_command_, gripper_force_command_);
       // read after write in twist mode
-      feedback_ = base_cyclic_.RefreshFeedback();
+      try
+      {
+        feedback_ = base_cyclic_.RefreshFeedback();
+      }
+      catch (std::exception & ex)
+      {
+        RCLCPP_ERROR_STREAM(LOGGER, "RefreshFeedback error (SINGLE_LEVEL): " << ex.what());
+      }
     }
     else if (
       (arm_mode_ == k_api::Base::ServoingMode::LOW_LEVEL_SERVOING) &&
@@ -914,14 +977,28 @@ return_type KortexMultiInterfaceHardware::write(
       else
       {
         // Keep alive mode - no controller active
-        feedback_ = base_cyclic_.RefreshFeedback();
+        try
+        {
+          feedback_ = base_cyclic_.RefreshFeedback();
+        }
+        catch (std::exception & ex)
+        {
+          RCLCPP_ERROR_STREAM(LOGGER, "RefreshFeedback error (LOW_LEVEL keep-alive): " << ex.what());
+        }
         // RCLCPP_DEBUG(LOGGER, "No controller active in LOW_LEVEL_SERVOING mode !");
       }
     }
     else
     {
       // Keep alive mode - no controller active
-      feedback_ = base_cyclic_.RefreshFeedback();
+      try
+      {
+        feedback_ = base_cyclic_.RefreshFeedback();
+      }
+      catch (std::exception & ex)
+      {
+        RCLCPP_ERROR_STREAM(LOGGER, "RefreshFeedback error (fallback): " << ex.what());
+      }
       RCLCPP_DEBUG(
         LOGGER,
         "Fault was not recognized on the robot but combination of Control Mode and Active State "
@@ -932,7 +1009,24 @@ return_type KortexMultiInterfaceHardware::write(
   {
     // this is needed when the robot was faulted
     // so we can internally conclude it is not faulted anymore
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try
+    {
+      feedback_ = base_cyclic_.RefreshFeedback();
+    }
+    catch (std::exception & ex)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "RefreshFeedback error (fault recovery): " << ex.what());
+    }
+  }
+
+  }  // end top-level try
+  catch (std::exception & ex)
+  {
+    RCLCPP_ERROR_STREAM(LOGGER, "Unhandled exception in write(): " << ex.what());
+  }
+  catch (...)
+  {
+    RCLCPP_ERROR(LOGGER, "Unknown exception in write()");
   }
 
   return return_type::OK;
@@ -968,7 +1062,7 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (k_api::KDetailedException & ex)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try { feedback_ = base_cyclic_.RefreshFeedback(); } catch (...) {}
     RCLCPP_ERROR_STREAM(LOGGER, "Kortex exception: " << ex.what());
 
     RCLCPP_ERROR_STREAM(
@@ -977,17 +1071,17 @@ void KortexMultiInterfaceHardware::sendJointCommands()
   }
   catch (std::runtime_error & ex_runtime)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try { feedback_ = base_cyclic_.RefreshFeedback(); } catch (...) {}
     RCLCPP_ERROR_STREAM(LOGGER, "Runtime error: " << ex_runtime.what());
   }
   catch (std::future_error & ex_future)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try { feedback_ = base_cyclic_.RefreshFeedback(); } catch (...) {}
     RCLCPP_ERROR_STREAM(LOGGER, "Future error: " << ex_future.what());
   }
   catch (std::exception & ex_std)
   {
-    feedback_ = base_cyclic_.RefreshFeedback();
+    try { feedback_ = base_cyclic_.RefreshFeedback(); } catch (...) {}
     RCLCPP_ERROR_STREAM(LOGGER, "Standard exception: " << ex_std.what());
   }
 }
@@ -1034,6 +1128,18 @@ void KortexMultiInterfaceHardware::sendGripperCommand(
       RCLCPP_ERROR_STREAM(
         LOGGER, "Error sub-code: " << k_api::SubErrorCodes_Name(
                   k_api::SubErrorCodes((ex.getErrorInfo().getError().error_sub_code()))));
+    }
+    catch (std::runtime_error & ex_runtime)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Gripper command runtime error: " << ex_runtime.what());
+    }
+    catch (std::future_error & ex_future)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Gripper command future error: " << ex_future.what());
+    }
+    catch (std::exception & ex_std)
+    {
+      RCLCPP_ERROR_STREAM(LOGGER, "Gripper command exception: " << ex_std.what());
     }
   }
 }
