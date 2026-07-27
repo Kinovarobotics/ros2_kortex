@@ -21,7 +21,7 @@
     </xacro:if>
 
     <xacro:robotiq_gripper
-        name="RobotiqGripperHardwareInterface"
+        name="${prefix}RobotiqGripperHardwareInterface"
         prefix="${prefix}"
         parent="${parent}"
         include_ros2_control="${include_ros2_control}"
