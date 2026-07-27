@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code
@@ -67,7 +67,7 @@ jobs:
           ) | claude --print > triage_report.md
 
       - name: Upload triage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: triage-report
           path: triage_report.md

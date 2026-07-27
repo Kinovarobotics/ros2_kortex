@@ -25,7 +25,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 
-
 ARGUMENTS = [
     DeclareLaunchArgument(
         "use_sim_time", default_value="true", choices=["true", "false"], description="use_sim_time"
