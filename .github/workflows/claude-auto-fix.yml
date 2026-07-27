@@ -21,14 +21,14 @@
 
       steps:
         - name: Checkout repository
-          uses: actions/checkout@v4
+          uses: actions/checkout@v7
           with:
             fetch-depth: 0
 
         - name: Setup Node
-          uses: actions/setup-node@v4
+          uses: actions/setup-node@v7
           with:
-            node-version: 20
+            node-version: 22
 
         - name: Install dependencies
           run: |
@@ -204,14 +204,14 @@
 
       steps:
         - name: Checkout repository
-          uses: actions/checkout@v4
+          uses: actions/checkout@v7
           with:
             fetch-depth: 0
 
         - name: Setup Node
-          uses: actions/setup-node@v4
+          uses: actions/setup-node@v7
           with:
-            node-version: 20
+            node-version: 22
 
         - name: Install dependencies
           run: |
