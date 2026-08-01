@@ -44,6 +44,7 @@ def launch_setup(context, *args, **kwargs):
     description_file = LaunchConfiguration("description_file")
     robot_name = LaunchConfiguration("robot_name")
     prefix = LaunchConfiguration("prefix")
+    vision = LaunchConfiguration("vision")
     gripper = LaunchConfiguration("gripper")
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
     gripper_max_force = LaunchConfiguration("gripper_max_force")
@@ -59,7 +60,7 @@ def launch_setup(context, *args, **kwargs):
 
     # if we are using fake hardware then we can't use the internal gripper communications of the hardware
     use_fake_hardware_value = use_fake_hardware.perform(context)
-    if use_fake_hardware_value == "true":
+    if use_fake_hardware_value == "true" or gripper.perform(context) == "":
         use_internal_bus_gripper_comm = "false"
 
     robot_description_content = Command(
@@ -90,6 +91,9 @@ def launch_setup(context, *args, **kwargs):
             " ",
             "fake_sensor_commands:=",
             fake_sensor_commands,
+            " ",
+            "vision:=",
+            vision,
             " ",
             "gripper:=",
             gripper,
@@ -298,6 +302,13 @@ def generate_launch_description():
             description="Prefix of the joint names, useful for \
         multi-robot setup. If changed than also joint names in the controllers' configuration \
         have to be updated.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "vision",
+            default_value="false",
+            description="Is vision module (camera) present on the robot?", 
         )
     )
     declared_arguments.append(
