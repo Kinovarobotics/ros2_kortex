@@ -24,6 +24,7 @@
     gripper_joint_name
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0
+    use_external_cable:=false
     moveit_active:=false">
 
     <ros2_control name="${name}" type="system">
@@ -55,6 +56,7 @@
           <param name="gripper_joint_name">${gripper_joint_name}</param>
           <param name="gripper_max_velocity">${gripper_max_velocity}</param>
           <param name="gripper_max_force">${gripper_max_force}</param>
+          <param name="use_external_cable">${use_external_cable}</param>
         </xacro:unless>
       </hardware>
       <joint name="${prefix}joint_1">

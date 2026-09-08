@@ -142,6 +142,23 @@ private:
   std::vector<double> arm_velocities_;
   std::vector<double> arm_efforts_;
 
+  // External cable support: when a cable is routed along the arm, the normally-continuous joints
+  // must be treated as revolute with position limits. The robot reports each actuator position
+  // wrapped into [-pi, pi], so a URDF limit of +/-2*pi can never be reached. To enforce the limit
+  // we reconstruct the unwrapped (accumulated) shaft angle here and clamp outgoing position
+  // commands against it. These are kept internal to the driver and are NOT exported as state, so
+  // the rest of the stack (MoveIt, RViz) keeps seeing the wrapped angles it expects.
+  bool use_external_cable_ = false;
+  // Accumulated (unwrapped) measured position per arm joint, relative to the position at startup.
+  std::vector<double> arm_positions_accumulated_;
+  // Previous wrapped measured position per arm joint, used to accumulate turns across cycles.
+  std::vector<double> arm_positions_prev_wrapped_;
+  // Whether the accumulator has been seeded from the first valid reading.
+  bool position_accumulator_initialized_ = false;
+  // Per arm joint position command limits, read from the ros2_control command interface min/max.
+  std::vector<double> arm_position_cmd_min_;
+  std::vector<double> arm_position_cmd_max_;
+
   // twist command interfaces
   std::vector<double> twist_commands_;
 

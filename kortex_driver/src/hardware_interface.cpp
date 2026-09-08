@@ -253,14 +253,46 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   arm_commands_efforts_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
   arm_joints_control_level_.resize(
     actuator_count_, integration_lvl_t::UNDEFINED);  // start in undefined
+  arm_positions_accumulated_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  arm_positions_prev_wrapped_.resize(actuator_count_, std::numeric_limits<double>::quiet_NaN());
+  position_accumulator_initialized_ = false;
+  // Default the command limits to +/-2*pi; overwritten below from the ros2_control command
+  // interface min/max where provided.
+  arm_position_cmd_min_.assign(actuator_count_, -2.0 * M_PI);
+  arm_position_cmd_max_.assign(actuator_count_, 2.0 * M_PI);
   gripper_command_position_ = std::numeric_limits<double>::quiet_NaN();
   gripper_position_ = std::numeric_limits<double>::quiet_NaN();
 
   // set size of the twist interface
   twist_commands_.resize(6, 0.0);
 
+  // Index into the arm-joint-ordered vectors (arm_positions_, command limits, ...). The gripper
+  // joint is not part of the arm actuators, so it is skipped and does not advance this index.
+  std::size_t arm_joint_index = 0;
   for (const hardware_interface::ComponentInfo & joint : info_.joints)
   {
+    // Collect the position command limits (used to clamp against the accumulated angle when an
+    // external cable is present). Only arm joints are tracked; the gripper is handled separately.
+    if (joint.name != gripper_joint_name_ && arm_joint_index < actuator_count_)
+    {
+      for (const auto & cmd_iface : joint.command_interfaces)
+      {
+        if (cmd_iface.name != hardware_interface::HW_IF_POSITION)
+        {
+          continue;
+        }
+        if (!cmd_iface.min.empty())
+        {
+          arm_position_cmd_min_[arm_joint_index] = std::stod(cmd_iface.min);
+        }
+        if (!cmd_iface.max.empty())
+        {
+          arm_position_cmd_max_[arm_joint_index] = std::stod(cmd_iface.max);
+        }
+      }
+      arm_joint_index++;
+    }
+
     if (!(joint.command_interfaces[0].name == hardware_interface::HW_IF_POSITION ||
           joint.command_interfaces[0].name == hardware_interface::HW_IF_VELOCITY ||
           joint.command_interfaces[0].name == hardware_interface::HW_IF_EFFORT))
@@ -290,6 +322,23 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   {
     use_internal_bus_gripper_comm_ = true;
     RCLCPP_INFO(LOGGER, "Using internal bus communication for gripper!");
+  }
+
+  if (
+    (info_.hardware_parameters["use_external_cable"] == "true") ||
+    (info_.hardware_parameters["use_external_cable"] == "True"))
+  {
+    use_external_cable_ = true;
+    RCLCPP_INFO(
+      LOGGER,
+      "External cable mode enabled: continuous joints are treated as revolute and position "
+      "commands are clamped to their configured limits.");
+    for (std::size_t i = 0; i < actuator_count_; i++)
+    {
+      RCLCPP_INFO(
+        LOGGER, "  arm joint %lu position command limits: [%f, %f] rad", i,
+        arm_position_cmd_min_[i], arm_position_cmd_max_[i]);
+    }
   }
 
   RCLCPP_INFO(LOGGER, "Hardware Interface successfully configured");
@@ -832,11 +881,36 @@ return_type KortexMultiInterfaceHardware::read(
       KortexMathUtil::toRad(feedback_.actuators(i).position()),
       num_turns_tmp_);  // rad
 
+    // Reconstruct the unwrapped (accumulated) shaft angle from the wrapped reading. The robot only
+    // reports the position within a single turn, so this is relative to the pose at startup. It is
+    // used to enforce the external-cable position limits (see prepareCommands()).
+    if (!position_accumulator_initialized_)
+    {
+      arm_positions_accumulated_[i] = arm_positions_[i];
+    }
+    else
+    {
+      double delta = arm_positions_[i] - arm_positions_prev_wrapped_[i];
+      // Assume the joint moved less than half a turn since the last cycle and unwrap accordingly.
+      if (delta > M_PI)
+      {
+        delta -= 2.0 * M_PI;
+      }
+      else if (delta < -M_PI)
+      {
+        delta += 2.0 * M_PI;
+      }
+      arm_positions_accumulated_[i] += delta;
+    }
+    arm_positions_prev_wrapped_[i] = arm_positions_[i];
+
     in_fault_ += (feedback_.actuators(i).fault_bank_a() + feedback_.actuators(i).fault_bank_b());
 
     // TODO(livanov93): separate warnings into another variable to expose it via fault controller
     //       feedback_.actuators(i).warning_bank_a() + feedback_.actuators(i).warning_bank_b());
   }
+  // The accumulator is seeded on the first read; subsequent reads track turns incrementally.
+  position_accumulator_initialized_ = true;
 
   // add all base's faults and warnings into series
   in_fault_ += (feedback_.base().fault_bank_a() + feedback_.base().fault_bank_b());
@@ -977,9 +1051,35 @@ void KortexMultiInterfaceHardware::prepareCommands()
 {  // update the command for each joint
   for (size_t i = 0; i < actuator_count_; i++)
   {
+    double position_command = arm_commands_positions_[i];
+
+    // External cable: clamp the position command against the accumulated shaft angle so a
+    // normally-continuous joint cannot wind the cable past its configured limit. The controller
+    // plans from the wrapped state, so the incoming setpoint is expressed relative to the wrapped
+    // measured position; map it into the accumulated frame, saturate to [min, max], then map back.
+    // Joints that physically cannot reach their limit (the genuinely bounded ones) are unaffected.
+    if (use_external_cable_ && position_accumulator_initialized_ && !use_velocity_command_)
+    {
+      double wrapped_measured = arm_positions_[i];
+      double accumulated_measured = arm_positions_accumulated_[i];
+      double delta = position_command - wrapped_measured;
+      // Take the shortest path from the current measured position to the commanded setpoint.
+      if (delta > M_PI)
+      {
+        delta -= 2.0 * M_PI;
+      }
+      else if (delta < -M_PI)
+      {
+        delta += 2.0 * M_PI;
+      }
+      double accumulated_target = std::clamp(
+        accumulated_measured + delta, arm_position_cmd_min_[i], arm_position_cmd_max_[i]);
+      position_command = wrapped_measured + (accumulated_target - accumulated_measured);
+    }
+
     // set command per joint
     cmd_degrees_tmp_ = static_cast<float>(
-      KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(arm_commands_positions_[i])));
+      KortexMathUtil::wrapDegreesFromZeroTo360(KortexMathUtil::toDeg(position_command)));
     cmd_vel_tmp_ = static_cast<float>(KortexMathUtil::toDeg(arm_commands_velocities_[i]));
 
     if (use_velocity_command_)

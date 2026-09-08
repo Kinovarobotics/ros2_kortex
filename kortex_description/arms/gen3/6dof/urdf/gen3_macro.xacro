@@ -56,6 +56,7 @@
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}"
       gripper_joint_name="${gripper_joint_name}"
+      use_external_cable="${use_external_cable}"
       gripper="${gripper}"/>
 
     <joint name="${prefix}base_joint" type="fixed">
