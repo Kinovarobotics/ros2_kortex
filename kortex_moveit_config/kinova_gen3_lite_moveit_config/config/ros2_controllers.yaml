@@ -1,6 +1,9 @@
 controller_manager:
   ros__parameters:
     update_rate: 1000  # Hz
+    cpu_affinity: 2        # pin RT update loop to isolated core (isolcpus=2,3,6,7)
+    lock_memory: true      # mlockall to avoid page-fault jitter
+    thread_priority: 80    # SCHED_FIFO priority (under ulimit -r 98 ceiling)
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
