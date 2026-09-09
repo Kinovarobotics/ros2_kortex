@@ -46,7 +46,6 @@
     <xacro:arg name="use_fake_hardware" default="false"/>
     <xacro:arg name="fake_sensor_commands" default="false"/>
     <xacro:arg name="sim_gazebo" default="false"/>
-    <xacro:arg name="sim_ignition" default="false"/>
     <xacro:arg name="sim_isaac" default="false"/>
     <xacro:arg name="use_internal_bus_gripper_comm" default="false"/>
     <xacro:arg name="use_external_cable" default="false"/>
@@ -105,7 +104,6 @@
         use_fake_hardware="$(arg use_fake_hardware)"
         fake_sensor_commands="$(arg fake_sensor_commands)"
         sim_gazebo="$(arg sim_gazebo)"
-        sim_ignition="$(arg sim_ignition)"
         sim_isaac="$(arg sim_isaac)"
         use_external_cable="$(arg use_external_cable)"
         initial_positions="${xacro.load_yaml(initial_positions_file)}">
@@ -133,7 +131,6 @@
         use_fake_hardware="$(arg use_fake_hardware)"
         fake_sensor_commands="$(arg fake_sensor_commands)"
         sim_gazebo="$(arg sim_gazebo)"
-        sim_ignition="$(arg sim_ignition)"
         sim_isaac="$(arg sim_isaac)"
         use_external_cable="$(arg use_external_cable)"
         initial_positions="${xacro.load_yaml(initial_positions_file)}">
