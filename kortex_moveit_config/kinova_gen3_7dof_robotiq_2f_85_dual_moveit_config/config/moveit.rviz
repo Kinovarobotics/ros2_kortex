@@ -19,6 +19,23 @@ Visualization Manager:
         Loop Animation: true
         State Display Time: 0.05 s
         Trajectory Topic: display_planned_path
+      Planning Request:
+        # Must name a group that HAS a kinematics solver and an end effector,
+        # otherwise MoveIt draws no interactive marker at all. "both_arms" is a
+        # composite of left_arm + right_arm and has no IK solver of its own, so
+        # selecting it leaves the scene with no ball/arrows - which is what
+        # happens if this is left unset and RViz picks its own default.
+        # Switch groups from the MotionPlanning panel to drag the other arm.
+        Planning Group: left_arm
+        Query Start State: false
+        Query Goal State: true
+        Interactive Marker Size: 0.15
+        Goal State Alpha: 1
+        Goal State Color: 250; 128; 0
+        Start State Alpha: 1
+        Start State Color: 0; 255; 0
+        Colliding Link Color: 255; 0; 0
+        Show Workspace: false
       Planning Scene Topic: monitored_planning_scene
       Robot Description: robot_description
       Scene Geometry:

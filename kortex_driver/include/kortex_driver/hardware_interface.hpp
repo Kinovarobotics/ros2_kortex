@@ -207,6 +207,14 @@ private:
 
   // gripper stuff
   std::string gripper_joint_name_;
+
+  // Prefix for the non-joint interfaces this component exports ("tcp/..." and
+  // "reset_fault/..."). Those names are otherwise identical across components,
+  // so two arms in one controller_manager collide on registration. Empty for a
+  // single-arm setup, which keeps the interface names unchanged.
+  std::string prefix_;
+  std::string tcp_name_;
+  std::string reset_fault_name_;
   bool use_internal_bus_gripper_comm_;
 
   // temp variables to use in update loop

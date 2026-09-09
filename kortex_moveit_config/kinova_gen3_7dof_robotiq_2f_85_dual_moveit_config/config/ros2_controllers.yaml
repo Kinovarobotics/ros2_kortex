@@ -1,6 +1,18 @@
 controller_manager:
   ros__parameters:
     update_rate: 1000  # Hz
+    cpu_affinity: 2        # isolated core (isolcpus=2,3,6,7); ONE loop drives both arms
+    lock_memory: true      # mlockall to avoid page-fault jitter
+    thread_priority: 80    # SCHED_FIFO priority (under ulimit -r 98 ceiling)
+
+    # Both arms are read/written by this single controller_manager, so each cycle
+    # contains TWO blocking Refresh() round trips (~1.28 ms each). Against a
+    # 1000 us period that overran every cycle and the periodic policy quantised
+    # the real period to 3000 us -> a measured 337 Hz. Letting the hardware pace
+    # the loop removes the quantisation.
+    hardware_synchronization:
+      expect_blocking_read_write: true
+      minimum_cycle_time: 0.0001
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -102,3 +114,11 @@ right_gripper_controller:
     default: true
     joint: right_robotiq_85_left_knuckle_joint
     allow_stalling: true
+
+left_fault_controller:
+  ros__parameters:
+    prefix: left_
+
+right_fault_controller:
+  ros__parameters:
+    prefix: right_

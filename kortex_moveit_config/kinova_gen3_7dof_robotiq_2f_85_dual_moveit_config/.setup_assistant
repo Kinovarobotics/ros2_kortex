@@ -10,7 +10,7 @@ moveit_setup_assistant_config:
       right_dof:=7
       right_gripper:=robotiq_2f_85
   srdf:
-    relative_path: config/dual_gen3.srdf
+    relative_path: config/dual_gen3.srdf.xacro
   package_settings:
     author_name: Abed Al Rahman Al Mrad
     author_email: aalmrad@kinova.ca
