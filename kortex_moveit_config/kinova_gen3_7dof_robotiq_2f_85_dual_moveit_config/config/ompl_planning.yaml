@@ -198,6 +198,15 @@ right_arm:
     - SPARStwokConfigDefault
     - TrajOptDefault
 both_arms:
+  # OMPL only collision-checks discrete states along each motion, spaced by
+  # longest_valid_segment_fraction x the state-space extent. Unset, the library
+  # default applies, and for a 14-joint group the extent is large -- so the gap
+  # between checked states is wide exactly where it matters least forgivingly:
+  # the gripper finger tips are the fastest-moving geometry on the robot, so they
+  # sweep furthest between two checked states. Tightening this makes the planner
+  # reject grazing paths during the search instead of at ValidateSolution.
+  # Planning currently takes ~100 ms, so there is budget for a finer check.
+  longest_valid_segment_fraction: 0.002
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault

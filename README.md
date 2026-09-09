@@ -6,7 +6,9 @@
    
 **P.S.** Please refer to the Gen3 user guide for more details if needed
 
-2. In a terminal window, run the following to command to start Moveit in RVIZ:
+2. Take each arm to 'home' position using the webapp
+
+3. In a terminal window, run the following to command to start Moveit in RVIZ:
 
 ```
   ros2 launch kinova_gen3_7dof_robotiq_2f_85_dual_moveit_config robot.launch.py \
@@ -19,7 +21,7 @@
 This will activate the controllers for both robotic arms and an rviz scene will appear where the motion of both arms can be planned simultaneously while avoiding inter-collision scenarios.
 
 
-3. Open a new terminal window then run the following python script:
+4. Open a new terminal window then run the following python script:
 ```
 cd ~/workspace/ros2_gen3_ws/src/ros2_kortex/kortex_moveit_config/kinova_gen3_7dof_robotiq_2f_85_dual_moveit_config/scripts
 

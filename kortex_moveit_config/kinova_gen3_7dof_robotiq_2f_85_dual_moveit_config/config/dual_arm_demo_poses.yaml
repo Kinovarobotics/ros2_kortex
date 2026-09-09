@@ -26,17 +26,17 @@ home:
   right_joint_6: 0.96
   right_joint_7: 1.57
 demo:
-  left_joint_1: -0.982176
-  left_joint_2: -0.759042
-  left_joint_3: -1.365891
-  left_joint_4: -1.841348
-  left_joint_5: 0.755265
-  left_joint_6: -1.176406
-  left_joint_7: 2.129297
-  right_joint_1: -0.937216
-  right_joint_2: 0.38595
-  right_joint_3: 2.350404
-  right_joint_4: -0.887176
-  right_joint_5: 0.368984
-  right_joint_6: -1.959924
-  right_joint_7: 0.023683
+  left_joint_1: -1.073451
+  left_joint_2: -0.895398
+  left_joint_3: -1.257135
+  left_joint_4: -2.032506
+  left_joint_5: 0.773067
+  left_joint_6: -1.042192
+  left_joint_7: 2.008888
+  right_joint_1: -1.003119
+  right_joint_2: 0.586069
+  right_joint_3: 2.466389
+  right_joint_4: -1.853778
+  right_joint_5: 0.423898
+  right_joint_6: -1.232167
+  right_joint_7: -0.337736

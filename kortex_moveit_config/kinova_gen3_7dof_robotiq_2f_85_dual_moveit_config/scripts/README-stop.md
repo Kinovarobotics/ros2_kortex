@@ -32,34 +32,23 @@ There is no `/emergency_stop` service, and no stop service of any kind.
 ### 1. Physical e-stop
 The only real one. Everything else is software.
 
-### 2. `scripts/dual_arm_stop.py`
-Cancels every in-flight goal, closest-to-hardware first: the two
-`follow_joint_trajectory` servers (which are what actually drive the arms), the
-grippers, then `execute_trajectory` and `move_action`. The
-`JointTrajectoryController` halts and holds position on cancel.
+### 2. RViz "Stop" button
+The MotionPlanning panel has one. It cancels via `move_group`, so it only
+reaches goals MoveIt dispatched, and it needs you to find and click it.
+
+### 3. Ctrl-C in `dual_arm_demo.py`
+Cancels the active goal before exiting. **This only works for motion that
+script started** — and only while it is still running. It is also the way to
+stop the script's default infinite home <-> demo loop.
+
+### 4. Deactivate the arm controllers
+Blunt, and there is no script for it — stops the controllers writing commands
+at all. The arms need reactivating afterwards:
 
 ```bash
-./scripts/dual_arm_stop.py                # cancel everything, arms hold
-./scripts/dual_arm_stop.py --deactivate   # also deactivate the arm controllers
+ros2 control switch_controllers --deactivate left_arm_controller right_arm_controller
+ros2 control switch_controllers --activate   left_arm_controller right_arm_controller
 ```
-
-Keep a terminal open with this command typed and ready before any run.
-
-`--deactivate` is the heavier hammer: it stops the controllers writing commands
-at all. The arms will need reactivating before they can move again:
-
-```bash
-ros2 control switch_controllers --activate left_arm_controller right_arm_controller
-```
-
-### 3. RViz "Stop" button
-The MotionPlanning panel has one. Same mechanism as option 2 (cancels via
-`move_group`), but it only reaches goals MoveIt dispatched, and it needs you to
-find and click it.
-
-### 4. Ctrl-C in `dual_arm_demo.py`
-Now cancels the active goal before exiting. **This only works for motion that
-script started** — and only while it is still running.
 
 ## What does NOT stop the arms
 
@@ -72,7 +61,13 @@ script started** — and only while it is still running.
 
 ## Untested
 
-Cancel-all has been exercised against an idle system (clean no-op on all six
-servers). Cancelling *during motion*, and `--deactivate`, have not been tested
-on moving hardware — do that deliberately, at low speed, with a hand on the
-physical e-stop, before relying on either.
+Cancelling *during motion*, and deactivating the controllers, have not been
+tested on moving hardware — do that deliberately, at low speed, with a hand on
+the physical e-stop, before relying on either.
+
+## Removed
+
+There used to be a `scripts/dual_arm_stop.py` that cancelled every in-flight
+goal closest-to-hardware first (both `follow_joint_trajectory` servers, then the
+grippers, then `execute_trajectory` and `move_action`). It was deleted on
+2026-09-09. Options 2-4 above are what is left.
