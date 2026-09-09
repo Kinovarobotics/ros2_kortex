@@ -5,3 +5,6 @@ __pycache__/
 log/
 build/
 install/
+
+# Editor / IDE
+.vscode/

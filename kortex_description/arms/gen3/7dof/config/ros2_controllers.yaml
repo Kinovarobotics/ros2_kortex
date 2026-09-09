@@ -1,9 +1,31 @@
 controller_manager:
   ros__parameters:
     update_rate: 1000  # Hz
-    cpu_affinity: 2
-    lock_memory: true
-    thread_priority: 80
+    cpu_affinity: 2        # pin RT update loop to isolated core (isolcpus=2,3,6,7)
+    lock_memory: true      # mlockall to avoid page-fault jitter
+    thread_priority: 80    # SCHED_FIFO priority (under ulimit -r 98 ceiling)
+
+    # The Gen3's blocking Refresh() round trip is ~1.28 ms (min 984, p50 1278,
+    # p90 1488, max 1928 us - measured from controller_manager's own Read/Update/
+    # Write instrumentation). It cannot fit a 1000 us period, so the default
+    # periodic policy overran every cycle and sleep_for_periodic_cycle() snapped
+    # the next deadline to a whole multiple of the period - making the actual
+    # period alternate 1000 us / 2000 us between consecutive cycles. The real
+    # measured_period is passed to the controllers, so trajectory interpolation
+    # was being stepped with a dt that doubled and halved.
+    #
+    # In this mode the loop is paced by the hardware instead: it sleeps only if a
+    # cycle came in under minimum_cycle_time, otherwise it free-runs at the arm's
+    # natural rate. That removes the quantisation and lets the loop phase-lock to
+    # the arm's own 1 kHz tick. Expect ~780 Hz (1/1.28 ms) rather than the ~550 Hz
+    # the quantised policy produced, and a smoothly varying period.
+    #
+    # update_rate above still sets the nominal period and the controllers' rate;
+    # it is no longer what paces the loop.
+    hardware_synchronization:
+      expect_blocking_read_write: true
+      minimum_cycle_time: 0.0001   # 100 us floor, guards a non-blocking component
+
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
