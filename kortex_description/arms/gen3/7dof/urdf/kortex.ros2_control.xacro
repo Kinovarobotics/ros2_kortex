@@ -24,9 +24,12 @@
     gripper_joint_name
     gripper_max_velocity:=100.0
     gripper_max_force:=100.0
-    moveit_active:=false">
+    moveit_active:=false
+    hw_is_async:=false
+    hw_async_cores:=[]
+    hw_async_priority:=80">
 
-    <ros2_control name="${name}" type="system">
+    <ros2_control name="${name}" type="system" is_async="${hw_is_async}">
       <hardware>
         <xacro:if value="${sim_gazebo}">
           <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -58,6 +61,19 @@
           <param name="gripper_max_force">${gripper_max_force}</param>
         </xacro:unless>
       </hardware>
+
+      <!-- Run this component's read()+write() on its own thread, so a blocking
+           BaseCyclic::Refresh() does not serialise against other arms in the
+           same controller_manager. See CLAUDE.md "Two arms". -->
+      <xacro:if value="${hw_is_async}">
+        <properties>
+          <async affinity="${hw_async_cores}"
+                 scheduling_policy="synchronized"
+                 thread_priority="${hw_async_priority}"
+                 print_warnings="false"/>
+        </properties>
+      </xacro:if>
+
       <joint name="${prefix}joint_1">
         <command_interface name="position">
           <param name="min">${-2*pi}</param>

@@ -26,7 +26,7 @@ Visualization Manager:
         # selecting it leaves the scene with no ball/arrows - which is what
         # happens if this is left unset and RViz picks its own default.
         # Switch groups from the MotionPlanning panel to drag the other arm.
-        Planning Group: left_arm
+        Planning Group: both_arms
         Query Start State: false
         Query Goal State: true
         Interactive Marker Size: 0.15

@@ -1,18 +1,30 @@
 controller_manager:
   ros__parameters:
-    update_rate: 1000  # Hz
+    update_rate: 2000  # Hz - trigger grid for the async hardware threads, see below
     cpu_affinity: 2        # isolated core (isolcpus=2,3,6,7); ONE loop drives both arms
     lock_memory: true      # mlockall to avoid page-fault jitter
     thread_priority: 80    # SCHED_FIFO priority (under ulimit -r 98 ceiling)
 
-    # Both arms are read/written by this single controller_manager, so each cycle
-    # contains TWO blocking Refresh() round trips (~1.28 ms each). Against a
-    # 1000 us period that overran every cycle and the periodic policy quantised
-    # the real period to 3000 us -> a measured 337 Hz. Letting the hardware pace
-    # the loop removes the quantisation.
-    hardware_synchronization:
-      expect_blocking_read_write: true
-      minimum_cycle_time: 0.0001
+    # Both arms are driven by this single controller_manager. ResourceManager::write()
+    # is a plain for-loop over components, so with synchronous hardware each cycle
+    # contained TWO blocking Refresh() round trips back to back: measured write p50
+    # 1969 us -> ~520 Hz, against 1278 us / 857 Hz for a single arm. The two round
+    # trips are independent (different arms, different subnets) and were serialising
+    # for no reason.
+    #
+    # Fix: both hardware components are declared is_async="true" in the URDF
+    # (kortex_dual_robots.xacro -> kortex.ros2_control.xacro), each with its own
+    # thread pinned to an isolated core (left=6, right=7, SCHED_FIFO 80). The two
+    # Refresh() calls now overlap, so a cycle costs max(left, right) instead of
+    # left + right.
+    #
+    # Because nothing in the loop blocks any more, expect_blocking_read_write MUST
+    # be off here - it would spin the loop at the 100 us minimum_cycle_time floor.
+    # The periodic policy is back, and update_rate is now the *trigger grid* for the
+    # async threads: an async cycle taking t us starts again after ceil(t/period)*period.
+    # At 2000 Hz (500 us grid) a ~1.3 ms round trip quantises to 1.5 ms -> ~667 Hz per
+    # arm; raise to 3000-4000 for ~700-770 Hz at a few % more cpu2. Update costs ~25 us,
+    # so 2000 Hz is ~5% of the isolated core.
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster

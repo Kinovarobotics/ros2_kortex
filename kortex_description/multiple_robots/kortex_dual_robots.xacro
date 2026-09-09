@@ -11,15 +11,16 @@
     <xacro:arg name="left_dof" default="7"/>
     <xacro:arg name="left_vision" default="false"/>
     <xacro:arg name="left_prefix" default="left_"/>
-    <xacro:arg name="left_robot_ip" default="192.168.1.10"/>
+    <xacro:arg name="left_robot_ip" default="192.168.2.10"/>
     <xacro:arg name="left_username" default="admin"/>
     <xacro:arg name="left_password" default="admin"/>
     <xacro:arg name="left_port" default="10000"/>
     <xacro:arg name="left_port_realtime" default="10001"/>
     <xacro:arg name="left_session_inactivity_timeout_ms" default="60000"/>
     <xacro:arg name="left_connection_inactivity_timeout_ms" default="2000"/>
-    <xacro:arg name="left_xyz" default="0.0565 0 0.1395"/>
-    <xacro:arg name="left_rpy" default="1.5708 0  1.5708"/>
+    <!-- Base pose is derived from base_separation below; rpy stays overridable
+         so the arms can be yawed inward later without editing the plate maths. -->
+    <xacro:arg name="left_rpy" default="0 0 0"/>
 
     <!-- ============================================================== -->
     <!-- RIGHT ARM arguments                                             -->
@@ -30,15 +31,14 @@
     <xacro:arg name="right_dof" default="7"/>
     <xacro:arg name="right_vision" default="false"/>
     <xacro:arg name="right_prefix" default="right_"/>
-    <xacro:arg name="right_robot_ip" default="192.168.1.11"/>
+    <xacro:arg name="right_robot_ip" default="192.168.1.10"/>
     <xacro:arg name="right_username" default="admin"/>
     <xacro:arg name="right_password" default="admin"/>
     <xacro:arg name="right_port" default="10000"/>
     <xacro:arg name="right_port_realtime" default="10001"/>
     <xacro:arg name="right_session_inactivity_timeout_ms" default="60000"/>
     <xacro:arg name="right_connection_inactivity_timeout_ms" default="2000"/>
-    <xacro:arg name="right_xyz" default="-0.0565 0 0.1395"/>
-    <xacro:arg name="right_rpy" default="-1.5708 0 1.5708"/>
+    <xacro:arg name="right_rpy" default="0 0 0"/>
 
     <!-- ============================================================== -->
     <!-- Shared arguments                                                -->
@@ -53,14 +53,60 @@
     <xacro:arg name="gripper_max_force" default="100.0"/>
 
     <!-- ============================================================== -->
-    <!-- Structure arguments                                            -->
+    <!-- Mounting geometry                                              -->
+    <!-- Both arms stand vertically (base +Z = world +Z) on a horizontal -->
+    <!-- plate, spaced base_separation apart along Y: left at +Y, right  -->
+    <!-- at -Y. The plate rests on the world plane (bottom face z = 0)   -->
+    <!-- and the arms bolt to its top face.                              -->
     <!-- ============================================================== -->
-    <xacro:arg name="struct_name"   default="dual_arm_structure"/>
-    <xacro:arg name="struct_length" default="0.113"/>
-    <xacro:arg name="struct_width"  default="0.225"/>
-    <xacro:arg name="struct_height" default="0.585"/>
-    <xacro:arg name="struct_xyz"    default="0 0 0.2925"/>
-    <xacro:arg name="struct_rpy"    default="0 0 0"/>
+    <!-- Async hardware: each arm's read()+write() runs on its own thread, so the
+         two blocking BaseCyclic::Refresh() round trips overlap instead of adding
+         up. Cores 6 and 7 are isolated (isolcpus=2,3,6,7). -->
+    <xacro:arg name="hw_is_async"       default="true"/>
+    <xacro:arg name="left_async_cores"  default="[6]"/>
+    <xacro:arg name="right_async_cores" default="[7]"/>
+    <xacro:arg name="hw_async_priority" default="80"/>
+
+    <!-- Workspace walls: a fixed enclosure MoveIt collision-checks against, so
+         planned paths cannot leave the cell. Faces sit wall_offset from each
+         arm's BASE CENTRE: +/-wall_offset in X (both arms are at x=0) and
+         +/-(base_separation/2 + wall_offset) in Y.
+         Reference numbers for this arm (gen3 7dof + 2f-85, measured from the
+         URDF): max horizontal reach 1.007 m, max vertical reach 1.291 m above
+         the base. wall_height therefore defaults to 1.35 m so the arm cannot
+         arc over the top; drop it if you only want a lateral fence.
+         All three SRDF named poses fit inside the default 0.7 m offset:
+         "Home" reaches 0.559 m horizontally (+X, 141 mm margin), "Retract"
+         0.150 m, "Vertical" 0.072 m. Below ~0.62 m Home starts inside the +X
+         wall and MoveIt refuses to plan from it.
+         NOTE robot.launch.py always forwards wall_offset into the xacro
+         mappings, so the launch argument's default WINS over the one below.
+         Keep the two in sync. -->
+    <xacro:arg name="enable_walls"   default="true"/>
+    <xacro:arg name="wall_offset"    default="0.7"/>   <!-- m from each arm base centre -->
+    <xacro:arg name="wall_height"    default="1.35"/>  <!-- m above the plate top face -->
+    <xacro:arg name="wall_thickness" default="0.02"/>  <!-- m -->
+
+    <xacro:arg name="struct_name"     default="dual_arm_structure"/>
+    <xacro:arg name="base_separation" default="0.585"/>   <!-- centre-to-centre, m -->
+    <xacro:arg name="plate_length"    default="2.0"/>  <!-- X extent, m -->
+    <xacro:arg name="plate_thickness" default="0.05"/>  <!-- Z extent, m -->
+    <xacro:arg name="plate_margin"    default="1.0"/>  <!-- Y overhang past each base, m -->
+
+    <xacro:property name="base_sep"   value="$(arg base_separation)"/>
+    <xacro:property name="plate_len"  value="$(arg plate_length)"/>
+    <xacro:property name="plate_th"   value="$(arg plate_thickness)"/>
+    <xacro:property name="plate_marg" value="$(arg plate_margin)"/>
+    <xacro:property name="plate_wid"  value="${base_sep + 2 * plate_marg}"/>
+
+    <xacro:property name="wall_off"   value="$(arg wall_offset)"/>
+    <xacro:property name="wall_h"     value="$(arg wall_height)"/>
+    <xacro:property name="wall_t"     value="$(arg wall_thickness)"/>
+    <!-- inner faces of the enclosure, in the plate link frame -->
+    <xacro:property name="wall_hx"    value="${wall_off}"/>
+    <xacro:property name="wall_hy"    value="${base_sep / 2 + wall_off}"/>
+    <!-- plate link frame sits at the plate mid-height, so its top face is +plate_th/2 -->
+    <xacro:property name="wall_cz"    value="${plate_th / 2 + wall_h / 2}"/>
 
     <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro"/>
     <xacro:include filename="$(find kortex_description)/multiple_robots/dual_arm_structure.xacro"/>
@@ -77,11 +123,53 @@
     <xacro:load_dual_arm_structure
         parent="world"
         name="$(arg struct_name)"
-        length="$(arg struct_length)"
-        width="$(arg struct_width)"
-        height="$(arg struct_height)">
-        <origin xyz="$(arg struct_xyz)" rpy="$(arg struct_rpy)"/>
+        length="${plate_len}"
+        width="${plate_wid}"
+        height="${plate_th}">
+        <origin xyz="0 0 ${plate_th / 2}" rpy="0 0 0"/>
     </xacro:load_dual_arm_structure>
+
+    <!-- ============================================================== -->
+    <!-- Workspace walls                                                -->
+    <!-- All four walls are collision/visual geometry on ONE link. That -->
+    <!-- is deliberate: MoveIt never self-collision-checks within a     -->
+    <!-- single link, so the corners can overlap without producing a    -->
+    <!-- permanent wall-vs-wall collision, and the only ACM entry that  -->
+    <!-- matters (wall vs plate) is auto-disabled because the two are   -->
+    <!-- adjacent across a fixed joint.                                 -->
+    <!-- ============================================================== -->
+    <xacro:if value="$(arg enable_walls)">
+      <link name="workspace_walls_link">
+        <xacro:macro name="wall_box" params="sx sy sz x y z">
+          <visual>
+            <geometry><box size="${sx} ${sy} ${sz}"/></geometry>
+            <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+            <material name="workspace_wall"><color rgba="0.8 0.2 0.2 0.25"/></material>
+          </visual>
+          <collision>
+            <geometry><box size="${sx} ${sy} ${sz}"/></geometry>
+            <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+          </collision>
+        </xacro:macro>
+
+        <!-- +/-X walls: span the full inner Y extent -->
+        <xacro:wall_box sx="${wall_t}" sy="${2 * wall_hy}" sz="${wall_h}"
+                        x="${ wall_hx + wall_t / 2}" y="0" z="${wall_cz}"/>
+        <xacro:wall_box sx="${wall_t}" sy="${2 * wall_hy}" sz="${wall_h}"
+                        x="${-wall_hx - wall_t / 2}" y="0" z="${wall_cz}"/>
+        <!-- +/-Y walls: overrun in X by one thickness each side to close the corners -->
+        <xacro:wall_box sx="${2 * (wall_hx + wall_t)}" sy="${wall_t}" sz="${wall_h}"
+                        x="0" y="${ wall_hy + wall_t / 2}" z="${wall_cz}"/>
+        <xacro:wall_box sx="${2 * (wall_hx + wall_t)}" sy="${wall_t}" sz="${wall_h}"
+                        x="0" y="${-wall_hy - wall_t / 2}" z="${wall_cz}"/>
+      </link>
+
+      <joint name="workspace_walls_joint" type="fixed">
+        <parent link="${struct_name_prop}_link"/>
+        <child link="workspace_walls_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </joint>
+    </xacro:if>
 
     <xacro:load_robot
         parent="${struct_name_prop}_link"
@@ -106,8 +194,11 @@
         sim_gazebo="$(arg sim_gazebo)"
         sim_isaac="$(arg sim_isaac)"
         use_external_cable="$(arg use_external_cable)"
-        initial_positions="${xacro.load_yaml(initial_positions_file)}">
-        <origin xyz="$(arg left_xyz)" rpy="$(arg left_rpy)"/>
+        initial_positions="${xacro.load_yaml(initial_positions_file)}"
+        hw_is_async="$(arg hw_is_async)"
+        hw_async_cores="$(arg left_async_cores)"
+        hw_async_priority="$(arg hw_async_priority)">
+        <origin xyz="0 ${ base_sep / 2} ${plate_th / 2}" rpy="$(arg left_rpy)"/>
     </xacro:load_robot>
 
     <xacro:load_robot
@@ -133,8 +224,11 @@
         sim_gazebo="$(arg sim_gazebo)"
         sim_isaac="$(arg sim_isaac)"
         use_external_cable="$(arg use_external_cable)"
-        initial_positions="${xacro.load_yaml(initial_positions_file)}">
-        <origin xyz="$(arg right_xyz)" rpy="$(arg right_rpy)"/>
+        initial_positions="${xacro.load_yaml(initial_positions_file)}"
+        hw_is_async="$(arg hw_is_async)"
+        hw_async_cores="$(arg right_async_cores)"
+        hw_async_priority="$(arg hw_async_priority)">
+        <origin xyz="0 ${-base_sep / 2} ${plate_th / 2}" rpy="$(arg right_rpy)"/>
     </xacro:load_robot>
 
 </robot>

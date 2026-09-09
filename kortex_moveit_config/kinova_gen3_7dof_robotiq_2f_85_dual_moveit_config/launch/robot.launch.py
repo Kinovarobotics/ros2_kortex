@@ -38,6 +38,10 @@ def launch_setup(context, *args, **kwargs):
     gripper_max_force = LaunchConfiguration("gripper_max_force")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
+    enable_walls = LaunchConfiguration("enable_walls")
+    wall_offset = LaunchConfiguration("wall_offset")
+    wall_height = LaunchConfiguration("wall_height")
+    wall_thickness = LaunchConfiguration("wall_thickness")
 
     # URDF xacro mappings: forwarded to multiple_robots/kortex_dual_robots.xacro.
     urdf_mappings = {
@@ -57,12 +61,20 @@ def launch_setup(context, *args, **kwargs):
         "use_internal_bus_gripper_comm": use_internal_bus_gripper_comm.perform(context),
         "gripper_max_velocity": gripper_max_velocity.perform(context),
         "gripper_max_force": gripper_max_force.perform(context),
+        # Workspace walls. enable_walls MUST be forwarded to the SRDF too, or the
+        # walls-vs-plate disable_collisions entry would reference a link that the
+        # URDF did not create.
+        "enable_walls": enable_walls.perform(context),
+        "wall_offset": wall_offset.perform(context),
+        "wall_height": wall_height.perform(context),
+        "wall_thickness": wall_thickness.perform(context),
     }
 
     srdf_mappings = {
         "left_prefix": left_prefix.perform(context),
         "right_prefix": right_prefix.perform(context),
         "struct_name": "dual_arm_structure",
+        "enable_walls": enable_walls.perform(context),
     }
 
     moveit_config = (
@@ -225,6 +237,32 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             "use_sim_time", default_value="false", description="Use simulated clock."
+        ),
+        DeclareLaunchArgument(
+            "enable_walls",
+            default_value="true",
+            description="Add the workspace walls to the robot model so MoveIt plans around them.",
+        ),
+        DeclareLaunchArgument(
+            "wall_offset",
+            default_value="0.7",
+            description=(
+                "Distance in metres from each arm's base centre to the inner wall face. "
+                "The arm's full horizontal reach is 1.007 m. Do not go below ~0.62: the "
+                "SRDF 'Home' pose reaches 0.559 m horizontally, and inside that the start "
+                "state is in collision and MoveIt refuses to plan from it."
+            ),
+        ),
+        DeclareLaunchArgument(
+            "wall_height",
+            default_value="1.35",
+            description=(
+                "Wall height in metres above the plate top face. The arm reaches 1.291 m "
+                "above its base, so anything below ~1.30 lets it arc over the top."
+            ),
+        ),
+        DeclareLaunchArgument(
+            "wall_thickness", default_value="0.02", description="Wall thickness in metres."
         ),
     ]
     return LaunchDescription(declared + [OpaqueFunction(function=launch_setup)])

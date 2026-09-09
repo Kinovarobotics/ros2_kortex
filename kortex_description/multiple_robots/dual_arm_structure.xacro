@@ -3,16 +3,23 @@
 
   <!-- Macro: load_dual_arm_structure
        Creates a parametric box body (visual + collision) fixed to 'parent'.
-       Arm bases attach to ${name}_link at +/-(length/2) on the X axis.
+
+       NOTE: kortex_dual_robots.xacro always passes length/width/height
+       explicitly, so the defaults below are NEVER used. To resize the plate,
+       edit the plate_length / plate_width / plate_thickness args in
+       kortex_dual_robots.xacro — changing the defaults here does nothing.
+
+       Arm bases attach to ${name}_link at +/-(base_separation/2) on the Y
+       axis, on the top face (z = +height/2).
        Params: parent, *origin, name (default: dual_arm_structure),
-               length/width/height in metres (defaults: 0.30 / 0.20 / 0.40). -->
+               length (X) / width (Y) / height (Z) in metres. -->
   <xacro:macro name="load_dual_arm_structure" params="
       parent
       *origin
       name:=dual_arm_structure
       length:=0.30
       width:=0.20
-      height:=0.40">
+      height:=0.05">
 
     <link name="${name}_link">
       <visual>

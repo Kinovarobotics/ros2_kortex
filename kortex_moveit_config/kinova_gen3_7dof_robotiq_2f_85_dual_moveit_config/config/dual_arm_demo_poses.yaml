@@ -1,0 +1,42 @@
+# Named joint configurations for scripts/dual_arm_demo.py
+#
+# Both entries cover the 14 joints of the `both_arms` planning group
+# (left_arm + right_arm). Grippers are separate groups and are not touched.
+#
+# `home` mirrors the BothHome group_state in config/dual_gen3.srdf.xacro --
+# the SRDF remains the source of truth; if you change it there, update it here.
+#
+# `demo` was captured from /joint_states on 2026-09-09 with the arms at rest,
+# posed via MoveIt to demonstrate inter-arm collision avoidance.
+# Re-record it at any time with:  scripts/dual_arm_demo.py --capture demo
+
+home:
+  left_joint_1: 0.0
+  left_joint_2: 0.26
+  left_joint_3: 3.14
+  left_joint_4: -2.27
+  left_joint_5: 0.0
+  left_joint_6: 0.96
+  left_joint_7: 1.57
+  right_joint_1: 0.0
+  right_joint_2: 0.26
+  right_joint_3: 3.14
+  right_joint_4: -2.27
+  right_joint_5: 0.0
+  right_joint_6: 0.96
+  right_joint_7: 1.57
+demo:
+  left_joint_1: -0.982176
+  left_joint_2: -0.759042
+  left_joint_3: -1.365891
+  left_joint_4: -1.841348
+  left_joint_5: 0.755265
+  left_joint_6: -1.176406
+  left_joint_7: 2.129297
+  right_joint_1: -0.937216
+  right_joint_2: 0.38595
+  right_joint_3: 2.350404
+  right_joint_4: -0.887176
+  right_joint_5: 0.368984
+  right_joint_6: -1.959924
+  right_joint_7: 0.023683

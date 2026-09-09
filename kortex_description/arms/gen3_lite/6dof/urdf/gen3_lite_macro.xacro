@@ -31,7 +31,10 @@
     isaac_joint_states:=/isaac_joint_states
     use_external_cable:=false
     initial_positions:=${dict(joint_1=0.0,joint_2=0.0,joint_3=0.0,joint_4=0.0,joint_5=0.0,joint_6=0.0)}
-    moveit_active:=false" >
+    moveit_active:=false
+    hw_is_async:=false
+    hw_async_cores:=[]
+    hw_async_priority:=80" >
 
     <!-- ros2 control include -->
     <xacro:include filename="$(find kortex_description)/arms/gen3_lite/${dof}dof/urdf/kortex.ros2_control.xacro" />
@@ -74,7 +77,10 @@
       gripper_max_velocity="${gripper_max_velocity}"
       gripper_max_force="${gripper_max_force}"
       gripper_joint_name="${gripper_joint_name}"
-      moveit_active="${moveit_active}"/>
+      moveit_active="${moveit_active}"
+      hw_is_async="${hw_is_async}"
+      hw_async_cores="${hw_async_cores}"
+      hw_async_priority="${hw_async_priority}"/>
 
     <joint name="${prefix}base_joint" type="fixed">
       <xacro:insert_block name="origin" />
