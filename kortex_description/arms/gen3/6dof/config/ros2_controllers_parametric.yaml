@@ -1,0 +1,72 @@
+${prefix}/controller_manager:
+  ros__parameters:
+    update_rate: 1000
+    lock_memory: true      # mlockall to avoid page-fault jitter
+    thread_priority: 80    # SCHED_FIFO priority (under ulimit -r 98 ceiling)
+    # NOTE: cpu_affinity is deliberately NOT set here. This file is shared by
+    # both arms (gen3_dual.launch.py passes it as controllers_file_1 AND
+    # controllers_file_2), so any value here would pin BOTH controller_manager
+    # nodes to the same core. To pin them, copy this file per arm and pass
+    # controllers_file_1 / controllers_file_2 separately - e.g. cpu 2 and cpu 6,
+    # which the rt-tune core split reserves (see rt-tune/README.md).
+
+    # The Gen3's blocking Refresh() round trip is ~1.28 ms and cannot fit a
+    # 1000 us period, so the default periodic policy overruns every cycle and
+    # quantises the real period to 1000/2000 us. Letting the hardware pace the
+    # loop removes that; measured 550 Hz -> 857 Hz on a single arm.
+    hardware_synchronization:
+      expect_blocking_read_write: true
+      minimum_cycle_time: 0.0001
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    twist_controller:
+      type: picknik_twist_controller/PicknikTwistController
+
+    robotiq_gripper_controller:
+      type: position_controllers/GripperActionController
+
+    fault_controller:
+      type: picknik_reset_fault_controller/PicknikResetFaultController
+
+${prefix}/joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - ${prefix}joint_1
+      - ${prefix}joint_2
+      - ${prefix}joint_3
+      - ${prefix}joint_4
+      - ${prefix}joint_5
+      - ${prefix}joint_6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.0
+      goal_time: 0.0
+
+${prefix}/twist_controller:
+  ros__parameters:
+    joint: ${prefix}tcp
+    interface_names:
+      - twist.linear.x
+      - twist.linear.y
+      - twist.linear.z
+      - twist.angular.x
+      - twist.angular.y
+      - twist.angular.z
+
+${prefix}/robotiq_gripper_controller:
+  ros__parameters:
+    default: true
+    joint: ${prefix}robotiq_85_left_knuckle_joint
+    allow_stalling: true
