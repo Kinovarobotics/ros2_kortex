@@ -36,7 +36,22 @@ Visualization Manager:
         Start State Color: 0; 255; 0
         Colliding Link Color: 255; 0; 0
         Show Workspace: false
-      Planning Scene Topic: monitored_planning_scene
+      # Filtered relay, not move_group's own monitored_planning_scene. The
+      # scene_display_filter node (started by robot.launch.py, controlled by its
+      # hide_padding_in_rviz argument) republishes the scene here with
+      # arm_padding.py's inter-arm margin geometry stripped out, because RViz
+      # has no per-attached-object visibility switch and the padding would
+      # otherwise be drawn opaque on the goal-state ghost.
+      #
+      # DISPLAY ONLY -- move_group plans against its own internal scene, so the
+      # margin is enforced regardless of what is shown here.
+      #
+      # The relay runs even with hide_padding_in_rviz:=false (it just relays
+      # unfiltered), so this topic is always live from robot.launch.py. If you
+      # start RViz some other way -- moveit_rviz.launch.py on its own, say --
+      # nothing publishes it and the scene will be EMPTY; switch back to
+      # monitored_planning_scene or run scene_display_filter.py yourself.
+      Planning Scene Topic: /display_planning_scene
       Robot Description: robot_description
       Scene Geometry:
         Scene Alpha: 1

@@ -11,4 +11,5 @@ install(FILES .setup_assistant DESTINATION share/${PROJECT_NAME})
 install(PROGRAMS
   scripts/dual_arm_demo.py
   scripts/arm_padding.py
+  scripts/scene_display_filter.py
   DESTINATION lib/${PROJECT_NAME})

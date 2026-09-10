@@ -38,6 +38,7 @@ def launch_setup(context, *args, **kwargs):
     gripper_max_velocity = LaunchConfiguration("gripper_max_velocity")
     gripper_max_force = LaunchConfiguration("gripper_max_force")
     launch_rviz = LaunchConfiguration("launch_rviz")
+    hide_padding_in_rviz = LaunchConfiguration("hide_padding_in_rviz")
     use_sim_time = LaunchConfiguration("use_sim_time")
     enable_walls = LaunchConfiguration("enable_walls")
     wall_offset = LaunchConfiguration("wall_offset")
@@ -201,6 +202,33 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(launch_rviz),
     )
 
+    # Display-only relay of the planning scene, with scripts/arm_padding.py's
+    # attached bodies stripped out so RViz stops drawing them. It publishes on
+    # /display_planning_scene; point MotionPlanning's "Planning Scene Topic"
+    # there (config/moveit.rviz still names monitored_planning_scene, so this is
+    # a one-time change in the RViz GUI unless that file is updated too).
+    #
+    # This changes NOTHING about planning: move_group plans against its own
+    # internal scene, not against what it publishes, so the margin stays fully
+    # enforced whether or not the padding is drawn. arm_padding.py status reads
+    # the real scene and remains the source of truth.
+    #
+    # The node runs either way; the argument only decides which prefix it hides.
+    # Always relaying means /display_planning_scene is a valid scene topic in
+    # both states, so turning the filtering off cannot leave RViz staring at a
+    # dead topic.
+    scene_display_filter = Node(
+        package=PACKAGE_NAME,
+        executable="scene_display_filter.py",
+        name="scene_display_filter",
+        output="log",
+        arguments=[
+            "--prefix",
+            "pad__" if hide_padding_in_rviz.perform(context).lower() in ("true", "1")
+            else "",
+        ],
+    )
+
     nodes_to_start = [
         ros2_control_node,
         robot_state_publisher,
@@ -215,6 +243,7 @@ def launch_setup(context, *args, **kwargs):
         #left_fault_spawner,
         #right_fault_spawner,
         move_group_node,
+        scene_display_filter,
     ]
     return nodes_to_start
 
@@ -259,6 +288,22 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             "launch_rviz", default_value="true", description="Launch RViz with MoveIt config."
+        ),
+        DeclareLaunchArgument(
+            "hide_padding_in_rviz",
+            default_value="true",
+            description=(
+                "Hide scripts/arm_padding.py's inter-arm margin geometry from RViz. The "
+                "padding is attached to the robot, and RViz has no per-attached-object "
+                "visibility switch: Robot Alpha hides the whole scene robot with it, and a "
+                "PlanningScene object_colors alpha of 0 hides it on the scene robot but NOT "
+                "on the orange goal ghost, which renders attached bodies with the default "
+                "colour and ignores that map. So instead a relay node republishes the scene "
+                "on /display_planning_scene with those objects removed -- set MotionPlanning's "
+                "Planning Scene Topic to that. DISPLAY ONLY: the margin is still enforced "
+                "either way, because move_group plans against its own internal scene. Set "
+                "false to relay the scene unfiltered (the topic stays valid, padding visible)."
+            ),
         ),
         DeclareLaunchArgument(
             "use_sim_time", default_value="false", description="Use simulated clock."
