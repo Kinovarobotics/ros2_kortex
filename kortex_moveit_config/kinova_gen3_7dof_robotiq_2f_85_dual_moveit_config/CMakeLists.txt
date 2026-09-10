@@ -10,4 +10,5 @@ install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 install(FILES .setup_assistant DESTINATION share/${PROJECT_NAME})
 install(PROGRAMS
   scripts/dual_arm_demo.py
+  scripts/arm_padding.py
   DESTINATION lib/${PROJECT_NAME})
