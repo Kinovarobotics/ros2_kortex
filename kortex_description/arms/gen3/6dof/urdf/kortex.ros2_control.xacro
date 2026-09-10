@@ -56,7 +56,7 @@
           <param name="prefix">${prefix}</param>
           <param name="tf_prefix">"${tf_prefix}"</param>
           <param name="use_internal_bus_gripper_comm">${use_internal_bus_gripper_comm}</param>
-          <param name="gripper_joint_name">${gripper_joint_name}</param>
+          <param name="gripper_joint_name">${prefix}${gripper_joint_name}</param>
           <param name="gripper_max_velocity">${gripper_max_velocity}</param>
           <param name="gripper_max_force">${gripper_max_force}</param>
         </xacro:unless>

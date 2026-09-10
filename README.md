@@ -91,3 +91,7 @@ The demo has its own conservatism controls -- `--sequential` moves one arm at a
 time, `--velocity` slows everything down, and `--plan-only` previews in RViz
 without touching the hardware. Run `./dual_arm_demo.py --help` for the rest.
 
+7. The user can interrupt the script using Ctrl+C then command the arm from the RVIZ graphical interface.
+
+8. To resume the script again, simply run it another time as previously specified in step 6.
+
