@@ -75,22 +75,36 @@ left_arm_controller:
     # physical collision that nothing notices until the next planning request.
     #   trajectory: max deviation from the commanded path DURING motion -> abort
     #   goal:       max deviation from the final point -> goal rejected
-    # Sized from MEASURED following error, sampled live over 25 s of motion at
-    # velocity scaling 0.5: max |error| was 11.4 mrad on any joint (p95 ~10 mrad),
-    # consistent across both arms. 0.05 rad is ~4.4x that, so it will not trip on
-    # normal lag, but it aborts long before a deviation matters.
+    # Sized from MEASURED following error at the speed actually used. Re-measured
+    # 2026-09-10 at velocity scaling 0.8, ~200k samples per arm over 105 s, with
+    # rt-fix-userspace.sh applied: worst joint error 17.6 mrad, p99 15.5, and the
+    # two arms agree to within 0.2 mrad. The worst joints are the wrist (5/6/7);
+    # the shoulder pair stay under 7.
+    #   trajectory 0.08 rad = ~4.5x the worst observed, the same headroom ratio
+    #   the earlier 0.05 had against its own 11.4 mrad at velocity 0.5.
+    # goal stays at 0.05: it governs final settling, not speed-dependent lag, so
+    # raising it would only let a move finish short of the commanded pose.
+    #
+    # NOTE this tolerance is not what causes PATH_TOLERANCE_VIOLATED aborts on
+    # this cell. Normal tracking uses about a third of the budget, so a violation
+    # means something exceeded ~3x normal -- an EVENT, not lag. The two known
+    # candidates are physical contact (the demo pose has only 10-15 mm of true
+    # inter-arm clearance; see scripts/arm_padding.py) and a latency spike from
+    # the Kortex transport threads sitting on E-cores when
+    # rt-tune/rt-fix-userspace.sh has not been re-run since the last launch.
+    # Loosening this further hides those rather than fixing them.
     # The previous 0.20 rad was useless for this: on joint_4 it permits 95 mm of
     # gripper-tip displacement, ten times the collision margin padding provides.
     constraints:
       stopped_velocity_tolerance: 0.05
       goal_time: 2.0
-      left_joint_1: {trajectory: 0.05, goal: 0.05}
-      left_joint_2: {trajectory: 0.05, goal: 0.05}
-      left_joint_3: {trajectory: 0.05, goal: 0.05}
-      left_joint_4: {trajectory: 0.05, goal: 0.05}
-      left_joint_5: {trajectory: 0.05, goal: 0.05}
-      left_joint_6: {trajectory: 0.05, goal: 0.05}
-      left_joint_7: {trajectory: 0.05, goal: 0.05}
+      left_joint_1: {trajectory: 0.08, goal: 0.05}
+      left_joint_2: {trajectory: 0.08, goal: 0.05}
+      left_joint_3: {trajectory: 0.08, goal: 0.05}
+      left_joint_4: {trajectory: 0.08, goal: 0.05}
+      left_joint_5: {trajectory: 0.08, goal: 0.05}
+      left_joint_6: {trajectory: 0.08, goal: 0.05}
+      left_joint_7: {trajectory: 0.08, goal: 0.05}
 
 right_arm_controller:
   ros__parameters:
@@ -118,22 +132,36 @@ right_arm_controller:
     # physical collision that nothing notices until the next planning request.
     #   trajectory: max deviation from the commanded path DURING motion -> abort
     #   goal:       max deviation from the final point -> goal rejected
-    # Sized from MEASURED following error, sampled live over 25 s of motion at
-    # velocity scaling 0.5: max |error| was 11.4 mrad on any joint (p95 ~10 mrad),
-    # consistent across both arms. 0.05 rad is ~4.4x that, so it will not trip on
-    # normal lag, but it aborts long before a deviation matters.
+    # Sized from MEASURED following error at the speed actually used. Re-measured
+    # 2026-09-10 at velocity scaling 0.8, ~200k samples per arm over 105 s, with
+    # rt-fix-userspace.sh applied: worst joint error 17.6 mrad, p99 15.5, and the
+    # two arms agree to within 0.2 mrad. The worst joints are the wrist (5/6/7);
+    # the shoulder pair stay under 7.
+    #   trajectory 0.08 rad = ~4.5x the worst observed, the same headroom ratio
+    #   the earlier 0.05 had against its own 11.4 mrad at velocity 0.5.
+    # goal stays at 0.05: it governs final settling, not speed-dependent lag, so
+    # raising it would only let a move finish short of the commanded pose.
+    #
+    # NOTE this tolerance is not what causes PATH_TOLERANCE_VIOLATED aborts on
+    # this cell. Normal tracking uses about a third of the budget, so a violation
+    # means something exceeded ~3x normal -- an EVENT, not lag. The two known
+    # candidates are physical contact (the demo pose has only 10-15 mm of true
+    # inter-arm clearance; see scripts/arm_padding.py) and a latency spike from
+    # the Kortex transport threads sitting on E-cores when
+    # rt-tune/rt-fix-userspace.sh has not been re-run since the last launch.
+    # Loosening this further hides those rather than fixing them.
     # The previous 0.20 rad was useless for this: on joint_4 it permits 95 mm of
     # gripper-tip displacement, ten times the collision margin padding provides.
     constraints:
       stopped_velocity_tolerance: 0.05
       goal_time: 2.0
-      right_joint_1: {trajectory: 0.05, goal: 0.05}
-      right_joint_2: {trajectory: 0.05, goal: 0.05}
-      right_joint_3: {trajectory: 0.05, goal: 0.05}
-      right_joint_4: {trajectory: 0.05, goal: 0.05}
-      right_joint_5: {trajectory: 0.05, goal: 0.05}
-      right_joint_6: {trajectory: 0.05, goal: 0.05}
-      right_joint_7: {trajectory: 0.05, goal: 0.05}
+      right_joint_1: {trajectory: 0.08, goal: 0.05}
+      right_joint_2: {trajectory: 0.08, goal: 0.05}
+      right_joint_3: {trajectory: 0.08, goal: 0.05}
+      right_joint_4: {trajectory: 0.08, goal: 0.05}
+      right_joint_5: {trajectory: 0.08, goal: 0.05}
+      right_joint_6: {trajectory: 0.08, goal: 0.05}
+      right_joint_7: {trajectory: 0.08, goal: 0.05}
 
 left_twist_controller:
   ros__parameters:

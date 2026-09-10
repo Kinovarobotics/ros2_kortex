@@ -44,6 +44,9 @@ def launch_setup(context, *args, **kwargs):
     wall_height = LaunchConfiguration("wall_height")
     wall_thickness = LaunchConfiguration("wall_thickness")
     robot_padding = LaunchConfiguration("robot_padding")
+    base_separation = LaunchConfiguration("base_separation")
+    left_rpy = LaunchConfiguration("left_rpy")
+    right_rpy = LaunchConfiguration("right_rpy")
 
     # URDF xacro mappings: forwarded to multiple_robots/kortex_dual_robots.xacro.
     urdf_mappings = {
@@ -70,6 +73,12 @@ def launch_setup(context, *args, **kwargs):
         "wall_offset": wall_offset.perform(context),
         "wall_height": wall_height.perform(context),
         "wall_thickness": wall_thickness.perform(context),
+        # Mounting geometry. Correct these from measurement rather than padding
+        # over the error: inter-arm clearance tracks base_separation error ~1:1,
+        # and loses ~4.3 mm per degree of relative yaw at the demo pose.
+        "base_separation": base_separation.perform(context),
+        "left_rpy": left_rpy.perform(context),
+        "right_rpy": right_rpy.perform(context),
     }
 
     srdf_mappings = {
@@ -281,19 +290,35 @@ def generate_launch_description():
             "wall_thickness", default_value="0.02", description="Wall thickness in metres."
         ),
         DeclareLaunchArgument(
+            "base_separation",
+            default_value="0.585",
+            description="Centre-to-centre distance between the two arm bases, metres. MEASURE THIS.",
+        ),
+        DeclareLaunchArgument(
+            "left_rpy", default_value="0 0 0",
+            description="Left arm mounting orientation correction (roll pitch yaw, radians).",
+        ),
+        DeclareLaunchArgument(
+            "right_rpy", default_value="0 0 0",
+            description="Right arm mounting orientation correction (roll pitch yaw, radians).",
+        ),
+        DeclareLaunchArgument(
             "robot_padding",
-            default_value="0.015",
+            default_value="0.10",
             description=(
-                "Collision padding in metres applied to every robot link (was 0.0, i.e. no "
-                "margin at all -- planned paths could pass the other arm by fractions of a "
-                "millimetre). Inflates links against each other AND against the workspace "
-                "walls, so a pose with little real clearance may become unplannable; that is "
-                "the padding correctly reporting there is no margin, not a fault. "
-                "0.015 gives 30 mm of required separation between the two arms, against a "
-                "MEASURED worst-case gripper-tip displacement of 18.2 mm from trajectory "
-                "following error (max joint error 11.4 mrad, sampled live at velocity 0.5). "
-                "5 mm was NOT enough -- it left only 10 mm, less than the tracking error, "
-                "which is why the grippers touched."
+                "Collision padding in metres applied to every robot link. Both links in a "
+                "pair inflate, so the required separation between the two arms is TWICE this "
+                "value: 0.020 -> 40 mm. It also inflates links against the workspace walls, "
+                "so a pose with little real clearance can become unplannable -- that is the "
+                "padding correctly reporting there is no margin, not a fault. "
+                "Budget behind the default: 18.2 mm covers the MEASURED worst-case "
+                "gripper-tip displacement from trajectory following error (max joint error "
+                "11.4 mrad over 49,666 live samples at velocity 0.5); the remainder is an "
+                "unmeasured allowance for URDF-vs-bench mounting error, which costs about "
+                "1 mm of clearance per mm of base_separation error and ~4.3 mm per degree of "
+                "relative yaw. Measure the bench and correct base_separation / left_rpy / "
+                "right_rpy to earn that part back. Padding is read once at startup, so "
+                "changing it needs a relaunch."
             ),
         ),
     ]

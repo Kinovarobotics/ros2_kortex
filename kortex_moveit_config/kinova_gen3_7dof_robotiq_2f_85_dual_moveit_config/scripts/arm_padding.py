@@ -75,6 +75,7 @@ from moveit_msgs.msg import (
 )
 from moveit_msgs.srv import ApplyPlanningScene, GetPlanningScene, GetStateValidity
 from shape_msgs.msg import Mesh, MeshTriangle, SolidPrimitive
+from moveit_msgs.msg import ObjectColor
 
 PREFIXES = ("left_", "right_")
 STATIC_LINKS = ["world", "dual_arm_structure_link", "workspace_walls_link"]
@@ -454,6 +455,16 @@ class ArmPadding(Node):
         scene.is_diff = True
         scene.robot_state.is_diff = True
         scene.robot_state.attached_collision_objects = attached
+        # Make padding objects semi-transparent in RViz
+        for aco in attached:
+            color = ObjectColor()
+            color.id = aco.object.id
+            color.color.r = 0.2
+            color.color.g = 0.8
+            color.color.b = 1.0
+            color.color.a = 0.0   # 15% opacity
+            scene.object_colors.append(color)
+
         request = ApplyPlanningScene.Request()
         request.scene = scene
         return self.call(self.apply, request).success

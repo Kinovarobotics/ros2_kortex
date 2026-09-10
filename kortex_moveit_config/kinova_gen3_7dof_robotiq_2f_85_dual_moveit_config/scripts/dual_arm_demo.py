@@ -27,6 +27,7 @@ Usage:
 
 import argparse
 import itertools
+import math
 import os
 import signal
 import sys
@@ -40,6 +41,8 @@ from rclpy.signals import SignalHandlerOptions
 from sensor_msgs.msg import JointState
 
 from moveit_msgs.action import MoveGroup
+from action_msgs.msg import GoalStatus, GoalStatusArray
+from action_msgs.srv import CancelGoal
 from moveit_msgs.srv import GetStateValidity
 from moveit_msgs.msg import (
     Constraints,
@@ -101,6 +104,26 @@ class DualArmMover(Node):
         super().__init__("dual_arm_demo")
         self._client = ActionClient(self, MoveGroup, "/move_action")
         self._validity = self.create_client(GetStateValidity, "/check_state_validity")
+
+        # Coordinated abort. MoveIt plans ONE trajectory for all 14 joints and
+        # splits it across the two arm controllers; the plan is only collision-free
+        # if BOTH arms execute it. Nothing tells one controller that the other
+        # aborted, so a state-tolerance abort on one arm leaves the other running a
+        # path that is only safe in company. Observed live: the left arm aborted
+        # 2.59 s into a move and the right arm carried on for a further 4.58 s to
+        # completion. This watcher cancels the partner the moment either side ends
+        # abnormally.
+        self.peer_abort = None
+        self._watch_armed = False
+        self._handled_goals = set()
+        self._cancel_clients = {}
+        for side in ("left", "right"):
+            ns = f"/{side}_arm_controller/follow_joint_trajectory/_action"
+            self._cancel_clients[side] = self.create_client(CancelGoal, f"{ns}/cancel_goal")
+            self.create_subscription(
+                GoalStatusArray, f"{ns}/status",
+                lambda msg, s=side: self._on_arm_status(s, msg), 10
+            )
         self._joint_state = None
         self.last_error_code = None
         self.create_subscription(
@@ -150,6 +173,45 @@ class DualArmMover(Node):
                 return False
         return future.done()
 
+    BAD_STATUS = {
+        GoalStatus.STATUS_ABORTED: "ABORTED",
+        GoalStatus.STATUS_CANCELED: "CANCELED",
+    }
+
+    def _on_arm_status(self, side, msg):
+        """Cancel the partner arm as soon as this one ends abnormally."""
+        for status in msg.status_list:
+            label = self.BAD_STATUS.get(status.status)
+            if label is None:
+                continue
+            goal_id = bytes(status.goal_info.goal_id.uuid)
+            if goal_id in self._handled_goals:
+                continue  # terminal statuses linger in the list; react once
+            self._handled_goals.add(goal_id)
+            if not self._watch_armed:
+                # left over from an earlier run; record it, do not act on it
+                continue
+            other = "right" if side == "left" else "left"
+            self.get_logger().error(
+                f"{side} arm goal {label} -- cancelling {other} arm so they stop together"
+            )
+            self.peer_abort = f"{side} arm {label}"
+            self._cancel_arm(other)
+
+    def _cancel_arm(self, side):
+        """Cancel-all on one arm's follow_joint_trajectory server.
+
+        An all-zero goal_id and timestamp is the action protocol's "cancel every
+        goal" form, which is what lets us cancel a goal this process never sent
+        (move_group owns it, not us).
+        """
+        client = self._cancel_clients[side]
+        if not client.service_is_ready():
+            self.get_logger().error(f"  cannot cancel {side} arm: {client.srv_name} not available")
+            return
+        client.call_async(CancelGoal.Request())
+        self.get_logger().warning(f"  cancel-all sent to {side} arm")
+
     def state_validity(self, joints, timeout=5.0):
         """Ask move_group whether a joint configuration is collision-free.
 
@@ -195,7 +257,7 @@ class DualArmMover(Node):
             return False
         worst_joint, worst = None, 0.0
         for joint in ARM_JOINTS:
-            error = abs(reached[joint] - float(target[joint]))
+            error = angular_error(reached[joint], float(target[joint]))
             if error > worst:
                 worst_joint, worst = joint, error
         ok = True
@@ -233,7 +295,19 @@ class DualArmMover(Node):
         """
         request = MotionPlanRequest()
         request.group_name = GROUP
-        request.num_planning_attempts = 10
+        # ONE attempt, not the usual 10. MoveIt runs num_planning_attempts
+        # planners in PARALLEL and waits for the whole set before returning --
+        # it does not stop at the first success -- so a request costs the
+        # slowest attempt plus path hybridization, not the fastest.
+        # Measured on this cell 2026-09-10, home -> demo, no padding attached:
+        #     10 attempts  7.35 s of OMPL time  (382 traj points)
+        #      1 attempt   0.95 - 1.74 s        (124 points)
+        # That 7 s was the pause before every move, at both poses. Retrying is
+        # already handled a level up by move_to_with_retries(), so a single
+        # attempt keeps the same robustness against an unlucky RRTConnect run at
+        # a fraction of the wait. Raise this only if you would rather wait
+        # longer for a tidier path -- MoveIt keeps the best of N.
+        request.num_planning_attempts = 1
         request.allowed_planning_time = planning_time
         request.max_velocity_scaling_factor = velocity
         request.max_acceleration_scaling_factor = acceleration
@@ -301,8 +375,13 @@ class DualArmMover(Node):
         are returned immediately -- replanning cannot fix them and retrying ten
         times would just cost 10x the planning timeout.
         """
+        self.peer_abort = None
         for attempt in range(1, retries + 1):
             trajectory = self.move_to(target, **kwargs)
+            if self.peer_abort:
+                # an arm stopped mid-trajectory; replanning is not the answer
+                self.get_logger().error(f"  {self.peer_abort}; not replanning")
+                return None
             if trajectory is not None:
                 if attempt > 1:
                     self.get_logger().info(f"  succeeded on plan attempt {attempt}/{retries}")
@@ -319,6 +398,21 @@ class DualArmMover(Node):
                 self.get_logger().warning(f"  replanning ({attempt}/{retries} used)")
         self.get_logger().error(f"  no valid plan after {retries} attempts")
         return None
+
+
+def angular_error(reached, target):
+    """Shortest angular distance between two joint angles, in [0, pi].
+
+    joints 1/3/5/7 on the Gen3 are CONTINUOUS (no limits), so the driver may
+    report the same physical pose as theta or theta +/- 2*pi. A naive subtraction
+    then reports a full revolution of "error" for an arm that is exactly where it
+    was asked to be -- which is precisely what stopped the loop at cycle 4:
+        did NOT reach 'home': left_joint_3 off by 6.2814 rad
+    6.2814 is 2*pi to four decimals. Wrapping is safe for the revolute joints too:
+    the widest is joint_4 at +/-2.57 (5.14 rad of range), so no genuine error on
+    those can reach the 2*pi ambiguity.
+    """
+    return abs((reached - target + math.pi) % (2.0 * math.pi) - math.pi)
 
 
 def describe(trajectory, log):
@@ -369,13 +463,13 @@ def main():
     parser.add_argument("--capture", metavar="POSE",
                         help="record the current joint state into the YAML under this name and exit")
     parser.add_argument("--plan-only", action="store_true", help="plan and visualise, do not execute")
-    parser.add_argument("--velocity", type=float, default=0.1, help="velocity scaling (default 0.1)")
+    parser.add_argument("--velocity", type=float, default=0.4, help="velocity scaling (default 0.4)")
     parser.add_argument("--acceleration", type=float, default=0.1, help="acceleration scaling (default 0.1)")
     parser.add_argument("--planning-time", type=float, default=10.0, help="seconds (default 10)")
     parser.add_argument("--tolerance", type=float, default=0.001, help="joint goal tolerance, rad")
     parser.add_argument("--arrival-tolerance", type=float, default=0.05, metavar="RAD",
                         help="max per-joint error accepted after an executed move (default 0.05)")
-    parser.add_argument("--plan-retries", type=int, default=10, metavar="N",
+    parser.add_argument("--plan-retries", type=int, default=3, metavar="N",
                         help="re-plan up to N times when a plan is rejected (default 10). "
                              "Distinct from num_planning_attempts, which is internal to one request.")
     parser.add_argument("--cycles", type=int, default=0, metavar="N",
@@ -463,6 +557,7 @@ def main():
             log.info(f"{args.cycles} cycle(s) over {' -> '.join(targets)}")
 
         completed = 0
+        node._watch_armed = not args.plan_only
         cycles = itertools.count(1) if forever else range(1, args.cycles + 1)
         try:
             for cycle in cycles:
@@ -482,6 +577,12 @@ def main():
                         planning_time=args.planning_time,
                         tolerance=args.tolerance,
                     )
+                    if node.peer_abort:
+                        log.error(
+                            f"  {node.peer_abort} -- both arms cancelled; stopping after "
+                            f"{completed} completed cycle(s)"
+                        )
+                        return 1
                     if trajectory is None:
                         # Stop on the first failure rather than retrying blindly:
                         # a plan that failed once on real hardware usually means the
