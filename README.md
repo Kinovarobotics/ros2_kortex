@@ -1,5 +1,7 @@
 # Dual Control with Moveit (2 Gen3 7DoF)
 
+0. Make sure to replicate the setup as accurately as possible (i.e. both arms facing forward at home position and separated by a distance of 0.585 m )
+   
 1. Make sure to set the IP address of the robotic arms as follows:
    1.  left side arm --> '192.168.1.10'
    2.  right side arm --> '192.168.2.10'
@@ -62,7 +64,7 @@ Expect the control loop and the two async component workers at `rtprio` 80 on
 cpu 2, 6 and 7, **plus** the transport threads at 85. If 80 is the only priority
 you see, the script has not been run for this launch.
 
-5. In a new terminal window, give the arms a real keep-apart margin:
+5. In the same terminal window, give the arms a real keep-apart margin:
 
 ```
   ros2 run kinova_gen3_7dof_robotiq_2f_85_dual_moveit_config arm_padding.py \
