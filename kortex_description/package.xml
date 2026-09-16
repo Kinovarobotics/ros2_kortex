@@ -9,7 +9,7 @@
 for KINOVA KORTEX™ arms and supported grippers</p>
   </description>
   <author email="avannobel@kinova.ca">Alexandre Vannobel</author>
-  <maintainer email="avannobel@kinova.ca" />
+  <maintainer email="avannobel@kinova.ca">Alexandre Vannobel</maintainer>
   <maintainer email="marq.rasmussen@picknik.ai">Marq Rasmussen</maintainer>
   <license>BSD</license>
 
