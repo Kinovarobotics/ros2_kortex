@@ -8,9 +8,24 @@
    
 **P.S.** Please refer to the Gen3 user guide for more details if needed
 
-2. Take each arm to 'home' position using the webapp
+2. Verify the connection with the arms by running this command:
 
-3. In a terminal window, run the following to command to start Moveit in RVIZ:
+```
+ethtool enp129s0 | grep -E 'Speed|Duplex'
+```
+
+It should print something like this:
+
+```
+	Speed: 1000Mb/s
+	Duplex: Full
+```
+
+If you see "Duplex: Half" then the connection will not work for the real time operation. Make sure you are using good Cat5e/Cat6 ethernet cables. Only proceed if the `ethtool` command prints "Duplex: Full".
+
+3. Take each arm to 'home' position using the webapp
+
+4. In a terminal window, run the following to command to start Moveit in RVIZ:
 
 ```
   ros2 launch kinova_gen3_7dof_robotiq_2f_85_dual_moveit_config robot.launch.py \
@@ -29,7 +44,7 @@ fraction of a millimetre and any tracking error becomes a real collision. The
 against the *world*, and self-collision -- which is what arm-vs-arm is, since both
 arms are links of one robot -- is checked unpadded. Step 5 is what adds the margin.
 
-4. In a new terminal window, re-apply the realtime userspace tuning:
+5. In a new terminal window, re-apply the realtime userspace tuning:
 
 ```
   sudo ~/workspace/ros2_gen3_ws/rt-tune/rt-fix-userspace.sh
@@ -64,7 +79,7 @@ Expect the control loop and the two async component workers at `rtprio` 80 on
 cpu 2, 6 and 7, **plus** the transport threads at 85. If 80 is the only priority
 you see, the script has not been run for this launch.
 
-5. In the same terminal window, give the arms a real keep-apart margin:
+6. In the same terminal window, give the arms a real keep-apart margin:
 
 ```
   ros2 run kinova_gen3_7dof_robotiq_2f_85_dual_moveit_config arm_padding.py \
@@ -82,7 +97,7 @@ anything. `arm_padding.py status` says whether it is active; `arm_padding.py
 remove` takes it off. 10 mm is close to the most the current `demo` pose can
 take: it has 10-15 mm of true clearance at the wrist/gripper.
 
-6. In the same terminal, run the following python script:
+7. In the same terminal, run the following python script:
 ```
 cd ~/workspace/ros2_gen3_ws/src/ros2_kortex/kortex_moveit_config/kinova_gen3_7dof_robotiq_2f_85_dual_moveit_config/scripts
 
@@ -93,7 +108,7 @@ The demo has its own conservatism controls -- `--sequential` moves one arm at a
 time, `--velocity` slows everything down, and `--plan-only` previews in RViz
 without touching the hardware. Run `./dual_arm_demo.py --help` for the rest.
 
-7. The user can interrupt the script using Ctrl+C then command the arm from the RVIZ graphical interface.
+8. The user can interrupt the script using Ctrl+C then command the arm from the RVIZ graphical interface.
 
-8. To resume the script again, simply run it another time as previously specified in step 6.
+9. To resume the script again, simply run it another time as previously specified in step 6.
 
