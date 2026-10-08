@@ -180,8 +180,7 @@ two things:
 - raises the minimum clock of cores 2, 3, 6, 7 to their maximum (5.3 GHz)
 - moves the Kortex transport threads to cores 6–7 at SCHED_FIFO 85
 
-It was run later on 2026-10-06 while investigating faults, which made no difference to them. The clock
-floor stays until the next reboot.
+If you run it, the clock floor stays until the next reboot.
 
 Check the controller thread:
 
@@ -211,35 +210,10 @@ Without the host settings, expect a lower and less steady rate.
 ## If the rate drops to about 500 Hz
 
 Check that the `hardware_synchronization` block (section 4) is active and correctly indented in the
-config you launch. For the 2026-10-06 fault tests it was commented out in the 7dof MoveIt config; it
-was restored on 2026-10-08. After any edit, rebuild and check the YAML:
+config you launch. After any edit, rebuild and check the YAML:
 
 ```bash
 colcon build --packages-select kinova_gen3_7dof_robotiq_2f_85_moveit_config
 python3 -c "import yaml,sys; yaml.safe_load(open(sys.argv[1]))" \
   src/ros2_kortex/kortex_moveit_config/kinova_gen3_7dof_robotiq_2f_85_moveit_config/config/ros2_controllers.yaml
 ```
-
-## Known issue: joint faults in low-level servoing
-
-The arm sometimes faults during low-level control. This is **not caused by the 1 kHz settings**:
-
-- It happens at about 500 Hz too.
-- It happens without ROS, with `scripts/gen3_lowlevel_loop` using the Kortex API only.
-- It happened on a second arm, a Gen3 6dof.
-
-The cause: now and then the arm returns feedback where some joints' positions are 2–6 s old. That
-reading triggers following-error or current-mismatch faults. High-level control
-(`scripts/gen3_highlevel_loop`) runs clean. The case is with Kinova.
-
-Test and diagnostic tools are in `scripts/`:
-
-| Tool | What it does |
-|---|---|
-| `gen3_home_zero_loop.py` | MoveIt home↔zero loop |
-| `gen3_lowlevel_loop` and `gen3_lowlevel_loop_6dof` | Kortex low-level home↔zero loop, about 1 kHz |
-| `gen3_highlevel_loop` | Kortex high-level home↔zero loop |
-| `gen3_faults` | Read-only: arm state and fault/warning bits per joint |
-| `gen3_release` | Lists connected clients; with `--release`, switches the arm back to single-level servoing |
-| `gen3_fwinfo` | Read-only: firmware versions |
-| `gen3_limits` | Read-only: joint safety limits |
