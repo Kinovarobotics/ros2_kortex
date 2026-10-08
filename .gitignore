@@ -5,3 +5,6 @@ __pycache__/
 log/
 build/
 install/
+
+# Editor state (IntelliSense database, local paths)
+.vscode/
