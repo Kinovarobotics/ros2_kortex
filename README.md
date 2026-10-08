@@ -1,437 +1,245 @@
-# ROS 2 KINOVA KORTEX™
-> Kinova® KINOVA KORTEX™ is the common software platform behind all of the products in the Gen3 family (Gen3 and Gen3 lite). It unifies the inner workings of the various robots and their related external tools, like the API. <br />
-> https://www.kinovarobotics.com/product/gen3-robots
+# gen3_optimization_ws: 1 kHz ROS 2 control of a Kinova Gen3
 
-<center><img src="doc/resources/kinova-gen3-7dof-robotiq-2f-85.jpg" alt="Kinova Gen3 7DoF manipulator with Intel RealSense 3D Vision Module and Robotiq 2F-85 2 Finger 85mm Adaptive Gripper" style="width: 50%"/></center>
-
-ROS2 Kortex is the official ROS2 package to interact with KINOVA KORTEX™ and its related products. It is built upon the KINOVA KORTEX™ API, documentation for which can be found in the [GitHub Kortex repository](https://github.com/Kinovarobotics/kortex).
-
-## Build status
-
-<table width="100%">
-  <tr>
-    <th>ROS 2 Distro</th>
-    <th>Humble</th>
-    <th>Jazzy</th>
-  </tr>
-  <tr>
-    <th>Branch</th>
-    <td><a href="https://github.com/Kinovarobotics/ros2_kortex/tree/humble">humble</a></td>
-    <td><a href="https://github.com/Kinovarobotics/ros2_kortex/tree/main">main</a></td>
-  </tr>
-  <tr>
-    <th>Build Status</th>
-    <td>
-      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/humble-binary-build.yml">
-        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/humble-binary-build.yml/badge.svg?event=push&branch=main" alt="Humble Binary Build"/>
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/Kinovarobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml">
-        <img src="https://github.com/PickNikRobotics/ros2_kortex/actions/workflows/rolling-binary-build.yml/badge.svg?event=push&branch=main" alt="Rolling Binary Build"/>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <th>Release Status</th>
-    <td>Stable (binary available — may lag behind source)<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
-    <td>Stable (source only)<!-- TODO(moriarty) add build.ros2.org status badge once released --></td>
-  </tr>
-</table>
-
-
-**Note:** There are several CI jobs checking against future upstream changes see [detailed build status](.github/workflows/README.md) for a full list of CI jobs and for more information.
-
-**Note:** Gazebo classic support was removed from the `main` branch of this repository
-
-## Getting started
-
-1. Install ROS 2.
-
-  For this branch, ROS2 Jazzy has to be installed on Ubuntu 24.04.
-
-   Latest LTS Release: [Install ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)</br>
-
-   After installing ROS2, source the setup.bash, which will set the `$ROS_DISTRO` environment variable.
-
-2. If you plan to use MoveIt, it is recommended to install and use Cyclone DDS.
-   ```
-   sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
-   export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-   ```
-## Contributing to this repository or building from source
-
-To build this repository from source or contribute back to the repository read on.
-
-1. Make sure that `colcon`, its extensions, and `vcs` are installed:
-   ```
-   sudo apt install python3-colcon-common-extensions python3-vcstool
-   ```
-
-2. Create a new ROS2 workspace:
-   ```
-   export COLCON_WS=~/workspace/ros2_kortex_ws
-   mkdir -p $COLCON_WS/src
-   ```
-
-3. Pull relevant packages:
-   ```
-   cd $COLCON_WS
-   git clone https://github.com/Kinovarobotics/ros2_kortex.git src/ros2_kortex
-   vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex.$ROS_DISTRO.repos
-   vcs import src --skip-existing --input src/ros2_kortex/ros2_kortex-not-released.$ROS_DISTRO.repos
-   ```
-
-   If you plan on simulating the robot with Gazebo, make sure to pull the additional simulation packages.
-   If you're on ROS 2 Jazzy, run
-   ```
-   vcs import src --skip-existing --input src/ros2_kortex/simulation.jazzy.repos
-   ```
-
-   otherwise
-   ```
-   vcs import --skip-existing --input src/ros2_kortex/simulation.repos
-   ```
-
-   If you plan on using MoveIt, you must make sure that you have it already [installed](https://moveit.ros.org/install-moveit2/binary/) either from binaries or by building it from source.
-
-
-4. Follow the instructions to install [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/)
-
-5. Install dependencies, compile, and source the workspace:
-   ```
-   rosdep install --ignore-src --from-paths src -y -r
-   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-   ```
-
-   By default, colcon will use as much resources as possible to build the ROS2 workspace. This can temporarily freeze or even crash your machine. You can limit the number of threads used to avoid this issue, we found a good tradeoff between build time and resource utilisation by setting it to 3 :
-   ```
-   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --parallel-workers 3
-   ```
-6. Source the previously built workspace using the following command:
-   ```
-   echo 'source ~/workspace/ros2_kortex_ws/install/setup.bash' >> ~/.bashrc
-   ```
-
-## Simulation Issues
-
-Please note, at this time there are two known issues you with simulation
-
-1. Gazebo + Mimic Joints for the Robotiq Gripper
-2. Protobuf version mismatch
-
-# Gazebo and Mimic Joints
-
-A pull request has been made to gz_ros2_control which is how this repository was tested in simulation.
-The pull request won't be merged as the fix should be done upstream in gz-sim.
-Once a fix is available ros2_robotiq_gripper will be re-released and an update should fix any workarounds.
-
-In the meantime if you need simulation checkout the upstream pull request link:
-
-- Upstream Issue: https://github.com/gazebosim/gz-sim/issues/1684
-- Upstream Pull Request: https://github.com/ros-controls/gz_ros2_control/pull/86
-- Tracking Issue: https://github.com/PickNikRobotics/ros2_robotiq_gripper/issues/7
-
-# Protobuf
-
-Due to mismatched protobuf version that ships system and used by Gazebo simulator compiling twice may be required.
-You will only run into this if you have certain other gazebo related code in your workspace while compiling this repository.
-If errors are encounter you must clean your workspace and run colcon build in two steps:
-
-1. build everything except kortex related packages
-2. build the packages that where skipped
-
-```
-sudo apt install python3-colcon-clean # if you don't have colcon-clean installed already
-colcon clean workspace -y
-colcon build --packages-skip-regex '.*kortex.*' '.*gen3.*'
-colcon build --packages-select-regex '.*kortex.*' '.*gen3.*'
-```
-
-## Usage
-To launch and view any of the robot's URDF run:
+This workspace runs the Kinova Gen3 7dof (with a Robotiq 2F-85) through `ros2_kortex` + MoveIt and
+reaches about **1 kHz** on the ros2_control loop, and on the PC↔arm link. This page lists every setting
+that was in effect when it reached that rate, and the PC it ran on.
 
 ```bash
-ros2 launch kortex_description view_robot.launch.py
+ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py robot_ip:=192.168.1.10
 ```
 
-The accepted arguments are:
+Result on 2026-10-06:
 
-* `robot_type` : Your robot model. Possible values are either `gen3` or `gen3_lite`, the default is `gen3`.
+| Condition | Measured on `enp129s0` |
+|---|---|
+| Camera view open | about 1104 tx packets/s, which includes some non-cyclic traffic |
+| Camera view closed | about 990 Hz |
 
-* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85` or `robotiq_2f_140`. For the Gen3 Lite, the only option is `gen3_lite_2f`. Default value is an empty string, which will display the arm without a gripper.
+The earlier notes in `ros2_gen3_ws` recorded only 857 Hz for the same YAML change; the newer
+ros2_control stack below is the main difference.
 
-* `dof` : Degrees of freedom of the arm. Possible values for the Gen3 are either `6` or `7`. For the Gen3 Lite, the only option is `6`. Default value is `7`.
+---
 
-### Gen 3 Robots
+## 1. PC specifications
 
-The `gen3.launch.py` launch file is designed to be used for Gen3 arms. The typical use case to bringup and visualize the 7 DoF Kinova Gen3 robot arm (default) with mock hardware on Rviz:
+| Item | Value |
+|---|---|
+| Machine | Lenovo Legion Pro 7 16IAX10H (product 83F5) |
+| CPU | Intel Core Ultra 9 275HX: 24 cores (8 P-cores at 5.3–5.4 GHz on CPU 0–7, 16 E-cores at 4.7 GHz on CPU 8–23), 1 thread per core, single NUMA node |
+| RAM | 62 GiB |
+| OS | Ubuntu 24.04.3 LTS |
+| Kernel | `7.0.0-31-realtime` (PREEMPT_RT) |
+| NIC to the arm | `enp129s0`: Intel I226-V (`igc` driver, firmware 2032:88b6), 1000 Mb/s full duplex, direct cable |
+| PC address / arm address | `192.168.1.11/24` / `192.168.1.10` |
+| User groups | `aarp` is in the `realtime` group |
+
+## 2. Software versions
+
+| Component | Version / source |
+|---|---|
+| ROS 2 | Jazzy (`/opt/ros/jazzy`) |
+| ros2_control (`controller_manager`, `hardware_interface`) | **4.49.0**, `src/ros2_control` (jazzy branch, cc6bbd66) |
+| ros2_controllers (incl. `joint_trajectory_controller`) | **4.43.0**, `src/ros2_controllers` (jazzy, 46358426) |
+| realtime_tools | **3.13.0**, `src/realtime_tools` (jazzy, 3c9ce67). Needed for `trySetFeedback()` |
+| control_msgs, control_toolbox, ros2_control_cmake, gz_ros2_control | from source, jazzy branches |
+| generate_parameter_library | from source, main |
+| ros2_kortex / kortex_driver | jazzy (462dab9), kortex_driver 0.2.6 |
+| Kortex API (C++) | 2.8.0 (`linux_x86-64_gcc_5.4.zip`, fetched by `kortex_api`) |
+| Arm firmware (7dof) | *(record from Web App)* |
+
+## 3. Build
 
 ```bash
-ros2 launch kortex_bringup gen3.launch.py \
-  robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
+cd ~/workspace/gen3_optimization_ws
+source /opt/ros/jazzy/setup.bash
+# One time only, after realtime_tools was added to src/:
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --cmake-clean-cache --allow-overriding realtime_tools
+# After that:
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-Alternatively, for a physical robot:
+`realtime_tools` from source overrides the `/opt/ros/jazzy` copy. Without it the from-source
+ros2_controllers fail to build (`trySetFeedback` missing).
+
+## 4. Controller manager settings (the change that reached 1 kHz)
+
+This block was added under `controller_manager: ros__parameters:` in all six `ros2_controllers.yaml`
+files (copied from `ros2_gen3_ws`):
+
+```yaml
+controller_manager:
+  ros__parameters:
+    update_rate: 1000  # Hz
+    cpu_affinity: 2        # pin RT update loop to isolated core (isolcpus=2,3,6,7)
+    lock_memory: true      # mlockall to avoid page-fault jitter
+    thread_priority: 80    # SCHED_FIFO priority (under ulimit -r 98 ceiling)
+    hardware_synchronization:
+      expect_blocking_read_write: true
+      minimum_cycle_time: 0.0001
+```
+
+Files:
+
+```
+src/ros2_kortex/kortex_description/arms/gen3/7dof/config/ros2_controllers.yaml
+src/ros2_kortex/kortex_description/arms/gen3/6dof/config/ros2_controllers.yaml
+src/ros2_kortex/kortex_description/arms/gen3_lite/6dof/config/ros2_controllers.yaml
+src/ros2_kortex/kortex_moveit_config/kinova_gen3_7dof_robotiq_2f_85_moveit_config/config/ros2_controllers.yaml
+src/ros2_kortex/kortex_moveit_config/kinova_gen3_6dof_robotiq_2f_85_moveit_config/config/ros2_controllers.yaml
+src/ros2_kortex/kortex_moveit_config/kinova_gen3_lite_moveit_config/config/ros2_controllers.yaml
+```
+
+Why it works: the Gen3's blocking `Refresh()` round trip takes about 1–1.3 ms, so with the default
+fixed-period policy the loop overran and alternated 1 ms / 2 ms periods (about 500–550 Hz). With
+`expect_blocking_read_write` the loop is paced by the arm's reply instead. It free-runs and locks onto
+the arm's own 1 kHz tick.
+
+`cpu_affinity`, `lock_memory` and `thread_priority` only take effect if the host settings in section 5
+are in place. Without them the node starts, but logs that it could not set priority or lock memory.
+
+No other changes were needed: no async hardware interface, no xacro changes, no driver code changes.
+
+## 5. Host real-time settings
+
+These were installed on 2026-09-08 from `~/workspace/ros2_gen3_ws/rt-tune/` (see its README) and apply
+automatically at boot. **No rt-tune script was run by hand for the 1 kHz result.**
+
+### 5.1 Kernel command line (GRUB)
+
+```
+isolcpus=managed_irq,domain,2,3,6,7 nohz_full=2,3,6,7 rcu_nocbs=2,3,6,7 rcu_nocb_poll
+irqaffinity=0,1,4,5,8-23 skew_tick=1 nosoftlockup nmi_watchdog=0 audit=0
+split_lock_detect=off tsc=nowatchdog
+```
+
+The `isolcpus` and `nohz_full` flags reserve P-cores 2, 3, 6 and 7 for real-time work, and the
+ros2_control loop runs on core 2. All other work and interrupts go to the housekeeping cores
+0, 1, 4, 5 and 8–23.
+
+### 5.2 `/etc/security/limits.d/99-realtime.conf`
+
+```
+@realtime   -   rtprio      98
+@realtime   -   memlock     unlimited
+@realtime   -   nice        -20
+```
+
+This lets members of `realtime` use SCHED_FIFO 80 and `mlockall`. It needs a fresh login to take effect.
+
+### 5.3 `/etc/sysctl.d/99-realtime.conf`
+
+```
+kernel.sched_rt_runtime_us = -1     # no RT throttling (avoids 50 ms dropouts)
+kernel.timer_migration = 0
+vm.stat_interval = 120
+kernel.numa_balancing = 0
+vm.dirty_ratio = 10
+vm.dirty_background_ratio = 3
+net.core.rmem_max = 4194304
+net.core.wmem_max = 4194304
+```
+
+### 5.4 `rt-runtime-tune.service` (enabled, oneshot at boot)
+
+This service runs `/usr/local/sbin/rt-runtime-tune apply`. Its settings come from
+`/etc/default/rt-tuning`:
+
+```
+RT_CORES="2,3,6,7"   HK_CORES="0,1,4,5,8-23"   RT_LOOP_CORE="2"
+RT_IRQ_CORE="3"      RT_NIC="enp129s0"          RT_IRQ_PRIO="85"   RT_BUSY_POLL="0"
+```
+
+What it does:
+
+- **Idle states:** disables C-states with more than 10 µs exit latency on cores 2, 3, 6, 7. Only POLL
+  and C1 remain.
+- **CPU governor:** sets `performance` on cores 2, 3, 6, 7.
+- **Interrupts:** moves all movable IRQs to the housekeeping cores.
+- **NIC interrupts:** points the `enp129s0` IRQs at core 3 and runs their threads at SCHED_FIFO 85.
+- **NIC latency settings:** interrupt coalescing off (`rx-usecs 0`), GRO/LRO/TSO/GSO off, pause frames
+  off, busy-polling off.
+- **Kernel work queues:** restricts unbound workqueues to the housekeeping cores.
+
+Check what's in effect with `sudo rt-runtime-tune status`.
+
+**Live state observed on 2026-10-08** (worth knowing if you try to reproduce this):
+
+| Setting | Intended | Observed |
+|---|---|---|
+| NIC IRQ threads | on core 3 | SCHED_FIFO 85 as intended, but IRQ affinity is the housekeeping set (`0-1,4-5,8-23`) and the threads run on cores 16–20 |
+| Interrupt coalescing | `rx-usecs 0` | `rx-usecs 3` / `tx-usecs 3`. Probably reset when the NIC re-initialised |
+| GRO / TSO / GSO | off | off, as intended |
+
+So 1 kHz does not depend on the NIC tweaks being exactly as intended.
+
+### 5.5 Optional per-launch script (not used for the 1 kHz result)
+
+`sudo ~/workspace/ros2_gen3_ws/rt-tune/rt-fix-userspace.sh`, run after the driver has started, does
+two things:
+
+- raises the minimum clock of cores 2, 3, 6, 7 to their maximum (5.3 GHz)
+- moves the Kortex transport threads to cores 6–7 at SCHED_FIFO 85
+
+It was run later on 2026-10-06 while investigating faults, which made no difference to them. The clock
+floor stays until the next reboot.
+
+Check the controller thread:
 
 ```bash
-ros2 launch kortex_bringup gen3.launch.py \
-  robot_ip:=192.168.1.10 \
+ps -L -o tid,cls,rtprio,psr,comm -p $(pgrep -f ros2_control_node | head -1) | awk 'NR==1 || $2=="FF"'
 ```
-You can specify the following arguments if you wish to change your arm configuration:
 
-* `robot_type`: Your robot model. Default value (and only one) is `gen3`.
-
-* `gripper` : Gripper to use. Possible values for the Gen3 are either `robotiq_2f_85`, `robotiq_2f_140` or `""`. Default is `""`. An empty string will not initialise any gripper.
-
-* `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value is `robotiq_85_left_knuckle_joint`.
-
-* `use_internal_bus_gripper_comm` : Use internal bus for gripper communication. Default value is `true`.
-
-* `gripper_max_velocity` : Max velocity for gripper commands. Default value is `100.0`.
-
-* `gripper_max_force` : Max force for gripper commands. Default value is `100.0`.
-
-* `dof` : Degrees of freedom of the arm. Possible values are either `6` or `7`.Default value is `7`.
-
-* `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address.
-
-* `use_fake_hardware` : Start robot with fake hardware mirroring command to its states. Default value is `false`.
-
-* `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
-
-* `robot_controller` : Robot controller to start. Possible values are `twist_controller` and `joint_trajectory_controller`.Default value is `joint_trajectory_controller`.
-
-* `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
-
-* `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
-
-#### Robotiq gripper
-
-The Robotiq 2f 85 (or 2f 140) Gripper will be available on the Action topic:
+## 6. Measuring the rate
 
 ```bash
-/robotiq_gripper_controller/gripper_cmd
+# Packets/s the PC sends to the arm (about 1 per control cycle, plus a little other traffic)
+a=$(cat /sys/class/net/enp129s0/statistics/tx_packets); sleep 10
+b=$(cat /sys/class/net/enp129s0/statistics/tx_packets); echo $(( (b-a)/10 )) pkt/s
 ```
 
-You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`)
+## 7. Does this carry over to another PC?
+
+| Part | Carries over? |
+|---|---|
+| YAML (section 4) and the source-built stack (sections 2–3) | Yes, on any PC |
+| `cpu_affinity: 2` | Only if core 2 is a fast, isolated core on that machine. Adjust per machine |
+| Host settings (section 5) | No. Needs a PREEMPT_RT kernel, the `realtime` group, and isolated cores |
+| NIC name (`enp129s0`) and core lists | Specific to this PC. Need to be redone per machine |
+
+Without the host settings, expect a lower and less steady rate.
+
+## If the rate drops to about 500 Hz
+
+Check that the `hardware_synchronization` block (section 4) is active and correctly indented in the
+config you launch. For the 2026-10-06 fault tests it was commented out in the 7dof MoveIt config; it
+was restored on 2026-10-08. After any edit, rebuild and check the YAML:
 
 ```bash
-ros2 action send_goal /robotiq_gripper_controller/gripper_cmd control_msgs/action/ParallelGripperCommand "{command: {position: [0.0], effort: [100.0]}}"
+colcon build --packages-select kinova_gen3_7dof_robotiq_2f_85_moveit_config
+python3 -c "import yaml,sys; yaml.safe_load(open(sys.argv[1]))" \
+  src/ros2_kortex/kortex_moveit_config/kinova_gen3_7dof_robotiq_2f_85_moveit_config/config/ros2_controllers.yaml
 ```
 
-#### Gen3_lite gripper
+## Known issue: joint faults in low-level servoing
 
-The Gen3_lite gripper will be available on the Action topic:
+The arm sometimes faults during low-level control. This is **not caused by the 1 kHz settings**:
 
-```bash
-/gen3_lite_2f_gripper_controller/gripper_cmd
-```
+- It happens at about 500 Hz too.
+- It happens without ROS, with `scripts/gen3_lowlevel_loop` using the Kortex API only.
+- It happened on a second arm, a Gen3 6dof.
 
-You can test the gripper by calling the Action server with the following command and setting the desired `position` of the gripper (`0.0=open`, `0.8=close`)
+The cause: now and then the arm returns feedback where some joints' positions are 2–6 s old. That
+reading triggers following-error or current-mismatch faults. High-level control
+(`scripts/gen3_highlevel_loop`) runs clean. The case is with Kinova.
 
-```bash
-ros2 action send_goal /gen3_lite_2f_gripper_controller/gripper_cmd control_msgs/action/GripperCommand "{command:{position: 0.0, max_effort: 100.0}}"
-```
+Test and diagnostic tools are in `scripts/`:
 
-#### Vision Module
-
-In order to access the Kinova Vision module's depth and color streams for the camera-equipped Gen3 arm models, please refer to the following github repository for detailed instructions: [ros2_kortex_vision](https://github.com/Kinovarobotics/ros2_kortex_vision)
-
-### Gen 3 Lite Robot
-
-The `gen3_lite.launch.py` launch file is designed to be used for Gen3 Lite arms. The typical use case to bringup the robot arm with mock hardware:
-
-```bash
-ros2 launch kortex_bringup gen3_lite.launch.py \
-  robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
-```
-Alternatively, if you wish to use the physical robot:
-
-```bash
-ros2 launch kortex_bringup gen3_lite.launch.py \
-  robot_ip:=192.168.1.10 \
-```
-
-You can specify the following arguments if you wish to change your arm configuration:
-
-* `robot_type`: Your robot model. Default value (and only one) is `gen3_lite`.
-
-* `gripper` : Gripper to use. Default value (and only one) is `gen3_lite_2f`.
-
-* `gripper_joint_name` : Name of the controlled joint of the gripper attached to the arm. Default value (and only one) is `right_finger_bottom_joint`.
-
-* `use_internal_bus_gripper_comm` : Use internal bus for gripper communication. Default value is `true`.
-
-* `gripper_max_velocity` : Max velocity for gripper commands. Default value is `100.0`.
-
-* `gripper_max_force` : Max force for gripper commands. Default value is `100.0`.
-
-* `robot_ip` : IP address by which the robot can be reached. No default is specified, this is a required argument. All arms are shipped with address `192.168.1.10`, but if you have reassigned your physical arm's robot IP address, then you will need to assign that ip address. If you're using an USB to Ethernet interface to connect your robot to your machine instead of USB via RNDIS, the ip address will be `192.168.2.10`.
-
-* `use_fake_hardware` : Start robot with fake hardware mirroring command to its states. Default value is `false`.
-
-* `fake_sensor_commands` : Enable fake command interfaces for sensors used for simple simulations. Used only if 'use_fake_hardware' parameter is true. Default value is `false`.
-
-* `robot_controller` : Robot controller to start. Possible values are `twist_controller` and `joint_trajectory_controller`.Default value is `joint_trajectory_controller`.
-
-* `controllers_file` : Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
-
-* `description_file` : URDF/XACRO description file with the robot. Default value is `gen3_lite_gen3_lite_2f.xacro`.
-
-* `launch_rviz` : Start an Rviz window to visualize the robot. Default value is `true`.
-
-
-## Simulation
-The `kortex_sim_control.launch.py` launch file is designed to simulate all of our arm models, you just need to specify your configuration through the arguments. By default, the Gen3 7 dof configuration is used :
-
-```bash
-ros2 launch kortex_bringup kortex_sim_control.launch.py \
-  use_sim_time:=true \
-  launch_rviz:=false
-```
-
-* `sim_gazebo` : Use Gazebo for simulation. Default value is `false`.
-* `robot_type` : Your robot model. Possible values are either `gen3` or `gen3_lite`.Default is `gen3`.
-* `robot_name` : Name you would like your robot to have. Default value is `gen3`.
-* `dof` : Degrees of freedom of the arm. Possible values are either `6` or `7`.Default value is `7`.
-* `vision` : Use arm mounted realsens. Possible values are either `true` or `false`. Default value is `false`. This option does not generate simulated images, it only loads up the robot's URDF that includes the vision link.
-* `robot_controller` : Robot joint controller to start. Default value is `joint_trajectory_controller`.
-* `robot_pos_controller` : Robot position controller to start. Default value is `twist_controller`.
-* `robot_hand_controller` : Robot gripper controller to start. Default value is `robotiq_gripper_controller`.
-* `controllers_file` :  Ros 2 control configuration file to use. Default value is `ros2_controllers.yaml`
-* `description_package` : Description package with robot URDF/XACRO files. Default value is `kortex_description`.
-* `description_file` : URDF/XACRO description file with the robot. Default value is `kinova.urdf.xacro`.
-* `prefix` : Prefix of the joint names, useful for multi-robot setup. If changed, then also joint names in the controllers' configuration have to be updated. Default value is `""` (none).
-* `use_sim_time` : Use simulated clock. Default value is `true`.
-* `gripper` : Gripper to use. Possible values for the Gen3 are: `robotiq_2f_85`, `robotiq_2f_140`, `""` and `gen3_lite_2f`. Default is `robotiq_2f_85`. An empty string will not initialise any gripper.
-
-#### MoveIt 2
-
-To generate motion plans and execute them with a simulated 7 DoF Kinova Gen3 arm with mock hardware:
-
-```bash
-ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
-  robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
-```
-
-and to bring up the Kinova Gen3 6 DoF with MoveIt:
-
-```bash
-ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config robot.launch.py \
-  robot_ip:=yyy.yyy.yyy.yyy \
-  use_fake_hardware:=true
-```
-
-To generate motion plans and execute them with a Gazebo simulated 7 DoF Kinova Gen3 arm (previously launched with the command at the [simulation](#simulation) section):
-
-```bash
-ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config sim.launch.py \
-  use_sim_time:=true
-```
-
-To work with a physical robot and generate/execute paths with MoveIt run the following:
-
-For Gen3:
-
-```bash
-ros2 launch kinova_gen3_7dof_robotiq_2f_85_moveit_config robot.launch.py \
-  robot_ip:=192.168.1.10
-```
-
-For Gen3-Lite:
-
-```bash
-ros2 launch kinova_gen3_lite_moveit_config robot.launch.py \
-  robot_ip:=192.168.1.10
-```
-
-
-
-## Commanding the arm (physically and in simulation)
-
-### Joint trajectory control
-You can command the arm by publishing Joint Trajectory messages directly to the joint trajectory controller:
-
-```bash
-ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/JointTrajectory "{
-  joint_names: [joint_1, joint_2, joint_3, joint_4, joint_5, joint_6, joint_7],
-  points: [
-    { positions: [0, 0, 0, 0, 0, 0, 0], time_from_start: { sec: 10 } },
-  ]
-}" -1
-```
-
-Depending on your robot type and its DoF, you will need to adapt the `joint_names` and `positions` properties accordingly.
-
-### Joint twist control
-You can also command the arm using Twist messages. Before doing so, you must active the `twist_controller` and deactivate the `joint_trajectory_controller`:
-```bash
-ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
-  activate_controllers: [twist_controller],
-  deactivate_controllers: [joint_trajectory_controller],
-  strictness: 1,
-  activate_asap: true,
-}"
-```
-
-**Note: the required interface for the `twist_controller` does not currently exist in the gazebo or mock hardware simulation setups. So the `twist_controller` is currently only functional on Kinova hardware.**
-
-Once the `twist_controller` is activated, You can publish Twist messages on the `/twist_controller/commands` topic to command the arm.
-
-For example, you can jog the arm using [Teleop Twist Keyboard](https://index.ros.org/p/teleop_twist_keyboard/github-ros2-teleop_twist_keyboard/) with the following command:
-
-**WARNING: you are responsible for collision checking, including self collisions when in this mode.**
-
-```bash
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/twist_controller/commands
-```
-
-If you wish to use the `joint_trajectory_controller` again to command the arm using JointTrajectory messages, run the following:
-```bash
-ros2 service call /controller_manager/switch_controller controller_manager_msgs/srv/SwitchController "{
-  activate_controllers: [joint_trajectory_controller],
-  deactivate_controllers: [twist_controller],
-  strictness: 1,
-  activate_asap: true,
-}"
-```
-### Joint velocity control
-You can command joint velocities directly as well by first activating the `joint_group_velocity_controller` using the following command:
-```bash
-# switch from trajectory (position) control to velocity control
-ros2 control switch_controllers \
-  --deactivate joint_trajectory_controller \
-  --activate joint_group_velocity_controller
-```
-Then use the following command example to move the arm (velocities are in **rad/s**):
-```bash
-# command 0.3 rad/s on the last joint of a 7 DoF gen3 (zeros elsewhere)
-ros2 topic pub --once /joint_group_velocity_controller/commands std_msgs/msg/Float64MultiArray \
-  "{data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3]}"
-
-# stop motion before switching back
-ros2 topic pub --once /joint_group_velocity_controller/commands std_msgs/msg/Float64MultiArray \
-  "{data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}"
-
-# switch back to joint trajectory controller if needed
-ros2 control switch_controllers \
-  --deactivate joint_group_velocity_controller \
-  --activate joint_trajectory_controller
-```
-
-## Contents
-
-The following is a description of the packages included in this repository.
-
-### kortex_description
-This package contains the URDF (Unified Robot Description Format), STL and configuration files for the Kortex-compatible robots. For more details, please consult the [README](kortex_description/readme.md) from the package subdirectory.
-
-### kortex_driver
-This package implements a ROS node that allows communication between a node and a Kinova Gen3 or Gen3 lite robot. For more details, please consult the [README](kortex_driver/readme.md) from the package subdirectory.
-
-### kortex_moveit_config
-This metapackage contains the auto-generated MoveIt! files to use the Kinova Gen3 and Gen3 lite arms with the MoveIt! motion planning framework. For more details, please consult the [README](kortex_moveit_config/readme.md) from the package subdirectory.
+| Tool | What it does |
+|---|---|
+| `gen3_home_zero_loop.py` | MoveIt home↔zero loop |
+| `gen3_lowlevel_loop` and `gen3_lowlevel_loop_6dof` | Kortex low-level home↔zero loop, about 1 kHz |
+| `gen3_highlevel_loop` | Kortex high-level home↔zero loop |
+| `gen3_faults` | Read-only: arm state and fault/warning bits per joint |
+| `gen3_release` | Lists connected clients; with `--release`, switches the arm back to single-level servoing |
+| `gen3_fwinfo` | Read-only: firmware versions |
+| `gen3_limits` | Read-only: joint safety limits |
