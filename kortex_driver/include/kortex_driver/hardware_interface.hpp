@@ -31,6 +31,7 @@
 #include <limits>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "rclcpp/macros.hpp"
@@ -86,11 +87,22 @@ public:
   KORTEX_DRIVER_PUBLIC
   CallbackReturn on_init(const hardware_interface::HardwareComponentInterfaceParams & params) final;
 
+  // Interfaces not declared in the URDF (e.g. tcp/twist.*, reset_fault/*, gripper speed/force,
+  // per-joint velocity/effort commands) are exported as unlisted interfaces with the same names.
   KORTEX_DRIVER_PUBLIC
-  std::vector<hardware_interface::StateInterface> export_state_interfaces() final;
+  std::vector<hardware_interface::InterfaceDescription>
+  export_unlisted_state_interface_descriptions() final;
 
   KORTEX_DRIVER_PUBLIC
-  std::vector<hardware_interface::CommandInterface> export_command_interfaces() final;
+  std::vector<hardware_interface::InterfaceDescription>
+  export_unlisted_command_interface_descriptions() final;
+
+  KORTEX_DRIVER_PUBLIC
+  std::vector<hardware_interface::StateInterface::ConstSharedPtr> on_export_state_interfaces()
+    final;
+
+  KORTEX_DRIVER_PUBLIC
+  std::vector<hardware_interface::CommandInterface::SharedPtr> on_export_command_interfaces() final;
 
   KORTEX_DRIVER_PUBLIC
   return_type prepare_command_mode_switch(
@@ -205,10 +217,41 @@ private:
   int num_turns_tmp_ = 0;
 
   // fault control
-  double reset_fault_cmd_;
-  double reset_fault_async_success_;
-  double in_fault_;
+  double reset_fault_cmd_ = std::numeric_limits<double>::quiet_NaN();
+  double reset_fault_async_success_ = std::numeric_limits<double>::quiet_NaN();
+  double in_fault_ = 0.0;
   static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
+
+  // ros2_control handle-based interfaces: the driver keeps working on the member variables above;
+  // command handles are copied into the members at the start of write(), the members are copied
+  // into the state handles at the end of read(), and wherever the driver itself changes a command
+  // member (mode switch, activation) the value is also written to the command handle.
+  using StateHandle = hardware_interface::StateInterface::SharedPtr;
+  using CommandHandle = hardware_interface::CommandInterface::SharedPtr;
+  // prefix, interface name and backing member of every interface this driver exports, in the
+  // order of the former export_state_interfaces() / export_command_interfaces()
+  struct InterfaceBinding
+  {
+    std::string prefix;
+    std::string name;
+    double * value;
+  };
+  std::vector<InterfaceBinding> state_interface_bindings();
+  std::vector<InterfaceBinding> command_interface_bindings();
+  std::vector<std::pair<StateHandle, double *>> state_push_list_;
+  std::vector<std::pair<CommandHandle, double *>> command_pull_list_;
+  std::vector<CommandHandle> arm_command_position_handles_;
+  std::vector<CommandHandle> arm_command_velocity_handles_;
+  std::vector<CommandHandle> arm_command_effort_handles_;
+  std::vector<CommandHandle> twist_command_handles_;
+  CommandHandle gripper_command_position_handle_;
+  CommandHandle reset_fault_cmd_handle_;
+  CommandHandle reset_fault_async_success_handle_;
+  void pushStates();
+  void pullCommands();
+  void pushArmCommands();
+  void pushTwistCommands();
+  void pushGripperPositionCommand();
 
   void sendTwistCommand();
   void incrementId();

@@ -22,12 +22,14 @@
  */
 //----------------------------------------------------------------------
 
+#include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <exception>
 #include <limits>
 #include <memory>
 #include <string>
+#include <tuple>
 #include <vector>
 
 #include "kortex_driver/hardware_interface.hpp"
@@ -291,10 +293,10 @@ CallbackReturn KortexMultiInterfaceHardware::on_init(
   return CallbackReturn::SUCCESS;
 }
 
-std::vector<hardware_interface::StateInterface>
-KortexMultiInterfaceHardware::export_state_interfaces()
+std::vector<KortexMultiInterfaceHardware::InterfaceBinding>
+KortexMultiInterfaceHardware::state_interface_bindings()
 {
-  std::vector<hardware_interface::StateInterface> state_interfaces;
+  std::vector<InterfaceBinding> bindings;
   std::vector<string> arm_joint_names;
 
   for (std::size_t i = 0; i < info_.joints.size(); i++)
@@ -302,10 +304,10 @@ KortexMultiInterfaceHardware::export_state_interfaces()
     RCLCPP_DEBUG(LOGGER, "export_state_interfaces for joint: %s", info_.joints[i].name.c_str());
     if (info_.joints[i].name == gripper_joint_name_)
     {
-      state_interfaces.emplace_back(hardware_interface::StateInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_));
-      state_interfaces.emplace_back(hardware_interface::StateInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &gripper_velocity_));
+      bindings.push_back(
+        {info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_position_});
+      bindings.push_back(
+        {info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &gripper_velocity_});
     }
     else
     {
@@ -315,40 +317,34 @@ KortexMultiInterfaceHardware::export_state_interfaces()
 
   for (std::size_t i = 0; i < arm_joint_names.size(); i++)
   {
-    state_interfaces.emplace_back(hardware_interface::StateInterface(
-      arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_positions_[i]));
-    state_interfaces.emplace_back(hardware_interface::StateInterface(
-      arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_velocities_[i]));
-    state_interfaces.emplace_back(hardware_interface::StateInterface(
-      arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]));
+    bindings.push_back(
+      {arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_positions_[i]});
+    bindings.push_back(
+      {arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_velocities_[i]});
+    bindings.push_back({arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_efforts_[i]});
   }
 
   // state interface which reports if robot is faulted
-  state_interfaces.emplace_back(
-    hardware_interface::StateInterface("reset_fault", "internal_fault", &in_fault_));
+  bindings.push_back({"reset_fault", "internal_fault", &in_fault_});
 
-  return state_interfaces;
+  return bindings;
 }
 
-std::vector<hardware_interface::CommandInterface>
-KortexMultiInterfaceHardware::export_command_interfaces()
+std::vector<KortexMultiInterfaceHardware::InterfaceBinding>
+KortexMultiInterfaceHardware::command_interface_bindings()
 {
-  std::vector<hardware_interface::CommandInterface> command_interfaces;
+  std::vector<InterfaceBinding> bindings;
   std::vector<string> arm_joint_names;
 
   for (std::size_t i = 0; i < info_.joints.size(); i++)
   {
     if (info_.joints[i].name == gripper_joint_name_)
     {
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_command_position_));
-
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        info_.joints[i].name, "set_gripper_max_velocity", &gripper_speed_command_));
-      gripper_speed_command_ = gripper_command_max_velocity_;
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        info_.joints[i].name, "set_gripper_max_effort", &gripper_force_command_));
-      gripper_force_command_ = gripper_command_max_force_;
+      bindings.push_back(
+        {info_.joints[i].name, hardware_interface::HW_IF_POSITION, &gripper_command_position_});
+      bindings.push_back(
+        {info_.joints[i].name, "set_gripper_max_velocity", &gripper_speed_command_});
+      bindings.push_back({info_.joints[i].name, "set_gripper_max_effort", &gripper_force_command_});
     }
     else
     {
@@ -357,37 +353,190 @@ KortexMultiInterfaceHardware::export_command_interfaces()
   }
   for (std::size_t i = 0; i < arm_joint_names.size(); i++)
   {
-    {
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_commands_positions_[i]));
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_commands_velocities_[i]));
-      command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]));
-    }
+    bindings.push_back(
+      {arm_joint_names[i], hardware_interface::HW_IF_POSITION, &arm_commands_positions_[i]});
+    bindings.push_back(
+      {arm_joint_names[i], hardware_interface::HW_IF_VELOCITY, &arm_commands_velocities_[i]});
+    bindings.push_back(
+      {arm_joint_names[i], hardware_interface::HW_IF_EFFORT, &arm_commands_efforts_[i]});
   }
 
-  // register twist command interfaces
-  command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.linear.x", &twist_commands_[0]));
-  command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.linear.y", &twist_commands_[1]));
-  command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.linear.z", &twist_commands_[2]));
-  command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.angular.x", &twist_commands_[3]));
-  command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.angular.y", &twist_commands_[4]));
-  command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("tcp", "twist.angular.z", &twist_commands_[5]));
+  // twist command interfaces
+  bindings.push_back({"tcp", "twist.linear.x", &twist_commands_[0]});
+  bindings.push_back({"tcp", "twist.linear.y", &twist_commands_[1]});
+  bindings.push_back({"tcp", "twist.linear.z", &twist_commands_[2]});
+  bindings.push_back({"tcp", "twist.angular.x", &twist_commands_[3]});
+  bindings.push_back({"tcp", "twist.angular.y", &twist_commands_[4]});
+  bindings.push_back({"tcp", "twist.angular.z", &twist_commands_[5]});
 
-  command_interfaces.emplace_back(
-    hardware_interface::CommandInterface("reset_fault", "command", &reset_fault_cmd_));
+  bindings.push_back({"reset_fault", "command", &reset_fault_cmd_});
+  bindings.push_back({"reset_fault", "async_success", &reset_fault_async_success_});
 
-  command_interfaces.emplace_back(hardware_interface::CommandInterface(
-    "reset_fault", "async_success", &reset_fault_async_success_));
+  return bindings;
+}
+
+namespace
+{
+hardware_interface::InterfaceDescription make_unlisted_description(
+  const std::string & prefix, const std::string & name)
+{
+  hardware_interface::InterfaceInfo info;
+  info.name = name;
+  info.data_type = "double";
+  info.size = 1;
+  info.enable_limits = false;
+  return hardware_interface::InterfaceDescription(prefix, info);
+}
+}  // namespace
+
+std::vector<hardware_interface::InterfaceDescription>
+KortexMultiInterfaceHardware::export_unlisted_state_interface_descriptions()
+{
+  // everything this driver exports that the URDF does not declare
+  std::vector<hardware_interface::InterfaceDescription> descriptions;
+  for (const auto & b : state_interface_bindings())
+  {
+    if (joint_state_interfaces_.count(b.prefix + "/" + b.name) == 0)
+    {
+      descriptions.push_back(make_unlisted_description(b.prefix, b.name));
+    }
+  }
+  return descriptions;
+}
+
+std::vector<hardware_interface::InterfaceDescription>
+KortexMultiInterfaceHardware::export_unlisted_command_interface_descriptions()
+{
+  // everything this driver exports that the URDF does not declare
+  std::vector<hardware_interface::InterfaceDescription> descriptions;
+  for (const auto & b : command_interface_bindings())
+  {
+    if (joint_command_interfaces_.count(b.prefix + "/" + b.name) == 0)
+    {
+      descriptions.push_back(make_unlisted_description(b.prefix, b.name));
+    }
+  }
+  return descriptions;
+}
+
+std::vector<hardware_interface::StateInterface::ConstSharedPtr>
+KortexMultiInterfaceHardware::on_export_state_interfaces()
+{
+  auto state_interfaces = hardware_interface::SystemInterface::on_export_state_interfaces();
+
+  state_push_list_.clear();
+  for (const auto & b : state_interface_bindings())
+  {
+    state_push_list_.emplace_back(get_state_interface_handle(b.prefix + "/" + b.name), b.value);
+  }
+  return state_interfaces;
+}
+
+std::vector<hardware_interface::CommandInterface::SharedPtr>
+KortexMultiInterfaceHardware::on_export_command_interfaces()
+{
+  auto command_interfaces = hardware_interface::SystemInterface::on_export_command_interfaces();
+
+  gripper_speed_command_ = gripper_command_max_velocity_;
+  gripper_force_command_ = gripper_command_max_force_;
+
+  command_pull_list_.clear();
+  for (const auto & b : command_interface_bindings())
+  {
+    command_pull_list_.emplace_back(get_command_interface_handle(b.prefix + "/" + b.name), b.value);
+  }
+
+  const auto handle_of = [this](const double * value) -> CommandHandle
+  {
+    for (const auto & [handle, member] : command_pull_list_)
+    {
+      if (member == value)
+      {
+        return handle;
+      }
+    }
+    return nullptr;
+  };
+  arm_command_position_handles_.clear();
+  arm_command_velocity_handles_.clear();
+  arm_command_effort_handles_.clear();
+  for (std::size_t i = 0; i < actuator_count_; i++)
+  {
+    arm_command_position_handles_.push_back(handle_of(&arm_commands_positions_[i]));
+    arm_command_velocity_handles_.push_back(handle_of(&arm_commands_velocities_[i]));
+    arm_command_effort_handles_.push_back(handle_of(&arm_commands_efforts_[i]));
+  }
+  twist_command_handles_.clear();
+  for (std::size_t i = 0; i < twist_commands_.size(); i++)
+  {
+    twist_command_handles_.push_back(handle_of(&twist_commands_[i]));
+  }
+  gripper_command_position_handle_ = handle_of(&gripper_command_position_);
+  reset_fault_cmd_handle_ = handle_of(&reset_fault_cmd_);
+  reset_fault_async_success_handle_ = handle_of(&reset_fault_async_success_);
+
+  // initial command values (e.g. gripper max velocity/effort) as seen by the controllers
+  for (const auto & [handle, value] : command_pull_list_)
+  {
+    std::ignore = set_command(handle, *value, true);
+  }
 
   return command_interfaces;
+}
+
+void KortexMultiInterfaceHardware::pushStates()
+{
+  for (const auto & [handle, value] : state_push_list_)
+  {
+    std::ignore = set_state(handle, *value, false);
+  }
+}
+
+void KortexMultiInterfaceHardware::pullCommands()
+{
+  for (const auto & [handle, value] : command_pull_list_)
+  {
+    std::ignore = get_command(handle, *value, false);
+  }
+}
+
+void KortexMultiInterfaceHardware::pushArmCommands()
+{
+  for (std::size_t i = 0; i < actuator_count_ && i < arm_command_position_handles_.size(); i++)
+  {
+    if (arm_command_position_handles_[i])
+    {
+      std::ignore = set_command(arm_command_position_handles_[i], arm_commands_positions_[i], true);
+    }
+    if (arm_command_velocity_handles_[i])
+    {
+      std::ignore =
+        set_command(arm_command_velocity_handles_[i], arm_commands_velocities_[i], true);
+    }
+    if (arm_command_effort_handles_[i])
+    {
+      std::ignore = set_command(arm_command_effort_handles_[i], arm_commands_efforts_[i], true);
+    }
+  }
+}
+
+void KortexMultiInterfaceHardware::pushTwistCommands()
+{
+  for (std::size_t i = 0; i < twist_command_handles_.size(); i++)
+  {
+    if (twist_command_handles_[i])
+    {
+      std::ignore = set_command(twist_command_handles_[i], twist_commands_[i], true);
+    }
+  }
+}
+
+void KortexMultiInterfaceHardware::pushGripperPositionCommand()
+{
+  if (gripper_command_position_handle_)
+  {
+    std::ignore = set_command(gripper_command_position_handle_, gripper_command_position_, true);
+  }
 }
 
 return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
@@ -592,17 +741,20 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
   {
     joint_based_controller_running_ = false;
     arm_commands_positions_ = arm_positions_;
-    arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    std::fill(arm_commands_velocities_.begin(), arm_commands_velocities_.end(), 0.0);
+    pushArmCommands();
   }
   if (stop_twist_controller_)
   {
     twist_controller_running_ = false;
     twist_commands_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    pushTwistCommands();
   }
   if (stop_gripper_controller_)
   {
     gripper_controller_running_ = false;
     gripper_command_position_ = gripper_position_;
+    pushGripperPositionCommand();
   }
   if (stop_fault_controller_)
   {
@@ -616,7 +768,8 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     arm_mode_ = k_api::Base::ServoingMode::LOW_LEVEL_SERVOING;
     twist_controller_running_ = false;
     arm_commands_positions_ = arm_positions_;
-    arm_commands_velocities_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    std::fill(arm_commands_velocities_.begin(), arm_commands_velocities_.end(), 0.0);
+    pushArmCommands();
     joint_based_controller_running_ = true;
     // refresh feedback
     feedback_ = base_cyclic_.RefreshFeedback();
@@ -628,11 +781,13 @@ return_type KortexMultiInterfaceHardware::perform_command_mode_switch(
     arm_mode_ = k_api::Base::ServoingMode::SINGLE_LEVEL_SERVOING;
     joint_based_controller_running_ = false;
     twist_commands_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    pushTwistCommands();
     twist_controller_running_ = true;
   }
   if (start_gripper_controller_)
   {
     gripper_command_position_ = gripper_position_;
+    pushGripperPositionCommand();
     gripper_controller_running_ = true;
   }
   if (start_fault_controller_)
@@ -716,6 +871,9 @@ CallbackReturn KortexMultiInterfaceHardware::on_activate(
     }
     arm_joints_control_level_[i] = integration_lvl_t::UNDEFINED;
   }
+  pushArmCommands();
+  pushGripperPositionCommand();
+  pushStates();
 
   RCLCPP_INFO(LOGGER, "KortexMultiInterfaceHardware successfully activated!");
   return CallbackReturn::SUCCESS;
@@ -792,6 +950,8 @@ return_type KortexMultiInterfaceHardware::read(
   // add mode that can't be easily reached
   in_fault_ += (feedback_.base().active_state() == k_api::Common::ARMSTATE_SERVOING_READY);
 
+  pushStates();
+
   return return_type::OK;
 }
 
@@ -809,6 +969,8 @@ void KortexMultiInterfaceHardware::readGripperPosition()
 return_type KortexMultiInterfaceHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
+  pullCommands();
+
   if (block_write)
   {
     feedback_ = base_cyclic_.RefreshFeedback();
@@ -852,6 +1014,15 @@ return_type KortexMultiInterfaceHardware::write(
       reset_fault_async_success_ = 0.0;
     }
     reset_fault_cmd_ = NO_CMD;
+    if (reset_fault_cmd_handle_)
+    {
+      std::ignore = set_command(reset_fault_cmd_handle_, reset_fault_cmd_, true);
+    }
+    if (reset_fault_async_success_handle_)
+    {
+      std::ignore =
+        set_command(reset_fault_async_success_handle_, reset_fault_async_success_, true);
+    }
   }
 
   if (in_fault_ == 0.0)
