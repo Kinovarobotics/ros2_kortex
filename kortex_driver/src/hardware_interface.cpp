@@ -572,11 +572,13 @@ return_type KortexMultiInterfaceHardware::prepare_command_mode_switch(
   if (twist_controller_running_ && start_joint_based_controller_ && !stop_twist_controller_)
   {
     RCLCPP_ERROR(LOGGER, "Can't start joint based controller while twist controller is running!");
+    block_write = false;
     return hardware_interface::return_type::ERROR;
   }
   if (joint_based_controller_running_ && start_twist_controller_ && !stop_joint_based_controller_)
   {
     RCLCPP_ERROR(LOGGER, "Can't start twist controller while joint based controller is running!");
+    block_write = false;
     return hardware_interface::return_type::ERROR;
   }
 
