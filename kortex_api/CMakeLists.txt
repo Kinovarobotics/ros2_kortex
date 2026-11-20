@@ -1,46 +1,26 @@
-cmake_minimum_required(VERSION 3.14)
-include(FetchContent)
-#include(ExternalProject)
-FetchContent_Declare(
-  kinova_binary_api
-  URL https://artifactory.kinovaapps.com/artifactory/generic-public/kortex/API/2.8.0/linux_x86-64_gcc_5.4.zip
-  URL_HASH MD5=b9b68885df8e1dd0e5a2ba7285f14c0d
-)
-
-FetchContent_MakeAvailable(kinova_binary_api)
-
+cmake_minimum_required(VERSION 3.18)
 project(kortex_api)
-
-#Future:
-# convert API_URL components from CMAKE_SYSTEM variables.
-# The kinova artifactory server artifacts have slightly different expectations and they need some transformations
-# Could build something like: (URL_OS)_(URL_PROCESSOR)_(?)_(URL_COMPILER).zip
-# string(REPLACE "_" "-" URL_PROCESSOR ${CMAKE_SYSTEM_PROCESSOR}) # x86_64 -> x86-64
-# string(TOLOWER ${CMAKE_SYSTEM_NAME} URL_OS) # Linux -> linux
-
-#Current: only support Linux x86_64
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
-  set(API_URL https://artifactory.kinovaapps.com/artifactory/generic-public/kortex/API/2.8.0/linux_x86-64_gcc_5.4.zip)
-else()
-  set(API_URL "")
-  message(FATAL_ERROR "Unsupported System: currently support is for Linux x68_64. Detected ${CMAKE_SYSTEM_NAME} and ${CMAKE_SYSTEM_PROCESSOR}")
-endif()
-
-#ExternalProject_Add(kinova_binary_api
-#  URL ${API_URL}
-#  CONFIGURE_COMMAND ""
-#  BUILD_COMMAND ""
-#  INSTALL_COMMAND ""
-#)
 
 find_package(ament_cmake REQUIRED)
 
+if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64"))
+  message(FATAL_ERROR "The bundled Kortex API supports Linux x86_64. Detected ${CMAKE_SYSTEM_NAME} ${CMAKE_SYSTEM_PROCESSOR}.")
+endif()
+
+# Extract the bundled SDK even when Debian disables FetchContent.
+set(sdk_archive "${CMAKE_CURRENT_SOURCE_DIR}/linux_x86-64_gcc_5.4.zip")
+set(sdk_dir "${CMAKE_CURRENT_BINARY_DIR}/sdk")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${sdk_archive}")
+file(ARCHIVE_EXTRACT INPUT "${sdk_archive}" DESTINATION "${sdk_dir}")
+
 ament_export_include_directories(include/kortex_api)
 
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/common/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/messages/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/client_stubs/ DESTINATION include/kortex_api)
-install(DIRECTORY ${kinova_binary_api_SOURCE_DIR}/include/google/protobuf DESTINATION include/kortex_api/google)
+install(DIRECTORY ${sdk_dir}/include/client/ DESTINATION include/kortex_api)
+install(DIRECTORY ${sdk_dir}/include/common/ DESTINATION include/kortex_api)
+install(DIRECTORY ${sdk_dir}/include/messages/ DESTINATION include/kortex_api)
+install(DIRECTORY ${sdk_dir}/include/client_stubs/ DESTINATION include/kortex_api)
+install(DIRECTORY ${sdk_dir}/include/google/protobuf DESTINATION include/kortex_api/google)
 
-ament_package()
+install(FILES "${sdk_dir}/lib/release/libKortexApiCpp.a" DESTINATION lib/kortex_api)
+
+ament_package(CONFIG_EXTRAS cmake/kortex_api_library.cmake)
